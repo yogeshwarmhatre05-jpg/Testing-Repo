@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Chess Club Sidebar</title>
+<title>Sidebar Layout</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -17,103 +17,86 @@
 }
 
 body{
-  min-height:100vh;
-  display:flex;
-  justify-content:flex-end;
-  align-items:flex-start;
-  background:
-  radial-gradient(circle at top,#1f2937,#0b0f19 70%);
-  font-family:'Poppins',sans-serif;
-  overflow-x:hidden;
+  background:#0b1220;
+  font-family:Poppins,sans-serif;
   padding:25px;
+  color:white;
 }
 
-/* RIGHT SIDEBAR */
+/* MAIN BOX */
 
-.right-sidebar{
-  width:270px;
+.sidebar-box{
+  width:100%;
+  max-width:700px;
+  margin:auto;
+
   display:flex;
-  flex-direction:column;
-  gap:18px;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+
   background:rgba(255,255,255,0.05);
   border:1px solid rgba(255,255,255,0.08);
+
   border-radius:24px;
-  padding:18px;
-  backdrop-filter:blur(12px);
-  box-shadow:
-  0 0 35px rgba(0,0,0,0.4),
-  0 0 20px rgba(255,255,255,0.05);
+  padding:20px;
+
+  backdrop-filter:blur(10px);
 }
 
-/* IMAGE */
+/* LINKS */
 
-.sidebar-image{
-  width:100%;
-  border-radius:18px;
-  object-fit:cover;
-  border:1px solid rgba(255,255,255,0.08);
-  box-shadow:
-  0 0 20px rgba(255,255,255,0.08);
+.links{
+  width:55%;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
 }
-
-/* BUTTONS */
 
 .side-btn{
   text-decoration:none;
   color:white;
-  background:rgba(255,255,255,0.06);
+
+  background:rgba(255,255,255,0.07);
   border:1px solid rgba(255,255,255,0.12);
-  padding:15px;
+
+  padding:14px;
   border-radius:16px;
-  font-size:15px;
+
   font-weight:600;
-  letter-spacing:0.4px;
   text-align:center;
-  transition:0.35s;
-  backdrop-filter:blur(8px);
-  position:relative;
-  overflow:hidden;
-}
 
-.side-btn::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-120%;
-  width:100%;
-  height:100%;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,0.18),
-    transparent
-  );
-  transition:0.6s;
-}
-
-.side-btn:hover::before{
-  left:120%;
+  transition:0.3s;
 }
 
 .side-btn:hover{
-  transform:translateY(-4px) scale(1.02);
-  background:rgba(255,255,255,0.12);
-  box-shadow:
-  0 0 18px rgba(255,255,255,0.12);
+  transform:translateY(-3px);
+  background:rgba(255,255,255,0.14);
+}
+
+/* IMAGE */
+
+.image-box{
+  width:40%;
+}
+
+.image-box img{
+  width:100%;
+  border-radius:18px;
+  display:block;
 }
 
 /* MOBILE */
 
-@media(max-width:600px){
+@media(max-width:650px){
 
-  body{
-    justify-content:center;
-    padding:15px;
+  .sidebar-box{
+    flex-direction:column-reverse;
   }
 
-  .right-sidebar{
+  .links,
+  .image-box{
     width:100%;
-    max-width:320px;
   }
 
 }
@@ -123,28 +106,36 @@ body{
 
 <body>
 
-<div class="right-sidebar">
+<div class="sidebar-box">
+
+  <!-- LINKS -->
+
+  <div class="links">
+
+    <a href="#" class="side-btn">
+      Club Rules
+    </a>
+
+    <a href="#" class="side-btn">
+      Announcement
+    </a>
+
+    <a href="#" class="side-btn">
+      Join Events
+    </a>
+
+  </div>
 
   <!-- IMAGE -->
-  <img
-    src="https://i.ibb.co/8L4mGQ7/image.png"
-    alt="Chess Club"
-    class="sidebar-image"
-  >
 
-  <!-- BUTTONS -->
+  <div class="image-box">
 
-  <a href="#" class="side-btn">
-    Club Rules
-  </a>
+    <img 
+      src="https://i.ibb.co/8L4mGQ7/image.png"
+      alt="Club Image"
+    >
 
-  <a href="#" class="side-btn">
-    Announcement
-  </a>
-
-  <a href="#" class="side-btn">
-    Join Events
-  </a>
+  </div>
 
 </div>
 
