@@ -4,92 +4,268 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Club Sidebar Links</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<title>Improved Music Player</title>
 
 <style>
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
 body{
-  background:#0f0f0f;
-  min-height:100vh;
+  background:#0F172A;
   display:flex;
   justify-content:center;
   align-items:center;
-  font-family:'Poppins',sans-serif;
+  height:100vh;
+  margin:0;
+  font-family:Arial,sans-serif;
 }
 
-/* MAIN BOX */
-.links-box{
-  width:320px;
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:20px;
-  padding:18px;
-  backdrop-filter:blur(10px);
-  box-shadow:0 0 25px rgba(255,255,255,0.08);
-  display:flex;
-  flex-direction:column;
-  gap:14px;
+.player{
+  width:260px;
+  background:#0F172A;
+  border:2px solid #22C55E;
+  border-radius:12px;
+  padding:10px;
+  position:relative;
+  box-shadow:0 0 25px rgba(34,197,94,0.25);
 }
 
-/* TOP ROW */
-.top-links{
-  display:flex;
-  gap:12px;
+.live-dot{
+  width:8px;
+  height:8px;
+  background:#22C55E;
+  border-radius:50%;
+  position:absolute;
+  top:8px;
+  left:8px;
+  box-shadow:0 0 8px #22C55E;
+  animation:pulse 1.2s infinite;
 }
 
-/* BUTTON STYLE */
-.side-btn{
-  flex:1;
-  text-decoration:none;
-  color:white;
-  background:linear-gradient(135deg,#2f2f2f,#454545);
-  padding:14px;
-  border-radius:14px;
-  text-align:center;
-  font-size:15px;
-  font-weight:600;
-  transition:0.3s ease;
-  box-shadow:0 0 12px rgba(255,255,255,0.08);
+@keyframes pulse{
+  0%{opacity:1;}
+  50%{opacity:0.3;}
+  100%{opacity:1;}
 }
 
-/* FULL WIDTH BUTTONS */
-.full{
+.marquee{
   width:100%;
+  overflow:hidden;
+  white-space:nowrap;
+  font-size:11px;
+  margin-bottom:6px;
+  color:#22C55E;
 }
 
-/* HOVER EFFECT */
-.side-btn:hover{
-  transform:translateY(-2px);
-  background:linear-gradient(135deg,#444,#666);
-  box-shadow:0 0 18px rgba(255,255,255,0.18);
+.marquee span{
+  display:inline-block;
+  padding-left:100%;
+  animation:scroll 6s linear infinite;
+}
+
+@keyframes scroll{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-100%);}
+}
+
+.screen{
+  width:100%;
+  aspect-ratio:16/9;
+  border:2px solid #1E293B;
+  border-radius:8px;
+  overflow:hidden;
+}
+
+.screen iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:8px;
+}
+
+.controls button{
+  background:#1E293B;
+  color:#E2E8F0;
+  border:1px solid #1E293B;
+  width:30px;
+  height:24px;
+  border-radius:7px;
+  cursor:pointer;
+  transition:0.25s;
+}
+
+.controls button:hover{
+  transform:translateY(-2px) scale(1.05);
+  border-color:#22C55E;
+}
+
+#toggleBtn{
+  width:42px;
+  font-size:13px;
+  font-weight:bold;
+  background:linear-gradient(135deg,#22C55E,#16A34A);
+  border:none;
+  box-shadow:0 0 12px rgba(34,197,94,0.45);
+}
+
+#toggleBtn:hover{
+  transform:scale(1.08);
 }
 
 </style>
 </head>
 <body>
 
-<div class="links-box">
+<div class="player">
 
-  <!-- TOP BUTTONS -->
-  <div class="top-links">
-    <a href="#" class="side-btn">Owner</a>
-    <a href="#" class="side-btn">Co Owner</a>
+  <div class="live-dot"></div>
+
+  <div class="marquee">
+    <span id="songText">Now Playing:</span>
   </div>
 
-  <!-- MAIN BUTTONS -->
-  <a href="#" class="side-btn full">Club Rules</a>
-  <a href="#" class="side-btn full">Announcements</a>
-  <a href="#" class="side-btn full">Join Events</a>
+  <div class="screen">
+    <iframe
+      id="playerFrame"
+      src=""
+      allow="autoplay; fullscreen"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="controls">
+
+    <button onclick="prevSong()">⏮</button>
+
+    <button id="toggleBtn" onclick="toggleVideo()">▶</button>
+
+    <button onclick="nextSong()">⏭</button>
+
+  </div>
 
 </div>
+
+<script>
+
+let songs = [
+
+{
+  src:"https://youtu.be/qdpXxGPqW-Y",
+  name:"Faded - Alan Walker"
+},
+
+{
+  src:"https://youtu.be/R5aurUlfn3w",
+  name:"Monody - TheFatRat"
+},
+
+{
+  src:"https://youtu.be/Jkj36B1YuDU",
+  name:"Another Love - Tom Odell"
+}
+
+];
+
+let songIndex = 0;
+let isPlaying = false;
+
+const frame = document.getElementById("playerFrame");
+const songText = document.getElementById("songText");
+
+function convert(url){
+
+  if(url.includes("youtu.be")){
+
+    let id = url.split("youtu.be/")[1].split("?")[0];
+
+    return "https://www.youtube.com/embed/" +
+    id +
+    "?enablejsapi=1";
+
+  }
+
+  return url;
+
+}
+
+function loadVideo(i){
+
+  frame.src = convert(songs[i].src);
+
+  songText.innerText =
+  "Now Playing: " + songs[i].name;
+
+  document.getElementById("toggleBtn").innerText = "▶";
+
+  isPlaying = false;
+
+}
+
+function prevSong(){
+
+  songIndex--;
+
+  if(songIndex < 0){
+
+    songIndex = songs.length - 1;
+
+  }
+
+  loadVideo(songIndex);
+
+}
+
+function nextSong(){
+
+  songIndex++;
+
+  if(songIndex >= songs.length){
+
+    songIndex = 0;
+
+  }
+
+  loadVideo(songIndex);
+
+}
+
+function toggleVideo(){
+
+  if(!isPlaying){
+
+    frame.contentWindow.postMessage(
+      '{"event":"command","func":"playVideo","args":""}',
+      "*"
+    );
+
+    document.getElementById("toggleBtn").innerText = "❚❚";
+
+    isPlaying = true;
+
+  }
+
+  else{
+
+    frame.contentWindow.postMessage(
+      '{"event":"command","func":"pauseVideo","args":""}',
+      "*"
+    );
+
+    document.getElementById("toggleBtn").innerText = "▶";
+
+    isPlaying = false;
+
+  }
+
+}
+
+loadVideo(songIndex);
+
+</script>
 
 </body>
 </html>
