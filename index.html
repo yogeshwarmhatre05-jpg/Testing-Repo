@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Club Box</title>
+<title>Links + Image Box</title>
 
 <style>
 
@@ -16,53 +16,69 @@ body{
   color:white;
 }
 
+/* MAIN BOX */
 .box{
-  max-width:750px;
+  max-width:800px;
   margin:auto;
 
   display:flex;
   justify-content:space-between;
+  align-items:center;
   gap:20px;
 
   padding:20px;
   border-radius:20px;
+
   background:rgba(255,255,255,0.05);
   border:1px solid rgba(255,255,255,0.08);
 }
 
-/* LEFT LINKS */
-.links{
+/* LEFT SIDE */
+.left{
   width:55%;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
 }
 
-.links a{
+.left-title{
+  font-weight:bold;
+  margin-bottom:12px;
+  font-size:18px;
+}
+
+.left a{
+  display:block;
+  margin:8px 0;
+  padding:12px;
   text-decoration:none;
   color:white;
+
   background:rgba(255,255,255,0.08);
-  padding:14px;
-  border-radius:14px;
+  border-radius:12px;
   text-align:center;
-  font-weight:bold;
 }
 
-/* RIGHT IMAGE */
-.image{
+/* RIGHT SIDE */
+.right{
   width:40%;
+  text-align:center;
 }
 
-.image img{
+.right-title{
+  font-weight:bold;
+  margin-bottom:12px;
+  font-size:18px;
+}
+
+.right img{
   width:100%;
   border-radius:16px;
 }
 
+/* MOBILE */
 @media(max-width:650px){
   .box{
     flex-direction:column;
   }
-  .links,.image{
+  .left,.right{
     width:100%;
   }
 }
@@ -74,16 +90,20 @@ body{
 
 <div class="box">
 
-  <!-- LEFT LINKS -->
-  <div class="links">
+  <!-- LEFT -->
+  <div class="left">
+    <div class="left-title">These are links</div>
+
     <a href="#">Club Rules</a>
     <a href="#">Announcement</a>
     <a href="#">Join Events</a>
   </div>
 
-  <!-- RIGHT IMAGE -->
-  <div class="image">
-    <img src="IMAGE_URL_HERE" alt="Club Image">
+  <!-- RIGHT -->
+  <div class="right">
+    <div class="right-title">This is image</div>
+
+    <img src="https://i.ibb.co/8L4mGQ7/image.png" alt="Image">
   </div>
 
 </div>
