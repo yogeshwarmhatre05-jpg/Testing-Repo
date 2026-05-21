@@ -21,26 +21,31 @@ body{
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  gap:20px;
 
   background:
     radial-gradient(circle at top,#1f2f57,#090d18 65%);
 
   font-family:'Poppins',sans-serif;
   padding:20px;
-  flex-wrap:wrap;
 }
 
-/* LEFT COLUMN */
+/* MAIN LAYOUT */
 
-.left-column{
+.main-layout{
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+}
+
+/* RIGHT SIDE */
+
+.right-side{
   display:flex;
   flex-direction:column;
   gap:20px;
-  width:260px;
 }
 
-/* LEFT BUTTONS */
+/* REVIEW BUTTONS */
 
 .sidebar{
   display:flex;
@@ -152,8 +157,6 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-
-  position:relative;
 }
 
 .date{
@@ -197,14 +200,6 @@ body{
   right:-9px;
 }
 
-/* RIGHT SIDE */
-
-.right-side{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
-
 /* LINKS BOX */
 
 .links-box{
@@ -215,6 +210,7 @@ body{
   padding:18px;
   backdrop-filter:blur(10px);
   box-shadow:0 0 25px rgba(255,255,255,0.08);
+
   display:flex;
   flex-direction:column;
   gap:14px;
@@ -358,23 +354,9 @@ body{
 
 <body>
 
-<!-- LEFT COLUMN -->
+<div class="main-layout">
 
-<div class="left-column">
-
-  <!-- BUTTONS -->
-
-  <div class="sidebar">
-
-    <a href="#">Review</a>
-
-    <a href="#">Insight</a>
-
-    <a href="#">Ads</a>
-
-  </div>
-
-  <!-- CALENDAR -->
+  <!-- LEFT SIDE -->
 
   <div class="calendar">
 
@@ -389,53 +371,65 @@ body{
 
   </div>
 
-</div>
+  <!-- RIGHT SIDE -->
 
-<!-- RIGHT SIDE -->
+  <div class="right-side">
 
-<div class="right-side">
+    <!-- REVIEW BUTTONS -->
 
-  <!-- LINKS BOX -->
+    <div class="sidebar">
 
-  <div class="links-box">
+      <a href="#">Review</a>
 
-    <div class="top-links">
-      <a href="#" class="side-btn">Owner</a>
-      <a href="#" class="side-btn">Co Owner</a>
+      <a href="#">Insight</a>
+
+      <a href="#">Ads</a>
+
     </div>
 
-    <a href="#" class="side-btn full">Club Rules</a>
-    <a href="#" class="side-btn full">Announcements</a>
-    <a href="#" class="side-btn full">Join Events</a>
+    <!-- LINKS BOX -->
 
-  </div>
+    <div class="links-box">
 
-  <!-- PLAYER -->
+      <div class="top-links">
+        <a href="#" class="side-btn">Owner</a>
+        <a href="#" class="side-btn">Co Owner</a>
+      </div>
 
-  <div class="player">
+      <a href="#" class="side-btn full">Club Rules</a>
+      <a href="#" class="side-btn full">Announcements</a>
+      <a href="#" class="side-btn full">Join Events</a>
 
-    <div class="live-dot"></div>
-
-    <div class="marquee">
-      <span id="songText">Now Playing:</span>
     </div>
 
-    <div class="screen">
-      <iframe
-        id="playerFrame"
-        src=""
-        allow="autoplay; fullscreen"
-        allowfullscreen>
-      </iframe>
-    </div>
+    <!-- PLAYER -->
 
-    <div class="controls">
+    <div class="player">
 
-      <button onclick="prevSong()">⏮</button>
+      <div class="live-dot"></div>
 
-      <button id="toggleBtn" onclick="toggleVideo()">▶</button>
+      <div class="marquee">
+        <span id="songText">Now Playing:</span>
+      </div>
 
-      <button onclick="nextSong()">⏭</button>
+      <div class="screen">
+        <iframe
+          id="playerFrame"
+          src=""
+          allow="autoplay; fullscreen"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="controls">
+
+        <button onclick="prevSong()">⏮</button>
+
+        <button id="toggleBtn" onclick="toggleVideo()">▶</button>
+
+        <button onclick="nextSong()">⏭</button>
+
+      </div>
 
     </div>
 
