@@ -1,363 +1,557 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Club Sidebar Links</title>  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">  <style>  
+  
+*{  
+  margin:0;  
+  padding:0;  
+  box-sizing:border-box;  
+}  
+  
+body{  
+  min-height:100vh;  
+  display:flex;  
+  justify-content:center;  
+  align-items:flex-start;  
+  
+  background:  
+    radial-gradient(circle at top,#1f2f57,#090d18 65%);  
+  
+  font-family:'Poppins',sans-serif;  
+  padding:20px;  
+}  
+  
+/* MAIN LAYOUT */  
+  
+.main-layout{  
+  display:flex;  
+  gap:20px;  
+  align-items:flex-start;  
+}  
+  
+/* RIGHT SIDE */  
+  
+.right-side{  
+  display:flex;  
+  flex-direction:column;  
+  gap:20px;  
+}  
+  
+/* REVIEW BUTTONS */  
+  
+.sidebar{  
+  display:flex;  
+  flex-direction:column;  
+  gap:16px;  
+}  
+  
+.sidebar a{  
+  width:260px;  
+  padding:14px 18px;  
+  
+  text-decoration:none;  
+  color:white;  
+  
+  font-size:16px;  
+  font-weight:600;  
+  
+  border-radius:18px;  
+  
+  background:rgba(255,255,255,0.08);  
+  
+  backdrop-filter:blur(12px);  
+  
+  border:1px solid rgba(255,255,255,0.15);  
+  
+  box-shadow:  
+    0 10px 25px rgba(0,0,0,0.35),  
+    inset 0 1px 0 rgba(255,255,255,0.08);  
+  
+  transition:0.25s;  
+}  
+  
+.sidebar a:hover{  
+  transform:translateX(6px) scale(1.03);  
+  
+  background:  
+    linear-gradient(135deg,#5ea0ff,#7b6dff);  
+}  
+  
+/* CALENDAR */  
+  
+.calendar{  
+  width:260px;  
+  height:300px;  
+  border-radius:30px;  
+  overflow:hidden;  
+  position:relative;  
+  
+  background:rgba(255,255,255,0.06);  
+  
+  backdrop-filter:blur(14px);  
+  
+  border:1px solid rgba(255,255,255,0.15);  
+  
+  box-shadow:  
+    0 20px 45px rgba(0,0,0,0.45),  
+    inset 0 1px 0 rgba(255,255,255,0.08);  
+  
+  display:flex;  
+  flex-direction:column;  
+  align-items:center;  
+}  
+  
+/* TOP BAR */  
+  
+.top{  
+  width:100%;  
+  height:90px;  
+  
+  background:  
+    linear-gradient(135deg,#5ea0ff,#7b6dff);  
+  
+  display:flex;  
+  align-items:center;  
+  justify-content:center;  
+  
+  position:relative;  
+}  
+  
+.top::after{  
+  content:"";  
+  position:absolute;  
+  inset:0;  
+  
+  background:  
+    linear-gradient(  
+      rgba(255,255,255,0.18),  
+      transparent  
+    );  
+}  
+  
+.month{  
+  color:white;  
+  font-size:28px;  
+  font-weight:700;  
+  letter-spacing:2px;  
+  z-index:2;  
+  text-transform:uppercase;  
+}  
+  
+/* DATE SECTION */  
+  
+.content{  
+  flex:1;  
+  
+  width:100%;  
+  
+  display:flex;  
+  flex-direction:column;  
+  align-items:center;  
+  justify-content:center;  
+}  
+  
+.date{  
+  font-size:96px;  
+  font-weight:700;  
+  color:white;  
+  line-height:1;  
+  
+  text-shadow:  
+    0 6px 18px rgba(0,0,0,0.35);  
+}  
+  
+.year{  
+  margin-top:12px;  
+  
+  font-size:16px;  
+  font-weight:400;  
+  letter-spacing:4px;  
+  
+  color:rgba(255,255,255,0.65);  
+}  
+  
+/* SMALL DESIGN DETAILS */  
+  
+.calendar::before,  
+.calendar::after{  
+  content:"";  
+  position:absolute;  
+  width:18px;  
+  height:18px;  
+  background:#0f1627;  
+  border-radius:50%;  
+  top:78px;  
+}  
+  
+.calendar::before{  
+  left:-9px;  
+}  
+  
+.calendar::after{  
+  right:-9px;  
+}  
+  
+/* LINKS BOX */  
+  
+.links-box{  
+  width:260px;  
+  background:rgba(255,255,255,0.06);  
+  border:1px solid rgba(255,255,255,0.15);  
+  border-radius:20px;  
+  padding:18px;  
+  backdrop-filter:blur(10px);  
+  box-shadow:0 0 25px rgba(255,255,255,0.08);  
+  
+  display:flex;  
+  flex-direction:column;  
+  gap:14px;  
+}  
+  
+/* TOP ROW */  
+  
+.top-links{  
+  display:flex;  
+  gap:12px;  
+}  
+  
+/* BUTTON STYLE */  
+  
+.side-btn{  
+  flex:1;  
+  text-decoration:none;  
+  color:white;  
+  background:linear-gradient(135deg,#2f2f2f,#454545);  
+  padding:14px;  
+  border-radius:14px;  
+  text-align:center;  
+  font-size:15px;  
+  font-weight:600;  
+  transition:0.3s ease;  
+  box-shadow:0 0 12px rgba(255,255,255,0.08);  
+}  
+  
+.full{  
+  width:100%;  
+}  
+  
+.side-btn:hover{  
+  transform:translateY(-2px);  
+  background:linear-gradient(135deg,#444,#666);  
+  box-shadow:0 0 18px rgba(255,255,255,0.18);  
+}  
+  
+/* PLAYER */  
+  
+.player{  
+  width:260px;  
+  background:#0F172A;  
+  border:2px solid #22C55E;  
+  border-radius:12px;  
+  padding:10px;  
+  position:relative;  
+  box-shadow:0 0 25px rgba(34,197,94,0.25);  
+}  
+  
+.live-dot{  
+  width:8px;  
+  height:8px;  
+  background:#22C55E;  
+  border-radius:50%;  
+  position:absolute;  
+  top:8px;  
+  left:8px;  
+  box-shadow:0 0 8px #22C55E;  
+  animation:pulse 1.2s infinite;  
+}  
+  
+@keyframes pulse{  
+  0%{opacity:1;}  
+  50%{opacity:0.3;}  
+  100%{opacity:1;}  
+}  
+  
+.marquee{  
+  width:100%;  
+  overflow:hidden;  
+  white-space:nowrap;  
+  font-size:11px;  
+  margin-bottom:6px;  
+  color:#22C55E;  
+}  
+  
+.marquee span{  
+  display:inline-block;  
+  padding-left:100%;  
+  animation:scroll 8s linear infinite;  
+}  
+  
+@keyframes scroll{  
+  0%{transform:translateX(0);}  
+  100%{transform:translateX(-100%);}  
+}  
+  
+.screen{  
+  width:100%;  
+  aspect-ratio:16/9;  
+  border:2px solid #1E293B;  
+  border-radius:8px;  
+  overflow:hidden;  
+}  
+  
+.screen iframe{  
+  width:100%;  
+  height:100%;  
+  border:none;  
+}  
+  
+.controls{  
+  display:flex;  
+  justify-content:center;  
+  gap:10px;  
+  margin-top:8px;  
+}  
+  
+.controls button{  
+  background:#1E293B;  
+  color:#E2E8F0;  
+  border:1px solid #1E293B;  
+  width:30px;  
+  height:24px;  
+  border-radius:7px;  
+  cursor:pointer;  
+  transition:0.25s;  
+}  
+  
+.controls button:hover{  
+  transform:translateY(-2px) scale(1.05);  
+  border-color:#22C55E;  
+}  
+  
+#toggleBtn{  
+  width:42px;  
+  font-size:13px;  
+  font-weight:bold;  
+  background:linear-gradient(135deg,#22C55E,#16A34A);  
+  border:none;  
+  box-shadow:0 0 12px rgba(34,197,94,0.45);  
+}  
+  
+#toggleBtn:hover{  
+  transform:scale(1.08);  
+}  
+  
+</style>  </head>  <body>  <div class="main-layout">    <!-- LEFT SIDE -->    <div class="calendar">  <div class="top">  
+  <div class="month" id="month"></div>  
+</div>  
 
-<title>Club Sidebar Links</title>
+<div class="content">  
+  <div class="date" id="date"></div>  
+  <div class="year" id="year"></div>  
+</div>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  </div>    <!-- RIGHT SIDE -->    <div class="right-side">  <!-- REVIEW BUTTONS -->  
 
-<style>
+<div class="sidebar">  
 
-/* RESET */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+  <a href="#">Review</a>  
 
-body{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  background: radial-gradient(circle at top,#1f2f57,#090d18 65%);
-  font-family:'Poppins',sans-serif;
-  padding:20px;
-}
+  <a href="#">Insight</a>  
 
-/* MAIN WRAPPER */
-.main-layout{
-  display:flex;
-  gap:20px;
-  align-items:flex-start;
-}
+  <a href="#">Ads</a>  
 
-/* LEFT SIDE (260px TOTAL COMBINED) */
-.left-side{
-  width:260px;
-}
+</div>  
 
-.combined{
-  width:260px;
-  display:flex;
-  gap:10px;
-}
+<!-- LINKS BOX -->  
 
-/* CALENDAR */
-.calendar{
-  width:125px;
-  height:300px;
-  border-radius:20px;
-  overflow:hidden;
-  background:rgba(255,255,255,0.06);
-  backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,0.15);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  box-shadow:0 10px 25px rgba(0,0,0,0.35);
-}
+<div class="links-box">  
 
-.top{
-  width:100%;
-  height:80px;
-  background:linear-gradient(135deg,#5ea0ff,#7b6dff);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+  <div class="top-links">  
+    <a href="#" class="side-btn">Owner</a>  
+    <a href="#" class="side-btn">Co Owner</a>  
+  </div>  
 
-.month{
-  color:white;
-  font-size:16px;
-  font-weight:700;
-  letter-spacing:1px;
-}
+  <a href="#" class="side-btn full">Club Rules</a>  
+  <a href="#" class="side-btn full">Announcements</a>  
+  <a href="#" class="side-btn full">Join Events</a>  
 
-.content{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-}
+</div>  
 
-.date{
-  font-size:60px;
-  font-weight:700;
-  color:white;
-  line-height:1;
-}
+<!-- PLAYER -->  
 
-.year{
-  font-size:12px;
-  color:rgba(255,255,255,0.7);
-  margin-top:10px;
-  letter-spacing:2px;
-}
+<div class="player">  
 
-/* SIDEBAR (ADS / REVIEW / INSIGHT) */
-.sidebar{
-  width:125px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
+  <div class="live-dot"></div>  
 
-.sidebar a{
-  width:100%;
-  padding:10px;
-  font-size:12px;
-  font-weight:600;
-  text-align:center;
-  text-decoration:none;
-  color:white;
-  border-radius:12px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.15);
-  backdrop-filter:blur(10px);
-  transition:0.25s;
-}
+  <div class="marquee">  
+    <span id="songText">Now Playing:</span>  
+  </div>  
 
-.sidebar a:hover{
-  transform:translateX(5px);
-  background:linear-gradient(135deg,#5ea0ff,#7b6dff);
-}
+  <div class="screen">  
+    <iframe  
+      id="playerFrame"  
+      src=""  
+      allow="autoplay; fullscreen"  
+      allowfullscreen>  
+    </iframe>  
+  </div>  
 
-/* RIGHT SIDE */
-.right-side{
-  width:540px;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
+  <div class="controls">  
 
-/* LINKS BOX */
-.links-box{
-  width:100%;
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:20px;
-  padding:18px;
-  backdrop-filter:blur(10px);
-  box-shadow:0 0 25px rgba(255,255,255,0.08);
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
+    <button onclick="prevSong()">⏮</button>  
 
-.top-links{
-  display:flex;
-  gap:12px;
-}
+    <button id="toggleBtn" onclick="toggleVideo()">▶</button>  
 
-.side-btn{
-  flex:1;
-  text-decoration:none;
-  color:white;
-  background:linear-gradient(135deg,#2f2f2f,#454545);
-  padding:14px;
-  border-radius:14px;
-  text-align:center;
-  font-size:15px;
-  font-weight:600;
-  transition:0.25s;
-}
+    <button onclick="nextSong()">⏭</button>  
 
-.side-btn:hover{
-  transform:translateY(-2px);
-  background:linear-gradient(135deg,#444,#666);
-}
-
-.full{
-  width:100%;
-}
-
-/* PLAYER */
-.player{
-  width:100%;
-  background:#0F172A;
-  border:2px solid #22C55E;
-  border-radius:12px;
-  padding:10px;
-  position:relative;
-  box-shadow:0 0 25px rgba(34,197,94,0.25);
-}
-
-/* LIVE DOT */
-.live-dot{
-  width:8px;
-  height:8px;
-  background:#22C55E;
-  border-radius:50%;
-  position:absolute;
-  top:8px;
-  left:8px;
-  box-shadow:0 0 8px #22C55E;
-  animation:pulse 1.2s infinite;
-}
-
-@keyframes pulse{
-  0%{opacity:1;}
-  50%{opacity:0.3;}
-  100%{opacity:1;}
-}
-
-/* MARQUEE */
-.marquee{
-  width:100%;
-  overflow:hidden;
-  white-space:nowrap;
-  font-size:11px;
-  margin-bottom:6px;
-  color:#22C55E;
-}
-
-.marquee span{
-  display:inline-block;
-  padding-left:100%;
-  animation:scroll 8s linear infinite;
-}
-
-@keyframes scroll{
-  0%{transform:translateX(0);}
-  100%{transform:translateX(-100%);}
-}
-
-/* VIDEO SCREEN */
-.screen{
-  width:100%;
-  aspect-ratio:16/9;
-  border:2px solid #1E293B;
-  border-radius:8px;
-  overflow:hidden;
-}
-
-.screen iframe{
-  width:100%;
-  height:100%;
-  border:none;
-}
-
-/* CONTROLS */
-.controls{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin-top:8px;
-}
-
-.controls button{
-  background:#1E293B;
-  color:#E2E8F0;
-  border:1px solid #1E293B;
-  width:30px;
-  height:24px;
-  border-radius:7px;
-  cursor:pointer;
-  transition:0.25s;
-}
-
-.controls button:hover{
-  transform:translateY(-2px) scale(1.05);
-  border-color:#22C55E;
-}
-
-#toggleBtn{
-  width:42px;
-  font-weight:bold;
-  background:linear-gradient(135deg,#22C55E,#16A34A);
-  border:none;
-  color:white;
-  box-shadow:0 0 12px rgba(34,197,94,0.45);
-}
-
-#toggleBtn:hover{
-  transform:scale(1.08);
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="main-layout">
-
-  <!-- LEFT (260px TOTAL) -->
-  <div class="left-side">
-    <div class="combined">
-
-      <!-- CALENDAR -->
-      <div class="calendar">
-        <div class="top">
-          <div class="month" id="month"></div>
-        </div>
-        <div class="content">
-          <div class="date" id="date"></div>
-          <div class="year" id="year"></div>
-        </div>
-      </div>
-
-      <!-- LINKS -->
-      <div class="sidebar">
-        <a href="#">Review</a>
-        <a href="#">Insight</a>
-        <a href="#">Ads</a>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- RIGHT SIDE -->
-  <div class="right-side">
-
-    <div class="links-box">
-      <div class="top-links">
-        <a href="#" class="side-btn">Owner</a>
-        <a href="#" class="side-btn">Co Owner</a>
-      </div>
-
-      <a href="#" class="side-btn full">Club Rules</a>
-      <a href="#" class="side-btn full">Announcements</a>
-      <a href="#" class="side-btn full">Join Events</a>
-    </div>
-
-    <!-- PLAYER -->
-    <div class="player">
-
-      <div class="live-dot"></div>
-
-      <div class="marquee">
-        <span id="songText">Now Playing</span>
-      </div>
-
-      <div class="screen">
-        <iframe id="playerFrame" allow="autoplay; fullscreen"></iframe>
-      </div>
-
-      <div class="controls">
-        <button>⏮</button>
-        <button id="toggleBtn">▶</button>
-        <button>⏭</button>
-      </div>
-
-    </div>
-
-  </div>
+  </div>  
 
 </div>
 
-<script>
-const today = new Date();
-
-const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-
-document.getElementById("month").innerText = months[today.getMonth()];
-document.getElementById("date").innerText = today.getDate();
-document.getElementById("year").innerText = today.getFullYear();
-</script>
-
-</body>
-</html>
+  </div>  </div>  <script>  
+  
+const today = new Date();  
+  
+const months = [  
+  "JAN","FEB","MAR","APR",  
+  "MAY","JUN","JUL","AUG",  
+  "SEP","OCT","NOV","DEC"  
+];  
+  
+document.getElementById("month").innerText =  
+months[today.getMonth()];  
+  
+document.getElementById("date").innerText =  
+today.getDate();  
+  
+document.getElementById("year").innerText =  
+today.getFullYear();  
+  
+let songs = [  
+  
+{  
+src:"https://youtu.be/kcsGhOmULxQ",  
+name:"Golden Brown - The Stranglers"  
+},  
+  
+{  
+src:"https://youtu.be/_XeE2aEiPHk",  
+name:"The Flame of Love - Rokudenashi"  
+},  
+  
+{  
+src:"https://youtu.be/qdpXxGPqW-Y",  
+name:"Faded - Alan Walker"  
+},  
+  
+{  
+src:"https://youtu.be/k50D8-EvNxk",  
+name:"Meu Abrigo - Melim"  
+},  
+  
+{  
+src:"https://youtu.be/7WoVX2X3SQw",  
+name:"Motagem Renaido - Jmilton"  
+}  
+  
+];  
+  
+let songIndex = 0;  
+let isPlaying = false;  
+  
+const frame = document.getElementById("playerFrame");  
+const songText = document.getElementById("songText");  
+const toggleBtn = document.getElementById("toggleBtn");  
+  
+function convert(url){  
+  
+  if(url.includes("youtu.be")){  
+  
+    let id = url.split("youtu.be/")[1].split("?")[0];  
+  
+    return "https://www.youtube.com/embed/" +  
+    id +  
+    "?enablejsapi=1&rel=0";  
+  
+  }  
+  
+  return url;  
+  
+}  
+  
+function loadVideo(i){  
+  
+  frame.src = convert(songs[i].src);  
+  
+  songText.innerText =  
+  "Now Playing: " + songs[i].name;  
+  
+  toggleBtn.innerText = "▶";  
+  
+  isPlaying = false;  
+  
+}  
+  
+function prevSong(){  
+  
+  songIndex--;  
+  
+  if(songIndex < 0){  
+  
+    songIndex = songs.length - 1;  
+  
+  }  
+  
+  loadVideo(songIndex);  
+  
+}  
+  
+function nextSong(){  
+  
+  songIndex++;  
+  
+  if(songIndex >= songs.length){  
+  
+    songIndex = 0;  
+  
+  }  
+  
+  loadVideo(songIndex);  
+  
+}  
+  
+function toggleVideo(){  
+  
+  if(!isPlaying){  
+  
+    frame.contentWindow.postMessage(  
+      '{"event":"command","func":"playVideo","args":""}',  
+      "*"  
+    );  
+  
+    toggleBtn.innerText = "❚❚";  
+  
+    isPlaying = true;  
+  
+  }  
+  
+  else{  
+  
+    frame.contentWindow.postMessage(  
+      '{"event":"command","func":"pauseVideo","args":""}',  
+      "*"  
+    );  
+  
+    toggleBtn.innerText = "▶";  
+  
+    isPlaying = false;  
+  
+  }  
+  
+}  
+  
+loadVideo(songIndex);  
+  
+</script>  </body>  
+</html>  
