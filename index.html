@@ -22,10 +22,7 @@ body{
   justify-content:center;
   align-items:flex-start;
   gap:20px;
-
-  background:
-    radial-gradient(circle at top,#1f2f57,#090d18 65%);
-
+  background: radial-gradient(circle at top,#1f2f57,#090d18 65%);
   font-family:'Poppins',sans-serif;
   padding:20px;
   flex-wrap:wrap;
@@ -40,7 +37,7 @@ body{
   width:260px;
 }
 
-/* LEFT BUTTONS */
+/* SIDEBAR */
 
 .sidebar{
   display:flex;
@@ -51,150 +48,22 @@ body{
 .sidebar a{
   width:260px;
   padding:14px 18px;
-
   text-decoration:none;
   color:white;
-
   font-size:16px;
   font-weight:600;
-
   border-radius:18px;
-
   background:rgba(255,255,255,0.08);
-
   backdrop-filter:blur(12px);
-
   border:1px solid rgba(255,255,255,0.15);
-
-  box-shadow:
-    0 10px 25px rgba(0,0,0,0.35),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-
+  box-shadow:0 10px 25px rgba(0,0,0,0.35),
+             inset 0 1px 0 rgba(255,255,255,0.08);
   transition:0.25s;
 }
 
 .sidebar a:hover{
   transform:translateX(6px) scale(1.03);
-
-  background:
-    linear-gradient(135deg,#5ea0ff,#7b6dff);
-}
-
-/* CALENDAR */
-
-.calendar{
-  width:260px;
-  height:300px;
-  border-radius:30px;
-  overflow:hidden;
-  position:relative;
-
-  background:rgba(255,255,255,0.06);
-
-  backdrop-filter:blur(14px);
-
-  border:1px solid rgba(255,255,255,0.15);
-
-  box-shadow:
-    0 20px 45px rgba(0,0,0,0.45),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-/* TOP BAR */
-
-.top{
-  width:100%;
-  height:90px;
-
-  background:
-    linear-gradient(135deg,#5ea0ff,#7b6dff);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  position:relative;
-}
-
-.top::after{
-  content:"";
-  position:absolute;
-  inset:0;
-
-  background:
-    linear-gradient(
-      rgba(255,255,255,0.18),
-      transparent
-    );
-}
-
-.month{
-  color:white;
-  font-size:28px;
-  font-weight:700;
-  letter-spacing:2px;
-  z-index:2;
-  text-transform:uppercase;
-}
-
-/* DATE SECTION */
-
-.content{
-  flex:1;
-
-  width:100%;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-
-  position:relative;
-}
-
-.date{
-  font-size:96px;
-  font-weight:700;
-  color:white;
-  line-height:1;
-
-  text-shadow:
-    0 6px 18px rgba(0,0,0,0.35);
-}
-
-.year{
-  margin-top:12px;
-
-  font-size:16px;
-  font-weight:400;
-  letter-spacing:4px;
-
-  color:rgba(255,255,255,0.65);
-}
-
-/* SMALL DESIGN DETAILS */
-
-.calendar::before,
-.calendar::after{
-  content:"";
-  position:absolute;
-  width:18px;
-  height:18px;
-  background:#0f1627;
-  border-radius:50%;
-  top:78px;
-}
-
-.calendar::before{
-  left:-9px;
-}
-
-.calendar::after{
-  right:-9px;
+  background:linear-gradient(135deg,#5ea0ff,#7b6dff);
 }
 
 /* RIGHT SIDE */
@@ -220,14 +89,10 @@ body{
   gap:14px;
 }
 
-/* TOP ROW */
-
 .top-links{
   display:flex;
   gap:12px;
 }
-
-/* BUTTON STYLE */
 
 .side-btn{
   flex:1;
@@ -362,31 +227,10 @@ body{
 
 <div class="left-column">
 
-  <!-- BUTTONS -->
-
   <div class="sidebar">
-
     <a href="#">Review</a>
-
     <a href="#">Insight</a>
-
     <a href="#">Ads</a>
-
-  </div>
-
-  <!-- CALENDAR -->
-
-  <div class="calendar">
-
-    <div class="top">
-      <div class="month" id="month"></div>
-    </div>
-
-    <div class="content">
-      <div class="date" id="date"></div>
-      <div class="year" id="year"></div>
-    </div>
-
   </div>
 
 </div>
@@ -394,8 +238,6 @@ body{
 <!-- RIGHT SIDE -->
 
 <div class="right-side">
-
-  <!-- LINKS BOX -->
 
   <div class="links-box">
 
@@ -410,8 +252,6 @@ body{
 
   </div>
 
-  <!-- PLAYER -->
-
   <div class="player">
 
     <div class="live-dot"></div>
@@ -421,22 +261,13 @@ body{
     </div>
 
     <div class="screen">
-      <iframe
-        id="playerFrame"
-        src=""
-        allow="autoplay; fullscreen"
-        allowfullscreen>
-      </iframe>
+      <iframe id="playerFrame" allow="autoplay; fullscreen"></iframe>
     </div>
 
     <div class="controls">
-
       <button onclick="prevSong()">⏮</button>
-
       <button id="toggleBtn" onclick="toggleVideo()">▶</button>
-
       <button onclick="nextSong()">⏭</button>
-
     </div>
 
   </div>
@@ -445,50 +276,12 @@ body{
 
 <script>
 
-const today = new Date();
-
-const months = [
-  "JAN","FEB","MAR","APR",
-  "MAY","JUN","JUL","AUG",
-  "SEP","OCT","NOV","DEC"
-];
-
-document.getElementById("month").innerText =
-months[today.getMonth()];
-
-document.getElementById("date").innerText =
-today.getDate();
-
-document.getElementById("year").innerText =
-today.getFullYear();
-
 let songs = [
-
-{
-src:"https://youtu.be/kcsGhOmULxQ",
-name:"Golden Brown - The Stranglers"
-},
-
-{
-src:"https://youtu.be/_XeE2aEiPHk",
-name:"The Flame of Love - Rokudenashi"
-},
-
-{
-src:"https://youtu.be/qdpXxGPqW-Y",
-name:"Faded - Alan Walker"
-},
-
-{
-src:"https://youtu.be/k50D8-EvNxk",
-name:"Meu Abrigo - Melim"
-},
-
-{
-src:"https://youtu.be/7WoVX2X3SQw",
-name:"Motagem Renaido - Jmilton"
-}
-
+  {src:"https://youtu.be/kcsGhOmULxQ", name:"Golden Brown - The Stranglers"},
+  {src:"https://youtu.be/_XeE2aEiPHk", name:"The Flame of Love - Rokudenashi"},
+  {src:"https://youtu.be/qdpXxGPqW-Y", name:"Faded - Alan Walker"},
+  {src:"https://youtu.be/k50D8-EvNxk", name:"Meu Abrigo - Melim"},
+  {src:"https://youtu.be/7WoVX2X3SQw", name:"Motagem Renaido - Jmilton"}
 ];
 
 let songIndex = 0;
@@ -499,90 +292,45 @@ const songText = document.getElementById("songText");
 const toggleBtn = document.getElementById("toggleBtn");
 
 function convert(url){
-
-  if(url.includes("youtu.be")){
-
-    let id = url.split("youtu.be/")[1].split("?")[0];
-
-    return "https://www.youtube.com/embed/" +
-    id +
-    "?enablejsapi=1&rel=0";
-
-  }
-
-  return url;
-
+  let id = url.split("youtu.be/")[1].split("?")[0];
+  return "https://www.youtube.com/embed/" + id + "?enablejsapi=1&rel=0";
 }
 
 function loadVideo(i){
-
   frame.src = convert(songs[i].src);
-
-  songText.innerText =
-  "Now Playing: " + songs[i].name;
-
+  songText.innerText = "Now Playing: " + songs[i].name;
   toggleBtn.innerText = "▶";
-
   isPlaying = false;
-
 }
 
 function prevSong(){
-
   songIndex--;
-
-  if(songIndex < 0){
-
-    songIndex = songs.length - 1;
-
-  }
-
+  if(songIndex < 0) songIndex = songs.length - 1;
   loadVideo(songIndex);
-
 }
 
 function nextSong(){
-
   songIndex++;
-
-  if(songIndex >= songs.length){
-
-    songIndex = 0;
-
-  }
-
+  if(songIndex >= songs.length) songIndex = 0;
   loadVideo(songIndex);
-
 }
 
 function toggleVideo(){
-
   if(!isPlaying){
-
     frame.contentWindow.postMessage(
       '{"event":"command","func":"playVideo","args":""}',
       "*"
     );
-
     toggleBtn.innerText = "❚❚";
-
     isPlaying = true;
-
-  }
-
-  else{
-
+  } else {
     frame.contentWindow.postMessage(
       '{"event":"command","func":"pauseVideo","args":""}',
       "*"
     );
-
     toggleBtn.innerText = "▶";
-
     isPlaying = false;
-
   }
-
 }
 
 loadVideo(songIndex);
