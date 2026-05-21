@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Modern Calendar Card</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+
+  background:
+    radial-gradient(circle at top,#1f2f57,#090d18 65%);
+
+  font-family:'Poppins',sans-serif;
+}
+
+/* LEFT BUTTONS */
+
+.sidebar{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.sidebar a{
+  width:130px;
+  padding:14px 18px;
+
+  text-decoration:none;
+  color:white;
+
+  font-size:16px;
+  font-weight:600;
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(12px);
+
+  border:1px solid rgba(255,255,255,0.15);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+
+  transition:0.25s;
+}
+
+.sidebar a:hover{
+  transform:translateX(6px) scale(1.03);
+
+  background:
+    linear-gradient(135deg,#5ea0ff,#7b6dff);
+}
+
+/* CALENDAR CARD */
+
+.calendar{
+  width:190px;
+  height:300px;
+  border-radius:30px;
+  overflow:hidden;
+  position:relative;
+
+  background:rgba(255,255,255,0.06);
+
+  backdrop-filter:blur(14px);
+
+  border:1px solid rgba(255,255,255,0.15);
+
+  box-shadow:
+    0 20px 45px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  animation:float 4s ease-in-out infinite;
+}
+
+/* TOP BAR */
+
+.top{
+  width:100%;
+  height:90px;
+
+  background:
+    linear-gradient(135deg,#5ea0ff,#7b6dff);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  position:relative;
+}
+
+.top::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      rgba(255,255,255,0.18),
+      transparent
+    );
+}
+
+.month{
+  color:white;
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:2px;
+  z-index:2;
+  text-transform:uppercase;
+}
+
+/* DATE SECTION */
+
+.content{
+  flex:1;
+
+  width:100%;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  position:relative;
+}
+
+.date{
+  font-size:96px;
+  font-weight:700;
+  color:white;
+  line-height:1;
+
+  text-shadow:
+    0 6px 18px rgba(0,0,0,0.35);
+}
+
+.year{
+  margin-top:12px;
+
+  font-size:16px;
+  font-weight:400;
+  letter-spacing:4px;
+
+  color:rgba(255,255,255,0.65);
+}
+
+/* SMALL DESIGN DETAILS */
+
+.calendar::before,
+.calendar::after{
+  content:"";
+  position:absolute;
+  width:18px;
+  height:18px;
+  background:#0f1627;
+  border-radius:50%;
+  top:78px;
+}
+
+.calendar::before{
+  left:-9px;
+}
+
+.calendar::after{
+  right:-9px;
+}
+
+/* FLOAT ANIMATION */
+
+@keyframes float{
+  0%,100%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-10px);
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- LEFT BUTTONS -->
+
+<div class="sidebar">
+
+  <a href="https://example.com/review" target="_blank">
+    Review
+  </a>
+
+  <a href="https://example.com/ads" target="_blank">
+    Ads
+  </a>
+
+</div>
+
+<!-- CALENDAR -->
+
+<div class="calendar">
+
+  <div class="top">
+    <div class="month" id="month"></div>
+  </div>
+
+  <div class="content">
+    <div class="date" id="date"></div>
+    <div class="year" id="year"></div>
+  </div>
+
+</div>
+
+<script>
+
+const today = new Date();
+
+const months = [
+  "JAN","FEB","MAR","APR",
+  "MAY","JUN","JUL","AUG",
+  "SEP","OCT","NOV","DEC"
+];
+
+document.getElementById("month").innerText =
+months[today.getMonth()];
+
+document.getElementById("date").innerText =
+today.getDate();
+
+document.getElementById("year").innerText =
+today.getFullYear();
+
+</script>
+
+</body>
+</html>
