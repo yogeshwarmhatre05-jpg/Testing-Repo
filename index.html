@@ -4,38 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Left Links Right Image</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Club Box</title>
 
 <style>
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
 body{
+  margin:0;
   background:#0b1220;
-  font-family:Poppins,sans-serif;
+  font-family:Arial, sans-serif;
   padding:25px;
   color:white;
 }
 
-.container{
+.box{
   max-width:750px;
   margin:auto;
 
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  gap:25px;
+  gap:20px;
 
+  padding:20px;
+  border-radius:20px;
   background:rgba(255,255,255,0.05);
   border:1px solid rgba(255,255,255,0.08);
-  border-radius:20px;
-  padding:20px;
 }
 
 /* LEFT LINKS */
@@ -43,24 +35,17 @@ body{
   width:55%;
   display:flex;
   flex-direction:column;
-  gap:15px;
+  gap:12px;
 }
 
 .links a{
   text-decoration:none;
   color:white;
-  background:rgba(255,255,255,0.07);
-  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.08);
   padding:14px;
   border-radius:14px;
   text-align:center;
-  font-weight:600;
-  transition:0.3s;
-}
-
-.links a:hover{
-  background:rgba(255,255,255,0.14);
-  transform:translateY(-3px);
+  font-weight:bold;
 }
 
 /* RIGHT IMAGE */
@@ -71,15 +56,13 @@ body{
 .image img{
   width:100%;
   border-radius:16px;
-  display:block;
 }
 
 @media(max-width:650px){
-  .container{
+  .box{
     flex-direction:column;
   }
-
-  .links, .image{
+  .links,.image{
     width:100%;
   }
 }
@@ -89,7 +72,7 @@ body{
 
 <body>
 
-<div class="container">
+<div class="box">
 
   <!-- LEFT LINKS -->
   <div class="links">
@@ -100,7 +83,7 @@ body{
 
   <!-- RIGHT IMAGE -->
   <div class="image">
-    <img src="https://i.ibb.co/8L4mGQ7/image.png" alt="Club Image">
+    <img src="IMAGE_URL_HERE" alt="Club Image">
   </div>
 
 </div>
