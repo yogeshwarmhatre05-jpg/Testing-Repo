@@ -19,13 +19,51 @@
 body{
   min-height:100vh;
   display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  gap:20px;
+  flex-direction:column;
+  align-items:center;
   background: radial-gradient(circle at top,#1f2f57,#090d18 65%);
   font-family:'Poppins',sans-serif;
   padding:20px;
+}
+
+/* WELCOME HEADER */
+
+.welcome{
+  font-size:42px;
+  font-weight:800;
+  letter-spacing:6px;
+  color:#E2E8F0;
+  margin-bottom:25px;
+  text-transform:uppercase;
+  text-shadow:
+    0 0 10px #22C55E,
+    0 0 20px #3B82F6,
+    0 0 40px #8B5CF6;
+  animation: glow 2.5s infinite alternate;
+}
+
+@keyframes glow{
+  0%{
+    text-shadow:
+      0 0 10px #22C55E,
+      0 0 20px #3B82F6,
+      0 0 40px #8B5CF6;
+  }
+  100%{
+    text-shadow:
+      0 0 20px #22C55E,
+      0 0 35px #3B82F6,
+      0 0 60px #8B5CF6;
+  }
+}
+
+/* MAIN WRAPPER */
+
+.container{
+  display:flex;
+  gap:20px;
   flex-wrap:wrap;
+  justify-content:center;
 }
 
 /* LEFT COLUMN */
@@ -223,51 +261,51 @@ body{
 
 <body>
 
-<!-- LEFT COLUMN -->
+<div class="welcome">WELCOME</div>
 
-<div class="left-column">
+<div class="container">
 
-  <div class="sidebar">
-    <a href="#">Review</a>
-    <a href="#">Insight</a>
-    <a href="#">Ads</a>
+  <div class="left-column">
+    <div class="sidebar">
+      <a href="#">Review</a>
+      <a href="#">Insight</a>
+      <a href="#">Ads</a>
+    </div>
   </div>
 
-</div>
+  <div class="right-side">
 
-<!-- RIGHT SIDE -->
+    <div class="links-box">
 
-<div class="right-side">
+      <div class="top-links">
+        <a href="#" class="side-btn">Owner</a>
+        <a href="#" class="side-btn">Co Owner</a>
+      </div>
 
-  <div class="links-box">
+      <a href="#" class="side-btn full">Club Rules</a>
+      <a href="#" class="side-btn full">Announcements</a>
+      <a href="#" class="side-btn full">Join Events</a>
 
-    <div class="top-links">
-      <a href="#" class="side-btn">Owner</a>
-      <a href="#" class="side-btn">Co Owner</a>
     </div>
 
-    <a href="#" class="side-btn full">Club Rules</a>
-    <a href="#" class="side-btn full">Announcements</a>
-    <a href="#" class="side-btn full">Join Events</a>
+    <div class="player">
 
-  </div>
+      <div class="live-dot"></div>
 
-  <div class="player">
+      <div class="marquee">
+        <span id="songText">Now Playing:</span>
+      </div>
 
-    <div class="live-dot"></div>
+      <div class="screen">
+        <iframe id="playerFrame" allow="autoplay; fullscreen"></iframe>
+      </div>
 
-    <div class="marquee">
-      <span id="songText">Now Playing:</span>
-    </div>
+      <div class="controls">
+        <button onclick="prevSong()">⏮</button>
+        <button id="toggleBtn" onclick="toggleVideo()">▶</button>
+        <button onclick="nextSong()">⏭</button>
+      </div>
 
-    <div class="screen">
-      <iframe id="playerFrame" allow="autoplay; fullscreen"></iframe>
-    </div>
-
-    <div class="controls">
-      <button onclick="prevSong()">⏮</button>
-      <button id="toggleBtn" onclick="toggleVideo()">▶</button>
-      <button onclick="nextSong()">⏭</button>
     </div>
 
   </div>
