@@ -3,40 +3,212 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galaxy Club Dashboard</title>
 
-<title>Improved Music Player</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
 body{
-  background:#0F172A;
+  font-family:'Poppins',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  color:white;
+
+  background:
+  radial-gradient(circle at top,#243b6b 0%,#101726 45%,#06070d 100%);
+
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
-  margin:0;
-  font-family:Arial,sans-serif;
+  padding:30px;
+
+  position:relative;
 }
 
-.player{
-  width:260px;
-  background:#0F172A;
-  border:2px solid #22C55E;
-  border-radius:12px;
-  padding:10px;
+/* MOVING STARS */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+  radial-gradient(white 1px,transparent 1px);
+  background-size:40px 40px;
+  opacity:0.12;
+  animation:starsMove 50s linear infinite;
+}
+
+@keyframes starsMove{
+  from{
+    transform:translateY(0px);
+  }
+
+  to{
+    transform:translateY(-200px);
+  }
+}
+
+/* MAIN LAYOUT */
+
+.dashboard{
+  width:100%;
+  max-width:1200px;
+
+  display:grid;
+  grid-template-columns:260px 1fr 240px;
+  gap:22px;
+
   position:relative;
-  box-shadow:0 0 25px rgba(34,197,94,0.25);
+  z-index:2;
+}
+
+/* GLASS BOX */
+
+.glass{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  backdrop-filter:blur(14px);
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,0.35),
+  inset 0 1px 0 rgba(255,255,255,0.08);
+
+  border-radius:26px;
+}
+
+/* LEFT SIDEBAR */
+
+.left-panel{
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.club-title{
+  text-align:center;
+  padding:12px;
+  border-radius:18px;
+
+  background:linear-gradient(135deg,#5ea0ff,#7b6dff);
+
+  font-size:20px;
+  font-weight:700;
+
+  box-shadow:0 0 25px rgba(94,160,255,0.4);
+}
+
+.top-links{
+  display:flex;
+  gap:10px;
+}
+
+.side-btn{
+  text-decoration:none;
+  color:white;
+
+  background:
+  linear-gradient(135deg,#222f49,#3b4f75);
+
+  padding:14px;
+  border-radius:18px;
+
+  text-align:center;
+  font-size:14px;
+  font-weight:600;
+
+  transition:0.3s ease;
+
+  box-shadow:
+  0 0 15px rgba(255,255,255,0.05);
+}
+
+.top-links .side-btn{
+  flex:1;
+}
+
+.full-btns{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.side-btn:hover{
+  transform:translateY(-4px) scale(1.03);
+
+  background:
+  linear-gradient(135deg,#5ea0ff,#7b6dff);
+
+  box-shadow:
+  0 0 20px rgba(94,160,255,0.4);
+}
+
+/* CENTER PANEL */
+
+.center-panel{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+/* WELCOME CARD */
+
+.welcome-card{
+  padding:24px;
+  min-height:180px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.welcome-text h1{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.welcome-text p{
+  color:rgba(255,255,255,0.75);
+  line-height:1.7;
+  font-size:14px;
+}
+
+.welcome-img{
+  width:170px;
+  border-radius:22px;
+  object-fit:cover;
+
+  box-shadow:
+  0 0 25px rgba(255,255,255,0.1);
+}
+
+/* MUSIC PLAYER */
+
+.player{
+  padding:18px;
+  position:relative;
 }
 
 .live-dot{
-  width:8px;
-  height:8px;
+  width:10px;
+  height:10px;
   background:#22C55E;
   border-radius:50%;
+
   position:absolute;
-  top:8px;
-  left:8px;
-  box-shadow:0 0 8px #22C55E;
+  top:18px;
+  left:18px;
+
+  box-shadow:0 0 12px #22C55E;
+
   animation:pulse 1.2s infinite;
 }
 
@@ -46,19 +218,27 @@ body{
   100%{opacity:1;}
 }
 
+.player-title{
+  text-align:center;
+  margin-bottom:14px;
+  font-size:18px;
+  font-weight:600;
+}
+
 .marquee{
   width:100%;
   overflow:hidden;
   white-space:nowrap;
-  font-size:11px;
-  margin-bottom:6px;
-  color:#22C55E;
+
+  color:#7dff9f;
+  margin-bottom:10px;
+  font-size:13px;
 }
 
 .marquee span{
   display:inline-block;
   padding-left:100%;
-  animation:scroll 8s linear infinite;
+  animation:scroll 10s linear infinite;
 }
 
 @keyframes scroll{
@@ -69,9 +249,10 @@ body{
 .screen{
   width:100%;
   aspect-ratio:16/9;
-  border:2px solid #1E293B;
-  border-radius:8px;
   overflow:hidden;
+  border-radius:18px;
+
+  border:2px solid rgba(255,255,255,0.08);
 }
 
 .screen iframe{
@@ -81,75 +262,282 @@ body{
 }
 
 .controls{
+  margin-top:14px;
+
   display:flex;
   justify-content:center;
-  gap:10px;
-  margin-top:8px;
+  gap:14px;
 }
 
 .controls button{
-  background:#1E293B;
-  color:#E2E8F0;
-  border:1px solid #1E293B;
-  width:30px;
-  height:24px;
-  border-radius:7px;
+  width:44px;
+  height:40px;
+
+  border:none;
+  border-radius:14px;
+
+  background:#1d2b46;
+  color:white;
+
   cursor:pointer;
-  transition:0.25s;
+
+  transition:0.3s;
+
+  font-size:16px;
 }
 
 .controls button:hover{
-  transform:translateY(-2px) scale(1.05);
-  border-color:#22C55E;
+  transform:translateY(-3px) scale(1.05);
+
+  background:
+  linear-gradient(135deg,#5ea0ff,#7b6dff);
 }
 
 #toggleBtn{
-  width:42px;
-  font-size:13px;
-  font-weight:bold;
-  background:linear-gradient(135deg,#22C55E,#16A34A);
-  border:none;
-  box-shadow:0 0 12px rgba(34,197,94,0.45);
+  width:58px;
 }
 
-#toggleBtn:hover{
-  transform:scale(1.08);
+/* RIGHT PANEL */
+
+.right-panel{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+/* CALENDAR */
+
+.calendar{
+  overflow:hidden;
+}
+
+.top{
+  height:90px;
+
+  background:
+  linear-gradient(135deg,#5ea0ff,#7b6dff);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.month{
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+.content{
+  padding:26px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.date{
+  font-size:82px;
+  font-weight:700;
+}
+
+.year{
+  margin-top:10px;
+  color:rgba(255,255,255,0.65);
+  letter-spacing:4px;
+}
+
+/* EXTRA CARD */
+
+.extra-card{
+  padding:18px;
+  text-align:center;
+}
+
+.extra-card img{
+  width:100%;
+  border-radius:18px;
+  margin-bottom:14px;
+}
+
+.extra-card h3{
+  margin-bottom:8px;
+}
+
+.extra-card p{
+  color:rgba(255,255,255,0.7);
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* MOBILE */
+
+@media(max-width:1000px){
+
+  .dashboard{
+    grid-template-columns:1fr;
+  }
+
+  .welcome-card{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .welcome-img{
+    width:100%;
+    max-width:240px;
+  }
+
 }
 
 </style>
 </head>
 <body>
 
-<div class="player">
+<div class="dashboard">
 
-  <div class="live-dot"></div>
+  <!-- LEFT -->
 
-  <div class="marquee">
-    <span id="songText">Now Playing:</span>
+  <div class="left-panel glass">
+
+    <div class="club-title">
+      Cosmic Chess Club
+    </div>
+
+    <div class="top-links">
+      <a href="#" class="side-btn">Owner</a>
+      <a href="#" class="side-btn">Co Owner</a>
+    </div>
+
+    <div class="full-btns">
+      <a href="#" class="side-btn">Club Rules</a>
+      <a href="#" class="side-btn">Announcements</a>
+      <a href="#" class="side-btn">Join Events</a>
+      <a href="#" class="side-btn">Game Review</a>
+      <a href="#" class="side-btn">Music Lounge</a>
+    </div>
+
   </div>
 
-  <div class="screen">
-    <iframe
-      id="playerFrame"
-      src=""
-      allow="autoplay; fullscreen"
-      allowfullscreen>
-    </iframe>
+  <!-- CENTER -->
+
+  <div class="center-panel">
+
+    <div class="welcome-card glass">
+
+      <div class="welcome-text">
+
+        <h1>Welcome Players ♟</h1>
+
+        <p>
+          Relax, play chess, listen to music and enjoy the nostalgic galaxy atmosphere.
+          This club dashboard combines events, announcements, music and community in one modern layout.
+        </p>
+
+      </div>
+
+      <img
+      class="welcome-img"
+      src="https://i.ibb.co/8L4mGQ7/image.png"
+      alt="Club Image">
+
+    </div>
+
+    <!-- MUSIC PLAYER -->
+
+    <div class="player glass">
+
+      <div class="live-dot"></div>
+
+      <div class="player-title">
+        Music Player
+      </div>
+
+      <div class="marquee">
+        <span id="songText">Now Playing:</span>
+      </div>
+
+      <div class="screen">
+        <iframe
+        id="playerFrame"
+        src=""
+        allow="autoplay; fullscreen"
+        allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="controls">
+
+        <button onclick="prevSong()">⏮</button>
+
+        <button id="toggleBtn" onclick="toggleVideo()">▶</button>
+
+        <button onclick="nextSong()">⏭</button>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="controls">
+  <!-- RIGHT -->
 
-    <button onclick="prevSong()">⏮</button>
+  <div class="right-panel">
 
-    <button id="toggleBtn" onclick="toggleVideo()">▶</button>
+    <div class="calendar glass">
 
-    <button onclick="nextSong()">⏭</button>
+      <div class="top">
+        <div class="month" id="month"></div>
+      </div>
+
+      <div class="content">
+        <div class="date" id="date"></div>
+        <div class="year" id="year"></div>
+      </div>
+
+    </div>
+
+    <div class="extra-card glass">
+
+      <img
+      src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop"
+      alt="Galaxy">
+
+      <h3>Galaxy Mood</h3>
+
+      <p>
+        Calm aesthetic visuals, floating glow and relaxing music atmosphere for your club members.
+      </p>
+
+    </div>
 
   </div>
 
 </div>
 
 <script>
+
+/* CALENDAR */
+
+const today = new Date();
+
+const months = [
+"JAN","FEB","MAR","APR",
+"MAY","JUN","JUL","AUG",
+"SEP","OCT","NOV","DEC"
+];
+
+document.getElementById("month").innerText =
+months[today.getMonth()];
+
+document.getElementById("date").innerText =
+today.getDate();
+
+document.getElementById("year").innerText =
+today.getFullYear();
+
+/* MUSIC PLAYER */
 
 let songs = [
 
@@ -169,113 +557,13 @@ name:"Faded - Alan Walker"
 },
 
 {
-src:"https://youtu.be/k50D8-EvNxk",
-name:"Meu Abrigo - Melim"
-},
-
-{
 src:"https://youtu.be/7WoVX2X3SQw",
 name:"Motagem Renaido - Jmilton"
 },
 
 {
-src:"https://youtu.be/9I9c20LHmzY",
-name:"Come As You Are - Nirvana"
-},
-
-{
-src:"https://youtu.be/SDNA934EEVk",
-name:"A Walk - Tycho"
-},
-
-{
-src:"https://youtu.be/A3xxG5zHuCA",
-name:"Passo Bem Solto - ATLXS"
-},
-
-{
-src:"https://youtu.be/Qk5lzJVfcLo",
-name:"Downtown Baby 2 - Overtonight"
-},
-
-{
-src:"https://youtu.be/vi72_ggUCHU",
-name:"Keep Up - ODETARI"
-},
-
-{
-src:"https://youtu.be/kGobHQ7z8X4",
-name:"Why Do I? - Unknown Brain"
-},
-
-{
-src:"https://youtu.be/0jSpCxmb2VQ",
-name:"Mood - 24kGoldn"
-},
-
-{
-src:"https://youtu.be/R5aurUlfn3w",
-name:"Monody - TheFatRat"
-},
-
-{
-src:"https://youtu.be/4jh2H5qFb44",
-name:"Shape of You - Ed Sheeran"
-},
-
-{
-src:"https://youtu.be/rfTgO9rpqck",
-name:"Heat Waves - Glass Animals"
-},
-
-{
-src:"https://youtu.be/JrNMyzsYr4M",
-name:"Love Me Like You Do - Ellie Goulding"
-},
-
-{
-src:"https://youtu.be/DKbfBSrjVHA",
-name:"Can We Kiss Forever? - Kina"
-},
-
-{
-src:"https://youtu.be/TdbyjBf93zc",
-name:"All I Want - Lofi Remix"
-},
-
-{
-src:"https://youtu.be/z7zoabFKD60",
-name:"TheFatRat Mix / Songs"
-},
-
-{
-src:"https://youtu.be/i4bWViFpd0Q",
-name:"Army Dreamers - Kate Bush"
-},
-
-{
 src:"https://youtu.be/Jkj36B1YuDU",
 name:"Another Love - Tom Odell"
-},
-
-{
-src:"https://youtu.be/GXioir-fujY",
-name:"NO BATIDÃO - ZXKAI"
-},
-
-{
-src:"https://youtu.be/EoNWCYNTANA",
-name:"If I Killed Someone for You - Alec Benjamin"
-},
-
-{
-src:"https://youtu.be/y1uzBncUsQQ",
-name:"Origami - The Rare Occasions"
-},
-
-{
-src:"https://youtu.be/7U1LFCY70nA",
-name:"Ava - Underdog"
 }
 
 ];
@@ -321,9 +609,7 @@ function prevSong(){
   songIndex--;
 
   if(songIndex < 0){
-
     songIndex = songs.length - 1;
-
   }
 
   loadVideo(songIndex);
@@ -335,9 +621,7 @@ function nextSong(){
   songIndex++;
 
   if(songIndex >= songs.length){
-
     songIndex = 0;
-
   }
 
   loadVideo(songIndex);
@@ -350,10 +634,10 @@ function toggleVideo(){
 
     frame.contentWindow.postMessage(
       '{"event":"command","func":"playVideo","args":""}',
-      "*"
+      '*'
     );
 
-    toggleBtn.innerText = "❚❚";
+    toggleBtn.innerText = '❚❚';
 
     isPlaying = true;
 
@@ -363,10 +647,10 @@ function toggleVideo(){
 
     frame.contentWindow.postMessage(
       '{"event":"command","func":"pauseVideo","args":""}',
-      "*"
+      '*'
     );
 
-    toggleBtn.innerText = "▶";
+    toggleBtn.innerText = '▶';
 
     isPlaying = false;
 
