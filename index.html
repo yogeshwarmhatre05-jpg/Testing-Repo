@@ -28,8 +28,7 @@ body{
 
   font-family:'Poppins',sans-serif;
   padding:20px;
-
-  flex-wrap:nowrap;
+  flex-wrap:wrap;
 }
 
 /* LEFT COLUMN */
@@ -198,6 +197,14 @@ body{
   right:-9px;
 }
 
+/* RIGHT SIDE */
+
+.right-side{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
 /* LINKS BOX */
 
 .links-box{
@@ -236,13 +243,9 @@ body{
   box-shadow:0 0 12px rgba(255,255,255,0.08);
 }
 
-/* FULL WIDTH BUTTONS */
-
 .full{
   width:100%;
 }
-
-/* HOVER EFFECT */
 
 .side-btn:hover{
   transform:translateY(-2px);
@@ -355,9 +358,11 @@ body{
 
 <body>
 
-<!-- LEFT BUTTONS -->
+<!-- LEFT COLUMN -->
 
 <div class="left-column">
+
+  <!-- BUTTONS -->
 
   <div class="sidebar">
 
@@ -369,64 +374,70 @@ body{
 
   </div>
 
-</div>
+  <!-- CALENDAR -->
 
-<!-- CALENDAR -->
+  <div class="calendar">
 
-<div class="calendar">
+    <div class="top">
+      <div class="month" id="month"></div>
+    </div>
 
-  <div class="top">
-    <div class="month" id="month"></div>
+    <div class="content">
+      <div class="date" id="date"></div>
+      <div class="year" id="year"></div>
+    </div>
+
   </div>
-
-  <div class="content">
-    <div class="date" id="date"></div>
-    <div class="year" id="year"></div>
-  </div>
-
-</div>
-
-<!-- LINKS BOX -->
-
-<div class="links-box">
-
-  <div class="top-links">
-    <a href="#" class="side-btn">Owner</a>
-    <a href="#" class="side-btn">Co Owner</a>
-  </div>
-
-  <a href="#" class="side-btn full">Club Rules</a>
-  <a href="#" class="side-btn full">Announcements</a>
-  <a href="#" class="side-btn full">Join Events</a>
 
 </div>
 
-<!-- PLAYER -->
+<!-- RIGHT SIDE -->
 
-<div class="player">
+<div class="right-side">
 
-  <div class="live-dot"></div>
+  <!-- LINKS BOX -->
 
-  <div class="marquee">
-    <span id="songText">Now Playing:</span>
+  <div class="links-box">
+
+    <div class="top-links">
+      <a href="#" class="side-btn">Owner</a>
+      <a href="#" class="side-btn">Co Owner</a>
+    </div>
+
+    <a href="#" class="side-btn full">Club Rules</a>
+    <a href="#" class="side-btn full">Announcements</a>
+    <a href="#" class="side-btn full">Join Events</a>
+
   </div>
 
-  <div class="screen">
-    <iframe
-      id="playerFrame"
-      src=""
-      allow="autoplay; fullscreen"
-      allowfullscreen>
-    </iframe>
-  </div>
+  <!-- PLAYER -->
 
-  <div class="controls">
+  <div class="player">
 
-    <button onclick="prevSong()">⏮</button>
+    <div class="live-dot"></div>
 
-    <button id="toggleBtn" onclick="toggleVideo()">▶</button>
+    <div class="marquee">
+      <span id="songText">Now Playing:</span>
+    </div>
 
-    <button onclick="nextSong()">⏭</button>
+    <div class="screen">
+      <iframe
+        id="playerFrame"
+        src=""
+        allow="autoplay; fullscreen"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="controls">
+
+      <button onclick="prevSong()">⏮</button>
+
+      <button id="toggleBtn" onclick="toggleVideo()">▶</button>
+
+      <button onclick="nextSong()">⏭</button>
+
+    </div>
 
   </div>
 
