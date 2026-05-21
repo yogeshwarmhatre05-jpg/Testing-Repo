@@ -20,7 +20,7 @@ body{
   min-height:100vh;
   display:flex;
   justify-content:center;
-  align-items:center;
+  align-items:flex-start;
   gap:20px;
 
   background:
@@ -40,7 +40,7 @@ body{
 }
 
 .sidebar a{
-  width:130px;
+  width:260px;
   padding:14px 18px;
 
   text-decoration:none;
@@ -71,10 +71,19 @@ body{
     linear-gradient(135deg,#5ea0ff,#7b6dff);
 }
 
+/* CENTER COLUMN */
+
+.center-column{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  width:260px;
+}
+
 /* CALENDAR CARD */
 
 .calendar{
-  width:190px;
+  width:260px;
   height:300px;
   border-radius:30px;
   overflow:hidden;
@@ -205,7 +214,7 @@ body{
 /* MAIN BOX */
 
 .links-box{
-  width:320px;
+  width:260px;
   background:rgba(255,255,255,0.06);
   border:1px solid rgba(255,255,255,0.15);
   border-radius:20px;
@@ -363,47 +372,47 @@ body{
 
 <div class="sidebar">
 
-  <a href="https://example.com/review" target="_blank">
-    Review
-  </a>
+  <a href="#">Review</a>
 
-  <a href="https://example.com/insight" target="_blank">
-    Insight
-  </a>
+  <a href="#">Insight</a>
 
-  <a href="https://example.com/ads" target="_blank">
-    Ads
-  </a>
+  <a href="#">Ads</a>
 
 </div>
 
-<!-- CALENDAR -->
+<!-- CENTER COLUMN -->
 
-<div class="calendar">
+<div class="center-column">
 
-  <div class="top">
-    <div class="month" id="month"></div>
+  <!-- CALENDAR -->
+
+  <div class="calendar">
+
+    <div class="top">
+      <div class="month" id="month"></div>
+    </div>
+
+    <div class="content">
+      <div class="date" id="date"></div>
+      <div class="year" id="year"></div>
+    </div>
+
   </div>
 
-  <div class="content">
-    <div class="date" id="date"></div>
-    <div class="year" id="year"></div>
+  <!-- LINKS BOX -->
+
+  <div class="links-box">
+
+    <div class="top-links">
+      <a href="#" class="side-btn">Owner</a>
+      <a href="#" class="side-btn">Co Owner</a>
+    </div>
+
+    <a href="#" class="side-btn full">Club Rules</a>
+    <a href="#" class="side-btn full">Announcements</a>
+    <a href="#" class="side-btn full">Join Events</a>
+
   </div>
-
-</div>
-
-<!-- LINKS BOX -->
-
-<div class="links-box">
-
-  <div class="top-links">
-    <a href="#" class="side-btn">Owner</a>
-    <a href="#" class="side-btn">Co Owner</a>
-  </div>
-
-  <a href="#" class="side-btn full">Club Rules</a>
-  <a href="#" class="side-btn full">Announcements</a>
-  <a href="#" class="side-btn full">Join Events</a>
 
 </div>
 
