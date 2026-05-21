@@ -31,6 +31,15 @@ body{
   flex-wrap:wrap;
 }
 
+/* LEFT COLUMN */
+
+.left-column{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  width:260px;
+}
+
 /* LEFT BUTTONS */
 
 .sidebar{
@@ -71,16 +80,7 @@ body{
     linear-gradient(135deg,#5ea0ff,#7b6dff);
 }
 
-/* CENTER COLUMN */
-
-.center-column{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-  width:260px;
-}
-
-/* CALENDAR CARD */
+/* CALENDAR */
 
 .calendar{
   width:260px;
@@ -102,8 +102,6 @@ body{
   display:flex;
   flex-direction:column;
   align-items:center;
-
-  animation:float 4s ease-in-out infinite;
 }
 
 /* TOP BAR */
@@ -199,19 +197,7 @@ body{
   right:-9px;
 }
 
-/* FLOAT ANIMATION */
-
-@keyframes float{
-  0%,100%{
-    transform:translateY(0px);
-  }
-
-  50%{
-    transform:translateY(-10px);
-  }
-}
-
-/* MAIN BOX */
+/* LINKS BOX */
 
 .links-box{
   width:260px;
@@ -368,21 +354,21 @@ body{
 
 <body>
 
-<!-- LEFT BUTTONS -->
+<!-- LEFT COLUMN -->
 
-<div class="sidebar">
+<div class="left-column">
 
-  <a href="#">Review</a>
+  <!-- BUTTONS -->
 
-  <a href="#">Insight</a>
+  <div class="sidebar">
 
-  <a href="#">Ads</a>
+    <a href="#">Review</a>
 
-</div>
+    <a href="#">Insight</a>
 
-<!-- CENTER COLUMN -->
+    <a href="#">Ads</a>
 
-<div class="center-column">
+  </div>
 
   <!-- CALENDAR -->
 
@@ -399,20 +385,20 @@ body{
 
   </div>
 
-  <!-- LINKS BOX -->
+</div>
 
-  <div class="links-box">
+<!-- LINKS BOX -->
 
-    <div class="top-links">
-      <a href="#" class="side-btn">Owner</a>
-      <a href="#" class="side-btn">Co Owner</a>
-    </div>
+<div class="links-box">
 
-    <a href="#" class="side-btn full">Club Rules</a>
-    <a href="#" class="side-btn full">Announcements</a>
-    <a href="#" class="side-btn full">Join Events</a>
-
+  <div class="top-links">
+    <a href="#" class="side-btn">Owner</a>
+    <a href="#" class="side-btn">Co Owner</a>
   </div>
+
+  <a href="#" class="side-btn full">Club Rules</a>
+  <a href="#" class="side-btn full">Announcements</a>
+  <a href="#" class="side-btn full">Join Events</a>
 
 </div>
 
