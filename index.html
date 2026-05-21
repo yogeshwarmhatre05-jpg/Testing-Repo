@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nostalgia Club Panel</title>
+<title>Club Sidebar Links</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -17,137 +17,88 @@
 }
 
 body{
+  background:#0f0f0f;
   min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#0B1020;
   font-family:'Poppins',sans-serif;
-  overflow:hidden;
-  color:#E5E7EB;
-  padding:30px;
 }
 
-/* BACKGROUND GLOW */
-
-body::before{
-  content:"";
-  position:fixed;
-  width:500px;
-  height:500px;
-  background:#8B5CF6;
-  filter:blur(140px);
-  opacity:0.22;
-  top:-120px;
-  left:-120px;
-  z-index:-2;
-}
-
-body::after{
-  content:"";
-  position:fixed;
-  width:500px;
-  height:500px;
-  background:#22D3EE;
-  filter:blur(140px);
-  opacity:0.18;
-  bottom:-140px;
-  right:-120px;
-  z-index:-2;
-}
-
-/* MAIN LAYOUT */
-
-.main-container{
-  display:grid;
-  grid-template-columns:320px 290px 220px;
-  gap:22px;
-  align-items:start;
-}
-
-/* GLASS STYLE */
-
-.glass{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.10);
-  backdrop-filter:blur(14px);
-  border-radius:24px;
-  box-shadow:
-  0 0 25px rgba(139,92,246,0.18),
-  0 0 35px rgba(34,211,238,0.08);
-}
-
-/* LINKS PANEL */
-
+/* MAIN BOX */
 .links-box{
+  width:320px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px;
   padding:18px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 25px rgba(255,255,255,0.08);
   display:flex;
   flex-direction:column;
   gap:14px;
 }
 
+/* TOP ROW */
 .top-links{
   display:flex;
   gap:12px;
 }
 
+/* BUTTON STYLE */
 .side-btn{
   flex:1;
   text-decoration:none;
-  color:#E5E7EB;
+  color:white;
+  background:linear-gradient(135deg,#2f2f2f,#454545);
   padding:14px;
-  border-radius:16px;
+  border-radius:14px;
   text-align:center;
   font-size:15px;
   font-weight:600;
-
-  background:
-  linear-gradient(
-  135deg,
-  rgba(139,92,246,0.18),
-  rgba(34,211,238,0.12)
-  );
-
-  border:1px solid rgba(255,255,255,0.08);
-
-  transition:0.3s;
+  transition:0.3s ease;
+  box-shadow:0 0 12px rgba(255,255,255,0.08);
 }
 
+/* FULL WIDTH BUTTONS */
 .full{
   width:100%;
 }
 
+/* HOVER EFFECT */
 .side-btn:hover{
-  transform:translateY(-3px) scale(1.02);
-
-  background:
-  linear-gradient(
-  135deg,
-  rgba(139,92,246,0.35),
-  rgba(34,211,238,0.22)
-  );
-
-  box-shadow:
-  0 0 20px rgba(139,92,246,0.30),
-  0 0 20px rgba(34,211,238,0.15);
+  transform:translateY(-2px);
+  background:linear-gradient(135deg,#444,#666);
+  box-shadow:0 0 18px rgba(255,255,255,0.18);
 }
-
-/* MUSIC PLAYER */
-
+body{
+  background:#0F172A;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  margin:0;
+  font-family:Arial,sans-serif;
+}
 .player{
-  padding:14px;
+  width:260px;
+  background:#0F172A;
+  border:2px solid #22C55E;
+  border-radius:12px;
+  padding:10px;
   position:relative;
+  box-shadow:0 0 25px rgba(34,197,94,0.25);
 }
 
 .live-dot{
-  width:9px;
-  height:9px;
-  background:#22D3EE;
+  width:8px;
+  height:8px;
+  background:#22C55E;
   border-radius:50%;
   position:absolute;
-  top:12px;
-  left:12px;
-  box-shadow:0 0 10px #22D3EE;
+  top:8px;
+  left:8px;
+  box-shadow:0 0 8px #22C55E;
   animation:pulse 1.2s infinite;
 }
 
@@ -158,17 +109,18 @@ body::after{
 }
 
 .marquee{
+  width:100%;
   overflow:hidden;
   white-space:nowrap;
-  font-size:12px;
-  margin-bottom:10px;
-  color:#22D3EE;
+  font-size:11px;
+  margin-bottom:6px;
+  color:#22C55E;
 }
 
 .marquee span{
   display:inline-block;
   padding-left:100%;
-  animation:scroll 9s linear infinite;
+  animation:scroll 8s linear infinite;
 }
 
 @keyframes scroll{
@@ -179,9 +131,9 @@ body::after{
 .screen{
   width:100%;
   aspect-ratio:16/9;
+  border:2px solid #1E293B;
+  border-radius:8px;
   overflow:hidden;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,0.10);
 }
 
 .screen iframe{
@@ -193,90 +145,196 @@ body::after{
 .controls{
   display:flex;
   justify-content:center;
-  gap:12px;
-  margin-top:14px;
+  gap:10px;
+  margin-top:8px;
 }
 
 .controls button{
-  width:38px;
-  height:32px;
-  border:none;
-  border-radius:12px;
+  background:#1E293B;
+  color:#E2E8F0;
+  border:1px solid #1E293B;
+  width:30px;
+  height:24px;
+  border-radius:7px;
   cursor:pointer;
-
-  color:#E5E7EB;
-
-  background:
-  linear-gradient(
-  135deg,
-  rgba(139,92,246,0.25),
-  rgba(34,211,238,0.18)
-  );
-
   transition:0.25s;
 }
 
 .controls button:hover{
   transform:translateY(-2px) scale(1.05);
-
-  box-shadow:
-  0 0 18px rgba(139,92,246,0.25),
-  0 0 18px rgba(34,211,238,0.12);
+  border-color:#22C55E;
 }
 
 #toggleBtn{
-  width:50px;
+  width:42px;
+  font-size:13px;
   font-weight:bold;
+  background:linear-gradient(135deg,#22C55E,#16A34A);
+  border:none;
+  box-shadow:0 0 12px rgba(34,197,94,0.45);
 }
 
-/* CALENDAR */
+#toggleBtn:hover{
+  transform:scale(1.08);
+}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+
+  background:
+    radial-gradient(circle at top,#1f2f57,#090d18 65%);
+
+  font-family:'Poppins',sans-serif;
+}
+
+/* LEFT BUTTONS */
+
+.sidebar{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.sidebar a{
+  width:130px;
+  padding:14px 18px;
+
+  text-decoration:none;
+  color:white;
+
+  font-size:16px;
+  font-weight:600;
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(12px);
+
+  border:1px solid rgba(255,255,255,0.15);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+
+  transition:0.25s;
+}
+
+.sidebar a:hover{
+  transform:translateX(6px) scale(1.03);
+
+  background:
+    linear-gradient(135deg,#5ea0ff,#7b6dff);
+}
+
+/* CALENDAR CARD */
 
 .calendar{
+  width:190px;
+  height:300px;
+  border-radius:30px;
   overflow:hidden;
   position:relative;
+
+  background:rgba(255,255,255,0.06);
+
+  backdrop-filter:blur(14px);
+
+  border:1px solid rgba(255,255,255,0.15);
+
+  box-shadow:
+    0 20px 45px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
   animation:float 4s ease-in-out infinite;
 }
 
+/* TOP BAR */
+
 .top{
+  width:100%;
   height:90px;
 
   background:
-  linear-gradient(
-  135deg,
-  #8B5CF6,
-  #22D3EE
-  );
+    linear-gradient(135deg,#5ea0ff,#7b6dff);
 
   display:flex;
   align-items:center;
   justify-content:center;
+
+  position:relative;
+}
+
+.top::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      rgba(255,255,255,0.18),
+      transparent
+    );
 }
 
 .month{
+  color:white;
   font-size:28px;
   font-weight:700;
   letter-spacing:2px;
+  z-index:2;
+  text-transform:uppercase;
 }
 
+/* DATE SECTION */
+
 .content{
-  height:210px;
+  flex:1;
+
+  width:100%;
+
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+
+  position:relative;
 }
 
 .date{
-  font-size:88px;
+  font-size:96px;
   font-weight:700;
+  color:white;
   line-height:1;
+
+  text-shadow:
+    0 6px 18px rgba(0,0,0,0.35);
 }
 
 .year{
-  margin-top:10px;
+  margin-top:12px;
+
+  font-size:16px;
+  font-weight:400;
   letter-spacing:4px;
-  color:rgba(229,231,235,0.65);
+
+  color:rgba(255,255,255,0.65);
 }
+
+/* SMALL DESIGN DETAILS */
 
 .calendar::before,
 .calendar::after{
@@ -284,9 +342,9 @@ body::after{
   position:absolute;
   width:18px;
   height:18px;
-  background:#0B1020;
+  background:#0f1627;
   border-radius:50%;
-  top:82px;
+  top:78px;
 }
 
 .calendar::before{
@@ -296,6 +354,8 @@ body::after{
 .calendar::after{
   right:-9px;
 }
+
+/* FLOAT ANIMATION */
 
 @keyframes float{
   0%,100%{
@@ -307,100 +367,51 @@ body::after{
   }
 }
 
-/* MOBILE */
-
-@media(max-width:950px){
-
-  .main-container{
-    grid-template-columns:1fr;
-  }
-
-}
-
 </style>
 </head>
 <body>
 
-<div class="main-container">
+<!-- LEFT BUTTONS -->
 
-  <!-- LINKS -->
+<div class="sidebar">
 
-  <div class="links-box glass">
+  <a href="https://example.com/review" target="_blank">
+    Review
+  </a>
 
-    <div class="top-links">
-      <a href="#" class="side-btn">Owner</a>
-      <a href="#" class="side-btn">Co Owner</a>
-    </div>
+  <a href="https://example.com/insight" target="_blank">
+    Insight
+  </a>
 
-    <a href="#" class="side-btn full">Club Rules</a>
-    <a href="#" class="side-btn full">Announcements</a>
-    <a href="#" class="side-btn full">Join Events</a>
+  <a href="https://example.com/ads" target="_blank">
+    Ads
+  </a>
 
+</div>
+
+<!-- CALENDAR -->
+
+<div class="calendar">
+
+  <div class="top">
+    <div class="month" id="month"></div>
   </div>
 
-  <!-- MUSIC PLAYER -->
-
-  <div class="player glass">
-
-    <div class="live-dot"></div>
-
-    <div class="marquee">
-      <span id="songText">
-        Now Playing:
-      </span>
-    </div>
-
-    <div class="screen">
-      <iframe
-      id="playerFrame"
-      src=""
-      allow="autoplay; fullscreen"
-      allowfullscreen>
-      </iframe>
-    </div>
-
-    <div class="controls">
-
-      <button onclick="prevSong()">⏮</button>
-
-      <button id="toggleBtn" onclick="toggleVideo()">▶</button>
-
-      <button onclick="nextSong()">⏭</button>
-
-    </div>
-
-  </div>
-
-  <!-- CALENDAR -->
-
-  <div class="calendar glass">
-
-    <div class="top">
-      <div class="month" id="month"></div>
-    </div>
-
-    <div class="content">
-
-      <div class="date" id="date"></div>
-
-      <div class="year" id="year"></div>
-
-    </div>
-
+  <div class="content">
+    <div class="date" id="date"></div>
+    <div class="year" id="year"></div>
   </div>
 
 </div>
 
 <script>
 
-/* CALENDAR */
-
 const today = new Date();
 
 const months = [
-"JAN","FEB","MAR","APR",
-"MAY","JUN","JUL","AUG",
-"SEP","OCT","NOV","DEC"
+  "JAN","FEB","MAR","APR",
+  "MAY","JUN","JUL","AUG",
+  "SEP","OCT","NOV","DEC"
 ];
 
 document.getElementById("month").innerText =
@@ -411,8 +422,53 @@ today.getDate();
 
 document.getElementById("year").innerText =
 today.getFullYear();
+</style>
+</head>
+<body>
+<div class="links-box">
 
-/* MUSIC PLAYER */
+  <!-- TOP BUTTONS -->
+  <div class="top-links">
+    <a href="#" class="side-btn">Owner</a>
+    <a href="#" class="side-btn">Co Owner</a>
+  </div>
+
+  <!-- MAIN BUTTONS -->
+  <a href="#" class="side-btn full">Club Rules</a>
+  <a href="#" class="side-btn full">Announcements</a>
+  <a href="#" class="side-btn full">Join Events</a>
+
+</div>
+<div class="player">
+
+  <div class="live-dot"></div>
+
+  <div class="marquee">
+    <span id="songText">Now Playing:</span>
+  </div>
+
+  <div class="screen">
+    <iframe
+      id="playerFrame"
+      src=""
+      allow="autoplay; fullscreen"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="controls">
+
+    <button onclick="prevSong()">⏮</button>
+
+    <button id="toggleBtn" onclick="toggleVideo()">▶</button>
+
+    <button onclick="nextSong()">⏭</button>
+
+  </div>
+
+</div>
+
+<script>
 
 let songs = [
 
@@ -432,8 +488,113 @@ name:"Faded - Alan Walker"
 },
 
 {
+src:"https://youtu.be/k50D8-EvNxk",
+name:"Meu Abrigo - Melim"
+},
+
+{
 src:"https://youtu.be/7WoVX2X3SQw",
 name:"Motagem Renaido - Jmilton"
+},
+
+{
+src:"https://youtu.be/9I9c20LHmzY",
+name:"Come As You Are - Nirvana"
+},
+
+{
+src:"https://youtu.be/SDNA934EEVk",
+name:"A Walk - Tycho"
+},
+
+{
+src:"https://youtu.be/A3xxG5zHuCA",
+name:"Passo Bem Solto - ATLXS"
+},
+
+{
+src:"https://youtu.be/Qk5lzJVfcLo",
+name:"Downtown Baby 2 - Overtonight"
+},
+
+{
+src:"https://youtu.be/vi72_ggUCHU",
+name:"Keep Up - ODETARI"
+},
+
+{
+src:"https://youtu.be/kGobHQ7z8X4",
+name:"Why Do I? - Unknown Brain"
+},
+
+{
+src:"https://youtu.be/0jSpCxmb2VQ",
+name:"Mood - 24kGoldn"
+},
+
+{
+src:"https://youtu.be/R5aurUlfn3w",
+name:"Monody - TheFatRat"
+},
+
+{
+src:"https://youtu.be/4jh2H5qFb44",
+name:"Shape of You - Ed Sheeran"
+},
+
+{
+src:"https://youtu.be/rfTgO9rpqck",
+name:"Heat Waves - Glass Animals"
+},
+
+{
+src:"https://youtu.be/JrNMyzsYr4M",
+name:"Love Me Like You Do - Ellie Goulding"
+},
+
+{
+src:"https://youtu.be/DKbfBSrjVHA",
+name:"Can We Kiss Forever? - Kina"
+},
+
+{
+src:"https://youtu.be/TdbyjBf93zc",
+name:"All I Want - Lofi Remix"
+},
+
+{
+src:"https://youtu.be/z7zoabFKD60",
+name:"TheFatRat Mix / Songs"
+},
+
+{
+src:"https://youtu.be/i4bWViFpd0Q",
+name:"Army Dreamers - Kate Bush"
+},
+
+{
+src:"https://youtu.be/Jkj36B1YuDU",
+name:"Another Love - Tom Odell"
+},
+
+{
+src:"https://youtu.be/GXioir-fujY",
+name:"NO BATIDÃO - ZXKAI"
+},
+
+{
+src:"https://youtu.be/EoNWCYNTANA",
+name:"If I Killed Someone for You - Alec Benjamin"
+},
+
+{
+src:"https://youtu.be/y1uzBncUsQQ",
+name:"Origami - The Rare Occasions"
+},
+
+{
+src:"https://youtu.be/7U1LFCY70nA",
+name:"Ava - Underdog"
 }
 
 ];
@@ -447,94 +608,146 @@ const toggleBtn = document.getElementById("toggleBtn");
 
 function convert(url){
 
-if(url.includes("youtu.be")){
+  if(url.includes("youtu.be")){
 
-let id = url.split("youtu.be/")[1].split("?")[0];
+    let id = url.split("youtu.be/")[1].split("?")[0];
 
-return "https://www.youtube.com/embed/" +
-id +
-"?enablejsapi=1&rel=0";
+    return "https://www.youtube.com/embed/" +
+    id +
+    "?enablejsapi=1&rel=0";
 
-}
+  }
 
-return url;
+  return url;
 
 }
 
 function loadVideo(i){
 
-frame.src = convert(songs[i].src);
+  frame.src = convert(songs[i].src);
 
-songText.innerText =
-"Now Playing: " + songs[i].name;
+  songText.innerText =
+  "Now Playing: " + songs[i].name;
 
-toggleBtn.innerText = "▶";
+  toggleBtn.innerText = "▶";
 
-isPlaying = false;
+  isPlaying = false;
 
 }
 
 function prevSong(){
 
-songIndex--;
+  songIndex--;
 
-if(songIndex < 0){
+  if(songIndex < 0){
 
-songIndex = songs.length - 1;
+    songIndex = songs.length - 1;
 
-}
+  }
 
-loadVideo(songIndex);
+  loadVideo(songIndex);
 
 }
 
 function nextSong(){
 
-songIndex++;
+  songIndex++;
 
-if(songIndex >= songs.length){
+  if(songIndex >= songs.length){
 
-songIndex = 0;
+    songIndex = 0;
 
-}
+  }
 
-loadVideo(songIndex);
+  loadVideo(songIndex);
 
 }
 
 function toggleVideo(){
 
-if(!isPlaying){
+  if(!isPlaying){
 
-frame.contentWindow.postMessage(
-'{"event":"command","func":"playVideo","args":""}',
-"*"
-);
+    frame.contentWindow.postMessage(
+      '{"event":"command","func":"playVideo","args":""}',
+      "*"
+    );
 
-toggleBtn.innerText = "❚❚";
+    toggleBtn.innerText = "❚❚";
 
-isPlaying = true;
+    isPlaying = true;
 
-}
+  }
 
-else{
+  else{
 
-frame.contentWindow.postMessage(
-'{"event":"command","func":"pauseVideo","args":""}',
-"*"
-);
+    frame.contentWindow.postMessage(
+      '{"event":"command","func":"pauseVideo","args":""}',
+      "*"
+    );
 
-toggleBtn.innerText = "▶";
+    toggleBtn.innerText = "▶";
 
-isPlaying = false;
+    isPlaying = false;
 
-}
+  }
 
 }
 
 loadVideo(songIndex);
 
 </script>
+<!-- LEFT BUTTONS -->
 
+<div class="sidebar">
+
+  <a href="https://example.com/review" target="_blank">
+    Review
+  </a>
+
+  <a href="https://example.com/insight" target="_blank">
+    Insight
+  </a>
+
+  <a href="https://example.com/ads" target="_blank">
+    Ads
+  </a>
+
+</div>
+
+<!-- CALENDAR -->
+
+<div class="calendar">
+
+  <div class="top">
+    <div class="month" id="month"></div>
+  </div>
+
+  <div class="content">
+    <div class="date" id="date"></div>
+    <div class="year" id="year"></div>
+  </div>
+
+</div>
+
+<script>
+
+const today = new Date();
+
+const months = [
+  "JAN","FEB","MAR","APR",
+  "MAY","JUN","JUL","AUG",
+  "SEP","OCT","NOV","DEC"
+];
+
+document.getElementById("month").innerText =
+months[today.getMonth()];
+
+document.getElementById("date").innerText =
+today.getDate();
+
+document.getElementById("year").innerText =
+today.getFullYear();
+
+</script>
 </body>
-</html>
+</html> 
