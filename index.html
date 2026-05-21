@@ -4,107 +4,90 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Links + Image Box</title>
+<title>Club Sidebar Links</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
-body{
+*{
   margin:0;
-  background:#0b1220;
-  font-family:Arial, sans-serif;
-  padding:25px;
-  color:white;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#0f0f0f;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Poppins',sans-serif;
 }
 
 /* MAIN BOX */
-.box{
-  max-width:800px;
-  margin:auto;
-
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-
-  padding:20px;
+.links-box{
+  width:320px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.15);
   border-radius:20px;
-
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.08);
+  padding:18px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 25px rgba(255,255,255,0.08);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
 }
 
-/* LEFT SIDE */
-.left{
-  width:55%;
+/* TOP ROW */
+.top-links{
+  display:flex;
+  gap:12px;
 }
 
-.left-title{
-  font-weight:bold;
-  margin-bottom:12px;
-  font-size:18px;
-}
-
-.left a{
-  display:block;
-  margin:8px 0;
-  padding:12px;
+/* BUTTON STYLE */
+.side-btn{
+  flex:1;
   text-decoration:none;
   color:white;
-
-  background:rgba(255,255,255,0.08);
-  border-radius:12px;
+  background:linear-gradient(135deg,#2f2f2f,#454545);
+  padding:14px;
+  border-radius:14px;
   text-align:center;
+  font-size:15px;
+  font-weight:600;
+  transition:0.3s ease;
+  box-shadow:0 0 12px rgba(255,255,255,0.08);
 }
 
-/* RIGHT SIDE */
-.right{
-  width:40%;
-  text-align:center;
-}
-
-.right-title{
-  font-weight:bold;
-  margin-bottom:12px;
-  font-size:18px;
-}
-
-.right img{
+/* FULL WIDTH BUTTONS */
+.full{
   width:100%;
-  border-radius:16px;
 }
 
-/* MOBILE */
-@media(max-width:650px){
-  .box{
-    flex-direction:column;
-  }
-  .left,.right{
-    width:100%;
-  }
+/* HOVER EFFECT */
+.side-btn:hover{
+  transform:translateY(-2px);
+  background:linear-gradient(135deg,#444,#666);
+  box-shadow:0 0 18px rgba(255,255,255,0.18);
 }
 
 </style>
 </head>
-
 <body>
 
-<div class="box">
+<div class="links-box">
 
-  <!-- LEFT -->
-  <div class="left">
-    <div class="left-title">These are links</div>
-
-    <a href="#">Club Rules</a>
-    <a href="#">Announcement</a>
-    <a href="#">Join Events</a>
+  <!-- TOP BUTTONS -->
+  <div class="top-links">
+    <a href="#" class="side-btn">Owner</a>
+    <a href="#" class="side-btn">Co Owner</a>
   </div>
 
-  <!-- RIGHT -->
-  <div class="right">
-    <div class="right-title">This is image</div>
-
-    <img src="https://i.ibb.co/8L4mGQ7/image.png" alt="Image">
-  </div>
+  <!-- MAIN BUTTONS -->
+  <a href="#" class="side-btn full">Club Rules</a>
+  <a href="#" class="side-btn full">Announcements</a>
+  <a href="#" class="side-btn full">Join Events</a>
 
 </div>
 
