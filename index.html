@@ -33,8 +33,24 @@ body{
 
 .main-layout{
   display:flex;
+  flex-direction:column;
   gap:20px;
-  align-items:flex-start;
+  align-items:center;
+}
+
+/* TOP ROW */
+
+.top-row{
+  display:flex;
+  gap:20px;
+  width:540px;
+}
+
+/* SAME WIDTH DISTRIBUTION */
+
+.calendar,
+.right-side{
+  flex:1;
 }
 
 /* RIGHT SIDE */
@@ -54,7 +70,7 @@ body{
 }
 
 .sidebar a{
-  width:260px;
+  width:100%;
   padding:14px 18px;
 
   text-decoration:none;
@@ -88,7 +104,6 @@ body{
 /* CALENDAR */
 
 .calendar{
-  width:260px;
   height:300px;
   border-radius:30px;
   overflow:hidden;
@@ -150,7 +165,6 @@ body{
 
 .content{
   flex:1;
-
   width:100%;
 
   display:flex;
@@ -203,7 +217,7 @@ body{
 /* LINKS BOX */
 
 .links-box{
-  width:260px;
+  width:100%;
   background:rgba(255,255,255,0.06);
   border:1px solid rgba(255,255,255,0.15);
   border-radius:20px;
@@ -252,7 +266,7 @@ body{
 /* PLAYER */
 
 .player{
-  width:260px;
+  width:540px;
   background:#0F172A;
   border:2px solid #22C55E;
   border-radius:12px;
@@ -356,80 +370,86 @@ body{
 
 <div class="main-layout">
 
-  <!-- LEFT SIDE -->
+  <!-- TOP ROW -->
 
-  <div class="calendar">
+  <div class="top-row">
 
-    <div class="top">
-      <div class="month" id="month"></div>
+    <!-- CALENDAR -->
+
+    <div class="calendar">
+
+      <div class="top">
+        <div class="month" id="month"></div>
+      </div>
+
+      <div class="content">
+        <div class="date" id="date"></div>
+        <div class="year" id="year"></div>
+      </div>
+
     </div>
 
-    <div class="content">
-      <div class="date" id="date"></div>
-      <div class="year" id="year"></div>
+    <!-- RIGHT SIDE -->
+
+    <div class="right-side">
+
+      <!-- REVIEW BUTTONS -->
+
+      <div class="sidebar">
+
+        <a href="#">Review</a>
+
+        <a href="#">Insight</a>
+
+        <a href="#">Ads</a>
+
+      </div>
+
+      <!-- LINKS BOX -->
+
+      <div class="links-box">
+
+        <div class="top-links">
+          <a href="#" class="side-btn">Owner</a>
+          <a href="#" class="side-btn">Co Owner</a>
+        </div>
+
+        <a href="#" class="side-btn full">Club Rules</a>
+        <a href="#" class="side-btn full">Announcements</a>
+        <a href="#" class="side-btn full">Join Events</a>
+
+      </div>
+
     </div>
 
   </div>
 
-  <!-- RIGHT SIDE -->
+  <!-- PLAYER -->
 
-  <div class="right-side">
+  <div class="player">
 
-    <!-- REVIEW BUTTONS -->
+    <div class="live-dot"></div>
 
-    <div class="sidebar">
-
-      <a href="#">Review</a>
-
-      <a href="#">Insight</a>
-
-      <a href="#">Ads</a>
-
+    <div class="marquee">
+      <span id="songText">Now Playing:</span>
     </div>
 
-    <!-- LINKS BOX -->
-
-    <div class="links-box">
-
-      <div class="top-links">
-        <a href="#" class="side-btn">Owner</a>
-        <a href="#" class="side-btn">Co Owner</a>
-      </div>
-
-      <a href="#" class="side-btn full">Club Rules</a>
-      <a href="#" class="side-btn full">Announcements</a>
-      <a href="#" class="side-btn full">Join Events</a>
-
+    <div class="screen">
+      <iframe
+        id="playerFrame"
+        src=""
+        allow="autoplay; fullscreen"
+        allowfullscreen>
+      </iframe>
     </div>
 
-    <!-- PLAYER -->
+    <div class="controls">
 
-    <div class="player">
+      <button onclick="prevSong()">⏮</button>
 
-      <div class="live-dot"></div>
+      <button id="toggleBtn" onclick="toggleVideo()">▶</button>
 
-      <div class="marquee">
-        <span id="songText">Now Playing:</span>
-      </div>
-
-      <div class="screen">
-        <iframe
-          id="playerFrame"
-          src=""
-          allow="autoplay; fullscreen"
-          allowfullscreen>
-        </iframe>
-      </div>
-
-      <div class="controls">
-
-        <button onclick="prevSong()">⏮</button>
-
-        <button id="toggleBtn" onclick="toggleVideo()">▶</button>
-
-        <button onclick="nextSong()">⏭</button>
-
-      </div>
+      <button onclick="nextSong()">⏭</button>
 
     </div>
 
