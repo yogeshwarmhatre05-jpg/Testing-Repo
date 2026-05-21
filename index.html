@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sidebar Layout</title>
+<title>Left Links Right Image</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
@@ -23,29 +23,22 @@ body{
   color:white;
 }
 
-/* MAIN BOX */
-
-.sidebar-box{
-  width:100%;
-  max-width:700px;
+.container{
+  max-width:750px;
   margin:auto;
 
   display:flex;
   justify-content:space-between;
-  align-items:flex-start;
-  gap:20px;
+  align-items:center;
+  gap:25px;
 
   background:rgba(255,255,255,0.05);
   border:1px solid rgba(255,255,255,0.08);
-
-  border-radius:24px;
+  border-radius:20px;
   padding:20px;
-
-  backdrop-filter:blur(10px);
 }
 
-/* LINKS */
-
+/* LEFT LINKS */
 .links{
   width:55%;
   display:flex;
@@ -53,52 +46,42 @@ body{
   gap:15px;
 }
 
-.side-btn{
+.links a{
   text-decoration:none;
   color:white;
-
   background:rgba(255,255,255,0.07);
   border:1px solid rgba(255,255,255,0.12);
-
   padding:14px;
-  border-radius:16px;
-
-  font-weight:600;
+  border-radius:14px;
   text-align:center;
-
+  font-weight:600;
   transition:0.3s;
 }
 
-.side-btn:hover{
-  transform:translateY(-3px);
+.links a:hover{
   background:rgba(255,255,255,0.14);
+  transform:translateY(-3px);
 }
 
-/* IMAGE */
-
-.image-box{
+/* RIGHT IMAGE */
+.image{
   width:40%;
 }
 
-.image-box img{
+.image img{
   width:100%;
-  border-radius:18px;
+  border-radius:16px;
   display:block;
 }
 
-/* MOBILE */
-
 @media(max-width:650px){
-
-  .sidebar-box{
-    flex-direction:column-reverse;
+  .container{
+    flex-direction:column;
   }
 
-  .links,
-  .image-box{
+  .links, .image{
     width:100%;
   }
-
 }
 
 </style>
@@ -106,35 +89,18 @@ body{
 
 <body>
 
-<div class="sidebar-box">
+<div class="container">
 
-  <!-- LINKS -->
-
+  <!-- LEFT LINKS -->
   <div class="links">
-
-    <a href="#" class="side-btn">
-      Club Rules
-    </a>
-
-    <a href="#" class="side-btn">
-      Announcement
-    </a>
-
-    <a href="#" class="side-btn">
-      Join Events
-    </a>
-
+    <a href="#">Club Rules</a>
+    <a href="#">Announcement</a>
+    <a href="#">Join Events</a>
   </div>
 
-  <!-- IMAGE -->
-
-  <div class="image-box">
-
-    <img 
-      src="https://i.ibb.co/8L4mGQ7/image.png"
-      alt="Club Image"
-    >
-
+  <!-- RIGHT IMAGE -->
+  <div class="image">
+    <img src="https://i.ibb.co/8L4mGQ7/image.png" alt="Club Image">
   </div>
 
 </div>
