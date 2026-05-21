@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Galaxy Club Dashboard</title>
+
+<title>Nostalgia Club Panel</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -16,199 +17,137 @@
 }
 
 body{
-  font-family:'Poppins',sans-serif;
   min-height:100vh;
-  overflow-x:hidden;
-  color:#E5E7EB;
-
-  background:
-  radial-gradient(circle at top,#141b36 0%,#0B1020 45%,#060814 100%);
-
   display:flex;
   justify-content:center;
   align-items:center;
+  background:#0B1020;
+  font-family:'Poppins',sans-serif;
+  overflow:hidden;
+  color:#E5E7EB;
   padding:30px;
-
-  position:relative;
 }
 
-/* MOVING STARS */
+/* BACKGROUND GLOW */
 
 body::before{
   content:"";
   position:fixed;
-  inset:0;
-  background-image:
-  radial-gradient(white 1px,transparent 1px);
-  background-size:40px 40px;
-  opacity:0.12;
-  animation:starsMove 50s linear infinite;
+  width:500px;
+  height:500px;
+  background:#8B5CF6;
+  filter:blur(140px);
+  opacity:0.22;
+  top:-120px;
+  left:-120px;
+  z-index:-2;
 }
 
-@keyframes starsMove{
-  from{
-    transform:translateY(0px);
-  }
-
-  to{
-    transform:translateY(-200px);
-  }
+body::after{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  background:#22D3EE;
+  filter:blur(140px);
+  opacity:0.18;
+  bottom:-140px;
+  right:-120px;
+  z-index:-2;
 }
 
 /* MAIN LAYOUT */
 
-.dashboard{
-  width:100%;
-  max-width:1200px;
-
+.main-container{
   display:grid;
-  grid-template-columns:260px 1fr 240px;
+  grid-template-columns:320px 290px 220px;
   gap:22px;
-
-  position:relative;
-  z-index:2;
+  align-items:start;
 }
 
-/* GLASS BOX */
+/* GLASS STYLE */
 
 .glass{
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.10);
   backdrop-filter:blur(14px);
-
+  border-radius:24px;
   box-shadow:
-  0 10px 30px rgba(0,0,0,0.35),
-  inset 0 1px 0 rgba(255,255,255,0.08);
-
-  border-radius:26px;
+  0 0 25px rgba(139,92,246,0.18),
+  0 0 35px rgba(34,211,238,0.08);
 }
 
-/* LEFT SIDEBAR */
+/* LINKS PANEL */
 
-.left-panel{
+.links-box{
   padding:18px;
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-
-.club-title{
-  text-align:center;
-  padding:12px;
-  border-radius:18px;
-
-  background:linear-gradient(135deg,#22D3EE,#8B5CF6);
-
-  font-size:20px;
-  font-weight:700;
-
-  box-shadow:0 0 25px rgba(94,160,255,0.4);
-}
-
-.top-links{
-  display:flex;
-  gap:10px;
-}
-
-.side-btn{
-  text-decoration:none;
-  color:#E5E7EB;
-
-  background:
-  linear-gradient(135deg,#172036,#1f2a44);
-
-  padding:14px;
-  border-radius:18px;
-
-  text-align:center;
-  font-size:14px;
-  font-weight:600;
-
-  transition:0.3s ease;
-
-  box-shadow:
-  0 0 15px rgba(255,255,255,0.05);
-}
-
-.top-links .side-btn{
-  flex:1;
-}
-
-.full-btns{
   display:flex;
   flex-direction:column;
   gap:14px;
 }
 
-.side-btn:hover{
-  transform:translateY(-4px) scale(1.03);
+.top-links{
+  display:flex;
+  gap:12px;
+}
+
+.side-btn{
+  flex:1;
+  text-decoration:none;
+  color:#E5E7EB;
+  padding:14px;
+  border-radius:16px;
+  text-align:center;
+  font-size:15px;
+  font-weight:600;
 
   background:
-  linear-gradient(135deg,#22D3EE,#8B5CF6);
+  linear-gradient(
+  135deg,
+  rgba(139,92,246,0.18),
+  rgba(34,211,238,0.12)
+  );
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  transition:0.3s;
+}
+
+.full{
+  width:100%;
+}
+
+.side-btn:hover{
+  transform:translateY(-3px) scale(1.02);
+
+  background:
+  linear-gradient(
+  135deg,
+  rgba(139,92,246,0.35),
+  rgba(34,211,238,0.22)
+  );
 
   box-shadow:
-  0 0 20px rgba(94,160,255,0.4);
-}
-
-/* CENTER PANEL */
-
-.center-panel{
-  display:flex;
-  flex-direction:column;
-  gap:22px;
-}
-
-/* WELCOME CARD */
-
-.welcome-card{
-  padding:24px;
-  min-height:180px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.welcome-text h1{
-  font-size:34px;
-  margin-bottom:10px;
-}
-
-.welcome-text p{
-  color:rgba(255,255,255,0.75);
-  line-height:1.7;
-  font-size:14px;
-}
-
-.welcome-img{
-  width:170px;
-  border-radius:22px;
-  object-fit:cover;
-
-  box-shadow:
-  0 0 25px rgba(255,255,255,0.1);
+  0 0 20px rgba(139,92,246,0.30),
+  0 0 20px rgba(34,211,238,0.15);
 }
 
 /* MUSIC PLAYER */
 
 .player{
-  padding:18px;
+  padding:14px;
   position:relative;
 }
 
 .live-dot{
-  width:10px;
-  height:10px;
+  width:9px;
+  height:9px;
   background:#22D3EE;
   border-radius:50%;
-
   position:absolute;
-  top:18px;
-  left:18px;
-
-  box-shadow:0 0 12px #22D3EE;
-
+  top:12px;
+  left:12px;
+  box-shadow:0 0 10px #22D3EE;
   animation:pulse 1.2s infinite;
 }
 
@@ -218,27 +157,18 @@ body::before{
   100%{opacity:1;}
 }
 
-.player-title{
-  text-align:center;
-  margin-bottom:14px;
-  font-size:18px;
-  font-weight:600;
-}
-
 .marquee{
-  width:100%;
   overflow:hidden;
   white-space:nowrap;
-
-  color:#22D3EE;
+  font-size:12px;
   margin-bottom:10px;
-  font-size:13px;
+  color:#22D3EE;
 }
 
 .marquee span{
   display:inline-block;
   padding-left:100%;
-  animation:scroll 10s linear infinite;
+  animation:scroll 9s linear infinite;
 }
 
 @keyframes scroll{
@@ -250,9 +180,8 @@ body::before{
   width:100%;
   aspect-ratio:16/9;
   overflow:hidden;
-  border-radius:18px;
-
-  border:2px solid rgba(255,255,255,0.08);
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.10);
 }
 
 .screen iframe{
@@ -262,64 +191,65 @@ body::before{
 }
 
 .controls{
-  margin-top:14px;
-
   display:flex;
   justify-content:center;
-  gap:14px;
+  gap:12px;
+  margin-top:14px;
 }
 
 .controls button{
-  width:44px;
-  height:40px;
-
+  width:38px;
+  height:32px;
   border:none;
-  border-radius:14px;
-
-  background:#162033;
-  color:#E5E7EB;
-
+  border-radius:12px;
   cursor:pointer;
 
-  transition:0.3s;
+  color:#E5E7EB;
 
-  font-size:16px;
+  background:
+  linear-gradient(
+  135deg,
+  rgba(139,92,246,0.25),
+  rgba(34,211,238,0.18)
+  );
+
+  transition:0.25s;
 }
 
 .controls button:hover{
-  transform:translateY(-3px) scale(1.05);
+  transform:translateY(-2px) scale(1.05);
 
-  background:
-  linear-gradient(135deg,#22D3EE,#8B5CF6);
+  box-shadow:
+  0 0 18px rgba(139,92,246,0.25),
+  0 0 18px rgba(34,211,238,0.12);
 }
 
 #toggleBtn{
-  width:58px;
-}
-
-/* RIGHT PANEL */
-
-.right-panel{
-  display:flex;
-  flex-direction:column;
-  gap:22px;
+  width:50px;
+  font-weight:bold;
 }
 
 /* CALENDAR */
 
 .calendar{
   overflow:hidden;
+  position:relative;
+  animation:float 4s ease-in-out infinite;
 }
 
 .top{
   height:90px;
 
   background:
-  linear-gradient(135deg,#22D3EE,#8B5CF6);
+  linear-gradient(
+  135deg,
+  #8B5CF6,
+  #22D3EE
+  );
 
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 }
 
 .month{
@@ -329,64 +259,60 @@ body::before{
 }
 
 .content{
-  padding:26px;
-
+  height:210px;
   display:flex;
   flex-direction:column;
-  align-items:center;
   justify-content:center;
+  align-items:center;
 }
 
 .date{
-  font-size:82px;
+  font-size:88px;
   font-weight:700;
+  line-height:1;
 }
 
 .year{
   margin-top:10px;
-  color:rgba(255,255,255,0.65);
   letter-spacing:4px;
+  color:rgba(229,231,235,0.65);
 }
 
-/* EXTRA CARD */
-
-.extra-card{
-  padding:18px;
-  text-align:center;
+.calendar::before,
+.calendar::after{
+  content:"";
+  position:absolute;
+  width:18px;
+  height:18px;
+  background:#0B1020;
+  border-radius:50%;
+  top:82px;
 }
 
-.extra-card img{
-  width:100%;
-  border-radius:18px;
-  margin-bottom:14px;
+.calendar::before{
+  left:-9px;
 }
 
-.extra-card h3{
-  margin-bottom:8px;
+.calendar::after{
+  right:-9px;
 }
 
-.extra-card p{
-  color:rgba(255,255,255,0.7);
-  font-size:13px;
-  line-height:1.6;
+@keyframes float{
+  0%,100%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-10px);
+  }
 }
 
 /* MOBILE */
 
-@media(max-width:1000px){
+@media(max-width:950px){
 
-  .dashboard{
+  .main-container{
     grid-template-columns:1fr;
-  }
-
-  .welcome-card{
-    flex-direction:column;
-    text-align:center;
-  }
-
-  .welcome-img{
-    width:100%;
-    max-width:240px;
   }
 
 }
@@ -395,120 +321,69 @@ body::before{
 </head>
 <body>
 
-<div class="dashboard">
+<div class="main-container">
 
-  <!-- LEFT -->
+  <!-- LINKS -->
 
-  <div class="left-panel glass">
-
-    <div class="club-title">
-      Nebula Chess Club
-    </div>
+  <div class="links-box glass">
 
     <div class="top-links">
       <a href="#" class="side-btn">Owner</a>
       <a href="#" class="side-btn">Co Owner</a>
     </div>
 
-    <div class="full-btns">
-      <a href="#" class="side-btn">Club Rules</a>
-      <a href="#" class="side-btn">Announcements</a>
-      <a href="#" class="side-btn">Join Events</a>
-      <a href="#" class="side-btn">Game Review</a>
-      <a href="#" class="side-btn">Music Lounge</a>
-    </div>
+    <a href="#" class="side-btn full">Club Rules</a>
+    <a href="#" class="side-btn full">Announcements</a>
+    <a href="#" class="side-btn full">Join Events</a>
 
   </div>
 
-  <!-- CENTER -->
+  <!-- MUSIC PLAYER -->
 
-  <div class="center-panel">
+  <div class="player glass">
 
-    <div class="welcome-card glass">
+    <div class="live-dot"></div>
 
-      <div class="welcome-text">
-
-        <h1>Welcome Players ✦</h1>
-
-        <p>
-          Relax, play chess, listen to music and enjoy the nostalgic galaxy atmosphere.
-          This club dashboard combines events, announcements, music and community in one modern layout.
-        </p>
-
-      </div>
-
-      <img
-      class="welcome-img"
-      src="https://i.ibb.co/8L4mGQ7/image.png"
-      alt="Club Image">
-
+    <div class="marquee">
+      <span id="songText">
+        Now Playing:
+      </span>
     </div>
 
-    <!-- MUSIC PLAYER -->
+    <div class="screen">
+      <iframe
+      id="playerFrame"
+      src=""
+      allow="autoplay; fullscreen"
+      allowfullscreen>
+      </iframe>
+    </div>
 
-    <div class="player glass">
+    <div class="controls">
 
-      <div class="live-dot"></div>
+      <button onclick="prevSong()">⏮</button>
 
-      <div class="player-title">
-        Music Player
-      </div>
+      <button id="toggleBtn" onclick="toggleVideo()">▶</button>
 
-      <div class="marquee">
-        <span id="songText">Now Playing:</span>
-      </div>
-
-      <div class="screen">
-        <iframe
-        id="playerFrame"
-        src=""
-        allow="autoplay; fullscreen"
-        allowfullscreen>
-        </iframe>
-      </div>
-
-      <div class="controls">
-
-        <button onclick="prevSong()">⏮</button>
-
-        <button id="toggleBtn" onclick="toggleVideo()">▶</button>
-
-        <button onclick="nextSong()">⏭</button>
-
-      </div>
+      <button onclick="nextSong()">⏭</button>
 
     </div>
 
   </div>
 
-  <!-- RIGHT -->
+  <!-- CALENDAR -->
 
-  <div class="right-panel">
+  <div class="calendar glass">
 
-    <div class="calendar glass">
-
-      <div class="top">
-        <div class="month" id="month"></div>
-      </div>
-
-      <div class="content">
-        <div class="date" id="date"></div>
-        <div class="year" id="year"></div>
-      </div>
-
+    <div class="top">
+      <div class="month" id="month"></div>
     </div>
 
-    <div class="extra-card glass">
+    <div class="content">
 
-      <img
-      src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop"
-      alt="Galaxy">
+      <div class="date" id="date"></div>
 
-      <h3>Galaxy Mood</h3>
-
-      <p>
-        Calm aesthetic visuals, floating glow and relaxing music atmosphere for your club members.
-      </p>
+      <div class="year" id="year"></div>
 
     </div>
 
@@ -559,11 +434,6 @@ name:"Faded - Alan Walker"
 {
 src:"https://youtu.be/7WoVX2X3SQw",
 name:"Motagem Renaido - Jmilton"
-},
-
-{
-src:"https://youtu.be/Jkj36B1YuDU",
-name:"Another Love - Tom Odell"
 }
 
 ];
@@ -577,84 +447,88 @@ const toggleBtn = document.getElementById("toggleBtn");
 
 function convert(url){
 
-  if(url.includes("youtu.be")){
+if(url.includes("youtu.be")){
 
-    let id = url.split("youtu.be/")[1].split("?")[0];
+let id = url.split("youtu.be/")[1].split("?")[0];
 
-    return "https://www.youtube.com/embed/" +
-    id +
-    "?enablejsapi=1&rel=0";
+return "https://www.youtube.com/embed/" +
+id +
+"?enablejsapi=1&rel=0";
 
-  }
+}
 
-  return url;
+return url;
 
 }
 
 function loadVideo(i){
 
-  frame.src = convert(songs[i].src);
+frame.src = convert(songs[i].src);
 
-  songText.innerText =
-  "Now Playing: " + songs[i].name;
+songText.innerText =
+"Now Playing: " + songs[i].name;
 
-  toggleBtn.innerText = "▶";
+toggleBtn.innerText = "▶";
 
-  isPlaying = false;
+isPlaying = false;
 
 }
 
 function prevSong(){
 
-  songIndex--;
+songIndex--;
 
-  if(songIndex < 0){
-    songIndex = songs.length - 1;
-  }
+if(songIndex < 0){
 
-  loadVideo(songIndex);
+songIndex = songs.length - 1;
+
+}
+
+loadVideo(songIndex);
 
 }
 
 function nextSong(){
 
-  songIndex++;
+songIndex++;
 
-  if(songIndex >= songs.length){
-    songIndex = 0;
-  }
+if(songIndex >= songs.length){
 
-  loadVideo(songIndex);
+songIndex = 0;
+
+}
+
+loadVideo(songIndex);
 
 }
 
 function toggleVideo(){
 
-  if(!isPlaying){
+if(!isPlaying){
 
-    frame.contentWindow.postMessage(
-      '{"event":"command","func":"playVideo","args":""}',
-      '*'
-    );
+frame.contentWindow.postMessage(
+'{"event":"command","func":"playVideo","args":""}',
+"*"
+);
 
-    toggleBtn.innerText = '❚❚';
+toggleBtn.innerText = "❚❚";
 
-    isPlaying = true;
+isPlaying = true;
 
-  }
+}
 
-  else{
+else{
 
-    frame.contentWindow.postMessage(
-      '{"event":"command","func":"pauseVideo","args":""}',
-      '*'
-    );
+frame.contentWindow.postMessage(
+'{"event":"command","func":"pauseVideo","args":""}',
+"*"
+);
 
-    toggleBtn.innerText = '▶';
+toggleBtn.innerText = "▶";
 
-    isPlaying = false;
+isPlaying = false;
 
-  }
+}
 
 }
 
