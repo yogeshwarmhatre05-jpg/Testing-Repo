@@ -1,11 +1,17 @@
-<!DOCTYPE html>  <html lang="en">    <head>    
-<meta charset="UTF-8">    
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Pixel Glow Club</title>  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">  <style>    *{
-box-sizing:border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
 
-html,
-body{
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixel Glow Club</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;}
+
+html,body{
 margin:0;
 padding:0;
 background:#0F172A;
@@ -16,27 +22,12 @@ overflow-x:hidden;
 transition:background 1s ease;
 }
 
-body{
-position:relative;
-}
-
 /* RGB BORDER */
-
 .rgbBorder{
 position:fixed;
 inset:0;
 padding:3px;
-background:linear-gradient(
-90deg,
-#ff0000,
-#ff9900,
-#ffee00,
-#00ff00,
-#00ffff,
-#0066ff,
-#aa00ff,
-#ff0000
-);
+background:linear-gradient(90deg,#ff0000,#ff9900,#ffee00,#00ff00,#00ffff,#0066ff,#aa00ff,#ff0000);
 background-size:400% 400%;
 animation:rgbMove 8s linear infinite;
 z-index:-1;
@@ -54,14 +45,7 @@ background:#0F172A;
 100%{background-position:400% 50%;}
 }
 
-@keyframes discoRGB{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
-
 /* MAIN */
-
 .mainBox{
 width:300px;
 margin:auto;
@@ -70,17 +54,12 @@ text-align:center;
 border:2px solid #1E293B;
 border-radius:12px;
 background:#0F172A;
-transition:
-background 1s ease,
-border-color 1s ease,
-box-shadow 1s ease;
+transition:all 1s ease;
 }
 
 .themeText{
 color:#22C55E;
-transition:
-color 1s ease,
-text-shadow 1s ease;
+transition:all 1s ease;
 }
 
 .line{
@@ -90,7 +69,6 @@ margin:8px 20px;
 }
 
 /* PIXEL GLOW */
-
 .pixelGlowBox{
 width:270px;
 height:60px;
@@ -104,14 +82,9 @@ border-radius:10px;
 position:absolute;
 inset:0;
 padding:2px;
-background:linear-gradient(
-90deg,
-#22C55E,
-white,
-#22C55E
-);
+background:linear-gradient(90deg,#22C55E,white,#22C55E);
 background-size:300% 300%;
-animation:discoRGB 6s ease-in-out infinite;
+animation:rgbMove 6s ease-in-out infinite;
 }
 
 .pixelBorder::before{
@@ -131,135 +104,114 @@ font-size:1rem;
 font-family:'Montserrat',sans-serif;
 font-weight:700;
 letter-spacing:2px;
-z-index:2;
 color:#22C55E;
-transition:
-color 1s ease,
-text-shadow 1s ease;
 -webkit-text-stroke:1px #000;
+transition:all 1s ease;
 }
+</style>
+</head>
 
+<body>
 
-</style>  </head>  <body>  <div class="rgbBorder"></div>  <div class="mainBox">  <!-- PIXEL GLOW -->  <div class="pixelGlowBox">  <div class="pixelBorder"></div>  <div id="pixelText">
-PIXEL GLOW
+<div class="rgbBorder"></div>
 
-</div>  </div>  <br>  <div class="themeText" style="font-size:15px;letter-spacing:2px;overflow:hidden;">  <marquee behavior="scroll" direction="left" scrollamount="3">  ♣Welcome to Our Club♣  </marquee>  </div>  <br>  <div style="font-size:11px;letter-spacing:3px;">  <span class="themeText" style="font-size:14px;">  ✧ 𝐎 𝐖 𝐍 𝐄 𝐑 ✧
+<div class="mainBox">
 
-</span>  </div>  <div style="margin-top:6px;">  <img    
-src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png"    
-width="250"    
-height="333"    
-style="border-radius:12px;border:0px solid #1E293B;">
+<div class="pixelGlowBox">
+<div class="pixelBorder"></div>
+<div id="pixelText">PIXEL GLOW</div>
+</div>
 
-</div>  <div    
-class="themeText"    
-style="    
-font-size:22px;    
-font-weight:900;    
-font-family:cursive;    
-margin-top:6px;    
-">  √𝓎𝓸𝓰𝓲136  </div>  <div class="line"></div>  <div style="font-size:12px;font-style:italic;">  “Think like a King. Play like a Master.”  </div>  <br>  <!-- PLAYER -->  
-/* RGB THEME */
+<br>
 
+<div class="themeText" style="font-size:15px;letter-spacing:2px;">
+<marquee scrollamount="3">♣ Welcome to Our Club ♣</marquee>
+</div>
+
+<br>
+
+<div class="themeText" style="font-size:14px;">✧ OWNER ✧</div>
+
+<div style="margin-top:6px;">
+<img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png"
+width="250" height="333" style="border-radius:12px;">
+</div>
+
+<div class="themeText" style="font-size:22px;font-weight:900;font-family:cursive;margin-top:6px;">
+√𝓎𝓸𝓰𝓲136
+</div>
+
+<div class="line"></div>
+
+<div style="font-size:12px;font-style:italic;">
+“Think like a King. Play like a Master.”
+</div>
+
+</div>
+
+<script>
 const themes = [
-
 {
 bg:"#0F172A",
 border:"#22C55E",
 glow:"rgba(34,197,94,0.5)",
 text:"#22C55E"
 },
-
 {
 bg:"#1E1B4B",
 border:"#A855F7",
 glow:"rgba(168,85,247,0.5)",
 text:"#A855F7"
 },
-
 {
 bg:"#111827",
 border:"#3B82F6",
 glow:"rgba(59,130,246,0.5)",
 text:"#3B82F6"
 },
-
 {
 bg:"#2A0F0F",
 border:"#FF4D4D",
 glow:"rgba(255,77,77,0.5)",
 text:"#FF4D4D"
 },
-
 {
 bg:"#1A1A00",
 border:"#FFCC00",
 glow:"rgba(255,204,0,0.5)",
 text:"#FFCC00"
 }
-
 ];
 
 let index = 0;
 
 function changeTheme(){
-
 const theme = themes[index];
 
 document.body.style.background = theme.bg;
 
-document.querySelector(".mainBox").style.borderColor = theme.border;
-
-document.querySelector(".mainBox").style.boxShadow =
-0 0 25px ${theme.glow};
-
-document.querySelector(".player").style.borderColor =
-theme.border;
-
-document.querySelector(".calendar").style.borderColor =
-theme.border;
-
-document.querySelector(".section").style.borderColor =
-theme.border;
-
-document.querySelector("#game").style.borderColor =
-theme.border;
-
-document.querySelector(".pixelBorder").style.background =
-linear-gradient(     90deg,     ${theme.border},     white,     ${theme.border}     );
-
-document.querySelector(".pixelBorder").style.backgroundSize =
-"300% 300%";
-
-document.querySelector(".pixelBorder").style.animation =
-"discoRGB 6s ease-in-out infinite";
+const box = document.querySelector(".mainBox");
+box.style.borderColor = theme.border;
+box.style.boxShadow = `0 0 25px ${theme.glow}`;
 
 document.querySelectorAll(".themeText").forEach(el=>{
-
-el.style.color = theme.text;    
-
-el.style.textShadow =    
-`0 0 12px ${theme.glow}`;
-
+el.style.color = theme.text;
+el.style.textShadow = `0 0 12px ${theme.glow}`;
 });
 
-document.getElementById("pixelText").style.color =
-theme.text;
+document.getElementById("pixelText").style.color = theme.text;
+document.getElementById("pixelText").style.textShadow = `0 0 12px ${theme.glow}`;
 
-document.getElementById("pixelText").style.textShadow =
-0 0 12px ${theme.glow};
+document.querySelector(".pixelBorder").style.background =
+`linear-gradient(90deg, ${theme.border}, white, ${theme.border})`;
 
 index++;
-
-if(index >= themes.length){
-index = 0;
-}
+if(index >= themes.length) index = 0;
 }
 
 setInterval(changeTheme,6000);
-
 changeTheme();
+</script>
 
-</script>  </body>
-
-</html>   
+</body>
+</html>
