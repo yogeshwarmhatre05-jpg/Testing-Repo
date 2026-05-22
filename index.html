@@ -497,61 +497,101 @@ name:"Monody - TheFatRat"
 
 ];  
   
-let songIndex = 0;  
-  
-const frame = document.getElementById("playerFrame");  
-const songText = document.getElementById("songText");  
-  
-function convert(url){  
-  
-if(url.includes("youtu.be")){  
-  
-let id = url.split("youtu.be/")[1].split("?")[0];  
-  
-return "https://www.youtube.com/embed/" +  
-id +  
-"?enablejsapi=1";  
-  
-}  
-  
-return url;  
-  
-}  
-  
-function loadVideo(i){  
-  
-frame.src = convert(songs[i].src);  
-  
-songText.innerText =  
-"Now Playing: " + songs[i].name;  
-  
-}  
-  
-function prevSong(){  
-  
-songIndex--;  
-  
-if(songIndex < 0){  
-  
-songIndex = songs.length - 1;  
-  
-}  
-  
-loadVideo(songIndex);  
-  
-}  
-  
-function nextSong(){  
-  
-songIndex++;  
-  
-if(songIndex >= songs.length){  
-  
-songIndex = 0;  
-  
-}  
-  
-loadVideo(songIndex);  
+let songIndex = 0;
+let isPlaying = false;
+
+const frame = document.getElementById("playerFrame");
+const songText = document.getElementById("songText");
+const toggleBtn = document.getElementById("toggleBtn");
+
+function convert(url){
+
+  if(url.includes("youtu.be")){
+
+    let id = url.split("youtu.be/")[1].split("?")[0];
+
+    return "https://www.youtube.com/embed/" +
+    id +
+    "?enablejsapi=1&rel=0";
+
+  }
+
+  return url;
+
+}
+
+function loadVideo(i){
+
+  frame.src = convert(songs[i].src);
+
+  songText.innerText =
+  "Now Playing: " + songs[i].name;
+
+  toggleBtn.innerText = "▶";
+
+  isPlaying = false;
+
+}
+
+function prevSong(){
+
+  songIndex--;
+
+  if(songIndex < 0){
+
+    songIndex = songs.length - 1;
+
+  }
+
+  loadVideo(songIndex);
+
+}
+
+function nextSong(){
+
+  songIndex++;
+
+  if(songIndex >= songs.length){
+
+    songIndex = 0;
+
+  }
+
+  loadVideo(songIndex);
+
+}
+
+function toggleVideo(){
+
+  if(!isPlaying){
+
+    frame.contentWindow.postMessage(
+      '{"event":"command","func":"playVideo","args":""}',
+      "*"
+    );
+
+    toggleBtn.innerText = "❚❚";
+
+    isPlaying = true;
+
+  }
+
+  else{
+
+    frame.contentWindow.postMessage(
+      '{"event":"command","func":"pauseVideo","args":""}',
+      "*"
+    );
+
+    toggleBtn.innerText = "▶";
+
+    isPlaying = false;
+
+  }
+
+}
+
+loadVideo(songIndex);
   
 }  
   
