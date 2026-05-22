@@ -9,209 +9,172 @@
 
 <style>
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 body{
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:flex-start;
-background:radial-gradient(circle at top,#1f2f57,#090d18 65%);
-font-family:'Poppins',sans-serif;
-padding:20px;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  background:radial-gradient(circle at top,#1f2f57,#090d18 65%);
+  font-family:'Poppins',sans-serif;
+  padding:20px;
 }
 
+/* MAIN LAYOUT */
 .main-layout{
-display:flex;
-gap:20px;
-align-items:flex-start;
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+}
+
+/* LEFT COLUMN (NEW WRAPPER) */
+.left-column{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+/* CALENDAR */
+.calendar{
+  width:260px;
+  height:300px;
+  border-radius:30px;
+  overflow:hidden;
+  position:relative;
+
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,0.15);
+
+  box-shadow:0 20px 45px rgba(0,0,0,0.45),
+             inset 0 1px 0 rgba(255,255,255,0.08);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.top{
+  width:100%;
+  height:90px;
+  background:linear-gradient(135deg,#5ea0ff,#7b6dff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.month{
+  color:white;
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:2px;
+  z-index:2;
+  text-transform:uppercase;
+}
+
+.content{
+  flex:1;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.date{
+  font-size:96px;
+  font-weight:700;
+  color:white;
+  line-height:1;
+}
+
+.year{
+  margin-top:12px;
+  font-size:16px;
+  letter-spacing:4px;
+  color:rgba(255,255,255,0.65);
+}
+
+/* REVIEW / INSIGHT / ADS BOX (SEPARATE) */
+.side-panel{
+  width:260px;
+  padding:18px;
+  border-radius:20px;
+
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px);
+
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.side-panel a{
+  text-decoration:none;
+  color:white;
+  padding:14px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:600;
+
+  background:linear-gradient(135deg,#2f2f2f,#454545);
+  transition:0.3s;
+}
+
+.side-panel a:hover{
+  transform:translateY(-2px);
+  background:linear-gradient(135deg,#444,#666);
 }
 
 /* RIGHT SIDE */
 .right-side{
-display:flex;
-flex-direction:column;
-gap:20px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
 }
 
-/* === COMBINED CALENDAR + LINKS BOX === */
-.side-panel{
-width:260px;
-background:rgba(255,255,255,0.06);
-border:1px solid rgba(255,255,255,0.15);
-border-radius:25px;
-overflow:hidden;
-backdrop-filter:blur(14px);
-box-shadow:0 20px 45px rgba(0,0,0,0.45);
-}
-
-/* CALENDAR TOP */
-.calendar{
-display:flex;
-flex-direction:column;
-align-items:center;
-text-align:center;
-}
-
-.top{
-width:100%;
-height:90px;
-background:linear-gradient(135deg,#5ea0ff,#7b6dff);
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-}
-
-.month{
-color:white;
-font-size:28px;
-font-weight:700;
-letter-spacing:2px;
-text-transform:uppercase;
-}
-
-.content{
-padding:20px;
-display:flex;
-flex-direction:column;
-align-items:center;
-}
-
-.date{
-font-size:96px;
-font-weight:700;
-color:white;
-line-height:1;
-}
-
-.year{
-margin-top:10px;
-font-size:16px;
-letter-spacing:4px;
-color:rgba(255,255,255,0.65);
-}
-
-/* LINKS INSIDE SAME BOX */
-.sidebar{
-display:flex;
-flex-direction:column;
-gap:12px;
-padding:15px;
-border-top:1px solid rgba(255,255,255,0.15);
-}
-
-.sidebar a{
-text-decoration:none;
-color:white;
-font-size:16px;
-font-weight:600;
-padding:14px;
-border-radius:16px;
-background:rgba(255,255,255,0.08);
-transition:0.25s;
-text-align:center;
-}
-
-.sidebar a:hover{
-transform:translateX(4px);
-background:linear-gradient(135deg,#5ea0ff,#7b6dff);
-}
-
-/* LINKS BOX (OTHER BUTTONS) */
+/* LINKS BOX */
 .links-box{
-width:260px;
-background:rgba(255,255,255,0.06);
-border:1px solid rgba(255,255,255,0.15);
-border-radius:20px;
-padding:18px;
-backdrop-filter:blur(10px);
-display:flex;
-flex-direction:column;
-gap:14px;
+  width:260px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px;
+  padding:18px;
+  backdrop-filter:blur(10px);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
 }
 
 .top-links{
-display:flex;
-gap:12px;
+  display:flex;
+  gap:12px;
 }
 
 .side-btn{
-flex:1;
-text-decoration:none;
-color:white;
-background:linear-gradient(135deg,#2f2f2f,#454545);
-padding:14px;
-border-radius:14px;
-text-align:center;
-font-size:15px;
-font-weight:600;
-transition:0.3s ease;
-}
-
-.side-btn:hover{
-transform:translateY(-2px);
-background:linear-gradient(135deg,#444,#666);
+  flex:1;
+  text-decoration:none;
+  color:white;
+  background:linear-gradient(135deg,#2f2f2f,#454545);
+  padding:14px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:600;
 }
 
 /* PLAYER */
 .player{
-width:260px;
-background:#0F172A;
-border:2px solid #22C55E;
-border-radius:12px;
-padding:10px;
-box-shadow:0 0 25px rgba(34,197,94,0.25);
-}
-
-.live-dot{
-width:8px;height:8px;
-background:#22C55E;
-border-radius:50%;
-position:absolute;
-animation:pulse 1.2s infinite;
-}
-
-@keyframes pulse{
-0%{opacity:1;}
-50%{opacity:0.3;}
-100%{opacity:1;}
-}
-
-.marquee{
-width:100%;
-overflow:hidden;
-white-space:nowrap;
-font-size:11px;
-margin-bottom:6px;
-color:#22C55E;
-}
-
-.marquee span{
-display:inline-block;
-padding-left:100%;
-animation:scroll 8s linear infinite;
-}
-
-@keyframes scroll{
-0%{transform:translateX(0);}
-100%{transform:translateX(-100%);}
-}
-
-.screen iframe{
-width:100%;
-aspect-ratio:16/9;
-border:none;
-}
-
-.controls{
-display:flex;
-justify-content:center;
-gap:10px;
-margin-top:8px;
+  width:260px;
+  background:#0F172A;
+  border:2px solid #22C55E;
+  border-radius:12px;
+  padding:10px;
 }
 </style>
 </head>
@@ -220,48 +183,51 @@ margin-top:8px;
 
 <div class="main-layout">
 
-<!-- LEFT CALENDAR + LINKS COMBINED -->
-<div class="side-panel">
+  <!-- LEFT COLUMN -->
+  <div class="left-column">
 
-<div class="calendar">
-  <div class="top">
-    <div class="month" id="month"></div>
+    <!-- CALENDAR -->
+    <div class="calendar">
+      <div class="top">
+        <div class="month" id="month"></div>
+      </div>
+      <div class="content">
+        <div class="date" id="date"></div>
+        <div class="year" id="year"></div>
+      </div>
+    </div>
+
+    <!-- REVIEW / INSIGHT / ADS -->
+    <div class="side-panel">
+      <a href="#">Review</a>
+      <a href="#">Insight</a>
+      <a href="#">Ads</a>
+    </div>
+
   </div>
 
-  <div class="content">
-    <div class="date" id="date"></div>
-    <div class="year" id="year"></div>
+  <!-- RIGHT SIDE -->
+  <div class="right-side">
+
+    <div class="links-box">
+      <div class="top-links">
+        <a href="#" class="side-btn">Owner</a>
+        <a href="#" class="side-btn">Co Owner</a>
+      </div>
+      <a href="#" class="side-btn">Club Rules</a>
+      <a href="#" class="side-btn">Announcements</a>
+      <a href="#" class="side-btn">Join Events</a>
+    </div>
+
+    <div class="player"></div>
+
   </div>
-</div>
-
-<div class="sidebar">
-  <a href="#">Review</a>
-  <a href="#">Insight</a>
-  <a href="#">Ads</a>
-</div>
-
-</div>
-
-<!-- RIGHT SIDE -->
-<div class="right-side">
-
-<div class="links-box">
-  <div class="top-links">
-    <a href="#" class="side-btn">Owner</a>
-    <a href="#" class="side-btn">Co Owner</a>
-  </div>
-  <a href="#" class="side-btn">Club Rules</a>
-  <a href="#" class="side-btn">Announcements</a>
-  <a href="#" class="side-btn">Join Events</a>
-</div>
-
-</div>
 
 </div>
 
 <script>
 const today = new Date();
-const months=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
 document.getElementById("month").innerText = months[today.getMonth()];
 document.getElementById("date").innerText = today.getDate();
