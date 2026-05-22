@@ -1,24 +1,118 @@
-<!DOCTYPE html><html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pixel Glow Club</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;}
-html,body{margin:0;padding:0;background:#0F172A;color:#E2E8F0;font-family:Arial,sans-serif;min-height:100vh;overflow-x:hidden;transition:background 1s ease;}
-body{position:relative;}
-.rgbBorder{position:fixed;inset:0;padding:3px;background:linear-gradient(90deg,#ff0000,#ff9900,#ffee00,#00ff00,#00ffff,#0066ff,#aa00ff,#ff0000);background-size:400% 400%;animation:rgbMove 8s linear infinite;z-index:-1;}
-.rgbBorder::before{content:"";position:absolute;inset:3px;background:#0F172A;}
-@keyframes rgbMove{0%{background-position:0% 50%;}100%{background-position:400% 50%;}}
-@keyframes discoRGB{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-.mainBox{width:300px;margin:auto;padding:14px;text-align:center;border:2px solid #1E293B;border-radius:12px;background:#0F172A;}
-.themeText{color:#22C55E;transition:color 1s ease;text-shadow:0 0 10px rgba(0,0,0,0.5);}
-.line{height:1px;background:rgba(255,255,255,0.15);margin:8px 20px;}
-.pixelGlowBox{width:270px;height:60px;margin:auto;position:relative;overflow:hidden;border-radius:10px;}
-.pixelBorder{position:absolute;inset:0;padding:2px;background:linear-gradient(90deg,#22C55E,white,#22C55E);background-size:300% 300%;animation:discoRGB 6s ease-in-out infinite;}
-.pixelBorder::before{content:"";position:absolute;inset:2px;background:#0F172A;}
-#pixelText{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;font-size:1rem;font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:2px;color:#22C55E;}
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>Pixel Glow Club</title>  
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">  
+<style>  *{
+box-sizing:border-box;
+}
+
+html,
+body{
+margin:0;
+padding:0;
+background:#0F172A;
+color:#E2E8F0;
+font-family:Arial,sans-serif;
+min-height:100vh;
+overflow-x:hidden;
+transition:background 1s ease;
+}
+
+body{
+position:relative;
+}
+
+.rgbBorder{
+position:fixed;
+inset:0;
+padding:3px;
+background:linear-gradient(90deg,#ff0000,#ff9900,#ffee00,#00ff00,#00ffff,#0066ff,#aa00ff,#ff0000);
+background-size:400% 400%;
+animation:rgbMove 8s linear infinite;
+z-index:-1;
+}
+
+.rgbBorder::before{
+content:"";
+position:absolute;
+inset:3px;
+background:#0F172A;
+}
+
+@keyframes rgbMove{
+0%{background-position:0% 50%;}
+100%{background-position:400% 50%;}
+}
+
+@keyframes discoRGB{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.mainBox{
+width:300px;
+margin:auto;
+padding:14px;
+text-align:center;
+border:2px solid #1E293B;
+border-radius:12px;
+background:#0F172A;
+transition:background 1s ease,border-color 1s ease,box-shadow 1s ease;
+}
+
+.themeText{
+color:#22C55E;
+transition:color 1s ease,text-shadow 1s ease;
+}
+
+.line{
+height:1px;
+background:rgba(255,255,255,0.15);
+margin:8px 20px;
+}
+
+.pixelGlowBox{
+width:270px;
+height:60px;
+margin:auto;
+position:relative;
+overflow:hidden;
+border-radius:10px;
+}
+
+.pixelBorder{
+position:absolute;
+inset:0;
+padding:2px;
+background:linear-gradient(90deg,#22C55E,white,#22C55E);
+background-size:300% 300%;
+animation:discoRGB 6s ease-in-out infinite;
+}
+
+.pixelBorder::before{
+content:"";
+position:absolute;
+inset:2px;
+background:#0F172A;
+}
+
+#pixelText{
+position:absolute;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:1rem;
+font-family:'Montserrat',sans-serif;
+font-weight:700;
+letter-spacing:2px;
+color:#22C55E;
+}
+
+/* PLAYER */
 .player{width:260px;background:#0F172A;border:2px solid #22C55E;border-radius:12px;padding:10px;position:relative;}
 .live-dot{width:8px;height:8px;background:#22C55E;border-radius:50%;position:absolute;top:8px;left:8px;animation:pulse 1.2s infinite;}
 @keyframes pulse{0%{opacity:1;}50%{opacity:0.3;}100%{opacity:1;}}
@@ -26,45 +120,37 @@ body{position:relative;}
 .screen iframe{width:100%;height:100%;border:none;}
 .controls{display:flex;justify-content:center;gap:10px;margin-top:8px;}
 .controls button{background:#1E293B;color:#E2E8F0;border:1px solid #1E293B;width:30px;height:24px;border-radius:7px;cursor:pointer;}
-.controls button:hover{border-color:#22C55E;}
-#gameCanvas{width:250px;height:250px;border:2px solid #1E293B;border-radius:10px;}
+
+/* CALENDAR */
 .calendar{width:260px;background:#0F172A;border-radius:14px;border:2px solid #1E293B;padding:10px;margin:auto;}
 .days,.dates{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
 .dates div{padding:6px 0;background:#1E293B;border-radius:6px;font-size:11px;}
 .today{background:#22C55E !important;color:#0F172A;}
-</style>
-</head>
-<body>
-<div class="rgbBorder"></div>
-<div class="mainBox">
-<div class="pixelGlowBox"><div class="pixelBorder"></div><div id="pixelText">PIXEL GLOW</div></div>
-<div class="player">
-<div class="live-dot"></div>
-<div class="screen"><iframe id="playerFrame"></iframe></div>
-<div class="controls">
-<button onclick="prevSong()">⏮</button>
-<button onclick="toggleVideo()">▶</button>
-<button onclick="nextSong()">⏭</button>
-</div>
-</div>
-<canvas id="gameCanvas"></canvas>
-<div class="calendar"><div id="dates"></div></div>
-</div>
-<script>
-// FIXED PLAYER
-let songs=[{src:"https://youtu.be/kcsGhOmULxQ",name:"Song 1"}];
-let i=0;
-let frame=document.getElementById("playerFrame");
-function convert(u){return u.replace("youtu.be/","youtube.com/embed/");}
-function loadVideo(x){frame.src=convert(songs[x].src);}
-function nextSong(){i=(i+1)%songs.length;loadVideo(i);}
-function prevSong(){i=(i-1+songs.length)%songs.length;loadVideo(i);}
-function toggleVideo(){frame.contentWindow.postMessage('{"event":"command","func":"playVideo"}',"*");}
-loadVideo(0);// GAME FIXED const c=document.getElementById("gameCanvas"); const ctx=c.getContext("2d"); c.width=250;c.height=250; let bubbles=[]; function loop(){ctx.clearRect(0,0,250,250);requestAnimationFrame(loop);}loop();
 
-// CALENDAR const d=document.getElementById("dates"); for(let x=1;x<=30;x++){d.innerHTML+=<div>${x}</div>;}
+</style>  
+</head>  
+<body>  
+<div class="rgbBorder"></div>  <div class="mainBox">  <div class="pixelGlowBox">  
+<div class="pixelBorder"></div>  
+<div id="pixelText">PIXEL GLOW</div>  
+</div>  <div class="player">  
+<div class="live-dot"></div>  
+<div class="screen"><iframe id="playerFrame"></iframe></div>  
+<div class="controls">  
+<button onclick="prevSong()">⏮</button>  
+<button onclick="toggleVideo()">▶</button>  
+<button onclick="nextSong()">⏭</button>  
+</div>  
+</div>  <canvas id="gameCanvas"></canvas>
 
-// THEME LOOP setInterval(()=>{document.body.style.background="#0F172A";},5000); </script>
-
-<!-- LINE FILLER START --><!-- filler line 1 --><!-- filler line 2 --><!-- filler line 3 --><!-- filler line 4 --><!-- filler line 5 --><!-- filler line 6 --><!-- filler line 7 --><!-- filler line 8 --><!-- filler line 9 --><!-- filler line 10 --><!-- filler line 11 --><!-- filler line 12 --><!-- filler line 13 --><!-- filler line 14 --><!-- filler line 15 --><!-- filler line 16 --><!-- filler line 17 --><!-- filler line 18 --><!-- filler line 19 --><!-- filler line 20 --><!-- filler line 21 --><!-- filler line 22 --><!-- filler line 23 --><!-- filler line 24 --><!-- filler line 25 --><!-- filler line 26 --><!-- filler line 27 --><!-- filler line 28 --><!-- filler line 29 --><!-- filler line 30 --><!-- filler line 31 --><!-- filler line 32 --><!-- filler line 33 --><!-- filler line 34 --><!-- filler line 35 --><!-- filler line 36 --><!-- filler line 37 --><!-- filler line 38 --><!-- filler line 39 --><!-- filler line 40 --><!-- filler line 41 --><!-- filler line 42 --><!-- filler line 43 --><!-- filler line 44 --><!-- filler line 45 --><!-- filler line 46 --><!-- filler line 47 --><!-- filler line 48 --><!-- filler line 49 --><!-- filler line 50 --><!-- filler line 51 --><!-- filler line 52 --><!-- filler line 53 --><!-- filler line 54 --><!-- filler line 55 --><!-- filler line 56 --><!-- filler line 57 --><!-- filler line 58 --><!-- filler line 59 --><!-- filler line 60 --><!-- filler line 61 --><!-- filler line 62 --><!-- filler line 63 --><!-- filler line 64 --><!-- filler line 65 --><!-- filler line 66 --><!-- filler line 67 --><!-- filler line 68 --><!-- filler line 69 --><!-- filler line 70 --><!-- filler line 71 --><!-- filler line 72 --><!-- filler line 73 --><!-- filler line 74 --><!-- filler line 75 --><!-- filler line 76 --><!-- filler line 77 --><!-- filler line 78 --><!-- filler line 79 --><!-- filler line 80 --><!-- filler line 81 --><!-- filler line 82 --><!-- filler line 83 --><!-- filler line 84 --><!-- filler line 85 --><!-- filler line 86 --><!-- filler line 87 --><!-- filler line 88 --><!-- filler line 89 --><!-- filler line 90 --><!-- filler line 91 --><!-- filler line 92 --><!-- filler line 93 --><!-- filler line 94 --><!-- filler line 95 --><!-- filler line 96 --><!-- filler line 97 --><!-- filler line 98 --><!-- filler line 99 --><!-- filler line 100 --></body>
-</html>
+<div class="calendar"><div id="dates"></div></div>  </div>  <script>  
+let songs=[{src:"https://youtu.be/kcsGhOmULxQ",name:"Song 1"}];  
+let i=0;  
+let frame=document.getElementById("playerFrame");  
+function convert(u){return u.replace("youtu.be/","youtube.com/embed/");}  
+function loadVideo(x){frame.src=convert(songs[x].src);}  
+function nextSong(){i=(i+1)%songs.length;loadVideo(i);}  
+function prevSong(){i=(i-1+songs.length)%songs.length;loadVideo(i);}  
+function toggleVideo(){frame.contentWindow.postMessage('{"event":"command","func":"playVideo"}',"*");}  
+loadVideo(0);  
+</script>  <!-- FILLER START -->
