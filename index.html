@@ -3,27 +3,26 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Pro Calendar Dashboard</title>
+<title>Cute Calendar</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg1:#0a0f1f;
-  --bg2:#0f1b33;
-  --card:rgba(255,255,255,0.06);
-  --border:rgba(255,255,255,0.12);
-  --text:#eaf0ff;
-  --muted:#9aa7c7;
-  --accent:#6ae4ff;
-  --accent2:#b46bff;
+  --bg1:#ffe6f0;
+  --bg2:#e6f7ff;
+  --card:#ffffffcc;
+  --text:#3a3a3a;
+  --accent:#ff7eb9;
+  --accent2:#7afcff;
+  --soft:#fff3f8;
 }
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Inter, sans-serif;
+  font-family:Poppins, sans-serif;
 }
 
 body{
@@ -31,40 +30,45 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  background: radial-gradient(circle at top, #162447, var(--bg1));
-  color:var(--text);
+  background: linear-gradient(135deg,var(--bg1),var(--bg2));
 }
 
-/* MAIN CARD */
-.container{
-  width:380px;
+/* CARD */
+.box{
+  width:360px;
   background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  backdrop-filter: blur(16px);
+  border-radius:22px;
   padding:18px;
-  box-shadow:0 10px 40px rgba(0,0,0,0.5);
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  backdrop-filter: blur(10px);
 }
 
 /* HEADER */
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:14px;
-}
-
-.header h1{
-  font-size:18px;
+.title{
+  text-align:center;
+  font-size:20px;
   font-weight:700;
+  color:var(--accent);
 }
 
-.header span{
+.subtitle{
+  text-align:center;
   font-size:12px;
-  color:var(--muted);
+  color:#888;
+  margin-top:4px;
 }
 
-/* CALENDAR GRID */
+/* DAYS */
+.days{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  margin-top:14px;
+  text-align:center;
+  font-size:11px;
+  color:#aaa;
+}
+
+/* CALENDAR */
 .calendar{
   display:grid;
   grid-template-columns:repeat(7,1fr);
@@ -72,97 +76,76 @@ body{
   margin-top:10px;
 }
 
-.day{
-  text-align:center;
-  font-size:11px;
-  color:var(--muted);
-  padding:6px 0;
-}
-
 .date{
   aspect-ratio:1/1;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:10px;
-  background:rgba(255,255,255,0.04);
-  border:1px solid transparent;
+  border-radius:14px;
+  background:#fff;
   font-size:13px;
-  transition:0.25s;
+  color:var(--text);
+  transition:0.2s;
+  border:1px solid #f1f1f1;
   cursor:pointer;
 }
 
 .date:hover{
-  border:1px solid var(--accent);
-  background:rgba(106,228,255,0.12);
-  transform:translateY(-2px);
+  background:var(--soft);
+  transform:scale(1.08);
+  border-color:var(--accent);
 }
 
-/* HIGHLIGHT TODAY (example) */
+/* cute today highlight */
 .today{
-  background:linear-gradient(45deg,var(--accent),var(--accent2));
-  color:#0a0f1f;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:white;
   font-weight:700;
+  box-shadow:0 6px 15px rgba(255,126,185,0.3);
 }
 
-/* BUTTON SECTION */
+/* BUTTONS */
 .buttons{
   display:flex;
   gap:10px;
-  margin-top:18px;
+  margin-top:16px;
 }
 
 .btn{
   flex:1;
   padding:10px;
+  border-radius:14px;
   text-align:center;
   text-decoration:none;
-  border-radius:12px;
   font-weight:600;
   font-size:13px;
-  color:white;
-  background:rgba(255,255,255,0.06);
-  border:1px solid var(--border);
-  transition:0.25s;
+  background:#fff;
+  color:var(--text);
+  border:1px solid #eee;
+  transition:0.2s;
 }
 
 .btn:hover{
-  border-color:var(--accent);
-  box-shadow:0 0 18px rgba(106,228,255,0.25);
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:white;
   transform:translateY(-2px);
-}
-
-/* SUB TITLE */
-.sub{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:4px;
+  box-shadow:0 8px 18px rgba(255,126,185,0.25);
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="box">
 
-  <div class="header">
-    <div>
-      <h1>Calendar</h1>
-      <div class="sub">Minimal • Clean • Dashboard UI</div>
-    </div>
-    <span>May 2026</span>
+  <div class="title">🌷 My Cute Calendar</div>
+  <div class="subtitle">soft vibes • pastel style</div>
+
+  <div class="days">
+    <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
   </div>
 
-  <!-- Days -->
   <div class="calendar">
-    <div class="day">S</div>
-    <div class="day">M</div>
-    <div class="day">T</div>
-    <div class="day">W</div>
-    <div class="day">T</div>
-    <div class="day">F</div>
-    <div class="day">S</div>
-
     <div class="date"></div>
     <div class="date"></div>
     <div class="date">1</div>
@@ -204,11 +187,10 @@ body{
     <div class="date"></div>
   </div>
 
-  <!-- Buttons -->
   <div class="buttons">
-    <a class="btn" href="#">Dashboard</a>
-    <a class="btn" href="#">Tasks</a>
-    <a class="btn" href="#">Settings</a>
+    <a class="btn" href="#">Home</a>
+    <a class="btn" href="#">Notes</a>
+    <a class="btn" href="#">Profile</a>
   </div>
 
 </div>
