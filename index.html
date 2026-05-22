@@ -21,7 +21,7 @@ min-height:100vh;
 overflow-x:hidden;
 }
 
-/* RGB BORDER */
+/* 🌈 RGB BORDER BACKGROUND */
 .rgbBorder{
 position:fixed;
 inset:0;
@@ -44,18 +44,18 @@ background:#0F172A;
 100%{background-position:400% 50%;}
 }
 
-/* MAIN BOX */
+/* 🧊 MAIN CONTAINER */
 .mainBox{
 width:300px;
 margin:20px auto;
 padding:14px;
 text-align:center;
-border-radius:12px;
 background:#0F172A;
+border-radius:12px;
 border:2px solid #1E293B;
 }
 
-/* PIXEL GLOW */
+/* ✨ PIXEL GLOW HEADER */
 .pixelGlowBox{
 width:270px;
 height:60px;
@@ -93,7 +93,7 @@ font-weight:700;
 letter-spacing:2px;
 }
 
-/* PLAYER */
+/* 🎥 PLAYER BOX */
 .player{
 width:270px;
 margin:20px auto;
@@ -104,6 +104,7 @@ padding:10px;
 position:relative;
 }
 
+/* LIVE DOT */
 .live-dot{
 width:8px;
 height:8px;
@@ -121,6 +122,7 @@ animation:pulse 1.2s infinite;
 100%{opacity:1;}
 }
 
+/* SONG TITLE SCROLL */
 .marquee{
 width:100%;
 overflow:hidden;
@@ -130,6 +132,7 @@ margin-bottom:6px;
 color:#22C55E;
 }
 
+/* VIDEO SCREEN */
 .screen{
 width:100%;
 aspect-ratio:16/9;
@@ -144,6 +147,7 @@ height:100%;
 border:none;
 }
 
+/* CONTROLS */
 .controls{
 display:flex;
 justify-content:center;
@@ -168,7 +172,7 @@ color:black;
 font-weight:bold;
 }
 
-/* CALENDAR */
+/* 📅 CALENDAR */
 .box{
 width:270px;
 margin:20px auto;
@@ -205,7 +209,7 @@ font-size:10px;
 opacity:0.6;
 }
 
-.date{
+.calendar div{
 aspect-ratio:1/1;
 display:flex;
 align-items:center;
@@ -213,22 +217,23 @@ justify-content:center;
 background:#1E293B;
 border-radius:10px;
 font-size:12px;
-cursor:pointer;
 transition:0.2s;
+cursor:pointer;
 }
 
-.date:hover{
+.calendar div:hover{
 background:#22C55E;
 color:black;
 transform:scale(1.1);
 }
 
 .today{
-background:#22C55E;
+background:#22C55E !important;
 color:black;
 font-weight:bold;
 }
 
+/* NAV BUTTONS */
 .buttons{
 display:flex;
 gap:8px;
@@ -259,6 +264,7 @@ color:black;
 
 <div class="mainBox">
 
+<!-- HEADER -->
 <div class="pixelGlowBox">
 <div class="pixelBorder"></div>
 <div id="pixelText">PIXEL GLOW</div>
@@ -266,8 +272,8 @@ color:black;
 
 <br>
 
-<img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png"
-width="250" height="333">
+<!-- IMAGE -->
+<img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png" width="250">
 
 <!-- PLAYER -->
 <div class="player">
@@ -275,7 +281,7 @@ width="250" height="333">
 <div class="live-dot"></div>
 
 <div class="marquee">
-<span id="songText">Now Playing:</span>
+<span id="songText">Now Playing</span>
 </div>
 
 <div class="screen">
@@ -334,16 +340,19 @@ const frame = document.getElementById("playerFrame");
 const songText = document.getElementById("songText");
 const btn = document.getElementById("toggleBtn");
 
+/* 🔧 FIX: extract video ID safely */
 function getId(url) {
   if (url.includes("youtu.be/")) return url.split("youtu.be/")[1];
   if (url.includes("watch?v=")) return url.split("watch?v=")[1].split("&")[0];
   return url;
 }
 
+/* 🔧 FIX: build embed URL properly */
 function convert(url) {
   return `https://www.youtube.com/embed/${getId(url)}?enablejsapi=1&rel=0`;
 }
 
+/* ▶ load song */
 function load() {
   frame.src = convert(songs[i].src);
   songText.innerText = "Now Playing: " + songs[i].name;
@@ -351,16 +360,19 @@ function load() {
   isPlaying = false;
 }
 
+/* ⏭ next song */
 function nextSong() {
   i = (i + 1) % songs.length;
   load();
 }
 
+/* ⏮ previous song */
 function prevSong() {
   i = (i - 1 + songs.length) % songs.length;
   load();
 }
 
+/* ▶ pause/play toggle */
 function toggleVideo() {
   frame.contentWindow.postMessage(JSON.stringify({
     event: "command",
