@@ -35,15 +35,13 @@ body{
 
 /* LEFT COLUMN */
 .left-side{
+  width:260px;
   display:flex;
   flex-direction:column;
-  gap:20px;
-  width:260px;
 }
 
-/* RIGHT COLUMN */
-.right-side{
-  width:260px;
+/* COMBINED BLOCK */
+.calendar-links-wrapper{
   display:flex;
   flex-direction:column;
   gap:20px;
@@ -55,7 +53,6 @@ body{
   height:300px;
   border-radius:30px;
   overflow:hidden;
-  position:relative;
   background:rgba(255,255,255,0.06);
   backdrop-filter:blur(14px);
   border:1px solid rgba(255,255,255,0.15);
@@ -164,6 +161,14 @@ body{
   background:linear-gradient(135deg,#444,#666);
 }
 
+/* RIGHT SIDE */
+.right-side{
+  width:260px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
 /* PLAYER */
 .player{
   width:100%;
@@ -255,36 +260,46 @@ body{
 
 <div class="main-layout">
 
-  <!-- LEFT SIDE -->
+  <!-- LEFT SIDE (CALENDAR + LINKS COMBINED) -->
   <div class="left-side">
 
-    <div class="calendar">
-      <div class="top"><div class="month" id="month"></div></div>
-      <div class="content">
-        <div class="date" id="date"></div>
-        <div class="year" id="year"></div>
-      </div>
-    </div>
+    <div class="calendar-links-wrapper">
 
-    <div class="sidebar">
-      <a href="#">Review</a>
-      <a href="#">Insight</a>
-      <a href="#">Ads</a>
-    </div>
+      <!-- CALENDAR -->
+      <div class="calendar">
+        <div class="top">
+          <div class="month" id="month"></div>
+        </div>
 
-    <div class="links-box">
-      <div class="top-links">
-        <a href="#" class="side-btn">Owner</a>
-        <a href="#" class="side-btn">Co Owner</a>
+        <div class="content">
+          <div class="date" id="date"></div>
+          <div class="year" id="year"></div>
+        </div>
       </div>
-      <a href="#" class="side-btn full">Club Rules</a>
-      <a href="#" class="side-btn full">Announcements</a>
-      <a href="#" class="side-btn full">Join Events</a>
+
+      <!-- LINKS -->
+      <div class="sidebar">
+        <a href="#">Review</a>
+        <a href="#">Insight</a>
+        <a href="#">Ads</a>
+      </div>
+
+      <div class="links-box">
+        <div class="top-links">
+          <a href="#" class="side-btn">Owner</a>
+          <a href="#" class="side-btn">Co Owner</a>
+        </div>
+
+        <a href="#" class="side-btn full">Club Rules</a>
+        <a href="#" class="side-btn full">Announcements</a>
+        <a href="#" class="side-btn full">Join Events</a>
+      </div>
+
     </div>
 
   </div>
 
-  <!-- RIGHT SIDE -->
+  <!-- RIGHT SIDE (PLAYER ONLY) -->
   <div class="right-side">
 
     <div class="player">
