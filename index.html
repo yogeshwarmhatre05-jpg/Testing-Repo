@@ -1,355 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pixel Glow Club</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pro Calendar Dashboard</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;}
-
-html,body{
-margin:0;
-padding:0;
-background:#0F172A;
-color:#E2E8F0;
-font-family:'Poppins',sans-serif;
-min-height:100vh;
-overflow-x:hidden;
+:root{
+  --bg1:#0a0f1f;
+  --bg2:#0f1b33;
+  --card:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.12);
+  --text:#eaf0ff;
+  --muted:#9aa7c7;
+  --accent:#6ae4ff;
+  --accent2:#b46bff;
 }
 
-/* RGB BORDER (UNCHANGED) */
-.rgbBorder{
-position:fixed;
-inset:0;
-padding:3px;
-background:linear-gradient(90deg,#ff0000,#ff9900,#ffee00,#00ff00,#00ffff,#0066ff,#aa00ff,#ff0000);
-background-size:400% 400%;
-animation:rgbMove 8s linear infinite;
-z-index:-1;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter, sans-serif;
 }
 
-.rgbBorder::before{
-content:"";
-position:absolute;
-inset:3px;
-background:#0F172A;
+body{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: radial-gradient(circle at top, #162447, var(--bg1));
+  color:var(--text);
 }
 
-@keyframes rgbMove{
-0%{background-position:0% 50%;}
-100%{background-position:400% 50%;}
+/* MAIN CARD */
+.container{
+  width:380px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  backdrop-filter: blur(16px);
+  padding:18px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.5);
 }
 
-/* MAIN BOX */
-.mainBox{
-width:300px;
-margin:20px auto;
-padding:14px;
-text-align:center;
-border:2px solid #1E293B;
-border-radius:12px;
-background:#0F172A;
-transition:all 1s ease;
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
 }
 
-.themeText{
-transition:all 1s ease;
+.header h1{
+  font-size:18px;
+  font-weight:700;
 }
 
-.line{
-height:1px;
-background:rgba(255,255,255,0.15);
-margin:8px 20px;
+.header span{
+  font-size:12px;
+  color:var(--muted);
 }
 
-/* PIXEL GLOW */
-.pixelGlowBox{
-width:270px;
-height:60px;
-margin:auto;
-position:relative;
-overflow:hidden;
-border-radius:10px;
+/* CALENDAR GRID */
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+  margin-top:10px;
 }
 
-.pixelBorder{
-position:absolute;
-inset:0;
-padding:2px;
-background:linear-gradient(90deg,#22C55E,white,#22C55E);
-background-size:300% 300%;
-animation:rgbMove 6s ease-in-out infinite;
+.day{
+  text-align:center;
+  font-size:11px;
+  color:var(--muted);
+  padding:6px 0;
 }
 
-.pixelBorder::before{
-content:"";
-position:absolute;
-inset:2px;
-background:#0F172A;
+.date{
+  aspect-ratio:1/1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid transparent;
+  font-size:13px;
+  transition:0.25s;
+  cursor:pointer;
 }
 
-#pixelText{
-position:absolute;
-inset:0;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:1rem;
-font-family:'Orbitron',sans-serif;
-font-weight:700;
-letter-spacing:2px;
--webkit-text-stroke:1px #000;
-transition:all 1s ease;
+.date:hover{
+  border:1px solid var(--accent);
+  background:rgba(106,228,255,0.12);
+  transform:translateY(-2px);
 }
 
-/* MUSIC PLAYER */
-.player{
-width:270px;
-margin:20px auto 40px;
-background:#0F172A;
-border:2px solid #22C55E;
-border-radius:12px;
-padding:10px;
-position:relative;
-box-shadow:0 0 25px rgba(34,197,94,0.25);
+/* HIGHLIGHT TODAY (example) */
+.today{
+  background:linear-gradient(45deg,var(--accent),var(--accent2));
+  color:#0a0f1f;
+  font-weight:700;
 }
 
-.live-dot{
-width:8px;
-height:8px;
-background:#22C55E;
-border-radius:50%;
-position:absolute;
-top:8px;
-left:8px;
-box-shadow:0 0 8px #22C55E;
-animation:pulse 1.2s infinite;
+/* BUTTON SECTION */
+.buttons{
+  display:flex;
+  gap:10px;
+  margin-top:18px;
 }
 
-@keyframes pulse{
-0%{opacity:1;}
-50%{opacity:0.3;}
-100%{opacity:1;}
+.btn{
+  flex:1;
+  padding:10px;
+  text-align:center;
+  text-decoration:none;
+  border-radius:12px;
+  font-weight:600;
+  font-size:13px;
+  color:white;
+  background:rgba(255,255,255,0.06);
+  border:1px solid var(--border);
+  transition:0.25s;
 }
 
-.marquee{
-width:100%;
-overflow:hidden;
-white-space:nowrap;
-font-size:11px;
-margin-bottom:6px;
-color:#22C55E;
+.btn:hover{
+  border-color:var(--accent);
+  box-shadow:0 0 18px rgba(106,228,255,0.25);
+  transform:translateY(-2px);
 }
 
-.marquee span{
-display:inline-block;
-padding-left:100%;
-animation:scroll 8s linear infinite;
-}
-
-@keyframes scroll{
-0%{transform:translateX(0);}
-100%{transform:translateX(-100%);}
-}
-
-.screen{
-width:100%;
-aspect-ratio:16/9;
-border:2px solid #1E293B;
-border-radius:8px;
-overflow:hidden;
-}
-
-.screen iframe{
-width:100%;
-height:100%;
-border:none;
-}
-
-.controls{
-display:flex;
-justify-content:center;
-gap:10px;
-margin-top:8px;
-}
-
-.controls button{
-background:#1E293B;
-color:#E2E8F0;
-border:1px solid #1E293B;
-width:30px;
-height:24px;
-border-radius:7px;
-cursor:pointer;
-transition:0.25s;
-}
-
-.controls button:hover{
-transform:translateY(-2px) scale(1.05);
-border-color:#22C55E;
-}
-
-#toggleBtn{
-width:42px;
-font-size:13px;
-font-weight:bold;
-background:linear-gradient(135deg,#22C55E,#16A34A);
-border:none;
-box-shadow:0 0 12px rgba(34,197,94,0.45);
-}
-
-#toggleBtn:hover{
-transform:scale(1.08);
+/* SUB TITLE */
+.sub{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:4px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="rgbBorder"></div>
+<div class="container">
 
-<!-- CLUB -->
-<div class="mainBox">
+  <div class="header">
+    <div>
+      <h1>Calendar</h1>
+      <div class="sub">Minimal • Clean • Dashboard UI</div>
+    </div>
+    <span>May 2026</span>
+  </div>
 
-<div class="pixelGlowBox">
-<div class="pixelBorder"></div>
-<div id="pixelText">PIXEL GLOW</div>
+  <!-- Days -->
+  <div class="calendar">
+    <div class="day">S</div>
+    <div class="day">M</div>
+    <div class="day">T</div>
+    <div class="day">W</div>
+    <div class="day">T</div>
+    <div class="day">F</div>
+    <div class="day">S</div>
+
+    <div class="date"></div>
+    <div class="date"></div>
+    <div class="date">1</div>
+    <div class="date">2</div>
+    <div class="date">3</div>
+    <div class="date">4</div>
+    <div class="date">5</div>
+
+    <div class="date">6</div>
+    <div class="date">7</div>
+    <div class="date">8</div>
+    <div class="date">9</div>
+    <div class="date">10</div>
+    <div class="date">11</div>
+    <div class="date">12</div>
+
+    <div class="date">13</div>
+    <div class="date">14</div>
+    <div class="date">15</div>
+    <div class="date">16</div>
+    <div class="date">17</div>
+    <div class="date">18</div>
+    <div class="date">19</div>
+
+    <div class="date">20</div>
+    <div class="date">21</div>
+    <div class="date today">22</div>
+    <div class="date">23</div>
+    <div class="date">24</div>
+    <div class="date">25</div>
+    <div class="date">26</div>
+
+    <div class="date">27</div>
+    <div class="date">28</div>
+    <div class="date">29</div>
+    <div class="date">30</div>
+    <div class="date">31</div>
+    <div class="date"></div>
+    <div class="date"></div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="buttons">
+    <a class="btn" href="#">Dashboard</a>
+    <a class="btn" href="#">Tasks</a>
+    <a class="btn" href="#">Settings</a>
+  </div>
+
 </div>
-
-<br>
-
-<div class="themeText" style="font-size:15px;letter-spacing:2px;">
-<marquee scrollamount="3">♣ Welcome to Our Club ♣</marquee>
-</div>
-<div style="margin-top:6px;">
-<img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png"
-width="250" height="333">
-</div>
-
-<br>
-
-<div class="line"></div>
-
-<!-- MUSIC PLAYER -->
-<div class="player">
-
-<div class="live-dot"></div>
-
-<div class="marquee">
-<span id="songText">Now Playing:</span>
-</div>
-
-<div class="screen">
-<iframe id="playerFrame" allow="autoplay; fullscreen" allowfullscreen></iframe>
-</div>
-
-<div class="controls">
-<button onclick="prevSong()">⏮</button>
-<button id="toggleBtn" onclick="toggleVideo()">▶</button>
-<button onclick="nextSong()">⏭</button>
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-/* THEME SYSTEM */
-const themes=[
-{bg:"#0F172A",border:"#22C55E",glow:"rgba(34,197,94,0.5)",text:"#22C55E"},
-{bg:"#1E1B4B",border:"#A855F7",glow:"rgba(168,85,247,0.5)",text:"#A855F7"},
-{bg:"#111827",border:"#3B82F6",glow:"rgba(59,130,246,0.5)",text:"#3B82F6"},
-{bg:"#2A0F0F",border:"#FF4D4D",glow:"rgba(255,77,77,0.5)",text:"#FF4D4D"},
-{bg:"#1A1A00",border:"#FFCC00",glow:"rgba(255,204,0,0.5)",text:"#FFCC00"}
-];
-
-let index=0;
-
-function changeTheme(){
-const t=themes[index];
-
-document.body.style.background=t.bg;
-
-const box=document.querySelector(".mainBox");
-box.style.borderColor=t.border;
-box.style.boxShadow=`0 0 25px ${t.glow}`;
-
-document.querySelectorAll(".themeText").forEach(e=>{
-e.style.color=t.text;
-});
-
-document.getElementById("pixelText").style.color=t.text;
-document.getElementById("pixelText").style.textShadow=`0 0 12px ${t.glow}`;
-
-document.querySelector(".pixelBorder").style.background=
-`linear-gradient(90deg,${t.border},white,${t.border})`;
-
-index=(index+1)%themes.length;
-}
-
-setInterval(changeTheme,6000);
-changeTheme();
-
-/* MUSIC PLAYER */
-let songs=[
-{src:"https://youtu.be/kcsGhOmULxQ",name:"Golden Brown - The Stranglers"},
-{src:"https://youtu.be/_XeE2aEiPHk",name:"The Flame of Love - Rokudenashi"},
-{src:"https://youtu.be/qdpXxGPqW-Y",name:"Faded - Alan Walker"},
-{src:"https://youtu.be/k50D8-EvNxk",name:"Meu Abrigo - Melim"},
-{src:"https://youtu.be/9I9c20LHmzY",name:"Come As You Are - Nirvana"}
-];
-
-let songIndex=0;
-let isPlaying=false;
-
-const frame=document.getElementById("playerFrame");
-const songText=document.getElementById("songText");
-const toggleBtn=document.getElementById("toggleBtn");
-
-function convert(url){
-let id=url.split("youtu.be/")[1]?.split("?")[0];
-return "https://www.youtube.com/embed/"+id+"?enablejsapi=1&rel=0";
-}
-
-function loadVideo(i){
-frame.src=convert(songs[i].src);
-songText.innerText="Now Playing: "+songs[i].name;
-toggleBtn.innerText="▶";
-isPlaying=false;
-}
-
-function prevSong(){
-songIndex=(songIndex-1+songs.length)%songs.length;
-loadVideo(songIndex);
-}
-
-function nextSong(){
-songIndex=(songIndex+1)%songs.length;
-loadVideo(songIndex);
-}
-
-function toggleVideo(){
-frame.contentWindow.postMessage(
-JSON.stringify({
-event:"command",
-func:isPlaying?"pauseVideo":"playVideo",
-args:""
-}),
-"*"
-);
-
-isPlaying=!isPlaying;
-toggleBtn.innerText=isPlaying?"❚❚":"▶";
-}
-
-loadVideo(songIndex);
-
-</script>
 
 </body>
 </html>
