@@ -96,7 +96,40 @@ font-family:'Orbitron',sans-serif;
 font-weight:700;
 letter-spacing:2px;
 }
+.links{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:12px;
+}
 
+.topRow{
+display:flex;
+gap:10px;
+}
+
+.linkBtn{
+flex:1;
+padding:10px;
+border-radius:12px;
+text-decoration:none;
+font-size:13px;
+font-weight:600;
+color:#d7e2f0;
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+transition:0.2s;
+}
+
+.linkBtn:hover{
+background:rgba(124,255,178,0.12);
+border-color:#7CFFB2;
+color:#7CFFB2;
+}
+
+.full{
+width:100%;
+}
 /* PLAYER */
 .player{
 width:270px;
@@ -325,7 +358,18 @@ color:#d7e2f0;
 <br>
 
 <img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png" width="250">
+<div class="links">
 
+<div class="topRow">
+<a class="linkBtn" href="#">Owner</a>
+<a class="linkBtn" href="#">Co Owner</a>
+</div>
+
+<a class="linkBtn full" href="#">Club Rules</a>
+<a class="linkBtn full" href="#">Announcements</a>
+<a class="linkBtn full" href="#">Join Events</a>
+
+</div>
 <div class="player">
 
 <div class="live-dot"></div>
