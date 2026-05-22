@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pixel Glow Club</title>
 
-<!-- NEW FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -17,10 +16,9 @@ margin:0;
 padding:0;
 background:#0F172A;
 color:#E2E8F0;
-font-family:'Poppins', sans-serif;
+font-family:'Poppins',sans-serif;
 min-height:100vh;
 overflow-x:hidden;
-transition:background 1s ease;
 }
 
 /* RGB BORDER (UNCHANGED) */
@@ -46,10 +44,10 @@ background:#0F172A;
 100%{background-position:400% 50%;}
 }
 
-/* MAIN */
+/* MAIN BOX */
 .mainBox{
 width:300px;
-margin:auto;
+margin:20px auto;
 padding:14px;
 text-align:center;
 border:2px solid #1E293B;
@@ -59,7 +57,6 @@ transition:all 1s ease;
 }
 
 .themeText{
-color:#22C55E;
 transition:all 1s ease;
 }
 
@@ -102,13 +99,114 @@ display:flex;
 justify-content:center;
 align-items:center;
 font-size:1rem;
-font-family:'Orbitron', sans-serif;
+font-family:'Orbitron',sans-serif;
 font-weight:700;
 letter-spacing:2px;
-color:#22C55E;
 -webkit-text-stroke:1px #000;
 transition:all 1s ease;
 }
+
+/* ================= MUSIC PLAYER ================= */
+
+.player{
+width:300px;
+margin:20px auto 40px;
+background:#0F172A;
+border:2px solid #22C55E;
+border-radius:12px;
+padding:10px;
+position:relative;
+box-shadow:0 0 25px rgba(34,197,94,0.25);
+}
+
+.live-dot{
+width:8px;
+height:8px;
+background:#22C55E;
+border-radius:50%;
+position:absolute;
+top:8px;
+left:8px;
+box-shadow:0 0 8px #22C55E;
+animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+0%{opacity:1;}
+50%{opacity:0.3;}
+100%{opacity:1;}
+}
+
+.marquee{
+width:100%;
+overflow:hidden;
+white-space:nowrap;
+font-size:11px;
+margin-bottom:6px;
+color:#22C55E;
+}
+
+.marquee span{
+display:inline-block;
+padding-left:100%;
+animation:scroll 8s linear infinite;
+}
+
+@keyframes scroll{
+0%{transform:translateX(0);}
+100%{transform:translateX(-100%);}
+}
+
+.screen{
+width:100%;
+aspect-ratio:16/9;
+border:2px solid #1E293B;
+border-radius:8px;
+overflow:hidden;
+}
+
+.screen iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+.controls{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-top:8px;
+}
+
+.controls button{
+background:#1E293B;
+color:#E2E8F0;
+border:1px solid #1E293B;
+width:30px;
+height:24px;
+border-radius:7px;
+cursor:pointer;
+transition:0.25s;
+}
+
+.controls button:hover{
+transform:translateY(-2px) scale(1.05);
+border-color:#22C55E;
+}
+
+#toggleBtn{
+width:42px;
+font-size:13px;
+font-weight:bold;
+background:linear-gradient(135deg,#22C55E,#16A34A);
+border:none;
+box-shadow:0 0 12px rgba(34,197,94,0.45);
+}
+
+#toggleBtn:hover{
+transform:scale(1.08);
+}
+
 </style>
 </head>
 
@@ -116,6 +214,7 @@ transition:all 1s ease;
 
 <div class="rgbBorder"></div>
 
+<!-- ================= CLUB ================= -->
 <div class="mainBox">
 
 <div class="pixelGlowBox">
@@ -131,15 +230,14 @@ transition:all 1s ease;
 
 <br>
 
-<div class="themeText" style="font-size:14px;">✧ OWNER ✧</div>
+<div style="font-size:14px;">✧ OWNER ✧</div>
 
 <div style="margin-top:6px;">
 <img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png"
 width="250" height="333">
 </div>
 
-<div class="themeText"
-style="font-size:22px;font-weight:800;font-family:'Poppins',sans-serif;margin-top:6px;">
+<div style="font-size:22px;font-weight:800;margin-top:6px;">
 √𝓎𝓸𝓰𝓲136
 </div>
 
@@ -151,68 +249,121 @@ style="font-size:22px;font-weight:800;font-family:'Poppins',sans-serif;margin-to
 
 </div>
 
+<!-- ================= MUSIC PLAYER ================= -->
+<div class="player">
+
+<div class="live-dot"></div>
+
+<div class="marquee">
+<span id="songText">Now Playing:</span>
+</div>
+
+<div class="screen">
+<iframe id="playerFrame" allow="autoplay; fullscreen" allowfullscreen></iframe>
+</div>
+
+<div class="controls">
+<button onclick="prevSong()">⏮</button>
+<button id="toggleBtn" onclick="toggleVideo()">▶</button>
+<button onclick="nextSong()">⏭</button>
+</div>
+
+</div>
+
 <script>
-const themes = [
-{
-bg:"#0F172A",
-border:"#22C55E",
-glow:"rgba(34,197,94,0.5)",
-text:"#22C55E"
-},
-{
-bg:"#1E1B4B",
-border:"#A855F7",
-glow:"rgba(168,85,247,0.5)",
-text:"#A855F7"
-},
-{
-bg:"#111827",
-border:"#3B82F6",
-glow:"rgba(59,130,246,0.5)",
-text:"#3B82F6"
-},
-{
-bg:"#2A0F0F",
-border:"#FF4D4D",
-glow:"rgba(255,77,77,0.5)",
-text:"#FF4D4D"
-},
-{
-bg:"#1A1A00",
-border:"#FFCC00",
-glow:"rgba(255,204,0,0.5)",
-text:"#FFCC00"
-}
+
+/* ===== THEME SYSTEM (UNCHANGED CORE IDEA) ===== */
+
+const themes=[
+{bg:"#0F172A",border:"#22C55E",glow:"rgba(34,197,94,0.5)",text:"#22C55E"},
+{bg:"#1E1B4B",border:"#A855F7",glow:"rgba(168,85,247,0.5)",text:"#A855F7"},
+{bg:"#111827",border:"#3B82F6",glow:"rgba(59,130,246,0.5)",text:"#3B82F6"},
+{bg:"#2A0F0F",border:"#FF4D4D",glow:"rgba(255,77,77,0.5)",text:"#FF4D4D"},
+{bg:"#1A1A00",border:"#FFCC00",glow:"rgba(255,204,0,0.5)",text:"#FFCC00"}
 ];
 
-let index = 0;
+let index=0;
 
 function changeTheme(){
-const theme = themes[index];
+const t=themes[index];
 
-document.body.style.background = theme.bg;
+document.body.style.background=t.bg;
 
-const box = document.querySelector(".mainBox");
-box.style.borderColor = theme.border;
-box.style.boxShadow = `0 0 25px ${theme.glow}`;
+const box=document.querySelector(".mainBox");
+box.style.borderColor=t.border;
+box.style.boxShadow=`0 0 25px ${t.glow}`;
 
-document.querySelectorAll(".themeText").forEach(el=>{
-el.style.color = theme.text;
-el.style.textShadow = `0 0 12px ${theme.glow}`;
+document.querySelectorAll(".themeText").forEach(e=>{
+e.style.color=t.text;
 });
 
-document.getElementById("pixelText").style.color = theme.text;
-document.getElementById("pixelText").style.textShadow = `0 0 12px ${theme.glow}`;
+document.getElementById("pixelText").style.color=t.text;
+document.getElementById("pixelText").style.textShadow=`0 0 12px ${t.glow}`;
 
-document.querySelector(".pixelBorder").style.background =
-`linear-gradient(90deg, ${theme.border}, white, ${theme.border})`;
+document.querySelector(".pixelBorder").style.background=
+`linear-gradient(90deg,${t.border},white,${t.border})`;
 
-index++;
-if(index >= themes.length) index = 0;
+index=(index+1)%themes.length;
 }
 
 setInterval(changeTheme,6000);
 changeTheme();
+
+/* ===== MUSIC PLAYER ===== */
+
+let songs=[
+{src:"https://youtu.be/kcsGhOmULxQ",name:"Golden Brown - The Stranglers"},
+{src:"https://youtu.be/_XeE2aEiPHk",name:"The Flame of Love - Rokudenashi"},
+{src:"https://youtu.be/qdpXxGPqW-Y",name:"Faded - Alan Walker"},
+{src:"https://youtu.be/k50D8-EvNxk",name:"Meu Abrigo - Melim"},
+{src:"https://youtu.be/9I9c20LHmzY",name:"Come As You Are - Nirvana"}
+];
+
+let songIndex=0;
+let isPlaying=false;
+
+const frame=document.getElementById("playerFrame");
+const songText=document.getElementById("songText");
+const toggleBtn=document.getElementById("toggleBtn");
+
+function convert(url){
+let id=url.split("youtu.be/")[1]?.split("?")[0];
+return "https://www.youtube.com/embed/"+id+"?enablejsapi=1&rel=0";
+}
+
+function loadVideo(i){
+frame.src=convert(songs[i].src);
+songText.innerText="Now Playing: "+songs[i].name;
+toggleBtn.innerText="▶";
+isPlaying=false;
+}
+
+function prevSong(){
+songIndex=(songIndex-1+songs.length)%songs.length;
+loadVideo(songIndex);
+}
+
+function nextSong(){
+songIndex=(songIndex+1)%songs.length;
+loadVideo(songIndex);
+}
+
+function toggleVideo(){
+frame.contentWindow.postMessage(
+JSON.stringify({
+event:"command",
+func:isPlaying?"pauseVideo":"playVideo",
+args:""
+}),
+"*"
+);
+
+isPlaying=!isPlaying;
+toggleBtn.innerText=isPlaying?"❚❚":"▶";
+}
+
+loadVideo(songIndex);
+
 </script>
 
 </body>
