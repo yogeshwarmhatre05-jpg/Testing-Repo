@@ -1,351 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pixel Glow Club</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Calendar + Links</title>
 
 <style>
-*{box-sizing:border-box;}
-
-html,body{
-margin:0;
-padding:0;
-background:#0F172A;
-color:#E2E8F0;
-font-family:'Poppins',sans-serif;
-min-height:100vh;
-overflow-x:hidden;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
 }
 
-/* RGB BORDER (UNCHANGED) */
-.rgbBorder{
-position:fixed;
-inset:0;
-padding:3px;
-background:linear-gradient(90deg,#ff0000,#ff9900,#ffee00,#00ff00,#00ffff,#0066ff,#aa00ff,#ff0000);
-background-size:400% 400%;
-animation:rgbMove 8s linear infinite;
-z-index:-1;
+body{
+  background:#0b0f1a;
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
 }
 
-.rgbBorder::before{
-content:"";
-position:absolute;
-inset:3px;
-background:#0F172A;
+/* Main container */
+.wrapper{
+  width:350px;
+  background:#121a2b;
+  border:2px solid #00f5ff;
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 0 20px #00f5ff;
 }
 
-@keyframes rgbMove{
-0%{background-position:0% 50%;}
-100%{background-position:400% 50%;}
+/* Title */
+h2{
+  text-align:center;
+  margin-bottom:15px;
+  color:#00f5ff;
+  letter-spacing:1px;
 }
 
-/* MAIN BOX */
-.mainBox{
-width:300px;
-margin:20px auto;
-padding:14px;
-text-align:center;
-border:2px solid #1E293B;
-border-radius:12px;
-background:#0F172A;
-transition:all 1s ease;
+/* Calendar */
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+  text-align:center;
+  margin-bottom:20px;
 }
 
-.themeText{
-transition:all 1s ease;
+.day-name{
+  font-weight:bold;
+  color:#ff00ff;
 }
 
-.line{
-height:1px;
-background:rgba(255,255,255,0.15);
-margin:8px 20px;
+.date{
+  padding:8px 0;
+  border-radius:6px;
+  background:#1c2742;
+  transition:0.2s;
 }
 
-/* PIXEL GLOW */
-.pixelGlowBox{
-width:270px;
-height:60px;
-margin:auto;
-position:relative;
-overflow:hidden;
-border-radius:10px;
+.date:hover{
+  background:#00f5ff;
+  color:#000;
+  transform:scale(1.05);
 }
 
-.pixelBorder{
-position:absolute;
-inset:0;
-padding:2px;
-background:linear-gradient(90deg,#22C55E,white,#22C55E);
-background-size:300% 300%;
-animation:rgbMove 6s ease-in-out infinite;
+/* Buttons */
+.buttons{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
 }
 
-.pixelBorder::before{
-content:"";
-position:absolute;
-inset:2px;
-background:#0F172A;
+.btn{
+  flex:1;
+  padding:10px;
+  text-align:center;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+  background:linear-gradient(45deg,#00f5ff,#ff00ff);
+  color:#000;
+  transition:0.3s;
 }
 
-#pixelText{
-position:absolute;
-inset:0;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:1rem;
-font-family:'Orbitron',sans-serif;
-font-weight:700;
-letter-spacing:2px;
--webkit-text-stroke:1px #000;
-transition:all 1s ease;
-}
-
-/* MUSIC PLAYER */
-.player{
-width:270px;
-margin:20px auto 40px;
-background:#0F172A;
-border:2px solid #22C55E;
-border-radius:12px;
-padding:10px;
-position:relative;
-box-shadow:0 0 25px rgba(34,197,94,0.25);
-}
-
-.live-dot{
-width:8px;
-height:8px;
-background:#22C55E;
-border-radius:50%;
-position:absolute;
-top:8px;
-left:8px;
-box-shadow:0 0 8px #22C55E;
-animation:pulse 1.2s infinite;
-}
-
-@keyframes pulse{
-0%{opacity:1;}
-50%{opacity:0.3;}
-100%{opacity:1;}
-}
-
-.marquee{
-width:100%;
-overflow:hidden;
-white-space:nowrap;
-font-size:11px;
-margin-bottom:6px;
-color:#22C55E;
-}
-
-.marquee span{
-display:inline-block;
-padding-left:100%;
-animation:scroll 8s linear infinite;
-}
-
-@keyframes scroll{
-0%{transform:translateX(0);}
-100%{transform:translateX(-100%);}
-}
-
-.screen{
-width:100%;
-aspect-ratio:16/9;
-border:2px solid #1E293B;
-border-radius:8px;
-overflow:hidden;
-}
-
-.screen iframe{
-width:100%;
-height:100%;
-border:none;
-}
-
-.controls{
-display:flex;
-justify-content:center;
-gap:10px;
-margin-top:8px;
-}
-
-.controls button{
-background:#1E293B;
-color:#E2E8F0;
-border:1px solid #1E293B;
-width:30px;
-height:24px;
-border-radius:7px;
-cursor:pointer;
-transition:0.25s;
-}
-
-.controls button:hover{
-transform:translateY(-2px) scale(1.05);
-border-color:#22C55E;
-}
-
-#toggleBtn{
-width:42px;
-font-size:13px;
-font-weight:bold;
-background:linear-gradient(135deg,#22C55E,#16A34A);
-border:none;
-box-shadow:0 0 12px rgba(34,197,94,0.45);
-}
-
-#toggleBtn:hover{
-transform:scale(1.08);
+.btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 10px #00f5ff;
 }
 </style>
 </head>
 
 <body>
 
-<div class="rgbBorder"></div>
+<div class="wrapper">
 
-<!-- CLUB -->
-<div class="mainBox">
+  <h2>📅 My Calendar</h2>
 
-<div class="pixelGlowBox">
-<div class="pixelBorder"></div>
-<div id="pixelText">PIXEL GLOW</div>
+  <!-- Calendar -->
+  <div class="calendar">
+    <div class="day-name">Sun</div>
+    <div class="day-name">Mon</div>
+    <div class="day-name">Tue</div>
+    <div class="day-name">Wed</div>
+    <div class="day-name">Thu</div>
+    <div class="day-name">Fri</div>
+    <div class="day-name">Sat</div>
+
+    <!-- Sample dates -->
+    <div class="date"></div>
+    <div class="date"></div>
+    <div class="date">1</div>
+    <div class="date">2</div>
+    <div class="date">3</div>
+    <div class="date">4</div>
+    <div class="date">5</div>
+
+    <div class="date">6</div>
+    <div class="date">7</div>
+    <div class="date">8</div>
+    <div class="date">9</div>
+    <div class="date">10</div>
+    <div class="date">11</div>
+    <div class="date">12</div>
+
+    <div class="date">13</div>
+    <div class="date">14</div>
+    <div class="date">15</div>
+    <div class="date">16</div>
+    <div class="date">17</div>
+    <div class="date">18</div>
+    <div class="date">19</div>
+
+    <div class="date">20</div>
+    <div class="date">21</div>
+    <div class="date">22</div>
+    <div class="date">23</div>
+    <div class="date">24</div>
+    <div class="date">25</div>
+    <div class="date">26</div>
+
+    <div class="date">27</div>
+    <div class="date">28</div>
+    <div class="date">29</div>
+    <div class="date">30</div>
+    <div class="date">31</div>
+    <div class="date"></div>
+    <div class="date"></div>
+  </div>
+
+  <!-- 3 Buttons -->
+  <div class="buttons">
+    <a class="btn" href="https://example.com" target="_blank">Home</a>
+    <a class="btn" href="https://example.com" target="_blank">Profile</a>
+    <a class="btn" href="https://example.com" target="_blank">Settings</a>
+  </div>
+
 </div>
-
-<br>
-
-<div class="themeText" style="font-size:15px;letter-spacing:2px;">
-<marquee scrollamount="3">♣ Welcome to Our Club ♣</marquee>
-</div>
-
-<br>
-
-<div class="line"></div>
-
-<!-- MUSIC PLAYER -->
-<div class="player">
-
-<div class="live-dot"></div>
-
-<div class="marquee">
-<span id="songText">Now Playing:</span>
-</div>
-
-<div class="screen">
-<iframe id="playerFrame" allow="autoplay; fullscreen" allowfullscreen></iframe>
-</div>
-
-<div class="controls">
-<button onclick="prevSong()">⏮</button>
-<button id="toggleBtn" onclick="toggleVideo()">▶</button>
-<button onclick="nextSong()">⏭</button>
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-/* THEME SYSTEM */
-const themes=[
-{bg:"#0F172A",border:"#22C55E",glow:"rgba(34,197,94,0.5)",text:"#22C55E"},
-{bg:"#1E1B4B",border:"#A855F7",glow:"rgba(168,85,247,0.5)",text:"#A855F7"},
-{bg:"#111827",border:"#3B82F6",glow:"rgba(59,130,246,0.5)",text:"#3B82F6"},
-{bg:"#2A0F0F",border:"#FF4D4D",glow:"rgba(255,77,77,0.5)",text:"#FF4D4D"},
-{bg:"#1A1A00",border:"#FFCC00",glow:"rgba(255,204,0,0.5)",text:"#FFCC00"}
-];
-
-let index=0;
-
-function changeTheme(){
-const t=themes[index];
-
-document.body.style.background=t.bg;
-
-const box=document.querySelector(".mainBox");
-box.style.borderColor=t.border;
-box.style.boxShadow=`0 0 25px ${t.glow}`;
-
-document.querySelectorAll(".themeText").forEach(e=>{
-e.style.color=t.text;
-});
-
-document.getElementById("pixelText").style.color=t.text;
-document.getElementById("pixelText").style.textShadow=`0 0 12px ${t.glow}`;
-
-document.querySelector(".pixelBorder").style.background=
-`linear-gradient(90deg,${t.border},white,${t.border})`;
-
-index=(index+1)%themes.length;
-}
-
-setInterval(changeTheme,6000);
-changeTheme();
-
-/* MUSIC PLAYER */
-let songs=[
-{src:"https://youtu.be/kcsGhOmULxQ",name:"Golden Brown - The Stranglers"},
-{src:"https://youtu.be/_XeE2aEiPHk",name:"The Flame of Love - Rokudenashi"},
-{src:"https://youtu.be/qdpXxGPqW-Y",name:"Faded - Alan Walker"},
-{src:"https://youtu.be/k50D8-EvNxk",name:"Meu Abrigo - Melim"},
-{src:"https://youtu.be/9I9c20LHmzY",name:"Come As You Are - Nirvana"}
-];
-
-let songIndex=0;
-let isPlaying=false;
-
-const frame=document.getElementById("playerFrame");
-const songText=document.getElementById("songText");
-const toggleBtn=document.getElementById("toggleBtn");
-
-function convert(url){
-let id=url.split("youtu.be/")[1]?.split("?")[0];
-return "https://www.youtube.com/embed/"+id+"?enablejsapi=1&rel=0";
-}
-
-function loadVideo(i){
-frame.src=convert(songs[i].src);
-songText.innerText="Now Playing: "+songs[i].name;
-toggleBtn.innerText="▶";
-isPlaying=false;
-}
-
-function prevSong(){
-songIndex=(songIndex-1+songs.length)%songs.length;
-loadVideo(songIndex);
-}
-
-function nextSong(){
-songIndex=(songIndex+1)%songs.length;
-loadVideo(songIndex);
-}
-
-function toggleVideo(){
-frame.contentWindow.postMessage(
-JSON.stringify({
-event:"command",
-func:isPlaying?"pauseVideo":"playVideo",
-args:""
-}),
-"*"
-);
-
-isPlaying=!isPlaying;
-toggleBtn.innerText=isPlaying?"❚❚":"▶";
-}
-
-loadVideo(songIndex);
-
-</script>
 
 </body>
 </html>
