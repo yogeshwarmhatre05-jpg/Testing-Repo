@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pixel Glow Club</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@700&family=Russo+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box;}
@@ -21,7 +21,7 @@ min-height:100vh;
 overflow-x:hidden;
 }
 
-/* GLOBAL RGB BORDER */
+/* RGB BORDER (UNCHANGED) */
 .rgbBorder{
 position:fixed;
 inset:0;
@@ -46,107 +46,79 @@ background:#0F172A;
 
 /* MAIN BOX */
 .mainBox{
-width:320px;
+width:300px;
 margin:20px auto;
 padding:14px;
 text-align:center;
+border:2px solid #1E293B;
 border-radius:12px;
 background:#0F172A;
+transition:all 1s ease;
+}
+
+.themeText{
+transition:all 1s ease;
+}
+
+.line{
+height:1px;
+background:rgba(255,255,255,0.15);
+margin:8px 20px;
 }
 
 /* PIXEL GLOW */
 .pixelGlowBox{
 width:270px;
-height:70px;
+height:60px;
 margin:auto;
 position:relative;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:14px;
 overflow:hidden;
+border-radius:10px;
 }
 
-.pixelRgbBorder{
-position:absolute;
-inset:0;
-padding:3px;
-background:linear-gradient(90deg,#ff004c,#ffae00,#ffee00,#00ff66,#00e5ff,#7a00ff,#ff004c);
-background-size:400% 400%;
-animation:rgbMove 6s linear infinite;
-}
-
-.pixelRgbBorder::before{
-content:"";
-position:absolute;
-inset:3px;
-background:#0F172A;
-border-radius:12px;
-}
-
-#pixelText{
-position:relative;
-z-index:2;
-font-size:1.2rem;
-font-family:'Russo One','Orbitron',sans-serif;
-letter-spacing:4px;
-color:#00ffcc;
-text-shadow:0 0 6px #00ffcc,0 0 12px #00e5ff,0 0 20px #7a00ff;
-animation:glowPulse 2.5s infinite;
-}
-
-@keyframes glowPulse{
-0%{transform:scale(1);filter:brightness(1);}
-50%{transform:scale(1.05);filter:brightness(1.4);}
-100%{transform:scale(1);filter:brightness(1);}
-}
-
-/* TEXT */
-.line{
-height:1px;
-background:rgba(255,255,255,0.15);
-margin:10px 20px;
-}
-
-/* ================= PLAYER ================= */
-
-.player{
-width:270px;
-margin:20px auto;
-position:relative;
-border-radius:12px;
-padding:10px;
-overflow:hidden;
-}
-
-/* SAME RGB BORDER AS BODY (NO SHADOW) */
-.player::before{
-content:"";
+.pixelBorder{
 position:absolute;
 inset:0;
 padding:2px;
-background:linear-gradient(
-90deg,
-#ff0000,#ff9900,#ffee00,#00ff00,#00ffff,#0066ff,#aa00ff,#ff0000
-);
-background-size:400% 400%;
-animation:rgbMove 8s linear infinite;
+background:linear-gradient(90deg,#22C55E,white,#22C55E);
+background-size:300% 300%;
+animation:rgbMove 6s ease-in-out infinite;
 }
 
-.player::after{
+.pixelBorder::before{
 content:"";
 position:absolute;
 inset:2px;
 background:#0F172A;
-border-radius:10px;
 }
 
-.player > *{
+#pixelText{
+position:absolute;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:1rem;
+font-family:'Orbitron',sans-serif;
+font-weight:700;
+letter-spacing:2px;
+-webkit-text-stroke:1px #000;
+transition:all 1s ease;
+}
+
+/* ================= MUSIC PLAYER ================= */
+
+.player{
+width:270px;
+margin:20px auto 40px;
+background:#0F172A;
+border:2px solid #22C55E;
+border-radius:12px;
+padding:10px;
 position:relative;
-z-index:2;
+box-shadow:0 0 25px rgba(34,197,94,0.25);
 }
 
-/* PLAYER UI */
 .live-dot{
 width:8px;
 height:8px;
@@ -155,6 +127,7 @@ border-radius:50%;
 position:absolute;
 top:8px;
 left:8px;
+box-shadow:0 0 8px #22C55E;
 animation:pulse 1.2s infinite;
 }
 
@@ -165,6 +138,7 @@ animation:pulse 1.2s infinite;
 }
 
 .marquee{
+width:100%;
 overflow:hidden;
 white-space:nowrap;
 font-size:11px;
@@ -186,9 +160,9 @@ animation:scroll 8s linear infinite;
 .screen{
 width:100%;
 aspect-ratio:16/9;
+border:2px solid #1E293B;
 border-radius:8px;
 overflow:hidden;
-border:2px solid #1E293B;
 }
 
 .screen iframe{
@@ -207,18 +181,30 @@ margin-top:8px;
 .controls button{
 background:#1E293B;
 color:#E2E8F0;
-border:none;
+border:1px solid #1E293B;
 width:30px;
 height:24px;
 border-radius:7px;
 cursor:pointer;
+transition:0.25s;
+}
+
+.controls button:hover{
+transform:translateY(-2px) scale(1.05);
+border-color:#22C55E;
 }
 
 #toggleBtn{
 width:42px;
-background:#22C55E;
-color:#000;
+font-size:13px;
 font-weight:bold;
+background:linear-gradient(135deg,#22C55E,#16A34A);
+border:none;
+box-shadow:0 0 12px rgba(34,197,94,0.45);
+}
+
+#toggleBtn:hover{
+transform:scale(1.08);
 }
 
 </style>
@@ -228,63 +214,106 @@ font-weight:bold;
 
 <div class="rgbBorder"></div>
 
+<!-- ================= CLUB ================= -->
 <div class="mainBox">
 
-  <div class="pixelGlowBox">
-    <div class="pixelRgbBorder"></div>
-    <div id="pixelText">PIXEL GLOW</div>
-  </div>
+<div class="pixelGlowBox">
+<div class="pixelBorder"></div>
+<div id="pixelText">PIXEL GLOW</div>
+</div>
 
-  <br>
+<br>
 
-  <div>♣ Welcome to Our Club ♣</div>
+<div class="themeText" style="font-size:15px;letter-spacing:2px;">
+<marquee scrollamount="3">♣ Welcome to Our Club ♣</marquee>
+</div>
 
-  <br>
+<br>
 
-  <div>✧ OWNER ✧</div>
+<div style="font-size:14px;">✧ OWNER ✧</div>
 
-  <img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png"
-  width="250" height="333">
+<div style="margin-top:6px;">
+<img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png"
+width="250" height="333">
+</div>
 
-  <div style="font-size:22px;font-weight:800;margin-top:6px;">
-    √𝓎𝓸𝓰𝓲136
-  </div>
+<div style="font-size:22px;font-weight:800;margin-top:6px;">
+√𝓎𝓸𝓰𝓲136
+</div>
 
-  <div class="line"></div>
+<div class="line"></div>
 
-  <div style="font-size:12px;font-style:italic;">
-    “Think like a King. Play like a Master.”
-  </div>
+<div style="font-size:12px;font-style:italic;">
+“Think like a King. Play like a Master.”
+</div>
 
-  <!-- PLAYER INSIDE MAIN BOX -->
-  <div class="player">
+<div class="player">
 
-    <div class="live-dot"></div>
+<div class="live-dot"></div>
 
-    <div class="marquee">
-      <span id="songText">Now Playing:</span>
-    </div>
+<div class="marquee">
+<span id="songText">Now Playing:</span>
+</div>
 
-    <div class="screen">
-      <iframe id="playerFrame" allow="autoplay; fullscreen"></iframe>
-    </div>
+<div class="screen">
+<iframe id="playerFrame" allow="autoplay; fullscreen" allowfullscreen></iframe>
+</div>
 
-    <div class="controls">
-      <button onclick="prevSong()">⏮</button>
-      <button id="toggleBtn" onclick="toggleVideo()">▶</button>
-      <button onclick="nextSong()">⏭</button>
-    </div>
-
-  </div>
+<div class="controls">
+<button onclick="prevSong()">⏮</button>
+<button id="toggleBtn" onclick="toggleVideo()">▶</button>
+<button onclick="nextSong()">⏭</button>
+</div>
 
 </div>
 
 <script>
 
+/* ===== THEME SYSTEM (UNCHANGED CORE IDEA) ===== */
+
+const themes=[
+{bg:"#0F172A",border:"#22C55E",glow:"rgba(34,197,94,0.5)",text:"#22C55E"},
+{bg:"#1E1B4B",border:"#A855F7",glow:"rgba(168,85,247,0.5)",text:"#A855F7"},
+{bg:"#111827",border:"#3B82F6",glow:"rgba(59,130,246,0.5)",text:"#3B82F6"},
+{bg:"#2A0F0F",border:"#FF4D4D",glow:"rgba(255,77,77,0.5)",text:"#FF4D4D"},
+{bg:"#1A1A00",border:"#FFCC00",glow:"rgba(255,204,0,0.5)",text:"#FFCC00"}
+];
+
+let index=0;
+
+function changeTheme(){
+const t=themes[index];
+
+document.body.style.background=t.bg;
+
+const box=document.querySelector(".mainBox");
+box.style.borderColor=t.border;
+box.style.boxShadow=`0 0 25px ${t.glow}`;
+
+document.querySelectorAll(".themeText").forEach(e=>{
+e.style.color=t.text;
+});
+
+document.getElementById("pixelText").style.color=t.text;
+document.getElementById("pixelText").style.textShadow=`0 0 12px ${t.glow}`;
+
+document.querySelector(".pixelBorder").style.background=
+`linear-gradient(90deg,${t.border},white,${t.border})`;
+
+index=(index+1)%themes.length;
+}
+
+setInterval(changeTheme,6000);
+changeTheme();
+
+/* ===== MUSIC PLAYER ===== */
+
 let songs=[
-{src:"https://youtu.be/kcsGhOmULxQ",name:"Golden Brown"},
-{src:"https://youtu.be/_XeE2aEiPHk",name:"Rokudenashi"},
-{src:"https://youtu.be/qdpXxGPqW-Y",name:"Faded"}
+{src:"https://youtu.be/kcsGhOmULxQ",name:"Golden Brown - The Stranglers"},
+{src:"https://youtu.be/_XeE2aEiPHk",name:"The Flame of Love - Rokudenashi"},
+{src:"https://youtu.be/qdpXxGPqW-Y",name:"Faded - Alan Walker"},
+{src:"https://youtu.be/k50D8-EvNxk",name:"Meu Abrigo - Melim"},
+{src:"https://youtu.be/9I9c20LHmzY",name:"Come As You Are - Nirvana"}
 ];
 
 let songIndex=0;
@@ -296,7 +325,7 @@ const toggleBtn=document.getElementById("toggleBtn");
 
 function convert(url){
 let id=url.split("youtu.be/")[1]?.split("?")[0];
-return "https://www.youtube.com/embed/"+id+"?enablejsapi=1";
+return "https://www.youtube.com/embed/"+id+"?enablejsapi=1&rel=0";
 }
 
 function loadVideo(i){
