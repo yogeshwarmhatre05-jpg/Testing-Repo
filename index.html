@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,119 +9,113 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
-*{
+*{box-sizing:border-box;}
+
+html,body{
 margin:0;
 padding:0;
-box-sizing:border-box;
-}
-
-body{
-font-family:'Poppins',sans-serif;
 background: radial-gradient(circle at top, #111827, #0b1220);
 color:#d7e2f0;
-display:flex;
-justify-content:center;
-padding:20px;
+font-family:'Poppins',sans-serif;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+/* 🌈 RGB BORDER */
+.rgbBorder{
+position:fixed;
+inset:0;
+padding:3px;
+background:linear-gradient(
+90deg,
+#ff4d4d,#ffb84d,#fff36a,#5cff7a,#4dd2ff,#6a7bff,#c77dff,#ff4d4d
+);
+background-size:400% 400%;
+animation:rgbMove 8s linear infinite;
+opacity:0.85;
+z-index:-1;
+}
+
+.rgbBorder::before{
+content:"";
+position:absolute;
+inset:3px;
+background:#0b1220;
+}
+
+@keyframes rgbMove{
+0%{background-position:0% 50%;}
+100%{background-position:400% 50%;}
 }
 
 /* MAIN BOX */
 .mainBox{
-width:320px;
-display:flex;
-flex-direction:column;
-gap:14px;
-}
-
-/* HEADER */
-.header{
+width:300px;
+margin:20px auto;
+padding:14px;
 text-align:center;
-padding:12px;
-border-radius:14px;
-background:rgba(255,255,255,0.03);
-border:1px solid rgba(124,255,178,0.25);
-}
-
-.header h1{
-font-family:'Orbitron',sans-serif;
-font-size:18px;
-color:#7CFFB2;
-}
-
-.header p{
-font-size:11px;
-opacity:0.6;
-}
-
-/* SIDEBAR */
-.sidebar{
-display:flex;
-flex-direction:column;
-gap:10px;
-}
-
-.top-links{
-display:flex;
-gap:10px;
-}
-
-.btn{
-flex:1;
-text-align:center;
-padding:10px;
+background:#0b1220;
 border-radius:12px;
-text-decoration:none;
-font-weight:600;
-font-size:13px;
-color:#d7e2f0;
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(255,255,255,0.08);
-transition:0.2s;
-}
-
-.btn:hover{
-background:rgba(124,255,178,0.12);
-border-color:#7CFFB2;
-color:#7CFFB2;
-}
-
-.full{
-width:100%;
-}
-
-/* IMAGE */
-.hero{
-border-radius:14px;
-overflow:hidden;
 border:1px solid rgba(124,255,178,0.25);
 }
 
-.hero img{
-width:100%;
-display:block;
+/* PIXEL GLOW */
+.pixelGlowBox{
+width:270px;
+height:60px;
+margin:auto;
+position:relative;
+overflow:hidden;
+border-radius:10px;
+}
+
+.pixelBorder{
+position:absolute;
+inset:0;
+padding:2px;
+background:linear-gradient(90deg,#7CFFB2,white,#7CFFB2);
+background-size:300% 300%;
+animation:rgbMove 6s ease-in-out infinite;
+}
+
+.pixelBorder::before{
+content:"";
+position:absolute;
+inset:2px;
+background:#0b1220;
+}
+
+#pixelText{
+position:absolute;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:1rem;
+font-family:'Orbitron',sans-serif;
+font-weight:700;
+letter-spacing:2px;
 }
 
 /* PLAYER */
 .player{
-background:rgba(255,255,255,0.03);
-border:1px solid rgba(124,255,178,0.25);
-border-radius:14px;
-padding:12px;
+width:270px;
+margin:20px auto;
+background:#0b1220;
+border:1px solid rgba(124,255,178,0.35);
+border-radius:12px;
+padding:10px;
+position:relative;
 }
 
-.live{
-display:flex;
-align-items:center;
-gap:6px;
-font-size:11px;
-color:#7CFFB2;
-margin-bottom:8px;
-}
-
-.dot{
-width:7px;
-height:7px;
+.live-dot{
+width:8px;
+height:8px;
 background:#7CFFB2;
 border-radius:50%;
+position:absolute;
+top:8px;
+left:8px;
 animation:pulse 1.5s infinite;
 }
 
@@ -129,15 +124,24 @@ animation:pulse 1.5s infinite;
 50%{opacity:0.3;}
 }
 
+.marquee{
+width:100%;
+overflow:hidden;
+white-space:nowrap;
+font-size:11px;
+margin-bottom:6px;
+color:#7CFFB2;
+}
+
 .screen{
 width:100%;
 aspect-ratio:16/9;
-border-radius:10px;
+border:1px solid rgba(124,255,178,0.25);
+border-radius:8px;
 overflow:hidden;
-border:1px solid rgba(124,255,178,0.2);
 }
 
-iframe{
+.screen iframe{
 width:100%;
 height:100%;
 border:none;
@@ -147,69 +151,125 @@ border:none;
 display:flex;
 justify-content:center;
 gap:10px;
-margin-top:10px;
+margin-top:8px;
 }
 
-button{
-padding:6px 10px;
-border-radius:10px;
-border:1px solid rgba(255,255,255,0.08);
-background:rgba(255,255,255,0.04);
+.controls button{
+background:rgba(255,255,255,0.05);
 color:#d7e2f0;
+border:1px solid rgba(255,255,255,0.08);
+width:32px;
+height:26px;
+border-radius:7px;
 cursor:pointer;
+transition:0.2s;
+}
+
+.controls button:hover{
+background:rgba(124,255,178,0.15);
+border-color:#7CFFB2;
+color:#7CFFB2;
 }
 
 #toggleBtn{
 background:#7CFFB2;
 color:#0b1220;
-font-weight:600;
+font-weight:bold;
 }
 
 /* CALENDAR */
-.calendar{
-background:rgba(255,255,255,0.03);
-border:1px solid rgba(124,255,178,0.25);
-border-radius:14px;
+.box{
+width:270px;
+margin:20px auto;
+background:#0b1220;
+border:1px solid rgba(124,255,178,0.35);
+border-radius:12px;
 padding:12px;
 }
 
 .title{
 text-align:center;
+font-weight:700;
 color:#7CFFB2;
-margin-bottom:10px;
+font-size:16px;
 }
 
-.grid{
+.subtitle{
+text-align:center;
+font-size:11px;
+opacity:0.7;
+margin-top:3px;
+}
+
+.days, .calendar{
 display:grid;
 grid-template-columns:repeat(7,1fr);
 gap:5px;
 text-align:center;
-font-size:11px;
+margin-top:10px;
 }
 
-.day{
-opacity:0.5;
+.days div{
+font-size:10px;
+opacity:0.6;
 }
 
-.date{
-padding:6px 0;
-border-radius:8px;
+.calendar div{
+aspect-ratio:1/1;
+display:flex;
+align-items:center;
+justify-content:center;
 background:rgba(255,255,255,0.03);
+border-radius:10px;
+font-size:12px;
+transition:0.2s;
+cursor:pointer;
+}
+
+.calendar div:hover{
+background:rgba(124,255,178,0.15);
+transform:scale(1.05);
 }
 
 .today{
-background:#7CFFB2;
+background:#7CFFB2 !important;
 color:#0b1220;
-font-weight:600;
+font-weight:bold;
 }
 
-/* ================= PARTNERS ================= */
+/* NAV */
+.buttons{
+display:flex;
+gap:8px;
+margin-top:12px;
+}
 
+.btn{
+flex:1;
+text-align:center;
+padding:6px;
+border-radius:8px;
+font-size:11px;
+text-decoration:none;
+background:rgba(255,255,255,0.05);
+color:#d7e2f0;
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.btn:hover{
+background:rgba(124,255,178,0.15);
+color:#7CFFB2;
+border-color:#7CFFB2;
+}
+
+/* PARTNERS (ADDED - SAME THEME) */
 .section{
-border:1px solid rgba(124,255,178,0.25);
-border-radius:14px;
+width:270px;
+margin:20px auto;
+background:#0b1220;
+border:1px solid rgba(124,255,178,0.35);
+border-radius:12px;
 padding:12px;
-background:rgba(255,255,255,0.03);
 }
 
 .section-title{
@@ -217,6 +277,7 @@ text-align:center;
 color:#7CFFB2;
 font-weight:bold;
 margin-bottom:10px;
+font-size:14px;
 }
 
 .partner-card{
@@ -245,51 +306,33 @@ object-fit:cover;
 .partner-name{
 margin-top:6px;
 font-size:13px;
+color:#d7e2f0;
 }
 </style>
 </head>
 
 <body>
 
+<div class="rgbBorder"></div>
+
 <div class="mainBox">
 
-<!-- HEADER -->
-<div class="header">
-<h1>PIXEL GLOW CLUB</h1>
-<p>nostalgic minimal space</p>
+<div class="pixelGlowBox">
+<div class="pixelBorder"></div>
+<div id="pixelText">PIXEL GLOW</div>
 </div>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
+<br>
 
-<div class="top-links">
-<a class="btn">Owner</a>
-<a class="btn">Co Owner</a>
-</div>
+<img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png" width="250">
 
-<a class="btn full">Club Rules</a>
-<a class="btn full">Announcements</a>
-<a class="btn full">Join Events</a>
-
-</div>
-
-<!-- IMAGE -->
-<div class="hero">
-<img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png">
-</div>
-
-<!-- PLAYER -->
 <div class="player">
 
-<div class="live">
-<div class="dot"></div>
-<span id="songText">Now Playing</span>
-</div>
+<div class="live-dot"></div>
+<div class="marquee"><span id="songText">Now Playing</span></div>
 
 <div class="screen">
-<iframe id="playerFrame"
-allow="autoplay; encrypted-media; fullscreen"
-allowfullscreen></iframe>
+<iframe id="playerFrame" allow="autoplay; encrypted-media; fullscreen"></iframe>
 </div>
 
 <div class="controls">
@@ -300,14 +343,16 @@ allowfullscreen></iframe>
 
 </div>
 
-<!-- CALENDAR -->
+<div class="box">
+
+<div class="title">🌷 My Cute Calendar</div>
+<div class="subtitle">soft nostalgic vibes</div>
+
+<div class="days">
+<div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+</div>
+
 <div class="calendar">
-
-<div class="title">May 2026</div>
-
-<div class="grid">
-<div class="day">S</div><div class="day">M</div><div class="day">T</div><div class="day">W</div><div class="day">T</div><div class="day">F</div><div class="day">S</div>
-
 <div></div><div></div><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div>
 <div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div>
 <div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div><div>19</div>
@@ -315,9 +360,15 @@ allowfullscreen></iframe>
 <div>27</div><div>28</div><div>29</div><div>30</div><div>31</div>
 </div>
 
+<div class="buttons">
+<a class="btn" href="#">Home</a>
+<a class="btn" href="#">Notes</a>
+<a class="btn" href="#">Profile</a>
 </div>
 
-<!-- PARTNERS (ADDED BELOW CALENDAR) -->
+</div>
+
+<!-- PARTNERS (BELOW CALENDAR) -->
 <div class="section">
 
 <div class="section-title">◆ PARTNERS ◆</div>
