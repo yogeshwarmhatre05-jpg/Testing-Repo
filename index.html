@@ -50,10 +50,9 @@ width:300px;
 margin:20px auto;
 padding:14px;
 text-align:center;
-border:2px solid #1E293B;
 border-radius:12px;
 background:#0F172A;
-transition:all 1s ease;
+border:2px solid #1E293B;
 }
 
 /* PIXEL GLOW */
@@ -131,17 +130,6 @@ margin-bottom:6px;
 color:#22C55E;
 }
 
-.marquee span{
-display:inline-block;
-padding-left:100%;
-animation:scroll 8s linear infinite;
-}
-
-@keyframes scroll{
-0%{transform:translateX(0);}
-100%{transform:translateX(-100%);}
-}
-
 .screen{
 width:100%;
 aspect-ratio:16/9;
@@ -167,20 +155,20 @@ margin-top:8px;
 background:#1E293B;
 color:#E2E8F0;
 border:1px solid #1E293B;
-width:30px;
-height:24px;
+width:32px;
+height:26px;
 border-radius:7px;
 cursor:pointer;
 }
 
 #toggleBtn{
-width:42px;
+width:45px;
 background:#22C55E;
 color:black;
 font-weight:bold;
 }
 
-/* ===== CALENDAR ===== */
+/* CALENDAR */
 .box{
 width:270px;
 margin:20px auto;
@@ -276,21 +264,11 @@ color:black;
 <div id="pixelText">PIXEL GLOW</div>
 </div>
 
-<div class="themeText" style="font-size:15px;letter-spacing:2px;">
-<marquee scrollamount="3">♣ Welcome to Our Club ♣</marquee>
-</div>
+<br>
 
-
-
-
-
-<div style="margin-top:0px;">
 <img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png"
 width="250" height="333">
 
-<div class="line"></div>
-<br>
-</div>
 <!-- PLAYER -->
 <div class="player">
 
@@ -301,13 +279,17 @@ width="250" height="333">
 </div>
 
 <div class="screen">
-<iframe id="playerFrame" allow="autoplay; fullscreen"></iframe>
+<iframe id="playerFrame"
+allow="autoplay; encrypted-media; fullscreen"
+allowfullscreen></iframe>
 </div>
 
 <div class="controls">
 <button onclick="prevSong()">⏮</button>
 <button id="toggleBtn" onclick="toggleVideo()">▶</button>
 <button onclick="nextSong()">⏭</button>
+</div>
+
 </div>
 
 <!-- CALENDAR -->
@@ -339,42 +321,55 @@ width="250" height="333">
 </div>
 
 <script>
-let songs=[
-{src:"https://youtu.be/kcsGhOmULxQ",name:"Golden Brown"},
-{src:"https://youtu.be/_XeE2aEiPHk",name:"Flame of Love"},
-{src:"https://youtu.be/qdpXxGPqW-Y",name:"Faded"}
+let songs = [
+  { src: "https://youtu.be/kcsGhOmULxQ", name: "Golden Brown" },
+  { src: "https://youtu.be/_XeE2aEiPHk", name: "Flame of Love" },
+  { src: "https://youtu.be/qdpXxGPqW-Y", name: "Faded" }
 ];
 
-let i=0;
-let isPlaying=false;
+let i = 0;
+let isPlaying = false;
 
-const frame=document.getElementById("playerFrame");
-const songText=document.getElementById("songText");
-const btn=document.getElementById("toggleBtn");
+const frame = document.getElementById("playerFrame");
+const songText = document.getElementById("songText");
+const btn = document.getElementById("toggleBtn");
 
-function convert(url){
-let id=url.split("youtu.be/")[1];
-return "https://www.youtube.com/embed/"+id+"?enablejsapi=1";
+function getId(url) {
+  if (url.includes("youtu.be/")) return url.split("youtu.be/")[1];
+  if (url.includes("watch?v=")) return url.split("watch?v=")[1].split("&")[0];
+  return url;
 }
 
-function load(){
-frame.src=convert(songs[i].src);
-songText.innerText="Now Playing: "+songs[i].name;
-btn.innerText="▶";
-isPlaying=false;
+function convert(url) {
+  return `https://www.youtube.com/embed/${getId(url)}?enablejsapi=1&rel=0`;
 }
 
-function nextSong(){i=(i+1)%songs.length;load();}
-function prevSong(){i=(i-1+songs.length)%songs.length;load();}
+function load() {
+  frame.src = convert(songs[i].src);
+  songText.innerText = "Now Playing: " + songs[i].name;
+  btn.innerText = "▶";
+  isPlaying = false;
+}
 
-function toggleVideo(){
-frame.contentWindow.postMessage(JSON.stringify({
-event:"command",
-func:isPlaying?"pauseVideo":"playVideo"
-}),"*");
+function nextSong() {
+  i = (i + 1) % songs.length;
+  load();
+}
 
-isPlaying=!isPlaying;
-btn.innerText=isPlaying?"❚❚":"▶";
+function prevSong() {
+  i = (i - 1 + songs.length) % songs.length;
+  load();
+}
+
+function toggleVideo() {
+  frame.contentWindow.postMessage(JSON.stringify({
+    event: "command",
+    func: isPlaying ? "pauseVideo" : "playVideo",
+    args: []
+  }), "*");
+
+  isPlaying = !isPlaying;
+  btn.innerText = isPlaying ? "❚❚" : "▶";
 }
 
 load();
