@@ -9,278 +9,239 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;}
-
-html,body{
+*{
+box-sizing:border-box;
 margin:0;
 padding:0;
-background:#0F172A;
-color:#E2E8F0;
+}
+
+body{
 font-family:'Poppins',sans-serif;
+background: radial-gradient(circle at top, #1a2233, #0b1020);
+color:#d7e2f0;
 min-height:100vh;
-overflow-x:hidden;
-}
-
-/* 🌈 RGB BORDER BACKGROUND */
-.rgbBorder{
-position:fixed;
-inset:0;
-padding:3px;
-background:linear-gradient(90deg,#ff0000,#ff9900,#ffee00,#00ff00,#00ffff,#0066ff,#aa00ff,#ff0000);
-background-size:400% 400%;
-animation:rgbMove 8s linear infinite;
-z-index:-1;
-}
-
-.rgbBorder::before{
-content:"";
-position:absolute;
-inset:3px;
-background:#0F172A;
-}
-
-@keyframes rgbMove{
-0%{background-position:0% 50%;}
-100%{background-position:400% 50%;}
-}
-
-/* 🧊 MAIN CONTAINER */
-.mainBox{
-width:300px;
-margin:20px auto;
-padding:14px;
-text-align:center;
-background:#0F172A;
-border-radius:12px;
-border:2px solid #1E293B;
-}
-
-/* ✨ PIXEL GLOW HEADER */
-.pixelGlowBox{
-width:270px;
-height:60px;
-margin:auto;
-position:relative;
-overflow:hidden;
-border-radius:10px;
-}
-
-.pixelBorder{
-position:absolute;
-inset:0;
-padding:2px;
-background:linear-gradient(90deg,#22C55E,white,#22C55E);
-background-size:300% 300%;
-animation:rgbMove 6s ease-in-out infinite;
-}
-
-.pixelBorder::before{
-content:"";
-position:absolute;
-inset:2px;
-background:#0F172A;
-}
-
-#pixelText{
-position:absolute;
-inset:0;
 display:flex;
 justify-content:center;
-align-items:center;
-font-size:1rem;
+padding:20px;
+}
+
+/* soft vignette like old screens */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.6));
+pointer-events:none;
+}
+
+/* MAIN APP */
+.mainBox{
+width:320px;
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+/* HEADER */
+.header{
+text-align:center;
+padding:14px;
+border-radius:14px;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.08);
+backdrop-filter: blur(8px);
+}
+
+.header h1{
 font-family:'Orbitron',sans-serif;
-font-weight:700;
+font-size:18px;
 letter-spacing:2px;
+color:#7CFFB2;
 }
 
-/* 🎥 PLAYER BOX */
-.player{
-width:270px;
-margin:20px auto;
-background:#0F172A;
-border:2px solid #22C55E;
-border-radius:12px;
-padding:10px;
-position:relative;
+.header p{
+font-size:11px;
+opacity:0.6;
+margin-top:4px;
 }
 
-/* LIVE DOT */
-.live-dot{
-width:8px;
-height:8px;
-background:#22C55E;
+/* IMAGE */
+.hero{
+border-radius:14px;
+overflow:hidden;
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.hero img{
+width:100%;
+display:block;
+}
+
+/* PLAYER CARD */
+.card{
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:14px;
+padding:12px;
+backdrop-filter: blur(8px);
+}
+
+.live{
+display:flex;
+align-items:center;
+gap:6px;
+font-size:11px;
+opacity:0.8;
+margin-bottom:8px;
+color:#7CFFB2;
+}
+
+.dot{
+width:7px;
+height:7px;
+background:#7CFFB2;
 border-radius:50%;
-position:absolute;
-top:8px;
-left:8px;
-animation:pulse 1.2s infinite;
+animation:pulse 1.6s infinite;
 }
 
 @keyframes pulse{
-0%{opacity:1;}
+0%,100%{opacity:1;}
 50%{opacity:0.3;}
-100%{opacity:1;}
 }
 
-/* SONG TITLE SCROLL */
-.marquee{
-width:100%;
-overflow:hidden;
-white-space:nowrap;
-font-size:11px;
-margin-bottom:6px;
-color:#22C55E;
-}
-
-/* VIDEO SCREEN */
 .screen{
 width:100%;
 aspect-ratio:16/9;
-border:2px solid #1E293B;
-border-radius:8px;
+border-radius:10px;
 overflow:hidden;
+border:1px solid rgba(255,255,255,0.08);
 }
 
-.screen iframe{
+iframe{
 width:100%;
 height:100%;
 border:none;
 }
 
-/* CONTROLS */
 .controls{
 display:flex;
 justify-content:center;
 gap:10px;
-margin-top:8px;
-}
-
-.controls button{
-background:#1E293B;
-color:#E2E8F0;
-border:1px solid #1E293B;
-width:32px;
-height:26px;
-border-radius:7px;
-cursor:pointer;
-}
-
-#toggleBtn{
-width:45px;
-background:#22C55E;
-color:black;
-font-weight:bold;
-}
-
-/* 📅 CALENDAR */
-.box{
-width:270px;
-margin:20px auto;
-background:#0F172A;
-border:2px solid #22C55E;
-border-radius:12px;
-padding:12px;
-}
-
-.title{
-text-align:center;
-font-weight:700;
-color:#22C55E;
-font-size:16px;
-}
-
-.subtitle{
-text-align:center;
-font-size:11px;
-opacity:0.7;
-margin-top:3px;
-}
-
-.days, .calendar{
-display:grid;
-grid-template-columns:repeat(7,1fr);
-gap:5px;
-text-align:center;
 margin-top:10px;
 }
 
-.days div{
-font-size:10px;
-opacity:0.6;
-}
-
-.calendar div{
-aspect-ratio:1/1;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#1E293B;
+button{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+color:#d7e2f0;
+padding:6px 10px;
 border-radius:10px;
-font-size:12px;
-transition:0.2s;
 cursor:pointer;
+transition:0.2s;
 }
 
-.calendar div:hover{
-background:#22C55E;
-color:black;
-transform:scale(1.1);
+button:hover{
+background:rgba(124,255,178,0.15);
+border-color:#7CFFB2;
+}
+
+#toggleBtn{
+background:#7CFFB2;
+color:#0b1020;
+font-weight:600;
+}
+
+/* CALENDAR */
+.calendar{
+padding:12px;
+border-radius:14px;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.08);
+backdrop-filter: blur(8px);
+}
+
+.title{
+font-size:14px;
+text-align:center;
+color:#7CFFB2;
+margin-bottom:10px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:6px;
+text-align:center;
+font-size:11px;
+}
+
+.day{
+opacity:0.5;
+}
+
+.date{
+padding:6px 0;
+border-radius:8px;
+background:rgba(255,255,255,0.04);
+transition:0.2s;
+}
+
+.date:hover{
+background:rgba(124,255,178,0.15);
+transform:scale(1.05);
 }
 
 .today{
-background:#22C55E !important;
-color:black;
-font-weight:bold;
+background:#7CFFB2;
+color:#0b1020;
+font-weight:600;
 }
 
-/* NAV BUTTONS */
-.buttons{
+.nav{
 display:flex;
 gap:8px;
 margin-top:12px;
 }
 
-.btn{
+.nav a{
 flex:1;
 text-align:center;
 padding:6px;
-border-radius:8px;
-font-size:11px;
+border-radius:10px;
 text-decoration:none;
-background:#1E293B;
-color:white;
+font-size:11px;
+color:#d7e2f0;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
 }
 
-.btn:hover{
-background:#22C55E;
-color:black;
+.nav a:hover{
+border-color:#7CFFB2;
+color:#7CFFB2;
 }
 </style>
 </head>
 
 <body>
 
-<div class="rgbBorder"></div>
-
 <div class="mainBox">
 
 <!-- HEADER -->
-<div class="pixelGlowBox">
-<div class="pixelBorder"></div>
-<div id="pixelText">PIXEL GLOW</div>
+<div class="header">
+<h1>PIXEL GLOW CLUB</h1>
+<p>a quiet nostalgic space</p>
 </div>
 
-<br>
-
 <!-- IMAGE -->
-<img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png" width="250">
+<div class="hero">
+<img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png">
+</div>
 
 <!-- PLAYER -->
-<div class="player">
+<div class="card">
 
-<div class="live-dot"></div>
-
-<div class="marquee">
+<div class="live">
+<div class="dot"></div>
 <span id="songText">Now Playing</span>
 </div>
 
@@ -299,27 +260,24 @@ allowfullscreen></iframe>
 </div>
 
 <!-- CALENDAR -->
-<div class="box">
-
-<div class="title">🌷 My Cute Calendar</div>
-<div class="subtitle">soft vibes • pastel style</div>
-
-<div class="days">
-<div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
-</div>
-
 <div class="calendar">
-<div></div><div></div><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div>
-<div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div>
-<div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div><div>19</div>
-<div>20</div><div>21</div><div class="today">22</div><div>23</div><div>24</div><div>25</div><div>26</div>
-<div>27</div><div>28</div><div>29</div><div>30</div><div>31</div><div></div><div></div>
+
+<div class="title">May 2026</div>
+
+<div class="grid">
+<div class="day">S</div><div class="day">M</div><div class="day">T</div><div class="day">W</div><div class="day">T</div><div class="day">F</div><div class="day">S</div>
+
+<div class="date"></div><div class="date"></div><div class="date">1</div><div class="date">2</div><div class="date">3</div><div class="date">4</div><div class="date">5</div>
+<div class="date">6</div><div class="date">7</div><div class="date">8</div><div class="date">9</div><div class="date">10</div><div class="date">11</div><div class="date">12</div>
+<div class="date">13</div><div class="date">14</div><div class="date">15</div><div class="date">16</div><div class="date">17</div><div class="date">18</div><div class="date">19</div>
+<div class="date">20</div><div class="date">21</div><div class="date today">22</div><div class="date">23</div><div class="date">24</div><div class="date">25</div><div class="date">26</div>
+<div class="date">27</div><div class="date">28</div><div class="date">29</div><div class="date">30</div><div class="date">31</div>
 </div>
 
-<div class="buttons">
-<a class="btn" href="#">Home</a>
-<a class="btn" href="#">Notes</a>
-<a class="btn" href="#">Profile</a>
+<div class="nav">
+<a href="#">Home</a>
+<a href="#">Notes</a>
+<a href="#">Profile</a>
 </div>
 
 </div>
@@ -327,61 +285,55 @@ allowfullscreen></iframe>
 </div>
 
 <script>
-let songs = [
-  { src: "https://youtu.be/kcsGhOmULxQ", name: "Golden Brown" },
-  { src: "https://youtu.be/_XeE2aEiPHk", name: "Flame of Love" },
-  { src: "https://youtu.be/qdpXxGPqW-Y", name: "Faded" }
+let songs=[
+{src:"https://youtu.be/kcsGhOmULxQ",name:"Golden Brown"},
+{src:"https://youtu.be/_XeE2aEiPHk",name:"Flame of Love"},
+{src:"https://youtu.be/qdpXxGPqW-Y",name:"Faded"}
 ];
 
-let i = 0;
-let isPlaying = false;
+let i=0;
+let isPlaying=false;
 
-const frame = document.getElementById("playerFrame");
-const songText = document.getElementById("songText");
-const btn = document.getElementById("toggleBtn");
+const frame=document.getElementById("playerFrame");
+const songText=document.getElementById("songText");
+const btn=document.getElementById("toggleBtn");
 
-/* 🔧 FIX: extract video ID safely */
-function getId(url) {
-  if (url.includes("youtu.be/")) return url.split("youtu.be/")[1];
-  if (url.includes("watch?v=")) return url.split("watch?v=")[1].split("&")[0];
-  return url;
+function getId(url){
+if(url.includes("youtu.be/")) return url.split("youtu.be/")[1];
+if(url.includes("watch?v=")) return url.split("watch?v=")[1].split("&")[0];
+return url;
 }
 
-/* 🔧 FIX: build embed URL properly */
-function convert(url) {
-  return `https://www.youtube.com/embed/${getId(url)}?enablejsapi=1&rel=0`;
+function convert(url){
+return `https://www.youtube.com/embed/${getId(url)}?enablejsapi=1&rel=0`;
 }
 
-/* ▶ load song */
-function load() {
-  frame.src = convert(songs[i].src);
-  songText.innerText = "Now Playing: " + songs[i].name;
-  btn.innerText = "▶";
-  isPlaying = false;
+function load(){
+frame.src=convert(songs[i].src);
+songText.innerText="Now Playing: "+songs[i].name;
+btn.innerText="▶";
+isPlaying=false;
 }
 
-/* ⏭ next song */
-function nextSong() {
-  i = (i + 1) % songs.length;
-  load();
+function nextSong(){
+i=(i+1)%songs.length;
+load();
 }
 
-/* ⏮ previous song */
-function prevSong() {
-  i = (i - 1 + songs.length) % songs.length;
-  load();
+function prevSong(){
+i=(i-1+songs.length)%songs.length;
+load();
 }
 
-/* ▶ pause/play toggle */
-function toggleVideo() {
-  frame.contentWindow.postMessage(JSON.stringify({
-    event: "command",
-    func: isPlaying ? "pauseVideo" : "playVideo",
-    args: []
-  }), "*");
+function toggleVideo(){
+frame.contentWindow.postMessage(JSON.stringify({
+event:"command",
+func:isPlaying?"pauseVideo":"playVideo",
+args:[]
+}),"*");
 
-  isPlaying = !isPlaying;
-  btn.innerText = isPlaying ? "❚❚" : "▶";
+isPlaying=!isPlaying;
+btn.innerText=isPlaying?"❚❚":"▶";
 }
 
 load();
