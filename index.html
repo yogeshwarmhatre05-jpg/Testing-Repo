@@ -18,13 +18,12 @@ body{
 font-family:'Poppins',sans-serif;
 background: radial-gradient(circle at top, #111827, #0b1220);
 color:#d7e2f0;
-min-height:100vh;
 display:flex;
 justify-content:center;
 padding:20px;
 }
 
-/* MAIN WRAPPER */
+/* MAIN BOX */
 .mainBox{
 width:320px;
 display:flex;
@@ -32,29 +31,38 @@ flex-direction:column;
 gap:14px;
 }
 
-/* GLASS CARD BASE */
-.card{
+/* HEADER */
+.header{
+text-align:center;
+padding:12px;
+border-radius:14px;
 background:rgba(255,255,255,0.03);
 border:1px solid rgba(124,255,178,0.25);
-border-radius:14px;
-padding:12px;
-backdrop-filter: blur(10px);
 }
 
-/* 🌿 SIDEBAR (NOW TOP NAV) */
+.header h1{
+font-family:'Orbitron',sans-serif;
+font-size:18px;
+color:#7CFFB2;
+}
+
+.header p{
+font-size:11px;
+opacity:0.6;
+}
+
+/* SIDEBAR */
 .sidebar{
 display:flex;
 flex-direction:column;
 gap:10px;
 }
 
-/* top row */
 .top-links{
 display:flex;
 gap:10px;
 }
 
-/* BUTTONS */
 .btn{
 flex:1;
 text-align:center;
@@ -66,44 +74,40 @@ font-size:13px;
 color:#d7e2f0;
 background:rgba(255,255,255,0.04);
 border:1px solid rgba(255,255,255,0.08);
-transition:0.25s;
+transition:0.2s;
 }
 
-/* full width buttons */
-.full{
-width:100%;
-}
-
-/* hover */
 .btn:hover{
 background:rgba(124,255,178,0.12);
 border-color:#7CFFB2;
 color:#7CFFB2;
-transform:translateY(-1px);
 }
 
-/* HEADER */
-.header{
-text-align:center;
-padding:14px;
+.full{
+width:100%;
+}
+
+/* IMAGE */
+.hero{
 border-radius:14px;
+overflow:hidden;
+border:1px solid rgba(124,255,178,0.25);
 }
 
-.header h1{
-font-family:'Orbitron',sans-serif;
-font-size:18px;
-color:#7CFFB2;
-letter-spacing:2px;
-}
-
-.header p{
-font-size:11px;
-opacity:0.6;
-margin-top:4px;
+.hero img{
+width:100%;
+display:block;
 }
 
 /* PLAYER */
-.player .live{
+.player{
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(124,255,178,0.25);
+border-radius:14px;
+padding:12px;
+}
+
+.live{
 display:flex;
 align-items:center;
 gap:6px;
@@ -163,15 +167,16 @@ font-weight:600;
 
 /* CALENDAR */
 .calendar{
-padding:12px;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(124,255,178,0.25);
 border-radius:14px;
+padding:12px;
 }
 
 .title{
 text-align:center;
 color:#7CFFB2;
 margin-bottom:10px;
-font-size:14px;
 }
 
 .grid{
@@ -192,14 +197,54 @@ border-radius:8px;
 background:rgba(255,255,255,0.03);
 }
 
-.date:hover{
-background:rgba(124,255,178,0.12);
-}
-
 .today{
 background:#7CFFB2;
 color:#0b1220;
 font-weight:600;
+}
+
+/* ================= PARTNERS ================= */
+
+.section{
+border:1px solid rgba(124,255,178,0.25);
+border-radius:14px;
+padding:12px;
+background:rgba(255,255,255,0.03);
+}
+
+.section-title{
+text-align:center;
+color:#7CFFB2;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.partner-card{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:12px;
+padding:12px;
+text-align:center;
+margin-bottom:10px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.partner-card:hover{
+transform:scale(1.03);
+border-color:#7CFFB2;
+}
+
+.partner-img{
+width:65px;
+height:65px;
+border-radius:10px;
+object-fit:cover;
+}
+
+.partner-name{
+margin-top:6px;
+font-size:13px;
 }
 </style>
 </head>
@@ -209,32 +254,32 @@ font-weight:600;
 <div class="mainBox">
 
 <!-- HEADER -->
-<div class="card header">
+<div class="header">
 <h1>PIXEL GLOW CLUB</h1>
 <p>nostalgic minimal space</p>
 </div>
 
-<!-- 🌿 SIDEBAR ADDED HERE -->
-<div class="card sidebar">
+<!-- SIDEBAR -->
+<div class="sidebar">
 
 <div class="top-links">
-<a href="#" class="btn">Owner</a>
-<a href="#" class="btn">Co Owner</a>
+<a class="btn">Owner</a>
+<a class="btn">Co Owner</a>
 </div>
 
-<a href="#" class="btn full">Club Rules</a>
-<a href="#" class="btn full">Announcements</a>
-<a href="#" class="btn full">Join Events</a>
+<a class="btn full">Club Rules</a>
+<a class="btn full">Announcements</a>
+<a class="btn full">Join Events</a>
 
 </div>
 
 <!-- IMAGE -->
-<div class="card">
-<img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png" width="100%">
+<div class="hero">
+<img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png">
 </div>
 
 <!-- PLAYER -->
-<div class="card player">
+<div class="player">
 
 <div class="live">
 <div class="dot"></div>
@@ -256,19 +301,28 @@ allowfullscreen></iframe>
 </div>
 
 <!-- CALENDAR -->
-<div class="card calendar">
+<div class="calendar">
 
 <div class="title">May 2026</div>
 
 <div class="grid">
 <div class="day">S</div><div class="day">M</div><div class="day">T</div><div class="day">W</div><div class="day">T</div><div class="day">F</div><div class="day">S</div>
 
-<div class="date"></div><div class="date"></div><div class="date">1</div><div class="date">2</div><div class="date">3</div><div class="date">4</div><div class="date">5</div>
-<div class="date">6</div><div class="date">7</div><div class="date">8</div><div class="date">9</div><div class="date">10</div><div class="date">11</div><div class="date">12</div>
-<div class="date">13</div><div class="date">14</div><div class="date">15</div><div class="date">16</div><div class="date">17</div><div class="date">18</div><div class="date">19</div>
-<div class="date">20</div><div class="date">21</div><div class="date today">22</div><div class="date">23</div><div class="date">24</div><div class="date">25</div><div class="date">26</div>
-<div class="date">27</div><div class="date">28</div><div class="date">29</div><div class="date">30</div><div class="date">31</div>
+<div></div><div></div><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div>
+<div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div>
+<div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div><div>19</div>
+<div>20</div><div>21</div><div class="today">22</div><div>23</div><div>24</div><div>25</div><div>26</div>
+<div>27</div><div>28</div><div>29</div><div>30</div><div>31</div>
 </div>
+
+</div>
+
+<!-- PARTNERS (ADDED BELOW CALENDAR) -->
+<div class="section">
+
+<div class="section-title">◆ PARTNERS ◆</div>
+
+<div id="partnersContainer"></div>
 
 </div>
 
@@ -305,15 +359,8 @@ btn.innerText="▶";
 isPlaying=false;
 }
 
-function nextSong(){
-i=(i+1)%songs.length;
-load();
-}
-
-function prevSong(){
-i=(i-1+songs.length)%songs.length;
-load();
-}
+function nextSong(){i=(i+1)%songs.length;load();}
+function prevSong(){i=(i-1+songs.length)%songs.length;load();}
 
 function toggleVideo(){
 frame.contentWindow.postMessage(JSON.stringify({
@@ -327,6 +374,28 @@ btn.innerText=isPlaying?"❚❚":"▶";
 }
 
 load();
+
+/* PARTNERS */
+const partners=[
+{name:"SAPPHIRE",img:"https://i.ibb.co/4RYLGQ3z/image.jpg",link:"https://www.chess.com/club/sapphire-1"},
+{name:"PENGUIN CHESS CLUB",img:"https://i.ibb.co/0p7z5V4R/your-image.jpg",link:"https://www.chess.com/club/penguin-chess-club-3"}
+];
+
+const container=document.getElementById("partnersContainer");
+
+partners.forEach(p=>{
+const card=document.createElement("div");
+card.className="partner-card";
+
+card.innerHTML=`
+<img src="${p.img}" class="partner-img">
+<div class="partner-name">${p.name}</div>
+`;
+
+card.onclick=()=>window.open(p.link,"_blank");
+
+container.appendChild(card);
+});
 </script>
 
 </body>
