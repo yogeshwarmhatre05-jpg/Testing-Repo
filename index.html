@@ -1,137 +1,945 @@
-<!DOCTYPE html><html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pixel Glow Club</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
-<style>*{ box-sizing:border-box; }
+<!DOCTYPE html>  <html lang="en">    <head>    
+<meta charset="UTF-8">    
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Pixel Glow Club</title>  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">  <style>    *{
+box-sizing:border-box;
+}
 
-html, body{ margin:0; padding:0; background:#0F172A; color:#E2E8F0; font-family:Arial,sans-serif; min-height:100vh; overflow-x:hidden; transition:background 1s ease; }
+html,
+body{
+margin:0;
+padding:0;
+background:#0F172A;
+color:#E2E8F0;
+font-family:Arial,sans-serif;
+min-height:100vh;
+overflow-x:hidden;
+transition:background 1s ease;
+}
 
-body{ position:relative; }
+body{
+position:relative;
+}
 
-.rgbBorder{ position:fixed; inset:0; padding:3px; background:linear-gradient(90deg,#ff0000,#ff9900,#ffee00,#00ff00,#00ffff,#0066ff,#aa00ff,#ff0000); background-size:400% 400%; animation:rgbMove 8s linear infinite; z-index:-1; }
+/* RGB BORDER */
 
-.rgbBorder::before{ content:""; position:absolute; inset:3px; background:#0F172A; }
+.rgbBorder{
+position:fixed;
+inset:0;
+padding:3px;
+background:linear-gradient(
+90deg,
+#ff0000,
+#ff9900,
+#ffee00,
+#00ff00,
+#00ffff,
+#0066ff,
+#aa00ff,
+#ff0000
+);
+background-size:400% 400%;
+animation:rgbMove 8s linear infinite;
+z-index:-1;
+}
 
-@keyframes rgbMove{ 0%{background-position:0% 50%;} 100%{background-position:400% 50%;} } @keyframes discoRGB{ 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
+.rgbBorder::before{
+content:"";
+position:absolute;
+inset:3px;
+background:#0F172A;
+}
 
-.mainBox{ width:300px; margin:auto; padding:14px; text-align:center; border:2px solid #1E293B; border-radius:12px; background:#0F172A; transition:all 1s ease; }
+@keyframes rgbMove{
+0%{background-position:0% 50%;}
+100%{background-position:400% 50%;}
+}
 
-.themeText{ color:#22C55E; transition:all 1s ease; }
+@keyframes discoRGB{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
 
-.line{ height:1px; background:rgba(255,255,255,0.15); margin:8px 20px; }
+/* MAIN */
 
-.pixelGlowBox{ width:270px; height:60px; margin:auto; position:relative; overflow:hidden; border-radius:10px; }
+.mainBox{
+width:300px;
+margin:auto;
+padding:14px;
+text-align:center;
+border:2px solid #1E293B;
+border-radius:12px;
+background:#0F172A;
+transition:
+background 1s ease,
+border-color 1s ease,
+box-shadow 1s ease;
+}
 
-.pixelBorder{ position:absolute; inset:0; padding:2px; background:linear-gradient(90deg,#22C55E,white,#22C55E); background-size:300% 300%; animation:discoRGB 6s ease-in-out infinite; }
+.themeText{
+color:#22C55E;
+transition:
+color 1s ease,
+text-shadow 1s ease;
+}
 
-.pixelBorder::before{ content:""; position:absolute; inset:2px; background:#0F172A; }
+.line{
+height:1px;
+background:rgba(255,255,255,0.15);
+margin:8px 20px;
+}
 
-#pixelText{ position:absolute; inset:0; display:flex; justify-content:center; align-items:center; font-size:1rem; font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:2px; z-index:2; color:#22C55E; -webkit-text-stroke:1px #000; }
+/* PIXEL GLOW */
 
-.player{ width:260px; background:#0F172A; border:2px solid #1E293B; border-radius:10px; padding:8px; margin:auto; position:relative; }
+.pixelGlowBox{
+width:270px;
+height:60px;
+margin:auto;
+position:relative;
+overflow:hidden;
+border-radius:10px;
+}
 
-.live-dot{ width:8px;height:8px;background:#22C55E;border-radius:50%;position:absolute;top:6px;left:6px;box-shadow:0 0 8px #22C55E;animation:pulse 1.2s infinite; }
+.pixelBorder{
+position:absolute;
+inset:0;
+padding:2px;
+background:linear-gradient(
+90deg,
+#22C55E,
+white,
+#22C55E
+);
+background-size:300% 300%;
+animation:discoRGB 6s ease-in-out infinite;
+}
 
-@keyframes pulse{0%{opacity:1;}50%{opacity:0.3;}100%{opacity:1;}}
+.pixelBorder::before{
+content:"";
+position:absolute;
+inset:2px;
+background:#0F172A;
+}
 
-.marquee{ width:100%; overflow:hidden; white-space:nowrap; font-size:11px; margin-bottom:4px; } .marquee span{ display:inline-block; padding-left:100%; animation:scroll 6s linear infinite; } @keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+#pixelText{
+position:absolute;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:1rem;
+font-family:'Montserrat',sans-serif;
+font-weight:700;
+letter-spacing:2px;
+z-index:2;
+color:#22C55E;
+transition:
+color 1s ease,
+text-shadow 1s ease;
+-webkit-text-stroke:1px #000;
+}
 
-.screen{ width:100%; aspect-ratio:16/9; border:2px solid #1E293B; border-radius:6px; overflow:hidden; } .screen iframe{ width:100%; height:100%; border:none; }
+/* PLAYER */
 
-.controls{ display:flex; justify-content:center; gap:10px; margin-top:5px; } .controls button{ background:#1E293B;color:#E2E8F0;border:1px solid #1E293B;width:28px;height:20px;border-radius:5px;cursor:pointer; }
+.player{
+width:260px;
+background:#0F172A;
+border:2px solid #1E293B;
+border-radius:10px;
+padding:8px;
+margin:auto;
+position:relative;
+transition:border-color 1s ease;
+}
 
-.calendar{ width:260px;background:#0F172A;border-radius:14px;border:2px solid #1E293B;padding:10px;margin:auto; } .header{ font-size:15px;margin-bottom:8px;color:#22C55E;font-weight:700; } .days,.dates{ display:grid;grid-template-columns:repeat(7,1fr);gap:4px; } .days div{ font-size:11px; } .dates div{ padding:6px 0;border-radius:6px;background:#1E293B;font-size:11px; } .today{ background:#22C55E !important;color:#0F172A; }
+.live-dot{
+width:8px;
+height:8px;
+background:#22C55E;
+border-radius:50%;
+position:absolute;
+top:6px;
+left:6px;
+box-shadow:0 0 8px #22C55E;
+animation:pulse 1.2s infinite;
+}
 
-.section{ border:2px solid #1E293B;border-radius:12px;padding:15px;background:#0F172A;width:270px;margin:auto; } .section-title{ background:#1E293B;border-radius:30px;padding:10px;margin-bottom:15px;color:#22C55E;font-weight:bold; } .partner-card{ background:#1E293B;border-radius:14px;padding:15px;text-align:center;margin-bottom:12px;cursor:pointer; } .partner-card:hover{ transform:scale(1.03); } .partner-img{ width:70px;height:70px;border-radius:12px;object-fit:cover; } .partner-name{ margin-top:8px;font-size:14px; }
+@keyframes pulse{
+0%{opacity:1;}
+50%{opacity:0.3;}
+100%{opacity:1;}
+}
 
-</style>
-</head>
-<body><div class="rgbBorder"></div><div class="mainBox">  <div class="pixelGlowBox">
-    <div class="pixelBorder"></div>
-    <div id="pixelText">PIXEL GLOW</div>
-  </div>  <br>  <div class="themeText" style="font-size:15px;letter-spacing:2px;overflow:hidden;">
-    <marquee scrollamount="3">♣Welcome to Our Club♣</marquee>
-  </div>  <br>  <div style="font-size:11px;letter-spacing:3px;">
-    <span class="themeText" style="font-size:14px;">✧ 𝐎 𝐖 𝐍 𝐄 𝐑 ✧</span>
-  </div>  <div style="margin-top:6px;">
-    <img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png" width="100" height="100" style="border-radius:12px;border:2px solid #1E293B;">
-  </div>  <div class="themeText" style="font-size:22px;font-weight:900;font-family:cursive;margin-top:6px;">
-    √𝓎𝓸𝓰𝓲136
-  </div>  <div class="line"></div>  <div style="font-size:12px;font-style:italic;">“Think like a King. Play like a Master.”</div>  <br>  <div class="player">
-    <div class="live-dot"></div>
-    <div class="marquee"><span id="songText">Now Playing:</span></div>
-    <div class="screen"><iframe id="playerFrame" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-    <div class="controls">
-      <button onclick="prevSong()">⏮</button>
-      <button onclick="playVideo()">▶</button>
-      <button onclick="pauseVideo()">❚❚</button>
-      <button onclick="nextSong()">⏭</button>
-    </div>
-  </div>  <br>  <div class="calendar">
-    <div class="header" id="monthYear"></div>
-    <div class="days">
-      <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
-    </div>
-    <div class="dates" id="dates"></div>
-  </div>  <br>  <div class="section">
-    <div class="section-title">◆ PARTNERS ◆</div>
-    <div id="partnersContainer"></div>
-  </div>  <br></div><script>
+.marquee{
+width:100%;
+overflow:hidden;
+white-space:nowrap;
+font-size:11px;
+margin-bottom:4px;
+}
 
-let songs = [/* unchanged songs array */];
+.marquee span{
+display:inline-block;
+padding-left:100%;
+animation:scroll 6s linear infinite;
+}
+
+@keyframes scroll{
+0%{transform:translateX(0);}
+100%{transform:translateX(-100%);}
+}
+
+.screen{
+width:100%;
+aspect-ratio:16/9;
+border:2px solid #1E293B;
+border-radius:6px;
+overflow:hidden;
+}
+
+.screen iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+.controls{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-top:5px;
+}
+
+.controls button{
+background:#1E293B;
+color:#E2E8F0;
+border:1px solid #1E293B;
+width:28px;
+height:20px;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* GAME */
+
+#game{
+width:250px;
+height:250px;
+border:2px solid #1E293B;
+border-radius:10px;
+background:radial-gradient(circle at center,#1E293B,#0F172A);
+transition:border-color 1s ease;
+}
+
+/* CALENDAR */
+
+.calendar{
+width:260px;
+background:#0F172A;
+border-radius:14px;
+border:2px solid #1E293B;
+padding:10px;
+margin:auto;
+transition:border-color 1s ease;
+}
+
+.header{
+font-size:15px;
+margin-bottom:8px;
+color:#22C55E;
+font-weight:700;
+}
+
+.days,
+.dates{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:4px;
+}
+
+.days div{
+font-size:11px;
+}
+
+.dates div{
+padding:6px 0;
+border-radius:6px;
+background:#1E293B;
+font-size:11px;
+}
+
+.today{
+background:#22C55E !important;
+color:#0F172A;
+}
+
+/* PARTNERS */
+
+.section{
+border:2px solid #1E293B;
+border-radius:12px;
+padding:15px;
+background:#0F172A;
+width:270px;
+margin:auto;
+transition:border-color 1s ease;
+}
+
+.section-title{
+background:#1E293B;
+border-radius:30px;
+padding:10px;
+margin-bottom:15px;
+color:#22C55E;
+font-weight:bold;
+}
+
+.partner-card{
+background:#1E293B;
+border:1px solid #1E293B;
+border-radius:14px;
+padding:15px;
+text-align:center;
+margin-bottom:12px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.partner-card:hover{
+transform:scale(1.03);
+border-color:#22C55E;
+}
+
+.partner-img{
+width:70px;
+height:70px;
+border-radius:12px;
+object-fit:cover;
+}
+
+.partner-name{
+margin-top:8px;
+font-size:14px;
+}
+
+</style>  </head>  <body>  <div class="rgbBorder"></div>  <div class="mainBox">  <!-- PIXEL GLOW -->  <div class="pixelGlowBox">  <div class="pixelBorder"></div>  <div id="pixelText">
+PIXEL GLOW
+
+</div>  </div>  <br>  <div class="themeText" style="font-size:15px;letter-spacing:2px;overflow:hidden;">  <marquee behavior="scroll" direction="left" scrollamount="3">  ♣Welcome to Our Club♣  </marquee>  </div>  <br>  <div style="font-size:11px;letter-spacing:3px;">  <span class="themeText" style="font-size:14px;">  ✧ 𝐎 𝐖 𝐍 𝐄 𝐑 ✧
+
+</span>  </div>  <div style="margin-top:6px;">  <img    
+src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png"    
+width="100"    
+height="100"    
+style="border-radius:12px;border:2px solid #1E293B;">
+
+</div>  <div    
+class="themeText"    
+style="    
+font-size:22px;    
+font-weight:900;    
+font-family:cursive;    
+margin-top:6px;    
+">  √𝓎𝓸𝓰𝓲136  </div>  <div class="line"></div>  <div style="font-size:12px;font-style:italic;">  “Think like a King. Play like a Master.”  </div>  <br>  <!-- PLAYER -->  <div class="player">  <div class="live-dot"></div>  <div class="marquee">    
+<span id="songText">Now Playing:</span>    
+</div>  <div class="screen">  <iframe    
+id="playerFrame"    
+src=""    
+allow="autoplay; fullscreen"    
+allowfullscreen>    
+</iframe>  </div>  <div class="controls">  <button onclick="prevSong()">⏮</button>  <button onclick="playVideo()">▶</button>
+
+<button onclick="pauseVideo()">❚❚</button>
+
+<button onclick="nextSong()">⏭</button>
+
+</div>  </div>  <br>  <!-- BUBBLE GAME -->  <canvas id="game"></canvas>  
+<br>  
+<br>  <!-- CALENDAR -->  <div class="calendar">  <div class="header" id="monthYear"></div>  <div class="days">  <div>S</div>    
+<div>M</div>    
+<div>T</div>    
+<div>W</div>    
+<div>T</div>    
+<div>F</div>    
+<div>S</div>  </div>  <div class="dates" id="dates"></div>  </div>  <br>  <!-- PARTNERS -->  <div class="section">  <div class="section-title">  ◆ PARTNERS ◆  </div>  <div id="partnersContainer"></div>  </div>  <br>  <div style="    
+font-size:22px;    
+font-weight:900;    
+font-family:cursive;    
+background:linear-gradient(90deg,#ff4d4d,#ffcc00,#22c55e,#3b82f6,#a855f7);    
+background-size:300% 300%;    
+-webkit-background-clip:text;    
+-webkit-text-fill-color:transparent;    
+animation:discoRGB 6s ease-in-out infinite;    
+display:inline-block;    
+">  PixelGlow  </div>  </div>  <script>    /* SONGS */
+
+let songs = [
+
+{
+src:"https://youtu.be/kcsGhOmULxQ",
+name:"Golden Brown - The Stranglers"
+},
+
+{
+src:"https://youtu.be/_XeE2aEiPHk",
+name:"The Flame of Love - Rokudenashi"
+},
+
+{
+src:"https://youtu.be/qdpXxGPqW-Y",
+name:"Faded - Alan Walker"
+},
+
+{
+src:"https://youtu.be/k50D8-EvNxk",
+name:"Meu Abrigo - Melim"
+},
+
+{
+src:"https://youtu.be/9I9c20LHmzY",
+name:"Come As You Are - Nirvana"
+},
+
+{
+src:"https://youtu.be/SDNA934EEVk",
+name:"A Walk - Tycho"
+},
+
+{
+src:"https://youtu.be/A3xxG5zHuCA",
+name:"Passo Bem Solto - ATLXS"
+},
+
+{
+src:"https://youtu.be/Qk5lzJVfcLo",
+name:"Downtown Baby 2 - Overtonight"
+},
+
+{
+src:"https://youtu.be/vi72_ggUCHU",
+name:"Keep Up - ODETARI"
+},
+
+{
+src:"https://youtu.be/kGobHQ7z8X4",
+name:"Why Do I? - Unknown Brain"
+},
+
+{
+src:"https://youtu.be/0jSpCxmb2VQ",
+name:"Mood - 24kGoldn"
+},
+
+{
+src:"https://youtu.be/R5aurUlfn3w",
+name:"Monody - TheFatRat"
+}, {src:"https://youtu.be/4jh2H5qFb44", name:"Shape of You - Ed Sheeran"},
+{src:"https://youtu.be/rfTgO9rpqck", name:"Heat Waves - Glass Animals"},
+{src:"https://youtu.be/JrNMyzsYr4M", name:"Love Me Like You Do - Ellie Goulding"},
+{src:"https://youtu.be/DKbfBSrjVHA", name:"Can We Kiss Forever? - Kina"},
+{src:"https://youtu.be/TdbyjBf93zc", name:"All I Want - Lofi Remix"},
+{src:"https://youtu.be/z7zoabFKD60", name:"TheFatRat Mix / Songs"},
+{src:"https://youtu.be/i4bWViFpd0Q", name:"Army Dreamers - Kate Bush"},
+{src:"https://youtu.be/Jkj36B1YuDU", name:"Another Love - Tom Odell"},
+{src:"https://youtu.be/GXioir-fujY", name:"NO BATIDÃO - ZXKAI"},
+{src:"https://youtu.be/EoNWCYNTANA", name:"If I Killed Someone for You - Alec Benjamin"},
+{src:"https://youtu.be/y1uzBncUsQQ", name:"Origami - The Rare Occasions"},
+{src:"https://youtu.be/7U1LFCY70nA", name:"Ava - Underdog"}
+
+];
+
 let songIndex = 0;
+
 const frame = document.getElementById("playerFrame");
 const songText = document.getElementById("songText");
 
 function convert(url){
-  if(url.includes("youtu.be")){
-    let id = url.split("youtu.be/")[1].split("?")[0];
-    return "https://www.youtube.com/embed/" + id + "?enablejsapi=1";
-  }
-  return url;
+
+if(url.includes("youtu.be")){
+
+let id = url.split("youtu.be/")[1].split("?")[0];
+
+return "https://www.youtube.com/embed/" +
+id +
+"?enablejsapi=1";
+
+}
+
+return url;
+
 }
 
 function loadVideo(i){
-  frame.src = convert(songs[i].src);
-  songText.innerText = "Now Playing: " + songs[i].name;
+
+frame.src = convert(songs[i].src);
+
+songText.innerText =
+"Now Playing: " + songs[i].name;
+
 }
 
-function prevSong(){ songIndex = (songIndex - 1 + songs.length) % songs.length; loadVideo(songIndex); }
-function nextSong(){ songIndex = (songIndex + 1) % songs.length; loadVideo(songIndex); }
-function playVideo(){ frame.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}',"*"); }
-function pauseVideo(){ frame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}',"*"); }
+function prevSong(){
+
+songIndex--;
+
+if(songIndex < 0){
+
+songIndex = songs.length - 1;
+
+}
 
 loadVideo(songIndex);
 
-/* CALENDAR (unchanged) */
-const monthYear=document.getElementById("monthYear");
-const dates=document.getElementById("dates");
-const now=new Date();
-const months=["January","February","March","April","May","June","July","August","September","October","November","December"];
-monthYear.innerText=months[now.getMonth()] + " " + now.getFullYear();
-const firstDay=new Date(now.getFullYear(),now.getMonth(),1).getDay();
-const lastDate=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
-for(let i=0;i<firstDay;i++) dates.innerHTML+="<div></div>";
-for(let i=1;i<=lastDate;i++) dates.innerHTML+=`<div class='${i===now.getDate()?"today":""}'>${i}</div>`;
+}
 
-/* PARTNERS */
-const partners=[
-{name:"SAPPHIRE",img:"https://i.ibb.co/4RYLGQ3z/image.jpg",link:"https://www.chess.com/club/sapphire-1"},
-{name:"penguin chess club",img:"https://i.ibb.co/0p7z5V4R/your-image.jpg",link:"https://www.chess.com/club/penguin-chess-club-3"}
+function nextSong(){
+
+songIndex++;
+
+if(songIndex >= songs.length){
+
+songIndex = 0;
+
+}
+
+loadVideo(songIndex);
+
+}
+
+function playVideo(){
+
+frame.contentWindow.postMessage(
+'{"event":"command","func":"playVideo","args":""}',
+"*"
+);
+
+}
+
+function pauseVideo(){
+
+frame.contentWindow.postMessage(
+'{"event":"command","func":"pauseVideo","args":""}',
+"*"
+);
+
+}
+
+loadVideo(songIndex);
+
+/* CALENDAR */
+
+const monthYear =
+document.getElementById("monthYear");
+
+const dates =
+document.getElementById("dates");
+
+const now = new Date();
+
+const year = now.getFullYear();
+
+const month = now.getMonth();
+
+const today = now.getDate();
+
+const months = [
+"January",
+"February",
+"March",
+"April",
+"May",
+"June",
+"July",
+"August",
+"September",
+"October",
+"November",
+"December"
 ];
 
-const container=document.getElementById("partnersContainer");
+monthYear.innerText =
+${months[month]} ${year};
+
+const firstDay =
+new Date(year,month,1).getDay();
+
+const lastDate =
+new Date(year,month + 1,0).getDate();
+
+for(let i=0;i<firstDay;i++){
+
+dates.innerHTML += "<div></div>";
+
+}
+
+for(let i=1;i<=lastDate;i++){
+
+if(i === today){
+
+dates.innerHTML +=
+<div class="today">${i}</div>;
+
+}
+
+else{
+
+dates.innerHTML += <div>${i}</div>;
+
+}
+
+}
+
+/* PARTNERS */
+
+const partners = [
+
+{
+name:"SAPPHIRE",
+img:"https://i.ibb.co/4RYLGQ3z/image.jpg",
+link:"https://www.chess.com/club/sapphire-1"
+},
+
+{
+name:"penguin chess club",
+img:"https://i.ibb.co/0p7z5V4R/your-image.jpg",
+link:"https://www.chess.com/club/penguin-chess-club-3"
+}
+
+];
+
+const container =
+document.getElementById("partnersContainer");
+
 partners.forEach(p=>{
-  const card=document.createElement("div");
-  card.className="partner-card";
-  card.innerHTML=`<img src="${p.img}" class="partner-img"><div class="partner-name">${p.name}</div>`;
-  card.onclick=()=>window.open(p.link,"_blank");
-  container.appendChild(card);
+
+const card =
+document.createElement("div");
+
+card.className = "partner-card";
+
+card.innerHTML = `
+<img src="${p.img}" class="partner-img">
+
+<div class="partner-name">${p.name}</div>    
+`;    card.onclick = ()=>{
+
+window.open(p.link,"_blank");
+
+};
+
+container.appendChild(card);
+
 });
 
-/* BUBBLE GAME REMOVED */
+/* BUBBLE GAME */
 
-</script></body>
-</html>
+const canvas =
+document.getElementById("game");
+
+const ctx =
+canvas.getContext("2d");
+
+const scale =
+window.devicePixelRatio || 1;
+
+canvas.width = 250 * scale;
+canvas.height = 250 * scale;
+
+ctx.scale(scale,scale);
+
+let bubbles = [];
+let pops = [];
+let score = 0;
+
+function spawnBubble(){
+
+bubbles.push({
+
+x:Math.random()*230+10,
+y:260,
+r:Math.random()*8+6,
+speed:Math.random()*0.6+0.4,
+alpha:Math.random()*0.5+0.5
+
+});
+
+}
+
+function createPop(x,y){
+
+for(let i=0;i<6;i++){
+
+pops.push({
+
+x:x,
+y:y,
+dx:(Math.random()-0.5)*2,
+dy:(Math.random()-0.5)*2,
+life:20
+
+});
+
+}
+
+}
+
+function handleTap(e){
+
+const rect =
+canvas.getBoundingClientRect();
+
+const x =
+(e.touches ?
+e.touches[0].clientX :
+e.clientX) - rect.left;
+
+const y =
+(e.touches ?
+e.touches[0].clientY :
+e.clientY) - rect.top;
+
+bubbles = bubbles.filter(b=>{
+
+const dist =
+Math.hypot(b.x - x,b.y - y);
+
+if(dist < b.r){
+
+createPop(b.x,b.y);
+
+score++;
+
+return false;
+
+}
+
+return true;
+
+});
+
+}
+
+canvas.addEventListener(
+"touchstart",
+handleTap
+);
+
+canvas.addEventListener(
+"mousedown",
+handleTap
+);
+
+function drawBubbles(){
+
+bubbles.forEach(b=>{
+
+ctx.globalAlpha = b.alpha;
+
+ctx.beginPath();
+
+ctx.arc(
+b.x,
+b.y,
+b.r,
+0,
+Math.PI * 2
+);
+
+ctx.fillStyle = "#22C55E";
+
+ctx.fill();
+
+ctx.globalAlpha = 1;
+
+});
+
+}
+
+function updateBubbles(){
+
+bubbles.forEach(b=>{
+
+b.y -= b.speed;
+
+});
+
+bubbles =
+bubbles.filter(b=>b.y > -10);
+
+}
+
+function drawPops(){
+
+pops.forEach(p=>{
+
+ctx.fillStyle = "#E2E8F0";
+
+ctx.fillRect(p.x,p.y,2,2);
+
+});
+
+}
+
+function updatePops(){
+
+pops.forEach(p=>{
+
+p.x += p.dx;
+p.y += p.dy;
+p.life--;
+
+});
+
+pops =
+pops.filter(p=>p.life > 0);
+
+}
+
+function drawScore(){
+
+ctx.fillStyle = "#E2E8F0";
+
+ctx.font = "12px Arial";
+
+ctx.fillText(
+"Pops: " + score,
+10,
+18
+);
+
+}
+
+let gameFrame = 0;
+
+function gameLoop(){
+
+ctx.clearRect(0,0,250,250);
+
+if(gameFrame % 25 === 0){
+
+spawnBubble();
+
+}
+
+updateBubbles();
+
+updatePops();
+
+drawBubbles();
+
+drawPops();
+
+drawScore();
+
+gameFrame++;
+
+requestAnimationFrame(gameLoop);
+
+}
+
+gameLoop();
+
+/* RGB THEME */
+
+const themes = [
+
+{
+bg:"#0F172A",
+border:"#22C55E",
+glow:"rgba(34,197,94,0.5)",
+text:"#22C55E"
+},
+
+{
+bg:"#1E1B4B",
+border:"#A855F7",
+glow:"rgba(168,85,247,0.5)",
+text:"#A855F7"
+},
+
+{
+bg:"#111827",
+border:"#3B82F6",
+glow:"rgba(59,130,246,0.5)",
+text:"#3B82F6"
+},
+
+{
+bg:"#2A0F0F",
+border:"#FF4D4D",
+glow:"rgba(255,77,77,0.5)",
+text:"#FF4D4D"
+},
+
+{
+bg:"#1A1A00",
+border:"#FFCC00",
+glow:"rgba(255,204,0,0.5)",
+text:"#FFCC00"
+}
+
+];
+
+let index = 0;
+
+function changeTheme(){
+
+const theme = themes[index];
+
+document.body.style.background = theme.bg;
+
+document.querySelector(".mainBox").style.borderColor = theme.border;
+
+document.querySelector(".mainBox").style.boxShadow =
+0 0 25px ${theme.glow};
+
+document.querySelector(".player").style.borderColor =
+theme.border;
+
+document.querySelector(".calendar").style.borderColor =
+theme.border;
+
+document.querySelector(".section").style.borderColor =
+theme.border;
+
+document.querySelector("#game").style.borderColor =
+theme.border;
+
+document.querySelector(".pixelBorder").style.background =
+linear-gradient(     90deg,     ${theme.border},     white,     ${theme.border}     );
+
+document.querySelector(".pixelBorder").style.backgroundSize =
+"300% 300%";
+
+document.querySelector(".pixelBorder").style.animation =
+"discoRGB 6s ease-in-out infinite";
+
+document.querySelectorAll(".themeText").forEach(el=>{
+
+el.style.color = theme.text;    
+
+el.style.textShadow =    
+`0 0 12px ${theme.glow}`;
+
+});
+
+document.getElementById("pixelText").style.color =
+theme.text;
+
+document.getElementById("pixelText").style.textShadow =
+0 0 12px ${theme.glow};
+
+index++;
+
+if(index >= themes.length){
+index = 0;
+}
+}
+
+setInterval(changeTheme,6000);
+
+changeTheme();
+
+</script>  </body>
+
+</html>    
