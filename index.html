@@ -1,4 +1,7 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pixel Glow Club</title>
@@ -7,35 +10,24 @@
 
 <style>
 *{
+margin:0;
+padding:0;
 box-sizing:border-box;
 }
 
-:root{
---bg:#0f172a;
---bg2:#111827;
---card:#111827ee;
---border:#243041;
---accent:#60a5fa;
---accent2:#38bdf8;
---text:#e5edf8;
---muted:#94a3b8;
---hover:#1e293b;
---shadow:0 10px 40px rgba(0,0,0,0.45);
-}
-
-html,body{
-margin:0;
-padding:0;
-min-height:100vh;
-overflow-x:hidden;
-font-family:'Inter',sans-serif;
+body{
 background:
 radial-gradient(circle at top left,#1e293b 0%,transparent 35%),
 radial-gradient(circle at bottom right,#0f766e33 0%,transparent 30%),
-linear-gradient(135deg,#0b1120,#0f172a 55%,#111827);
-color:var(--text);
+linear-gradient(135deg,#020617,#0f172a,#111827);
+font-family:'Inter',sans-serif;
+color:#e2e8f0;
+min-height:100vh;
+overflow-x:hidden;
+padding:20px 0;
 }
 
+/* RGB BORDER */
 .rgbBorder{
 position:fixed;
 inset:0;
@@ -48,8 +40,7 @@ background:linear-gradient(
 #60a5fa
 );
 background-size:300% 300%;
-animation:borderMove 10s linear infinite;
-opacity:0.9;
+animation:borderMove 8s linear infinite;
 z-index:-1;
 }
 
@@ -57,7 +48,7 @@ z-index:-1;
 content:"";
 position:absolute;
 inset:2px;
-background:linear-gradient(135deg,#0b1120,#111827);
+background:#020617;
 }
 
 @keyframes borderMove{
@@ -65,20 +56,22 @@ background:linear-gradient(135deg,#0b1120,#111827);
 100%{background-position:300% 50%;}
 }
 
+/* MAIN */
 .mainBox{
 width:320px;
-margin:24px auto;
-padding:16px;
-border-radius:24px;
-background:rgba(15,23,42,0.75);
+margin:auto;
+padding:18px;
+background:rgba(15,23,42,0.88);
 backdrop-filter:blur(14px);
 border:1px solid rgba(255,255,255,0.08);
-box-shadow:var(--shadow);
+border-radius:24px;
+box-shadow:0 10px 40px rgba(0,0,0,0.45);
 }
 
+/* LOGO */
 .pixelGlowBox{
 width:280px;
-height:68px;
+height:70px;
 margin:auto;
 position:relative;
 overflow:hidden;
@@ -96,59 +89,65 @@ background:linear-gradient(
 #818cf8
 );
 background-size:300% 300%;
-animation:borderMove 8s linear infinite;
+animation:borderMove 6s linear infinite;
 }
 
 .pixelBorder::before{
 content:"";
 position:absolute;
 inset:2px;
+background:#0f172a;
 border-radius:16px;
-background:linear-gradient(135deg,#0f172a,#111827);
 }
 
 #pixelText{
 position:absolute;
 inset:0;
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
 font-family:'Space Grotesk',sans-serif;
-font-size:1.05rem;
+font-size:1.1rem;
 font-weight:700;
 letter-spacing:3px;
 color:white;
 text-shadow:0 0 15px rgba(96,165,250,0.5);
 }
 
-marquee{
+/* MARQUEE */
+.marqueeWrap{
+overflow:hidden;
+margin-top:12px;
+color:#7dd3fc;
 font-size:12px;
-font-weight:500;
-letter-spacing:1px;
-color:var(--accent2);
 }
 
-img{
-border-radius:18px;
-margin-top:8px;
-box-shadow:0 10px 30px rgba(0,0,0,0.35);
-border:1px solid rgba(255,255,255,0.08);
-}
-
-i{
+/* IMAGE */
+.mainImg{
+width:250px;
 display:block;
-margin-top:10px;
-line-height:1.6;
-color:#dbeafe !important;
-font-size:14px !important;
-text-shadow:none !important;
+margin:14px auto;
+border-radius:18px;
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
 }
 
+/* QUOTE */
+.quote{
+display:block;
+text-align:center;
+font-size:14px;
+line-height:1.6;
+color:#dbeafe;
+margin-top:6px;
+}
+
+/* LINKS */
 .links{
 display:flex;
 flex-direction:column;
 gap:10px;
-margin-top:16px;
+margin-top:18px;
 }
 
 .topRow{
@@ -161,39 +160,36 @@ flex:1;
 padding:11px;
 border-radius:14px;
 text-decoration:none;
+text-align:center;
 font-size:13px;
 font-weight:600;
-color:var(--text);
+color:#e2e8f0;
 background:rgba(255,255,255,0.04);
 border:1px solid rgba(255,255,255,0.08);
 transition:0.25s;
-backdrop-filter:blur(6px);
 }
 
 .linkBtn:hover{
-background:linear-gradient(
-135deg,
-rgba(96,165,250,0.18),
-rgba(56,189,248,0.12)
-);
+background:rgba(96,165,250,0.12);
 border-color:#60a5fa;
 transform:translateY(-2px);
-box-shadow:0 6px 20px rgba(96,165,250,0.2);
 }
 
 .full{
 width:100%;
 }
 
-.player{
+/* PLAYER */
+.player,
+.box,
+.section{
 width:280px;
 margin:22px auto;
-padding:12px;
+padding:14px;
 border-radius:20px;
-background:rgba(17,24,39,0.9);
+background:rgba(17,24,39,0.92);
 border:1px solid rgba(255,255,255,0.08);
-box-shadow:var(--shadow);
-position:relative;
+box-shadow:0 10px 30px rgba(0,0,0,0.35);
 }
 
 .live-dot{
@@ -201,11 +197,9 @@ width:9px;
 height:9px;
 background:#22c55e;
 border-radius:50%;
-position:absolute;
-top:10px;
-left:10px;
-box-shadow:0 0 12px #22c55e;
+box-shadow:0 0 10px #22c55e;
 animation:pulse 1.5s infinite;
+margin-bottom:8px;
 }
 
 @keyframes pulse{
@@ -214,12 +208,11 @@ animation:pulse 1.5s infinite;
 }
 
 .marquee{
-width:100%;
 overflow:hidden;
 white-space:nowrap;
 font-size:11px;
+color:#7dd3fc;
 margin-bottom:8px;
-color:#93c5fd;
 }
 
 .screen{
@@ -245,70 +238,55 @@ margin-top:10px;
 }
 
 .controls button{
-background:rgba(255,255,255,0.05);
-color:var(--text);
-border:1px solid rgba(255,255,255,0.08);
 width:36px;
 height:30px;
+border:none;
 border-radius:10px;
+background:rgba(255,255,255,0.06);
+color:white;
 cursor:pointer;
 transition:0.25s;
-font-size:13px;
 }
 
 .controls button:hover{
 background:rgba(96,165,250,0.15);
-border-color:#60a5fa;
-transform:translateY(-1px);
 }
 
 #toggleBtn{
 background:linear-gradient(135deg,#60a5fa,#38bdf8);
 color:#08111f;
-font-weight:700;
-border:none;
+font-weight:bold;
 }
 
-.box,
-.section{
-width:280px;
-margin:22px auto;
-padding:14px;
-border-radius:20px;
-background:rgba(17,24,39,0.88);
-border:1px solid rgba(255,255,255,0.08);
-box-shadow:var(--shadow);
-backdrop-filter:blur(10px);
-}
-
+/* TITLES */
 .title,
 .section-title{
 text-align:center;
-font-weight:700;
 font-size:15px;
-letter-spacing:1px;
+font-weight:700;
+margin-bottom:5px;
 color:#dbeafe;
 }
 
 .subtitle{
 text-align:center;
 font-size:11px;
-color:var(--muted);
-margin-top:4px;
+color:#94a3b8;
+margin-bottom:10px;
 }
 
+/* CALENDAR */
 .days,
 .calendar{
 display:grid;
 grid-template-columns:repeat(7,1fr);
 gap:6px;
 text-align:center;
-margin-top:12px;
 }
 
 .days div{
 font-size:10px;
-color:var(--muted);
+color:#94a3b8;
 }
 
 .calendar div{
@@ -320,22 +298,20 @@ background:rgba(255,255,255,0.03);
 border-radius:12px;
 font-size:12px;
 transition:0.25s;
-cursor:pointer;
-border:1px solid transparent;
 }
 
 .calendar div:hover{
 background:rgba(96,165,250,0.12);
-border-color:#60a5fa55;
 transform:translateY(-2px);
 }
 
 .today{
 background:linear-gradient(135deg,#60a5fa,#38bdf8) !important;
 color:#08111f;
-font-weight:700;
+font-weight:bold;
 }
 
+/* BUTTONS */
 .buttons{
 display:flex;
 gap:8px;
@@ -344,14 +320,14 @@ margin-top:14px;
 
 .btn{
 flex:1;
-text-align:center;
 padding:8px;
 border-radius:12px;
+text-decoration:none;
+text-align:center;
 font-size:11px;
 font-weight:600;
-text-decoration:none;
+color:#e2e8f0;
 background:rgba(255,255,255,0.04);
-color:var(--text);
 border:1px solid rgba(255,255,255,0.08);
 transition:0.25s;
 }
@@ -359,9 +335,9 @@ transition:0.25s;
 .btn:hover{
 background:rgba(96,165,250,0.12);
 border-color:#60a5fa;
-transform:translateY(-2px);
 }
 
+/* PARTNERS */
 .partner-card{
 background:rgba(255,255,255,0.03);
 border:1px solid rgba(255,255,255,0.08);
@@ -374,9 +350,9 @@ transition:0.25s;
 }
 
 .partner-card:hover{
-transform:translateY(-3px);
-border-color:#60a5fa;
 background:rgba(96,165,250,0.08);
+border-color:#60a5fa;
+transform:translateY(-2px);
 }
 
 .partner-img{
@@ -390,8 +366,72 @@ object-fit:cover;
 margin-top:8px;
 font-size:13px;
 font-weight:600;
-color:#e2e8f0;
 }
 </style>
 </head>
+
+<body>
+
+<div class="rgbBorder"></div>
+
+<div class="mainBox">
+
+<div class="pixelGlowBox">
+<div class="pixelBorder"></div>
+<div id="pixelText">PIXEL GLOW</div>
+</div>
+
+<div class="marqueeWrap">
+<marquee scrollamount="3">
+♣︎ Welcome to Our Club ♣︎
+</marquee>
+</div>
+
+<img class="mainImg" src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png">
+
+<i class="quote">
+"Even a pawn becomes powerful when it keeps moving forward"
+</i>
+
+<div class="links">
+
+<div class="topRow">
+
+<a class="linkBtn"
+href="https://www.chess.com/member/yogi136"
+target="_blank">
+Owner
+</a>
+
+<a class="linkBtn"
+href="https://www.chess.com/member/michael-kaiser10bm"
+target="_blank">
+Co Owner
+</a>
+
+</div>
+
+<a class="linkBtn full"
+href="https://www.chess.com/clubs/forum/view/club-rulebook-1#comment-127196376"
+target="_blank">
+Club Rules
+</a>
+
+<a class="linkBtn full"
+href="https://www.chess.com/club/pixelglow/announcements"
+target="_blank">
+Announcements
+</a>
+
+<a class="linkBtn full"
+href="https://www.chess.com/clubs/events/pixelglow"
+target="_blank">
+Join Events
+</a>
+
+</div>
+
+</div>
+
+</body>
 </html>
