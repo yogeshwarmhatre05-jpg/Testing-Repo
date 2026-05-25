@@ -2,11 +2,13 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Pixel Glow Club</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PIXEL GLOW CLUB</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -17,14 +19,22 @@ box-sizing:border-box;
 }
 
 :root{
---bg:#060b14;
---card:#0d1522;
---card2:#111b2c;
+
+--bg:#060816;
+--card:#0e1525;
+--card2:#101b2d;
+--text:#edf4ff;
+--muted:#91a2bf;
+
+--green:#7CFFB2;
+--cyan:#66e7ff;
+--purple:#b884ff;
+--pink:#ff78c9;
+--orange:#ffb86b;
+--blue:#6aa7ff;
+
 --line:rgba(255,255,255,0.08);
---text:#e7edf7;
---muted:#8ea0bb;
---accent:#7CFFB2;
---shadow:0 10px 35px rgba(0,0,0,0.45);
+
 }
 
 html{
@@ -32,226 +42,565 @@ scroll-behavior:smooth;
 }
 
 body{
-background:
-radial-gradient(circle at top left,#122038 0%,transparent 35%),
-radial-gradient(circle at top right,#11263b 0%,transparent 30%),
-linear-gradient(180deg,#04070d,#08111f 45%,#060b14);
-color:var(--text);
+
 font-family:'Inter',sans-serif;
+background:
+radial-gradient(circle at top left,#152645 0%,transparent 30%),
+radial-gradient(circle at top right,#24173b 0%,transparent 25%),
+radial-gradient(circle at bottom left,#0f3242 0%,transparent 25%),
+linear-gradient(180deg,#04060c,#08101d,#060816);
+
+color:var(--text);
 min-height:100vh;
 overflow-x:hidden;
-padding:22px 14px 60px;
+padding:18px 14px 60px;
+
 }
 
-/* BACKGROUND GLOW */
+/* BACKGROUND */
 
-.bgGlow{
+.grid{
+
 position:fixed;
-width:420px;
-height:420px;
-background:rgba(124,255,178,0.06);
-filter:blur(120px);
+inset:0;
+
+background-image:
+linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+background-size:34px 34px;
+
+mask-image:linear-gradient(to bottom,rgba(0,0,0,0.8),transparent);
+
+z-index:-3;
+
+}
+
+.glow1,
+.glow2,
+.glow3{
+
+position:fixed;
 border-radius:50%;
-top:-120px;
-left:-120px;
+filter:blur(120px);
 pointer-events:none;
 z-index:-2;
+
 }
 
-.bgGlow2{
-position:fixed;
-width:350px;
-height:350px;
-background:rgba(96,166,255,0.06);
-filter:blur(120px);
-border-radius:50%;
-bottom:-100px;
+.glow1{
+width:320px;
+height:320px;
+background:rgba(124,255,178,0.12);
+top:-100px;
+left:-100px;
+}
+
+.glow2{
+width:340px;
+height:340px;
+background:rgba(102,231,255,0.10);
+bottom:-120px;
 right:-100px;
-pointer-events:none;
-z-index:-2;
 }
 
-/* MAIN WRAPPER */
+.glow3{
+width:240px;
+height:240px;
+background:rgba(184,132,255,0.12);
+top:40%;
+left:45%;
+}
+
+/* RGB BORDER */
+
+.rgbBorder{
+
+position:fixed;
+inset:0;
+padding:2px;
+background:
+linear-gradient(
+90deg,
+#ff6b6b,
+#ffb86b,
+#fff176,
+#7CFFB2,
+#66e7ff,
+#6aa7ff,
+#b884ff,
+#ff78c9,
+#ff6b6b
+);
+
+background-size:500% 500%;
+animation:borderMove 12s linear infinite;
+
+z-index:-5;
+
+}
+
+.rgbBorder::before{
+
+content:"";
+position:absolute;
+inset:2px;
+background:#050915;
+
+}
+
+@keyframes borderMove{
+
+0%{
+background-position:0% 50%;
+}
+
+100%{
+background-position:500% 50%;
+}
+
+}
+
+/* WRAPPER */
 
 .wrapper{
-max-width:340px;
+max-width:360px;
 margin:auto;
 }
 
 /* HERO */
 
 .hero{
+
 position:relative;
-background:linear-gradient(180deg,#111b2c,#0b1320);
-border:1px solid rgba(124,255,178,0.14);
-border-radius:26px;
-padding:24px 20px;
+
+background:
+linear-gradient(180deg,#131d32,#0d1627);
+
+border:1px solid rgba(255,255,255,0.08);
+
+border-radius:32px;
+
+padding:28px 22px;
+
 overflow:hidden;
-box-shadow:var(--shadow);
+
+box-shadow:
+0 25px 60px rgba(0,0,0,0.55),
+0 0 30px rgba(124,255,178,0.05);
+
 }
 
 .hero::before{
+
 content:"";
+
 position:absolute;
 inset:0;
+
 background:
-linear-gradient(120deg,transparent,rgba(255,255,255,0.03),transparent);
+linear-gradient(
+130deg,
+transparent,
+rgba(255,255,255,0.04),
+transparent
+);
+
 pointer-events:none;
+
 }
 
-.heroTop{
+.hero::after{
+
+content:"";
+
+position:absolute;
+
+width:180px;
+height:180px;
+
+background:radial-gradient(circle,var(--green),transparent 70%);
+
+opacity:0.08;
+
+top:-60px;
+right:-60px;
+
+}
+
+/* TOP */
+
+.top{
+
 display:flex;
 justify-content:center;
 align-items:center;
-margin-bottom:18px;
+
 }
 
-.logoRing{
-width:82px;
-height:82px;
-border-radius:24px;
+/* LOGO */
+
+.logoBox{
+
+position:relative;
+
+width:98px;
+height:98px;
+
+border-radius:28px;
+
 background:
-linear-gradient(145deg,rgba(124,255,178,0.25),rgba(255,255,255,0.03));
+linear-gradient(
+145deg,
+rgba(124,255,178,0.18),
+rgba(102,231,255,0.08),
+rgba(184,132,255,0.10)
+);
+
 display:flex;
 justify-content:center;
 align-items:center;
-border:1px solid rgba(124,255,178,0.18);
+
+border:1px solid rgba(255,255,255,0.08);
+
 box-shadow:
-0 0 25px rgba(124,255,178,0.08),
-inset 0 0 18px rgba(255,255,255,0.03);
+0 0 35px rgba(124,255,178,0.12),
+inset 0 0 30px rgba(255,255,255,0.04);
+
+overflow:hidden;
+
 }
 
-.logoRing img{
-width:68px;
-height:68px;
-object-fit:cover;
-border-radius:18px;
+.logoBox::before{
+
+content:"";
+
+position:absolute;
+inset:-2px;
+
+background:
+linear-gradient(
+45deg,
+var(--green),
+var(--cyan),
+var(--purple),
+var(--pink),
+var(--orange),
+var(--green)
+);
+
+background-size:400% 400%;
+
+animation:borderMove 6s linear infinite;
+
+z-index:-1;
+
 }
+
+.logoBox img{
+
+width:78px;
+height:78px;
+object-fit:cover;
+border-radius:22px;
+
+}
+
+/* TITLE */
 
 .clubName{
+
 font-family:'Orbitron',sans-serif;
-font-size:28px;
-font-weight:700;
-letter-spacing:2px;
+font-size:30px;
+font-weight:800;
+letter-spacing:3px;
+
 text-align:center;
-margin-top:4px;
+
+margin-top:18px;
+
+background:
+linear-gradient(
+90deg,
+#ffffff,
+#7CFFB2,
+#66e7ff,
+#ffffff
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
 }
 
-.clubSub{
-margin-top:8px;
+.clubTag{
+
+margin-top:10px;
+
 text-align:center;
+
 font-size:13px;
-line-height:1.7;
+line-height:1.8;
+
 color:var(--muted);
+
 }
+
+/* QUOTE */
 
 .quote{
-margin-top:18px;
-background:rgba(255,255,255,0.03);
-border:1px solid rgba(255,255,255,0.05);
-padding:14px;
-border-radius:18px;
+
+margin-top:22px;
+
+padding:16px;
+
+border-radius:20px;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,0.05),
+rgba(255,255,255,0.02)
+);
+
+border:1px solid rgba(255,255,255,0.06);
+
 font-size:13px;
-line-height:1.7;
-color:#dce6f5;
+line-height:1.8;
+
 text-align:center;
+
+position:relative;
+
+overflow:hidden;
+
 }
 
-/* LIVE BAR */
+.quote::before{
 
-.liveBar{
-margin-top:18px;
-padding:10px 14px;
-border-radius:16px;
-background:rgba(124,255,178,0.08);
-border:1px solid rgba(124,255,178,0.12);
+content:"";
+
+position:absolute;
+top:0;
+left:-100%;
+
+width:100%;
+height:100%;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,0.08),
+transparent
+);
+
+animation:shine 4s linear infinite;
+
+}
+
+@keyframes shine{
+
+100%{
+left:120%;
+}
+
+}
+
+/* STATUS */
+
+.status{
+
 display:flex;
 align-items:center;
 gap:10px;
-font-size:12px;
-color:#c9ffe0;
+
+margin-top:18px;
+
+padding:12px 14px;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+90deg,
+rgba(124,255,178,0.10),
+rgba(102,231,255,0.08)
+);
+
+border:1px solid rgba(124,255,178,0.12);
+
 }
 
-.liveDot{
-width:8px;
-height:8px;
+.dot{
+
+width:10px;
+height:10px;
+
+background:var(--green);
+
 border-radius:50%;
-background:var(--accent);
-box-shadow:0 0 12px var(--accent);
-animation:pulse 1.4s infinite;
+
+box-shadow:0 0 12px var(--green);
+
+animation:pulse 1.5s infinite;
+
 }
 
 @keyframes pulse{
-0%,100%{opacity:1;}
-50%{opacity:0.35;}
+
+0%,100%{
+opacity:1;
+transform:scale(1);
+}
+
+50%{
+opacity:0.4;
+transform:scale(0.8);
+}
+
 }
 
 /* SECTION */
 
 .section{
-margin-top:18px;
-background:linear-gradient(180deg,#0d1522,#0a121e);
+
+margin-top:20px;
+
+background:
+linear-gradient(
+180deg,
+#0f1828,
+#0b1320
+);
+
 border:1px solid var(--line);
-border-radius:22px;
-padding:16px;
-box-shadow:var(--shadow);
+
+border-radius:26px;
+
+padding:18px;
+
+position:relative;
+
+overflow:hidden;
+
+box-shadow:
+0 20px 45px rgba(0,0,0,0.45);
+
+}
+
+.section::before{
+
+content:"";
+
+position:absolute;
+
+width:140px;
+height:140px;
+
+border-radius:50%;
+
+background:rgba(102,231,255,0.04);
+
+top:-70px;
+right:-60px;
+
 }
 
 .sectionTitle{
+
 display:flex;
-align-items:center;
 justify-content:space-between;
-margin-bottom:14px;
+align-items:center;
+
+margin-bottom:16px;
+
 }
 
 .sectionTitle h3{
-font-size:15px;
+
+font-size:16px;
 font-weight:700;
-letter-spacing:0.4px;
+letter-spacing:0.5px;
+
 }
 
 .sectionTitle span{
+
 font-size:11px;
 color:var(--muted);
+
 }
 
-/* LINKS */
+/* BUTTONS */
 
 .links{
+
 display:flex;
 flex-direction:column;
 gap:12px;
+
 }
 
 .row{
+
 display:flex;
 gap:12px;
+
 }
 
 .linkBtn{
+
 flex:1;
-padding:14px;
-border-radius:16px;
-text-decoration:none;
-background:
-linear-gradient(180deg,#121d2f,#0e1726);
-border:1px solid rgba(255,255,255,0.06);
-color:var(--text);
-font-size:13px;
-font-weight:600;
-text-align:center;
-transition:0.25s;
+
 position:relative;
+
+padding:15px;
+
+text-decoration:none;
+
+text-align:center;
+
+font-size:13px;
+font-weight:700;
+
+color:var(--text);
+
+border-radius:18px;
+
+background:
+linear-gradient(
+180deg,
+#142033,
+#0f1828
+);
+
+border:1px solid rgba(255,255,255,0.06);
+
 overflow:hidden;
+
+transition:0.25s;
+
 }
 
 .linkBtn::before{
+
 content:"";
+
 position:absolute;
 inset:0;
-background:linear-gradient(120deg,transparent,rgba(255,255,255,0.05),transparent);
+
+background:
+linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.08),
+transparent
+);
+
 transform:translateX(-120%);
-transition:0.5s;
+transition:0.6s;
+
 }
 
 .linkBtn:hover::before{
@@ -259,187 +608,327 @@ transform:translateX(120%);
 }
 
 .linkBtn:hover{
-transform:translateY(-2px);
-border-color:rgba(124,255,178,0.35);
-box-shadow:0 10px 20px rgba(124,255,178,0.08);
+
+transform:translateY(-3px);
+
+border-color:rgba(124,255,178,0.30);
+
+box-shadow:
+0 10px 25px rgba(124,255,178,0.08);
+
 }
 
 /* PLAYER */
 
-.playerBox{
+.player{
+
 overflow:hidden;
-border-radius:18px;
-border:1px solid rgba(124,255,178,0.12);
-background:#09111d;
+
+border-radius:20px;
+
+border:1px solid rgba(124,255,178,0.10);
+
+background:#09111c;
+
 }
 
 .nowPlaying{
+
 padding:12px;
+
 font-size:12px;
-color:#c7ffd9;
-background:rgba(124,255,178,0.05);
-border-bottom:1px solid rgba(124,255,178,0.08);
+
+color:#caffdf;
+
+background:
+linear-gradient(
+90deg,
+rgba(124,255,178,0.08),
+rgba(102,231,255,0.04)
+);
+
+border-bottom:1px solid rgba(255,255,255,0.05);
+
 white-space:nowrap;
 overflow:hidden;
+
 }
 
 .marquee{
+
 display:inline-block;
+
 padding-left:100%;
+
 animation:marquee 12s linear infinite;
+
 }
 
 @keyframes marquee{
-0%{transform:translateX(0);}
-100%{transform:translateX(-100%);}
+
+0%{
+transform:translateX(0);
 }
 
-.playerScreen{
+100%{
+transform:translateX(-100%);
+}
+
+}
+
+.screen{
+
 aspect-ratio:16/9;
+
 width:100%;
+
+background:black;
+
 }
 
-.playerScreen iframe{
+.screen iframe{
+
 width:100%;
 height:100%;
 border:none;
+
 }
 
 .controls{
+
 display:flex;
 justify-content:center;
 gap:12px;
-padding:14px;
+
+padding:16px;
+
 }
 
 .controls button{
-width:42px;
-height:38px;
+
+width:44px;
+height:40px;
+
 border:none;
-border-radius:12px;
-background:#121d2d;
-color:white;
-font-size:15px;
+
+border-radius:14px;
+
 cursor:pointer;
-transition:0.2s;
+
+font-size:16px;
+
+background:
+linear-gradient(
+180deg,
+#172437,
+#101927
+);
+
+color:white;
+
 border:1px solid rgba(255,255,255,0.06);
+
+transition:0.2s;
+
 }
 
 .controls button:hover{
+
 transform:translateY(-2px);
-border-color:rgba(124,255,178,0.3);
+
+border-color:rgba(124,255,178,0.25);
+
 }
 
 #toggleBtn{
-background:var(--accent);
-color:#06120d;
+
+background:
+linear-gradient(
+135deg,
+var(--green),
+var(--cyan)
+);
+
+color:#06110c;
+
 font-weight:800;
+
 }
 
 /* CALENDAR */
 
-.calendarHead{
+.calendarHeader{
+
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:14px;
+
+margin-bottom:16px;
+
 }
 
-.calendarHead h2{
-font-size:17px;
+.calendarHeader h2{
+
+font-size:18px;
+
 }
 
-.calendarHead p{
+.calendarHeader p{
+
 font-size:11px;
 color:var(--muted);
+
 }
 
 .days,
 .calendar{
+
 display:grid;
 grid-template-columns:repeat(7,1fr);
+
 gap:8px;
+
 text-align:center;
+
 }
 
 .days div{
+
 font-size:11px;
 color:var(--muted);
+
 }
 
 .calendar div{
+
 aspect-ratio:1/1;
+
 display:flex;
 justify-content:center;
 align-items:center;
+
 border-radius:14px;
-background:#101a2a;
+
 font-size:12px;
+
+background:
+linear-gradient(
+180deg,
+#141f31,
+#101927
+);
+
 border:1px solid rgba(255,255,255,0.04);
+
 transition:0.2s;
+
 }
 
 .calendar div:hover{
+
 transform:translateY(-2px);
-border-color:rgba(124,255,178,0.2);
+
+border-color:rgba(124,255,178,0.20);
+
 }
 
 .today{
-background:var(--accent)!important;
-color:#06120d;
+
+background:
+linear-gradient(
+135deg,
+var(--green),
+var(--cyan)
+)!important;
+
+color:#06110c;
+
 font-weight:800;
+
 }
 
 /* PARTNERS */
 
 .partnerWrap{
+
 display:flex;
 flex-direction:column;
-gap:12px;
+gap:14px;
+
 }
 
 .partner{
+
 display:flex;
 align-items:center;
 gap:14px;
-padding:12px;
-border-radius:18px;
-background:#101927;
+
+padding:14px;
+
+border-radius:20px;
+
+background:
+linear-gradient(
+180deg,
+#131f31,
+#101927
+);
+
 border:1px solid rgba(255,255,255,0.05);
+
 transition:0.2s;
+
 cursor:pointer;
+
 }
 
 .partner:hover{
-transform:translateY(-2px);
+
+transform:translateY(-3px);
+
 border-color:rgba(124,255,178,0.25);
+
 }
 
 .partner img{
-width:58px;
-height:58px;
-border-radius:16px;
+
+width:60px;
+height:60px;
+
+border-radius:18px;
+
 object-fit:cover;
+
 }
 
 .partner h4{
+
 font-size:13px;
-margin-bottom:3px;
+margin-bottom:4px;
+
 }
 
 .partner p{
+
 font-size:11px;
 color:var(--muted);
+
 }
 
 /* FOOTER */
 
 .footer{
-margin-top:20px;
+
+margin-top:24px;
+
 text-align:center;
+
 font-size:11px;
+
+line-height:1.8;
+
 color:var(--muted);
-line-height:1.7;
+
 }
 
 /* MOBILE */
@@ -450,15 +939,25 @@ line-height:1.7;
 max-width:100%;
 }
 
+.clubName{
+font-size:26px;
+}
+
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="bgGlow"></div>
-<div class="bgGlow2"></div>
+<div class="rgbBorder"></div>
+
+<div class="grid"></div>
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="glow3"></div>
 
 <div class="wrapper">
 
@@ -466,10 +965,12 @@ max-width:100%;
 
 <div class="hero">
 
-<div class="heroTop">
+<div class="top">
 
-<div class="logoRing">
+<div class="logoBox">
+
 <img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png">
+
 </div>
 
 </div>
@@ -478,17 +979,26 @@ max-width:100%;
 PIXEL GLOW
 </div>
 
-<div class="clubSub">
-A modern chess community built for strategy, creativity, events and competitive growth.
+<div class="clubTag">
+
+Elite chess community with stylish events, strategic battles, creative tournaments and modern competitive vibes.
+
 </div>
 
 <div class="quote">
+
 “Even a pawn becomes powerful when it keeps moving forward.”
+
 </div>
 
-<div class="liveBar">
-<div class="liveDot"></div>
-<span>Community Online • Welcome to Pixel Glow Club</span>
+<div class="status">
+
+<div class="dot"></div>
+
+<span>
+Club Active • Players Online
+</span>
+
 </div>
 
 </div>
@@ -498,8 +1008,11 @@ A modern chess community built for strategy, creativity, events and competitive 
 <div class="section">
 
 <div class="sectionTitle">
+
 <h3>Club Access</h3>
-<span>Quick Links</span>
+
+<span>Quick Navigation</span>
+
 </div>
 
 <div class="links">
@@ -509,13 +1022,17 @@ A modern chess community built for strategy, creativity, events and competitive 
 <a class="linkBtn"
 href="https://www.chess.com/member/yogi136"
 target="_blank">
+
 Owner
+
 </a>
 
 <a class="linkBtn"
 href="https://www.chess.com/member/michael-kaiser10bm"
 target="_blank">
+
 Co Owner
+
 </a>
 
 </div>
@@ -523,19 +1040,25 @@ Co Owner
 <a class="linkBtn"
 href="https://www.chess.com/clubs/forum/view/club-rulebook-1#comment-127196376"
 target="_blank">
+
 Club Rules
+
 </a>
 
 <a class="linkBtn"
 href="https://www.chess.com/club/pixelglow/announcements"
 target="_blank">
+
 Announcements
+
 </a>
 
 <a class="linkBtn"
 href="https://www.chess.com/clubs/events/pixelglow"
 target="_blank">
+
 Join Events
+
 </a>
 
 </div>
@@ -547,28 +1070,49 @@ Join Events
 <div class="section">
 
 <div class="sectionTitle">
+
 <h3>Music Lounge</h3>
-<span>Now Streaming</span>
+
+<span>Live Playlist</span>
+
 </div>
 
-<div class="playerBox">
+<div class="player">
 
 <div class="nowPlaying">
-<div class="marquee" id="songText">
+
+<div class="marquee"
+id="songText">
+
 Now Playing
-</div>
+
 </div>
 
-<div class="playerScreen">
-<iframe id="playerFrame"
+</div>
+
+<div class="screen">
+
+<iframe
+id="playerFrame"
 allow="autoplay; encrypted-media; fullscreen">
+
 </iframe>
+
 </div>
 
 <div class="controls">
+
 <button onclick="prevSong()">⏮</button>
-<button id="toggleBtn" onclick="toggleVideo()">▶</button>
+
+<button id="toggleBtn"
+onclick="toggleVideo()">
+
+▶
+
+</button>
+
 <button onclick="nextSong()">⏭</button>
+
 </div>
 
 </div>
@@ -579,14 +1123,20 @@ allow="autoplay; encrypted-media; fullscreen">
 
 <div class="section">
 
-<div class="calendarHead">
+<div class="calendarHeader">
+
 <div>
+
 <h2>May 2026</h2>
+
 <p>Pixel Glow Schedule</p>
+
 </div>
+
 </div>
 
 <div class="days">
+
 <div>S</div>
 <div>M</div>
 <div>T</div>
@@ -594,6 +1144,7 @@ allow="autoplay; encrypted-media; fullscreen">
 <div>T</div>
 <div>F</div>
 <div>S</div>
+
 </div>
 
 <div class="calendar">
@@ -646,22 +1197,32 @@ allow="autoplay; encrypted-media; fullscreen">
 <div class="section">
 
 <div class="sectionTitle">
+
 <h3>Partner Clubs</h3>
-<span>Allied Communities</span>
+
+<span>Community Network</span>
+
 </div>
 
-<div class="partnerWrap" id="partnersContainer"></div>
+<div class="partnerWrap"
+id="partnersContainer">
+
+</div>
 
 </div>
 
 <div class="footer">
+
 PIXEL GLOW CLUB © 2026<br>
-Built for chess, creativity and competition.
+Built for strategy, creativity and competition.
+
 </div>
 
 </div>
 
 <script>
+
+/* SONGS */
 
 let songs=[
 
@@ -688,30 +1249,51 @@ name:"Monody - TheFatRat"
 {
 src:"https://youtu.be/Jkj36B1YuDU",
 name:"Another Love - Tom Odell"
+},
+
+{
+src:"https://youtu.be/GXioir-fujY",
+name:"NO BATIDÃO - ZXKAI"
 }
 
 ];
 
 let i=0;
+
 let isPlaying=false;
 
-const frame=document.getElementById("playerFrame");
-const songText=document.getElementById("songText");
-const btn=document.getElementById("toggleBtn");
+const frame=
+document.getElementById("playerFrame");
+
+const songText=
+document.getElementById("songText");
+
+const btn=
+document.getElementById("toggleBtn");
+
+/* GET VIDEO ID */
 
 function getId(url){
 
 if(url.includes("youtu.be/")){
+
 return url.split("youtu.be/")[1];
+
 }
 
 if(url.includes("watch?v=")){
-return url.split("watch?v=")[1].split("&")[0];
+
+return url
+.split("watch?v=")[1]
+.split("&")[0];
+
 }
 
 return url;
 
 }
+
+/* CONVERT URL */
 
 function convert(url){
 
@@ -719,9 +1301,12 @@ return `https://www.youtube.com/embed/${getId(url)}?enablejsapi=1&rel=0`;
 
 }
 
+/* LOAD SONG */
+
 function load(){
 
-frame.src=convert(songs[i].src);
+frame.src=
+convert(songs[i].src);
 
 songText.innerText=
 "Now Playing • " + songs[i].name;
@@ -732,6 +1317,8 @@ isPlaying=false;
 
 }
 
+/* NEXT */
+
 function nextSong(){
 
 i=(i+1)%songs.length;
@@ -739,6 +1326,8 @@ i=(i+1)%songs.length;
 load();
 
 }
+
+/* PREVIOUS */
 
 function prevSong(){
 
@@ -748,19 +1337,38 @@ load();
 
 }
 
+/* PLAY / PAUSE */
+
 function toggleVideo(){
 
-frame.contentWindow.postMessage(JSON.stringify({
+frame.contentWindow.postMessage(
+
+JSON.stringify({
+
 event:"command",
-func:isPlaying?"pauseVideo":"playVideo",
+
+func:isPlaying
+? "pauseVideo"
+: "playVideo",
+
 args:[]
-}),"*");
+
+}),
+
+"*"
+
+);
 
 isPlaying=!isPlaying;
 
-btn.innerText=isPlaying?"❚❚":"▶";
+btn.innerText=
+isPlaying
+? "❚❚"
+: "▶";
 
 }
+
+/* INITIAL LOAD */
 
 load();
 
@@ -769,27 +1377,42 @@ load();
 const partners=[
 
 {
+
 name:"SAPPHIRE",
+
 img:"https://i.ibb.co/4RYLGQ3z/image.jpg",
+
 link:"https://www.chess.com/club/sapphire-1",
-desc:"Strategic chess alliance"
+
+desc:"Competitive strategic alliance"
+
 },
 
 {
+
 name:"PENGUIN CHESS CLUB",
+
 img:"https://i.ibb.co/0p7z5V4R/your-image.jpg",
+
 link:"https://www.chess.com/club/penguin-chess-club-3",
-desc:"Friendly competitive community"
+
+desc:"Friendly modern chess community"
+
 }
 
 ];
 
+/* CONTAINER */
+
 const container=
 document.getElementById("partnersContainer");
 
+/* CREATE CARDS */
+
 partners.forEach(p=>{
 
-const card=document.createElement("div");
+const card=
+document.createElement("div");
 
 card.className="partner";
 
@@ -807,7 +1430,14 @@ card.innerHTML=`
 
 `;
 
-card.onclick=()=>window.open(p.link,"_blank");
+card.onclick=()=>{
+
+window.open(
+p.link,
+"_blank"
+);
+
+};
 
 container.appendChild(card);
 
