@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pixel Glow Club</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -15,19 +14,31 @@ padding:0;
 box-sizing:border-box;
 }
 
-body{
-background:
-radial-gradient(circle at top left,#1e293b 0%,transparent 35%),
-radial-gradient(circle at bottom right,#0f766e33 0%,transparent 30%),
-linear-gradient(135deg,#020617,#0f172a,#111827);
-font-family:'Inter',sans-serif;
-color:#e2e8f0;
-min-height:100vh;
-overflow-x:hidden;
-padding:20px 0;
+:root{
+--bg:#060816;
+--card:#0f172a;
+--card2:#111c33;
+--border:rgba(255,255,255,0.08);
+--text:#e8eefc;
+--muted:#94a3b8;
+--accent:#60a5fa;
+--accent2:#38bdf8;
+--shadow:0 20px 45px rgba(0,0,0,0.45);
 }
 
-/* RGB BORDER */
+body{
+font-family:'Inter',sans-serif;
+background:
+radial-gradient(circle at top left,rgba(59,130,246,0.15),transparent 25%),
+radial-gradient(circle at bottom right,rgba(14,165,233,0.12),transparent 25%),
+linear-gradient(145deg,#030712,#0b1120,#111827);
+min-height:100vh;
+color:var(--text);
+overflow-x:hidden;
+padding:22px 0;
+}
+
+/* ANIMATED OUTER RGB */
 .rgbBorder{
 position:fixed;
 inset:0;
@@ -37,67 +48,76 @@ background:linear-gradient(
 #60a5fa,
 #38bdf8,
 #818cf8,
+#22d3ee,
 #60a5fa
 );
-background-size:300% 300%;
-animation:borderMove 8s linear infinite;
+background-size:400% 400%;
+animation:rgbMove 12s linear infinite;
 z-index:-1;
+opacity:0.9;
 }
 
 .rgbBorder::before{
 content:"";
 position:absolute;
 inset:2px;
-background:#020617;
+background:#050816;
 }
 
-@keyframes borderMove{
+@keyframes rgbMove{
 0%{background-position:0% 50%;}
-100%{background-position:300% 50%;}
+100%{background-position:400% 50%;}
 }
 
-/* MAIN */
 .mainBox{
-width:320px;
+width:330px;
 margin:auto;
 padding:18px;
-background:rgba(15,23,42,0.88);
-backdrop-filter:blur(14px);
+background:rgba(15,23,42,0.75);
+backdrop-filter:blur(18px);
 border:1px solid rgba(255,255,255,0.08);
-border-radius:24px;
-box-shadow:0 10px 40px rgba(0,0,0,0.45);
-}
-
-/* LOGO */
-.pixelGlowBox{
-width:280px;
-height:70px;
-margin:auto;
+border-radius:30px;
+box-shadow:var(--shadow);
 position:relative;
 overflow:hidden;
-border-radius:18px;
+}
+
+.mainBox::before{
+content:"";
+position:absolute;
+width:200px;
+height:200px;
+background:radial-gradient(circle,rgba(96,165,250,0.18),transparent 70%);
+top:-80px;
+right:-80px;
+pointer-events:none;
+}
+
+/* HEADER */
+.pixelGlowBox{
+width:285px;
+height:72px;
+margin:auto;
+position:relative;
+border-radius:22px;
+overflow:hidden;
 }
 
 .pixelBorder{
 position:absolute;
 inset:0;
 padding:2px;
-background:linear-gradient(
-135deg,
-#60a5fa,
-#38bdf8,
-#818cf8
-);
+background:linear-gradient(135deg,#60a5fa,#38bdf8,#818cf8);
 background-size:300% 300%;
-animation:borderMove 6s linear infinite;
+animation:rgbMove 7s linear infinite;
 }
 
 .pixelBorder::before{
 content:"";
 position:absolute;
 inset:2px;
-background:#0f172a;
-border-radius:16px;
+border-radius:20px;
+background:linear-gradient(135deg,#0f172a,#111827);
 }
 
 #pixelText{
@@ -107,121 +127,151 @@ display:flex;
 align-items:center;
 justify-content:center;
 font-family:'Space Grotesk',sans-serif;
-font-size:1.1rem;
+font-size:1.15rem;
 font-weight:700;
-letter-spacing:3px;
+letter-spacing:4px;
 color:white;
-text-shadow:0 0 15px rgba(96,165,250,0.5);
+text-shadow:0 0 20px rgba(96,165,250,0.45);
 }
 
-/* MARQUEE */
 .marqueeWrap{
+margin-top:14px;
 overflow:hidden;
-margin-top:12px;
-color:#7dd3fc;
-font-size:12px;
 }
 
-/* IMAGE */
+marquee{
+font-size:12px;
+letter-spacing:1px;
+font-weight:600;
+color:#7dd3fc;
+}
+
 .mainImg{
 width:250px;
 display:block;
-margin:14px auto;
-border-radius:18px;
+margin:18px auto 12px;
+border-radius:22px;
+object-fit:cover;
 border:1px solid rgba(255,255,255,0.08);
-box-shadow:0 10px 25px rgba(0,0,0,0.4);
+box-shadow:0 15px 35px rgba(0,0,0,0.45);
 }
 
-/* QUOTE */
 .quote{
 display:block;
 text-align:center;
 font-size:14px;
-line-height:1.6;
+line-height:1.7;
 color:#dbeafe;
-margin-top:6px;
+padding:0 6px;
 }
 
 /* LINKS */
 .links{
 display:flex;
 flex-direction:column;
-gap:10px;
-margin-top:18px;
+gap:12px;
+margin-top:20px;
 }
 
 .topRow{
 display:flex;
-gap:10px;
+gap:12px;
 }
 
 .linkBtn{
 flex:1;
-padding:11px;
-border-radius:14px;
-text-decoration:none;
+padding:12px;
 text-align:center;
+text-decoration:none;
 font-size:13px;
-font-weight:600;
-color:#e2e8f0;
+font-weight:700;
+color:var(--text);
 background:rgba(255,255,255,0.04);
 border:1px solid rgba(255,255,255,0.08);
-transition:0.25s;
+border-radius:16px;
+transition:0.28s;
+position:relative;
+overflow:hidden;
+}
+
+.linkBtn::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(135deg,rgba(96,165,250,0.15),transparent);
+opacity:0;
+transition:0.28s;
+}
+
+.linkBtn:hover::before{
+opacity:1;
 }
 
 .linkBtn:hover{
-background:rgba(96,165,250,0.12);
+transform:translateY(-3px);
 border-color:#60a5fa;
-transform:translateY(-2px);
+box-shadow:0 10px 25px rgba(96,165,250,0.15);
 }
 
-.full{
-width:100%;
-}
-
-/* PLAYER */
+/* CARDS */
 .player,
 .box,
 .section{
-width:280px;
+width:285px;
 margin:22px auto;
-padding:14px;
-border-radius:20px;
-background:rgba(17,24,39,0.92);
+padding:16px;
+background:linear-gradient(145deg,#111827,#0f172a);
 border:1px solid rgba(255,255,255,0.08);
-box-shadow:0 10px 30px rgba(0,0,0,0.35);
+border-radius:24px;
+box-shadow:var(--shadow);
+position:relative;
+overflow:hidden;
+}
+
+.player::before,
+.box::before,
+.section::before{
+content:"";
+position:absolute;
+width:150px;
+height:150px;
+background:radial-gradient(circle,rgba(96,165,250,0.08),transparent 70%);
+top:-60px;
+right:-60px;
+pointer-events:none;
 }
 
 .live-dot{
-width:9px;
-height:9px;
+width:10px;
+height:10px;
 background:#22c55e;
 border-radius:50%;
-box-shadow:0 0 10px #22c55e;
-animation:pulse 1.5s infinite;
+box-shadow:0 0 12px #22c55e;
+animation:pulse 1.6s infinite;
 margin-bottom:8px;
 }
 
 @keyframes pulse{
 0%,100%{opacity:1;}
-50%{opacity:0.4;}
+50%{opacity:0.35;}
 }
 
 .marquee{
+font-size:11px;
+color:#93c5fd;
+margin-bottom:10px;
 overflow:hidden;
 white-space:nowrap;
-font-size:11px;
-color:#7dd3fc;
-margin-bottom:8px;
 }
 
 .screen{
 width:100%;
 aspect-ratio:16/9;
-border-radius:14px;
+border-radius:16px;
 overflow:hidden;
 border:1px solid rgba(255,255,255,0.08);
 background:black;
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
 }
 
 .screen iframe{
@@ -233,46 +283,49 @@ border:none;
 .controls{
 display:flex;
 justify-content:center;
-gap:10px;
-margin-top:10px;
+gap:12px;
+margin-top:14px;
 }
 
 .controls button{
-width:36px;
-height:30px;
+width:38px;
+height:32px;
 border:none;
-border-radius:10px;
+border-radius:12px;
 background:rgba(255,255,255,0.06);
 color:white;
+font-size:13px;
 cursor:pointer;
 transition:0.25s;
 }
 
 .controls button:hover{
+transform:translateY(-2px);
 background:rgba(96,165,250,0.15);
 }
 
 #toggleBtn{
 background:linear-gradient(135deg,#60a5fa,#38bdf8);
 color:#08111f;
-font-weight:bold;
+font-weight:800;
 }
 
 /* TITLES */
 .title,
 .section-title{
 text-align:center;
-font-size:15px;
-font-weight:700;
-margin-bottom:5px;
+font-size:16px;
+font-weight:800;
+letter-spacing:1px;
+margin-bottom:6px;
 color:#dbeafe;
 }
 
 .subtitle{
 text-align:center;
 font-size:11px;
-color:#94a3b8;
-margin-bottom:10px;
+color:var(--muted);
+margin-bottom:12px;
 }
 
 /* CALENDAR */
@@ -280,13 +333,14 @@ margin-bottom:10px;
 .calendar{
 display:grid;
 grid-template-columns:repeat(7,1fr);
-gap:6px;
+gap:7px;
 text-align:center;
 }
 
 .days div{
 font-size:10px;
-color:#94a3b8;
+font-weight:700;
+color:var(--muted);
 }
 
 .calendar div{
@@ -294,45 +348,46 @@ aspect-ratio:1/1;
 display:flex;
 align-items:center;
 justify-content:center;
+border-radius:14px;
 background:rgba(255,255,255,0.03);
-border-radius:12px;
 font-size:12px;
 transition:0.25s;
 }
 
 .calendar div:hover{
-background:rgba(96,165,250,0.12);
 transform:translateY(-2px);
+background:rgba(96,165,250,0.12);
 }
 
 .today{
 background:linear-gradient(135deg,#60a5fa,#38bdf8) !important;
 color:#08111f;
-font-weight:bold;
+font-weight:800;
 }
 
-/* BUTTONS */
+/* NAV */
 .buttons{
 display:flex;
-gap:8px;
+gap:10px;
 margin-top:14px;
 }
 
 .btn{
 flex:1;
-padding:8px;
-border-radius:12px;
-text-decoration:none;
+padding:9px;
 text-align:center;
+text-decoration:none;
 font-size:11px;
-font-weight:600;
-color:#e2e8f0;
+font-weight:700;
+color:var(--text);
 background:rgba(255,255,255,0.04);
 border:1px solid rgba(255,255,255,0.08);
+border-radius:14px;
 transition:0.25s;
 }
 
 .btn:hover{
+transform:translateY(-2px);
 background:rgba(96,165,250,0.12);
 border-color:#60a5fa;
 }
@@ -341,97 +396,39 @@ border-color:#60a5fa;
 .partner-card{
 background:rgba(255,255,255,0.03);
 border:1px solid rgba(255,255,255,0.08);
-border-radius:16px;
-padding:12px;
+border-radius:18px;
+padding:14px;
 text-align:center;
-margin-bottom:10px;
-cursor:pointer;
+margin-bottom:12px;
 transition:0.25s;
+cursor:pointer;
 }
 
 .partner-card:hover{
+transform:translateY(-3px);
 background:rgba(96,165,250,0.08);
 border-color:#60a5fa;
-transform:translateY(-2px);
 }
 
 .partner-img{
-width:68px;
-height:68px;
-border-radius:14px;
+width:70px;
+height:70px;
+border-radius:18px;
 object-fit:cover;
+box-shadow:0 10px 20px rgba(0,0,0,0.35);
 }
 
 .partner-name{
-margin-top:8px;
+margin-top:10px;
 font-size:13px;
-font-weight:600;
+font-weight:700;
+letter-spacing:0.5px;
 }
 </style>
 </head>
-
 <body>
 
-<div class="rgbBorder"></div>
-
-<div class="mainBox">
-
-<div class="pixelGlowBox">
-<div class="pixelBorder"></div>
-<div id="pixelText">PIXEL GLOW</div>
-</div>
-
-<div class="marqueeWrap">
-<marquee scrollamount="3">
-♣︎ Welcome to Our Club ♣︎
-</marquee>
-</div>
-
-<img class="mainImg" src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png">
-
-<i class="quote">
-"Even a pawn becomes powerful when it keeps moving forward"
-</i>
-
-<div class="links">
-
-<div class="topRow">
-
-<a class="linkBtn"
-href="https://www.chess.com/member/yogi136"
-target="_blank">
-Owner
-</a>
-
-<a class="linkBtn"
-href="https://www.chess.com/member/michael-kaiser10bm"
-target="_blank">
-Co Owner
-</a>
-
-</div>
-
-<a class="linkBtn full"
-href="https://www.chess.com/clubs/forum/view/club-rulebook-1#comment-127196376"
-target="_blank">
-Club Rules
-</a>
-
-<a class="linkBtn full"
-href="https://www.chess.com/club/pixelglow/announcements"
-target="_blank">
-Announcements
-</a>
-
-<a class="linkBtn full"
-href="https://www.chess.com/clubs/events/pixelglow"
-target="_blank">
-Join Events
-</a>
-
-</div>
-
-</div>
+<!-- KEEP YOUR EXISTING BODY + PLAYER + SONGS + JAVASCRIPT EXACTLY SAME -->
 
 </body>
 </html>
