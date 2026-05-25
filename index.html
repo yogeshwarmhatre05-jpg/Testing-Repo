@@ -2,170 +2,217 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Pixel Glow Club</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 }
 
+:root{
+--bg:#060b14;
+--card:#0d1522;
+--card2:#111b2c;
+--line:rgba(255,255,255,0.08);
+--text:#e7edf7;
+--muted:#8ea0bb;
+--accent:#7CFFB2;
+--shadow:0 10px 35px rgba(0,0,0,0.45);
+}
+
+html{
+scroll-behavior:smooth;
+}
+
 body{
-font-family:'Inter',sans-serif;
 background:
-radial-gradient(circle at top left,rgba(59,130,246,0.15),transparent 25%),
-radial-gradient(circle at bottom right,rgba(14,165,233,0.12),transparent 25%),
-linear-gradient(145deg,#030712,#0b1120,#111827);
-color:#e8eefc;
+radial-gradient(circle at top left,#122038 0%,transparent 35%),
+radial-gradient(circle at top right,#11263b 0%,transparent 30%),
+linear-gradient(180deg,#04070d,#08111f 45%,#060b14);
+color:var(--text);
+font-family:'Inter',sans-serif;
 min-height:100vh;
 overflow-x:hidden;
-padding:20px 0;
+padding:22px 14px 60px;
 }
 
-/* RGB BORDER */
+/* BACKGROUND GLOW */
 
-.rgbBorder{
+.bgGlow{
 position:fixed;
-inset:0;
-padding:2px;
-background:linear-gradient(
-90deg,
-#60a5fa,
-#38bdf8,
-#818cf8,
-#22d3ee,
-#60a5fa
-);
-background-size:400% 400%;
-animation:rgbMove 12s linear infinite;
-z-index:-1;
+width:420px;
+height:420px;
+background:rgba(124,255,178,0.06);
+filter:blur(120px);
+border-radius:50%;
+top:-120px;
+left:-120px;
+pointer-events:none;
+z-index:-2;
 }
 
-.rgbBorder::before{
-content:"";
-position:absolute;
-inset:2px;
-background:#050816;
+.bgGlow2{
+position:fixed;
+width:350px;
+height:350px;
+background:rgba(96,166,255,0.06);
+filter:blur(120px);
+border-radius:50%;
+bottom:-100px;
+right:-100px;
+pointer-events:none;
+z-index:-2;
 }
 
-@keyframes rgbMove{
-0%{background-position:0% 50%;}
-100%{background-position:400% 50%;}
-}
+/* MAIN WRAPPER */
 
-/* MAIN BOX */
-
-.mainBox{
-width:320px;
+.wrapper{
+max-width:340px;
 margin:auto;
-padding:18px;
-background:rgba(15,23,42,0.78);
-backdrop-filter:blur(18px);
-border:1px solid rgba(255,255,255,0.08);
-border-radius:30px;
-box-shadow:0 20px 45px rgba(0,0,0,0.45);
-position:relative;
-overflow:hidden;
 }
 
-.mainBox::before{
+/* HERO */
+
+.hero{
+position:relative;
+background:linear-gradient(180deg,#111b2c,#0b1320);
+border:1px solid rgba(124,255,178,0.14);
+border-radius:26px;
+padding:24px 20px;
+overflow:hidden;
+box-shadow:var(--shadow);
+}
+
+.hero::before{
 content:"";
 position:absolute;
-width:200px;
-height:200px;
-background:radial-gradient(circle,rgba(96,165,250,0.12),transparent 70%);
-top:-80px;
-right:-80px;
+inset:0;
+background:
+linear-gradient(120deg,transparent,rgba(255,255,255,0.03),transparent);
 pointer-events:none;
 }
 
-/* LOGO */
-
-.pixelGlowBox{
-width:280px;
-height:72px;
-margin:auto;
-position:relative;
-border-radius:22px;
-overflow:hidden;
-}
-
-.pixelBorder{
-position:absolute;
-inset:0;
-padding:2px;
-background:linear-gradient(
-135deg,
-#60a5fa,
-#38bdf8,
-#818cf8
-);
-background-size:300% 300%;
-animation:rgbMove 7s linear infinite;
-}
-
-.pixelBorder::before{
-content:"";
-position:absolute;
-inset:2px;
-border-radius:20px;
-background:linear-gradient(135deg,#0f172a,#111827);
-}
-
-#pixelText{
-position:absolute;
-inset:0;
+.heroTop{
 display:flex;
 justify-content:center;
 align-items:center;
-font-family:'Space Grotesk',sans-serif;
-font-size:1.1rem;
+margin-bottom:18px;
+}
+
+.logoRing{
+width:82px;
+height:82px;
+border-radius:24px;
+background:
+linear-gradient(145deg,rgba(124,255,178,0.25),rgba(255,255,255,0.03));
+display:flex;
+justify-content:center;
+align-items:center;
+border:1px solid rgba(124,255,178,0.18);
+box-shadow:
+0 0 25px rgba(124,255,178,0.08),
+inset 0 0 18px rgba(255,255,255,0.03);
+}
+
+.logoRing img{
+width:68px;
+height:68px;
+object-fit:cover;
+border-radius:18px;
+}
+
+.clubName{
+font-family:'Orbitron',sans-serif;
+font-size:28px;
 font-weight:700;
-letter-spacing:4px;
-color:white;
-text-shadow:0 0 18px rgba(96,165,250,0.45);
+letter-spacing:2px;
+text-align:center;
+margin-top:4px;
 }
 
-/* MARQUEE */
-
-.marqueeWrap{
-overflow:hidden;
-margin-top:14px;
+.clubSub{
+margin-top:8px;
+text-align:center;
+font-size:13px;
+line-height:1.7;
+color:var(--muted);
 }
-
-marquee{
-font-size:12px;
-font-weight:600;
-letter-spacing:1px;
-color:#7dd3fc;
-}
-
-/* IMAGE */
-
-.mainImg{
-width:250px;
-display:block;
-margin:18px auto 14px;
-border-radius:22px;
-border:1px solid rgba(255,255,255,0.08);
-box-shadow:0 15px 35px rgba(0,0,0,0.45);
-}
-
-/* QUOTE */
 
 .quote{
-display:block;
-text-align:center;
-font-size:14px;
+margin-top:18px;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.05);
+padding:14px;
+border-radius:18px;
+font-size:13px;
 line-height:1.7;
-color:#dbeafe;
-padding:0 5px;
+color:#dce6f5;
+text-align:center;
+}
+
+/* LIVE BAR */
+
+.liveBar{
+margin-top:18px;
+padding:10px 14px;
+border-radius:16px;
+background:rgba(124,255,178,0.08);
+border:1px solid rgba(124,255,178,0.12);
+display:flex;
+align-items:center;
+gap:10px;
+font-size:12px;
+color:#c9ffe0;
+}
+
+.liveDot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:var(--accent);
+box-shadow:0 0 12px var(--accent);
+animation:pulse 1.4s infinite;
+}
+
+@keyframes pulse{
+0%,100%{opacity:1;}
+50%{opacity:0.35;}
+}
+
+/* SECTION */
+
+.section{
+margin-top:18px;
+background:linear-gradient(180deg,#0d1522,#0a121e);
+border:1px solid var(--line);
+border-radius:22px;
+padding:16px;
+box-shadow:var(--shadow);
+}
+
+.sectionTitle{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:14px;
+}
+
+.sectionTitle h3{
+font-size:15px;
+font-weight:700;
+letter-spacing:0.4px;
+}
+
+.sectionTitle span{
+font-size:11px;
+color:var(--muted);
 }
 
 /* LINKS */
@@ -174,25 +221,25 @@ padding:0 5px;
 display:flex;
 flex-direction:column;
 gap:12px;
-margin-top:22px;
 }
 
-.topRow{
+.row{
 display:flex;
 gap:12px;
 }
 
 .linkBtn{
 flex:1;
-padding:12px;
-text-align:center;
-text-decoration:none;
-font-size:13px;
-font-weight:700;
-color:#e8eefc;
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(255,255,255,0.08);
+padding:14px;
 border-radius:16px;
+text-decoration:none;
+background:
+linear-gradient(180deg,#121d2f,#0e1726);
+border:1px solid rgba(255,255,255,0.06);
+color:var(--text);
+font-size:13px;
+font-weight:600;
+text-align:center;
 transition:0.25s;
 position:relative;
 overflow:hidden;
@@ -202,87 +249,57 @@ overflow:hidden;
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(
-135deg,
-rgba(96,165,250,0.15),
-transparent
-);
-opacity:0;
-transition:0.25s;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.05),transparent);
+transform:translateX(-120%);
+transition:0.5s;
 }
 
 .linkBtn:hover::before{
-opacity:1;
+transform:translateX(120%);
 }
 
 .linkBtn:hover{
-transform:translateY(-3px);
-border-color:#60a5fa;
-box-shadow:0 10px 20px rgba(96,165,250,0.15);
+transform:translateY(-2px);
+border-color:rgba(124,255,178,0.35);
+box-shadow:0 10px 20px rgba(124,255,178,0.08);
 }
 
 /* PLAYER */
 
-.player,
-.box,
-.section{
-width:280px;
-margin:22px auto;
-padding:16px;
-background:linear-gradient(145deg,#111827,#0f172a);
-border:1px solid rgba(255,255,255,0.08);
-border-radius:24px;
-box-shadow:0 18px 35px rgba(0,0,0,0.35);
-position:relative;
+.playerBox{
 overflow:hidden;
+border-radius:18px;
+border:1px solid rgba(124,255,178,0.12);
+background:#09111d;
 }
 
-.player::before,
-.box::before,
-.section::before{
-content:"";
-position:absolute;
-width:150px;
-height:150px;
-background:radial-gradient(circle,rgba(96,165,250,0.08),transparent 70%);
-top:-60px;
-right:-60px;
-pointer-events:none;
-}
-
-.live-dot{
-width:10px;
-height:10px;
-background:#22c55e;
-border-radius:50%;
-box-shadow:0 0 12px #22c55e;
-animation:pulse 1.6s infinite;
-margin-bottom:10px;
-}
-
-@keyframes pulse{
-0%,100%{opacity:1;}
-50%{opacity:0.35;}
+.nowPlaying{
+padding:12px;
+font-size:12px;
+color:#c7ffd9;
+background:rgba(124,255,178,0.05);
+border-bottom:1px solid rgba(124,255,178,0.08);
+white-space:nowrap;
+overflow:hidden;
 }
 
 .marquee{
-overflow:hidden;
-white-space:nowrap;
-font-size:11px;
-margin-bottom:10px;
-color:#93c5fd;
+display:inline-block;
+padding-left:100%;
+animation:marquee 12s linear infinite;
 }
 
-.screen{
-width:100%;
+@keyframes marquee{
+0%{transform:translateX(0);}
+100%{transform:translateX(-100%);}
+}
+
+.playerScreen{
 aspect-ratio:16/9;
-border-radius:16px;
-overflow:hidden;
-border:1px solid rgba(255,255,255,0.08);
-background:black;
+width:100%;
 }
 
-.screen iframe{
+.playerScreen iframe{
 width:100%;
 height:100%;
 border:none;
@@ -292,158 +309,511 @@ border:none;
 display:flex;
 justify-content:center;
 gap:12px;
-margin-top:14px;
+padding:14px;
 }
 
 .controls button{
-width:38px;
-height:32px;
+width:42px;
+height:38px;
 border:none;
 border-radius:12px;
-background:rgba(255,255,255,0.06);
+background:#121d2d;
 color:white;
-font-size:13px;
+font-size:15px;
 cursor:pointer;
-transition:0.25s;
+transition:0.2s;
+border:1px solid rgba(255,255,255,0.06);
 }
 
 .controls button:hover{
-background:rgba(96,165,250,0.15);
 transform:translateY(-2px);
+border-color:rgba(124,255,178,0.3);
 }
 
 #toggleBtn{
-background:linear-gradient(135deg,#60a5fa,#38bdf8);
-color:#08111f;
+background:var(--accent);
+color:#06120d;
 font-weight:800;
-}
-
-/* TITLES */
-
-.title,
-.section-title{
-text-align:center;
-font-size:16px;
-font-weight:800;
-margin-bottom:6px;
-letter-spacing:1px;
-color:#dbeafe;
-}
-
-.subtitle{
-text-align:center;
-font-size:11px;
-color:#94a3b8;
-margin-bottom:12px;
 }
 
 /* CALENDAR */
+
+.calendarHead{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:14px;
+}
+
+.calendarHead h2{
+font-size:17px;
+}
+
+.calendarHead p{
+font-size:11px;
+color:var(--muted);
+}
 
 .days,
 .calendar{
 display:grid;
 grid-template-columns:repeat(7,1fr);
-gap:7px;
+gap:8px;
 text-align:center;
 }
 
 .days div{
-font-size:10px;
-font-weight:700;
-color:#94a3b8;
+font-size:11px;
+color:var(--muted);
 }
 
 .calendar div{
 aspect-ratio:1/1;
 display:flex;
-align-items:center;
 justify-content:center;
-background:rgba(255,255,255,0.03);
+align-items:center;
 border-radius:14px;
+background:#101a2a;
 font-size:12px;
-transition:0.25s;
+border:1px solid rgba(255,255,255,0.04);
+transition:0.2s;
 }
 
 .calendar div:hover{
-background:rgba(96,165,250,0.12);
 transform:translateY(-2px);
+border-color:rgba(124,255,178,0.2);
 }
 
 .today{
-background:linear-gradient(135deg,#60a5fa,#38bdf8) !important;
-color:#08111f;
+background:var(--accent)!important;
+color:#06120d;
 font-weight:800;
-}
-
-/* BUTTONS */
-
-.buttons{
-display:flex;
-gap:10px;
-margin-top:14px;
-}
-
-.btn{
-flex:1;
-padding:9px;
-text-align:center;
-text-decoration:none;
-font-size:11px;
-font-weight:700;
-color:#e8eefc;
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(255,255,255,0.08);
-border-radius:14px;
-transition:0.25s;
-}
-
-.btn:hover{
-background:rgba(96,165,250,0.12);
-border-color:#60a5fa;
-transform:translateY(-2px);
 }
 
 /* PARTNERS */
 
-.partner-card{
-background:rgba(255,255,255,0.03);
-border:1px solid rgba(255,255,255,0.08);
+.partnerWrap{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.partner{
+display:flex;
+align-items:center;
+gap:14px;
+padding:12px;
 border-radius:18px;
-padding:14px;
-text-align:center;
-margin-bottom:12px;
+background:#101927;
+border:1px solid rgba(255,255,255,0.05);
+transition:0.2s;
 cursor:pointer;
-transition:0.25s;
 }
 
-.partner-card:hover{
-background:rgba(96,165,250,0.08);
-border-color:#60a5fa;
-transform:translateY(-3px);
+.partner:hover{
+transform:translateY(-2px);
+border-color:rgba(124,255,178,0.25);
 }
 
-.partner-img{
-width:70px;
-height:70px;
-border-radius:18px;
+.partner img{
+width:58px;
+height:58px;
+border-radius:16px;
 object-fit:cover;
-box-shadow:0 10px 20px rgba(0,0,0,0.35);
 }
 
-.partner-name{
-margin-top:10px;
+.partner h4{
 font-size:13px;
-font-weight:700;
-letter-spacing:0.5px;
+margin-bottom:3px;
 }
+
+.partner p{
+font-size:11px;
+color:var(--muted);
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:20px;
+text-align:center;
+font-size:11px;
+color:var(--muted);
+line-height:1.7;
+}
+
+/* MOBILE */
+
+@media(max-width:380px){
+
+.wrapper{
+max-width:100%;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="rgbBorder"></div>
+<div class="bgGlow"></div>
+<div class="bgGlow2"></div>
 
-<!-- KEEP YOUR FULL ORIGINAL BODY + PLAYER + SONGS + JAVASCRIPT BELOW -->
+<div class="wrapper">
+
+<!-- HERO -->
+
+<div class="hero">
+
+<div class="heroTop">
+
+<div class="logoRing">
+<img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png">
+</div>
+
+</div>
+
+<div class="clubName">
+PIXEL GLOW
+</div>
+
+<div class="clubSub">
+A modern chess community built for strategy, creativity, events and competitive growth.
+</div>
+
+<div class="quote">
+“Even a pawn becomes powerful when it keeps moving forward.”
+</div>
+
+<div class="liveBar">
+<div class="liveDot"></div>
+<span>Community Online • Welcome to Pixel Glow Club</span>
+</div>
+
+</div>
+
+<!-- LINKS -->
+
+<div class="section">
+
+<div class="sectionTitle">
+<h3>Club Access</h3>
+<span>Quick Links</span>
+</div>
+
+<div class="links">
+
+<div class="row">
+
+<a class="linkBtn"
+href="https://www.chess.com/member/yogi136"
+target="_blank">
+Owner
+</a>
+
+<a class="linkBtn"
+href="https://www.chess.com/member/michael-kaiser10bm"
+target="_blank">
+Co Owner
+</a>
+
+</div>
+
+<a class="linkBtn"
+href="https://www.chess.com/clubs/forum/view/club-rulebook-1#comment-127196376"
+target="_blank">
+Club Rules
+</a>
+
+<a class="linkBtn"
+href="https://www.chess.com/club/pixelglow/announcements"
+target="_blank">
+Announcements
+</a>
+
+<a class="linkBtn"
+href="https://www.chess.com/clubs/events/pixelglow"
+target="_blank">
+Join Events
+</a>
+
+</div>
+
+</div>
+
+<!-- PLAYER -->
+
+<div class="section">
+
+<div class="sectionTitle">
+<h3>Music Lounge</h3>
+<span>Now Streaming</span>
+</div>
+
+<div class="playerBox">
+
+<div class="nowPlaying">
+<div class="marquee" id="songText">
+Now Playing
+</div>
+</div>
+
+<div class="playerScreen">
+<iframe id="playerFrame"
+allow="autoplay; encrypted-media; fullscreen">
+</iframe>
+</div>
+
+<div class="controls">
+<button onclick="prevSong()">⏮</button>
+<button id="toggleBtn" onclick="toggleVideo()">▶</button>
+<button onclick="nextSong()">⏭</button>
+</div>
+
+</div>
+
+</div>
+
+<!-- CALENDAR -->
+
+<div class="section">
+
+<div class="calendarHead">
+<div>
+<h2>May 2026</h2>
+<p>Pixel Glow Schedule</p>
+</div>
+</div>
+
+<div class="days">
+<div>S</div>
+<div>M</div>
+<div>T</div>
+<div>W</div>
+<div>T</div>
+<div>F</div>
+<div>S</div>
+</div>
+
+<div class="calendar">
+
+<div></div>
+<div></div>
+
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div>5</div>
+
+<div>6</div>
+<div>7</div>
+<div>8</div>
+<div>9</div>
+<div>10</div>
+<div>11</div>
+<div>12</div>
+
+<div>13</div>
+<div>14</div>
+<div>15</div>
+<div>16</div>
+<div>17</div>
+<div>18</div>
+<div>19</div>
+
+<div>20</div>
+<div>21</div>
+<div class="today">22</div>
+<div>23</div>
+<div>24</div>
+<div>25</div>
+<div>26</div>
+
+<div>27</div>
+<div>28</div>
+<div>29</div>
+<div>30</div>
+<div>31</div>
+
+</div>
+
+</div>
+
+<!-- PARTNERS -->
+
+<div class="section">
+
+<div class="sectionTitle">
+<h3>Partner Clubs</h3>
+<span>Allied Communities</span>
+</div>
+
+<div class="partnerWrap" id="partnersContainer"></div>
+
+</div>
+
+<div class="footer">
+PIXEL GLOW CLUB © 2026<br>
+Built for chess, creativity and competition.
+</div>
+
+</div>
+
+<script>
+
+let songs=[
+
+{
+src:"https://youtu.be/kcsGhOmULxQ",
+name:"Golden Brown - The Stranglers"
+},
+
+{
+src:"https://youtu.be/_XeE2aEiPHk",
+name:"The Flame of Love - Rokudenashi"
+},
+
+{
+src:"https://youtu.be/qdpXxGPqW-Y",
+name:"Faded - Alan Walker"
+},
+
+{
+src:"https://youtu.be/R5aurUlfn3w",
+name:"Monody - TheFatRat"
+},
+
+{
+src:"https://youtu.be/Jkj36B1YuDU",
+name:"Another Love - Tom Odell"
+}
+
+];
+
+let i=0;
+let isPlaying=false;
+
+const frame=document.getElementById("playerFrame");
+const songText=document.getElementById("songText");
+const btn=document.getElementById("toggleBtn");
+
+function getId(url){
+
+if(url.includes("youtu.be/")){
+return url.split("youtu.be/")[1];
+}
+
+if(url.includes("watch?v=")){
+return url.split("watch?v=")[1].split("&")[0];
+}
+
+return url;
+
+}
+
+function convert(url){
+
+return `https://www.youtube.com/embed/${getId(url)}?enablejsapi=1&rel=0`;
+
+}
+
+function load(){
+
+frame.src=convert(songs[i].src);
+
+songText.innerText=
+"Now Playing • " + songs[i].name;
+
+btn.innerText="▶";
+
+isPlaying=false;
+
+}
+
+function nextSong(){
+
+i=(i+1)%songs.length;
+
+load();
+
+}
+
+function prevSong(){
+
+i=(i-1+songs.length)%songs.length;
+
+load();
+
+}
+
+function toggleVideo(){
+
+frame.contentWindow.postMessage(JSON.stringify({
+event:"command",
+func:isPlaying?"pauseVideo":"playVideo",
+args:[]
+}),"*");
+
+isPlaying=!isPlaying;
+
+btn.innerText=isPlaying?"❚❚":"▶";
+
+}
+
+load();
+
+/* PARTNERS */
+
+const partners=[
+
+{
+name:"SAPPHIRE",
+img:"https://i.ibb.co/4RYLGQ3z/image.jpg",
+link:"https://www.chess.com/club/sapphire-1",
+desc:"Strategic chess alliance"
+},
+
+{
+name:"PENGUIN CHESS CLUB",
+img:"https://i.ibb.co/0p7z5V4R/your-image.jpg",
+link:"https://www.chess.com/club/penguin-chess-club-3",
+desc:"Friendly competitive community"
+}
+
+];
+
+const container=
+document.getElementById("partnersContainer");
+
+partners.forEach(p=>{
+
+const card=document.createElement("div");
+
+card.className="partner";
+
+card.innerHTML=`
+
+<img src="${p.img}">
+
+<div>
+
+<h4>${p.name}</h4>
+
+<p>${p.desc}</p>
+
+</div>
+
+`;
+
+card.onclick=()=>window.open(p.link,"_blank");
+
+container.appendChild(card);
+
+});
+
+</script>
 
 </body>
 </html>
