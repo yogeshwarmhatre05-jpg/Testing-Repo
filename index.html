@@ -1,155 +1,412 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AI Chat UI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixel Glow Club</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+*{
+box-sizing:border-box;
 }
 
-body {
-  background: #0b0f19;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+:root{
+--bg:#0f172a;
+--bg2:#111827;
+--card:#111827ee;
+--border:#243041;
+--accent:#60a5fa;
+--accent2:#38bdf8;
+--text:#e5edf8;
+--muted:#94a3b8;
+--hover:#1e293b;
+--shadow:0 10px 40px rgba(0,0,0,0.45);
 }
 
-/* main container */
-.chat-container {
-  width: 400px;
-  height: 600px;
-  background: #111827;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid #2a2f3a;
+html,body{
+margin:0;
+padding:0;
+min-height:100vh;
+overflow-x:hidden;
+font-family:'Inter',sans-serif;
+background:
+radial-gradient(circle at top left,#1e293b 0%,transparent 35%),
+radial-gradient(circle at bottom right,#0f766e33 0%,transparent 30%),
+linear-gradient(135deg,#0b1120,#0f172a 55%,#111827);
+color:var(--text);
 }
 
-/* header */
-.header {
-  padding: 15px;
-  background: #0f172a;
-  color: white;
-  font-weight: bold;
-  text-align: center;
+/* PROFESSIONAL RGB FRAME */
+.rgbBorder{
+position:fixed;
+inset:0;
+padding:2px;
+background:linear-gradient(
+90deg,
+#60a5fa,
+#38bdf8,
+#818cf8,
+#60a5fa
+);
+background-size:300% 300%;
+animation:borderMove 10s linear infinite;
+opacity:0.9;
+z-index:-1;
 }
 
-/* chat box */
-.chat-box {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.rgbBorder::before{
+content:"";
+position:absolute;
+inset:2px;
+background:linear-gradient(135deg,#0b1120,#111827);
 }
 
-/* messages */
-.message {
-  padding: 10px 12px;
-  border-radius: 12px;
-  max-width: 75%;
-  font-size: 14px;
-  line-height: 1.4;
+@keyframes borderMove{
+0%{background-position:0% 50%;}
+100%{background-position:300% 50%;}
 }
 
-.user {
-  align-self: flex-end;
-  background: #3b82f6;
-  color: white;
+/* MAIN */
+.mainBox{
+width:320px;
+margin:24px auto;
+padding:16px;
+border-radius:24px;
+background:rgba(15,23,42,0.75);
+backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:var(--shadow);
 }
 
-.bot {
-  align-self: flex-start;
-  background: #1f2937;
-  color: #e5e7eb;
+/* LOGO BOX */
+.pixelGlowBox{
+width:280px;
+height:68px;
+margin:auto;
+position:relative;
+overflow:hidden;
+border-radius:18px;
 }
 
-/* input area */
-.input-area {
-  display: flex;
-  padding: 10px;
-  background: #0f172a;
-  gap: 8px;
+.pixelBorder{
+position:absolute;
+inset:0;
+padding:2px;
+background:linear-gradient(
+135deg,
+#60a5fa,
+#38bdf8,
+#818cf8
+);
+background-size:300% 300%;
+animation:borderMove 8s linear infinite;
 }
 
-input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background: #1f2937;
-  color: white;
+.pixelBorder::before{
+content:"";
+position:absolute;
+inset:2px;
+border-radius:16px;
+background:linear-gradient(135deg,#0f172a,#111827);
 }
 
-button {
-  padding: 10px 14px;
-  border: none;
-  border-radius: 10px;
-  background: #22c55e;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
+#pixelText{
+position:absolute;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:'Space Grotesk',sans-serif;
+font-size:1.05rem;
+font-weight:700;
+letter-spacing:3px;
+color:white;
+text-shadow:0 0 15px rgba(96,165,250,0.5);
 }
 
-button:hover {
-  background: #16a34a;
+/* MARQUEE */
+marquee{
+font-size:12px;
+font-weight:500;
+letter-spacing:1px;
+color:var(--accent2);
+}
+
+/* IMAGE */
+img{
+border-radius:18px;
+margin-top:8px;
+box-shadow:0 10px 30px rgba(0,0,0,0.35);
+border:1px solid rgba(255,255,255,0.08);
+}
+
+/* QUOTE */
+i{
+display:block;
+margin-top:10px;
+line-height:1.6;
+color:#dbeafe !important;
+font-size:14px !important;
+text-shadow:none !important;
+}
+
+/* LINKS */
+.links{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:16px;
+}
+
+.topRow{
+display:flex;
+gap:10px;
+}
+
+.linkBtn{
+flex:1;
+padding:11px;
+border-radius:14px;
+text-decoration:none;
+font-size:13px;
+font-weight:600;
+color:var(--text);
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+transition:0.25s;
+backdrop-filter:blur(6px);
+}
+
+.linkBtn:hover{
+background:linear-gradient(
+135deg,
+rgba(96,165,250,0.18),
+rgba(56,189,248,0.12)
+);
+border-color:#60a5fa;
+transform:translateY(-2px);
+box-shadow:0 6px 20px rgba(96,165,250,0.2);
+}
+
+.full{
+width:100%;
+}
+
+/* PLAYER */
+.player{
+width:280px;
+margin:22px auto;
+padding:12px;
+border-radius:20px;
+background:rgba(17,24,39,0.9);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:var(--shadow);
+position:relative;
+}
+
+.live-dot{
+width:9px;
+height:9px;
+background:#22c55e;
+border-radius:50%;
+position:absolute;
+top:10px;
+left:10px;
+box-shadow:0 0 12px #22c55e;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%,100%{opacity:1;}
+50%{opacity:0.4;}
+}
+
+.marquee{
+width:100%;
+overflow:hidden;
+white-space:nowrap;
+font-size:11px;
+margin-bottom:8px;
+color:#93c5fd;
+}
+
+.screen{
+width:100%;
+aspect-ratio:16/9;
+border-radius:14px;
+overflow:hidden;
+border:1px solid rgba(255,255,255,0.08);
+background:black;
+}
+
+.screen iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+.controls{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-top:10px;
+}
+
+.controls button{
+background:rgba(255,255,255,0.05);
+color:var(--text);
+border:1px solid rgba(255,255,255,0.08);
+width:36px;
+height:30px;
+border-radius:10px;
+cursor:pointer;
+transition:0.25s;
+font-size:13px;
+}
+
+.controls button:hover{
+background:rgba(96,165,250,0.15);
+border-color:#60a5fa;
+transform:translateY(-1px);
+}
+
+#toggleBtn{
+background:linear-gradient(135deg,#60a5fa,#38bdf8);
+color:#08111f;
+font-weight:700;
+border:none;
+}
+
+/* CARDS */
+.box,
+.section{
+width:280px;
+margin:22px auto;
+padding:14px;
+border-radius:20px;
+background:rgba(17,24,39,0.88);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:var(--shadow);
+backdrop-filter:blur(10px);
+}
+
+/* TITLES */
+.title,
+.section-title{
+text-align:center;
+font-weight:700;
+font-size:15px;
+letter-spacing:1px;
+color:#dbeafe;
+}
+
+.subtitle{
+text-align:center;
+font-size:11px;
+color:var(--muted);
+margin-top:4px;
+}
+
+/* CALENDAR */
+.days,
+.calendar{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:6px;
+text-align:center;
+margin-top:12px;
+}
+
+.days div{
+font-size:10px;
+color:var(--muted);
+}
+
+.calendar div{
+aspect-ratio:1/1;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,0.03);
+border-radius:12px;
+font-size:12px;
+transition:0.25s;
+cursor:pointer;
+border:1px solid transparent;
+}
+
+.calendar div:hover{
+background:rgba(96,165,250,0.12);
+border-color:#60a5fa55;
+transform:translateY(-2px);
+}
+
+.today{
+background:linear-gradient(135deg,#60a5fa,#38bdf8) !important;
+color:#08111f;
+font-weight:700;
+}
+
+/* BUTTONS */
+.buttons{
+display:flex;
+gap:8px;
+margin-top:14px;
+}
+
+.btn{
+flex:1;
+text-align:center;
+padding:8px;
+border-radius:12px;
+font-size:11px;
+font-weight:600;
+text-decoration:none;
+background:rgba(255,255,255,0.04);
+color:var(--text);
+border:1px solid rgba(255,255,255,0.08);
+transition:0.25s;
+}
+
+.btn:hover{
+background:rgba(96,165,250,0.12);
+border-color:#60a5fa;
+transform:translateY(-2px);
+}
+
+/* PARTNERS */
+.partner-card{
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:16px;
+padding:12px;
+text-align:center;
+margin-bottom:10px;
+cursor:pointer;
+transition:0.25s;
+}
+
+.partner-card:hover{
+transform:translateY(-3px);
+border-color:#60a5fa;
+background:rgba(96,165,250,0.08);
+}
+
+.partner-img{
+width:68px;
+height:68px;
+border-radius:14px;
+object-fit:cover;
+}
+
+.partner-name{
+margin-top:8px;
+font-size:13px;
+font-weight:600;
+color:#e2e8f0;
 }
 </style>
 </head>
-
-<body>
-
-<div class="chat-container">
-
-  <div class="header">AI Chat UI</div>
-
-  <div class="chat-box" id="chatBox"></div>
-
-  <div class="input-area">
-    <input id="input" placeholder="Type a message..." />
-    <button onclick="sendMessage()">Send</button>
-  </div>
-
-</div>
-
-<script>
-const chatBox = document.getElementById("chatBox");
-const input = document.getElementById("input");
-
-function addMessage(text, type) {
-  const div = document.createElement("div");
-  div.classList.add("message", type);
-  div.innerText = text;
-  chatBox.appendChild(div);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-function fakeAIResponse(userText) {
-  return "AI: You said -> " + userText;
-}
-
-function sendMessage() {
-  const text = input.value.trim();
-  if (!text) return;
-
-  addMessage(text, "user");
-  input.value = "";
-
-  setTimeout(() => {
-    addMessage(fakeAIResponse(text), "bot");
-  }, 600);
-}
-</script>
-
-</body>
-</html>
