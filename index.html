@@ -22,29 +22,6 @@ html{
 scroll-behavior:smooth;
 }
 
-:root{
-
---bg:#edf6f1;
---bg2:#dcece5;
-
---white:#ffffff;
-
---card:#ffffffc4;
-
---dark:#20322e;
---soft:#65766f;
-
---green:#8ccfb4;
---green2:#bfe6d4;
-
---orange:#ff9d8e;
---orange2:#ff7d6d;
-
---shadow:
-0 15px 35px rgba(0,0,0,0.06);
-
-}
-
 body{
 
 font-family:'Poppins',sans-serif;
@@ -56,23 +33,11 @@ linear-gradient(
 #dcece5
 );
 
-overflow-x:hidden;
-
-color:var(--dark);
+color:#20322e;
 
 padding:14px;
 
-min-height:100vh;
-
-}
-
-/* WIDTH */
-
-.wrapper{
-
-max-width:315px;
-
-margin:auto;
+overflow-x:hidden;
 
 }
 
@@ -84,9 +49,9 @@ position:fixed;
 
 inset:0;
 
-overflow:hidden;
-
 z-index:-10;
+
+overflow:hidden;
 
 }
 
@@ -100,19 +65,19 @@ filter:blur(100px);
 
 opacity:0.35;
 
-animation:moveBlur 12s infinite alternate ease-in-out;
+animation:move 10s infinite alternate ease-in-out;
 
 }
 
 .blur1{
 
-width:240px;
-height:240px;
+width:260px;
+height:260px;
 
 background:#bfe6d4;
 
-top:-70px;
-left:-70px;
+top:-80px;
+left:-80px;
 
 }
 
@@ -121,14 +86,14 @@ left:-70px;
 width:260px;
 height:260px;
 
-background:#ffd5cc;
+background:#ffd4c9;
 
-bottom:-90px;
-right:-90px;
+bottom:-80px;
+right:-80px;
 
 }
 
-@keyframes moveBlur{
+@keyframes move{
 
 100%{
 
@@ -140,50 +105,13 @@ translateX(10px);
 
 }
 
-/* LOADER */
+/* WRAPPER */
 
-#loader{
+.wrapper{
 
-position:fixed;
+max-width:315px;
 
-inset:0;
-
-background:#edf6f1;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-z-index:9999;
-
-transition:1s;
-
-}
-
-.loaderCircle{
-
-width:60px;
-height:60px;
-
-border-radius:50%;
-
-border:
-6px solid #bfe6d4;
-
-border-top:
-6px solid #ff9d8e;
-
-animation:spin 1s linear infinite;
-
-}
-
-@keyframes spin{
-
-100%{
-
-transform:rotate(360deg);
-
-}
+margin:auto;
 
 }
 
@@ -208,7 +136,8 @@ linear-gradient(
 
 border:1px solid rgba(255,255,255,0.7);
 
-box-shadow:var(--shadow);
+box-shadow:
+0 15px 35px rgba(0,0,0,0.06);
 
 animation:floatHero 5s ease-in-out infinite;
 
@@ -224,26 +153,24 @@ transform:translateY(-5px);
 
 }
 
-/* SKY */
+/* NATURE */
 
 .sun{
 
 position:absolute;
 
-top:22px;
-right:22px;
+top:20px;
+right:20px;
 
-width:75px;
-height:75px;
-
-background:#ffe3a8;
+width:70px;
+height:70px;
 
 border-radius:50%;
 
-box-shadow:
-0 0 50px #ffe3a8;
+background:#ffe6a8;
 
-opacity:0.9;
+box-shadow:
+0 0 50px #ffe6a8;
 
 }
 
@@ -251,7 +178,8 @@ opacity:0.9;
 
 position:absolute;
 
-background:rgba(255,255,255,0.55);
+background:
+rgba(255,255,255,0.55);
 
 border-radius:50px;
 
@@ -262,8 +190,8 @@ border-radius:50px;
 width:80px;
 height:28px;
 
-top:80px;
-left:18px;
+top:85px;
+left:10px;
 
 }
 
@@ -273,7 +201,7 @@ width:95px;
 height:34px;
 
 top:120px;
-right:10px;
+right:5px;
 
 }
 
@@ -281,7 +209,7 @@ right:10px;
 
 position:absolute;
 
-bottom:-15px;
+bottom:-20px;
 left:-10%;
 
 width:120%;
@@ -299,9 +227,7 @@ position:absolute;
 
 bottom:10px;
 
-font-size:62px;
-
-opacity:0.8;
+font-size:55px;
 
 }
 
@@ -341,7 +267,7 @@ background:
 linear-gradient(
 145deg,
 #ffffff,
-#dcece6
+#dcece5
 );
 
 box-shadow:
@@ -392,8 +318,6 @@ letter-spacing:2px;
 
 text-align:center;
 
-color:#20322e;
-
 position:relative;
 
 z-index:2;
@@ -428,7 +352,7 @@ grid-template-columns:repeat(3,1fr);
 
 gap:10px;
 
-margin-top:24px;
+margin-top:22px;
 
 position:relative;
 
@@ -449,9 +373,6 @@ backdrop-filter:blur(10px);
 text-align:center;
 
 border:1px solid rgba(255,255,255,0.6);
-
-box-shadow:
-0 5px 14px rgba(0,0,0,0.05);
 
 transition:0.35s;
 
@@ -493,7 +414,7 @@ border-radius:22px;
 
 background:#ffffffba;
 
-backdrop-filter:blur(12px);
+backdrop-filter:blur(10px);
 
 border:1px solid rgba(255,255,255,0.7);
 
@@ -511,11 +432,11 @@ color:#586965;
 
 .live{
 
-margin-top:16px;
+margin-top:15px;
 
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 gap:8px;
 
 padding:12px;
@@ -579,7 +500,7 @@ border-radius:28px;
 
 background:#ffffffba;
 
-backdrop-filter:blur(14px);
+backdrop-filter:blur(12px);
 
 border:1px solid rgba(255,255,255,0.7);
 
@@ -595,8 +516,6 @@ transition:0.35s;
 transform:translateY(-4px);
 
 }
-
-/* HEAD */
 
 .head{
 
@@ -640,7 +559,7 @@ padding:14px;
 
 border-radius:20px;
 
-background:#ffffff;
+background:white;
 
 border:1px solid #dce8e3;
 
@@ -668,7 +587,7 @@ margin-bottom:8px;
 
 font-size:12px;
 
-margin-bottom:6px;
+margin-bottom:5px;
 
 }
 
@@ -698,9 +617,9 @@ margin-bottom:8px;
 
 .calendarTop div{
 
-font-size:9px;
-
 text-align:center;
+
+font-size:9px;
 
 font-weight:600;
 
@@ -722,15 +641,15 @@ gap:6px;
 
 aspect-ratio:1/1;
 
+display:flex;
+justify-content:center;
+align-items:center;
+
 border-radius:14px;
 
-display:flex;
-align-items:center;
-justify-content:center;
+background:white;
 
 font-size:10px;
-
-background:#ffffff;
 
 box-shadow:
 0 4px 10px rgba(0,0,0,0.04);
@@ -783,7 +702,7 @@ padding:14px;
 
 border-radius:20px;
 
-background:#ffffff;
+background:white;
 
 border:1px solid #dce8e3;
 
@@ -886,9 +805,6 @@ linear-gradient(
 #ff7d6d
 );
 
-box-shadow:
-0 6px 16px rgba(255,120,100,0.18);
-
 transition:0.3s;
 
 }
@@ -931,7 +847,7 @@ left:130%;
 
 }
 
-/* MUSIC */
+/* PLAYER */
 
 .player{
 
@@ -942,19 +858,6 @@ border-radius:22px;
 background:#edf6f1;
 
 border:1px solid #d7e6df;
-
-animation:playerGlow 4s infinite alternate;
-
-}
-
-@keyframes playerGlow{
-
-100%{
-
-box-shadow:
-0 0 25px rgba(255,125,109,0.15);
-
-}
 
 }
 
@@ -985,7 +888,9 @@ animation:scroll 12s linear infinite;
 @keyframes scroll{
 
 100%{
+
 transform:translateX(-100%);
+
 }
 
 }
@@ -1026,8 +931,6 @@ border:none;
 
 border-radius:14px;
 
-font-size:15px;
-
 background:
 linear-gradient(
 135deg,
@@ -1037,7 +940,7 @@ linear-gradient(
 
 color:white;
 
-font-weight:700;
+font-size:15px;
 
 cursor:pointer;
 
@@ -1140,12 +1043,6 @@ color:#6f7f79;
 
 <body>
 
-<div id="loader">
-
-<div class="loaderCircle"></div>
-
-</div>
-
 <div class="bg">
 
 <div class="blur blur1"></div>
@@ -1185,7 +1082,7 @@ PIXEL GLOW
 
 <div class="subtitle">
 
-A calm digital chess sanctuary built for elite strategy, tournaments and peaceful competition.
+Where peaceful design meets elite strategy and modern chess culture.
 
 </div>
 
@@ -1201,7 +1098,7 @@ A calm digital chess sanctuary built for elite strategy, tournaments and peacefu
 
 <div class="stat">
 
-<h2 id="memberCount">0</h2>
+<h2 id="memberCount">147</h2>
 
 <p>MEMBERS</p>
 
@@ -1217,9 +1114,9 @@ A calm digital chess sanctuary built for elite strategy, tournaments and peacefu
 
 </div>
 
-<div class="quote">
+<div class="quote" id="quoteText">
 
-“Every chess move reflects patience, clarity and silent strength.”
+Patience creates perfect moves.
 
 </div>
 
@@ -1227,315 +1124,9 @@ A calm digital chess sanctuary built for elite strategy, tournaments and peacefu
 
 <div class="dot"></div>
 
-<span id="onlineCount">0</span> Members Online
+<span id="onlineCount">23</span> Members Online
 
 </div>
-
-</div>
-
-<!-- FEATURES -->
-
-<div class="section">
-
-<div class="head">
-
-<h3>Club Features</h3>
-
-<span>Experience</span>
-
-</div>
-
-<div class="featureGrid">
-
-<div class="feature">
-
-<div class="featureIcon">♟️</div>
-
-<h4>Daily Matches</h4>
-
-<p>Compete with active players every day.</p>
-
-</div>
-
-<div class="feature">
-
-<div class="featureIcon">🏆</div>
-
-<h4>Tournaments</h4>
-
-<p>Weekly elite club competitions.</p>
-
-</div>
-
-<div class="feature">
-
-<div class="featureIcon">🎧</div>
-
-<h4>Music Lounge</h4>
-
-<p>Peaceful background streaming.</p>
-
-</div>
-
-<div class="feature">
-
-<div class="featureIcon">🌿</div>
-
-<h4>Creative Space</h4>
-
-<p>Nature inspired strategic community.</p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- CALENDAR -->
-
-<div class="section">
-
-<div class="head">
-
-<h3>Club Calendar</h3>
-
-<span id="monthYear"></span>
-
-</div>
-
-<div class="calendarTop">
-
-<div>Mon</div>
-<div>Tue</div>
-<div>Wed</div>
-<div>Thu</div>
-<div>Fri</div>
-<div>Sat</div>
-<div>Sun</div>
-
-</div>
-
-<div class="calendar" id="calendar"></div>
-
-</div>
-
-<!-- EVENTS -->
-
-<div class="section">
-
-<div class="head">
-
-<h3>Upcoming Events</h3>
-
-<span>Schedule</span>
-
-</div>
-
-<div class="eventWrap" id="eventContainer"></div>
-
-</div>
-
-<!-- LEADERBOARD -->
-
-<div class="section">
-
-<div class="head">
-
-<h3>Top Players</h3>
-
-<span>Leaderboard</span>
-
-</div>
-
-<div class="eventWrap">
-
-<div class="event">
-
-<div class="eventTop">
-
-<h4>#1 Yogi136</h4>
-
-<div class="badge">2400</div>
-
-</div>
-
-<p>Elite tactical player and founder.</p>
-
-</div>
-
-<div class="event">
-
-<div class="eventTop">
-
-<h4>#2 Michael Kaiser</h4>
-
-<div class="badge">2310</div>
-
-</div>
-
-<p>Creative attacking playstyle.</p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- DAILY PUZZLE -->
-
-<div class="section">
-
-<div class="head">
-
-<h3>Daily Puzzle</h3>
-
-<span>Challenge</span>
-
-</div>
-
-<div class="quote">
-
-White to move and mate in 2 ♟️
-
-</div>
-
-</div>
-
-<!-- ACCESS -->
-
-<div class="section">
-
-<div class="head">
-
-<h3>Club Access</h3>
-
-<span>Quick Portal</span>
-
-</div>
-
-<div class="links">
-
-<div class="row">
-
-<a class="btn"
-href="https://www.chess.com/member/yogi136"
-target="_blank">
-
-Owner
-
-</a>
-
-<a class="btn"
-href="https://www.chess.com/member/michael-kaiser10bm"
-target="_blank">
-
-Co Owner
-
-</a>
-
-</div>
-
-<a class="btn"
-href="https://www.chess.com/clubs/forum/view/club-rulebook-1#comment-127196376"
-target="_blank">
-
-Club Rules
-
-</a>
-
-<a class="btn"
-href="https://www.chess.com/club/pixelglow/announcements"
-target="_blank">
-
-Announcements
-
-</a>
-
-<a class="btn"
-href="https://www.chess.com/clubs/events/pixelglow"
-target="_blank">
-
-Join Events
-
-</a>
-
-</div>
-
-</div>
-
-<!-- MUSIC -->
-
-<div class="section">
-
-<div class="head">
-
-<h3>Music Lounge</h3>
-
-<span>Streaming</span>
-
-</div>
-
-<div class="player">
-
-<div class="song">
-
-<div class="marquee" id="songText">
-
-Now Playing
-
-</div>
-
-</div>
-
-<div class="screen">
-
-<iframe id="playerFrame"
-allow="autoplay; encrypted-media"
-allowfullscreen>
-
-</iframe>
-
-</div>
-
-<div class="controls">
-
-<button onclick="prevSong()">⏮</button>
-
-<button onclick="toggleVideo()" id="toggleBtn">
-
-▶
-
-</button>
-
-<button onclick="nextSong()">⏭</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- PARTNERS -->
-
-<div class="section">
-
-<div class="head">
-
-<h3>Partner Clubs</h3>
-
-<span>Alliance</span>
-
-</div>
-
-<div class="partnerWrap" id="partnersContainer"></div>
-
-</div>
-
-<div class="footer">
-
-PIXEL GLOW CLUB © 2026<br>
-
-Designed with peaceful energy and elite strategy.
 
 </div>
 
@@ -1543,369 +1134,68 @@ Designed with peaceful energy and elite strategy.
 
 <script>
 
-/* LOADER */
-
-window.onload=()=>{
-
-setTimeout(()=>{
-
-document.getElementById("loader")
-.style.opacity="0";
-
-setTimeout(()=>{
-
-document.getElementById("loader")
-.style.display="none";
-
-},1000);
-
-},1200);
-
-};
-
-/* CALENDAR */
-
-function generateCalendar(){
-
-const calendar =
-document.getElementById("calendar");
-
-const monthYear =
-document.getElementById("monthYear");
-
-calendar.innerHTML = "";
-
-const today = new Date();
-
-const currentDate =
-today.getDate();
-
-const year =
-today.getFullYear();
-
-const month =
-today.getMonth();
-
-const monthNames=[
-
-"January","February","March",
-"April","May","June",
-"July","August","September",
-"October","November","December"
-
-];
-
-monthYear.innerText =
-monthNames[month] + " " + year;
-
-const firstDay =
-new Date(year,month,1).getDay();
-
-const totalDays =
-new Date(year,month+1,0).getDate();
-
-let start =
-firstDay === 0 ? 6 : firstDay - 1;
-
-for(let i=0;i<start;i++){
-
-calendar.innerHTML +=
-`<div class="day empty"></div>`;
-
-}
-
-for(let d=1; d<=totalDays; d++){
-
-calendar.innerHTML += `
-
-<div class="day ${
-d === currentDate
-? "active"
-: ""
-}">
-
-${d}
-
-</div>
-
-`;
-
-}
-
-}
-
-generateCalendar();
-
 /* MEMBERS */
 
-async function loadMembers(){
+let totalMembers = 147;
 
-try{
+let onlineMembers = 23;
 
-const response =
-await fetch("api/members.json");
+function updateMembers(){
 
-const data =
-await response.json();
+onlineMembers =
+Math.floor(Math.random()*20)+15;
 
-document.getElementById("memberCount")
-.innerText = data.members;
+if(Math.random() > 0.88){
 
-document.getElementById("onlineCount")
-.innerText = data.online;
+totalMembers++;
 
 }
 
-catch(error){
+document.getElementById(
+"memberCount"
+).innerText = totalMembers;
 
-console.log(error);
-
-}
-
-}
-
-loadMembers();
-
-/* EVENTS */
-
-async function loadEvents(){
-
-try{
-
-const response =
-await fetch("api/events.json");
-
-const events =
-await response.json();
-
-const container =
-document.getElementById("eventContainer");
-
-container.innerHTML = "";
-
-events.forEach(event=>{
-
-container.innerHTML += `
-
-<div class="event">
-
-<div class="eventTop">
-
-<h4>${event.title}</h4>
-
-<div class="badge">
-
-${event.type}
-
-</div>
-
-</div>
-
-<p>
-
-${event.date}
-
-</p>
-
-<p>
-
-${event.description}
-
-</p>
-
-</div>
-
-`;
-
-});
+document.getElementById(
+"onlineCount"
+).innerText = onlineMembers;
 
 }
 
-catch(error){
+setInterval(updateMembers,5000);
 
-console.log(error);
+updateMembers();
 
-}
+/* QUOTES */
 
-}
+const quotes=[
 
-loadEvents();
+"Patience creates perfect moves.",
 
-/* MUSIC */
+"Every move changes the battlefield.",
 
-let songs=[
+"Strategy defeats chaos.",
 
-{
-src:"https://youtu.be/kcsGhOmULxQ",
-name:"Golden Brown - The Stranglers"
-},
+"Think deeply before every move.",
 
-{
-src:"https://youtu.be/qdpXxGPqW-Y",
-name:"Faded - Alan Walker"
-},
-
-{
-src:"https://youtu.be/R5aurUlfn3w",
-name:"Monody - TheFatRat"
-}
+"Calm minds create brilliant tactics."
 
 ];
 
-let i=0;
+let q=0;
 
-let isPlaying=false;
+function rotateQuote(){
 
-const frame=document.getElementById("playerFrame");
+document.getElementById(
+"quoteText"
+).innerText = quotes[q];
 
-const songText=document.getElementById("songText");
-
-const btn=document.getElementById("toggleBtn");
-
-function getId(url){
-
-if(url.includes("youtu.be/")){
-
-return url.split("youtu.be/")[1];
+q=(q+1)%quotes.length;
 
 }
 
-return url;
+setInterval(rotateQuote,4000);
 
-}
-
-function convert(url){
-
-return `https://www.youtube.com/embed/${getId(url)}?enablejsapi=1&rel=0`;
-
-}
-
-function load(){
-
-frame.src=convert(songs[i].src);
-
-songText.innerText=
-"Now Playing • " + songs[i].name;
-
-btn.innerText="▶";
-
-isPlaying=false;
-
-}
-
-function nextSong(){
-
-i=(i+1)%songs.length;
-
-load();
-
-}
-
-function prevSong(){
-
-i=(i-1+songs.length)%songs.length;
-
-load();
-
-}
-
-function toggleVideo(){
-
-frame.contentWindow.postMessage(
-
-JSON.stringify({
-
-event:"command",
-
-func:isPlaying
-? "pauseVideo"
-: "playVideo",
-
-args:[]
-
-}),
-
-"*"
-
-);
-
-isPlaying=!isPlaying;
-
-btn.innerText=
-isPlaying
-? "❚❚"
-: "▶";
-
-}
-
-load();
-
-/* PARTNERS */
-
-const partners=[
-
-{
-
-name:"SAPPHIRE",
-
-img:"https://i.ibb.co/4RYLGQ3z/image.jpg",
-
-link:"https://www.chess.com/club/sapphire-1",
-
-desc:"Competitive strategic alliance"
-
-},
-
-{
-
-name:"PENGUIN CHESS CLUB",
-
-img:"https://i.ibb.co/0p7z5V4R/your-image.jpg",
-
-link:"https://www.chess.com/club/penguin-chess-club-3",
-
-desc:"Friendly modern chess community"
-
-}
-
-];
-
-const container=
-document.getElementById("partnersContainer");
-
-partners.forEach(p=>{
-
-const card=
-document.createElement("div");
-
-card.className="partner";
-
-card.innerHTML=`
-
-<img src="${p.img}">
-
-<div>
-
-<h4>${p.name}</h4>
-
-<p>${p.desc}</p>
-
-</div>
-
-`;
-
-card.onclick=()=>{
-
-window.open(
-p.link,
-"_blank"
-);
-
-};
-
-container.appendChild(card);
-
-});
+rotateQuote();
 
 </script>
 
