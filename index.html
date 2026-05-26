@@ -33,11 +33,11 @@ linear-gradient(
 #dcece5
 );
 
+overflow-x:hidden;
+
 color:#20322e;
 
 padding:14px;
-
-overflow-x:hidden;
 
 }
 
@@ -65,7 +65,7 @@ filter:blur(100px);
 
 opacity:0.35;
 
-animation:move 10s infinite alternate ease-in-out;
+animation:move 12s infinite alternate ease-in-out;
 
 }
 
@@ -541,63 +541,54 @@ color:#7f9089;
 
 }
 
-/* FEATURES */
+/* BUTTONS */
 
-.featureGrid{
+.links{
 
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
+display:flex;
+flex-direction:column;
 gap:10px;
 
 }
 
-.feature{
+.row{
+
+display:flex;
+gap:10px;
+
+}
+
+.btn{
+
+flex:1;
 
 padding:14px;
 
-border-radius:20px;
+border-radius:18px;
 
-background:white;
+text-decoration:none;
 
-border:1px solid #dce8e3;
+font-size:11px;
+font-weight:600;
 
 text-align:center;
 
-transition:0.35s;
+color:white;
+
+background:
+linear-gradient(
+135deg,
+#ff9d8e,
+#ff7d6d
+);
+
+transition:0.3s;
 
 }
 
-.feature:hover{
+.btn:hover{
 
-transform:translateY(-4px);
-
-}
-
-.featureIcon{
-
-font-size:24px;
-
-margin-bottom:8px;
-
-}
-
-.feature h4{
-
-font-size:12px;
-
-margin-bottom:5px;
-
-}
-
-.feature p{
-
-font-size:10px;
-
-line-height:1.6;
-
-color:#6d7d78;
+transform:translateY(-3px);
 
 }
 
@@ -654,14 +645,6 @@ font-size:10px;
 box-shadow:
 0 4px 10px rgba(0,0,0,0.04);
 
-transition:0.25s;
-
-}
-
-.day:hover{
-
-transform:scale(1.08);
-
 }
 
 .active{
@@ -706,14 +689,6 @@ background:white;
 
 border:1px solid #dce8e3;
 
-transition:0.35s;
-
-}
-
-.event:hover{
-
-transform:translateY(-4px);
-
 }
 
 .eventTop{
@@ -757,93 +732,6 @@ line-height:1.7;
 color:#6f7f79;
 
 margin-top:4px;
-
-}
-
-/* BUTTONS */
-
-.links{
-
-display:flex;
-flex-direction:column;
-gap:10px;
-
-}
-
-.row{
-
-display:flex;
-gap:10px;
-
-}
-
-.btn{
-
-flex:1;
-
-position:relative;
-
-overflow:hidden;
-
-padding:14px;
-
-border-radius:18px;
-
-text-decoration:none;
-
-font-size:11px;
-font-weight:600;
-
-text-align:center;
-
-color:white;
-
-background:
-linear-gradient(
-135deg,
-#ff9d8e,
-#ff7d6d
-);
-
-transition:0.3s;
-
-}
-
-.btn:hover{
-
-transform:translateY(-3px);
-
-}
-
-.btn::before{
-
-content:"";
-
-position:absolute;
-
-top:0;
-left:-120%;
-
-width:80%;
-height:100%;
-
-background:
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,0.5),
-transparent
-);
-
-transform:skewX(-20deg);
-
-transition:0.7s;
-
-}
-
-.btn:hover::before{
-
-left:130%;
 
 }
 
@@ -944,78 +832,234 @@ font-size:15px;
 
 cursor:pointer;
 
-transition:0.3s;
+}
+
+/* RABBIT */
+
+.rabbitScene{
+
+position:relative;
+
+margin-top:18px;
+
+height:220px;
+
+border-radius:32px;
+
+overflow:hidden;
+
+background:
+linear-gradient(
+180deg,
+#dff4ea,
+#bfe6d4
+);
 
 }
 
-.controls button:hover{
+.moon{
 
-transform:translateY(-3px);
+position:absolute;
+
+top:20px;
+right:25px;
+
+width:60px;
+height:60px;
+
+border-radius:50%;
+
+background:#fff6d1;
+
+box-shadow:
+0 0 30px #fff6d1;
 
 }
 
-/* PARTNERS */
+.water{
 
-.partnerWrap{
+position:absolute;
 
-display:flex;
-flex-direction:column;
-gap:10px;
+bottom:0;
+
+width:100%;
+height:80px;
+
+background:
+linear-gradient(
+180deg,
+#8fd1b3,
+#74b99b
+);
 
 }
 
-.partner{
+.rabbit{
 
-display:flex;
-align-items:center;
-gap:12px;
+position:absolute;
 
-padding:12px;
+left:40px;
+bottom:55px;
 
-border-radius:20px;
+width:120px;
+height:120px;
+
+animation:rabbitFloat 4s infinite ease-in-out;
+
+}
+
+@keyframes rabbitFloat{
+
+50%{
+
+transform:translateY(-5px);
+
+}
+
+}
+
+.ear{
+
+position:absolute;
+
+width:22px;
+height:55px;
+
+background:#fff;
+
+border-radius:30px;
+
+top:0;
+
+}
+
+.ear1{
+
+left:25px;
+
+transform:rotate(-10deg);
+
+}
+
+.ear2{
+
+left:55px;
+
+transform:rotate(10deg);
+
+}
+
+.face{
+
+position:absolute;
+
+top:35px;
+left:18px;
+
+width:70px;
+height:60px;
+
+border-radius:50%;
 
 background:white;
 
-border:1px solid #dce8e3;
+}
 
-transition:0.35s;
+.body{
 
-cursor:pointer;
+position:absolute;
+
+top:78px;
+left:28px;
+
+width:58px;
+height:45px;
+
+border-radius:40px;
+
+background:white;
 
 }
 
-.partner:hover{
+.arm{
 
-transform:translateY(-4px);
+position:absolute;
 
-}
+top:82px;
+left:70px;
 
-.partner img{
+width:34px;
+height:8px;
 
-width:52px;
-height:52px;
+border-radius:10px;
 
-border-radius:14px;
+background:white;
 
-object-fit:cover;
-
-}
-
-.partner h4{
-
-font-size:11px;
-
-margin-bottom:3px;
+transform:rotate(-18deg);
 
 }
 
-.partner p{
+.rod{
 
-font-size:9px;
+position:absolute;
 
-line-height:1.6;
+top:52px;
+left:95px;
 
-color:#6f7f79;
+width:4px;
+height:90px;
+
+background:#8b5e3c;
+
+transform:
+rotate(35deg);
+
+transform-origin:top;
+
+border-radius:10px;
+
+}
+
+.line{
+
+position:absolute;
+
+top:102px;
+left:145px;
+
+width:1.5px;
+height:70px;
+
+background:white;
+
+}
+
+.float{
+
+position:absolute;
+
+left:141px;
+top:168px;
+
+width:10px;
+height:10px;
+
+border-radius:50%;
+
+background:#ff8f7d;
+
+animation:floatWater 2s infinite ease-in-out;
+
+}
+
+@keyframes floatWater{
+
+50%{
+
+transform:
+translateY(4px);
+
+}
 
 }
 
@@ -1051,6 +1095,8 @@ color:#6f7f79;
 </div>
 
 <div class="wrapper">
+
+<!-- HERO -->
 
 <div class="hero">
 
@@ -1130,6 +1176,193 @@ Patience creates perfect moves.
 
 </div>
 
+<!-- RABBIT -->
+
+<div class="rabbitScene">
+
+<div class="moon"></div>
+
+<div class="water"></div>
+
+<div class="rabbit">
+
+<div class="ear ear1"></div>
+<div class="ear ear2"></div>
+
+<div class="face"></div>
+
+<div class="body"></div>
+
+<div class="arm"></div>
+
+<div class="rod"></div>
+
+<div class="line"></div>
+
+<div class="float"></div>
+
+</div>
+
+</div>
+
+<!-- LINKS -->
+
+<div class="section">
+
+<div class="head">
+
+<h3>Club Access</h3>
+
+<span>Portal</span>
+
+</div>
+
+<div class="links">
+
+<div class="row">
+
+<a class="btn"
+href="https://www.chess.com/member/yogi136"
+target="_blank">
+
+Owner
+
+</a>
+
+<a class="btn"
+href="https://www.chess.com/member/michael-kaiser10bm"
+target="_blank">
+
+Co Owner
+
+</a>
+
+</div>
+
+<a class="btn"
+href="https://www.chess.com/clubs/forum/view/club-rulebook-1#comment-127196376"
+target="_blank">
+
+Club Rules
+
+</a>
+
+<a class="btn"
+href="https://www.chess.com/club/pixelglow/announcements"
+target="_blank">
+
+Announcements
+
+</a>
+
+<a class="btn"
+href="https://www.chess.com/clubs/events/pixelglow"
+target="_blank">
+
+Join Events
+
+</a>
+
+</div>
+
+</div>
+
+<!-- CALENDAR -->
+
+<div class="section">
+
+<div class="head">
+
+<h3>Club Calendar</h3>
+
+<span id="monthYear"></span>
+
+</div>
+
+<div class="calendarTop">
+
+<div>Mon</div>
+<div>Tue</div>
+<div>Wed</div>
+<div>Thu</div>
+<div>Fri</div>
+<div>Sat</div>
+<div>Sun</div>
+
+</div>
+
+<div class="calendar" id="calendar"></div>
+
+</div>
+
+<!-- EVENTS -->
+
+<div class="section">
+
+<div class="head">
+
+<h3>Upcoming Events</h3>
+
+<span>Schedule</span>
+
+</div>
+
+<div class="eventWrap" id="eventContainer"></div>
+
+</div>
+
+<!-- PLAYER -->
+
+<div class="section">
+
+<div class="head">
+
+<h3>Music Lounge</h3>
+
+<span>Streaming</span>
+
+</div>
+
+<div class="player">
+
+<div class="song">
+
+<div class="marquee" id="songText">
+
+Now Playing
+
+</div>
+
+</div>
+
+<div class="screen">
+
+<iframe id="playerFrame"
+allowfullscreen>
+
+</iframe>
+
+</div>
+
+<div class="controls">
+
+<button onclick="prevSong()">⏮</button>
+
+<button onclick="nextSong()">⏭</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+PIXEL GLOW CLUB © 2026<br>
+Designed with peaceful modern aesthetics.
+
+</div>
+
 </div>
 
 <script>
@@ -1145,16 +1378,6 @@ function updateMembers(){
 onlineMembers =
 Math.floor(Math.random()*20)+15;
 
-if(Math.random() > 0.88){
-
-totalMembers++;
-
-}
-
-document.getElementById(
-"memberCount"
-).innerText = totalMembers;
-
 document.getElementById(
 "onlineCount"
 ).innerText = onlineMembers;
@@ -1162,8 +1385,6 @@ document.getElementById(
 }
 
 setInterval(updateMembers,5000);
-
-updateMembers();
 
 /* QUOTES */
 
@@ -1175,9 +1396,7 @@ const quotes=[
 
 "Strategy defeats chaos.",
 
-"Think deeply before every move.",
-
-"Calm minds create brilliant tactics."
+"Think deeply before every move."
 
 ];
 
@@ -1195,7 +1414,201 @@ q=(q+1)%quotes.length;
 
 setInterval(rotateQuote,4000);
 
-rotateQuote();
+/* EVENTS */
+
+const events=[
+
+{
+title:"Rapid Arena",
+date:"Today • 8 PM",
+type:"LIVE",
+description:"Fast paced rapid battles."
+},
+
+{
+title:"Sunday Championship",
+date:"Sunday • 7 PM",
+type:"SOON",
+description:"Elite weekly tournament."
+},
+
+{
+title:"Night Blitz",
+date:"Friday • 10 PM",
+type:"OPEN",
+description:"High speed blitz matches."
+}
+
+];
+
+const container =
+document.getElementById(
+"eventContainer"
+);
+
+events.forEach(event=>{
+
+container.innerHTML += `
+
+<div class="event">
+
+<div class="eventTop">
+
+<h4>${event.title}</h4>
+
+<div class="badge">
+
+${event.type}
+
+</div>
+
+</div>
+
+<p>${event.date}</p>
+
+<p>${event.description}</p>
+
+</div>
+
+`;
+
+});
+
+/* CALENDAR */
+
+function generateCalendar(){
+
+const calendar =
+document.getElementById(
+"calendar"
+);
+
+const monthYear =
+document.getElementById(
+"monthYear"
+);
+
+calendar.innerHTML="";
+
+const today =
+new Date();
+
+const year =
+today.getFullYear();
+
+const month =
+today.getMonth();
+
+const currentDate =
+today.getDate();
+
+const monthNames=[
+
+"January","February","March",
+"April","May","June",
+"July","August","September",
+"October","November","December"
+
+];
+
+monthYear.innerText =
+monthNames[month] + " " + year;
+
+const firstDay =
+new Date(year,month,1).getDay();
+
+const totalDays =
+new Date(year,month+1,0).getDate();
+
+let start =
+firstDay === 0
+? 6
+: firstDay - 1;
+
+for(let i=0;i<start;i++){
+
+calendar.innerHTML +=
+`<div class="day empty"></div>`;
+
+}
+
+for(let d=1; d<=totalDays; d++){
+
+calendar.innerHTML += `
+
+<div class="day ${
+d===currentDate
+? "active"
+: ""
+}">
+
+${d}
+
+</div>
+
+`;
+
+}
+
+}
+
+generateCalendar();
+
+/* PLAYER */
+
+let songs=[
+
+{
+src:"https://www.youtube.com/embed/qdpXxGPqW-Y",
+name:"Faded - Alan Walker"
+},
+
+{
+src:"https://www.youtube.com/embed/R5aurUlfn3w",
+name:"Monody - TheFatRat"
+}
+
+];
+
+let i=0;
+
+const frame =
+document.getElementById(
+"playerFrame"
+);
+
+const songText =
+document.getElementById(
+"songText"
+);
+
+function loadSong(){
+
+frame.src = songs[i].src;
+
+songText.innerText =
+"Now Playing • " +
+songs[i].name;
+
+}
+
+function nextSong(){
+
+i=(i+1)%songs.length;
+
+loadSong();
+
+}
+
+function prevSong(){
+
+i=(i-1+songs.length)%songs.length;
+
+loadSong();
+
+}
+
+loadSong();
 
 </script>
 
