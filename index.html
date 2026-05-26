@@ -8,7 +8,7 @@
 
 <title>Pixel Glow Club</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -20,14 +20,22 @@ box-sizing:border-box;
 
 :root{
 
---bg:#eef7f3;
+--bg:#edf6f1;
+--bg2:#dcece5;
+
 --card:#ffffffcc;
---dark:#20322e;
---soft:#61726c;
---mint:#b8dfcf;
---green:#7cc7aa;
---peach:#ff9c8d;
---white:#ffffff;
+
+--dark:#21342f;
+--soft:#62756f;
+
+--green:#8ccfb4;
+--green2:#bfe6d4;
+
+--orange:#ff9d8e;
+--orange2:#ff7d6d;
+
+--shadow:
+0 15px 35px rgba(0,0,0,0.06);
 
 }
 
@@ -36,63 +44,79 @@ body{
 font-family:'Poppins',sans-serif;
 
 background:
-linear-gradient(180deg,#eef7f3,#dcece5);
+linear-gradient(
+180deg,
+#edf6f1,
+#dcece5
+);
 
 overflow-x:hidden;
 
 color:var(--dark);
 
-padding:16px;
+padding:14px;
 
 min-height:100vh;
 
 }
 
+/* WIDTH */
+
+.wrapper{
+
+max-width:315px;
+
+margin:auto;
+
+}
+
 /* BACKGROUND */
 
-.bgBlur{
+.bg{
 
 position:fixed;
+
+inset:0;
+
+overflow:hidden;
+
+z-index:-5;
+
+}
+
+.blur{
+
+position:absolute;
 
 border-radius:50%;
 
 filter:blur(100px);
 
-z-index:-1;
-
-opacity:0.3;
+opacity:0.35;
 
 }
 
 .blur1{
 
-width:280px;
-height:280px;
+width:240px;
+height:240px;
 
-background:#ffd2ca;
+background:#bfe6d4;
 
-top:-80px;
-left:-80px;
+top:-70px;
+left:-70px;
 
 }
 
 .blur2{
 
-width:250px;
-height:250px;
+width:260px;
+height:260px;
 
-background:#b8dfcf;
+background:#ffd5cc;
 
-bottom:-70px;
-right:-70px;
-
-}
-
-.wrapper{
-
-max-width:430px;
-
-margin:auto;
+bottom:-90px;
+right:-90px;
 
 }
 
@@ -104,17 +128,20 @@ position:relative;
 
 overflow:hidden;
 
-padding:34px 24px 65px;
+padding:26px 18px 52px;
 
-border-radius:42px;
+border-radius:38px;
 
 background:
-linear-gradient(180deg,#e8f4ef,#dcece5);
+linear-gradient(
+180deg,
+#e8f4ef,
+#dcece5
+);
 
 border:1px solid rgba(255,255,255,0.7);
 
-box-shadow:
-0 20px 60px rgba(0,0,0,0.08);
+box-shadow:var(--shadow);
 
 }
 
@@ -124,18 +151,20 @@ box-shadow:
 
 position:absolute;
 
-top:20px;
-right:30px;
+top:22px;
+right:22px;
 
-width:90px;
-height:90px;
+width:75px;
+height:75px;
 
-background:#ffe2a8;
+background:#ffe3a8;
 
 border-radius:50%;
 
 box-shadow:
-0 0 50px #ffe2a8;
+0 0 50px #ffe3a8;
+
+opacity:0.9;
 
 }
 
@@ -143,28 +172,28 @@ box-shadow:
 
 position:absolute;
 
-background:rgba(255,255,255,0.6);
+background:rgba(255,255,255,0.55);
 
 border-radius:50px;
 
 }
 
-.cloud1{
+.c1{
 
-width:100px;
-height:34px;
+width:80px;
+height:28px;
 
-top:90px;
-left:20px;
+top:80px;
+left:18px;
 
 }
 
-.cloud2{
+.c2{
 
-width:120px;
-height:40px;
+width:95px;
+height:34px;
 
-top:130px;
+top:120px;
 right:10px;
 
 }
@@ -173,17 +202,15 @@ right:10px;
 
 position:absolute;
 
-bottom:-10px;
+bottom:-15px;
+left:-10%;
 
 width:120%;
+height:120px;
 
-height:130px;
-
-background:#a6d8c4;
+background:#aad9c5;
 
 border-radius:50%;
-
-left:-10%;
 
 }
 
@@ -191,20 +218,20 @@ left:-10%;
 
 position:absolute;
 
-bottom:15px;
+bottom:10px;
 
-font-size:78px;
+font-size:62px;
 
 opacity:0.8;
 
 }
 
 .t1{
-left:8px;
+left:5px;
 }
 
 .t2{
-right:8px;
+right:5px;
 }
 
 /* LOGO */
@@ -214,26 +241,32 @@ right:8px;
 display:flex;
 justify-content:center;
 
+position:relative;
+
+z-index:2;
+
 }
 
 .logo{
 
 position:relative;
 
-width:120px;
-height:120px;
-
-border-radius:35px;
+width:100px;
+height:100px;
 
 padding:5px;
 
+border-radius:30px;
+
 background:
-linear-gradient(145deg,#ffffff,#dcece6);
+linear-gradient(
+145deg,
+#ffffff,
+#dcece6
+);
 
 box-shadow:
-0 10px 25px rgba(0,0,0,0.08);
-
-z-index:2;
+0 8px 20px rgba(0,0,0,0.08);
 
 }
 
@@ -245,9 +278,9 @@ position:absolute;
 
 inset:5px;
 
-background:#edf5f1;
+background:#edf6f1;
 
-border-radius:30px;
+border-radius:24px;
 
 }
 
@@ -257,10 +290,10 @@ position:absolute;
 
 inset:10px;
 
-width:95px;
-height:95px;
+width:80px;
+height:80px;
 
-border-radius:24px;
+border-radius:20px;
 
 object-fit:cover;
 
@@ -270,39 +303,35 @@ object-fit:cover;
 
 .title{
 
-margin-top:24px;
+margin-top:20px;
 
 font-family:'Orbitron',sans-serif;
 
-font-size:36px;
-
-text-align:center;
+font-size:30px;
 
 letter-spacing:2px;
 
+text-align:center;
+
 color:#20322e;
 
-z-index:2;
-
 position:relative;
+
+z-index:2;
 
 }
 
 .subtitle{
 
-margin-top:14px;
+margin-top:10px;
+
+font-size:12px;
+
+line-height:1.8;
 
 text-align:center;
 
-font-size:13px;
-
-line-height:1.9;
-
-color:#5f706a;
-
-max-width:320px;
-
-margin-inline:auto;
+color:#60706a;
 
 position:relative;
 
@@ -318,9 +347,9 @@ display:grid;
 
 grid-template-columns:repeat(3,1fr);
 
-gap:12px;
+gap:10px;
 
-margin-top:30px;
+margin-top:24px;
 
 position:relative;
 
@@ -330,42 +359,34 @@ z-index:2;
 
 .stat{
 
-padding:18px 10px;
+padding:14px 8px;
 
-border-radius:24px;
+border-radius:22px;
 
-background:#ffffffc7;
+background:#ffffffba;
 
 backdrop-filter:blur(10px);
 
-border:1px solid rgba(255,255,255,0.6);
-
 text-align:center;
 
+border:1px solid rgba(255,255,255,0.6);
+
 box-shadow:
-0 8px 20px rgba(0,0,0,0.05);
-
-transition:0.3s;
-
-}
-
-.stat:hover{
-
-transform:translateY(-4px);
+0 5px 14px rgba(0,0,0,0.05);
 
 }
 
 .stat h2{
 
-font-size:22px;
+font-size:18px;
 
-margin-bottom:5px;
+margin-bottom:4px;
 
 }
 
 .stat p{
 
-font-size:10px;
+font-size:9px;
 
 letter-spacing:1px;
 
@@ -377,11 +398,11 @@ color:#72827d;
 
 .quote{
 
-margin-top:24px;
+margin-top:18px;
 
-padding:18px;
+padding:16px;
 
-border-radius:24px;
+border-radius:22px;
 
 background:#ffffffba;
 
@@ -389,16 +410,13 @@ backdrop-filter:blur(12px);
 
 border:1px solid rgba(255,255,255,0.7);
 
-font-size:13px;
+font-size:12px;
 
 line-height:1.9;
 
 text-align:center;
 
-color:#566863;
-
-box-shadow:
-0 8px 18px rgba(0,0,0,0.05);
+color:#586965;
 
 position:relative;
 
@@ -410,22 +428,22 @@ z-index:2;
 
 .live{
 
-margin-top:18px;
+margin-top:16px;
 
 display:flex;
 align-items:center;
 justify-content:center;
-gap:10px;
+gap:8px;
 
-padding:14px;
+padding:12px;
 
-border-radius:20px;
+border-radius:18px;
 
 background:#ffffffba;
 
 border:1px solid rgba(255,255,255,0.7);
 
-font-size:13px;
+font-size:11px;
 
 position:relative;
 
@@ -435,15 +453,15 @@ z-index:2;
 
 .dot{
 
-width:10px;
-height:10px;
+width:9px;
+height:9px;
 
 border-radius:50%;
 
-background:#7cc7aa;
+background:#7dc8ab;
 
 box-shadow:
-0 0 12px #7cc7aa;
+0 0 12px #7dc8ab;
 
 animation:pulse 1.5s infinite;
 
@@ -464,20 +482,20 @@ transform:scale(0.8);
 
 .section{
 
-margin-top:24px;
+margin-top:18px;
 
-padding:20px;
+padding:18px;
 
-border-radius:32px;
+border-radius:28px;
 
-background:#ffffffb8;
+background:#ffffffba;
 
 backdrop-filter:blur(14px);
 
 border:1px solid rgba(255,255,255,0.7);
 
 box-shadow:
-0 10px 28px rgba(0,0,0,0.05);
+0 8px 22px rgba(0,0,0,0.05);
 
 }
 
@@ -487,25 +505,25 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 
-margin-bottom:18px;
+margin-bottom:16px;
 
 }
 
 .head h3{
 
-font-size:18px;
+font-size:16px;
 
 }
 
 .head span{
 
-font-size:11px;
+font-size:10px;
 
-color:#82938d;
+color:#7f9089;
 
 }
 
-/* FEATURE GRID */
+/* FEATURES */
 
 .featureGrid{
 
@@ -513,15 +531,15 @@ display:grid;
 
 grid-template-columns:1fr 1fr;
 
-gap:14px;
+gap:10px;
 
 }
 
-.featureCard{
+.feature{
 
-padding:18px;
+padding:14px;
 
-border-radius:24px;
+border-radius:20px;
 
 background:#ffffff;
 
@@ -529,39 +547,167 @@ border:1px solid #dce8e3;
 
 text-align:center;
 
-transition:0.3s;
-
-}
-
-.featureCard:hover{
-
-transform:translateY(-4px);
-
 }
 
 .featureIcon{
 
-font-size:30px;
-
-margin-bottom:12px;
-
-}
-
-.featureCard h4{
-
-font-size:14px;
+font-size:24px;
 
 margin-bottom:8px;
 
 }
 
-.featureCard p{
+.feature h4{
 
-font-size:11px;
+font-size:12px;
+
+margin-bottom:6px;
+
+}
+
+.feature p{
+
+font-size:10px;
+
+line-height:1.6;
+
+color:#6d7d78;
+
+}
+
+/* CALENDAR */
+
+.calendarTop{
+
+display:grid;
+
+grid-template-columns:repeat(7,1fr);
+
+gap:6px;
+
+margin-bottom:8px;
+
+}
+
+.calendarTop div{
+
+font-size:9px;
+
+text-align:center;
+
+font-weight:600;
+
+color:#7d8e87;
+
+}
+
+.calendar{
+
+display:grid;
+
+grid-template-columns:repeat(7,1fr);
+
+gap:6px;
+
+}
+
+.day{
+
+aspect-ratio:1/1;
+
+border-radius:14px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:10px;
+
+background:#ffffff;
+
+box-shadow:
+0 4px 10px rgba(0,0,0,0.04);
+
+}
+
+.active{
+
+background:
+linear-gradient(
+135deg,
+#ff9d8e,
+#ff7d6d
+);
+
+color:white;
+
+font-weight:700;
+
+}
+
+/* EVENTS */
+
+.eventWrap{
+
+display:flex;
+flex-direction:column;
+gap:12px;
+
+}
+
+.event{
+
+padding:14px;
+
+border-radius:20px;
+
+background:#ffffff;
+
+border:1px solid #dce8e3;
+
+}
+
+.eventTop{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+margin-bottom:6px;
+
+}
+
+.event h4{
+
+font-size:12px;
+
+}
+
+.badge{
+
+padding:5px 10px;
+
+border-radius:30px;
+
+font-size:9px;
+
+background:#dff4ea;
+
+color:#2f7057;
+
+font-weight:600;
+
+}
+
+.event p{
+
+font-size:10px;
 
 line-height:1.7;
 
 color:#6f7f79;
+
+margin-top:4px;
 
 }
 
@@ -571,14 +717,14 @@ color:#6f7f79;
 
 display:flex;
 flex-direction:column;
-gap:14px;
+gap:10px;
 
 }
 
 .row{
 
 display:flex;
-gap:14px;
+gap:10px;
 
 }
 
@@ -586,13 +732,13 @@ gap:14px;
 
 flex:1;
 
-padding:15px;
+padding:14px;
 
-border-radius:20px;
+border-radius:18px;
 
 text-decoration:none;
 
-font-size:13px;
+font-size:11px;
 font-weight:600;
 
 text-align:center;
@@ -600,74 +746,26 @@ text-align:center;
 color:white;
 
 background:
-linear-gradient(135deg,#ff9c8d,#ff7f6f);
-
-transition:0.25s;
-
-box-shadow:
-0 6px 18px rgba(255,130,110,0.22);
-
-}
-
-.btn:hover{
-
-transform:translateY(-3px);
-
-}
-
-/* CALENDAR */
-
-.calendar{
-
-display:grid;
-
-grid-template-columns:repeat(7,1fr);
-
-gap:10px;
-
-margin-top:10px;
-
-}
-
-.day{
-
-aspect-ratio:1/1;
-
-border-radius:16px;
-
-background:#ffffff;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-font-size:12px;
+linear-gradient(
+135deg,
+#ff9d8e,
+#ff7d6d
+);
 
 box-shadow:
-0 4px 12px rgba(0,0,0,0.04);
+0 6px 16px rgba(255,120,100,0.18);
 
 }
 
-.activeDay{
-
-background:
-linear-gradient(135deg,#ff9c8d,#ff7f6f);
-
-color:white;
-
-font-weight:700;
-
-}
-
-/* PLAYER */
+/* MUSIC */
 
 .player{
 
 overflow:hidden;
 
-border-radius:24px;
+border-radius:22px;
 
-background:#edf5f1;
+background:#edf6f1;
 
 border:1px solid #d7e6df;
 
@@ -675,15 +773,15 @@ border:1px solid #d7e6df;
 
 .song{
 
-padding:14px;
+padding:12px;
 
-font-size:12px;
-
-white-space:nowrap;
+font-size:10px;
 
 overflow:hidden;
 
-background:#ffffff;
+white-space:nowrap;
+
+background:white;
 
 }
 
@@ -726,27 +824,29 @@ border:none;
 
 display:flex;
 justify-content:center;
-gap:14px;
+gap:10px;
 
-padding:15px;
+padding:14px;
 
 }
 
 .controls button{
 
-width:48px;
-height:42px;
+width:42px;
+height:38px;
 
 border:none;
 
-border-radius:16px;
+border-radius:14px;
 
-cursor:pointer;
-
-font-size:17px;
+font-size:15px;
 
 background:
-linear-gradient(135deg,#ff9c8d,#ff7f6f);
+linear-gradient(
+135deg,
+#ff9d8e,
+#ff7d6d
+);
 
 color:white;
 
@@ -760,7 +860,7 @@ font-weight:700;
 
 display:flex;
 flex-direction:column;
-gap:15px;
+gap:10px;
 
 }
 
@@ -768,34 +868,24 @@ gap:15px;
 
 display:flex;
 align-items:center;
-gap:14px;
+gap:12px;
 
-padding:15px;
+padding:12px;
 
-border-radius:24px;
+border-radius:20px;
 
-background:#ffffff;
+background:white;
 
 border:1px solid #dce8e3;
-
-transition:0.3s;
-
-cursor:pointer;
-
-}
-
-.partner:hover{
-
-transform:translateY(-4px);
 
 }
 
 .partner img{
 
-width:64px;
-height:64px;
+width:52px;
+height:52px;
 
-border-radius:18px;
+border-radius:14px;
 
 object-fit:cover;
 
@@ -803,15 +893,17 @@ object-fit:cover;
 
 .partner h4{
 
-font-size:14px;
+font-size:11px;
 
-margin-bottom:4px;
+margin-bottom:3px;
 
 }
 
 .partner p{
 
-font-size:11px;
+font-size:9px;
+
+line-height:1.6;
 
 color:#6f7f79;
 
@@ -821,17 +913,17 @@ color:#6f7f79;
 
 .footer{
 
-margin-top:26px;
+margin-top:22px;
+
+padding-bottom:24px;
 
 text-align:center;
 
-font-size:11px;
+font-size:10px;
 
 line-height:1.8;
 
-color:#73837d;
-
-padding-bottom:30px;
+color:#6f7f79;
 
 }
 
@@ -841,8 +933,12 @@ padding-bottom:30px;
 
 <body>
 
-<div class="bgBlur blur1"></div>
-<div class="bgBlur blur2"></div>
+<div class="bg">
+
+<div class="blur blur1"></div>
+<div class="blur blur2"></div>
+
+</div>
 
 <div class="wrapper">
 
@@ -852,8 +948,8 @@ padding-bottom:30px;
 
 <div class="sun"></div>
 
-<div class="cloud cloud1"></div>
-<div class="cloud cloud2"></div>
+<div class="cloud c1"></div>
+<div class="cloud c2"></div>
 
 <div class="hill"></div>
 
@@ -878,7 +974,7 @@ PIXEL GLOW
 
 <div class="subtitle">
 
-A peaceful digital chess sanctuary where calm strategy, elite tactics and creative minds unite together.
+A calm digital chess sanctuary built for elite strategy, tournaments, creative minds and peaceful competition.
 
 </div>
 
@@ -891,7 +987,7 @@ A peaceful digital chess sanctuary where calm strategy, elite tactics and creati
 
 <div class="stat">
 <h2 id="memberCount">147</h2>
-<p>PLAYERS</p>
+<p>MEMBERS</p>
 </div>
 
 <div class="stat">
@@ -911,7 +1007,7 @@ A peaceful digital chess sanctuary where calm strategy, elite tactics and creati
 
 <div class="dot"></div>
 
-Pixel Glow Club • Peacefully Online
+Pixel Glow Club • Online
 
 </div>
 
@@ -931,43 +1027,43 @@ Pixel Glow Club • Peacefully Online
 
 <div class="featureGrid">
 
-<div class="featureCard">
+<div class="feature">
 
 <div class="featureIcon">♟️</div>
 
 <h4>Daily Matches</h4>
 
-<p>Challenge active club players every day.</p>
+<p>Compete with active players every day.</p>
 
 </div>
 
-<div class="featureCard">
+<div class="feature">
 
 <div class="featureIcon">🏆</div>
 
 <h4>Tournaments</h4>
 
-<p>Compete in elite weekly competitions.</p>
+<p>Weekly elite club competitions.</p>
 
 </div>
 
-<div class="featureCard">
+<div class="feature">
 
 <div class="featureIcon">🎧</div>
 
 <h4>Music Lounge</h4>
 
-<p>Relax with peaceful background music.</p>
+<p>Peaceful background streaming.</p>
 
 </div>
 
-<div class="featureCard">
+<div class="feature">
 
 <div class="featureIcon">🌿</div>
 
 <h4>Creative Space</h4>
 
-<p>A soft nature inspired strategic community.</p>
+<p>Nature inspired strategic community.</p>
 
 </div>
 
@@ -987,37 +1083,145 @@ Pixel Glow Club • Peacefully Online
 
 </div>
 
+<div class="calendarTop">
+
+<div>Mon</div>
+<div>Tue</div>
+<div>Wed</div>
+<div>Thu</div>
+<div>Fri</div>
+<div>Sat</div>
+<div>Sun</div>
+
+</div>
+
 <div class="calendar">
 
+<div class="day"></div>
 <div class="day">1</div>
 <div class="day">2</div>
 <div class="day">3</div>
 <div class="day">4</div>
-<div class="day">5</div>
-<div class="day activeDay">6</div>
-<div class="day">7</div>
+<div class="day active">5</div>
+<div class="day">6</div>
 
+<div class="day">7</div>
 <div class="day">8</div>
 <div class="day">9</div>
-<div class="day">10</div>
+<div class="day active">10</div>
 <div class="day">11</div>
-<div class="day activeDay">12</div>
+<div class="day">12</div>
 <div class="day">13</div>
-<div class="day">14</div>
 
+<div class="day">14</div>
 <div class="day">15</div>
-<div class="day">16</div>
+<div class="day active">16</div>
 <div class="day">17</div>
-<div class="day activeDay">18</div>
+<div class="day">18</div>
 <div class="day">19</div>
 <div class="day">20</div>
+
 <div class="day">21</div>
+<div class="day">22</div>
+<div class="day">23</div>
+<div class="day">24</div>
+<div class="day active">25</div>
+<div class="day">26</div>
+<div class="day">27</div>
+
+<div class="day">28</div>
+<div class="day">29</div>
+<div class="day">30</div>
 
 </div>
 
 </div>
 
-<!-- CLUB ACCESS -->
+<!-- EVENTS -->
+
+<div class="section">
+
+<div class="head">
+
+<h3>Upcoming Events</h3>
+
+<span>Schedule</span>
+
+</div>
+
+<div class="eventWrap">
+
+<div class="event">
+
+<div class="eventTop">
+
+<h4>Rapid Arena</h4>
+
+<div class="badge">
+
+LIVE
+
+</div>
+
+</div>
+
+<p>
+
+Fast paced rapid tournament for active members.
+
+</p>
+
+</div>
+
+<div class="event">
+
+<div class="eventTop">
+
+<h4>Sunday Championship</h4>
+
+<div class="badge">
+
+SOON
+
+</div>
+
+</div>
+
+<p>
+
+Elite weekly competition with leaderboard rankings.
+
+</p>
+
+</div>
+
+<div class="event">
+
+<div class="eventTop">
+
+<h4>Night Blitz</h4>
+
+<div class="badge">
+
+OPEN
+
+</div>
+
+</div>
+
+<p>
+
+High speed blitz battles under peaceful night vibes.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- LINKS -->
 
 <div class="section">
 
@@ -1152,7 +1356,8 @@ allowfullscreen>
 <div class="footer">
 
 PIXEL GLOW CLUB © 2026<br>
-Designed with calm energy and elite strategy.
+
+Designed with peaceful energy and elite strategy.
 
 </div>
 
