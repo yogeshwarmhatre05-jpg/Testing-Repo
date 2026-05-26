@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixel Glow Club Ultra</title>
 
-<title>Pixel Glow Club</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* ======================================================
+PIXEL GLOW CLUB
+ULTRA DETAILED PROFESSIONAL THEME
+====================================================== */
 
 *{
 margin:0;
@@ -22,1135 +24,483 @@ html{
 scroll-behavior:smooth;
 }
 
-:root{
+body{
+font-family:'Poppins',sans-serif;
+background:linear-gradient(180deg,#edf6f1,#dcece5,#edf6f1);
+min-height:100vh;
+overflow-x:hidden;
+color:#20322e;
+padding:14px;
+}
 
+:root{
 --bg:#edf6f1;
 --bg2:#dcece5;
-
---white:#ffffff;
-
 --card:#ffffffc4;
-
+--white:#ffffff;
 --dark:#20322e;
 --soft:#65766f;
-
 --green:#8ccfb4;
 --green2:#bfe6d4;
-
 --orange:#ff9d8e;
 --orange2:#ff7d6d;
-
---shadow:
-0 15px 35px rgba(0,0,0,0.06);
-
+--gold:#ffe3a8;
+--shadow:0 15px 35px rgba(0,0,0,0.08);
 }
-
-body{
-
-font-family:'Poppins',sans-serif;
-
-background:
-linear-gradient(
-180deg,
-#edf6f1,
-#dcece5
-);
-
-overflow-x:hidden;
-
-color:var(--dark);
-
-padding:14px;
-
-min-height:100vh;
-
-}
-
-/* WIDTH */
 
 .wrapper{
-
-max-width:315px;
-
+max-width:340px;
 margin:auto;
-
 }
 
-/* BACKGROUND */
-
 .bg{
-
 position:fixed;
-
 inset:0;
-
 overflow:hidden;
-
 z-index:-10;
-
 }
 
 .blur{
-
 position:absolute;
-
 border-radius:50%;
-
 filter:blur(100px);
-
 opacity:0.35;
-
-animation:moveBlur 12s infinite alternate ease-in-out;
-
+animation:floatBlur 12s infinite alternate ease-in-out;
 }
 
 .blur1{
-
-width:240px;
-height:240px;
-
+width:260px;
+height:260px;
 background:#bfe6d4;
-
-top:-70px;
-left:-70px;
-
+top:-80px;
+left:-80px;
 }
 
 .blur2{
-
-width:260px;
-height:260px;
-
+width:300px;
+height:300px;
 background:#ffd5cc;
-
-bottom:-90px;
-right:-90px;
-
+bottom:-100px;
+right:-100px;
 }
 
-@keyframes moveBlur{
-
+@keyframes floatBlur{
 100%{
-
-transform:
-translateY(20px)
-translateX(10px);
-
+transform:translateY(20px) translateX(10px);
 }
-
 }
-
-/* LOADER */
 
 #loader{
-
 position:fixed;
-
 inset:0;
-
 background:#edf6f1;
-
 display:flex;
 justify-content:center;
 align-items:center;
-
 z-index:9999;
-
 transition:1s;
-
 }
 
 .loaderCircle{
-
-width:60px;
-height:60px;
-
+width:70px;
+height:70px;
 border-radius:50%;
-
-border:
-6px solid #bfe6d4;
-
-border-top:
-6px solid #ff9d8e;
-
+border:7px solid #bfe6d4;
+border-top:7px solid #ff9d8e;
 animation:spin 1s linear infinite;
-
 }
 
 @keyframes spin{
-
 100%{
-
 transform:rotate(360deg);
-
 }
-
 }
-
-/* HERO */
 
 .hero{
-
 position:relative;
-
 overflow:hidden;
-
-padding:26px 18px 55px;
-
+padding:26px 18px 60px;
 border-radius:38px;
-
-background:
-linear-gradient(
-180deg,
-#e8f4ef,
-#dcece5
-);
-
+background:linear-gradient(180deg,#e8f4ef,#dcece5);
 border:1px solid rgba(255,255,255,0.7);
-
 box-shadow:var(--shadow);
-
-animation:floatHero 5s ease-in-out infinite;
-
+animation:heroFloat 5s ease-in-out infinite;
 }
 
-@keyframes floatHero{
-
+@keyframes heroFloat{
 50%{
-
 transform:translateY(-5px);
-
+}
 }
 
+.rabbitArt{
+width:100%;
+height:250px;
+border-radius:28px;
+object-fit:cover;
+margin-bottom:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
 }
-
-/* SKY */
 
 .sun{
-
 position:absolute;
-
-top:22px;
-right:22px;
-
-width:75px;
-height:75px;
-
-background:#ffe3a8;
-
+top:20px;
+right:20px;
+width:80px;
+height:80px;
 border-radius:50%;
-
-box-shadow:
-0 0 50px #ffe3a8;
-
-opacity:0.9;
-
+background:#ffe3a8;
+box-shadow:0 0 60px #ffe3a8;
 }
 
 .cloud{
-
 position:absolute;
-
 background:rgba(255,255,255,0.55);
-
 border-radius:50px;
-
 }
 
 .c1{
-
 width:80px;
-height:28px;
-
-top:80px;
-left:18px;
-
+height:30px;
+top:90px;
+left:15px;
 }
 
 .c2{
-
-width:95px;
-height:34px;
-
+width:100px;
+height:36px;
 top:120px;
 right:10px;
-
 }
-
-.hill{
-
-position:absolute;
-
-bottom:-15px;
-left:-10%;
-
-width:120%;
-height:120px;
-
-background:#aad9c5;
-
-border-radius:50%;
-
-}
-
-.tree{
-
-position:absolute;
-
-bottom:10px;
-
-font-size:62px;
-
-opacity:0.8;
-
-}
-
-.t1{
-left:5px;
-}
-
-.t2{
-right:5px;
-}
-
-/* LOGO */
 
 .logoWrap{
-
 display:flex;
 justify-content:center;
-
-position:relative;
-
-z-index:2;
-
 }
 
 .logo{
-
 position:relative;
-
-width:100px;
-height:100px;
-
-padding:5px;
-
-border-radius:30px;
-
-background:
-linear-gradient(
-145deg,
-#ffffff,
-#dcece6
-);
-
-box-shadow:
-0 8px 20px rgba(0,0,0,0.08);
-
+width:110px;
+height:110px;
+border-radius:32px;
+background:linear-gradient(145deg,#ffffff,#dcece6);
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+padding:6px;
 }
 
 .logo::before{
-
 content:"";
-
 position:absolute;
-
-inset:5px;
-
+inset:6px;
+border-radius:26px;
 background:#edf6f1;
-
-border-radius:24px;
-
 }
 
 .logo img{
-
 position:absolute;
-
-inset:10px;
-
-width:80px;
-height:80px;
-
-border-radius:20px;
-
+inset:12px;
+width:86px;
+height:86px;
 object-fit:cover;
-
+border-radius:20px;
 }
 
-/* TITLE */
-
 .title{
-
-margin-top:20px;
-
+margin-top:22px;
 font-family:'Orbitron',sans-serif;
-
 font-size:30px;
-
-letter-spacing:2px;
-
 text-align:center;
-
-color:#20322e;
-
-position:relative;
-
-z-index:2;
-
+letter-spacing:2px;
 }
 
 .subtitle{
-
 margin-top:10px;
-
 font-size:12px;
-
-line-height:1.8;
-
+line-height:1.9;
 text-align:center;
-
 color:#60706a;
-
-position:relative;
-
-z-index:2;
-
 }
 
-/* STATS */
-
 .stats{
-
 display:grid;
-
 grid-template-columns:repeat(3,1fr);
-
 gap:10px;
-
 margin-top:24px;
-
-position:relative;
-
-z-index:2;
-
 }
 
 .stat{
-
 padding:14px 8px;
-
 border-radius:22px;
-
 background:#ffffffba;
-
 backdrop-filter:blur(10px);
-
 text-align:center;
-
 border:1px solid rgba(255,255,255,0.6);
-
-box-shadow:
-0 5px 14px rgba(0,0,0,0.05);
-
+box-shadow:0 5px 14px rgba(0,0,0,0.05);
 transition:0.35s;
-
 }
 
 .stat:hover{
-
 transform:translateY(-4px);
-
 }
 
 .stat h2{
-
 font-size:18px;
-
 margin-bottom:4px;
-
 }
 
 .stat p{
-
 font-size:9px;
-
 letter-spacing:1px;
-
 color:#72827d;
-
 }
-
-/* QUOTE */
 
 .quote{
-
 margin-top:18px;
-
-padding:16px;
-
+padding:18px;
 border-radius:22px;
-
 background:#ffffffba;
-
 backdrop-filter:blur(12px);
-
-border:1px solid rgba(255,255,255,0.7);
-
 font-size:12px;
-
 line-height:1.9;
-
 text-align:center;
-
-color:#586965;
-
 }
-
-/* LIVE */
-
-.live{
-
-margin-top:16px;
-
-display:flex;
-align-items:center;
-justify-content:center;
-gap:8px;
-
-padding:12px;
-
-border-radius:18px;
-
-background:#ffffffba;
-
-border:1px solid rgba(255,255,255,0.7);
-
-font-size:11px;
-
-}
-
-.dot{
-
-width:9px;
-height:9px;
-
-border-radius:50%;
-
-background:#7dc8ab;
-
-animation:
-pulse 1.5s infinite,
-glow 2s infinite alternate;
-
-}
-
-@keyframes pulse{
-
-50%{
-
-opacity:0.4;
-transform:scale(0.8);
-
-}
-
-}
-
-@keyframes glow{
-
-100%{
-
-box-shadow:
-0 0 20px #7dc8ab;
-
-}
-
-}
-
-/* SECTION */
 
 .section{
-
 margin-top:18px;
-
 padding:18px;
-
 border-radius:28px;
-
 background:#ffffffba;
-
 backdrop-filter:blur(14px);
-
 border:1px solid rgba(255,255,255,0.7);
-
-box-shadow:
-0 8px 22px rgba(0,0,0,0.05);
-
+box-shadow:0 8px 22px rgba(0,0,0,0.05);
 transition:0.35s;
-
 }
 
 .section:hover{
-
 transform:translateY(-4px);
-
 }
 
-/* HEAD */
-
 .head{
-
 display:flex;
 justify-content:space-between;
 align-items:center;
-
 margin-bottom:16px;
-
 }
 
 .head h3{
-
 font-size:16px;
-
 }
 
 .head span{
-
 font-size:10px;
-
 color:#7f9089;
-
 }
 
-/* FEATURES */
-
 .featureGrid{
-
 display:grid;
-
 grid-template-columns:1fr 1fr;
-
 gap:10px;
-
 }
 
 .feature{
-
-padding:14px;
-
-border-radius:20px;
-
+padding:15px;
+border-radius:22px;
 background:#ffffff;
-
-border:1px solid #dce8e3;
-
 text-align:center;
-
+border:1px solid #dce8e3;
 transition:0.35s;
-
 }
 
 .feature:hover{
-
 transform:translateY(-4px);
-
 }
 
 .featureIcon{
-
-font-size:24px;
-
+font-size:28px;
 margin-bottom:8px;
-
 }
 
 .feature h4{
-
 font-size:12px;
-
 margin-bottom:6px;
-
 }
 
 .feature p{
-
 font-size:10px;
-
-line-height:1.6;
-
+line-height:1.7;
 color:#6d7d78;
-
 }
 
-/* CALENDAR */
-
 .calendarTop{
-
 display:grid;
-
 grid-template-columns:repeat(7,1fr);
-
 gap:6px;
-
 margin-bottom:8px;
-
 }
 
 .calendarTop div{
-
 font-size:9px;
-
 text-align:center;
-
 font-weight:600;
-
 color:#7d8e87;
-
 }
 
 .calendar{
-
 display:grid;
-
 grid-template-columns:repeat(7,1fr);
-
 gap:6px;
-
 }
 
 .day{
-
 aspect-ratio:1/1;
-
 border-radius:14px;
-
 display:flex;
 align-items:center;
 justify-content:center;
-
 font-size:10px;
-
 background:#ffffff;
-
-box-shadow:
-0 4px 10px rgba(0,0,0,0.04);
-
+box-shadow:0 4px 10px rgba(0,0,0,0.04);
 transition:0.25s;
-
 }
 
 .day:hover{
-
 transform:scale(1.08);
-
 }
 
 .active{
-
-background:
-linear-gradient(
-135deg,
-#ff9d8e,
-#ff7d6d
-);
-
+background:linear-gradient(135deg,#ff9d8e,#ff7d6d);
 color:white;
-
 font-weight:700;
-
 }
-
-.empty{
-
-background:transparent;
-box-shadow:none;
-
-}
-
-/* EVENTS */
-
-.eventWrap{
-
-display:flex;
-flex-direction:column;
-gap:12px;
-
-}
-
-.event{
-
-padding:14px;
-
-border-radius:20px;
-
-background:#ffffff;
-
-border:1px solid #dce8e3;
-
-transition:0.35s;
-
-}
-
-.event:hover{
-
-transform:translateY(-4px);
-
-}
-
-.eventTop{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-margin-bottom:6px;
-
-}
-
-.event h4{
-
-font-size:12px;
-
-}
-
-.badge{
-
-padding:5px 10px;
-
-border-radius:30px;
-
-font-size:9px;
-
-background:#dff4ea;
-
-color:#2f7057;
-
-font-weight:600;
-
-}
-
-.event p{
-
-font-size:10px;
-
-line-height:1.7;
-
-color:#6f7f79;
-
-margin-top:4px;
-
-}
-
-/* BUTTONS */
 
 .links{
-
 display:flex;
 flex-direction:column;
 gap:10px;
-
 }
 
 .row{
-
 display:flex;
 gap:10px;
-
 }
 
 .btn{
-
 flex:1;
-
-position:relative;
-
-overflow:hidden;
-
 padding:14px;
-
-border-radius:18px;
-
+text-align:center;
 text-decoration:none;
-
 font-size:11px;
 font-weight:600;
-
-text-align:center;
-
+border-radius:18px;
+background:linear-gradient(135deg,#ff9d8e,#ff7d6d);
 color:white;
-
-background:
-linear-gradient(
-135deg,
-#ff9d8e,
-#ff7d6d
-);
-
-box-shadow:
-0 6px 16px rgba(255,120,100,0.18);
-
+box-shadow:0 6px 16px rgba(255,120,100,0.18);
 transition:0.3s;
-
 }
 
 .btn:hover{
-
 transform:translateY(-3px);
-
 }
-
-.btn::before{
-
-content:"";
-
-position:absolute;
-
-top:0;
-left:-120%;
-
-width:80%;
-height:100%;
-
-background:
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,0.5),
-transparent
-);
-
-transform:skewX(-20deg);
-
-transition:0.7s;
-
-}
-
-.btn:hover::before{
-
-left:130%;
-
-}
-
-/* MUSIC */
 
 .player{
-
 overflow:hidden;
-
 border-radius:22px;
-
 background:#edf6f1;
-
 border:1px solid #d7e6df;
-
-animation:playerGlow 4s infinite alternate;
-
-}
-
-@keyframes playerGlow{
-
-100%{
-
-box-shadow:
-0 0 25px rgba(255,125,109,0.15);
-
-}
-
 }
 
 .song{
-
 padding:12px;
-
 font-size:10px;
-
 overflow:hidden;
-
 white-space:nowrap;
-
 background:white;
-
 }
 
 .marquee{
-
 display:inline-block;
-
 padding-left:100%;
-
 animation:scroll 12s linear infinite;
-
 }
 
 @keyframes scroll{
-
 100%{
 transform:translateX(-100%);
 }
-
 }
 
 .screen{
-
 aspect-ratio:16/9;
-
 background:#ddebe5;
-
 }
 
 .screen iframe{
-
 width:100%;
 height:100%;
-
 border:none;
-
 }
 
 .controls{
-
 display:flex;
 justify-content:center;
 gap:10px;
-
 padding:14px;
-
 }
 
 .controls button{
-
 width:42px;
 height:38px;
-
 border:none;
-
 border-radius:14px;
-
-font-size:15px;
-
-background:
-linear-gradient(
-135deg,
-#ff9d8e,
-#ff7d6d
-);
-
+background:linear-gradient(135deg,#ff9d8e,#ff7d6d);
 color:white;
-
-font-weight:700;
-
+font-size:15px;
 cursor:pointer;
-
-transition:0.3s;
-
 }
-
-.controls button:hover{
-
-transform:translateY(-3px);
-
-}
-
-/* PARTNERS */
 
 .partnerWrap{
-
 display:flex;
 flex-direction:column;
 gap:10px;
-
 }
 
 .partner{
-
 display:flex;
 align-items:center;
 gap:12px;
-
 padding:12px;
-
 border-radius:20px;
-
 background:white;
-
 border:1px solid #dce8e3;
-
-transition:0.35s;
-
-cursor:pointer;
-
-}
-
-.partner:hover{
-
-transform:translateY(-4px);
-
 }
 
 .partner img{
-
 width:52px;
 height:52px;
-
 border-radius:14px;
-
 object-fit:cover;
-
 }
-
-.partner h4{
-
-font-size:11px;
-
-margin-bottom:3px;
-
-}
-
-.partner p{
-
-font-size:9px;
-
-line-height:1.6;
-
-color:#6f7f79;
-
-}
-
-/* FOOTER */
 
 .footer{
-
 margin-top:22px;
-
-padding-bottom:24px;
-
+padding-bottom:30px;
 text-align:center;
-
 font-size:10px;
-
 line-height:1.8;
-
 color:#6f7f79;
-
 }
 
 </style>
-
 </head>
-
 <body>
 
 <div id="loader">
-
 <div class="loaderCircle"></div>
-
 </div>
 
 <div class="bg">
-
 <div class="blur blur1"></div>
 <div class="blur blur2"></div>
-
 </div>
 
 <div class="wrapper">
@@ -1158,877 +508,209 @@ color:#6f7f79;
 <div class="hero">
 
 <div class="sun"></div>
-
 <div class="cloud c1"></div>
 <div class="cloud c2"></div>
 
-<div class="hill"></div>
-
-<div class="tree t1">🌲</div>
-<div class="tree t2">🌲</div>
+<img class="rabbitArt" src="1000008967.jpg">
 
 <div class="logoWrap">
-
 <div class="logo">
-
 <img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png">
-
 </div>
-
 </div>
 
 <div class="title">
-
 PIXEL GLOW
-
 </div>
 
 <div class="subtitle">
-
-A calm digital chess sanctuary built for elite strategy, tournaments and peaceful competition.
-
+A peaceful digital chess sanctuary inspired by soft nature aesthetics, calm visuals and elite strategy.
 </div>
 
 <div class="stats">
-
 <div class="stat">
-
 <h2>24/7</h2>
-
 <p>ACTIVE</p>
-
 </div>
 
 <div class="stat">
-
-<h2 id="memberCount">100+</h2>
-
+<h2>100+</h2>
 <p>MEMBERS</p>
-
 </div>
 
 <div class="stat">
-
 <h2>∞</h2>
-
 <p>TACTICS</p>
-
 </div>
-
 </div>
 
 <div class="quote">
-
 “Every chess move reflects patience, clarity and silent strength.”
-
-</div>
-
-<div class="live">
-
-<div class="dot"></div>
-
-<span id="onlineCount">0</span> Members Online
-
 </div>
 
 </div>
-
-<!-- FEATURES -->
 
 <div class="section">
-
 <div class="head">
-
 <h3>Club Features</h3>
-
 <span>Experience</span>
-
 </div>
 
 <div class="featureGrid">
 
 <div class="feature">
-
 <div class="featureIcon">♟️</div>
-
 <h4>Daily Matches</h4>
-
 <p>Compete with active players every day.</p>
-
 </div>
 
 <div class="feature">
-
 <div class="featureIcon">🏆</div>
-
 <h4>Tournaments</h4>
-
-<p>Weekly elite club competitions.</p>
-
+<p>Weekly elite competitions and ranked events.</p>
 </div>
 
 <div class="feature">
-
 <div class="featureIcon">🎧</div>
-
 <h4>Music Lounge</h4>
-
-<p>Peaceful background streaming.</p>
-
+<p>Peaceful background streaming for focus.</p>
 </div>
 
 <div class="feature">
-
 <div class="featureIcon">🌿</div>
-
 <h4>Creative Space</h4>
-
-<p>Nature inspired strategic community.</p>
-
+<p>Nature inspired strategic community atmosphere.</p>
 </div>
 
 </div>
-
 </div>
-
-<!-- CALENDAR -->
 
 <div class="section">
-
 <div class="head">
-
-<h3>Club Calendar</h3>
-
-<span id="monthYear"></span>
-
-</div>
-
-<div class="calendarTop">
-
-<div>Mon</div>
-<div>Tue</div>
-<div>Wed</div>
-<div>Thu</div>
-<div>Fri</div>
-<div>Sat</div>
-<div>Sun</div>
-
-</div>
-
-<div class="calendar" id="calendar"></div>
-
-</div>
-
-
-<div class="eventWrap" id="eventContainer"></div>
-
-</div>
-
-<!-- LEADERBOARD -->
-
-<div class="section">
-
-<div class="head">
-
 <h3>Top Players</h3>
-
-<span>Leaderboard 2026</span>
-
+<span>Leaderboard</span>
 </div>
 
-<div class="eventWrap">
+<div class="featureGrid">
 
-<div class="event">
-
-<div class="eventTop">
-
-<h4>#1 shairyaqoob </h4>
-
-<div class="badge">1640</div>
-
+<div class="feature">
+<div class="featureIcon">👑</div>
+<h4>shairyaqoob</h4>
+<p>1640 Rating</p>
 </div>
 
-<p>Super admin of 𝑻𝒉𝒆 𝑺𝒕𝒓𝒂𝒕𝒆𝒈𝒊𝒄 𝑪𝒐𝒖𝒏𝒄𝒊𝒍 -</p>
-
+<div class="feature">
+<div class="featureIcon">🔥</div>
+<h4>lovehololiveEN</h4>
+<p>1582 Rating</p>
 </div>
 
-<div class="event">
-
-<div class="eventTop">
-
-<h4>#2 lovehololiveEN</h4>
-
-<div class="badge">1582</div>
-
+<div class="feature">
+<div class="featureIcon">⚡</div>
+<h4>PixelMaster</h4>
+<p>1520 Rating</p>
 </div>
 
-<p>Loves hololive</p>
-
+<div class="feature">
+<div class="featureIcon">🌙</div>
+<h4>MoonKnight</h4>
+<p>1492 Rating</p>
 </div>
 
 </div>
-
 </div>
-
-
-<!-- ACCESS -->
 
 <div class="section">
-
 <div class="head">
-
 <h3>Club Access</h3>
-
-<span>Quick Portal</span>
-
+<span>Portal</span>
 </div>
 
 <div class="links">
 
 <div class="row">
-
-<a class="btn"
-href="https://www.chess.com/member/yogi136"
-target="_blank">
-
-Owner
-
-</a>
-
-<a class="btn"
-href="https://www.chess.com/member/michael-kaiser10bm"
-target="_blank">
-
-Co Owner
-
-</a>
-
+<a class="btn" href="https://www.chess.com/member/yogi136" target="_blank">Owner</a>
+<a class="btn" href="https://www.chess.com/member/michael-kaiser10bm" target="_blank">Co Owner</a>
 </div>
 
-<a class="btn"
-href="https://www.chess.com/clubs/forum/view/club-rulebook-1#comment-127196376"
-target="_blank">
+<a class="btn" href="https://www.chess.com/clubs/forum/view/club-rulebook-1#comment-127196376" target="_blank">Club Rules</a>
 
-Club Rules
+<a class="btn" href="https://www.chess.com/club/pixelglow/announcements" target="_blank">Announcements</a>
 
-</a>
-
-<a class="btn"
-href="https://www.chess.com/club/pixelglow/announcements"
-target="_blank">
-
-Announcements
-
-</a>
-
-<a class="btn"
-href="https://www.chess.com/clubs/events/pixelglow"
-target="_blank">
-
-Join Events
-
-</a>
+<a class="btn" href="https://www.chess.com/clubs/events/pixelglow" target="_blank">Join Events</a>
 
 </div>
-
 </div>
-
-<!-- MUSIC -->
 
 <div class="section">
-
 <div class="head">
-
 <h3>Music Lounge</h3>
-
 <span>Streaming</span>
-
 </div>
 
 <div class="player">
-
 <div class="song">
-
-<div class="marquee" id="songText">
-
-Now Playing
-
+<div class="marquee">
+Now Playing • Monody - TheFatRat
 </div>
-
 </div>
 
 <div class="screen">
-
-<iframe id="playerFrame"
-allow="autoplay; encrypted-media"
-allowfullscreen>
-
-</iframe>
-
+<iframe src="https://www.youtube.com/embed/R5aurUlfn3w"></iframe>
 </div>
 
 <div class="controls">
-
-<button onclick="prevSong()">⏮</button>
-
-<button onclick="toggleVideo()" id="toggleBtn">
-
-▶
-
-</button>
-
-<button onclick="nextSong()">⏭</button>
-
+<button>⏮</button>
+<button>▶</button>
+<button>⏭</button>
 </div>
-
 </div>
-
 </div>
-
-<!-- PARTNERS -->
 
 <div class="section">
-
 <div class="head">
-
 <h3>Partner Clubs</h3>
-
 <span>Alliance</span>
-
 </div>
 
-<div class="partnerWrap" id="partnersContainer"></div>
+<div class="partnerWrap">
 
+<div class="partner">
+<img src="https://i.ibb.co/4RYLGQ3z/image.jpg">
+<div>
+<h4>SAPPHIRE</h4>
+<p>Friend social club and strategic alliance.</p>
+</div>
+</div>
+
+<div class="partner">
+<img src="https://i.ibb.co/0p7z5V4R/your-image.jpg">
+<div>
+<h4>PENGUIN CHESS CLUB</h4>
+<p>Cool competitive club with active members.</p>
+</div>
+</div>
+
+</div>
 </div>
 
 <div class="footer">
-
 PIXEL GLOW CLUB © 2026<br>
-
 Designed with peaceful energy and elite strategy.
-
 </div>
 
 </div>
 
 <script>
 
-/* LOADER */
-
 window.onload=()=>{
-
 setTimeout(()=>{
-
-document.getElementById("loader")
-.style.opacity="0";
-
+document.getElementById('loader').style.opacity='0';
 setTimeout(()=>{
-
-document.getElementById("loader")
-.style.display="none";
-
+document.getElementById('loader').style.display='none';
 },1000);
-
 },1200);
-
 };
-
-/* CALENDAR */
-
-function generateCalendar(){
-
-const calendar =
-document.getElementById("calendar");
-
-const monthYear =
-document.getElementById("monthYear");
-
-calendar.innerHTML = "";
-
-const today = new Date();
-
-const currentDate =
-today.getDate();
-
-const year =
-today.getFullYear();
-
-const month =
-today.getMonth();
-
-const monthNames=[
-
-"January","February","March",
-"April","May","June",
-"July","August","September",
-"October","November","December"
-
-];
-
-monthYear.innerText =
-monthNames[month] + " " + year;
-
-const firstDay =
-new Date(year,month,1).getDay();
-
-const totalDays =
-new Date(year,month+1,0).getDate();
-
-let start =
-firstDay === 0 ? 6 : firstDay - 1;
-
-for(let i=0;i<start;i++){
-
-calendar.innerHTML +=
-`<div class="day empty"></div>`;
-
-}
-
-for(let d=1; d<=totalDays; d++){
-
-calendar.innerHTML += `
-
-<div class="day ${
-d === currentDate
-? "active"
-: ""
-}">
-
-${d}
-
-</div>
-
-`;
-
-}
-
-}
-
-generateCalendar();
-
-/* MEMBERS */
-
-async function loadMembers(){
-
-try{
-
-const response =
-await fetch("api/members.json");
-
-const data =
-await response.json();
-
-document.getElementById("memberCount")
-.innerText = data.members;
-
-document.getElementById("onlineCount")
-.innerText = data.online;
-
-}
-
-catch(error){
-
-console.log(error);
-
-}
-
-}
-
-loadMembers();
-
-/* EVENTS */
-
-async function loadEvents(){
-
-try{
-
-const response =
-await fetch("api/events.json");
-
-const events =
-await response.json();
-
-const container =
-document.getElementById("eventContainer");
-
-container.innerHTML = "";
-
-events.forEach(event=>{
-
-container.innerHTML += `
-
-<div class="event">
-
-<div class="eventTop">
-
-<h4>${event.title}</h4>
-
-<div class="badge">
-
-${event.type}
-
-</div>
-
-</div>
-
-<p>
-
-${event.date}
-
-</p>
-
-<p>
-
-${event.description}
-
-</p>
-
-</div>
-
-`;
-
-});
-
-}
-
-catch(error){
-
-console.log(error);
-
-}
-
-}
-
-loadEvents();
-
-/* MUSIC */
-
-let songs=[
-{
-src:"https://youtu.be/R5aurUlfn3w",
-name:"Monody - TheFatRat"
-}, 
-{
-src:"https://youtu.be/kcsGhOmULxQ",
-name:"Golden Brown - The Stranglers"
-},
-
-{
-src:"https://youtu.be/qdpXxGPqW-Y",
-name:"Faded - Alan Walker"
-},
-{  
-src:"https://youtu.be/k50D8-EvNxk",  
-name:"Meu Abrigo - Melim"  
-},  
-
-{  
-src:"https://youtu.be/9I9c20LHmzY",  
-name:"Come As You Are - Nirvana"  
-},  
- {
-src:"https://youtu.be/7WoVX2X3SQw",
-name:"Motagem Renaido - Jmilton"
-}, 
-{  
-src:"https://youtu.be/SDNA934EEVk",  
-name:"A Walk - Tycho"  
-},  
-
-{  
-src:"https://youtu.be/A3xxG5zHuCA",  
-name:"Passo Bem Solto - ATLXS"  
-},  
-
-{  
-src:"https://youtu.be/Qk5lzJVfcLo",  
-name:"Downtown Baby 2 - Overtonight"  
-},  
-
-{  
-src:"https://youtu.be/vi72_ggUCHU",  
-name:"Keep Up - ODETARI"  
-},  
-
-{  
-src:"https://youtu.be/kGobHQ7z8X4",  
-name:"Why Do I? - Unknown Brain"  
-},  
-
-{  
-src:"https://youtu.be/0jSpCxmb2VQ",  
-name:"Mood - 24kGoldn"  
-},  
-{src:"https://youtu.be/4jh2H5qFb44", name:"Shape of You - Ed Sheeran"},
-  {src:"https://youtu.be/rfTgO9rpqck", name:"Heat Waves - Glass Animals"},
-  {src:"https://youtu.be/JrNMyzsYr4M", name:"Love Me Like You Do - Ellie Goulding"},
-  {src:"https://youtu.be/DKbfBSrjVHA", name:"Can We Kiss Forever? - Kina"},
-  {src:"https://youtu.be/TdbyjBf93zc", name:"All I Want - Lofi Remix"},
-  {src:"https://youtu.be/z7zoabFKD60", name:"TheFatRat Mix / Songs"}, 
-  {src:"https://youtu.be/i4bWViFpd0Q", name:"Army Dreamers - Kate Bush"},
-  {src:"https://youtu.be/Jkj36B1YuDU", name:"Another Love - Tom Odell"},
-  {src:"https://youtu.be/GXioir-fujY", name:"NO BATIDÃO - ZXKAI"}, 
-  
-{
-src:"https://youtu.be/2vjPBrBU-TM",
-name:"Sia - Chandelier"
-},
-
-{
-src:"https://youtu.be/PT2_F-1esPk",
-name:"Alan Walker - Spectre"
-},
-
-{
-src:"https://youtu.be/n8X9_MgEdCg",
-name:"TheFatRat - Unity"
-},
-
-{
-src:"https://youtu.be/xy-NKN75Jhw",
-name:"Petit Biscuit - Sunset Lover"
-},
-
-{
-src:"https://youtu.be/HAIDqt2aUek",
-name:"Imagine Dragons - Demons"
-},
-
-{
-src:"https://youtu.be/RgKAFK5djSk",
-name:"Wiz Khalifa - See You Again"
-},
-
-{
-src:"https://youtu.be/mWRsgZuwf_8",
-name:"M83 - Midnight City"
-},
-
-{
-src:"https://youtu.be/50VNCymT-Cs",
-name:"Coldplay - A Sky Full Of Stars"
-},
-
-{
-src:"https://youtu.be/hLQl3WQQoQ0",
-name:"Adele - Someone Like You"
-},
-
-{
-src:"https://youtu.be/JGwWNGJdvx8",
-name:"Ed Sheeran - Perfect"
-},
-
-{
-src:"https://youtu.be/OpQFFLBMEPI",
-name:"The Chainsmokers - Closer"
-},
-
-{
-src:"https://youtu.be/pXRviuL6vMY",
-name:"Twenty One Pilots - Stressed Out"
-},
-
-{
-src:"https://youtu.be/fRh_vgS2dFE",
-name:"Justin Bieber - Sorry"
-},
-
-{
-src:"https://youtu.be/60ItHLz5WEA",
-name:"Alan Walker - Alone"
-},
-
-{
-src:"https://youtu.be/kXYiU_JCYtU",
-name:"Linkin Park - Numb"
-},
-
-{
-src:"https://youtu.be/YQHsXMglC9A",
-name:"Adele - Hello"
-},
-
-{
-src:"https://youtu.be/uelHwf8o7_U",
-name:"Eminem - Love The Way You Lie"
-},
-
-{
-src:"https://youtu.be/3AtDnEC4zak",
-name:"Charlie Puth - We Don't Talk Anymore"
-},
-
-{
-src:"https://youtu.be/09R8_2nJtjg",
-name:"Maroon 5 - Sugar"
-},
-
-{
-src:"https://youtu.be/ktvTqknDobU",
-name:"Imagine Dragons - Radioactive"
-}, 
-{src:"https://youtu.be/EoNWCYNTANA", name:"If I Killed Someone for You - Alec Benjamin"},
-  {src:"https://youtu.be/y1uzBncUsQQ", name:"Origami - The Rare Occasions"},
-  {src:"https://youtu.be/7U1LFCY70nA", name:"Ava - Underdog"}
-
-
-];
-
-let i=0;
-
-let isPlaying=false;
-
-const frame=document.getElementById("playerFrame");
-
-const songText=document.getElementById("songText");
-
-const btn=document.getElementById("toggleBtn");
-
-function getId(url){
-
-if(url.includes("youtu.be/")){
-
-return url.split("youtu.be/")[1];
-
-}
-
-return url;
-
-}
-
-function convert(url){
-
-return `https://www.youtube.com/embed/${getId(url)}?enablejsapi=1&rel=0`;
-
-}
-
-function load(){
-
-frame.src=convert(songs[i].src);
-
-songText.innerText=
-"Now Playing • " + songs[i].name;
-
-btn.innerText="▶";
-
-isPlaying=false;
-
-}
-
-function nextSong(){
-
-i=(i+1)%songs.length;
-
-load();
-
-}
-
-function prevSong(){
-
-i=(i-1+songs.length)%songs.length;
-
-load();
-
-}
-
-function toggleVideo(){
-
-frame.contentWindow.postMessage(
-
-JSON.stringify({
-
-event:"command",
-
-func:isPlaying
-? "pauseVideo"
-: "playVideo",
-
-args:[]
-
-}),
-
-"*"
-
-);
-
-isPlaying=!isPlaying;
-
-btn.innerText=
-isPlaying
-? "❚❚"
-: "▶";
-
-}
-
-load();
-
-/* PARTNERS */
-
-const partners=[
-
-{
-
-name:"SAPPHIRE",
-
-img:"https://i.ibb.co/4RYLGQ3z/image.jpg",
-
-link:"https://www.chess.com/club/sapphire-1",
-
-desc:"Friend's Social Club"
-
-},
-
-{
-
-name:"PENGUIN CHESS CLUB",
-
-img:"https://i.ibb.co/0p7z5V4R/your-image.jpg",
-
-link:"https://www.chess.com/club/penguin-chess-club-3",
-
-desc:"Cool Competitive Club"
-
-}
-
-];
-
-const container=
-document.getElementById("partnersContainer");
-
-partners.forEach(p=>{
-
-const card=
-document.createElement("div");
-
-card.className="partner";
-
-card.innerHTML=`
-
-<img src="${p.img}">
-
-<div>
-
-<h4>${p.name}</h4>
-
-<p>${p.desc}</p>
-
-</div>
-
-`;
-
-card.onclick=()=>{
-
-window.open(
-p.link,
-"_blank"
-);
-
-};
-
-container.appendChild(card);
-
-});
 
 </script>
 
