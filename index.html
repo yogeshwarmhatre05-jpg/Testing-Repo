@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>Pixel Glow Club</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -19,44 +20,48 @@ box-sizing:border-box;
 
 :root{
 
---bg:#090412;
---bg2:#12071f;
+--bg:#0b1017;
+--surface:#111827;
+--surface2:#151f2f;
 
---glass:rgba(255,255,255,0.06);
+--line:#263246;
 
---white:#ffffff;
---soft:#d8d2ea;
+--text:#f5f7fb;
+--muted:#9aa7bd;
 
---pink:#ff4fd8;
---purple:#8b5dff;
---blue:#4cc9ff;
---cyan:#6ffff3;
---gold:#ffc96b;
+--accent:#4f8cff;
+--accent2:#6dd3ff;
+
+--green:#38d39f;
+--orange:#ffb457;
+
+--shadow:0 15px 40px rgba(0,0,0,0.45);
 
 }
 
 body{
 
-font-family:'Poppins',sans-serif;
+font-family:'Inter',sans-serif;
+
+background:
+linear-gradient(
+180deg,
+#081018,
+#0b1017 40%,
+#0f1722
+);
+
+color:var(--text);
 
 min-height:100vh;
 
 overflow-x:hidden;
 
-background:
-radial-gradient(circle at top left,#34114d 0%,transparent 28%),
-radial-gradient(circle at bottom right,#0d4a58 0%,transparent 28%),
-linear-gradient(160deg,#06030d,#10061d,#060611);
-
-color:white;
-
-padding:18px;
-
 }
 
 /* BACKGROUND */
 
-.bgLines{
+.bgGrid{
 
 position:fixed;
 inset:0;
@@ -67,13 +72,14 @@ linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
 
 background-size:40px 40px;
 
-opacity:0.5;
+mask-image:linear-gradient(to bottom,rgba(0,0,0,0.9),transparent);
 
-z-index:-5;
+z-index:-3;
 
 }
 
-.glow{
+.glow1,
+.glow2{
 
 position:fixed;
 
@@ -81,45 +87,33 @@ border-radius:50%;
 
 filter:blur(120px);
 
-z-index:-4;
-
 pointer-events:none;
+
+z-index:-2;
 
 }
 
-.g1{
+.glow1{
 
 width:300px;
 height:300px;
 
-background:#ff4fd84d;
+background:rgba(79,140,255,0.16);
 
-top:-80px;
+top:-120px;
 left:-80px;
 
 }
 
-.g2{
+.glow2{
 
-width:320px;
-height:320px;
+width:280px;
+height:280px;
 
-background:#4cc9ff44;
+background:rgba(56,211,159,0.12);
 
-bottom:-100px;
+bottom:-120px;
 right:-100px;
-
-}
-
-.g3{
-
-width:260px;
-height:260px;
-
-background:#8b5dff44;
-
-top:40%;
-left:35%;
 
 }
 
@@ -127,9 +121,147 @@ left:35%;
 
 .wrapper{
 
-max-width:380px;
+max-width:1100px;
 
 margin:auto;
+
+padding:28px 18px 60px;
+
+}
+
+/* TOP NAV */
+
+.topbar{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+margin-bottom:24px;
+
+padding:18px 24px;
+
+background:rgba(17,24,39,0.7);
+
+backdrop-filter:blur(10px);
+
+border:1px solid rgba(255,255,255,0.05);
+
+border-radius:22px;
+
+box-shadow:var(--shadow);
+
+}
+
+.brand{
+
+display:flex;
+align-items:center;
+gap:16px;
+
+}
+
+.logo{
+
+width:72px;
+height:72px;
+
+padding:3px;
+
+border-radius:22px;
+
+background:
+linear-gradient(
+135deg,
+#4f8cff,
+#6dd3ff
+);
+
+}
+
+.logoInner{
+
+width:100%;
+height:100%;
+
+background:#0f1724;
+
+border-radius:19px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+overflow:hidden;
+
+}
+
+.logo img{
+
+width:56px;
+height:56px;
+
+border-radius:14px;
+
+object-fit:cover;
+
+}
+
+.brandText h1{
+
+font-family:'Orbitron',sans-serif;
+
+font-size:28px;
+
+letter-spacing:2px;
+
+}
+
+.brandText p{
+
+font-size:13px;
+
+color:var(--muted);
+
+margin-top:4px;
+
+}
+
+.nav{
+
+display:flex;
+gap:12px;
+
+flex-wrap:wrap;
+
+}
+
+.nav a{
+
+text-decoration:none;
+
+padding:12px 18px;
+
+border-radius:14px;
+
+font-size:13px;
+font-weight:600;
+
+color:var(--text);
+
+background:rgba(255,255,255,0.04);
+
+border:1px solid rgba(255,255,255,0.05);
+
+transition:0.25s;
+
+}
+
+.nav a:hover{
+
+background:rgba(79,140,255,0.12);
+
+border-color:rgba(79,140,255,0.3);
 
 }
 
@@ -137,33 +269,40 @@ margin:auto;
 
 .hero{
 
+display:grid;
+
+grid-template-columns:1.3fr 0.9fr;
+
+gap:20px;
+
+margin-bottom:22px;
+
+}
+
+.heroLeft{
+
+padding:34px;
+
+border-radius:28px;
+
+background:
+linear-gradient(
+180deg,
+#131c2b,
+#101826
+);
+
+border:1px solid rgba(255,255,255,0.05);
+
+box-shadow:var(--shadow);
+
 position:relative;
 
 overflow:hidden;
 
-padding:28px 22px;
-
-border-radius:38px;
-
-background:
-linear-gradient(
-145deg,
-rgba(255,255,255,0.09),
-rgba(255,255,255,0.03)
-);
-
-backdrop-filter:blur(18px);
-
-border:1px solid rgba(255,255,255,0.08);
-
-box-shadow:
-0 20px 80px rgba(0,0,0,0.55);
-
 }
 
-/* TOP LIGHT */
-
-.hero::before{
+.heroLeft::before{
 
 content:"";
 
@@ -172,363 +311,167 @@ position:absolute;
 top:-120px;
 right:-120px;
 
-width:240px;
-height:240px;
+width:260px;
+height:260px;
 
 border-radius:50%;
 
-background:
-radial-gradient(circle,#ff4fd899,transparent 70%);
+background:rgba(79,140,255,0.12);
 
 }
 
-/* FLOATING LIGHT */
+.badge{
 
-.hero::after{
+display:inline-flex;
+align-items:center;
+gap:8px;
 
-content:"";
+padding:10px 14px;
 
-position:absolute;
+border-radius:999px;
 
-bottom:-120px;
-left:-120px;
+background:rgba(79,140,255,0.12);
 
-width:240px;
-height:240px;
+border:1px solid rgba(79,140,255,0.22);
+
+font-size:12px;
+font-weight:600;
+
+color:#cfe3ff;
+
+margin-bottom:18px;
+
+}
+
+.badgeDot{
+
+width:8px;
+height:8px;
 
 border-radius:50%;
 
-background:
-radial-gradient(circle,#4cc9ff55,transparent 70%);
+background:#4f8cff;
+
+box-shadow:0 0 12px #4f8cff;
 
 }
 
-/* LOGO */
+.heroLeft h2{
 
-.logoWrap{
+font-size:44px;
+
+line-height:1.15;
+
+margin-bottom:16px;
+
+max-width:600px;
+
+}
+
+.heroLeft p{
+
+font-size:15px;
+
+line-height:1.9;
+
+color:var(--muted);
+
+max-width:620px;
+
+}
+
+.heroButtons{
 
 display:flex;
-justify-content:center;
+gap:14px;
+
+margin-top:28px;
+
+flex-wrap:wrap;
 
 }
 
-.logo{
+.primaryBtn,
+.secondaryBtn{
 
-position:relative;
+text-decoration:none;
 
-width:120px;
-height:120px;
+padding:14px 20px;
 
-border-radius:34px;
+border-radius:16px;
 
-padding:4px;
+font-size:14px;
+font-weight:700;
+
+transition:0.25s;
+
+}
+
+.primaryBtn{
 
 background:
 linear-gradient(
 135deg,
-var(--pink),
-var(--purple),
-var(--blue),
-var(--cyan)
+#4f8cff,
+#6dd3ff
 );
 
-animation:rotateBorder 8s linear infinite;
-
-box-shadow:
-0 0 45px rgba(255,79,216,0.3);
+color:#081018;
 
 }
 
-@keyframes rotateBorder{
+.primaryBtn:hover{
 
-0%{
-filter:hue-rotate(0deg);
-}
-
-100%{
-filter:hue-rotate(360deg);
-}
+transform:translateY(-3px);
 
 }
 
-.logo::before{
+.secondaryBtn{
 
-content:"";
+background:rgba(255,255,255,0.04);
 
-position:absolute;
-inset:4px;
+border:1px solid rgba(255,255,255,0.06);
 
-background:#0f0819;
-
-border-radius:30px;
+color:white;
 
 }
 
-.logo img{
+.secondaryBtn:hover{
 
-position:absolute;
-
-inset:11px;
-
-width:90px;
-height:90px;
-
-border-radius:24px;
-
-object-fit:cover;
-
-}
-
-/* TITLE */
-
-.title{
-
-margin-top:22px;
-
-font-family:'Orbitron',sans-serif;
-
-font-size:34px;
-
-font-weight:800;
-
-letter-spacing:4px;
-
-text-align:center;
-
-background:
-linear-gradient(
-90deg,
-#ffffff,
-#ff9df0,
-#6ffff3,
-#ffffff
-);
-
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
-}
-
-.subtitle{
-
-margin-top:12px;
-
-text-align:center;
-
-font-size:13px;
-
-line-height:1.9;
-
-color:var(--soft);
+background:rgba(255,255,255,0.08);
 
 }
 
 /* STATS */
 
-.stats{
+.heroRight{
 
-display:grid;
-
-grid-template-columns:repeat(3,1fr);
-
-gap:12px;
-
-margin-top:24px;
+display:flex;
+flex-direction:column;
+gap:18px;
 
 }
 
-.stat{
+.card{
 
-position:relative;
-
-overflow:hidden;
-
-padding:16px 10px;
-
-border-radius:22px;
-
-background:
-linear-gradient(
-145deg,
-rgba(255,255,255,0.08),
-rgba(255,255,255,0.03)
-);
-
-border:1px solid rgba(255,255,255,0.06);
-
-text-align:center;
-
-}
-
-.stat::before{
-
-content:"";
-
-position:absolute;
-
-top:-40px;
-right:-40px;
-
-width:90px;
-height:90px;
-
-border-radius:50%;
-
-background:rgba(255,255,255,0.05);
-
-}
-
-.stat h2{
-
-font-size:20px;
-
-margin-bottom:5px;
-
-}
-
-.stat p{
-
-font-size:10px;
-
-letter-spacing:1px;
-
-color:#c9c0df;
-
-}
-
-/* QUOTE */
-
-.quote{
-
-margin-top:24px;
-
-padding:18px;
+padding:24px;
 
 border-radius:24px;
 
 background:
 linear-gradient(
-135deg,
-rgba(255,79,216,0.14),
-rgba(76,201,255,0.10)
+180deg,
+#131c2b,
+#101826
 );
 
-border:1px solid rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.05);
 
-font-size:13px;
-
-line-height:1.9;
-
-text-align:center;
-
-color:#f6f2ff;
-
-backdrop-filter:blur(12px);
+box-shadow:var(--shadow);
 
 }
 
-/* LIVE */
-
-.live{
-
-margin-top:18px;
-
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-
-padding:13px;
-
-border-radius:18px;
-
-background:
-linear-gradient(
-90deg,
-rgba(111,255,243,0.12),
-rgba(255,79,216,0.12)
-);
-
-border:1px solid rgba(255,255,255,0.06);
-
-font-size:13px;
-
-}
-
-.dot{
-
-width:10px;
-height:10px;
-
-border-radius:50%;
-
-background:#6ffff3;
-
-box-shadow:
-0 0 15px #6ffff3;
-
-animation:pulse 1.4s infinite;
-
-}
-
-@keyframes pulse{
-
-50%{
-opacity:0.3;
-transform:scale(0.8);
-}
-
-}
-
-/* SECTIONS */
-
-.section{
-
-position:relative;
-
-overflow:hidden;
-
-margin-top:22px;
-
-padding:20px;
-
-border-radius:32px;
-
-background:
-linear-gradient(
-145deg,
-rgba(255,255,255,0.08),
-rgba(255,255,255,0.03)
-);
-
-backdrop-filter:blur(14px);
-
-border:1px solid rgba(255,255,255,0.07);
-
-box-shadow:
-0 10px 40px rgba(0,0,0,0.45);
-
-}
-
-.section::before{
-
-content:"";
-
-position:absolute;
-
-top:-80px;
-right:-80px;
-
-width:180px;
-height:180px;
-
-border-radius:50%;
-
-background:rgba(255,255,255,0.03);
-
-}
-
-.head{
+.cardTitle{
 
 display:flex;
 justify-content:space-between;
@@ -538,77 +481,156 @@ margin-bottom:18px;
 
 }
 
-.head h3{
+.cardTitle h3{
 
 font-size:18px;
 
 }
 
-.head span{
+.cardTitle span{
 
-font-size:11px;
+font-size:12px;
 
-color:#bdb4d5;
+color:var(--muted);
 
 }
 
-/* BUTTONS */
+.stats{
 
-.links{
+display:grid;
 
-display:flex;
-flex-direction:column;
+grid-template-columns:repeat(3,1fr);
+
 gap:14px;
 
 }
 
-.row{
+.stat{
 
-display:flex;
-gap:14px;
+padding:18px 12px;
 
-}
+border-radius:18px;
 
-.btn{
+background:rgba(255,255,255,0.03);
 
-flex:1;
-
-position:relative;
-
-overflow:hidden;
-
-padding:15px;
-
-border-radius:20px;
-
-text-decoration:none;
-
-font-size:13px;
-font-weight:700;
+border:1px solid rgba(255,255,255,0.05);
 
 text-align:center;
 
-color:white;
+}
+
+.stat h2{
+
+font-size:24px;
+
+margin-bottom:5px;
+
+}
+
+.stat p{
+
+font-size:11px;
+
+color:var(--muted);
+
+}
+
+/* QUOTE */
+
+.quote{
+
+padding:18px;
+
+border-radius:18px;
 
 background:
 linear-gradient(
 135deg,
-rgba(255,79,216,0.18),
-rgba(76,201,255,0.12)
+rgba(79,140,255,0.10),
+rgba(109,211,255,0.08)
 );
 
-border:1px solid rgba(255,255,255,0.07);
+border:1px solid rgba(79,140,255,0.14);
 
-transition:0.3s;
+font-size:14px;
+
+line-height:1.8;
+
+color:#dbe9ff;
 
 }
 
-.btn:hover{
+/* MAIN GRID */
 
-transform:translateY(-4px) scale(1.02);
+.main{
 
-box-shadow:
-0 10px 30px rgba(255,79,216,0.18);
+display:grid;
+
+grid-template-columns:1fr 340px;
+
+gap:22px;
+
+margin-top:24px;
+
+}
+
+/* LINKS */
+
+.linkGrid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:16px;
+
+margin-top:18px;
+
+}
+
+.linkBtn{
+
+text-decoration:none;
+
+padding:18px;
+
+border-radius:18px;
+
+background:rgba(255,255,255,0.03);
+
+border:1px solid rgba(255,255,255,0.05);
+
+transition:0.25s;
+
+color:white;
+
+}
+
+.linkBtn:hover{
+
+transform:translateY(-4px);
+
+border-color:rgba(79,140,255,0.3);
+
+background:rgba(79,140,255,0.08);
+
+}
+
+.linkBtn h4{
+
+font-size:15px;
+
+margin-bottom:6px;
+
+}
+
+.linkBtn p{
+
+font-size:12px;
+
+line-height:1.7;
+
+color:var(--muted);
 
 }
 
@@ -618,30 +640,27 @@ box-shadow:
 
 overflow:hidden;
 
-border-radius:24px;
+border-radius:22px;
 
-background:#080510;
+margin-top:20px;
 
-border:1px solid rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.05);
 
 }
 
-.song{
+.nowPlaying{
 
-padding:14px;
+padding:14px 18px;
 
-font-size:12px;
+font-size:13px;
+
+background:rgba(255,255,255,0.03);
+
+border-bottom:1px solid rgba(255,255,255,0.05);
 
 white-space:nowrap;
 
 overflow:hidden;
-
-background:
-linear-gradient(
-90deg,
-rgba(255,79,216,0.10),
-rgba(76,201,255,0.08)
-);
 
 }
 
@@ -651,11 +670,11 @@ display:inline-block;
 
 padding-left:100%;
 
-animation:scroll 12s linear infinite;
+animation:marquee 12s linear infinite;
 
 }
 
-@keyframes scroll{
+@keyframes marquee{
 
 100%{
 transform:translateX(-100%);
@@ -686,33 +705,28 @@ display:flex;
 justify-content:center;
 gap:14px;
 
-padding:15px;
+padding:16px;
+
+background:#0f1724;
 
 }
 
 .controls button{
 
 width:48px;
-height:42px;
+height:44px;
 
 border:none;
 
-border-radius:16px;
+border-radius:14px;
 
 cursor:pointer;
 
 font-size:17px;
 
-background:
-linear-gradient(
-135deg,
-#ff4fd8,
-#4cc9ff
-);
+background:rgba(255,255,255,0.06);
 
-color:#080510;
-
-font-weight:700;
+color:white;
 
 transition:0.25s;
 
@@ -720,7 +734,22 @@ transition:0.25s;
 
 .controls button:hover{
 
-transform:translateY(-3px);
+background:rgba(79,140,255,0.16);
+
+}
+
+#toggleBtn{
+
+background:
+linear-gradient(
+135deg,
+#4f8cff,
+#6dd3ff
+);
+
+color:#081018;
+
+font-weight:800;
 
 }
 
@@ -730,7 +759,9 @@ transform:translateY(-3px);
 
 display:flex;
 flex-direction:column;
-gap:15px;
+gap:14px;
+
+margin-top:18px;
 
 }
 
@@ -740,40 +771,34 @@ display:flex;
 align-items:center;
 gap:14px;
 
-padding:15px;
+padding:14px;
 
-border-radius:24px;
+border-radius:18px;
 
-background:
-linear-gradient(
-145deg,
-rgba(255,255,255,0.07),
-rgba(255,255,255,0.03)
-);
+background:rgba(255,255,255,0.03);
 
-border:1px solid rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.05);
 
 cursor:pointer;
 
-transition:0.3s;
+transition:0.25s;
 
 }
 
 .partner:hover{
 
-transform:translateY(-5px);
+transform:translateY(-3px);
 
-box-shadow:
-0 10px 30px rgba(76,201,255,0.15);
+border-color:rgba(79,140,255,0.25);
 
 }
 
 .partner img{
 
-width:64px;
-height:64px;
+width:62px;
+height:62px;
 
-border-radius:18px;
+border-radius:16px;
 
 object-fit:cover;
 
@@ -789,9 +814,11 @@ margin-bottom:4px;
 
 .partner p{
 
-font-size:11px;
+font-size:12px;
 
-color:#cfc7e4;
+color:var(--muted);
+
+line-height:1.6;
 
 }
 
@@ -799,17 +826,58 @@ color:#cfc7e4;
 
 .footer{
 
-margin-top:28px;
+margin-top:26px;
 
 text-align:center;
 
-font-size:11px;
+font-size:12px;
 
 line-height:1.8;
 
-color:#c3bad8;
+color:var(--muted);
 
-padding-bottom:30px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.hero,
+.main{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:650px){
+
+.topbar{
+
+flex-direction:column;
+gap:18px;
+align-items:flex-start;
+
+}
+
+.heroLeft h2{
+
+font-size:34px;
+
+}
+
+.linkGrid{
+
+grid-template-columns:1fr;
+
+}
+
+.stats{
+
+grid-template-columns:1fr;
+
+}
 
 }
 
@@ -819,21 +887,22 @@ padding-bottom:30px;
 
 <body>
 
-<div class="bgLines"></div>
+<div class="bgGrid"></div>
 
-<div class="glow g1"></div>
-<div class="glow g2"></div>
-<div class="glow g3"></div>
+<div class="glow1"></div>
+<div class="glow2"></div>
 
 <div class="wrapper">
 
-<!-- HERO -->
+<!-- TOPBAR -->
 
-<div class="hero">
+<div class="topbar">
 
-<div class="logoWrap">
+<div class="brand">
 
 <div class="logo">
+
+<div class="logoInner">
 
 <img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png">
 
@@ -841,16 +910,83 @@ padding-bottom:30px;
 
 </div>
 
-<div class="title">
+<div class="brandText">
 
-PIXEL GLOW
+<h1>PIXEL GLOW</h1>
+
+<p>Professional Chess Community</p>
 
 </div>
 
-<div class="subtitle">
+</div>
 
-Where style meets strategy.<br>
-A futuristic chess community built for elite minds and modern vibes.
+<div class="nav">
+
+<a href="#">Home</a>
+<a href="#">Events</a>
+<a href="#">Community</a>
+
+</div>
+
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+<div class="heroLeft">
+
+<div class="badge">
+
+<div class="badgeDot"></div>
+
+Club Online
+
+</div>
+
+<h2>
+
+Modern Chess Community Built For Strategy & Competition
+
+</h2>
+
+<p>
+
+Pixel Glow is a premium chess club focused on tournaments, elite gameplay, creative community events and modern competitive energy.
+
+</p>
+
+<div class="heroButtons">
+
+<a class="primaryBtn"
+href="https://www.chess.com/clubs/events/pixelglow"
+target="_blank">
+
+Join Events
+
+</a>
+
+<a class="secondaryBtn"
+href="https://www.chess.com/club/pixelglow/announcements"
+target="_blank">
+
+Announcements
+
+</a>
+
+</div>
+
+</div>
+
+<div class="heroRight">
+
+<div class="card">
+
+<div class="cardTitle">
+
+<h3>Club Stats</h3>
+
+<span>Live</span>
 
 </div>
 
@@ -873,77 +1009,73 @@ A futuristic chess community built for elite minds and modern vibes.
 
 </div>
 
+</div>
+
 <div class="quote">
 
-“Chess is not only a game. It's a battlefield where patience becomes power.”
-
-</div>
-
-<div class="live">
-
-<div class="dot"></div>
-
-Pixel Glow Club • Online Now
+“Even the strongest queen once started as a pawn.”
 
 </div>
 
 </div>
 
-<!-- LINKS -->
+</div>
 
-<div class="section">
+<!-- MAIN -->
 
-<div class="head">
+<div class="main">
+
+<div>
+
+<div class="card">
+
+<div class="cardTitle">
 
 <h3>Club Access</h3>
 
-<span>Quick Portal</span>
+<span>Quick Navigation</span>
 
 </div>
 
-<div class="links">
+<div class="linkGrid">
 
-<div class="row">
-
-<a class="btn"
+<a class="linkBtn"
 href="https://www.chess.com/member/yogi136"
 target="_blank">
 
-Owner
+<h4>Owner</h4>
+
+<p>Main club account and leadership profile.</p>
 
 </a>
 
-<a class="btn"
+<a class="linkBtn"
 href="https://www.chess.com/member/michael-kaiser10bm"
 target="_blank">
 
-Co Owner
+<h4>Co Owner</h4>
+
+<p>Community management and tournament support.</p>
 
 </a>
 
-</div>
-
-<a class="btn"
+<a class="linkBtn"
 href="https://www.chess.com/clubs/forum/view/club-rulebook-1#comment-127196376"
 target="_blank">
 
-Club Rules
+<h4>Club Rules</h4>
+
+<p>Read official rules and member guidelines.</p>
 
 </a>
 
-<a class="btn"
+<a class="linkBtn"
 href="https://www.chess.com/club/pixelglow/announcements"
 target="_blank">
 
-Announcements
+<h4>Announcements</h4>
 
-</a>
-
-<a class="btn"
-href="https://www.chess.com/clubs/events/pixelglow"
-target="_blank">
-
-Join Events
+<p>Latest updates, notices and event details.</p>
 
 </a>
 
@@ -951,21 +1083,9 @@ Join Events
 
 </div>
 
-<!-- MUSIC -->
+<div class="card player">
 
-<div class="section">
-
-<div class="head">
-
-<h3>Music Lounge</h3>
-
-<span>Streaming</span>
-
-</div>
-
-<div class="player">
-
-<div class="song">
+<div class="nowPlaying">
 
 <div class="marquee" id="songText">
 
@@ -977,7 +1097,8 @@ Now Playing
 
 <div class="screen">
 
-<iframe id="playerFrame"
+<iframe
+id="playerFrame"
 allow="autoplay; encrypted-media"
 allowfullscreen>
 
@@ -1003,19 +1124,24 @@ allowfullscreen>
 
 </div>
 
-<!-- PARTNERS -->
+<div>
 
-<div class="section">
+<div class="card">
 
-<div class="head">
+<div class="cardTitle">
 
 <h3>Partner Clubs</h3>
 
-<span>Alliance</span>
+<span>Network</span>
 
 </div>
 
-<div class="partnerWrap" id="partnersContainer">
+<div class="partnerWrap"
+id="partnersContainer">
+
+</div>
+
+</div>
 
 </div>
 
@@ -1024,7 +1150,7 @@ allowfullscreen>
 <div class="footer">
 
 PIXEL GLOW CLUB © 2026<br>
-Designed with style, energy and elite strategy.
+Professional chess community built with modern design and competitive spirit.
 
 </div>
 
@@ -1035,11 +1161,6 @@ Designed with style, energy and elite strategy.
 let songs=[
 
 {
-src:"https://youtu.be/kcsGhOmULxQ",
-name:"Golden Brown - The Stranglers"
-},
-
-{
 src:"https://youtu.be/qdpXxGPqW-Y",
 name:"Faded - Alan Walker"
 },
@@ -1047,6 +1168,11 @@ name:"Faded - Alan Walker"
 {
 src:"https://youtu.be/R5aurUlfn3w",
 name:"Monody - TheFatRat"
+},
+
+{
+src:"https://youtu.be/Jkj36B1YuDU",
+name:"Another Love - Tom Odell"
 }
 
 ];
@@ -1055,11 +1181,14 @@ let i=0;
 
 let isPlaying=false;
 
-const frame=document.getElementById("playerFrame");
+const frame=
+document.getElementById("playerFrame");
 
-const songText=document.getElementById("songText");
+const songText=
+document.getElementById("songText");
 
-const btn=document.getElementById("toggleBtn");
+const btn=
+document.getElementById("toggleBtn");
 
 function getId(url){
 
@@ -1081,7 +1210,8 @@ return `https://www.youtube.com/embed/${getId(url)}?enablejsapi=1&rel=0`;
 
 function load(){
 
-frame.src=convert(songs[i].src);
+frame.src=
+convert(songs[i].src);
 
 songText.innerText=
 "Now Playing • " + songs[i].name;
