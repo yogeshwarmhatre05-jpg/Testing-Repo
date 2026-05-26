@@ -3,12 +3,12 @@
 
 <head>
 
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Pixel Glow Club</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -20,248 +20,33 @@ box-sizing:border-box;
 
 :root{
 
---bg:#0b1017;
---surface:#111827;
---surface2:#151f2f;
-
---line:#263246;
-
---text:#f5f7fb;
---muted:#9aa7bd;
-
---accent:#4f8cff;
---accent2:#6dd3ff;
-
---green:#38d39f;
---orange:#ffb457;
-
---shadow:0 15px 40px rgba(0,0,0,0.45);
+--bg:#edf5f1;
+--bg2:#dbece5;
+--mint:#d9ebe4;
+--soft:#6f7f79;
+--dark:#23322d;
+--accent:#ff7d6e;
+--white:#ffffff;
+--card:#f8fbf9;
+--border:#d4e3dd;
 
 }
 
 body{
 
-font-family:'Inter',sans-serif;
-
-background:
-linear-gradient(
-180deg,
-#081018,
-#0b1017 40%,
-#0f1722
-);
-
-color:var(--text);
-
+font-family:'Poppins',sans-serif;
+background:linear-gradient(180deg,#eef7f3,#dbece5);
+color:var(--dark);
+padding:18px;
+overflow-x:hidden;
 min-height:100vh;
 
-overflow-x:hidden;
-
 }
-
-/* BACKGROUND */
-
-.bgGrid{
-
-position:fixed;
-inset:0;
-
-background-image:
-linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-
-background-size:40px 40px;
-
-mask-image:linear-gradient(to bottom,rgba(0,0,0,0.9),transparent);
-
-z-index:-3;
-
-}
-
-.glow1,
-.glow2{
-
-position:fixed;
-
-border-radius:50%;
-
-filter:blur(120px);
-
-pointer-events:none;
-
-z-index:-2;
-
-}
-
-.glow1{
-
-width:300px;
-height:300px;
-
-background:rgba(79,140,255,0.16);
-
-top:-120px;
-left:-80px;
-
-}
-
-.glow2{
-
-width:280px;
-height:280px;
-
-background:rgba(56,211,159,0.12);
-
-bottom:-120px;
-right:-100px;
-
-}
-
-/* WRAPPER */
 
 .wrapper{
 
-max-width:1100px;
-
+max-width:420px;
 margin:auto;
-
-padding:28px 18px 60px;
-
-}
-
-/* TOP NAV */
-
-.topbar{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-margin-bottom:24px;
-
-padding:18px 24px;
-
-background:rgba(17,24,39,0.7);
-
-backdrop-filter:blur(10px);
-
-border:1px solid rgba(255,255,255,0.05);
-
-border-radius:22px;
-
-box-shadow:var(--shadow);
-
-}
-
-.brand{
-
-display:flex;
-align-items:center;
-gap:16px;
-
-}
-
-.logo{
-
-width:72px;
-height:72px;
-
-padding:3px;
-
-border-radius:22px;
-
-background:
-linear-gradient(
-135deg,
-#4f8cff,
-#6dd3ff
-);
-
-}
-
-.logoInner{
-
-width:100%;
-height:100%;
-
-background:#0f1724;
-
-border-radius:19px;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-overflow:hidden;
-
-}
-
-.logo img{
-
-width:56px;
-height:56px;
-
-border-radius:14px;
-
-object-fit:cover;
-
-}
-
-.brandText h1{
-
-font-family:'Orbitron',sans-serif;
-
-font-size:28px;
-
-letter-spacing:2px;
-
-}
-
-.brandText p{
-
-font-size:13px;
-
-color:var(--muted);
-
-margin-top:4px;
-
-}
-
-.nav{
-
-display:flex;
-gap:12px;
-
-flex-wrap:wrap;
-
-}
-
-.nav a{
-
-text-decoration:none;
-
-padding:12px 18px;
-
-border-radius:14px;
-
-font-size:13px;
-font-weight:600;
-
-color:var(--text);
-
-background:rgba(255,255,255,0.04);
-
-border:1px solid rgba(255,255,255,0.05);
-
-transition:0.25s;
-
-}
-
-.nav a:hover{
-
-background:rgba(79,140,255,0.12);
-
-border-color:rgba(79,140,255,0.3);
 
 }
 
@@ -269,209 +54,297 @@ border-color:rgba(79,140,255,0.3);
 
 .hero{
 
-display:grid;
+position:relative;
+overflow:hidden;
 
-grid-template-columns:1.3fr 0.9fr;
+padding:30px 24px 50px;
 
-gap:20px;
+border-radius:38px;
 
-margin-bottom:22px;
+background:
+linear-gradient(180deg,#e6f3ee,#d9ebe4);
+
+border:1px solid rgba(0,0,0,0.04);
+
+box-shadow:
+0 15px 40px rgba(80,120,110,0.12);
 
 }
 
-.heroLeft{
+/* TREES */
 
-padding:34px;
+.hero::before{
 
-border-radius:28px;
+content:"🌲";
 
-background:
-linear-gradient(
-180deg,
-#131c2b,
-#101826
-);
+position:absolute;
 
-border:1px solid rgba(255,255,255,0.05);
+left:10px;
+bottom:15px;
 
-box-shadow:var(--shadow);
+font-size:90px;
+
+opacity:0.7;
+
+}
+
+.hero::after{
+
+content:"🌲";
+
+position:absolute;
+
+right:10px;
+bottom:15px;
+
+font-size:90px;
+
+opacity:0.7;
+
+}
+
+/* LOGO */
+
+.logoWrap{
+
+display:flex;
+justify-content:center;
+
+}
+
+.logo{
 
 position:relative;
 
-overflow:hidden;
+width:110px;
+height:110px;
+
+border-radius:28px;
+
+padding:5px;
+
+background:
+linear-gradient(145deg,#ffffff,#dcece6);
+
+box-shadow:
+0 8px 20px rgba(0,0,0,0.08);
 
 }
 
-.heroLeft::before{
+.logo::before{
 
 content:"";
 
 position:absolute;
+inset:5px;
 
-top:-120px;
-right:-120px;
+background:#edf5f1;
 
-width:260px;
-height:260px;
-
-border-radius:50%;
-
-background:rgba(79,140,255,0.12);
+border-radius:24px;
 
 }
 
-.badge{
+.logo img{
 
-display:inline-flex;
-align-items:center;
-gap:8px;
+position:absolute;
 
-padding:10px 14px;
+inset:10px;
 
-border-radius:999px;
+width:85px;
+height:85px;
 
-background:rgba(79,140,255,0.12);
+border-radius:20px;
 
-border:1px solid rgba(79,140,255,0.22);
-
-font-size:12px;
-font-weight:600;
-
-color:#cfe3ff;
-
-margin-bottom:18px;
+object-fit:cover;
 
 }
 
-.badgeDot{
+/* TITLE */
 
-width:8px;
-height:8px;
+.title{
 
-border-radius:50%;
+margin-top:22px;
 
-background:#4f8cff;
+font-family:'Orbitron',sans-serif;
 
-box-shadow:0 0 12px #4f8cff;
+font-size:34px;
 
-}
+line-height:1.4;
 
-.heroLeft h2{
+text-align:center;
 
-font-size:44px;
+letter-spacing:2px;
 
-line-height:1.15;
-
-margin-bottom:16px;
-
-max-width:600px;
+color:#20322e;
 
 }
 
-.heroLeft p{
+.subtitle{
 
-font-size:15px;
+margin-top:12px;
+
+text-align:center;
+
+font-size:13px;
 
 line-height:1.9;
 
-color:var(--muted);
+color:#5d6e68;
 
-max-width:620px;
+max-width:320px;
 
-}
-
-.heroButtons{
-
-display:flex;
-gap:14px;
-
-margin-top:28px;
-
-flex-wrap:wrap;
-
-}
-
-.primaryBtn,
-.secondaryBtn{
-
-text-decoration:none;
-
-padding:14px 20px;
-
-border-radius:16px;
-
-font-size:14px;
-font-weight:700;
-
-transition:0.25s;
-
-}
-
-.primaryBtn{
-
-background:
-linear-gradient(
-135deg,
-#4f8cff,
-#6dd3ff
-);
-
-color:#081018;
-
-}
-
-.primaryBtn:hover{
-
-transform:translateY(-3px);
-
-}
-
-.secondaryBtn{
-
-background:rgba(255,255,255,0.04);
-
-border:1px solid rgba(255,255,255,0.06);
-
-color:white;
-
-}
-
-.secondaryBtn:hover{
-
-background:rgba(255,255,255,0.08);
+margin-inline:auto;
 
 }
 
 /* STATS */
 
-.heroRight{
+.stats{
 
-display:flex;
-flex-direction:column;
-gap:18px;
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:12px;
+
+margin-top:28px;
 
 }
 
-.card{
+.stat{
 
-padding:24px;
+padding:16px 10px;
+
+border-radius:22px;
+
+background:#f6fbf8;
+
+border:1px solid #d9e7e1;
+
+text-align:center;
+
+box-shadow:
+0 4px 12px rgba(0,0,0,0.04);
+
+}
+
+.stat h2{
+
+font-size:20px;
+
+margin-bottom:5px;
+
+color:#243630;
+
+}
+
+.stat p{
+
+font-size:10px;
+
+letter-spacing:1px;
+
+color:#71827c;
+
+}
+
+/* QUOTE */
+
+.quote{
+
+margin-top:24px;
+
+padding:18px;
 
 border-radius:24px;
 
-background:
-linear-gradient(
-180deg,
-#131c2b,
-#101826
-);
+background:#f8fcfa;
 
-border:1px solid rgba(255,255,255,0.05);
+border:1px solid #dbe9e3;
 
-box-shadow:var(--shadow);
+font-size:13px;
+
+line-height:1.9;
+
+text-align:center;
+
+color:#566863;
+
+box-shadow:
+0 5px 16px rgba(0,0,0,0.04);
 
 }
 
-.cardTitle{
+/* LIVE */
+
+.live{
+
+margin-top:18px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+
+padding:13px;
+
+border-radius:18px;
+
+background:#f8fcfa;
+
+border:1px solid #dbe7e2;
+
+font-size:13px;
+
+color:#52625d;
+
+}
+
+.dot{
+
+width:10px;
+height:10px;
+
+border-radius:50%;
+
+background:#8ac7b0;
+
+box-shadow:
+0 0 10px #8ac7b0;
+
+animation:pulse 1.5s infinite;
+
+}
+
+@keyframes pulse{
+
+50%{
+opacity:0.4;
+transform:scale(0.8);
+}
+
+}
+
+/* SECTION */
+
+.section{
+
+margin-top:22px;
+
+padding:20px;
+
+border-radius:30px;
+
+background:#f8fcfa;
+
+border:1px solid #dce8e3;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.05);
+
+}
+
+.head{
 
 display:flex;
 justify-content:space-between;
@@ -481,156 +354,69 @@ margin-bottom:18px;
 
 }
 
-.cardTitle h3{
+.head h3{
 
 font-size:18px;
 
-}
-
-.cardTitle span{
-
-font-size:12px;
-
-color:var(--muted);
+color:#253732;
 
 }
 
-.stats{
+.head span{
 
-display:grid;
+font-size:11px;
 
-grid-template-columns:repeat(3,1fr);
+color:#82938d;
 
+}
+
+/* BUTTONS */
+
+.links{
+
+display:flex;
+flex-direction:column;
 gap:14px;
 
 }
 
-.stat{
+.row{
 
-padding:18px 12px;
+display:flex;
+gap:14px;
+
+}
+
+.btn{
+
+flex:1;
+
+padding:15px;
 
 border-radius:18px;
-
-background:rgba(255,255,255,0.03);
-
-border:1px solid rgba(255,255,255,0.05);
-
-text-align:center;
-
-}
-
-.stat h2{
-
-font-size:24px;
-
-margin-bottom:5px;
-
-}
-
-.stat p{
-
-font-size:11px;
-
-color:var(--muted);
-
-}
-
-/* QUOTE */
-
-.quote{
-
-padding:18px;
-
-border-radius:18px;
-
-background:
-linear-gradient(
-135deg,
-rgba(79,140,255,0.10),
-rgba(109,211,255,0.08)
-);
-
-border:1px solid rgba(79,140,255,0.14);
-
-font-size:14px;
-
-line-height:1.8;
-
-color:#dbe9ff;
-
-}
-
-/* MAIN GRID */
-
-.main{
-
-display:grid;
-
-grid-template-columns:1fr 340px;
-
-gap:22px;
-
-margin-top:24px;
-
-}
-
-/* LINKS */
-
-.linkGrid{
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:16px;
-
-margin-top:18px;
-
-}
-
-.linkBtn{
 
 text-decoration:none;
 
-padding:18px;
+font-size:13px;
+font-weight:600;
 
-border-radius:18px;
-
-background:rgba(255,255,255,0.03);
-
-border:1px solid rgba(255,255,255,0.05);
-
-transition:0.25s;
+text-align:center;
 
 color:white;
 
-}
+background:
+linear-gradient(135deg,#ff887a,#ff6b5c);
 
-.linkBtn:hover{
+transition:0.25s;
 
-transform:translateY(-4px);
-
-border-color:rgba(79,140,255,0.3);
-
-background:rgba(79,140,255,0.08);
+box-shadow:
+0 6px 16px rgba(255,120,100,0.2);
 
 }
 
-.linkBtn h4{
+.btn:hover{
 
-font-size:15px;
-
-margin-bottom:6px;
-
-}
-
-.linkBtn p{
-
-font-size:12px;
-
-line-height:1.7;
-
-color:var(--muted);
+transform:translateY(-3px);
 
 }
 
@@ -640,27 +426,27 @@ color:var(--muted);
 
 overflow:hidden;
 
-border-radius:22px;
+border-radius:24px;
 
-margin-top:20px;
+background:#edf5f1;
 
-border:1px solid rgba(255,255,255,0.05);
+border:1px solid #d7e6df;
 
 }
 
-.nowPlaying{
+.song{
 
-padding:14px 18px;
+padding:14px;
 
-font-size:13px;
-
-background:rgba(255,255,255,0.03);
-
-border-bottom:1px solid rgba(255,255,255,0.05);
+font-size:12px;
 
 white-space:nowrap;
 
 overflow:hidden;
+
+background:#f8fcfa;
+
+color:#52625d;
 
 }
 
@@ -670,11 +456,11 @@ display:inline-block;
 
 padding-left:100%;
 
-animation:marquee 12s linear infinite;
+animation:scroll 12s linear infinite;
 
 }
 
-@keyframes marquee{
+@keyframes scroll{
 
 100%{
 transform:translateX(-100%);
@@ -686,7 +472,7 @@ transform:translateX(-100%);
 
 aspect-ratio:16/9;
 
-background:black;
+background:#ddebe5;
 
 }
 
@@ -705,28 +491,29 @@ display:flex;
 justify-content:center;
 gap:14px;
 
-padding:16px;
-
-background:#0f1724;
+padding:15px;
 
 }
 
 .controls button{
 
 width:48px;
-height:44px;
+height:42px;
 
 border:none;
 
-border-radius:14px;
+border-radius:16px;
 
 cursor:pointer;
 
 font-size:17px;
 
-background:rgba(255,255,255,0.06);
+background:
+linear-gradient(135deg,#ff8b7d,#ff7062);
 
 color:white;
+
+font-weight:700;
 
 transition:0.25s;
 
@@ -734,22 +521,7 @@ transition:0.25s;
 
 .controls button:hover{
 
-background:rgba(79,140,255,0.16);
-
-}
-
-#toggleBtn{
-
-background:
-linear-gradient(
-135deg,
-#4f8cff,
-#6dd3ff
-);
-
-color:#081018;
-
-font-weight:800;
+transform:translateY(-3px);
 
 }
 
@@ -759,9 +531,7 @@ font-weight:800;
 
 display:flex;
 flex-direction:column;
-gap:14px;
-
-margin-top:18px;
+gap:15px;
 
 }
 
@@ -771,13 +541,13 @@ display:flex;
 align-items:center;
 gap:14px;
 
-padding:14px;
+padding:15px;
 
-border-radius:18px;
+border-radius:24px;
 
-background:rgba(255,255,255,0.03);
+background:#f8fcfa;
 
-border:1px solid rgba(255,255,255,0.05);
+border:1px solid #dce8e3;
 
 cursor:pointer;
 
@@ -787,18 +557,16 @@ transition:0.25s;
 
 .partner:hover{
 
-transform:translateY(-3px);
-
-border-color:rgba(79,140,255,0.25);
+transform:translateY(-4px);
 
 }
 
 .partner img{
 
-width:62px;
-height:62px;
+width:64px;
+height:64px;
 
-border-radius:16px;
+border-radius:18px;
 
 object-fit:cover;
 
@@ -810,15 +578,15 @@ font-size:14px;
 
 margin-bottom:4px;
 
+color:#253732;
+
 }
 
 .partner p{
 
-font-size:12px;
+font-size:11px;
 
-color:var(--muted);
-
-line-height:1.6;
+color:#6f7f79;
 
 }
 
@@ -826,58 +594,17 @@ line-height:1.6;
 
 .footer{
 
-margin-top:26px;
+margin-top:28px;
 
 text-align:center;
 
-font-size:12px;
+font-size:11px;
 
 line-height:1.8;
 
-color:var(--muted);
+color:#73837d;
 
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-.hero,
-.main{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-@media(max-width:650px){
-
-.topbar{
-
-flex-direction:column;
-gap:18px;
-align-items:flex-start;
-
-}
-
-.heroLeft h2{
-
-font-size:34px;
-
-}
-
-.linkGrid{
-
-grid-template-columns:1fr;
-
-}
-
-.stats{
-
-grid-template-columns:1fr;
-
-}
+padding-bottom:30px;
 
 }
 
@@ -887,22 +614,15 @@ grid-template-columns:1fr;
 
 <body>
 
-<div class="bgGrid"></div>
-
-<div class="glow1"></div>
-<div class="glow2"></div>
-
 <div class="wrapper">
 
-<!-- TOPBAR -->
+<!-- HERO -->
 
-<div class="topbar">
+<div class="hero">
 
-<div class="brand">
+<div class="logoWrap">
 
 <div class="logo">
-
-<div class="logoInner">
 
 <img src="https://i.ibb.co/wNJ7ppRK/dffee40173146e6ecec0ebc503391970-1.png">
 
@@ -910,83 +630,16 @@ grid-template-columns:1fr;
 
 </div>
 
-<div class="brandText">
+<div class="title">
 
-<h1>PIXEL GLOW</h1>
-
-<p>Professional Chess Community</p>
+PIXEL GLOW
 
 </div>
 
-</div>
+<div class="subtitle">
 
-<div class="nav">
-
-<a href="#">Home</a>
-<a href="#">Events</a>
-<a href="#">Community</a>
-
-</div>
-
-</div>
-
-<!-- HERO -->
-
-<div class="hero">
-
-<div class="heroLeft">
-
-<div class="badge">
-
-<div class="badgeDot"></div>
-
-Club Online
-
-</div>
-
-<h2>
-
-Modern Chess Community Built For Strategy & Competition
-
-</h2>
-
-<p>
-
-Pixel Glow is a premium chess club focused on tournaments, elite gameplay, creative community events and modern competitive energy.
-
-</p>
-
-<div class="heroButtons">
-
-<a class="primaryBtn"
-href="https://www.chess.com/clubs/events/pixelglow"
-target="_blank">
-
-Join Events
-
-</a>
-
-<a class="secondaryBtn"
-href="https://www.chess.com/club/pixelglow/announcements"
-target="_blank">
-
-Announcements
-
-</a>
-
-</div>
-
-</div>
-
-<div class="heroRight">
-
-<div class="card">
-
-<div class="cardTitle">
-
-<h3>Club Stats</h3>
-
-<span>Live</span>
+Where calm meets strategy.<br>
+A peaceful digital chess sanctuary for focused minds and creative thinkers.
 
 </div>
 
@@ -1009,73 +662,77 @@ Announcements
 
 </div>
 
-</div>
-
 <div class="quote">
 
-“Even the strongest queen once started as a pawn.”
+“Every chess move reflects patience, clarity and silent strength.”
+
+</div>
+
+<div class="live">
+
+<div class="dot"></div>
+
+Pixel Glow Club • Online Now
 
 </div>
 
 </div>
 
-</div>
+<!-- LINKS -->
 
-<!-- MAIN -->
+<div class="section">
 
-<div class="main">
-
-<div>
-
-<div class="card">
-
-<div class="cardTitle">
+<div class="head">
 
 <h3>Club Access</h3>
 
-<span>Quick Navigation</span>
+<span>Quick Portal</span>
 
 </div>
 
-<div class="linkGrid">
+<div class="links">
 
-<a class="linkBtn"
+<div class="row">
+
+<a class="btn"
 href="https://www.chess.com/member/yogi136"
 target="_blank">
 
-<h4>Owner</h4>
-
-<p>Main club account and leadership profile.</p>
+Owner
 
 </a>
 
-<a class="linkBtn"
+<a class="btn"
 href="https://www.chess.com/member/michael-kaiser10bm"
 target="_blank">
 
-<h4>Co Owner</h4>
-
-<p>Community management and tournament support.</p>
+Co Owner
 
 </a>
 
-<a class="linkBtn"
+</div>
+
+<a class="btn"
 href="https://www.chess.com/clubs/forum/view/club-rulebook-1#comment-127196376"
 target="_blank">
 
-<h4>Club Rules</h4>
-
-<p>Read official rules and member guidelines.</p>
+Club Rules
 
 </a>
 
-<a class="linkBtn"
+<a class="btn"
 href="https://www.chess.com/club/pixelglow/announcements"
 target="_blank">
 
-<h4>Announcements</h4>
+Announcements
 
-<p>Latest updates, notices and event details.</p>
+</a>
+
+<a class="btn"
+href="https://www.chess.com/clubs/events/pixelglow"
+target="_blank">
+
+Join Events
 
 </a>
 
@@ -1083,9 +740,21 @@ target="_blank">
 
 </div>
 
-<div class="card player">
+<!-- MUSIC -->
 
-<div class="nowPlaying">
+<div class="section">
+
+<div class="head">
+
+<h3>Music Lounge</h3>
+
+<span>Streaming</span>
+
+</div>
+
+<div class="player">
+
+<div class="song">
 
 <div class="marquee" id="songText">
 
@@ -1097,8 +766,7 @@ Now Playing
 
 <div class="screen">
 
-<iframe
-id="playerFrame"
+<iframe id="playerFrame"
 allow="autoplay; encrypted-media"
 allowfullscreen>
 
@@ -1124,24 +792,19 @@ allowfullscreen>
 
 </div>
 
-<div>
+<!-- PARTNERS -->
 
-<div class="card">
+<div class="section">
 
-<div class="cardTitle">
+<div class="head">
 
 <h3>Partner Clubs</h3>
 
-<span>Network</span>
+<span>Alliance</span>
 
 </div>
 
-<div class="partnerWrap"
-id="partnersContainer">
-
-</div>
-
-</div>
+<div class="partnerWrap" id="partnersContainer">
 
 </div>
 
@@ -1150,7 +813,7 @@ id="partnersContainer">
 <div class="footer">
 
 PIXEL GLOW CLUB © 2026<br>
-Professional chess community built with modern design and competitive spirit.
+Designed with calm energy and elite strategy.
 
 </div>
 
@@ -1161,6 +824,11 @@ Professional chess community built with modern design and competitive spirit.
 let songs=[
 
 {
+src:"https://youtu.be/kcsGhOmULxQ",
+name:"Golden Brown - The Stranglers"
+},
+
+{
 src:"https://youtu.be/qdpXxGPqW-Y",
 name:"Faded - Alan Walker"
 },
@@ -1168,11 +836,6 @@ name:"Faded - Alan Walker"
 {
 src:"https://youtu.be/R5aurUlfn3w",
 name:"Monody - TheFatRat"
-},
-
-{
-src:"https://youtu.be/Jkj36B1YuDU",
-name:"Another Love - Tom Odell"
 }
 
 ];
@@ -1181,14 +844,11 @@ let i=0;
 
 let isPlaying=false;
 
-const frame=
-document.getElementById("playerFrame");
+const frame=document.getElementById("playerFrame");
 
-const songText=
-document.getElementById("songText");
+const songText=document.getElementById("songText");
 
-const btn=
-document.getElementById("toggleBtn");
+const btn=document.getElementById("toggleBtn");
 
 function getId(url){
 
@@ -1210,8 +870,7 @@ return `https://www.youtube.com/embed/${getId(url)}?enablejsapi=1&rel=0`;
 
 function load(){
 
-frame.src=
-convert(songs[i].src);
+frame.src=convert(songs[i].src);
 
 songText.innerText=
 "Now Playing • " + songs[i].name;
