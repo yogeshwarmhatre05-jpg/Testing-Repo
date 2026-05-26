@@ -8,7 +8,7 @@
 
 <title>Pixel Glow Club</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -18,15 +18,21 @@ padding:0;
 box-sizing:border-box;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 :root{
 
 --bg:#edf6f1;
 --bg2:#dcece5;
 
---card:#ffffffcc;
+--white:#ffffff;
 
---dark:#21342f;
---soft:#62756f;
+--card:#ffffffc4;
+
+--dark:#20322e;
+--soft:#65766f;
 
 --green:#8ccfb4;
 --green2:#bfe6d4;
@@ -80,7 +86,7 @@ inset:0;
 
 overflow:hidden;
 
-z-index:-5;
+z-index:-10;
 
 }
 
@@ -93,6 +99,8 @@ border-radius:50%;
 filter:blur(100px);
 
 opacity:0.35;
+
+animation:moveBlur 12s infinite alternate ease-in-out;
 
 }
 
@@ -120,6 +128,65 @@ right:-90px;
 
 }
 
+@keyframes moveBlur{
+
+100%{
+
+transform:
+translateY(20px)
+translateX(10px);
+
+}
+
+}
+
+/* LOADER */
+
+#loader{
+
+position:fixed;
+
+inset:0;
+
+background:#edf6f1;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+z-index:9999;
+
+transition:1s;
+
+}
+
+.loaderCircle{
+
+width:60px;
+height:60px;
+
+border-radius:50%;
+
+border:
+6px solid #bfe6d4;
+
+border-top:
+6px solid #ff9d8e;
+
+animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
 /* HERO */
 
 .hero{
@@ -128,7 +195,7 @@ position:relative;
 
 overflow:hidden;
 
-padding:26px 18px 52px;
+padding:26px 18px 55px;
 
 border-radius:38px;
 
@@ -142,6 +209,18 @@ linear-gradient(
 border:1px solid rgba(255,255,255,0.7);
 
 box-shadow:var(--shadow);
+
+animation:floatHero 5s ease-in-out infinite;
+
+}
+
+@keyframes floatHero{
+
+50%{
+
+transform:translateY(-5px);
+
+}
 
 }
 
@@ -374,6 +453,14 @@ border:1px solid rgba(255,255,255,0.6);
 box-shadow:
 0 5px 14px rgba(0,0,0,0.05);
 
+transition:0.35s;
+
+}
+
+.stat:hover{
+
+transform:translateY(-4px);
+
 }
 
 .stat h2{
@@ -418,10 +505,6 @@ text-align:center;
 
 color:#586965;
 
-position:relative;
-
-z-index:2;
-
 }
 
 /* LIVE */
@@ -445,10 +528,6 @@ border:1px solid rgba(255,255,255,0.7);
 
 font-size:11px;
 
-position:relative;
-
-z-index:2;
-
 }
 
 .dot{
@@ -460,10 +539,9 @@ border-radius:50%;
 
 background:#7dc8ab;
 
-box-shadow:
-0 0 12px #7dc8ab;
-
-animation:pulse 1.5s infinite;
+animation:
+pulse 1.5s infinite,
+glow 2s infinite alternate;
 
 }
 
@@ -473,6 +551,17 @@ animation:pulse 1.5s infinite;
 
 opacity:0.4;
 transform:scale(0.8);
+
+}
+
+}
+
+@keyframes glow{
+
+100%{
+
+box-shadow:
+0 0 20px #7dc8ab;
 
 }
 
@@ -497,7 +586,17 @@ border:1px solid rgba(255,255,255,0.7);
 box-shadow:
 0 8px 22px rgba(0,0,0,0.05);
 
+transition:0.35s;
+
 }
+
+.section:hover{
+
+transform:translateY(-4px);
+
+}
+
+/* HEAD */
 
 .head{
 
@@ -546,6 +645,14 @@ background:#ffffff;
 border:1px solid #dce8e3;
 
 text-align:center;
+
+transition:0.35s;
+
+}
+
+.feature:hover{
+
+transform:translateY(-4px);
 
 }
 
@@ -628,6 +735,14 @@ background:#ffffff;
 box-shadow:
 0 4px 10px rgba(0,0,0,0.04);
 
+transition:0.25s;
+
+}
+
+.day:hover{
+
+transform:scale(1.08);
+
 }
 
 .active{
@@ -642,6 +757,13 @@ linear-gradient(
 color:white;
 
 font-weight:700;
+
+}
+
+.empty{
+
+background:transparent;
+box-shadow:none;
 
 }
 
@@ -664,6 +786,14 @@ border-radius:20px;
 background:#ffffff;
 
 border:1px solid #dce8e3;
+
+transition:0.35s;
+
+}
+
+.event:hover{
+
+transform:translateY(-4px);
 
 }
 
@@ -732,6 +862,10 @@ gap:10px;
 
 flex:1;
 
+position:relative;
+
+overflow:hidden;
+
 padding:14px;
 
 border-radius:18px;
@@ -755,6 +889,46 @@ linear-gradient(
 box-shadow:
 0 6px 16px rgba(255,120,100,0.18);
 
+transition:0.3s;
+
+}
+
+.btn:hover{
+
+transform:translateY(-3px);
+
+}
+
+.btn::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:-120%;
+
+width:80%;
+height:100%;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,0.5),
+transparent
+);
+
+transform:skewX(-20deg);
+
+transition:0.7s;
+
+}
+
+.btn:hover::before{
+
+left:130%;
+
 }
 
 /* MUSIC */
@@ -768,6 +942,19 @@ border-radius:22px;
 background:#edf6f1;
 
 border:1px solid #d7e6df;
+
+animation:playerGlow 4s infinite alternate;
+
+}
+
+@keyframes playerGlow{
+
+100%{
+
+box-shadow:
+0 0 25px rgba(255,125,109,0.15);
+
+}
 
 }
 
@@ -852,6 +1039,16 @@ color:white;
 
 font-weight:700;
 
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.controls button:hover{
+
+transform:translateY(-3px);
+
 }
 
 /* PARTNERS */
@@ -877,6 +1074,16 @@ border-radius:20px;
 background:white;
 
 border:1px solid #dce8e3;
+
+transition:0.35s;
+
+cursor:pointer;
+
+}
+
+.partner:hover{
+
+transform:translateY(-4px);
 
 }
 
@@ -933,6 +1140,12 @@ color:#6f7f79;
 
 <body>
 
+<div id="loader">
+
+<div class="loaderCircle"></div>
+
+</div>
+
 <div class="bg">
 
 <div class="blur blur1"></div>
@@ -941,8 +1154,6 @@ color:#6f7f79;
 </div>
 
 <div class="wrapper">
-
-<!-- HERO -->
 
 <div class="hero">
 
@@ -974,25 +1185,34 @@ PIXEL GLOW
 
 <div class="subtitle">
 
-A calm digital chess sanctuary built for elite strategy, tournaments, creative minds and peaceful competition.
+A calm digital chess sanctuary built for elite strategy, tournaments and peaceful competition.
 
 </div>
 
 <div class="stats">
 
 <div class="stat">
+
 <h2>24/7</h2>
+
 <p>ACTIVE</p>
+
 </div>
 
 <div class="stat">
-<h2 id="memberCount">147</h2>
+
+<h2 id="memberCount">0</h2>
+
 <p>MEMBERS</p>
+
 </div>
 
 <div class="stat">
+
 <h2>∞</h2>
+
 <p>TACTICS</p>
+
 </div>
 
 </div>
@@ -1007,7 +1227,7 @@ A calm digital chess sanctuary built for elite strategy, tournaments, creative m
 
 <div class="dot"></div>
 
-Pixel Glow Club • Online
+<span id="onlineCount">0</span> Members Online
 
 </div>
 
@@ -1079,7 +1299,7 @@ Pixel Glow Club • Online
 
 <h3>Club Calendar</h3>
 
-<span>June 2026</span>
+<span id="monthYear"></span>
 
 </div>
 
@@ -1095,45 +1315,7 @@ Pixel Glow Club • Online
 
 </div>
 
-<div class="calendar">
-
-<div class="day"></div>
-<div class="day">1</div>
-<div class="day">2</div>
-<div class="day">3</div>
-<div class="day">4</div>
-<div class="day active">5</div>
-<div class="day">6</div>
-
-<div class="day">7</div>
-<div class="day">8</div>
-<div class="day">9</div>
-<div class="day active">10</div>
-<div class="day">11</div>
-<div class="day">12</div>
-<div class="day">13</div>
-
-<div class="day">14</div>
-<div class="day">15</div>
-<div class="day active">16</div>
-<div class="day">17</div>
-<div class="day">18</div>
-<div class="day">19</div>
-<div class="day">20</div>
-
-<div class="day">21</div>
-<div class="day">22</div>
-<div class="day">23</div>
-<div class="day">24</div>
-<div class="day active">25</div>
-<div class="day">26</div>
-<div class="day">27</div>
-
-<div class="day">28</div>
-<div class="day">29</div>
-<div class="day">30</div>
-
-</div>
+<div class="calendar" id="calendar"></div>
 
 </div>
 
@@ -1149,27 +1331,35 @@ Pixel Glow Club • Online
 
 </div>
 
+<div class="eventWrap" id="eventContainer"></div>
+
+</div>
+
+<!-- LEADERBOARD -->
+
+<div class="section">
+
+<div class="head">
+
+<h3>Top Players</h3>
+
+<span>Leaderboard</span>
+
+</div>
+
 <div class="eventWrap">
 
 <div class="event">
 
 <div class="eventTop">
 
-<h4>Rapid Arena</h4>
+<h4>#1 Yogi136</h4>
 
-<div class="badge">
-
-LIVE
+<div class="badge">2400</div>
 
 </div>
 
-</div>
-
-<p>
-
-Fast paced rapid tournament for active members.
-
-</p>
+<p>Elite tactical player and founder.</p>
 
 </div>
 
@@ -1177,43 +1367,13 @@ Fast paced rapid tournament for active members.
 
 <div class="eventTop">
 
-<h4>Sunday Championship</h4>
+<h4>#2 Michael Kaiser</h4>
 
-<div class="badge">
-
-SOON
+<div class="badge">2310</div>
 
 </div>
 
-</div>
-
-<p>
-
-Elite weekly competition with leaderboard rankings.
-
-</p>
-
-</div>
-
-<div class="event">
-
-<div class="eventTop">
-
-<h4>Night Blitz</h4>
-
-<div class="badge">
-
-OPEN
-
-</div>
-
-</div>
-
-<p>
-
-High speed blitz battles under peaceful night vibes.
-
-</p>
+<p>Creative attacking playstyle.</p>
 
 </div>
 
@@ -1221,7 +1381,27 @@ High speed blitz battles under peaceful night vibes.
 
 </div>
 
-<!-- LINKS -->
+<!-- DAILY PUZZLE -->
+
+<div class="section">
+
+<div class="head">
+
+<h3>Daily Puzzle</h3>
+
+<span>Challenge</span>
+
+</div>
+
+<div class="quote">
+
+White to move and mate in 2 ♟️
+
+</div>
+
+</div>
+
+<!-- ACCESS -->
 
 <div class="section">
 
@@ -1347,9 +1527,7 @@ allowfullscreen>
 
 </div>
 
-<div class="partnerWrap" id="partnersContainer">
-
-</div>
+<div class="partnerWrap" id="partnersContainer"></div>
 
 </div>
 
@@ -1364,6 +1542,196 @@ Designed with peaceful energy and elite strategy.
 </div>
 
 <script>
+
+/* LOADER */
+
+window.onload=()=>{
+
+setTimeout(()=>{
+
+document.getElementById("loader")
+.style.opacity="0";
+
+setTimeout(()=>{
+
+document.getElementById("loader")
+.style.display="none";
+
+},1000);
+
+},1200);
+
+};
+
+/* CALENDAR */
+
+function generateCalendar(){
+
+const calendar =
+document.getElementById("calendar");
+
+const monthYear =
+document.getElementById("monthYear");
+
+calendar.innerHTML = "";
+
+const today = new Date();
+
+const currentDate =
+today.getDate();
+
+const year =
+today.getFullYear();
+
+const month =
+today.getMonth();
+
+const monthNames=[
+
+"January","February","March",
+"April","May","June",
+"July","August","September",
+"October","November","December"
+
+];
+
+monthYear.innerText =
+monthNames[month] + " " + year;
+
+const firstDay =
+new Date(year,month,1).getDay();
+
+const totalDays =
+new Date(year,month+1,0).getDate();
+
+let start =
+firstDay === 0 ? 6 : firstDay - 1;
+
+for(let i=0;i<start;i++){
+
+calendar.innerHTML +=
+`<div class="day empty"></div>`;
+
+}
+
+for(let d=1; d<=totalDays; d++){
+
+calendar.innerHTML += `
+
+<div class="day ${
+d === currentDate
+? "active"
+: ""
+}">
+
+${d}
+
+</div>
+
+`;
+
+}
+
+}
+
+generateCalendar();
+
+/* MEMBERS */
+
+async function loadMembers(){
+
+try{
+
+const response =
+await fetch("api/members.json");
+
+const data =
+await response.json();
+
+document.getElementById("memberCount")
+.innerText = data.members;
+
+document.getElementById("onlineCount")
+.innerText = data.online;
+
+}
+
+catch(error){
+
+console.log(error);
+
+}
+
+}
+
+loadMembers();
+
+/* EVENTS */
+
+async function loadEvents(){
+
+try{
+
+const response =
+await fetch("api/events.json");
+
+const events =
+await response.json();
+
+const container =
+document.getElementById("eventContainer");
+
+container.innerHTML = "";
+
+events.forEach(event=>{
+
+container.innerHTML += `
+
+<div class="event">
+
+<div class="eventTop">
+
+<h4>${event.title}</h4>
+
+<div class="badge">
+
+${event.type}
+
+</div>
+
+</div>
+
+<p>
+
+${event.date}
+
+</p>
+
+<p>
+
+${event.description}
+
+</p>
+
+</div>
+
+`;
+
+});
+
+}
+
+catch(error){
+
+console.log(error);
+
+}
+
+}
+
+loadEvents();
+
+/* MUSIC */
 
 let songs=[
 
