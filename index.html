@@ -13,50 +13,30 @@ html{
 scroll-behavior:smooth;  
 }  
 
-:root{  
+:root{
 
---bg:#edf6f1;  
---bg2:#dcece5;  
+--bg:#0b1020;
+--bg2:#131a2f;
+--bg3:#1d2745;
 
---white:#ffffff;  
+--white:#f5f7ff;
 
---card:#ffffffc4;  
+--card:rgba(18,24,40,.78);
 
---dark:#20322e;  
---soft:#65766f;  
+--dark:#f5f7ff;
 
---green:#8ccfb4;  
---green2:#bfe6d4;  
+--soft:#aeb8d1;
 
---orange:#ff9d8e;  
---orange2:#ff7d6d;  
+--primary:#7c6cff;
 
---shadow:  
-0 15px 35px rgba(0,0,0,0.06);  
+--secondary:#4aa3ff;
 
-}  
+--accent:#a56eff;
 
-body{  
+--shadow:
+0 15px 40px rgba(0,0,0,.35);
 
-font-family:'Poppins',sans-serif;  
-
-background:  
-linear-gradient(  
-180deg,  
-#edf6f1,  
-#dcece5  
-);  
-
-overflow-x:hidden;  
-
-color:var(--dark);  
-
-padding:14px;  
-
-min-height:100vh;  
-
-}  
-
+}
 /* WIDTH */  
 
 .wrapper{  
@@ -78,56 +58,6 @@ inset:0;
 overflow:hidden;  
 
 z-index:-10;  
-
-}  
-
-.blur{  
-
-position:absolute;  
-
-border-radius:50%;  
-
-filter:blur(100px);  
-
-opacity:0.35;  
-
-animation:moveBlur 12s infinite alternate ease-in-out;  
-
-}  
-
-.blur1{  
-
-width:240px;  
-height:240px;  
-
-background:#bfe6d4;  
-
-top:-70px;  
-left:-70px;  
-
-}  
-
-.blur2{  
-
-width:260px;  
-height:260px;  
-
-background:#ffd5cc;  
-
-bottom:-90px;  
-right:-90px;  
-
-}  
-
-@keyframes moveBlur{  
-
-100%{  
-
-transform:  
-translateY(20px)  
-translateX(10px);  
-
-}  
 
 }  
 
@@ -215,94 +145,6 @@ transform:translateY(-5px);
 
 }  
 
-/* SKY */  
-
-.sun{  
-
-position:absolute;  
-
-top:22px;  
-right:22px;  
-
-width:75px;  
-height:75px;  
-
-background:#ffe3a8;  
-
-border-radius:50%;  
-
-box-shadow:  
-0 0 50px #ffe3a8;  
-
-opacity:0.9;  
-
-}  
-
-.cloud{  
-
-position:absolute;  
-
-background:rgba(255,255,255,0.55);  
-
-border-radius:50px;  
-
-}  
-
-.c1{  
-
-width:80px;  
-height:28px;  
-
-top:80px;  
-left:18px;  
-
-}  
-
-.c2{  
-
-width:95px;  
-height:34px;  
-
-top:120px;  
-right:10px;  
-
-}  
-
-.hill{  
-
-position:absolute;  
-
-bottom:-15px;  
-left:-10%;  
-
-width:120%;  
-height:120px;  
-
-background:#aad9c5;  
-
-border-radius:50%;  
-
-}  
-
-.tree{  
-
-position:absolute;  
-
-bottom:10px;  
-
-font-size:62px;  
-
-opacity:0.8;  
-
-}  
-
-.t1{  
-left:5px;  
-}  
-
-.t2{  
-right:5px;  
-}  
 
 /* LOGO */  
 
@@ -1125,10 +967,7 @@ color:#6f7f79;
 
 }  
 
-</style>  </head>  <body>  <div id="loader">  <div class="loaderCircle"></div>  </div>  <div class="bg">  <div class="blur blur1"></div>  
-<div class="blur blur2"></div>  </div>  <div class="wrapper">  <div class="hero">  <div class="sun"></div>  <div class="cloud c1"></div>  
-<div class="cloud c2"></div>  <div class="hill"></div>  <div class="tree t1">🌲</div>  
-<div class="tree t2">🌲</div>  <div class="logoWrap">  <div class="logo">  <img src="https://i.ibb.co/Q3RwnmRx/ebecef4598a23caaf0457820efcd1758.jpg">  </div>  </div>  <div class="title">  PIXEL GLOW
+</style>  </head>  <body>  <div id="loader">  <div class="loaderCircle"></div>  </div> <div class="logoWrap">  <div class="logo">  <img src="https://i.ibb.co/Q3RwnmRx/ebecef4598a23caaf0457820efcd1758.jpg">  </div>  </div>  <div class="title">  PIXEL GLOW
 
 </div>  <div class="subtitle">  A calm digital chess sanctuary built for elite strategy, tournaments and peaceful competition.
 
