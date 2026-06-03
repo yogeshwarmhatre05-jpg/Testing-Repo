@@ -1,1381 +1,1716 @@
 <!DOCTYPE html>
-<html lang="en">
 
-<head>
+<html lang="en">  <head>  <meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Pixel Glow Club</title>  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">  <style>  
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+*{  
+margin:0;  
+padding:0;  
+box-sizing:border-box;  
+}  
 
-<title>Pixel Glow Club • RGB Edition</title>
+html{  
+scroll-behavior:smooth;  
+}  
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+:root{  
 
-<style>
+--bg:#edf6f1;  
+--bg2:#dcece5;  
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+--white:#ffffff;  
 
-html{
-scroll-behavior:smooth;
-}
+--card:#ffffffc4;  
 
-:root{
+--dark:#20322e;  
+--soft:#65766f;  
 
---bg:#050816;
---bg2:#09111f;
+--green:#8ccfb4;  
+--green2:#bfe6d4;  
 
---card:#0f172ad8;
+--orange:#ff9d8e;  
+--orange2:#ff7d6d;  
 
---white:#ffffff;
+--shadow:  
+0 15px 35px rgba(0,0,0,0.06);  
 
---dark:#eaf2ff;
+}  
 
---soft:#94a3b8;
+body{  
 
---rgb1:#ff006e;
---rgb2:#00e5ff;
---rgb3:#7cff00;
---rgb4:#ff9f1c;
+font-family:'Poppins',sans-serif;  
 
-}
+background:  
+linear-gradient(  
+180deg,  
+#edf6f1,  
+#dcece5  
+);  
 
-body{
+overflow-x:hidden;  
 
-font-family:'Poppins',sans-serif;
+color:var(--dark);  
 
-background:
-radial-gradient(circle at top left,#111936,#050816 60%);
+padding:14px;  
 
-overflow-x:hidden;
+min-height:100vh;  
 
-color:var(--dark);
+}  
 
-padding:14px;
+/* WIDTH */  
 
-min-height:100vh;
+.wrapper{  
 
-}
+max-width:315px;  
 
-/* BACKGROUND */
+margin:auto;  
 
-.bg{
+}  
 
-position:fixed;
+/* BACKGROUND */  
 
-inset:0;
+.bg{  
 
-overflow:hidden;
+position:fixed;  
 
-z-index:-10;
+inset:0;  
 
-}
+overflow:hidden;  
 
-.blur{
+z-index:-10;  
 
-position:absolute;
+}  
 
-border-radius:50%;
+.blur{  
 
-filter:blur(120px);
+position:absolute;  
 
-opacity:0.4;
+border-radius:50%;  
 
-animation:moveBlur 12s infinite alternate ease-in-out;
+filter:blur(100px);  
 
-}
+opacity:0.35;  
 
-.blur1{
+animation:moveBlur 12s infinite alternate ease-in-out;  
 
-width:280px;
-height:280px;
+}  
 
-background:#ff006e;
+.blur1{  
 
-top:-80px;
-left:-70px;
+width:240px;  
+height:240px;  
 
-}
+background:#bfe6d4;  
 
-.blur2{
+top:-70px;  
+left:-70px;  
 
-width:300px;
-height:300px;
+}  
 
-background:#00e5ff;
+.blur2{  
 
-bottom:-90px;
-right:-80px;
+width:260px;  
+height:260px;  
 
-}
+background:#ffd5cc;  
 
-@keyframes moveBlur{
+bottom:-90px;  
+right:-90px;  
 
-100%{
+}  
 
-transform:
-translateY(25px)
-translateX(15px);
+@keyframes moveBlur{  
 
-}
+100%{  
 
-}
+transform:  
+translateY(20px)  
+translateX(10px);  
 
-/* WIDTH */
+}  
 
-.wrapper{
+}  
 
-max-width:330px;
+/* LOADER */  
 
-margin:auto;
+#loader{  
 
-}
+position:fixed;  
 
-/* LOADER */
+inset:0;  
 
-#loader{
+background:#edf6f1;  
 
-position:fixed;
+display:flex;  
+justify-content:center;  
+align-items:center;  
 
-inset:0;
+z-index:9999;  
 
-background:#050816;
+transition:1s;  
 
-display:flex;
-justify-content:center;
-align-items:center;
+}  
 
-z-index:9999;
+.loaderCircle{  
 
-transition:1s;
+width:60px;  
+height:60px;  
 
-}
+border-radius:50%;  
 
-.loaderCircle{
+border:  
+6px solid #bfe6d4;  
 
-width:65px;
-height:65px;
+border-top:  
+6px solid #ff9d8e;  
 
-border-radius:50%;
+animation:spin 1s linear infinite;  
 
-border:
-6px solid rgba(255,255,255,0.1);
+}  
 
-border-top:
-6px solid #00e5ff;
+@keyframes spin{  
 
-animation:spin 1s linear infinite;
+100%{  
 
-box-shadow:
-0 0 30px #00e5ff;
+transform:rotate(360deg);  
 
-}
+}  
 
-@keyframes spin{
+}  
 
-100%{
+/* HERO */  
 
-transform:rotate(360deg);
+.hero{  
 
-}
+position:relative;  
 
-}
+overflow:hidden;  
 
-/* HERO */
+padding:26px 18px 55px;  
 
-.hero{
+border-radius:38px;  
 
-position:relative;
+background:  
+linear-gradient(  
+180deg,  
+#e8f4ef,  
+#dcece5  
+);  
 
-overflow:hidden;
+border:1px solid rgba(255,255,255,0.7);  
 
-padding:26px 18px 55px;
+box-shadow:var(--shadow);  
 
-border-radius:38px;
+animation:floatHero 5s ease-in-out infinite;  
 
-background:
-linear-gradient(
-180deg,
-rgba(15,23,42,0.95),
-rgba(2,6,23,0.95)
-);
+}  
 
-border:1px solid rgba(255,255,255,0.06);
+@keyframes floatHero{  
 
-box-shadow:
-0 0 15px rgba(255,0,110,0.15),
-0 0 35px rgba(0,229,255,0.12);
+50%{  
 
-animation:rgbGlow 8s linear infinite;
+transform:translateY(-5px);  
 
-}
+}  
 
-@keyframes rgbGlow{
+}  
 
-0%{
+/* SKY */  
 
-box-shadow:
-0 0 15px rgba(255,0,110,0.35),
-0 0 30px rgba(255,0,110,0.2);
+.sun{  
 
-}
+position:absolute;  
 
-25%{
+top:22px;  
+right:22px;  
 
-box-shadow:
-0 0 15px rgba(0,229,255,0.35),
-0 0 30px rgba(0,229,255,0.2);
+width:75px;  
+height:75px;  
 
-}
+background:#ffe3a8;  
 
-50%{
+border-radius:50%;  
 
-box-shadow:
-0 0 15px rgba(124,255,0,0.35),
-0 0 30px rgba(124,255,0,0.2);
+box-shadow:  
+0 0 50px #ffe3a8;  
 
-}
+opacity:0.9;  
 
-75%{
+}  
 
-box-shadow:
-0 0 15px rgba(255,159,28,0.35),
-0 0 30px rgba(255,159,28,0.2);
+.cloud{  
 
-}
+position:absolute;  
 
-100%{
+background:rgba(255,255,255,0.55);  
 
-box-shadow:
-0 0 15px rgba(255,0,110,0.35),
-0 0 30px rgba(255,0,110,0.2);
+border-radius:50px;  
 
-}
+}  
 
-}
+.c1{  
 
-/* SKY */
+width:80px;  
+height:28px;  
 
-.sun{
+top:80px;  
+left:18px;  
 
-position:absolute;
+}  
 
-top:20px;
-right:20px;
+.c2{  
 
-width:80px;
-height:80px;
+width:95px;  
+height:34px;  
 
-background:#00e5ff;
+top:120px;  
+right:10px;  
 
-border-radius:50%;
+}  
 
-box-shadow:
-0 0 45px #00e5ff;
+.hill{  
 
-opacity:0.9;
+position:absolute;  
 
-}
+bottom:-15px;  
+left:-10%;  
 
-.cloud{
+width:120%;  
+height:120px;  
 
-position:absolute;
+background:#aad9c5;  
 
-background:rgba(255,255,255,0.06);
+border-radius:50%;  
 
-border-radius:50px;
+}  
 
-backdrop-filter:blur(10px);
+.tree{  
 
-}
+position:absolute;  
 
-.c1{
+bottom:10px;  
 
-width:80px;
-height:28px;
+font-size:62px;  
 
-top:80px;
-left:18px;
+opacity:0.8;  
 
-}
+}  
 
-.c2{
+.t1{  
+left:5px;  
+}  
 
-width:95px;
-height:34px;
+.t2{  
+right:5px;  
+}  
 
-top:120px;
-right:10px;
+/* LOGO */  
 
-}
+.logoWrap{  
 
-.hill{
+display:flex;  
+justify-content:center;  
 
-position:absolute;
+position:relative;  
 
-bottom:-15px;
-left:-10%;
+z-index:2;  
 
-width:120%;
-height:120px;
+}  
 
-background:
-linear-gradient(
-90deg,
-#0f172a,
-#111827
-);
+.logo{  
 
-border-radius:50%;
+position:relative;  
 
-}
+width:100px;  
+height:100px;  
 
-.tree{
+padding:5px;  
 
-position:absolute;
+border-radius:30px;  
 
-bottom:10px;
+background:  
+linear-gradient(  
+145deg,  
+#ffffff,  
+#dcece6  
+);  
 
-font-size:62px;
+box-shadow:  
+0 8px 20px rgba(0,0,0,0.08);  
 
-opacity:0.8;
+}  
 
-}
+.logo::before{  
 
-.t1{
-left:5px;
-}
+content:"";  
 
-.t2{
-right:5px;
-}
+position:absolute;  
 
-/* LOGO */
+inset:5px;  
 
-.logoWrap{
+background:#edf6f1;  
 
-display:flex;
-justify-content:center;
+border-radius:24px;  
 
-position:relative;
+}  
 
-z-index:2;
+.logo img{  
 
-}
+position:absolute;  
 
-.logo{
+inset:10px;  
 
-position:relative;
+width:80px;  
+height:80px;  
 
-width:100px;
-height:100px;
+border-radius:20px;  
 
-padding:5px;
+object-fit:cover;  
 
-border-radius:30px;
+}  
 
-background:
-linear-gradient(
-145deg,
-#111827,
-#0f172a
-);
+/* TITLE */  
 
-border:1px solid rgba(255,255,255,0.06);
+.title{  
 
-box-shadow:
-0 0 25px rgba(0,229,255,0.2);
+margin-top:20px;  
 
-}
+font-family:'Orbitron',sans-serif;  
 
-.logo::before{
+font-size:30px;  
 
-content:"";
+letter-spacing:2px;  
 
-position:absolute;
+text-align:center;  
 
-inset:5px;
+color:#20322e;  
 
-background:#050816;
+position:relative;  
 
-border-radius:24px;
+z-index:2;  
 
-}
+}  
 
-.logo img{
+.subtitle{  
 
-position:absolute;
+margin-top:10px;  
 
-inset:10px;
+font-size:12px;  
 
-width:80px;
-height:80px;
+line-height:1.8;  
 
-border-radius:20px;
+text-align:center;  
 
-object-fit:cover;
+color:#60706a;  
 
-}
+position:relative;  
 
-/* TITLE */
+z-index:2;  
 
-.title{
+}  
 
-margin-top:20px;
+/* STATS */  
 
-font-family:'Orbitron',sans-serif;
+.stats{  
 
-font-size:30px;
+display:grid;  
 
-letter-spacing:2px;
+grid-template-columns:repeat(3,1fr);  
 
-text-align:center;
+gap:10px;  
 
-color:white;
+margin-top:24px;  
 
-text-shadow:
-0 0 15px #00e5ff;
+position:relative;  
 
-position:relative;
+z-index:2;  
 
-z-index:2;
+}  
 
-}
+.stat{  
 
-.subtitle{
+padding:14px 8px;  
 
-margin-top:10px;
+border-radius:22px;  
 
-font-size:12px;
+background:#ffffffba;  
 
-line-height:1.8;
+backdrop-filter:blur(10px);  
 
-text-align:center;
+text-align:center;  
 
-color:#a8b5d1;
+border:1px solid rgba(255,255,255,0.6);  
 
-position:relative;
+box-shadow:  
+0 5px 14px rgba(0,0,0,0.05);  
 
-z-index:2;
+transition:0.35s;  
 
-}
+}  
 
-/* STATS */
+.stat:hover{  
 
-.stats{
+transform:translateY(-4px);  
 
-display:grid;
+}  
 
-grid-template-columns:repeat(3,1fr);
+.stat h2{  
 
-gap:10px;
+font-size:18px;  
 
-margin-top:24px;
+margin-bottom:4px;  
 
-position:relative;
+}  
 
-z-index:2;
+.stat p{  
 
-}
+font-size:9px;  
 
-.stat{
+letter-spacing:1px;  
 
-padding:14px 8px;
+color:#72827d;  
 
-border-radius:22px;
+}  
 
-background:rgba(15,23,42,0.82);
+/* QUOTE */  
 
-backdrop-filter:blur(10px);
+.quote{  
 
-text-align:center;
+margin-top:18px;  
 
-border:1px solid rgba(255,255,255,0.06);
+padding:16px;  
 
-transition:0.35s;
+border-radius:22px;  
 
-}
+background:#ffffffba;  
 
-.stat:hover{
+backdrop-filter:blur(12px);  
 
-transform:translateY(-4px);
+border:1px solid rgba(255,255,255,0.7);  
 
-border-color:#00e5ff;
+font-size:12px;  
 
-box-shadow:
-0 0 20px rgba(0,229,255,0.25);
+line-height:1.9;  
 
-}
+text-align:center;  
 
-.stat h2{
+color:#586965;  
 
-font-size:18px;
+}  
 
-margin-bottom:4px;
+/* LIVE */  
 
-color:white;
+.live{  
 
-}
+margin-top:16px;  
 
-.stat p{
+display:flex;  
+align-items:center;  
+justify-content:center;  
+gap:8px;  
 
-font-size:9px;
+padding:12px;  
 
-letter-spacing:1px;
+border-radius:18px;  
 
-color:#9db0cc;
+background:#ffffffba;  
 
-}
+border:1px solid rgba(255,255,255,0.7);  
 
-/* QUOTE */
+font-size:11px;  
 
-.quote{
+}  
 
-margin-top:18px;
+.dot{  
 
-padding:16px;
+width:9px;  
+height:9px;  
 
-border-radius:22px;
+border-radius:50%;  
 
-background:rgba(15,23,42,0.78);
+background:#7dc8ab;  
 
-backdrop-filter:blur(12px);
+animation:  
+pulse 1.5s infinite,  
+glow 2s infinite alternate;  
 
-border:1px solid rgba(255,255,255,0.06);
+}  
 
-font-size:12px;
+@keyframes pulse{  
 
-line-height:1.9;
+50%{  
 
-text-align:center;
+opacity:0.4;  
+transform:scale(0.8);  
 
-color:#d5e2ff;
+}  
 
-}
+}  
 
-/* LIVE */
+@keyframes glow{  
 
-.live{
+100%{  
 
-margin-top:16px;
+box-shadow:  
+0 0 20px #7dc8ab;  
 
-display:flex;
-align-items:center;
-justify-content:center;
-gap:8px;
+}  
 
-padding:12px;
+}  
 
-border-radius:18px;
+/* SECTION */  
 
-background:rgba(15,23,42,0.8);
+.section{  
 
-border:1px solid rgba(255,255,255,0.06);
+margin-top:18px;  
 
-font-size:11px;
+padding:18px;  
 
-color:white;
+border-radius:28px;  
 
-}
+background:#ffffffba;  
 
-.dot{
+backdrop-filter:blur(14px);  
 
-width:9px;
-height:9px;
+border:1px solid rgba(255,255,255,0.7);  
 
-border-radius:50%;
+box-shadow:  
+0 8px 22px rgba(0,0,0,0.05);  
 
-background:#00ff95;
+transition:0.35s;  
 
-animation:
-pulse 1.5s infinite,
-glow 2s infinite alternate;
+}  
 
-}
+.section:hover{  
 
-@keyframes pulse{
+transform:translateY(-4px);  
 
-50%{
+}  
 
-opacity:0.4;
-transform:scale(0.8);
+/* HEAD */  
 
-}
+.head{  
 
-}
+display:flex;  
+justify-content:space-between;  
+align-items:center;  
 
-@keyframes glow{
+margin-bottom:16px;  
 
-100%{
+}  
 
-box-shadow:
-0 0 20px #00ff95;
+.head h3{  
 
-}
+font-size:16px;  
 
-}
+}  
 
-/* SECTION */
+.head span{  
 
-.section{
+font-size:10px;  
 
-margin-top:18px;
+color:#7f9089;  
 
-padding:18px;
+}  
 
-border-radius:28px;
+/* FEATURES */  
 
-background:rgba(15,23,42,0.8);
+.featureGrid{  
 
-backdrop-filter:blur(14px);
+display:grid;  
 
-border:1px solid rgba(255,255,255,0.06);
+grid-template-columns:1fr 1fr;  
 
-box-shadow:
-0 0 20px rgba(0,0,0,0.3);
+gap:10px;  
 
-transition:0.35s;
+}  
 
-}
+.feature{  
 
-.section:hover{
+padding:14px;  
 
-transform:translateY(-4px);
+border-radius:20px;  
 
-box-shadow:
-0 0 20px rgba(0,229,255,0.12);
+background:#ffffff;  
 
-}
+border:1px solid #dce8e3;  
 
-/* HEAD */
+text-align:center;  
 
-.head{
+transition:0.35s;  
 
-display:flex;
-justify-content:space-between;
-align-items:center;
+}  
 
-margin-bottom:16px;
+.feature:hover{  
 
-}
+transform:translateY(-4px);  
 
-.head h3{
+}  
 
-font-size:16px;
+.featureIcon{  
 
-color:white;
+font-size:24px;  
 
-}
+margin-bottom:8px;  
 
-.head span{
+}  
 
-font-size:10px;
+.feature h4{  
 
-color:#94a3b8;
+font-size:12px;  
 
-}
+margin-bottom:6px;  
 
-/* FEATURES */
+}  
 
-.featureGrid{
+.feature p{  
 
-display:grid;
+font-size:10px;  
 
-grid-template-columns:1fr 1fr;
+line-height:1.6;  
 
-gap:10px;
+color:#6d7d78;  
 
-}
+}  
 
-.feature{
+/* CALENDAR */  
 
-padding:14px;
+.calendarTop{  
 
-border-radius:20px;
+display:grid;  
 
-background:#0f172a;
+grid-template-columns:repeat(7,1fr);  
 
-border:1px solid rgba(255,255,255,0.06);
+gap:6px;  
 
-text-align:center;
+margin-bottom:8px;  
 
-transition:0.35s;
+}  
 
-}
+.calendarTop div{  
 
-.feature:hover{
+font-size:9px;  
 
-transform:translateY(-4px);
+text-align:center;  
 
-border-color:#ff006e;
+font-weight:600;  
 
-box-shadow:
-0 0 20px rgba(255,0,110,0.2);
+color:#7d8e87;  
 
-}
+}  
 
-.featureIcon{
+.calendar{  
 
-font-size:24px;
+display:grid;  
 
-margin-bottom:8px;
+grid-template-columns:repeat(7,1fr);  
 
-}
+gap:6px;  
 
-.feature h4{
+}  
 
-font-size:12px;
+.day{  
 
-margin-bottom:6px;
+aspect-ratio:1/1;  
 
-color:white;
+border-radius:14px;  
 
-}
+display:flex;  
+align-items:center;  
+justify-content:center;  
 
-.feature p{
+font-size:10px;  
 
-font-size:10px;
+background:#ffffff;  
 
-line-height:1.6;
+box-shadow:  
+0 4px 10px rgba(0,0,0,0.04);  
 
-color:#9db0cc;
+transition:0.25s;  
 
-}
+}  
 
-/* CALENDAR */
+.day:hover{  
 
-.calendarTop{
+transform:scale(1.08);  
 
-display:grid;
+}  
 
-grid-template-columns:repeat(7,1fr);
+.active{  
 
-gap:6px;
+background:  
+linear-gradient(  
+135deg,  
+#ff9d8e,  
+#ff7d6d  
+);  
 
-margin-bottom:8px;
+color:white;  
 
-}
+font-weight:700;  
 
-.calendarTop div{
+}  
 
-font-size:9px;
+.empty{  
 
-text-align:center;
+background:transparent;  
+box-shadow:none;  
 
-font-weight:600;
+}  
 
-color:#8da1c0;
+/* EVENTS */  
 
-}
+.eventWrap{  
 
-.calendar{
+display:flex;  
+flex-direction:column;  
+gap:12px;  
 
-display:grid;
+}  
 
-grid-template-columns:repeat(7,1fr);
+.event{  
 
-gap:6px;
+padding:14px;  
 
-}
+border-radius:20px;  
 
-.day{
+background:#ffffff;  
 
-aspect-ratio:1/1;
+border:1px solid #dce8e3;  
 
-border-radius:14px;
+transition:0.35s;  
 
-display:flex;
-align-items:center;
-justify-content:center;
+}  
 
-font-size:10px;
+.event:hover{  
 
-background:#0f172a;
+transform:translateY(-4px);  
 
-color:white;
+}  
 
-border:1px solid rgba(255,255,255,0.05);
+.eventTop{  
 
-transition:0.25s;
+display:flex;  
+justify-content:space-between;  
+align-items:center;  
 
-}
+margin-bottom:6px;  
 
-.day:hover{
+}  
 
-transform:scale(1.08);
+.event h4{  
 
-border-color:#00e5ff;
+font-size:12px;  
 
-}
+}  
 
-.active{
+.badge{  
 
-background:
-linear-gradient(
-135deg,
-#ff006e,
-#7b2ff7
-);
+padding:5px 10px;  
 
-color:white;
+border-radius:30px;  
 
-font-weight:700;
+font-size:9px;  
 
-box-shadow:
-0 0 20px rgba(255,0,110,0.4);
+background:#dff4ea;  
 
-}
+color:#2f7057;  
 
-.empty{
+font-weight:600;  
 
-background:transparent;
-box-shadow:none;
-border:none;
+}  
 
-}
+.event p{  
 
-/* EVENTS */
+font-size:10px;  
 
-.eventWrap{
+line-height:1.7;  
 
-display:flex;
-flex-direction:column;
-gap:12px;
+color:#6f7f79;  
 
-}
+margin-top:4px;  
 
-.event{
+}  
 
-padding:14px;
+/* BUTTONS */  
 
-border-radius:20px;
+.links{  
 
-background:#0f172a;
+display:flex;  
+flex-direction:column;  
+gap:10px;  
 
-border:1px solid rgba(255,255,255,0.06);
+}  
 
-transition:0.35s;
+.row{  
 
-}
+display:flex;  
+gap:10px;  
 
-.event:hover{
+}  
 
-transform:translateY(-4px);
+.btn{  
 
-border-color:#7cff00;
+flex:1;  
 
-box-shadow:
-0 0 20px rgba(124,255,0,0.18);
+position:relative;  
 
-}
+overflow:hidden;  
 
-.eventTop{
+padding:14px;  
 
-display:flex;
-justify-content:space-between;
-align-items:center;
+border-radius:18px;  
 
-margin-bottom:6px;
+text-decoration:none;  
 
-}
+font-size:11px;  
+font-weight:600;  
 
-.event h4{
+text-align:center;  
 
-font-size:12px;
+color:white;  
 
-color:white;
+background:  
+linear-gradient(  
+135deg,  
+#ff9d8e,  
+#ff7d6d  
+);  
 
-}
+box-shadow:  
+0 6px 16px rgba(255,120,100,0.18);  
 
-.badge{
+transition:0.3s;  
 
-padding:5px 10px;
+}  
 
-border-radius:30px;
+.btn:hover{  
 
-font-size:9px;
+transform:translateY(-3px);  
 
-background:#0b1220;
+}  
 
-color:#00e5ff;
+.btn::before{  
 
-font-weight:600;
+content:"";  
 
-border:1px solid rgba(0,229,255,0.25);
+position:absolute;  
 
-}
+top:0;  
+left:-120%;  
 
-.event p{
+width:80%;  
+height:100%;  
 
-font-size:10px;
+background:  
+linear-gradient(  
+90deg,  
+transparent,  
+rgba(255,255,255,0.5),  
+transparent  
+);  
 
-line-height:1.7;
+transform:skewX(-20deg);  
 
-color:#a8b5d1;
+transition:0.7s;  
 
-margin-top:4px;
+}  
 
-}
+.btn:hover::before{  
 
-/* BUTTONS */
+left:130%;  
 
-.links{
+}  
 
-display:flex;
-flex-direction:column;
-gap:10px;
+/* MUSIC */  
 
-}
+.player{  
 
-.row{
+overflow:hidden;  
 
-display:flex;
-gap:10px;
+border-radius:22px;  
 
-}
+background:#edf6f1;  
 
-.btn{
+border:1px solid #d7e6df;  
 
-flex:1;
+animation:playerGlow 4s infinite alternate;  
 
-position:relative;
+}  
 
-overflow:hidden;
+@keyframes playerGlow{  
 
-padding:14px;
+100%{  
 
-border-radius:18px;
+box-shadow:  
+0 0 25px rgba(255,125,109,0.15);  
 
-text-decoration:none;
+}  
 
-font-size:11px;
-font-weight:600;
+}  
 
-text-align:center;
+.song{  
 
-color:white;
+padding:12px;  
 
-background:
-linear-gradient(
-135deg,
-#ff006e,
-#7b2ff7
-);
+font-size:10px;  
 
-border:1px solid rgba(255,255,255,0.08);
+overflow:hidden;  
 
-box-shadow:
-0 0 20px rgba(255,0,110,0.2);
+white-space:nowrap;  
 
-transition:0.3s;
+background:white;  
 
-}
+}  
 
-.btn:hover{
+.marquee{  
 
-transform:translateY(-3px);
+display:inline-block;  
 
-box-shadow:
-0 0 30px rgba(0,229,255,0.25);
+padding-left:100%;  
 
-}
+animation:scroll 12s linear infinite;  
 
-.btn::before{
+}  
 
-content:"";
+@keyframes scroll{  
 
-position:absolute;
+100%{  
+transform:translateX(-100%);  
+}  
 
-top:0;
-left:-120%;
+}  
 
-width:80%;
-height:100%;
+.screen{  
 
-background:
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,0.4),
-transparent
-);
+aspect-ratio:16/9;  
 
-transform:skewX(-20deg);
+background:#ddebe5;  
 
-transition:0.7s;
+}  
 
-}
+.screen iframe{  
 
-.btn:hover::before{
+width:100%;  
+height:100%;  
 
-left:130%;
+border:none;  
 
-}
+}  
 
-/* PLAYER */
+.controls{  
 
-.player{
+display:flex;  
+justify-content:center;  
+gap:10px;  
 
-overflow:hidden;
+padding:14px;  
 
-border-radius:22px;
+}  
 
-background:#0b1220;
+.controls button{  
 
-border:1px solid rgba(255,255,255,0.08);
+width:42px;  
+height:38px;  
 
-box-shadow:
-0 0 20px rgba(0,229,255,0.1);
+border:none;  
 
-}
+border-radius:14px;  
 
-.song{
+font-size:15px;  
 
-padding:12px;
+background:  
+linear-gradient(  
+135deg,  
+#ff9d8e,  
+#ff7d6d  
+);  
 
-font-size:10px;
+color:white;  
 
-overflow:hidden;
+font-weight:700;  
 
-white-space:nowrap;
+cursor:pointer;  
 
-background:#0f172a;
+transition:0.3s;  
 
-color:white;
+}  
 
-}
+.controls button:hover{  
 
-.marquee{
+transform:translateY(-3px);  
 
-display:inline-block;
+}  
 
-padding-left:100%;
+/* PARTNERS */  
 
-animation:scroll 12s linear infinite;
+.partnerWrap{  
 
-}
+display:flex;  
+flex-direction:column;  
+gap:10px;  
 
-@keyframes scroll{
+}  
 
-100%{
-transform:translateX(-100%);
-}
+.partner{  
 
-}
+display:flex;  
+align-items:center;  
+gap:12px;  
 
-.screen{
+padding:12px;  
 
-aspect-ratio:16/9;
+border-radius:20px;  
 
-background:#020617;
+background:white;  
 
-}
+border:1px solid #dce8e3;  
 
-.screen iframe{
+transition:0.35s;  
 
-width:100%;
-height:100%;
+cursor:pointer;  
 
-border:none;
+}  
 
-}
+.partner:hover{  
 
-.controls{
+transform:translateY(-4px);  
 
-display:flex;
-justify-content:center;
-gap:10px;
+}  
 
-padding:14px;
+.partner img{  
 
-}
+width:52px;  
+height:52px;  
 
-.controls button{
+border-radius:14px;  
 
-width:42px;
-height:38px;
+object-fit:cover;  
 
-border:none;
+}  
 
-border-radius:14px;
+.partner h4{  
 
-font-size:15px;
+font-size:11px;  
 
-background:
-linear-gradient(
-135deg,
-#00e5ff,
-#0077ff
-);
+margin-bottom:3px;  
 
-color:white;
+}  
 
-font-weight:700;
+.partner p{  
 
-cursor:pointer;
+font-size:9px;  
 
-transition:0.3s;
+line-height:1.6;  
 
-box-shadow:
-0 0 18px rgba(0,229,255,0.2);
+color:#6f7f79;  
 
-}
+}  
 
-.controls button:hover{
+/* FOOTER */  
 
-transform:translateY(-3px);
+.footer{  
 
-}
+margin-top:22px;  
 
-/* PARTNERS */
+padding-bottom:24px;  
 
-.partnerWrap{
+text-align:center;  
 
-display:flex;
-flex-direction:column;
-gap:10px;
+font-size:10px;  
 
-}
+line-height:1.8;  
 
-.partner{
+color:#6f7f79;  
 
-display:flex;
-align-items:center;
-gap:12px;
+}  
 
-padding:12px;
+</style>  </head>  <body>  <div id="loader">  <div class="loaderCircle"></div>  </div>  <div class="bg">  <div class="blur blur1"></div>  
+<div class="blur blur2"></div>  </div>  <div class="wrapper">  <div class="hero">  <div class="sun"></div>  <div class="cloud c1"></div>  
+<div class="cloud c2"></div>  <div class="hill"></div>  <div class="tree t1">🌲</div>  
+<div class="tree t2">🌲</div>  <div class="logoWrap">  <div class="logo">  <img src="https://i.ibb.co/Q3RwnmRx/ebecef4598a23caaf0457820efcd1758.jpg">  </div>  </div>  <div class="title">  PIXEL GLOW
 
-border-radius:20px;
+</div>  <div class="subtitle">  A calm digital chess sanctuary built for elite strategy, tournaments and peaceful competition.
 
-background:#0f172a;
+</div>  <div class="stats">  <div class="stat">  <h2>24/7</h2>  <p>ACTIVE</p>  </div>  <div class="stat">  <h2 id="memberCount">100+</h2>  <p>MEMBERS</p>  </div>  <div class="stat">  <h2>∞</h2>  <p>TACTICS</p>  </div>  </div>  <div class="quote">  “Every chess move reflects patience, clarity and silent strength.”
 
-border:1px solid rgba(255,255,255,0.06);
+</div>  <div class="live">  <div class="dot"></div>  <span id="onlineCount">0</span> Members Online
 
-transition:0.35s;
+</div>  </div>  <!-- FEATURES -->  <div class="section">  <div class="head">  <h3>Club Features</h3>  <span>Experience</span>
 
-cursor:pointer;
+</div>  <div class="featureGrid">  <div class="feature">  <div class="featureIcon">♟️</div>  <h4>Daily Matches</h4>  <p>Compete with active players every day.</p>  </div>  <div class="feature">  <div class="featureIcon">🏆</div>  <h4>Tournaments</h4>  <p>Weekly elite club competitions.</p>  </div>  <div class="feature">  <div class="featureIcon">🎧</div>  <h4>Music Lounge</h4>  <p>Peaceful background streaming.</p>  </div>  <div class="feature">  <div class="featureIcon">🌿</div>  <h4>Creative Space</h4>  <p>Nature inspired strategic community.</p>  </div>  </div>  </div>  <!-- CALENDAR -->  <div class="section">  <div class="head">  <h3>Club Calendar</h3>  <span id="monthYear"></span>
 
-}
+</div>  <div class="calendarTop">  <div>Mon</div>  
+<div>Tue</div>  
+<div>Wed</div>  
+<div>Thu</div>  
+<div>Fri</div>  
+<div>Sat</div>  
+<div>Sun</div>  </div>  <div class="calendar" id="calendar"></div>  </div>  <div class="eventWrap" id="eventContainer"></div>  </div>  <!-- LEADERBOARD -->  <div class="section">  <div class="head">  <h3>Top Players</h3>  <span>Leaderboard 2026</span>
 
-.partner:hover{
+</div>  <div class="eventWrap">  <div class="event">  <div class="eventTop">  <h4>#1 shairyaqoob </h4>  <div class="badge">1640</div>  </div>  <p>Super admin of 𝑻𝒉𝒆 𝑺𝒕𝒓𝒂𝒕𝒆𝒈𝒊𝒄 𝑪𝒐𝒖𝒏𝒄𝒊𝒍 -</p>  </div>  <div class="event">  <div class="eventTop">  <h4>#2 lovehololiveEN</h4>  <div class="badge">1582</div>  </div>  <p>Loves hololive</p>  </div>  </div>  </div>  <!-- ACCESS -->  <div class="section">  <div class="head">  <h3>Club Access</h3>  <span>Quick Portal</span>
 
-transform:translateY(-4px);
+</div>  <div class="links">  <div class="row">  <a class="btn"  
+href="https://www.chess.com/member/yogi136"  
+target="_blank">
 
-border-color:#00e5ff;
+Owner
 
-box-shadow:
-0 0 20px rgba(0,229,255,0.18);
+</a>  <a class="btn"  
+href="https://www.chess.com/member/michael-kaiser10bm"  
+target="_blank">
 
-}
+Co Owner
 
-.partner img{
+</a>  </div>  <a class="btn"  
+href="https://www.chess.com/clubs/forum/view/club-rulebook-1#comment-127196376"  
+target="_blank">
 
-width:52px;
-height:52px;
+Club Rules
 
-border-radius:14px;
+</a>  <a class="btn"  
+href="https://www.chess.com/club/pixelglow/announcements"  
+target="_blank">
 
-object-fit:cover;
+Announcements
 
-}
+</a>  <a class="btn"  
+href="https://www.chess.com/clubs/events/pixelglow"  
+target="_blank">
 
-.partner h4{
+Join Events
 
-font-size:11px;
+</a>  </div>  </div>  <!-- MUSIC -->  <div class="section">  <div class="head">  <h3>Music Lounge</h3>  <span>Streaming</span>
 
-margin-bottom:3px;
+</div>  <div class="player">  <div class="song">  <div class="marquee" id="songText">  Now Playing
 
-color:white;
+</div>  </div>  <div class="screen">  <iframe id="playerFrame"  
+allow="autoplay; encrypted-media"  
+allowfullscreen>  </iframe>  </div>  <div class="controls">  <button onclick="prevSong()">⏮</button>
 
-}
+<button onclick="toggleVideo()" id="toggleBtn">  ▶
 
-.partner p{
+</button>  <button onclick="nextSong()">⏭</button>
 
-font-size:9px;
+</div>  </div>  </div>  <!-- PARTNERS -->  <div class="section">  <div class="head">  <h3>Partner Clubs</h3>  <span>Alliance</span>
 
-line-height:1.6;
+</div>  <div class="partnerWrap" id="partnersContainer"></div>  </div>  <div class="footer">  PIXEL GLOW CLUB © 2026<br>
 
-color:#9db0cc;
+Designed with peaceful energy and elite strategy.
 
-}
+</div>  </div>  <script>  
 
-/* FOOTER */
+/* LOADER */  
 
-.footer{
+window.onload=()=>{  
 
-margin-top:22px;
+setTimeout(()=>{  
 
-padding-bottom:24px;
+document.getElementById("loader")  
+.style.opacity="0";  
 
-text-align:center;
+setTimeout(()=>{  
 
-font-size:10px;
+document.getElementById("loader")  
+.style.display="none";  
 
-line-height:1.8;
+},1000);  
 
-color:#8da1c0;
+},1200);  
 
-}
+};  
 
-</style>
+/* CALENDAR */  
 
-</head>
+function generateCalendar(){  
 
-<body>
+const calendar =  
+document.getElementById("calendar");  
 
-<div id="loader">
-<div class="loaderCircle"></div>
-</div>
+const monthYear =  
+document.getElementById("monthYear");  
 
-<div class="bg">
-<div class="blur blur1"></div>
-<div class="blur blur2"></div>
-</div>
+calendar.innerHTML = "";  
 
-<div class="wrapper">
+const today = new Date();  
 
-<div class="hero">
+const currentDate =  
+today.getDate();  
 
-<div class="sun"></div>
+const year =  
+today.getFullYear();  
 
-<div class="cloud c1"></div>
-<div class="cloud c2"></div>
+const month =  
+today.getMonth();  
 
-<div class="hill"></div>
+const monthNames=[  
 
-<div class="tree t1">🌲</div>
-<div class="tree t2">🌲</div>
+"January","February","March",  
+"April","May","June",  
+"July","August","September",  
+"October","November","December"  
 
-<div class="logoWrap">
+];  
 
-<div class="logo">
+monthYear.innerText =  
+monthNames[month] + " " + year;  
 
-<img src="https://i.ibb.co/Q3RwnmRx/ebecef4598a23caaf0457820efcd1758.jpg">
+const firstDay =  
+new Date(year,month,1).getDay();  
 
-</div>
+const totalDays =  
+new Date(year,month+1,0).getDate();  
 
-</div>
+let start =  
+firstDay === 0 ? 6 : firstDay - 1;  
 
-<div class="title">
+for(let i=0;i<start;i++){  
 
-PIXEL GLOW
+calendar.innerHTML +=  
+`<div class="day empty"></div>`;  
 
-</div>
+}  
 
-<div class="subtitle">
+for(let d=1; d<=totalDays; d++){  
 
-A calm digital chess sanctuary built for elite strategy, tournaments and peaceful competition.
+calendar.innerHTML += `  
+  
+<div class="day ${  
+d === currentDate  
+? "active"  
+: ""  
+}">  
+  
+${d}  
+  
+</div>  
+  
+`;  
 
-</div>
+}  
 
-<div class="stats">
+}  
 
-<div class="stat">
-<h2>24/7</h2>
-<p>ACTIVE</p>
-</div>
+generateCalendar();  
 
-<div class="stat">
-<h2>100+</h2>
-<p>MEMBERS</p>
-</div>
+/* MEMBERS */  
 
-<div class="stat">
-<h2>∞</h2>
-<p>TACTICS</p>
-</div>
+async function loadMembers(){  
 
-</div>
+try{  
 
-<div class="quote">
+const response =  
+await fetch("api/members.json");  
 
-“Every chess move reflects patience, clarity and silent strength.”
+const data =  
+await response.json();  
 
-</div>
+document.getElementById("memberCount")  
+.innerText = data.members;  
 
-<div class="live">
+document.getElementById("onlineCount")  
+.innerText = data.online;  
 
-<div class="dot"></div>
+}  
 
-Members Online
+catch(error){  
 
-</div>
+console.log(error);  
 
-</div>
+}  
 
-<div class="section">
+}  
 
-<div class="head">
+loadMembers();  
 
-<h3>Club Features</h3>
+/* EVENTS */  
 
-<span>Experience</span>
+async function loadEvents(){  
 
-</div>
+try{  
 
-<div class="featureGrid">
+const response =  
+await fetch("api/events.json");  
 
-<div class="feature">
-<div class="featureIcon">♟️</div>
-<h4>Daily Matches</h4>
-<p>Compete with active players every day.</p>
-</div>
+const events =  
+await response.json();  
 
-<div class="feature">
-<div class="featureIcon">🏆</div>
-<h4>Tournaments</h4>
-<p>Weekly elite club competitions.</p>
-</div>
+const container =  
+document.getElementById("eventContainer");  
 
-<div class="feature">
-<div class="featureIcon">🎧</div>
-<h4>Music Lounge</h4>
-<p>Peaceful background streaming.</p>
-</div>
+container.innerHTML = "";  
 
-<div class="feature">
-<div class="featureIcon">🌌</div>
-<h4>RGB Space</h4>
-<p>Modern glowing aesthetic interface.</p>
-</div>
+events.forEach(event=>{  
 
-</div>
+container.innerHTML += `  
+  
+<div class="event">  
+  
+<div class="eventTop">  
+  
+<h4>${event.title}</h4>  
+  
+<div class="badge">  
+  
+${event.type}  
+  
+</div>  
+  
+</div>  
+  
+<p>  
+  
+${event.date}  
+  
+</p>  
+  
+<p>  
+  
+${event.description}  
+  
+</p>  
+  
+</div>  
+  
+`;  
 
-</div>
+});  
 
-<div class="footer">
+}  
 
-PIXEL GLOW CLUB © 2026<br>
+catch(error){  
 
-RGB DARK EDITION
+console.log(error);  
 
-</div>
+}  
 
-</div>
+}  
 
-<script>
+loadEvents();  
 
-window.onload=()=>{
+/* MUSIC */  
 
-setTimeout(()=>{
+let songs=[  
+{  
+src:"https://youtu.be/R5aurUlfn3w",  
+name:"Monody - TheFatRat"  
+},   
+{  
+src:"https://youtu.be/kcsGhOmULxQ",  
+name:"Golden Brown - The Stranglers"  
+},  
 
-document.getElementById("loader")
-.style.opacity="0";
+{  
+src:"https://youtu.be/qdpXxGPqW-Y",  
+name:"Faded - Alan Walker"  
+},  
+{    
+src:"https://youtu.be/k50D8-EvNxk",    
+name:"Meu Abrigo - Melim"    
+},    
 
-setTimeout(()=>{
+{    
+src:"https://youtu.be/9I9c20LHmzY",    
+name:"Come As You Are - Nirvana"    
+},    
+ {  
+src:"https://youtu.be/7WoVX2X3SQw",  
+name:"Motagem Renaido - Jmilton"  
+},   
+{    
+src:"https://youtu.be/SDNA934EEVk",    
+name:"A Walk - Tycho"    
+},    
 
-document.getElementById("loader")
-.style.display="none";
+{    
+src:"https://youtu.be/A3xxG5zHuCA",    
+name:"Passo Bem Solto - ATLXS"    
+},    
 
-},1000);
+{    
+src:"https://youtu.be/Qk5lzJVfcLo",    
+name:"Downtown Baby 2 - Overtonight"    
+},    
 
-},1200);
+{    
+src:"https://youtu.be/vi72_ggUCHU",    
+name:"Keep Up - ODETARI"    
+},    
 
-};
+{    
+src:"https://youtu.be/kGobHQ7z8X4",    
+name:"Why Do I? - Unknown Brain"    
+},    
 
-</script>
+{    
+src:"https://youtu.be/0jSpCxmb2VQ",    
+name:"Mood - 24kGoldn"    
+},    
+{src:"https://youtu.be/4jh2H5qFb44", name:"Shape of You - Ed Sheeran"},  
+  {src:"https://youtu.be/rfTgO9rpqck", name:"Heat Waves - Glass Animals"},  
+  {src:"https://youtu.be/JrNMyzsYr4M", name:"Love Me Like You Do - Ellie Goulding"},  
+  {src:"https://youtu.be/DKbfBSrjVHA", name:"Can We Kiss Forever? - Kina"},  
+  {src:"https://youtu.be/TdbyjBf93zc", name:"All I Want - Lofi Remix"},  
+  {src:"https://youtu.be/z7zoabFKD60", name:"TheFatRat Mix / Songs"},   
+  {src:"https://youtu.be/i4bWViFpd0Q", name:"Army Dreamers - Kate Bush"},  
+  {src:"https://youtu.be/Jkj36B1YuDU", name:"Another Love - Tom Odell"},  
+  {src:"https://youtu.be/GXioir-fujY", name:"NO BATIDÃO - ZXKAI"},   
 
-</body>
-</html>
+{  
+src:"https://youtu.be/2vjPBrBU-TM",  
+name:"Sia - Chandelier"  
+},  
+
+{  
+src:"https://youtu.be/PT2_F-1esPk",  
+name:"Alan Walker - Spectre"  
+},  
+
+{  
+src:"https://youtu.be/n8X9_MgEdCg",  
+name:"TheFatRat - Unity"  
+},  
+
+{  
+src:"https://youtu.be/xy-NKN75Jhw",  
+name:"Petit Biscuit - Sunset Lover"  
+},  
+
+{  
+src:"https://youtu.be/HAIDqt2aUek",  
+name:"Imagine Dragons - Demons"  
+},  
+
+{  
+src:"https://youtu.be/RgKAFK5djSk",  
+name:"Wiz Khalifa - See You Again"  
+},  
+
+{  
+src:"https://youtu.be/mWRsgZuwf_8",  
+name:"M83 - Midnight City"  
+},  
+
+{  
+src:"https://youtu.be/50VNCymT-Cs",  
+name:"Coldplay - A Sky Full Of Stars"  
+},  
+
+{  
+src:"https://youtu.be/hLQl3WQQoQ0",  
+name:"Adele - Someone Like You"  
+},  
+
+{  
+src:"https://youtu.be/JGwWNGJdvx8",  
+name:"Ed Sheeran - Perfect"  
+},  
+
+{  
+src:"https://youtu.be/OpQFFLBMEPI",  
+name:"The Chainsmokers - Closer"  
+},  
+
+{  
+src:"https://youtu.be/pXRviuL6vMY",  
+name:"Twenty One Pilots - Stressed Out"  
+},  
+
+{  
+src:"https://youtu.be/60ItHLz5WEA",  
+name:"Alan Walker - Alone"  
+},  
+
+{  
+src:"https://youtu.be/kXYiU_JCYtU",  
+name:"Linkin Park - Numb"  
+},  
+
+{  
+src:"https://youtu.be/YQHsXMglC9A",  
+name:"Adele - Hello"  
+},  
+
+{  
+src:"https://youtu.be/uelHwf8o7_U",  
+name:"Eminem - Love The Way You Lie"  
+},  
+
+{  
+src:"https://youtu.be/3AtDnEC4zak",  
+name:"Charlie Puth - We Don't Talk Anymore"  
+},  
+
+{  
+src:"https://youtu.be/09R8_2nJtjg",  
+name:"Maroon 5 - Sugar"  
+},  
+
+{  
+src:"https://youtu.be/ktvTqknDobU",  
+name:"Imagine Dragons - Radioactive"  
+},   
+{src:"https://youtu.be/EoNWCYNTANA", name:"If I Killed Someone for You - Alec Benjamin"},  
+  {src:"https://youtu.be/y1uzBncUsQQ", name:"Origami - The Rare Occasions"},  
+  {src:"https://youtu.be/7U1LFCY70nA", name:"Ava - Underdog"}  
+
+
+];  
+
+let i=0;  
+
+let isPlaying=false;  
+
+const frame=document.getElementById("playerFrame");  
+
+const songText=document.getElementById("songText");  
+
+const btn=document.getElementById("toggleBtn");  
+
+function getId(url){  
+
+if(url.includes("youtu.be/")){  
+
+return url.split("youtu.be/")[1];  
+
+}  
+
+return url;  
+
+}  
+
+function convert(url){  
+
+return `https://www.youtube.com/embed/${getId(url)}?enablejsapi=1&rel=0`;  
+
+}  
+
+function load(){  
+
+frame.src=convert(songs[i].src);  
+
+songText.innerText=  
+"Now Playing • " + songs[i].name;  
+
+btn.innerText="▶";  
+
+isPlaying=false;  
+
+}  
+
+function nextSong(){  
+
+i=(i+1)%songs.length;  
+
+load();  
+
+}  
+
+function prevSong(){  
+
+i=(i-1+songs.length)%songs.length;  
+
+load();  
+
+}  
+
+function toggleVideo(){  
+
+frame.contentWindow.postMessage(  
+
+JSON.stringify({  
+
+event:"command",  
+
+func:isPlaying  
+? "pauseVideo"  
+: "playVideo",  
+
+args:[]  
+
+}),  
+
+"*"  
+
+);  
+
+isPlaying=!isPlaying;  
+
+btn.innerText=  
+isPlaying  
+? "❚❚"  
+: "▶";  
+
+}  
+
+load();  
+
+/* PARTNERS */  
+
+const partners=[  
+
+{  
+
+name:"SAPPHIRE",  
+
+img:"https://i.ibb.co/4RYLGQ3z/image.jpg",  
+
+link:"https://www.chess.com/club/sapphire-1",  
+
+desc:"Friend's Social Club"  
+
+},  
+
+{  
+
+name:"PENGUIN CHESS CLUB",  
+
+img:"https://i.ibb.co/0p7z5V4R/your-image.jpg",  
+
+link:"https://www.chess.com/club/penguin-chess-club-3",  
+
+desc:"Cool Competitive Club"  
+
+}  
+
+];  
+
+const container=  
+document.getElementById("partnersContainer");  
+
+partners.forEach(p=>{  
+
+const card=  
+document.createElement("div");  
+
+card.className="partner";  
+
+card.innerHTML=`  
+  
+<img src="${p.img}">  
+  
+<div>  
+  
+<h4>${p.name}</h4>  
+  
+<p>${p.desc}</p>  
+  
+</div>  
+  
+`;  
+
+card.onclick=()=>{  
+
+window.open(  
+p.link,  
+"_blank"  
+);  
+
+};  
+
+container.appendChild(card);  
+
+});  
+
+</script>  </body>  
+</html>  
