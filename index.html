@@ -13,45 +13,37 @@ html{
 scroll-behavior:smooth;  
 }  
 
+/* ===================================================
+   DRAGON FANTASY THEME V2
+   Paste BELOW your current CSS
+   =================================================== */
+
 :root{
 
---bg:#0b1020;
---bg2:#131a2f;
---bg3:#1d2745;
+--dragon-bg:#070b14;
+--dragon-bg2:#0d1322;
+--dragon-card:rgba(17,24,39,.78);
 
---white:#f5f7ff;
+--dragon-border:rgba(255,255,255,.08);
 
---card:rgba(18,24,40,.78);
+--dragon-purple:#7c6cff;
+--dragon-blue:#4aa3ff;
+--dragon-cyan:#5ce1ff;
 
---dark:#f5f7ff;
-
---soft:#aeb8d1;
-
---primary:#7c6cff;
-
---secondary:#4aa3ff;
-
---accent:#a56eff;
-
---shadow:
-0 15px 40px rgba(0,0,0,.35);
+--dragon-text:#ffffff;
+--dragon-soft:#cfd8f3;
 
 }
-/* ======================================
-   PIXEL GLOW - FANTASY DRAGON THEME
-   ====================================== */
 
-/* BACKGROUND */
+/* BODY */
 
 body{
 
 background:
-
 linear-gradient(
-rgba(8,12,20,.45),
-rgba(8,12,20,.80)
+rgba(5,8,15,.55),
+rgba(5,8,15,.85)
 ),
-
 url("https://i.ibb.co/TBYgfyyz/2ea6a654816bfbc5eaf430ce1d2adf54.jpg");
 
 background-size:cover;
@@ -59,7 +51,106 @@ background-position:center;
 background-repeat:no-repeat;
 background-attachment:fixed;
 
-color:#f5f7ff;
+color:var(--dragon-text);
+
+}
+
+/* OVERLAY */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+background:
+linear-gradient(
+180deg,
+rgba(0,0,0,.15),
+rgba(0,0,0,.60)
+);
+
+pointer-events:none;
+
+z-index:-1;
+
+}
+
+/* STARS */
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+background-image:
+radial-gradient(circle,#ffffff 1px,transparent 1px),
+radial-gradient(circle,#7c6cff 1px,transparent 1px),
+radial-gradient(circle,#4aa3ff 1px,transparent 1px);
+
+background-size:
+150px 150px,
+220px 220px,
+300px 300px;
+
+opacity:.18;
+
+animation:dragonStars 60s linear infinite;
+
+z-index:-1;
+
+}
+
+@keyframes dragonStars{
+
+0%{
+transform:translateY(0);
+}
+
+100%{
+transform:translateY(-300px);
+}
+
+}
+
+/* REMOVE OLD NATURE */
+
+.sun,
+.cloud,
+.hill,
+.tree,
+.bg{
+display:none !important;
+}
+
+/* LOADER */
+
+#loader{
+background:#0b1120;
+}
+
+.loaderCircle{
+
+border:
+6px solid rgba(124,108,255,.2);
+
+border-top:
+6px solid var(--dragon-purple);
+
+}
+
+/* WRAPPER */
+
+.wrapper{
+
+max-width:340px;
 
 }
 
@@ -68,26 +159,17 @@ color:#f5f7ff;
 .hero{
 
 background:
-rgba(15,20,35,.58) !important;
+rgba(12,18,34,.72) !important;
 
-backdrop-filter:blur(18px);
+backdrop-filter:blur(22px);
 
 border:
-1px solid rgba(255,255,255,.08);
+1px solid var(--dragon-border);
 
 box-shadow:
-0 20px 50px rgba(0,0,0,.45);
+0 15px 45px rgba(0,0,0,.55);
 
-}
-
-/* REMOVE OLD NATURE DECORATIONS */
-
-.sun,
-.cloud,
-.hill,
-.tree{
-
-display:none !important;
+animation:none;
 
 }
 
@@ -96,7 +178,6 @@ display:none !important;
 .logo{
 
 background:
-
 linear-gradient(
 135deg,
 rgba(124,108,255,.35),
@@ -104,14 +185,24 @@ rgba(74,163,255,.25)
 );
 
 border:
-1px solid rgba(255,255,255,.12);
+1px solid rgba(255,255,255,.08);
+
+box-shadow:
+0 0 20px rgba(124,108,255,.25);
 
 }
 
 .logo::before{
 
 background:
-rgba(15,20,35,.65);
+rgba(11,17,32,.8);
+
+}
+
+.logo img{
+
+border:
+1px solid rgba(255,255,255,.08);
 
 }
 
@@ -119,26 +210,22 @@ rgba(15,20,35,.65);
 
 .title{
 
-color:white;
-
 font-size:34px;
 
 letter-spacing:4px;
 
+color:white;
+
 text-shadow:
-
-0 0 15px rgba(124,108,255,.7),
-
-0 0 35px rgba(74,163,255,.35);
+0 0 10px rgba(124,108,255,.8),
+0 0 20px rgba(124,108,255,.8),
+0 0 40px rgba(74,163,255,.5);
 
 }
 
-/* SUBTITLE */
-
 .subtitle{
 
-color:
-rgba(255,255,255,.82);
+color:var(--dragon-soft);
 
 }
 
@@ -147,10 +234,22 @@ rgba(255,255,255,.82);
 .stat{
 
 background:
-rgba(255,255,255,.05);
+rgba(255,255,255,.04);
 
 border:
 1px solid rgba(255,255,255,.08);
+
+backdrop-filter:blur(20px);
+
+}
+
+.stat:hover{
+
+transform:
+translateY(-5px);
+
+box-shadow:
+0 0 25px rgba(124,108,255,.2);
 
 }
 
@@ -159,39 +258,13 @@ border:
 color:white;
 
 text-shadow:
-0 0 12px rgba(124,108,255,.6);
+0 0 10px rgba(124,108,255,.7);
 
 }
 
 .stat p{
 
-color:#c7d0e8;
-
-}
-
-/* LIVE */
-
-.live{
-
-background:
-rgba(255,255,255,.05);
-
-border:
-1px solid rgba(255,255,255,.08);
-
-}
-
-.dot{
-
-background:#4aa3ff;
-
-box-shadow:
-
-0 0 10px #4aa3ff,
-
-0 0 20px #7c6cff,
-
-0 0 35px #7c6cff;
+color:var(--dragon-soft);
 
 }
 
@@ -200,12 +273,37 @@ box-shadow:
 .quote{
 
 background:
-rgba(255,255,255,.05);
+rgba(255,255,255,.04);
 
 border:
 1px solid rgba(255,255,255,.08);
 
-color:#d7def0;
+color:#e7ecff;
+
+}
+
+/* LIVE */
+
+.live{
+
+background:
+rgba(255,255,255,.04);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+color:white;
+
+}
+
+.dot{
+
+background:var(--dragon-blue);
+
+box-shadow:
+0 0 10px var(--dragon-blue),
+0 0 20px var(--dragon-purple),
+0 0 35px var(--dragon-purple);
 
 }
 
@@ -214,19 +312,29 @@ color:#d7def0;
 .section{
 
 background:
-rgba(18,24,40,.75);
-
-backdrop-filter:blur(16px);
+rgba(15,22,40,.72);
 
 border:
 1px solid rgba(255,255,255,.08);
+
+backdrop-filter:blur(18px);
 
 box-shadow:
 0 10px 30px rgba(0,0,0,.35);
 
 }
 
-/* HEADINGS */
+.section:hover{
+
+transform:
+translateY(-4px);
+
+box-shadow:
+0 15px 35px rgba(0,0,0,.5);
+
+}
+
+/* HEADERS */
 
 .head h3{
 
@@ -236,7 +344,7 @@ color:white;
 
 .head span{
 
-color:#aab4cf;
+color:#b7c4e8;
 
 }
 
@@ -245,10 +353,27 @@ color:#aab4cf;
 .feature{
 
 background:
-rgba(255,255,255,.05);
+rgba(255,255,255,.04);
 
 border:
 1px solid rgba(255,255,255,.08);
+
+}
+
+.feature:hover{
+
+transform:
+translateY(-5px);
+
+box-shadow:
+0 0 20px rgba(124,108,255,.15);
+
+}
+
+.featureIcon{
+
+filter:
+drop-shadow(0 0 10px rgba(124,108,255,.4));
 
 }
 
@@ -260,7 +385,50 @@ color:white;
 
 .feature p{
 
-color:#c7d0e8;
+color:#cbd5f0;
+
+}
+
+/* CALENDAR */
+
+.calendarTop div{
+
+color:#c9d4ef;
+
+}
+
+.day{
+
+background:
+rgba(255,255,255,.04);
+
+color:white;
+
+border:
+1px solid rgba(255,255,255,.04);
+
+}
+
+.day:hover{
+
+box-shadow:
+0 0 15px rgba(124,108,255,.2);
+
+}
+
+.active{
+
+background:
+linear-gradient(
+135deg,
+#7c6cff,
+#4aa3ff
+);
+
+color:white;
+
+box-shadow:
+0 0 20px rgba(124,108,255,.55);
 
 }
 
@@ -269,7 +437,7 @@ color:#c7d0e8;
 .event{
 
 background:
-rgba(255,255,255,.05);
+rgba(255,255,255,.04);
 
 border:
 1px solid rgba(255,255,255,.08);
@@ -284,43 +452,15 @@ color:white;
 
 .event p{
 
-color:#c7d0e8;
+color:#d0daf5;
 
 }
 
-/* BADGE */
+/* BADGES */
 
 .badge{
 
 background:
-
-linear-gradient(
-135deg,
-#7c6cff,
-#4aa3ff
-);
-
-color:white;
-
-font-weight:700;
-
-}
-
-/* CALENDAR */
-
-.day{
-
-background:
-rgba(255,255,255,.05);
-
-color:white;
-
-}
-
-.active{
-
-background:
-
 linear-gradient(
 135deg,
 #7c6cff,
@@ -330,8 +470,7 @@ linear-gradient(
 color:white;
 
 box-shadow:
-
-0 0 20px rgba(124,108,255,.5);
+0 0 12px rgba(124,108,255,.35);
 
 }
 
@@ -340,15 +479,15 @@ box-shadow:
 .btn{
 
 background:
-
 linear-gradient(
 135deg,
 #7c6cff,
 #4aa3ff
 ) !important;
 
-box-shadow:
+color:white;
 
+box-shadow:
 0 0 20px rgba(124,108,255,.35);
 
 }
@@ -359,17 +498,28 @@ transform:
 translateY(-4px);
 
 box-shadow:
-
-0 0 35px rgba(124,108,255,.55);
+0 0 30px rgba(124,108,255,.55);
 
 }
 
-/* MUSIC PLAYER */
+.btn::before{
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.7),
+transparent
+);
+
+}
+
+/* PLAYER */
 
 .player{
 
 background:
-rgba(18,24,40,.75);
+rgba(255,255,255,.04);
 
 border:
 1px solid rgba(255,255,255,.08);
@@ -385,15 +535,30 @@ color:white;
 
 }
 
+.screen{
+
+background:#10182c;
+
+}
+
 .controls button{
 
 background:
-
 linear-gradient(
 135deg,
 #7c6cff,
 #4aa3ff
 );
+
+box-shadow:
+0 0 15px rgba(124,108,255,.25);
+
+}
+
+.controls button:hover{
+
+box-shadow:
+0 0 25px rgba(124,108,255,.45);
 
 }
 
@@ -402,10 +567,17 @@ linear-gradient(
 .partner{
 
 background:
-rgba(255,255,255,.05);
+rgba(255,255,255,.04);
 
 border:
 1px solid rgba(255,255,255,.08);
+
+}
+
+.partner:hover{
+
+box-shadow:
+0 0 20px rgba(124,108,255,.18);
 
 }
 
@@ -417,7 +589,14 @@ color:white;
 
 .partner p{
 
-color:#c7d0e8;
+color:#cfd9f5;
+
+}
+
+.partner img{
+
+border:
+1px solid rgba(255,255,255,.08);
 
 }
 
@@ -425,23 +604,12 @@ color:#c7d0e8;
 
 .footer{
 
-color:#d4dbef;
+color:#d8e0fa;
 
-}
+border-top:
+1px solid rgba(255,255,255,.08);
 
-/* HOVER EFFECTS */
-
-.section:hover,
-.feature:hover,
-.event:hover,
-.partner:hover,
-.stat:hover{
-
-transform:
-translateY(-4px);
-
-box-shadow:
-0 15px 35px rgba(0,0,0,.45);
+padding-top:20px;
 
 }
 
@@ -455,21 +623,56 @@ width:8px;
 
 ::-webkit-scrollbar-track{
 
-background:#0d1322;
+background:#0c1220;
 
 }
 
 ::-webkit-scrollbar-thumb{
 
 background:
-
 linear-gradient(
 180deg,
 #7c6cff,
 #4aa3ff
 );
 
-border-radius:10px;
+border-radius:50px;
+
+}
+
+/* GLOW ANIMATION */
+
+@keyframes dragonGlow{
+
+0%{
+
+box-shadow:
+0 0 10px rgba(124,108,255,.15);
+
+}
+
+50%{
+
+box-shadow:
+0 0 30px rgba(124,108,255,.30);
+
+}
+
+100%{
+
+box-shadow:
+0 0 10px rgba(124,108,255,.15);
+
+}
+
+}
+
+.hero,
+.section,
+.player{
+
+animation:
+dragonGlow 6s infinite;
 
 }
 </style>  </head>  <body>  <div id="loader">  <div class="loaderCircle"></div>  </div> <div class="logoWrap">  <div class="logo">  <img src="https://i.ibb.co/Q3RwnmRx/ebecef4598a23caaf0457820efcd1758.jpg">  </div>  </div>  <div class="title">  PIXEL GLOW
