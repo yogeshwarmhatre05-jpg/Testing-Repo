@@ -275,26 +275,23 @@ z-index:2;
 
 }  
 
-.stat{  
+.stat{
 
-padding:14px 8px;  
+padding:14px;
 
-border-radius:22px;  
+border-radius:22px;
 
-background:#ffffffba;  
+background:
 
-backdrop-filter:blur(10px);  
+rgba(255,255,255,.05);
 
-text-align:center;  
+backdrop-filter:blur(15px);
 
-border:1px solid rgba(255,255,255,0.6);  
+border:
 
-box-shadow:  
-0 5px 14px rgba(0,0,0,0.05);  
+1px solid rgba(255,255,255,.08);
 
-transition:0.35s;  
-
-}  
+}
 
 .stat:hover{  
 
@@ -322,67 +319,50 @@ color:#72827d;
 
 /* QUOTE */  
 
-.quote{  
+.quote{
 
-margin-top:18px;  
+background:
 
-padding:16px;  
+rgba(255,255,255,.05);
 
-border-radius:22px;  
+border:
 
-background:#ffffffba;  
+1px solid rgba(255,255,255,.08);
 
-backdrop-filter:blur(12px);  
+color:#d7def0;
 
-border:1px solid rgba(255,255,255,0.7);  
-
-font-size:12px;  
-
-line-height:1.9;  
-
-text-align:center;  
-
-color:#586965;  
-
-}  
+}
 
 /* LIVE */  
 
-.live{  
+.live{
 
-margin-top:16px;  
+background:
 
-display:flex;  
-align-items:center;  
-justify-content:center;  
-gap:8px;  
+rgba(255,255,255,.05);
 
-padding:12px;  
+border:
 
-border-radius:18px;  
+1px solid rgba(255,255,255,.08);
 
-background:#ffffffba;  
+}
 
-border:1px solid rgba(255,255,255,0.7);  
+.dot{
 
-font-size:11px;  
+width:9px;
+height:9px;
 
-}  
+border-radius:50%;
 
-.dot{  
+background:#4aa3ff;
 
-width:9px;  
-height:9px;  
+box-shadow:
 
-border-radius:50%;  
+0 0 15px #4aa3ff,
 
-background:#7dc8ab;  
+0 0 30px #7c6cff;
 
-animation:  
-pulse 1.5s infinite,  
-glow 2s infinite alternate;  
-
-}  
+}
 
 @keyframes pulse{  
 
