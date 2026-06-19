@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+}
+
+.sidebar{
+    position:fixed;
+    left:-250px;
+    top:0;
+    width:250px;
+    height:100%;
+    background:#222;
+    transition:0.3s;
+    padding-top:60px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:15px 20px;
+}
+
+.sidebar a:hover{
+    background:#444;
+}
+
+.sidebar.active{
+    left:0;
+}
+
+.menu-btn{
+    font-size:30px;
+    cursor:pointer;
+    padding:10px 15px;
+}
+
+.content{
+    padding:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="menu-btn" onclick="toggleSidebar()">☰</div>
+
+<div class="sidebar" id="sidebar">
+    <a href="#">Home</a>
+    <a href="#">Profile</a>
+    <a href="#">Settings</a>
+    <a href="#">About</a>
+</div>
+
+<div class="content">
+    <h1>Custom Sidebar</h1>
+    <p>Click the menu button to open or close the sidebar.</p>
+</div>
+
+<script>
+function toggleSidebar() {
+    document.getElementById("sidebar")
+            .classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
