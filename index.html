@@ -1,70 +1,2041 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pixel Glow Ultra Sidebar</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
+
+:root{
+
+--bg:#0b1120;
+--panel:#111827;
+--panel2:#1f2937;
+
+--accent:#22c55e;
+--accent2:#3b82f6;
+--accent3:#a855f7;
+
+--text:#f8fafc;
+--muted:#94a3b8;
+
+--radius:20px;
+
 }
+
+/* RESET */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Montserrat',sans-serif;
+}
+
+html,
+body{
+
+height:100%;
+background:var(--bg);
+overflow-x:hidden;
+
+}
+
+body{
+
+display:flex;
+
+}
+
+/* RGB BACKGROUND */
+
+body::before{
+
+content:"";
+
+position:fixed;
+inset:0;
+
+background:
+linear-gradient(
+90deg,
+#ff0000,
+#ff9900,
+#ffee00,
+#00ff00,
+#00ffff,
+#0066ff,
+#aa00ff,
+#ff0000
+);
+
+background-size:400% 400%;
+
+animation:rgbMove 12s linear infinite;
+
+opacity:.08;
+
+z-index:-3;
+
+}
+
+@keyframes rgbMove{
+
+0%{
+background-position:0% 50%;
+}
+
+100%{
+background-position:400% 50%;
+}
+
+}
+
+/* GLOW ORBS */
+
+.glow{
+
+position:fixed;
+
+border-radius:50%;
+
+filter:blur(120px);
+
+pointer-events:none;
+
+z-index:-2;
+
+}
+
+.glow1{
+
+width:280px;
+height:280px;
+
+background:#22c55e55;
+
+left:-80px;
+top:-80px;
+
+}
+
+.glow2{
+
+width:300px;
+height:300px;
+
+background:#3b82f655;
+
+right:-100px;
+bottom:-100px;
+
+}
+
+.glow3{
+
+width:250px;
+height:250px;
+
+background:#a855f755;
+
+left:40%;
+top:20%;
+
+}
+
+/* SIDEBAR */
 
 .sidebar{
-    position:fixed;
-    left:-250px;
-    top:0;
-    width:250px;
-    height:100%;
-    background:#222;
-    transition:0.3s;
-    padding-top:60px;
+
+width:340px;
+
+height:100vh;
+
+background:
+rgba(17,24,39,.84);
+
+backdrop-filter:blur(20px);
+
+border-right:
+1px solid rgba(255,255,255,.08);
+
+padding:18px;
+
+overflow-y:auto;
+
 }
 
-.sidebar a{
-    display:block;
-    color:white;
-    text-decoration:none;
-    padding:15px 20px;
+/* SCROLLBAR */
+
+.sidebar::-webkit-scrollbar{
+
+width:5px;
+
 }
 
-.sidebar a:hover{
-    background:#444;
+.sidebar::-webkit-scrollbar-thumb{
+
+background:var(--accent);
+
+border-radius:20px;
+
 }
 
-.sidebar.active{
-    left:0;
+/* LOGO */
+
+.logo{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+padding:14px;
+
+border-radius:18px;
+
+background:
+rgba(255,255,255,.03);
+
+border:
+1px solid rgba(255,255,255,.05);
+
 }
 
-.menu-btn{
-    font-size:30px;
-    cursor:pointer;
-    padding:10px 15px;
+.logoIcon{
+
+width:54px;
+height:54px;
+
+border-radius:16px;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+font-size:22px;
+
+background:
+linear-gradient(
+135deg,
+var(--accent),
+var(--accent2)
+);
+
+box-shadow:
+0 0 20px rgba(34,197,94,.4);
+
 }
 
-.content{
-    padding:20px;
+.logoInfo h2{
+
+font-size:18px;
+
+font-weight:800;
+
+color:white;
+
 }
+
+.logoInfo p{
+
+font-size:11px;
+
+margin-top:4px;
+
+color:var(--muted);
+
+}
+
+/* PROFILE */
+
+.profile{
+
+margin-top:18px;
+
+padding:18px;
+
+border-radius:24px;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.05),
+rgba(255,255,255,.02)
+);
+
+border:
+1px solid rgba(255,255,255,.06);
+
+text-align:center;
+
+}
+
+/* AVATAR */
+
+.avatarArea{
+
+position:relative;
+
+width:120px;
+height:120px;
+
+margin:auto;
+
+}
+
+.avatarGlow{
+
+position:absolute;
+
+inset:-8px;
+
+border-radius:24px;
+
+background:
+linear-gradient(
+135deg,
+#22c55e,
+#3b82f6,
+#a855f7
+);
+
+filter:blur(14px);
+
+opacity:.7;
+
+animation:avatarPulse 4s infinite;
+
+}
+
+@keyframes avatarPulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.08);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+.avatar{
+
+position:relative;
+
+width:100%;
+height:100%;
+
+border-radius:20px;
+
+object-fit:cover;
+
+border:
+3px solid rgba(255,255,255,.1);
+
+}
+
+/* STATUS */
+
+.status{
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+gap:8px;
+
+margin-top:14px;
+
+color:#22c55e;
+
+font-size:12px;
+
+}
+
+.statusDot{
+
+width:8px;
+height:8px;
+
+background:#22c55e;
+
+border-radius:50%;
+
+box-shadow:
+0 0 10px #22c55e;
+
+animation:pulse 1.5s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+opacity:1;
+}
+
+50%{
+opacity:.3;
+}
+
+100%{
+opacity:1;
+}
+
+}
+
+/* USERNAME */
+
+.username{
+
+margin-top:12px;
+
+font-size:24px;
+
+font-weight:800;
+
+color:white;
+
+}
+
+.tag{
+
+margin-top:5px;
+
+font-size:12px;
+
+color:var(--muted);
+
+}
+
+.bio{
+
+margin-top:12px;
+
+font-size:12px;
+
+line-height:1.7;
+
+color:var(--muted);
+
+}
+
+/* STATS */
+
+.stats{
+
+margin-top:18px;
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:10px;
+
+}
+
+.stat{
+
+padding:12px;
+
+border-radius:16px;
+
+background:
+rgba(255,255,255,.03);
+
+transition:.3s;
+
+}
+
+.stat:hover{
+
+transform:translateY(-3px);
+
+background:
+rgba(255,255,255,.05);
+
+}
+
+.stat h3{
+
+color:white;
+
+font-size:18px;
+
+}
+
+.stat p{
+
+margin-top:4px;
+
+font-size:11px;
+
+color:var(--muted);
+
+}
+
+/* NAVIGATION */
+
+.nav{
+
+margin-top:24px;
+
+}
+
+.navTitle{
+
+font-size:11px;
+
+letter-spacing:2px;
+
+font-weight:700;
+
+color:var(--muted);
+
+padding-left:10px;
+
+margin-bottom:10px;
+
+}
+
+.navItem{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+padding:14px;
+
+border-radius:16px;
+
+cursor:pointer;
+
+transition:.25s;
+
+margin-bottom:8px;
+
+background:
+rgba(255,255,255,.02);
+
+border:
+1px solid transparent;
+
+}
+
+.navItem:hover{
+
+transform:translateX(8px);
+
+background:
+rgba(34,197,94,.08);
+
+border-color:
+rgba(34,197,94,.25);
+
+}
+
+.navItem.active{
+
+background:
+linear-gradient(
+90deg,
+rgba(34,197,94,.2),
+rgba(59,130,246,.15)
+);
+
+border-color:
+rgba(34,197,94,.3);
+
+}
+
+.navIcon{
+
+width:42px;
+height:42px;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+border-radius:12px;
+
+background:
+rgba(255,255,255,.04);
+
+font-size:18px;
+
+}
+
+.navText{
+
+flex:1;
+
+}
+
+.navText h4{
+
+color:white;
+
+font-size:14px;
+
+}
+
+.navText p{
+
+font-size:11px;
+
+margin-top:3px;
+
+color:var(--muted);
+
+}
+
+/* QUICK ACTIONS */
+
+.quickActions{
+
+margin-top:24px;
+
+}
+
+.actionGrid{
+
+display:grid;
+
+grid-template-columns:
+repeat(2,1fr);
+
+gap:10px;
+
+}
+
+.action{
+
+padding:16px;
+
+border-radius:18px;
+
+background:
+rgba(255,255,255,.03);
+
+text-align:center;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.action:hover{
+
+transform:translateY(-4px);
+
+box-shadow:
+0 0 20px rgba(34,197,94,.15);
+
+}
+
+.actionIcon{
+
+font-size:22px;
+
+}
+
+.actionText{
+
+margin-top:10px;
+
+font-size:12px;
+
+color:white;
+
+}/* ==========================
+   MUSIC WIDGET
+========================== */
+
+.musicWidget{
+
+margin-top:24px;
+
+padding:18px;
+
+border-radius:22px;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.04),
+rgba(255,255,255,.02)
+);
+
+border:
+1px solid rgba(255,255,255,.06);
+
+overflow:hidden;
+
+position:relative;
+
+}
+
+.musicWidget::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+right:0;
+
+height:3px;
+
+background:
+linear-gradient(
+90deg,
+#22c55e,
+#3b82f6,
+#a855f7
+);
+
+background-size:300% 300%;
+
+animation:rgbMove 6s linear infinite;
+
+}
+
+.musicTitle{
+
+font-size:11px;
+
+letter-spacing:2px;
+
+font-weight:700;
+
+color:var(--muted);
+
+margin-bottom:14px;
+
+}
+
+.albumArea{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+}
+
+.albumCover{
+
+width:70px;
+height:70px;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+135deg,
+#22c55e,
+#3b82f6
+);
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+font-size:30px;
+
+box-shadow:
+0 0 20px rgba(34,197,94,.25);
+
+}
+
+.songInfo h3{
+
+color:white;
+
+font-size:15px;
+
+}
+
+.songInfo p{
+
+margin-top:4px;
+
+font-size:11px;
+
+color:var(--muted);
+
+}
+
+.progressBar{
+
+margin-top:14px;
+
+height:6px;
+
+border-radius:20px;
+
+background:
+rgba(255,255,255,.06);
+
+overflow:hidden;
+
+}
+
+.progress{
+
+width:65%;
+
+height:100%;
+
+background:
+linear-gradient(
+90deg,
+#22c55e,
+#3b82f6
+);
+
+border-radius:20px;
+
+animation:musicProgress 8s linear infinite;
+
+}
+
+@keyframes musicProgress{
+
+0%{
+width:0%;
+}
+
+100%{
+width:100%;
+}
+
+}
+
+.musicControls{
+
+display:flex;
+
+justify-content:center;
+
+gap:12px;
+
+margin-top:14px;
+
+}
+
+.musicBtn{
+
+width:40px;
+height:40px;
+
+border-radius:12px;
+
+background:
+rgba(255,255,255,.05);
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.musicBtn:hover{
+
+transform:scale(1.08);
+
+background:
+rgba(34,197,94,.12);
+
+}
+
+/* ==========================
+   LIVE CLOCK
+========================== */
+
+.clockWidget{
+
+margin-top:24px;
+
+padding:18px;
+
+border-radius:22px;
+
+background:
+rgba(255,255,255,.03);
+
+border:
+1px solid rgba(255,255,255,.06);
+
+text-align:center;
+
+}
+
+.clockLabel{
+
+font-size:11px;
+
+letter-spacing:2px;
+
+color:var(--muted);
+
+}
+
+.clockTime{
+
+font-size:34px;
+
+font-weight:800;
+
+margin-top:10px;
+
+color:white;
+
+}
+
+.clockDate{
+
+margin-top:6px;
+
+font-size:12px;
+
+color:var(--muted);
+
+}
+
+/* ==========================
+   ACHIEVEMENTS
+========================== */
+
+.achievements{
+
+margin-top:24px;
+
+}
+
+.achievementCard{
+
+padding:14px;
+
+border-radius:18px;
+
+background:
+rgba(255,255,255,.03);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+margin-bottom:10px;
+
+transition:.3s;
+
+}
+
+.achievementCard:hover{
+
+transform:translateX(6px);
+
+border-color:
+rgba(34,197,94,.3);
+
+}
+
+.achievementIcon{
+
+width:48px;
+height:48px;
+
+border-radius:14px;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+font-size:22px;
+
+background:
+linear-gradient(
+135deg,
+#22c55e,
+#3b82f6
+);
+
+}
+
+.achievementText h4{
+
+color:white;
+
+font-size:14px;
+
+}
+
+.achievementText p{
+
+margin-top:4px;
+
+font-size:11px;
+
+color:var(--muted);
+
+}
+
+/* ==========================
+   CALENDAR
+========================== */
+
+.calendarWidget{
+
+margin-top:24px;
+
+padding:18px;
+
+border-radius:22px;
+
+background:
+rgba(255,255,255,.03);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+}
+
+.calendarTitle{
+
+font-size:11px;
+
+letter-spacing:2px;
+
+color:var(--muted);
+
+margin-bottom:12px;
+
+}
+
+.calendarHeader{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:12px;
+
+}
+
+.calendarHeader h3{
+
+font-size:15px;
+
+color:white;
+
+}
+
+.calendarDays{
+
+display:grid;
+
+grid-template-columns:
+repeat(7,1fr);
+
+gap:5px;
+
+}
+
+.dayName{
+
+font-size:10px;
+
+text-align:center;
+
+color:var(--muted);
+
+padding:4px;
+
+}
+
+.day{
+
+height:34px;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+border-radius:10px;
+
+background:
+rgba(255,255,255,.03);
+
+font-size:12px;
+
+color:white;
+
+transition:.25s;
+
+}
+
+.day:hover{
+
+background:
+rgba(34,197,94,.15);
+
+}
+
+.today{
+
+background:
+linear-gradient(
+135deg,
+#22c55e,
+#3b82f6
+);
+
+font-weight:700;
+
+}
+
+/* ==========================
+   PARTNERS
+========================== */
+
+.partnerSection{
+
+margin-top:24px;
+
+}
+
+.partnerCard{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+padding:12px;
+
+border-radius:18px;
+
+background:
+rgba(255,255,255,.03);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+margin-bottom:10px;
+
+transition:.3s;
+
+cursor:pointer;
+
+}
+
+.partnerCard:hover{
+
+transform:translateY(-4px);
+
+border-color:
+rgba(34,197,94,.3);
+
+box-shadow:
+0 0 20px rgba(34,197,94,.12);
+
+}
+
+.partnerAvatar{
+
+width:54px;
+height:54px;
+
+border-radius:14px;
+
+background:
+linear-gradient(
+135deg,
+#22c55e,
+#3b82f6
+);
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+font-size:22px;
+
+}
+
+.partnerInfo h4{
+
+font-size:14px;
+
+color:white;
+
+}
+
+.partnerInfo p{
+
+margin-top:4px;
+
+font-size:11px;
+
+color:var(--muted);
+
+}
+
+/* ==========================
+   NOTIFICATIONS
+========================== */
+
+.notifications{
+
+margin-top:24px;
+
+}
+
+.notification{
+
+padding:14px;
+
+border-radius:18px;
+
+background:
+rgba(255,255,255,.03);
+
+margin-bottom:10px;
+
+border-left:
+4px solid var(--accent);
+
+}
+
+.notification h4{
+
+font-size:13px;
+
+color:white;
+
+}
+
+.notification p{
+
+margin-top:5px;
+
+font-size:11px;
+
+color:var(--muted);
+
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+.footer{
+
+margin-top:24px;
+
+padding:16px;
+
+border-radius:20px;
+
+background:
+rgba(255,255,255,.03);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+text-align:center;
+
+}
+
+.footer h3{
+
+color:white;
+
+font-size:15px;
+
+}
+
+.footer p{
+
+margin-top:6px;
+
+font-size:11px;
+
+color:var(--muted);
+
+}
+
+.footerGlow{
+
+margin-top:12px;
+
+height:4px;
+
+border-radius:20px;
+
+background:
+linear-gradient(
+90deg,
+#22c55e,
+#3b82f6,
+#a855f7
+);
+
+background-size:300% 300%;
+
+animation:rgbMove 5s linear infinite;
+
+}
+
+/* ==========================
+   MAIN CONTENT AREA
+========================== */
+
+.main{
+
+flex:1;
+
+padding:40px;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+}
+
+.hero{
+
+max-width:700px;
+
+text-align:center;
+
+}
+
+.hero h1{
+
+font-size:60px;
+
+font-weight:800;
+
+background:
+linear-gradient(
+90deg,
+#22c55e,
+#3b82f6,
+#a855f7
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+}
+
+.hero p{
+
+margin-top:14px;
+
+font-size:16px;
+
+line-height:1.8;
+
+color:var(--muted);
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:900px){
+
+.sidebar{
+
+width:100%;
+
+height:auto;
+
+position:relative;
+
+}
+
+.main{
+
+display:none;
+
+}
+
+}
+
 </style>
 </head>
+
 <body>
 
-<div class="menu-btn" onclick="toggleSidebar()">☰</div>
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+<div class="glow glow3"></div>
 
-<div class="sidebar" id="sidebar">
-    <a href="#">Home</a>
-    <a href="#">Profile</a>
-    <a href="#">Settings</a>
-    <a href="#">About</a>
+<div class="sidebar">
+<!-- LOGO -->
+
+<div class="logo">
+
+  <div class="logoIcon">⚡</div>
+
+  <div class="logoInfo">
+    <h2>PIXEL GLOW</h2>
+    <p>Premium Gaming Club</p>
+  </div>
+
 </div>
 
-<div class="content">
-    <h1>Custom Sidebar</h1>
-    <p>Click the menu button to open or close the sidebar.</p>
+<!-- PROFILE -->
+
+<div class="profile">
+
+  <div class="avatarArea">
+
+    <div class="avatarGlow"></div>
+
+    <img
+    class="avatar"
+    src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/yogi136/php8h3mmr9lb0qd8ZyClyS.png"
+    alt="avatar">
+
+  </div>
+
+  <div class="status">
+    <div class="statusDot"></div>
+    Online
+  </div>
+
+  <div class="username">√𝓎𝓸𝓰𝓲136</div>
+
+  <div class="tag">
+    Club Owner
+  </div>
+
+  <div class="bio">
+    Think like a King.
+    Play like a Master.
+  </div>
+
+  <div class="stats">
+
+    <div class="stat">
+      <h3>25</h3>
+      <p>Trophies</p>
+    </div>
+
+    <div class="stat">
+      <h3>500+</h3>
+      <p>Members</p>
+    </div>
+
+    <div class="stat">
+      <h3>99%</h3>
+      <p>Activity</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- NAVIGATION -->
+
+<div class="nav">
+
+  <div class="navTitle">
+    NAVIGATION
+  </div>
+
+  <div class="navItem active">
+
+    <div class="navIcon">🏠</div>
+
+    <div class="navText">
+      <h4>Home</h4>
+      <p>Main dashboard</p>
+    </div>
+
+  </div>
+
+  <div class="navItem">
+
+    <div class="navIcon">♟️</div>
+
+    <div class="navText">
+      <h4>Chess Club</h4>
+      <p>Club activities</p>
+    </div>
+
+  </div>
+
+  <div class="navItem">
+
+    <div class="navIcon">🏆</div>
+
+    <div class="navText">
+      <h4>Tournaments</h4>
+      <p>Upcoming events</p>
+    </div>
+
+  </div>
+
+  <div class="navItem">
+
+    <div class="navIcon">👥</div>
+
+    <div class="navText">
+      <h4>Members</h4>
+      <p>Community area</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- QUICK ACTIONS -->
+
+<div class="quickActions">
+
+  <div class="navTitle">
+    QUICK ACTIONS
+  </div>
+
+  <div class="actionGrid">
+
+    <div class="action">
+      <div class="actionIcon">🎮</div>
+      <div class="actionText">Games</div>
+    </div>
+
+    <div class="action">
+      <div class="actionIcon">📅</div>
+      <div class="actionText">Events</div>
+    </div>
+
+    <div class="action">
+      <div class="actionIcon">🎵</div>
+      <div class="actionText">Music</div>
+    </div>
+
+    <div class="action">
+      <div class="actionIcon">💬</div>
+      <div class="actionText">Chat</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- MUSIC -->
+
+<div class="musicWidget">
+
+  <div class="musicTitle">
+    NOW PLAYING
+  </div>
+
+  <div class="albumArea">
+
+    <div class="albumCover">
+      🎵
+    </div>
+
+    <div class="songInfo">
+      <h3>Faded</h3>
+      <p>Alan Walker</p>
+    </div>
+
+  </div>
+
+  <div class="progressBar">
+    <div class="progress"></div>
+  </div>
+
+  <div class="musicControls">
+
+    <div class="musicBtn">⏮</div>
+
+    <div class="musicBtn">▶</div>
+
+    <div class="musicBtn">⏭</div>
+
+  </div>
+
+</div>
+
+<!-- CLOCK -->
+
+<div class="clockWidget">
+
+  <div class="clockLabel">
+    LOCAL TIME
+  </div>
+
+  <div class="clockTime" id="clock">
+    00:00:00
+  </div>
+
+  <div class="clockDate" id="date">
+    Loading...
+  </div>
+
+</div>
+
+<!-- ACHIEVEMENTS -->
+
+<div class="achievements">
+
+  <div class="navTitle">
+    ACHIEVEMENTS
+  </div>
+
+  <div class="achievementCard">
+
+    <div class="achievementIcon">
+      🏆
+    </div>
+
+    <div class="achievementText">
+      <h4>Champion</h4>
+      <p>Won club tournament</p>
+    </div>
+
+  </div>
+
+  <div class="achievementCard">
+
+    <div class="achievementIcon">
+      ⭐
+    </div>
+
+    <div class="achievementText">
+      <h4>Elite Member</h4>
+      <p>Top community contributor</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- CALENDAR -->
+
+<div class="calendarWidget">
+
+  <div class="calendarTitle">
+    CALENDAR
+  </div>
+
+  <div class="calendarHeader">
+
+    <h3>June 2026</h3>
+
+    <span>📅</span>
+
+  </div>
+
+  <div class="calendarDays">
+
+    <div class="dayName">S</div>
+    <div class="dayName">M</div>
+    <div class="dayName">T</div>
+    <div class="dayName">W</div>
+    <div class="dayName">T</div>
+    <div class="dayName">F</div>
+    <div class="dayName">S</div>
+
+    <div class="day">1</div>
+    <div class="day">2</div>
+    <div class="day">3</div>
+    <div class="day">4</div>
+    <div class="day">5</div>
+    <div class="day">6</div>
+    <div class="day">7</div>
+
+    <div class="day">8</div>
+    <div class="day">9</div>
+    <div class="day">10</div>
+    <div class="day">11</div>
+    <div class="day">12</div>
+    <div class="day">13</div>
+    <div class="day">14</div>
+
+    <div class="day">15</div>
+    <div class="day">16</div>
+    <div class="day">17</div>
+    <div class="day">18</div>
+    <div class="day today">19</div>
+    <div class="day">20</div>
+    <div class="day">21</div>
+
+  </div>
+
+</div>
+
+<!-- PARTNERS -->
+
+<div class="partnerSection">
+
+  <div class="navTitle">
+    PARTNERS
+  </div>
+
+  <div class="partnerCard">
+
+    <div class="partnerAvatar">
+      💎
+    </div>
+
+    <div class="partnerInfo">
+      <h4>SAPPHIRE</h4>
+      <p>Official Partner Club</p>
+    </div>
+
+  </div>
+
+  <div class="partnerCard">
+
+    <div class="partnerAvatar">
+      🐧
+    </div>
+
+    <div class="partnerInfo">
+      <h4>Penguin Chess Club</h4>
+      <p>Community Partner</p>
+    </div>
+
+  </div>
+
+</div>
+<!-- NOTIFICATIONS -->
+
+<div class="notifications">
+
+  <div class="navTitle">
+    NOTIFICATIONS
+  </div>
+
+  <div class="notification">
+    <h4>🏆 Tournament Starting Soon</h4>
+    <p>Join the weekly championship event.</p>
+  </div>
+
+  <div class="notification">
+    <h4>🎉 New Members Joined</h4>
+    <p>5 players joined Pixel Glow today.</p>
+  </div>
+
+  <div class="notification">
+    <h4>⭐ Club Milestone</h4>
+    <p>Reached 500+ active members.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+  <h3>Pixel Glow</h3>
+
+  <p>
+    Premium Gaming & Chess Community
+  </p>
+
+  <div class="footerGlow"></div>
+
+</div>
+
+</div>
+<!-- END SIDEBAR -->
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+  <div class="hero">
+
+    <h1>PIXEL GLOW</h1>
+
+    <p>
+      Welcome to the next generation gaming club.
+      Compete in tournaments, connect with players,
+      track achievements, and build your legacy.
+    </p>
+
+  </div>
+
 </div>
 
 <script>
-function toggleSidebar() {
-    document.getElementById("sidebar")
-            .classList.toggle("active");
+
+/* LIVE CLOCK */
+
+function updateClock(){
+
+const now = new Date();
+
+const time =
+now.toLocaleTimeString();
+
+const date =
+now.toDateString();
+
+document.getElementById("clock").innerText =
+time;
+
+document.getElementById("date").innerText =
+date;
+
 }
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+/* ACTIVE NAVIGATION */
+
+const navItems =
+document.querySelectorAll(".navItem");
+
+navItems.forEach(item=>{
+
+item.addEventListener("click",()=>{
+
+navItems.forEach(i=>
+i.classList.remove("active")
+);
+
+item.classList.add("active");
+
+});
+
+});
+
+/* PARTNER CARD EFFECT */
+
+document
+.querySelectorAll(".partnerCard")
+.forEach(card=>{
+
+card.addEventListener("mouseenter",()=>{
+
+card.style.transform =
+"translateY(-6px) scale(1.02)";
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+card.style.transform =
+"translateY(0) scale(1)";
+
+});
+
+});
+
+/* ACHIEVEMENT EFFECT */
+
+document
+.querySelectorAll(".achievementCard")
+.forEach(card=>{
+
+card.addEventListener("mouseenter",()=>{
+
+card.style.boxShadow =
+"0 0 20px rgba(34,197,94,.25)";
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+card.style.boxShadow =
+"none";
+
+});
+
+});
+
+/* THEME ROTATOR */
+
+const themes = [
+
+{
+accent:"#22c55e"
+},
+
+{
+accent:"#3b82f6"
+},
+
+{
+accent:"#a855f7"
+},
+
+{
+accent:"#ff4d4d"
+},
+
+{
+accent:"#ffcc00"
+}
+
+];
+
+let themeIndex = 0;
+
+setInterval(()=>{
+
+themeIndex++;
+
+if(themeIndex >= themes.length){
+
+themeIndex = 0;
+
+}
+
+document.documentElement
+.style.setProperty(
+"--accent",
+themes[themeIndex].accent
+);
+
+},6000);
+
+/* RANDOM GLOW PULSE */
+
+setInterval(()=>{
+
+document.querySelector(".logoIcon")
+.style.boxShadow =
+`0 0 ${
+20 + Math.random()*20
+}px var(--accent)`;
+
+},800);
+
+/* FLOATING HERO */
+
+const hero =
+document.querySelector(".hero");
+
+let heroDirection = 1;
+
+setInterval(()=>{
+
+hero.style.transform =
+`translateY(${heroDirection*6}px)`;
+
+heroDirection *= -1;
+
+},2500);
+
+/* QUICK ACTION RIPPLE */
+
+document
+.querySelectorAll(".action")
+.forEach(action=>{
+
+action.addEventListener("click",()=>{
+
+action.animate(
+
+[
+{
+transform:"scale(1)"
+},
+{
+transform:"scale(1.08)"
+},
+{
+transform:"scale(1)"
+}
+],
+
+{
+duration:300
+}
+
+);
+
+});
+
+});
+
+/* MUSIC BUTTON ANIMATION */
+
+document
+.querySelectorAll(".musicBtn")
+.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+btn.animate(
+
+[
+{
+transform:"scale(1)"
+},
+{
+transform:"scale(1.15)"
+},
+{
+transform:"scale(1)"
+}
+],
+
+{
+duration:250
+}
+
+);
+
+});
+
+});
+
 </script>
 
 </body>
