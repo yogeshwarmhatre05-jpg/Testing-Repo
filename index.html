@@ -1,441 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pixel Glow Ultra Sidebar</title>
+<title>Grandmaster Club Dashboard</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
+/* =========================================================
+   GRANDMASTER CLUB DASHBOARD
+   PART 1
+   DESIGN SYSTEM + SIDEBAR FOUNDATION
+========================================================= */
+
 :root{
 
---bg:#0b1120;
---panel:#111827;
---panel2:#1f2937;
+/* Main Colors */
 
---accent:#22c55e;
---accent2:#3b82f6;
---accent3:#a855f7;
+--bg-primary:#0f1115;
+--bg-secondary:#171b22;
+--bg-tertiary:#1d232c;
 
---text:#f8fafc;
---muted:#94a3b8;
+--surface:#202734;
+--surface-light:#2a3342;
 
---radius:20px;
+--border:#2d3748;
+
+--text-primary:#f8fafc;
+--text-secondary:#cbd5e1;
+--text-muted:#94a3b8;
+
+/* Chess Colors */
+
+--gold:#d4a94d;
+--gold-dark:#b4882d;
+
+--silver:#c0c6cf;
+
+--green:#22c55e;
+
+--danger:#ef4444;
+
+/* Shadows */
+
+--shadow-small:
+0 4px 12px rgba(0,0,0,.25);
+
+--shadow-medium:
+0 8px 24px rgba(0,0,0,.35);
+
+--shadow-large:
+0 16px 40px rgba(0,0,0,.45);
+
+/* Radius */
+
+--radius-small:10px;
+--radius-medium:16px;
+--radius-large:24px;
+
+/* Transitions */
+
+--transition:
+all .25s ease;
 
 }
 
-/* RESET */
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Montserrat',sans-serif;
 }
 
-html,
+html{
+scroll-behavior:smooth;
+}
+
 body{
 
-height:100%;
-background:var(--bg);
+font-family:"Inter",sans-serif;
+
+background:
+linear-gradient(
+180deg,
+#0f1115,
+#121722
+);
+
+color:var(--text-primary);
+
+min-height:100vh;
+
 overflow-x:hidden;
 
 }
 
-body{
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.dashboard{
 
 display:flex;
 
-}
-
-/* RGB BACKGROUND */
-
-body::before{
-
-content:"";
-
-position:fixed;
-inset:0;
-
-background:
-linear-gradient(
-90deg,
-#ff0000,
-#ff9900,
-#ffee00,
-#00ff00,
-#00ffff,
-#0066ff,
-#aa00ff,
-#ff0000
-);
-
-background-size:400% 400%;
-
-animation:rgbMove 12s linear infinite;
-
-opacity:.08;
-
-z-index:-3;
+min-height:100vh;
 
 }
 
-@keyframes rgbMove{
-
-0%{
-background-position:0% 50%;
-}
-
-100%{
-background-position:400% 50%;
-}
-
-}
-
-/* GLOW ORBS */
-
-.glow{
-
-position:fixed;
-
-border-radius:50%;
-
-filter:blur(120px);
-
-pointer-events:none;
-
-z-index:-2;
-
-}
-
-.glow1{
-
-width:280px;
-height:280px;
-
-background:#22c55e55;
-
-left:-80px;
-top:-80px;
-
-}
-
-.glow2{
-
-width:300px;
-height:300px;
-
-background:#3b82f655;
-
-right:-100px;
-bottom:-100px;
-
-}
-
-.glow3{
-
-width:250px;
-height:250px;
-
-background:#a855f755;
-
-left:40%;
-top:20%;
-
-}
-
-/* SIDEBAR */
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
 .sidebar{
 
-width:340px;
-
-height:100vh;
+width:330px;
 
 background:
-rgba(17,24,39,.84);
-
-backdrop-filter:blur(20px);
+linear-gradient(
+180deg,
+#171b22,
+#141922
+);
 
 border-right:
-1px solid rgba(255,255,255,.08);
+1px solid var(--border);
 
-padding:18px;
+display:flex;
+
+flex-direction:column;
+
+padding:22px;
+
+position:sticky;
+
+top:0;
+
+height:100vh;
 
 overflow-y:auto;
 
 }
 
-/* SCROLLBAR */
-
 .sidebar::-webkit-scrollbar{
 
-width:5px;
+width:6px;
 
 }
 
 .sidebar::-webkit-scrollbar-thumb{
 
-background:var(--accent);
+background:#364152;
 
-border-radius:20px;
+border-radius:999px;
 
 }
 
-/* LOGO */
+/* =========================================================
+   CLUB HEADER
+========================================================= */
 
-.logo{
+.club-header{
 
 display:flex;
 
 align-items:center;
 
-gap:12px;
+gap:14px;
 
-padding:14px;
+padding-bottom:22px;
+
+border-bottom:
+1px solid var(--border);
+
+}
+
+.club-logo{
+
+width:62px;
+height:62px;
 
 border-radius:18px;
 
 background:
-rgba(255,255,255,.03);
-
-border:
-1px solid rgba(255,255,255,.05);
-
-}
-
-.logoIcon{
-
-width:54px;
-height:54px;
-
-border-radius:16px;
+linear-gradient(
+135deg,
+var(--gold),
+var(--gold-dark)
+);
 
 display:flex;
 
 justify-content:center;
 align-items:center;
 
-font-size:22px;
+font-size:28px;
 
-background:
-linear-gradient(
-135deg,
-var(--accent),
-var(--accent2)
-);
+font-weight:700;
+
+color:#111;
 
 box-shadow:
-0 0 20px rgba(34,197,94,.4);
+var(--shadow-small);
 
 }
 
-.logoInfo h2{
+.club-info h1{
 
 font-size:18px;
 
 font-weight:800;
 
-color:white;
+letter-spacing:.4px;
 
 }
 
-.logoInfo p{
+.club-info p{
 
-font-size:11px;
+font-size:12px;
 
-margin-top:4px;
+margin-top:5px;
 
-color:var(--muted);
+color:var(--text-muted);
 
 }
 
-/* PROFILE */
+/* =========================================================
+   PROFILE CARD
+========================================================= */
 
-.profile{
+.profile-card{
 
-margin-top:18px;
-
-padding:18px;
-
-border-radius:24px;
+margin-top:22px;
 
 background:
-linear-gradient(
-180deg,
-rgba(255,255,255,.05),
-rgba(255,255,255,.02)
-);
+var(--surface);
 
 border:
-1px solid rgba(255,255,255,.06);
+1px solid var(--border);
 
-text-align:center;
+border-radius:
+var(--radius-large);
 
-}
+padding:20px;
 
-/* AVATAR */
-
-.avatarArea{
-
-position:relative;
-
-width:120px;
-height:120px;
-
-margin:auto;
+box-shadow:
+var(--shadow-small);
 
 }
 
-.avatarGlow{
+.profile-top{
 
-position:absolute;
+display:flex;
 
-inset:-8px;
+align-items:center;
 
-border-radius:24px;
-
-background:
-linear-gradient(
-135deg,
-#22c55e,
-#3b82f6,
-#a855f7
-);
-
-filter:blur(14px);
-
-opacity:.7;
-
-animation:avatarPulse 4s infinite;
+gap:14px;
 
 }
 
-@keyframes avatarPulse{
+.profile-avatar{
 
-0%{
-transform:scale(1);
+width:72px;
+height:72px;
+
+border-radius:18px;
+
+overflow:hidden;
+
+border:
+2px solid rgba(212,169,77,.25);
+
+background:#111;
+
 }
 
-50%{
-transform:scale(1.08);
-}
-
-100%{
-transform:scale(1);
-}
-
-}
-
-.avatar{
-
-position:relative;
+.profile-avatar img{
 
 width:100%;
 height:100%;
 
-border-radius:20px;
-
 object-fit:cover;
-
-border:
-3px solid rgba(255,255,255,.1);
 
 }
 
-/* STATUS */
+.profile-details{
 
-.status{
+flex:1;
 
-display:flex;
+}
 
-justify-content:center;
-align-items:center;
+.profile-name{
 
-gap:8px;
+font-size:18px;
 
-margin-top:14px;
+font-weight:700;
 
-color:#22c55e;
+}
+
+.profile-title{
+
+margin-top:4px;
 
 font-size:12px;
 
+color:var(--gold);
+
+font-weight:600;
+
 }
 
-.statusDot{
+.online-status{
+
+display:flex;
+
+align-items:center;
+
+gap:7px;
+
+margin-top:10px;
+
+font-size:12px;
+
+color:var(--text-secondary);
+
+}
+
+.online-dot{
 
 width:8px;
 height:8px;
 
-background:#22c55e;
-
 border-radius:50%;
 
-box-shadow:
-0 0 10px #22c55e;
-
-animation:pulse 1.5s infinite;
+background:var(--green);
 
 }
 
-@keyframes pulse{
+/* =========================================================
+   PROFILE STATS
+========================================================= */
 
-0%{
-opacity:1;
-}
-
-50%{
-opacity:.3;
-}
-
-100%{
-opacity:1;
-}
-
-}
-
-/* USERNAME */
-
-.username{
-
-margin-top:12px;
-
-font-size:24px;
-
-font-weight:800;
-
-color:white;
-
-}
-
-.tag{
-
-margin-top:5px;
-
-font-size:12px;
-
-color:var(--muted);
-
-}
-
-.bio{
-
-margin-top:12px;
-
-font-size:12px;
-
-line-height:1.7;
-
-color:var(--muted);
-
-}
-
-/* STATS */
-
-.stats{
+.profile-stats{
 
 margin-top:18px;
 
@@ -448,605 +363,55 @@ gap:10px;
 
 }
 
-.stat{
+.stat-box{
+
+background:
+var(--bg-tertiary);
 
 padding:12px;
 
-border-radius:16px;
+border-radius:
+var(--radius-small);
 
-background:
-rgba(255,255,255,.03);
-
-transition:.3s;
+text-align:center;
 
 }
 
-.stat:hover{
+.stat-number{
 
-transform:translateY(-3px);
-
-background:
-rgba(255,255,255,.05);
-
-}
-
-.stat h3{
-
-color:white;
-
-font-size:18px;
-
-}
-
-.stat p{
-
-margin-top:4px;
-
-font-size:11px;
-
-color:var(--muted);
-
-}
-
-/* NAVIGATION */
-
-.nav{
-
-margin-top:24px;
-
-}
-
-.navTitle{
-
-font-size:11px;
-
-letter-spacing:2px;
+font-size:16px;
 
 font-weight:700;
 
-color:var(--muted);
-
-padding-left:10px;
-
-margin-bottom:10px;
-
 }
 
-.navItem{
-
-display:flex;
-
-align-items:center;
-
-gap:12px;
-
-padding:14px;
-
-border-radius:16px;
-
-cursor:pointer;
-
-transition:.25s;
-
-margin-bottom:8px;
-
-background:
-rgba(255,255,255,.02);
-
-border:
-1px solid transparent;
-
-}
-
-.navItem:hover{
-
-transform:translateX(8px);
-
-background:
-rgba(34,197,94,.08);
-
-border-color:
-rgba(34,197,94,.25);
-
-}
-
-.navItem.active{
-
-background:
-linear-gradient(
-90deg,
-rgba(34,197,94,.2),
-rgba(59,130,246,.15)
-);
-
-border-color:
-rgba(34,197,94,.3);
-
-}
-
-.navIcon{
-
-width:42px;
-height:42px;
-
-display:flex;
-
-justify-content:center;
-align-items:center;
-
-border-radius:12px;
-
-background:
-rgba(255,255,255,.04);
-
-font-size:18px;
-
-}
-
-.navText{
-
-flex:1;
-
-}
-
-.navText h4{
-
-color:white;
-
-font-size:14px;
-
-}
-
-.navText p{
+.stat-label{
 
 font-size:11px;
 
-margin-top:3px;
+margin-top:4px;
 
-color:var(--muted);
-
-}
-
-/* QUICK ACTIONS */
-
-.quickActions{
-
-margin-top:24px;
+color:var(--text-muted);
 
 }
 
-.actionGrid{
+/* =========================================================
+   QUICK RATING PANEL
+========================================================= */
 
-display:grid;
+.rating-panel{
 
-grid-template-columns:
-repeat(2,1fr);
+margin-top:18px;
+
+display:flex;
+
+flex-direction:column;
 
 gap:10px;
 
 }
 
-.action{
-
-padding:16px;
-
-border-radius:18px;
-
-background:
-rgba(255,255,255,.03);
-
-text-align:center;
-
-cursor:pointer;
-
-transition:.3s;
-
-}
-
-.action:hover{
-
-transform:translateY(-4px);
-
-box-shadow:
-0 0 20px rgba(34,197,94,.15);
-
-}
-
-.actionIcon{
-
-font-size:22px;
-
-}
-
-.actionText{
-
-margin-top:10px;
-
-font-size:12px;
-
-color:white;
-
-}/* ==========================
-   MUSIC WIDGET
-========================== */
-
-.musicWidget{
-
-margin-top:24px;
-
-padding:18px;
-
-border-radius:22px;
-
-background:
-linear-gradient(
-180deg,
-rgba(255,255,255,.04),
-rgba(255,255,255,.02)
-);
-
-border:
-1px solid rgba(255,255,255,.06);
-
-overflow:hidden;
-
-position:relative;
-
-}
-
-.musicWidget::before{
-
-content:"";
-
-position:absolute;
-
-top:0;
-left:0;
-right:0;
-
-height:3px;
-
-background:
-linear-gradient(
-90deg,
-#22c55e,
-#3b82f6,
-#a855f7
-);
-
-background-size:300% 300%;
-
-animation:rgbMove 6s linear infinite;
-
-}
-
-.musicTitle{
-
-font-size:11px;
-
-letter-spacing:2px;
-
-font-weight:700;
-
-color:var(--muted);
-
-margin-bottom:14px;
-
-}
-
-.albumArea{
-
-display:flex;
-
-align-items:center;
-
-gap:14px;
-
-}
-
-.albumCover{
-
-width:70px;
-height:70px;
-
-border-radius:18px;
-
-background:
-linear-gradient(
-135deg,
-#22c55e,
-#3b82f6
-);
-
-display:flex;
-
-justify-content:center;
-align-items:center;
-
-font-size:30px;
-
-box-shadow:
-0 0 20px rgba(34,197,94,.25);
-
-}
-
-.songInfo h3{
-
-color:white;
-
-font-size:15px;
-
-}
-
-.songInfo p{
-
-margin-top:4px;
-
-font-size:11px;
-
-color:var(--muted);
-
-}
-
-.progressBar{
-
-margin-top:14px;
-
-height:6px;
-
-border-radius:20px;
-
-background:
-rgba(255,255,255,.06);
-
-overflow:hidden;
-
-}
-
-.progress{
-
-width:65%;
-
-height:100%;
-
-background:
-linear-gradient(
-90deg,
-#22c55e,
-#3b82f6
-);
-
-border-radius:20px;
-
-animation:musicProgress 8s linear infinite;
-
-}
-
-@keyframes musicProgress{
-
-0%{
-width:0%;
-}
-
-100%{
-width:100%;
-}
-
-}
-
-.musicControls{
-
-display:flex;
-
-justify-content:center;
-
-gap:12px;
-
-margin-top:14px;
-
-}
-
-.musicBtn{
-
-width:40px;
-height:40px;
-
-border-radius:12px;
-
-background:
-rgba(255,255,255,.05);
-
-display:flex;
-
-justify-content:center;
-align-items:center;
-
-cursor:pointer;
-
-transition:.25s;
-
-}
-
-.musicBtn:hover{
-
-transform:scale(1.08);
-
-background:
-rgba(34,197,94,.12);
-
-}
-
-/* ==========================
-   LIVE CLOCK
-========================== */
-
-.clockWidget{
-
-margin-top:24px;
-
-padding:18px;
-
-border-radius:22px;
-
-background:
-rgba(255,255,255,.03);
-
-border:
-1px solid rgba(255,255,255,.06);
-
-text-align:center;
-
-}
-
-.clockLabel{
-
-font-size:11px;
-
-letter-spacing:2px;
-
-color:var(--muted);
-
-}
-
-.clockTime{
-
-font-size:34px;
-
-font-weight:800;
-
-margin-top:10px;
-
-color:white;
-
-}
-
-.clockDate{
-
-margin-top:6px;
-
-font-size:12px;
-
-color:var(--muted);
-
-}
-
-/* ==========================
-   ACHIEVEMENTS
-========================== */
-
-.achievements{
-
-margin-top:24px;
-
-}
-
-.achievementCard{
-
-padding:14px;
-
-border-radius:18px;
-
-background:
-rgba(255,255,255,.03);
-
-border:
-1px solid rgba(255,255,255,.05);
-
-display:flex;
-
-align-items:center;
-
-gap:12px;
-
-margin-bottom:10px;
-
-transition:.3s;
-
-}
-
-.achievementCard:hover{
-
-transform:translateX(6px);
-
-border-color:
-rgba(34,197,94,.3);
-
-}
-
-.achievementIcon{
-
-width:48px;
-height:48px;
-
-border-radius:14px;
-
-display:flex;
-
-justify-content:center;
-align-items:center;
-
-font-size:22px;
-
-background:
-linear-gradient(
-135deg,
-#22c55e,
-#3b82f6
-);
-
-}
-
-.achievementText h4{
-
-color:white;
-
-font-size:14px;
-
-}
-
-.achievementText p{
-
-margin-top:4px;
-
-font-size:11px;
-
-color:var(--muted);
-
-}
-
-/* ==========================
-   CALENDAR
-========================== */
-
-.calendarWidget{
-
-margin-top:24px;
-
-padding:18px;
-
-border-radius:22px;
-
-background:
-rgba(255,255,255,.03);
-
-border:
-1px solid rgba(255,255,255,.05);
-
-}
-
-.calendarTitle{
-
-font-size:11px;
-
-letter-spacing:2px;
-
-color:var(--muted);
-
-margin-bottom:12px;
-
-}
-
-.calendarHeader{
+.rating-row{
 
 display:flex;
 
@@ -1054,94 +419,67 @@ justify-content:space-between;
 
 align-items:center;
 
-margin-bottom:12px;
-
-}
-
-.calendarHeader h3{
-
-font-size:15px;
-
-color:white;
-
-}
-
-.calendarDays{
-
-display:grid;
-
-grid-template-columns:
-repeat(7,1fr);
-
-gap:5px;
-
-}
-
-.dayName{
-
-font-size:10px;
-
-text-align:center;
-
-color:var(--muted);
-
-padding:4px;
-
-}
-
-.day{
-
-height:34px;
-
-display:flex;
-
-justify-content:center;
-align-items:center;
-
-border-radius:10px;
+padding:12px 14px;
 
 background:
-rgba(255,255,255,.03);
+var(--bg-tertiary);
 
-font-size:12px;
-
-color:white;
-
-transition:.25s;
+border-radius:
+var(--radius-small);
 
 }
 
-.day:hover{
+.rating-label{
 
-background:
-rgba(34,197,94,.15);
+font-size:13px;
+
+color:var(--text-secondary);
 
 }
 
-.today{
+.rating-value{
 
-background:
-linear-gradient(
-135deg,
-#22c55e,
-#3b82f6
-);
+font-size:14px;
 
 font-weight:700;
 
 }
 
-/* ==========================
-   PARTNERS
-========================== */
+/* =========================================================
+   SECTION TITLE
+========================================================= */
 
-.partnerSection{
+.section-title{
 
-margin-top:24px;
+margin-top:28px;
+
+margin-bottom:12px;
+
+font-size:11px;
+
+font-weight:700;
+
+letter-spacing:2px;
+
+color:var(--text-muted);
 
 }
 
-.partnerCard{
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.nav{
+
+display:flex;
+
+flex-direction:column;
+
+gap:8px;
+
+}
+
+.nav-item{
 
 display:flex;
 
@@ -1149,244 +487,135 @@ align-items:center;
 
 gap:12px;
 
-padding:12px;
+padding:14px;
 
-border-radius:18px;
+border-radius:
+var(--radius-medium);
+
+cursor:pointer;
+
+transition:
+var(--transition);
+
+border:
+1px solid transparent;
+
+}
+
+.nav-item:hover{
 
 background:
 rgba(255,255,255,.03);
 
-border:
-1px solid rgba(255,255,255,.05);
-
-margin-bottom:10px;
-
-transition:.3s;
-
-cursor:pointer;
-
-}
-
-.partnerCard:hover{
-
-transform:translateY(-4px);
-
 border-color:
-rgba(34,197,94,.3);
-
-box-shadow:
-0 0 20px rgba(34,197,94,.12);
+var(--border);
 
 }
 
-.partnerAvatar{
-
-width:54px;
-height:54px;
-
-border-radius:14px;
+.nav-item.active{
 
 background:
-linear-gradient(
-135deg,
-#22c55e,
-#3b82f6
-);
+rgba(212,169,77,.08);
+
+border:
+1px solid rgba(212,169,77,.25);
+
+}
+
+.nav-icon{
+
+width:40px;
+height:40px;
+
+border-radius:12px;
+
+background:
+var(--bg-tertiary);
 
 display:flex;
 
 justify-content:center;
 align-items:center;
 
-font-size:22px;
+font-size:18px;
 
 }
 
-.partnerInfo h4{
+.nav-content{
+
+flex:1;
+
+}
+
+.nav-title{
 
 font-size:14px;
 
-color:white;
+font-weight:600;
 
 }
 
-.partnerInfo p{
-
-margin-top:4px;
+.nav-subtitle{
 
 font-size:11px;
 
-color:var(--muted);
+margin-top:3px;
+
+color:var(--text-muted);
 
 }
 
-/* ==========================
-   NOTIFICATIONS
-========================== */
+/* =========================================================
+   MAIN CONTENT PLACEHOLDER
+========================================================= */
 
-.notifications{
-
-margin-top:24px;
-
-}
-
-.notification{
-
-padding:14px;
-
-border-radius:18px;
-
-background:
-rgba(255,255,255,.03);
-
-margin-bottom:10px;
-
-border-left:
-4px solid var(--accent);
-
-}
-
-.notification h4{
-
-font-size:13px;
-
-color:white;
-
-}
-
-.notification p{
-
-margin-top:5px;
-
-font-size:11px;
-
-color:var(--muted);
-
-}
-
-/* ==========================
-   FOOTER
-========================== */
-
-.footer{
-
-margin-top:24px;
-
-padding:16px;
-
-border-radius:20px;
-
-background:
-rgba(255,255,255,.03);
-
-border:
-1px solid rgba(255,255,255,.05);
-
-text-align:center;
-
-}
-
-.footer h3{
-
-color:white;
-
-font-size:15px;
-
-}
-
-.footer p{
-
-margin-top:6px;
-
-font-size:11px;
-
-color:var(--muted);
-
-}
-
-.footerGlow{
-
-margin-top:12px;
-
-height:4px;
-
-border-radius:20px;
-
-background:
-linear-gradient(
-90deg,
-#22c55e,
-#3b82f6,
-#a855f7
-);
-
-background-size:300% 300%;
-
-animation:rgbMove 5s linear infinite;
-
-}
-
-/* ==========================
-   MAIN CONTENT AREA
-========================== */
-
-.main{
+.main-content{
 
 flex:1;
 
 padding:40px;
 
-display:flex;
-
-justify-content:center;
-align-items:center;
-
 }
 
 .hero{
 
-max-width:700px;
-
-text-align:center;
+max-width:900px;
 
 }
 
 .hero h1{
 
-font-size:60px;
+font-size:52px;
 
 font-weight:800;
 
-background:
-linear-gradient(
-90deg,
-#22c55e,
-#3b82f6,
-#a855f7
-);
-
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+line-height:1.1;
 
 }
 
 .hero p{
 
-margin-top:14px;
+margin-top:18px;
 
 font-size:16px;
 
 line-height:1.8;
 
-color:var(--muted);
+color:var(--text-secondary);
 
 }
 
-/* ==========================
-   MOBILE
-========================== */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-@media(max-width:900px){
+@media(max-width:1000px){
+
+.dashboard{
+
+flex-direction:column;
+
+}
 
 .sidebar{
 
@@ -1398,9 +627,9 @@ position:relative;
 
 }
 
-.main{
+.main-content{
 
-display:none;
+padding:25px;
 
 }
 
@@ -1411,632 +640,2998 @@ display:none;
 
 <body>
 
-<div class="glow glow1"></div>
-<div class="glow glow2"></div>
-<div class="glow glow3"></div>
+<div class="dashboard">
 
-<div class="sidebar">
-<!-- LOGO -->
+<!-- SIDEBAR -->
 
-<div class="logo">
+<aside class="sidebar">
 
-  <div class="logoIcon">⚡</div>
+<div class="club-header">
 
-  <div class="logoInfo">
-    <h2>PIXEL GLOW</h2>
-    <p>Premium Gaming Club</p>
-  </div>
-
+<div class="club-logo">
+♔
 </div>
 
-<!-- PROFILE -->
+<div class="club-info">
 
-<div class="profile">
+<h1>Grandmaster Club</h1>
 
-  <div class="avatarArea">
-
-    <div class="avatarGlow"></div>
-
-    <img
-    class="avatar"
-    src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/yogi136/php8h3mmr9lb0qd8ZyClyS.png"
-    alt="avatar">
-
-  </div>
-
-  <div class="status">
-    <div class="statusDot"></div>
-    Online
-  </div>
-
-  <div class="username">√𝓎𝓸𝓰𝓲136</div>
-
-  <div class="tag">
-    Club Owner
-  </div>
-
-  <div class="bio">
-    Think like a King.
-    Play like a Master.
-  </div>
-
-  <div class="stats">
-
-    <div class="stat">
-      <h3>25</h3>
-      <p>Trophies</p>
-    </div>
-
-    <div class="stat">
-      <h3>500+</h3>
-      <p>Members</p>
-    </div>
-
-    <div class="stat">
-      <h3>99%</h3>
-      <p>Activity</p>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- NAVIGATION -->
-
-<div class="nav">
-
-  <div class="navTitle">
-    NAVIGATION
-  </div>
-
-  <div class="navItem active">
-
-    <div class="navIcon">🏠</div>
-
-    <div class="navText">
-      <h4>Home</h4>
-      <p>Main dashboard</p>
-    </div>
-
-  </div>
-
-  <div class="navItem">
-
-    <div class="navIcon">♟️</div>
-
-    <div class="navText">
-      <h4>Chess Club</h4>
-      <p>Club activities</p>
-    </div>
-
-  </div>
-
-  <div class="navItem">
-
-    <div class="navIcon">🏆</div>
-
-    <div class="navText">
-      <h4>Tournaments</h4>
-      <p>Upcoming events</p>
-    </div>
-
-  </div>
-
-  <div class="navItem">
-
-    <div class="navIcon">👥</div>
-
-    <div class="navText">
-      <h4>Members</h4>
-      <p>Community area</p>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- QUICK ACTIONS -->
-
-<div class="quickActions">
-
-  <div class="navTitle">
-    QUICK ACTIONS
-  </div>
-
-  <div class="actionGrid">
-
-    <div class="action">
-      <div class="actionIcon">🎮</div>
-      <div class="actionText">Games</div>
-    </div>
-
-    <div class="action">
-      <div class="actionIcon">📅</div>
-      <div class="actionText">Events</div>
-    </div>
-
-    <div class="action">
-      <div class="actionIcon">🎵</div>
-      <div class="actionText">Music</div>
-    </div>
-
-    <div class="action">
-      <div class="actionIcon">💬</div>
-      <div class="actionText">Chat</div>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- MUSIC -->
-
-<div class="musicWidget">
-
-  <div class="musicTitle">
-    NOW PLAYING
-  </div>
-
-  <div class="albumArea">
-
-    <div class="albumCover">
-      🎵
-    </div>
-
-    <div class="songInfo">
-      <h3>Faded</h3>
-      <p>Alan Walker</p>
-    </div>
-
-  </div>
-
-  <div class="progressBar">
-    <div class="progress"></div>
-  </div>
-
-  <div class="musicControls">
-
-    <div class="musicBtn">⏮</div>
-
-    <div class="musicBtn">▶</div>
-
-    <div class="musicBtn">⏭</div>
-
-  </div>
-
-</div>
-
-<!-- CLOCK -->
-
-<div class="clockWidget">
-
-  <div class="clockLabel">
-    LOCAL TIME
-  </div>
-
-  <div class="clockTime" id="clock">
-    00:00:00
-  </div>
-
-  <div class="clockDate" id="date">
-    Loading...
-  </div>
-
-</div>
-
-<!-- ACHIEVEMENTS -->
-
-<div class="achievements">
-
-  <div class="navTitle">
-    ACHIEVEMENTS
-  </div>
-
-  <div class="achievementCard">
-
-    <div class="achievementIcon">
-      🏆
-    </div>
-
-    <div class="achievementText">
-      <h4>Champion</h4>
-      <p>Won club tournament</p>
-    </div>
-
-  </div>
-
-  <div class="achievementCard">
-
-    <div class="achievementIcon">
-      ⭐
-    </div>
-
-    <div class="achievementText">
-      <h4>Elite Member</h4>
-      <p>Top community contributor</p>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- CALENDAR -->
-
-<div class="calendarWidget">
-
-  <div class="calendarTitle">
-    CALENDAR
-  </div>
-
-  <div class="calendarHeader">
-
-    <h3>June 2026</h3>
-
-    <span>📅</span>
-
-  </div>
-
-  <div class="calendarDays">
-
-    <div class="dayName">S</div>
-    <div class="dayName">M</div>
-    <div class="dayName">T</div>
-    <div class="dayName">W</div>
-    <div class="dayName">T</div>
-    <div class="dayName">F</div>
-    <div class="dayName">S</div>
-
-    <div class="day">1</div>
-    <div class="day">2</div>
-    <div class="day">3</div>
-    <div class="day">4</div>
-    <div class="day">5</div>
-    <div class="day">6</div>
-    <div class="day">7</div>
-
-    <div class="day">8</div>
-    <div class="day">9</div>
-    <div class="day">10</div>
-    <div class="day">11</div>
-    <div class="day">12</div>
-    <div class="day">13</div>
-    <div class="day">14</div>
-
-    <div class="day">15</div>
-    <div class="day">16</div>
-    <div class="day">17</div>
-    <div class="day">18</div>
-    <div class="day today">19</div>
-    <div class="day">20</div>
-    <div class="day">21</div>
-
-  </div>
-
-</div>
-
-<!-- PARTNERS -->
-
-<div class="partnerSection">
-
-  <div class="navTitle">
-    PARTNERS
-  </div>
-
-  <div class="partnerCard">
-
-    <div class="partnerAvatar">
-      💎
-    </div>
-
-    <div class="partnerInfo">
-      <h4>SAPPHIRE</h4>
-      <p>Official Partner Club</p>
-    </div>
-
-  </div>
-
-  <div class="partnerCard">
-
-    <div class="partnerAvatar">
-      🐧
-    </div>
-
-    <div class="partnerInfo">
-      <h4>Penguin Chess Club</h4>
-      <p>Community Partner</p>
-    </div>
-
-  </div>
-
-</div>
-<!-- NOTIFICATIONS -->
-
-<div class="notifications">
-
-  <div class="navTitle">
-    NOTIFICATIONS
-  </div>
-
-  <div class="notification">
-    <h4>🏆 Tournament Starting Soon</h4>
-    <p>Join the weekly championship event.</p>
-  </div>
-
-  <div class="notification">
-    <h4>🎉 New Members Joined</h4>
-    <p>5 players joined Pixel Glow today.</p>
-  </div>
-
-  <div class="notification">
-    <h4>⭐ Club Milestone</h4>
-    <p>Reached 500+ active members.</p>
-  </div>
-
-</div>
-
-<!-- FOOTER -->
-
-<div class="footer">
-
-  <h3>Pixel Glow</h3>
-
-  <p>
-    Premium Gaming & Chess Community
-  </p>
-
-  <div class="footerGlow"></div>
+<p>
+Professional Chess Community
+</p>
 
 </div>
 
 </div>
-<!-- END SIDEBAR -->
 
-<!-- MAIN CONTENT -->
+<div class="profile-card">
 
-<div class="main">
+<div class="profile-top">
 
-  <div class="hero">
+<div class="profile-avatar">
 
-    <h1>PIXEL GLOW</h1>
-
-    <p>
-      Welcome to the next generation gaming club.
-      Compete in tournaments, connect with players,
-      track achievements, and build your legacy.
-    </p>
-
-  </div>
+<img
+src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/yogi136/php8h3mmr9lb0qd8ZyClyS.png"
+alt="Profile">
 
 </div>
+
+<div class="profile-details">
+
+<div class="profile-name">
+Yogi136
+</div>
+
+<div class="profile-title">
+Club Founder
+</div>
+
+<div class="online-status">
+
+<div class="online-dot"></div>
+
+Online
+
+</div>
+
+</div>
+
+</div>
+
+<div class="profile-stats">
+
+<div class="stat-box">
+
+<div class="stat-number">
+2145
+</div>
+
+<div class="stat-label">
+Rapid
+</div>
+
+</div>
+
+<div class="stat-box">
+
+<div class="stat-number">
+2281
+</div>
+
+<div class="stat-label">
+Blitz
+</div>
+
+</div>
+
+<div class="stat-box">
+
+<div class="stat-number">
+1980
+</div>
+
+<div class="stat-label">
+Bullet
+</div>
+
+</div>
+
+</div>
+
+<div class="rating-panel">
+
+<div class="rating-row">
+
+<div class="rating-label">
+Peak Rating
+</div>
+
+<div class="rating-value">
+2310
+</div>
+
+</div>
+
+<div class="rating-row">
+
+<div class="rating-label">
+Games Played
+</div>
+
+<div class="rating-value">
+14,285
+</div>
+
+</div>
+
+<div class="rating-row">
+
+<div class="rating-label">
+Win Rate
+</div>
+
+<div class="rating-value">
+62%
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section-title">
+NAVIGATION
+</div>
+
+<nav class="nav">
+
+<div class="nav-item active">
+
+<div class="nav-icon">🏠</div>
+
+<div class="nav-content">
+
+<div class="nav-title">
+Dashboard
+</div>
+
+<div class="nav-subtitle">
+Overview & statistics
+</div>
+
+</div>
+
+</div>
+
+<div class="nav-item">
+
+<div class="nav-icon">♟</div>
+
+<div class="nav-content">
+
+<div class="nav-title">
+Games
+</div>
+
+<div class="nav-subtitle">
+Recent club games
+</div>
+
+</div>
+
+</div>
+<!-- CONTINUE INSIDE <nav class="nav"> -->
+
+<div class="nav-item">
+
+<div class="nav-icon">📊</div>
+
+<div class="nav-content">
+
+<div class="nav-title">
+Analytics
+</div>
+
+<div class="nav-subtitle">
+Performance insights
+</div>
+
+</div>
+
+</div>
+
+<div class="nav-item">
+
+<div class="nav-icon">📚</div>
+
+<div class="nav-content">
+
+<div class="nav-title">
+Study Center
+</div>
+
+<div class="nav-subtitle">
+Openings & lessons
+</div>
+
+</div>
+
+</div>
+
+<div class="nav-item">
+
+<div class="nav-icon">👥</div>
+
+<div class="nav-content">
+
+<div class="nav-title">
+Members
+</div>
+
+<div class="nav-subtitle">
+Club community
+</div>
+
+</div>
+
+</div>
+
+<div class="nav-item">
+
+<div class="nav-icon">📅</div>
+
+<div class="nav-content">
+
+<div class="nav-title">
+Calendar
+</div>
+
+<div class="nav-subtitle">
+Upcoming events
+</div>
+
+</div>
+
+</div>
+
+<div class="nav-item">
+
+<div class="nav-icon">⚙️</div>
+
+<div class="nav-content">
+
+<div class="nav-title">
+Settings
+</div>
+
+<div class="nav-subtitle">
+Preferences
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+<!-- =========================================
+     CLUB STATUS SECTION
+========================================= -->
+
+<div class="section-title">
+CLUB STATUS
+</div>
+
+<div class="profile-card">
+
+<div class="rating-row">
+
+<div class="rating-label">
+Active Members
+</div>
+
+<div class="rating-value">
+547
+</div>
+
+</div>
+
+<div class="rating-row">
+
+<div class="rating-label">
+Weekly Games
+</div>
+
+<div class="rating-value">
+3,812
+</div>
+
+</div>
+
+<div class="rating-row">
+
+<div class="rating-label">
+Live Tournaments
+</div>
+
+<div class="rating-value">
+4
+</div>
+
+</div>
+
+<div class="rating-row">
+
+<div class="rating-label">
+Club Ranking
+</div>
+
+<div class="rating-value">
+#27
+</div>
+
+</div>
+
+</div>
+
+<!-- =========================================
+     ANNOUNCEMENTS
+========================================= -->
+
+<div class="section-title">
+ANNOUNCEMENTS
+</div>
+
+<div class="profile-card">
+
+<div class="rating-row">
+
+<div class="rating-label">
+🏆 Sunday Arena
+</div>
+
+</div>
+
+<div class="rating-row">
+
+<div class="rating-label">
+♟ New Opening Workshop
+</div>
+
+</div>
+
+<div class="rating-row">
+
+<div class="rating-label">
+🎯 Puzzle Marathon
+</div>
+
+</div>
+
+</div>
+
+</aside>
+
+<!-- =========================================
+     MAIN CONTENT
+========================================= -->
+
+<main class="main-content">
+
+<div class="hero">
+
+<h1>
+Master Chess.<br>
+Build Legacy.
+</h1>
+
+<p>
+
+Welcome to Grandmaster Club,
+a competitive chess environment focused on improvement,
+tournaments, training, analysis, and long-term player development.
+
+Track your performance, study openings,
+participate in club events,
+and climb the rankings.
+
+</p>
+
+</div>
+
+<!-- =========================================
+     DASHBOARD GRID
+========================================= -->
+
+<style>
+
+.dashboard-grid{
+
+margin-top:40px;
+
+display:grid;
+
+grid-template-columns:
+repeat(12,1fr);
+
+gap:20px;
+
+}
+
+.card{
+
+background:
+var(--surface);
+
+border:
+1px solid var(--border);
+
+border-radius:
+var(--radius-large);
+
+padding:22px;
+
+box-shadow:
+var(--shadow-small);
+
+}
+
+.card-title{
+
+font-size:15px;
+
+font-weight:700;
+
+margin-bottom:18px;
+
+}
+
+.col-4{
+
+grid-column:
+span 4;
+
+}
+
+.col-6{
+
+grid-column:
+span 6;
+
+}
+
+.col-8{
+
+grid-column:
+span 8;
+
+}
+
+.col-12{
+
+grid-column:
+span 12;
+
+}
+
+@media(max-width:1000px){
+
+.col-4,
+.col-6,
+.col-8,
+.col-12{
+
+grid-column:
+span 12;
+
+}
+
+}
+
+/* ====================================
+   KPI CARDS
+==================================== */
+
+.kpi{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.kpi-number{
+
+font-size:34px;
+
+font-weight:800;
+
+}
+
+.kpi-label{
+
+margin-top:6px;
+
+font-size:12px;
+
+color:var(--text-muted);
+
+}
+
+.kpi-icon{
+
+font-size:34px;
+
+opacity:.8;
+
+}
+
+/* ====================================
+   LEADERBOARD PREVIEW
+==================================== */
+
+.player-row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:12px 0;
+
+border-bottom:
+1px solid var(--border);
+
+}
+
+.player-row:last-child{
+
+border-bottom:none;
+
+}
+
+.player-left{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+.rank{
+
+width:28px;
+height:28px;
+
+border-radius:50%;
+
+background:
+var(--bg-tertiary);
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+font-size:12px;
+
+font-weight:700;
+
+}
+
+.player-name{
+
+font-size:14px;
+
+font-weight:600;
+
+}
+
+.player-rating{
+
+font-size:13px;
+
+color:var(--gold);
+
+font-weight:700;
+
+}
+
+/* ====================================
+   ACTIVITY FEED
+==================================== */
+
+.feed-item{
+
+padding:14px 0;
+
+border-bottom:
+1px solid var(--border);
+
+}
+
+.feed-item:last-child{
+
+border-bottom:none;
+
+}
+
+.feed-title{
+
+font-size:14px;
+
+font-weight:600;
+
+}
+
+.feed-time{
+
+margin-top:4px;
+
+font-size:12px;
+
+color:var(--text-muted);
+
+}
+
+</style>
+
+<div class="dashboard-grid">
+
+<!-- KPI 1 -->
+
+<div class="card col-4">
+
+<div class="kpi">
+
+<div>
+
+<div class="kpi-number">
+547
+</div>
+
+<div class="kpi-label">
+Club Members
+</div>
+
+</div>
+
+<div class="kpi-icon">
+👥
+</div>
+
+</div>
+
+</div>
+
+<!-- KPI 2 -->
+
+<div class="card col-4">
+
+<div class="kpi">
+
+<div>
+
+<div class="kpi-number">
+24
+</div>
+
+<div class="kpi-label">
+Tournaments
+</div>
+
+</div>
+
+<div class="kpi-icon">
+🏆
+</div>
+
+</div>
+
+</div>
+
+<!-- KPI 3 -->
+
+<div class="card col-4">
+
+<div class="kpi">
+
+<div>
+
+<div class="kpi-number">
+3812
+</div>
+
+<div class="kpi-label">
+Games This Week
+</div>
+
+</div>
+
+<div class="kpi-icon">
+♟
+</div>
+
+</div>
+
+</div>
+
+<!-- LEADERBOARD -->
+
+<div class="card col-6">
+
+<div class="card-title">
+Top Rated Players
+</div>
+
+<div class="player-row">
+
+<div class="player-left">
+
+<div class="rank">
+1
+</div>
+
+<div class="player-name">
+GM Falcon
+</div>
+
+</div>
+
+<div class="player-rating">
+2742
+</div>
+
+</div>
+
+<div class="player-row">
+
+<div class="player-left">
+
+<div class="rank">
+2
+</div>
+
+<div class="player-name">
+KnightStorm
+</div>
+
+</div>
+
+<div class="player-rating">
+2685
+</div>
+
+</div>
+
+<div class="player-row">
+
+<div class="player-left">
+
+<div class="rank">
+3
+</div>
+
+<div class="player-name">
+EndgameKing
+</div>
+
+</div>
+
+<div class="player-rating">
+2658
+</div>
+
+</div>
+
+</div>
+
+<!-- ACTIVITY -->
+
+<div class="card col-6">
+
+<div class="card-title">
+Recent Activity
+</div>
+
+<div class="feed-item">
+
+<div class="feed-title">
+Arena Tournament Finished
+</div>
+
+<div class="feed-time">
+18 minutes ago
+</div>
+
+</div>
+
+<div class="feed-item">
+
+<div class="feed-title">
+New Study Session Published
+</div>
+
+<div class="feed-time">
+1 hour ago
+</div>
+
+</div>
+
+<div class="feed-item">
+
+<div class="feed-title">
+Weekly Ranking Updated
+</div>
+
+<div class="feed-time">
+3 hours ago
+</div>
+
+</div>
+
+</div>
+<!-- =========================================
+     PART 3
+     TOURNAMENT CENTER
+     TRAINING HUB
+     OPENING REPERTOIRE
+     ACHIEVEMENTS
+========================================= -->
+
+<style>
+
+/* ====================================
+   TOURNAMENT CENTER
+==================================== */
+
+.tournament-card{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:16px;
+
+margin-bottom:14px;
+
+border-radius:14px;
+
+background:var(--bg-tertiary);
+
+border:1px solid var(--border);
+
+transition:var(--transition);
+
+}
+
+.tournament-card:hover{
+
+transform:translateY(-2px);
+
+}
+
+.tournament-left h4{
+
+font-size:15px;
+
+font-weight:700;
+
+}
+
+.tournament-left p{
+
+margin-top:6px;
+
+font-size:12px;
+
+color:var(--text-muted);
+
+}
+
+.tournament-status{
+
+padding:8px 14px;
+
+border-radius:999px;
+
+font-size:12px;
+
+font-weight:700;
+
+}
+
+.status-open{
+
+background:
+rgba(34,197,94,.12);
+
+color:var(--green);
+
+}
+
+.status-soon{
+
+background:
+rgba(212,169,77,.12);
+
+color:var(--gold);
+
+}
+
+/* ====================================
+   TRAINING MODULE
+==================================== */
+
+.training-list{
+
+display:flex;
+
+flex-direction:column;
+
+gap:14px;
+
+}
+
+.training-item{
+
+background:var(--bg-tertiary);
+
+border:1px solid var(--border);
+
+border-radius:14px;
+
+padding:16px;
+
+}
+
+.training-header{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-bottom:10px;
+
+}
+
+.training-title{
+
+font-size:14px;
+
+font-weight:700;
+
+}
+
+.training-percent{
+
+font-size:13px;
+
+font-weight:700;
+
+color:var(--gold);
+
+}
+
+.progress-track{
+
+height:10px;
+
+background:#11151c;
+
+border-radius:999px;
+
+overflow:hidden;
+
+}
+
+.progress-fill{
+
+height:100%;
+
+background:
+linear-gradient(
+90deg,
+var(--gold),
+#e7c97c
+);
+
+}
+
+/* ====================================
+   OPENING REPERTOIRE
+==================================== */
+
+.opening-row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:12px 0;
+
+border-bottom:
+1px solid var(--border);
+
+}
+
+.opening-row:last-child{
+
+border-bottom:none;
+
+}
+
+.opening-name{
+
+font-size:14px;
+
+font-weight:600;
+
+}
+
+.opening-score{
+
+font-size:13px;
+
+font-weight:700;
+
+color:var(--green);
+
+}
+
+/* ====================================
+   ACHIEVEMENTS
+==================================== */
+
+.badges-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:16px;
+
+}
+
+.badge{
+
+background:var(--bg-tertiary);
+
+border:1px solid var(--border);
+
+border-radius:18px;
+
+padding:18px;
+
+text-align:center;
+
+}
+
+.badge-icon{
+
+font-size:32px;
+
+margin-bottom:10px;
+
+}
+
+.badge-title{
+
+font-size:13px;
+
+font-weight:700;
+
+}
+
+.badge-sub{
+
+font-size:11px;
+
+margin-top:5px;
+
+color:var(--text-muted);
+
+}
+
+/* ====================================
+   PUZZLE STATS
+==================================== */
+
+.puzzle-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:14px;
+
+}
+
+.puzzle-box{
+
+background:var(--bg-tertiary);
+
+border:1px solid var(--border);
+
+border-radius:14px;
+
+padding:18px;
+
+text-align:center;
+
+}
+
+.puzzle-number{
+
+font-size:26px;
+
+font-weight:800;
+
+}
+
+.puzzle-label{
+
+margin-top:8px;
+
+font-size:11px;
+
+color:var(--text-muted);
+
+}
+
+@media(max-width:1000px){
+
+.badges-grid{
+
+grid-template-columns:
+repeat(2,1fr);
+
+}
+
+.puzzle-grid{
+
+grid-template-columns:
+repeat(2,1fr);
+
+}
+
+}
+
+</style>
+
+<!-- ====================================
+     TOURNAMENT CENTER
+==================================== -->
+
+<div class="card col-8">
+
+<div class="card-title">
+Tournament Center
+</div>
+
+<div class="tournament-card">
+
+<div class="tournament-left">
+
+<h4>Sunday Grand Arena</h4>
+
+<p>
+Starts in 2 days • Blitz • 5+0
+</p>
+
+</div>
+
+<div class="tournament-status status-open">
+Registration Open
+</div>
+
+</div>
+
+<div class="tournament-card">
+
+<div class="tournament-left">
+
+<h4>Rapid Championship</h4>
+
+<p>
+Saturday • Rapid • 15+10
+</p>
+
+</div>
+
+<div class="tournament-status status-soon">
+Upcoming
+</div>
+
+</div>
+
+<div class="tournament-card">
+
+<div class="tournament-left">
+
+<h4>Bullet Battle</h4>
+
+<p>
+Friday Night • Bullet • 1+0
+</p>
+
+</div>
+
+<div class="tournament-status status-open">
+Registration Open
+</div>
+
+</div>
+
+</div>
+
+<!-- ====================================
+     TRAINING HUB
+==================================== -->
+
+<div class="card col-4">
+
+<div class="card-title">
+Training Progress
+</div>
+
+<div class="training-list">
+
+<div class="training-item">
+
+<div class="training-header">
+
+<div class="training-title">
+Tactics
+</div>
+
+<div class="training-percent">
+82%
+</div>
+
+</div>
+
+<div class="progress-track">
+
+<div
+class="progress-fill"
+style="width:82%">
+</div>
+
+</div>
+
+</div>
+
+<div class="training-item">
+
+<div class="training-header">
+
+<div class="training-title">
+Endgames
+</div>
+
+<div class="training-percent">
+68%
+</div>
+
+</div>
+
+<div class="progress-track">
+
+<div
+class="progress-fill"
+style="width:68%">
+</div>
+
+</div>
+
+</div>
+
+<div class="training-item">
+
+<div class="training-header">
+
+<div class="training-title">
+Positional Play
+</div>
+
+<div class="training-percent">
+74%
+</div>
+
+</div>
+
+<div class="progress-track">
+
+<div
+class="progress-fill"
+style="width:74%">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ====================================
+     OPENING REPERTOIRE
+==================================== -->
+
+<div class="card col-6">
+
+<div class="card-title">
+Opening Repertoire
+</div>
+
+<div class="opening-row">
+
+<div class="opening-name">
+Sicilian Defense
+</div>
+
+<div class="opening-score">
+63% Win Rate
+</div>
+
+</div>
+
+<div class="opening-row">
+
+<div class="opening-name">
+Ruy Lopez
+</div>
+
+<div class="opening-score">
+58% Win Rate
+</div>
+
+</div>
+
+<div class="opening-row">
+
+<div class="opening-name">
+Queen's Gambit
+</div>
+
+<div class="opening-score">
+66% Win Rate
+</div>
+
+</div>
+
+<div class="opening-row">
+
+<div class="opening-name">
+Caro-Kann
+</div>
+
+<div class="opening-score">
+61% Win Rate
+</div>
+
+</div>
+
+<div class="opening-row">
+
+<div class="opening-name">
+English Opening
+</div>
+
+<div class="opening-score">
+57% Win Rate
+</div>
+
+</div>
+
+</div>
+
+<!-- ====================================
+     PUZZLE PERFORMANCE
+==================================== -->
+
+<div class="card col-6">
+
+<div class="card-title">
+Puzzle Performance
+</div>
+
+<div class="puzzle-grid">
+
+<div class="puzzle-box">
+
+<div class="puzzle-number">
+2410
+</div>
+
+<div class="puzzle-label">
+Puzzle Rating
+</div>
+
+</div>
+
+<div class="puzzle-box">
+
+<div class="puzzle-number">
+84%
+</div>
+
+<div class="puzzle-label">
+Accuracy
+</div>
+
+</div>
+
+<div class="puzzle-box">
+
+<div class="puzzle-number">
+143
+</div>
+
+<div class="puzzle-label">
+Solved This Month
+</div>
+
+</div>
+
+<div class="puzzle-box">
+
+<div class="puzzle-number">
+19
+</div>
+
+<div class="puzzle-label">
+Current Streak
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ====================================
+     ACHIEVEMENTS
+==================================== -->
+
+<div class="card col-12">
+
+<div class="card-title">
+Achievements
+</div>
+
+<div class="badges-grid">
+
+<div class="badge">
+
+<div class="badge-icon">
+🏆
+</div>
+
+<div class="badge-title">
+Club Champion
+</div>
+
+<div class="badge-sub">
+Won a club championship
+</div>
+
+</div>
+
+<div class="badge">
+
+<div class="badge-icon">
+♟
+</div>
+
+<div class="badge-title">
+1000 Games
+</div>
+
+<div class="badge-sub">
+Played 1000 rated games
+</div>
+
+</div>
+
+<div class="badge">
+
+<div class="badge-icon">
+🔥
+</div>
+
+<div class="badge-title">
+30 Day Streak
+</div>
+
+<div class="badge-sub">
+Daily training streak
+</div>
+
+</div>
+
+<div class="badge">
+
+<div class="badge-icon">
+🧠
+</div>
+
+<div class="badge-title">
+Puzzle Master
+</div>
+
+<div class="badge-sub">
+Reached 2400 puzzles
+</div>
+
+</div>
+
+<div class="badge">
+
+<div class="badge-icon">
+⭐
+</div>
+
+<div class="badge-title">
+Elite Member
+</div>
+
+<div class="badge-sub">
+Top contributor
+</div>
+
+</div>
+
+<div class="badge">
+
+<div class="badge-icon">
+👑
+</div>
+
+<div class="badge-title">
+Founder
+</div>
+
+<div class="badge-sub">
+Club leadership badge
+</div>
+
+</div>
+
+</div>
+
+</div>
+<!-- =========================================
+     PART 4
+     CALENDAR
+     ANNOUNCEMENTS
+     RECENT GAMES
+     MEMBER SPOTLIGHT
+     ADVANCED STATISTICS
+========================================= -->
+
+<style>
+
+/* ====================================
+   CALENDAR
+==================================== */
+
+.calendar-widget{
+
+background:var(--surface);
+
+border:1px solid var(--border);
+
+border-radius:20px;
+
+padding:22px;
+
+}
+
+.calendar-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:20px;
+
+}
+
+.calendar-title{
+
+font-size:18px;
+
+font-weight:700;
+
+}
+
+.calendar-month{
+
+font-size:14px;
+
+color:var(--gold);
+
+font-weight:600;
+
+}
+
+.calendar-days,
+.calendar-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(7,1fr);
+
+gap:8px;
+
+}
+
+.calendar-days div{
+
+text-align:center;
+
+font-size:12px;
+
+color:var(--text-muted);
+
+padding-bottom:8px;
+
+}
+
+.calendar-date{
+
+height:42px;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+border-radius:12px;
+
+background:var(--bg-tertiary);
+
+font-size:13px;
+
+transition:var(--transition);
+
+cursor:pointer;
+
+}
+
+.calendar-date:hover{
+
+background:var(--surface-light);
+
+}
+
+.calendar-date.active{
+
+background:var(--gold);
+
+color:#111;
+
+font-weight:700;
+
+}
+
+/* ====================================
+   ANNOUNCEMENTS
+==================================== */
+
+.announcement{
+
+padding:16px;
+
+background:var(--bg-tertiary);
+
+border:1px solid var(--border);
+
+border-radius:14px;
+
+margin-bottom:14px;
+
+}
+
+.announcement-title{
+
+font-size:14px;
+
+font-weight:700;
+
+}
+
+.announcement-text{
+
+margin-top:8px;
+
+font-size:13px;
+
+line-height:1.6;
+
+color:var(--text-secondary);
+
+}
+
+/* ====================================
+   RECENT GAMES
+==================================== */
+
+.games-table{
+
+width:100%;
+
+border-collapse:collapse;
+
+}
+
+.games-table th{
+
+text-align:left;
+
+padding:14px;
+
+font-size:12px;
+
+color:var(--text-muted);
+
+border-bottom:
+1px solid var(--border);
+
+}
+
+.games-table td{
+
+padding:16px 14px;
+
+font-size:13px;
+
+border-bottom:
+1px solid var(--border);
+
+}
+
+.result-win{
+
+color:var(--green);
+
+font-weight:700;
+
+}
+
+.result-loss{
+
+color:var(--danger);
+
+font-weight:700;
+
+}
+
+.result-draw{
+
+color:var(--gold);
+
+font-weight:700;
+
+}
+
+/* ====================================
+   MEMBER SPOTLIGHT
+==================================== */
+
+.member-spotlight{
+
+display:flex;
+
+align-items:center;
+
+gap:20px;
+
+}
+
+.member-avatar{
+
+width:90px;
+height:90px;
+
+border-radius:20px;
+
+overflow:hidden;
+
+border:
+2px solid rgba(212,169,77,.3);
+
+}
+
+.member-avatar img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+}
+
+.member-name{
+
+font-size:22px;
+
+font-weight:800;
+
+}
+
+.member-role{
+
+margin-top:6px;
+
+font-size:13px;
+
+color:var(--gold);
+
+font-weight:600;
+
+}
+
+.member-bio{
+
+margin-top:12px;
+
+font-size:14px;
+
+line-height:1.7;
+
+color:var(--text-secondary);
+
+}
+
+/* ====================================
+   ADVANCED STATS
+==================================== */
+
+.stats-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:18px;
+
+}
+
+.stat-card{
+
+background:var(--bg-tertiary);
+
+border:1px solid var(--border);
+
+border-radius:16px;
+
+padding:18px;
+
+}
+
+.stat-value{
+
+font-size:28px;
+
+font-weight:800;
+
+}
+
+.stat-name{
+
+margin-top:8px;
+
+font-size:12px;
+
+color:var(--text-muted);
+
+}
+
+@media(max-width:1000px){
+
+.stats-grid{
+
+grid-template-columns:
+repeat(2,1fr);
+
+}
+
+.member-spotlight{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+}
+
+</style>
+
+<!-- ====================================
+     CALENDAR
+==================================== -->
+
+<div class="card col-6">
+
+<div class="calendar-widget">
+
+<div class="calendar-header">
+
+<div class="calendar-title">
+Club Calendar
+</div>
+
+<div class="calendar-month">
+June 2026
+</div>
+
+</div>
+
+<div class="calendar-days">
+
+<div>Sun</div>
+<div>Mon</div>
+<div>Tue</div>
+<div>Wed</div>
+<div>Thu</div>
+<div>Fri</div>
+<div>Sat</div>
+
+</div>
+
+<div class="calendar-grid">
+
+<div class="calendar-date">1</div>
+<div class="calendar-date">2</div>
+<div class="calendar-date">3</div>
+<div class="calendar-date">4</div>
+<div class="calendar-date">5</div>
+<div class="calendar-date">6</div>
+<div class="calendar-date">7</div>
+
+<div class="calendar-date">8</div>
+<div class="calendar-date">9</div>
+<div class="calendar-date">10</div>
+<div class="calendar-date">11</div>
+<div class="calendar-date">12</div>
+<div class="calendar-date">13</div>
+<div class="calendar-date">14</div>
+
+<div class="calendar-date">15</div>
+<div class="calendar-date">16</div>
+<div class="calendar-date">17</div>
+<div class="calendar-date">18</div>
+<div class="calendar-date active">19</div>
+<div class="calendar-date">20</div>
+<div class="calendar-date">21</div>
+
+<div class="calendar-date">22</div>
+<div class="calendar-date">23</div>
+<div class="calendar-date">24</div>
+<div class="calendar-date">25</div>
+<div class="calendar-date">26</div>
+<div class="calendar-date">27</div>
+<div class="calendar-date">28</div>
+
+<div class="calendar-date">29</div>
+<div class="calendar-date">30</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ====================================
+     ANNOUNCEMENTS CENTER
+==================================== -->
+
+<div class="card col-6">
+
+<div class="card-title">
+Club Announcements
+</div>
+
+<div class="announcement">
+
+<div class="announcement-title">
+🏆 Grand Arena Championship
+</div>
+
+<div class="announcement-text">
+
+Registration remains open until Friday.
+Top finishers qualify for the seasonal finals.
+
+</div>
+
+</div>
+
+<div class="announcement">
+
+<div class="announcement-title">
+📚 Opening Workshop
+</div>
+
+<div class="announcement-text">
+
+This week's study session covers
+advanced Sicilian Defense structures
+and middlegame plans.
+
+</div>
+
+</div>
+
+<div class="announcement">
+
+<div class="announcement-title">
+♟ Team Match Scheduled
+</div>
+
+<div class="announcement-text">
+
+Club match against Royal Knights
+begins next weekend.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ====================================
+     RECENT GAMES
+==================================== -->
+
+<div class="card col-12">
+
+<div class="card-title">
+Recent Games
+</div>
+
+<table class="games-table">
+
+<thead>
+
+<tr>
+
+<th>Opponent</th>
+<th>Opening</th>
+<th>Time Control</th>
+<th>Result</th>
+<th>Accuracy</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>KingCrusher</td>
+<td>Sicilian Defense</td>
+<td>5+0</td>
+<td class="result-win">Win</td>
+<td>91%</td>
+
+</tr>
+
+<tr>
+
+<td>ChessTiger</td>
+<td>Queen's Gambit</td>
+<td>10+0</td>
+<td class="result-draw">Draw</td>
+<td>88%</td>
+
+</tr>
+
+<tr>
+
+<td>EndgamePro</td>
+<td>Caro-Kann</td>
+<td>15+10</td>
+<td class="result-loss">Loss</td>
+<td>84%</td>
+
+</tr>
+
+<tr>
+
+<td>RapidMaster</td>
+<td>English Opening</td>
+<td>10+5</td>
+<td class="result-win">Win</td>
+<td>93%</td>
+
+</tr>
+
+<tr>
+
+<td>GM Falcon</td>
+<td>Ruy Lopez</td>
+<td>3+2</td>
+<td class="result-win">Win</td>
+<td>95%</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ====================================
+     MEMBER SPOTLIGHT
+==================================== -->
+
+<div class="card col-6">
+
+<div class="card-title">
+Member Spotlight
+</div>
+
+<div class="member-spotlight">
+
+<div class="member-avatar">
+
+<img
+src="https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/yogi136/php8h3mmr9lb0qd8ZyClyS.png"
+alt="Member">
+
+</div>
+
+<div>
+
+<div class="member-name">
+Yogi136
+</div>
+
+<div class="member-role">
+Founder • Competitive Player
+</div>
+
+<div class="member-bio">
+
+Focused on tournament chess,
+opening preparation,
+and club development.
+Active in training programs
+and community events.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ====================================
+     ADVANCED STATISTICS
+==================================== -->
+
+<div class="card col-6">
+
+<div class="card-title">
+Advanced Statistics
+</div>
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<div class="stat-value">
+62%
+</div>
+
+<div class="stat-name">
+Win Rate
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-value">
+91%
+</div>
+
+<div class="stat-name">
+Avg Accuracy
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-value">
+2310
+</div>
+
+<div class="stat-name">
+Peak Rating
+</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-value">
+14K
+</div>
+
+<div class="stat-name">
+Games Played
+</div>
+
+</div>
+
+</div>
+
+</div>
+<!-- =========================================
+     PART 5
+     TOPBAR
+     SEARCH
+     NOTIFICATIONS
+     COLLAPSIBLE SIDEBAR
+     FOOTER
+     JAVASCRIPT
+========================================= -->
+
+<style>
+
+/* ====================================
+   TOPBAR
+==================================== */
+
+.topbar{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:20px;
+
+margin-bottom:30px;
+
+}
+
+.search-box{
+
+flex:1;
+
+position:relative;
+
+}
+
+.search-box input{
+
+width:100%;
+
+padding:14px 18px;
+
+padding-left:46px;
+
+background:var(--surface);
+
+border:1px solid var(--border);
+
+border-radius:14px;
+
+color:var(--text-primary);
+
+font-size:14px;
+
+outline:none;
+
+}
+
+.search-box input:focus{
+
+border-color:var(--gold);
+
+}
+
+.search-icon{
+
+position:absolute;
+
+left:16px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+color:var(--text-muted);
+
+}
+
+.topbar-actions{
+
+display:flex;
+
+gap:12px;
+
+}
+
+.action-btn{
+
+width:48px;
+height:48px;
+
+border-radius:14px;
+
+border:1px solid var(--border);
+
+background:var(--surface);
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+cursor:pointer;
+
+transition:var(--transition);
+
+font-size:18px;
+
+}
+
+.action-btn:hover{
+
+transform:translateY(-2px);
+
+border-color:var(--gold);
+
+}
+
+/* ====================================
+   NOTIFICATION PANEL
+==================================== */
+
+.notification-panel{
+
+display:none;
+
+position:fixed;
+
+top:90px;
+
+right:30px;
+
+width:320px;
+
+background:var(--surface);
+
+border:1px solid var(--border);
+
+border-radius:20px;
+
+padding:20px;
+
+box-shadow:var(--shadow-large);
+
+z-index:1000;
+
+}
+
+.notification-panel.show{
+
+display:block;
+
+}
+
+.notification-item{
+
+padding:14px 0;
+
+border-bottom:1px solid var(--border);
+
+}
+
+.notification-item:last-child{
+
+border-bottom:none;
+
+}
+
+.notification-title{
+
+font-size:14px;
+
+font-weight:600;
+
+}
+
+.notification-time{
+
+margin-top:5px;
+
+font-size:12px;
+
+color:var(--text-muted);
+
+}
+
+/* ====================================
+   FOOTER
+==================================== */
+
+.dashboard-footer{
+
+margin-top:50px;
+
+padding-top:30px;
+
+border-top:1px solid var(--border);
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+flex-wrap:wrap;
+
+gap:12px;
+
+}
+
+.footer-title{
+
+font-size:14px;
+
+font-weight:700;
+
+}
+
+.footer-text{
+
+font-size:12px;
+
+color:var(--text-muted);
+
+}
+
+.footer-links{
+
+display:flex;
+
+gap:16px;
+
+}
+
+.footer-links a{
+
+text-decoration:none;
+
+color:var(--text-secondary);
+
+font-size:13px;
+
+}
+
+.footer-links a:hover{
+
+color:var(--gold);
+
+}
+
+/* ====================================
+   COLLAPSED SIDEBAR
+==================================== */
+
+.sidebar.collapsed{
+
+width:95px;
+
+transition:0.3s;
+
+}
+
+.sidebar.collapsed .club-info,
+.sidebar.collapsed .profile-details,
+.sidebar.collapsed .stat-box,
+.sidebar.collapsed .rating-panel,
+.sidebar.collapsed .section-title,
+.sidebar.collapsed .nav-content,
+.sidebar.collapsed .profile-stats{
+
+display:none;
+
+}
+
+.sidebar.collapsed .club-header{
+
+justify-content:center;
+
+}
+
+.sidebar.collapsed .profile-top{
+
+justify-content:center;
+
+}
+
+.sidebar.collapsed .nav-item{
+
+justify-content:center;
+
+}
+
+/* ====================================
+   SIMPLE CHART
+==================================== */
+
+.mini-chart{
+
+display:flex;
+
+align-items:flex-end;
+
+gap:8px;
+
+height:180px;
+
+margin-top:20px;
+
+}
+
+.bar{
+
+flex:1;
+
+border-radius:8px 8px 0 0;
+
+background:
+linear-gradient(
+180deg,
+var(--gold),
+var(--gold-dark)
+);
+
+}
+
+</style>
+
+<!-- ====================================
+     PLACE AFTER HERO SECTION
+==================================== -->
+
+<div class="topbar">
+
+<div class="search-box">
+
+<span class="search-icon">🔍</span>
+
+<input
+type="text"
+placeholder="Search members, tournaments, openings...">
+
+</div>
+
+<div class="topbar-actions">
+
+<div
+class="action-btn"
+id="sidebarToggle">
+☰
+</div>
+
+<div
+class="action-btn"
+id="notificationBtn">
+🔔
+</div>
+
+</div>
+
+</div>
+
+<!-- ====================================
+     NOTIFICATIONS
+==================================== -->
+
+<div
+class="notification-panel"
+id="notificationPanel">
+
+<div class="notification-item">
+
+<div class="notification-title">
+Tournament begins tomorrow
+</div>
+
+<div class="notification-time">
+1 hour ago
+</div>
+
+</div>
+
+<div class="notification-item">
+
+<div class="notification-title">
+New member joined club
+</div>
+
+<div class="notification-time">
+3 hours ago
+</div>
+
+</div>
+
+<div class="notification-item">
+
+<div class="notification-title">
+Weekly rankings updated
+</div>
+
+<div class="notification-time">
+Yesterday
+</div>
+
+</div>
+
+</div>
+
+<!-- ====================================
+     PERFORMANCE CHART
+==================================== -->
+
+<div class="card col-12">
+
+<div class="card-title">
+Rating Progress Overview
+</div>
+
+<div class="mini-chart">
+
+<div
+class="bar"
+style="height:60%">
+</div>
+
+<div
+class="bar"
+style="height:70%">
+</div>
+
+<div
+class="bar"
+style="height:65%">
+</div>
+
+<div
+class="bar"
+style="height:80%">
+</div>
+
+<div
+class="bar"
+style="height:78%">
+</div>
+
+<div
+class="bar"
+style="height:90%">
+</div>
+
+<div
+class="bar"
+style="height:95%">
+</div>
+
+<div
+class="bar"
+style="height:100%">
+</div>
+
+</div>
+
+</div>
+
+<!-- ====================================
+     FOOTER
+==================================== -->
+
+<div class="dashboard-footer">
+
+<div>
+
+<div class="footer-title">
+Grandmaster Club Dashboard
+</div>
+
+<div class="footer-text">
+
+Professional Chess Community Interface
+
+</div>
+
+</div>
+
+<div class="footer-links">
+
+<a href="#">
+Home
+</a>
+
+<a href="#">
+Events
+</a>
+
+<a href="#">
+Members
+</a>
+
+<a href="#">
+Training
+</a>
+
+<a href="#">
+Contact
+</a>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<!-- ====================================
+     JAVASCRIPT
+==================================== -->
 
 <script>
 
-/* LIVE CLOCK */
+/* ============================
+   SIDEBAR COLLAPSE
+============================ */
+
+const sidebar =
+document.querySelector(".sidebar");
+
+const sidebarToggle =
+document.getElementById(
+"sidebarToggle"
+);
+
+sidebarToggle.addEventListener(
+"click",
+()=>{
+
+sidebar.classList.toggle(
+"collapsed"
+);
+
+}
+);
+
+/* ============================
+   NOTIFICATIONS
+============================ */
+
+const notifyBtn =
+document.getElementById(
+"notificationBtn"
+);
+
+const notifyPanel =
+document.getElementById(
+"notificationPanel"
+);
+
+notifyBtn.addEventListener(
+"click",
+()=>{
+
+notifyPanel.classList.toggle(
+"show"
+);
+
+}
+);
+
+/* ============================
+   ACTIVE NAVIGATION
+============================ */
+
+const navItems =
+document.querySelectorAll(
+".nav-item"
+);
+
+navItems.forEach(item=>{
+
+item.addEventListener(
+"click",
+()=>{
+
+navItems.forEach(nav=>{
+
+nav.classList.remove(
+"active"
+);
+
+});
+
+item.classList.add(
+"active"
+);
+
+}
+);
+
+});
+
+/* ============================
+   SEARCH FILTER
+============================ */
+
+const searchInput =
+document.querySelector(
+".search-box input"
+);
+
+searchInput.addEventListener(
+"keyup",
+()=>{
+
+const search =
+searchInput.value.toLowerCase();
+
+navItems.forEach(item=>{
+
+const text =
+item.innerText.toLowerCase();
+
+item.style.display =
+text.includes(search)
+? "flex"
+: "none";
+
+});
+
+}
+);
+
+/* ============================
+   LIVE CLOCK
+============================ */
 
 function updateClock(){
 
-const now = new Date();
+const now =
+new Date();
 
 const time =
 now.toLocaleTimeString();
 
-const date =
-now.toDateString();
-
-document.getElementById("clock").innerText =
+document.title =
+"Grandmaster Club • " +
 time;
 
-document.getElementById("date").innerText =
-date;
-
 }
 
-setInterval(updateClock,1000);
-
-updateClock();
-
-/* ACTIVE NAVIGATION */
-
-const navItems =
-document.querySelectorAll(".navItem");
-
-navItems.forEach(item=>{
-
-item.addEventListener("click",()=>{
-
-navItems.forEach(i=>
-i.classList.remove("active")
+setInterval(
+updateClock,
+1000
 );
 
-item.classList.add("active");
+/* ============================
+   CARD HOVER EFFECT
+============================ */
 
-});
-
-});
-
-/* PARTNER CARD EFFECT */
-
-document
-.querySelectorAll(".partnerCard")
-.forEach(card=>{
-
-card.addEventListener("mouseenter",()=>{
-
-card.style.transform =
-"translateY(-6px) scale(1.02)";
-
-});
-
-card.addEventListener("mouseleave",()=>{
-
-card.style.transform =
-"translateY(0) scale(1)";
-
-});
-
-});
-
-/* ACHIEVEMENT EFFECT */
-
-document
-.querySelectorAll(".achievementCard")
-.forEach(card=>{
-
-card.addEventListener("mouseenter",()=>{
-
-card.style.boxShadow =
-"0 0 20px rgba(34,197,94,.25)";
-
-});
-
-card.addEventListener("mouseleave",()=>{
-
-card.style.boxShadow =
-"none";
-
-});
-
-});
-
-/* THEME ROTATOR */
-
-const themes = [
-
-{
-accent:"#22c55e"
-},
-
-{
-accent:"#3b82f6"
-},
-
-{
-accent:"#a855f7"
-},
-
-{
-accent:"#ff4d4d"
-},
-
-{
-accent:"#ffcc00"
-}
-
-];
-
-let themeIndex = 0;
-
-setInterval(()=>{
-
-themeIndex++;
-
-if(themeIndex >= themes.length){
-
-themeIndex = 0;
-
-}
-
-document.documentElement
-.style.setProperty(
-"--accent",
-themes[themeIndex].accent
+const cards =
+document.querySelectorAll(
+".card"
 );
 
-},6000);
+cards.forEach(card=>{
 
-/* RANDOM GLOW PULSE */
+card.addEventListener(
+"mouseenter",
+()=>{
 
-setInterval(()=>{
+card.style.transform =
+"translateY(-3px)";
 
-document.querySelector(".logoIcon")
-.style.boxShadow =
-`0 0 ${
-20 + Math.random()*20
-}px var(--accent)`;
+card.style.transition =
+"0.25s";
 
-},800);
+}
+);
 
-/* FLOATING HERO */
+card.addEventListener(
+"mouseleave",
+()=>{
 
-const hero =
-document.querySelector(".hero");
+card.style.transform =
+"translateY(0px)";
 
-let heroDirection = 1;
+}
+);
 
-setInterval(()=>{
+});
 
-hero.style.transform =
-`translateY(${heroDirection*6}px)`;
+/* ============================
+   FADE IN EFFECT
+============================ */
 
-heroDirection *= -1;
+window.addEventListener(
+"load",
+()=>{
 
-},2500);
-
-/* QUICK ACTION RIPPLE */
-
-document
-.querySelectorAll(".action")
-.forEach(action=>{
-
-action.addEventListener("click",()=>{
-
-action.animate(
+document.body.animate(
 
 [
 {
-transform:"scale(1)"
+opacity:0
 },
 {
-transform:"scale(1.08)"
-},
-{
-transform:"scale(1)"
+opacity:1
 }
 ],
 
 {
-duration:300
+duration:700
 }
 
 );
 
-});
-
-});
-
-/* MUSIC BUTTON ANIMATION */
-
-document
-.querySelectorAll(".musicBtn")
-.forEach(btn=>{
-
-btn.addEventListener("click",()=>{
-
-btn.animate(
-
-[
-{
-transform:"scale(1)"
-},
-{
-transform:"scale(1.15)"
-},
-{
-transform:"scale(1)"
 }
-],
-
-{
-duration:250
-}
-
 );
-
-});
-
-});
 
 </script>
 
 </body>
 </html>
+
+<div class="nav-item">
+
+<div class="nav-icon">🏆</div>
+
+<div class="nav-content">
+
+<div class="nav-title">
+Tournaments
+</div>
+
+<div class="nav-subtitle">
+Club competitions
+</div>
+
+</div>
+
+</div>
