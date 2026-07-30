@@ -3,55 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pixel Glow Chess Club</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>The Opening Assassin</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ===== RESET & TOKENS ===== */
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --bg:#0f1710;
-  --card:#132018;
-  --card2:#0c1310;
-  --line:rgba(212,175,55,.18);
-  --ivory:#efe7d2;
-  --dim:#9fae9d;
-  --green:#3fae6f;
-  --green2:#2a7a4c;
-  --gold:#d4af37;
-  --gold2:#f0cf6d;
-  --shadow:0 10px 24px rgba(0,0,0,.45);
+  --bg:#0a0a0d;
+  --card:#151417;
+  --card2:#0f0e11;
+  --line:rgba(224,48,63,.22);
+  --ivory:#efeef0;
+  --dim:#8b8890;
+  --red:#e0303f;
+  --red2:#a3121f;
+  --steel:#9aa5ad;
+  --steel2:#5f6a72;
+  --shadow:0 10px 24px rgba(0,0,0,.55);
 }
-html,body{background:#05070a;}
+html,body{background:#000;}
 body{
-  font-family:'Poppins',sans-serif;
+  font-family:'Inter',sans-serif;
   color:var(--ivory);
   display:flex;
   justify-content:center;
 }
+h1,h2,h3,h4,h5{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;}
 
-/* ===== WIDGET FRAME (325 x ~1980) ===== */
+/* ===== WIDGET FRAME (325 x ~1990) ===== */
 .widget{
   width:325px;
   max-width:325px;
-  max-height:2500px;
+  max-height:2000px;
   overflow:hidden;
   background:
-    radial-gradient(circle at 15% 0%, rgba(63,174,111,.12), transparent 45%),
-    radial-gradient(circle at 100% 20%, rgba(212,175,55,.10), transparent 40%),
+    radial-gradient(circle at 10% 0%, rgba(224,48,63,.14), transparent 45%),
+    radial-gradient(circle at 100% 15%, rgba(154,165,173,.08), transparent 40%),
     var(--bg);
   position:relative;
   border-left:1px solid var(--line);
   border-right:1px solid var(--line);
 }
-.widget::before{ /* faint board texture */
+.widget::before{ /* diagonal blade texture */
   content:"";
   position:absolute;inset:0;
   background:
-    linear-gradient(45deg, rgba(255,255,255,.02) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(255,255,255,.02) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(255,255,255,.02) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(255,255,255,.02) 75%);
-  background-size:26px 26px;
+    repeating-linear-gradient(115deg, rgba(255,255,255,.015) 0 2px, transparent 2px 34px);
   pointer-events:none;
 }
 
@@ -63,290 +60,190 @@ body{
   border-bottom:1px solid var(--line);
 }
 .logo{
-  font-family:'Cinzel',serif;font-weight:700;font-size:15px;
-  letter-spacing:1px;color:var(--gold2);
+  font-family:'Bebas Neue',sans-serif;font-size:18px;
+  letter-spacing:1.5px;color:var(--ivory);
   display:flex;align-items:center;gap:6px;
 }
-.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
+.logo span{color:var(--red);}
+.nav-dot{width:6px;height:6px;background:var(--red);box-shadow:0 0 8px var(--red);transform:rotate(45deg);}
 
 /* ===== HERO ===== */
 .hero{position:relative;padding:20px 16px 16px;text-align:center;}
 .hero-piece{
-  font-size:120px;line-height:1;color:rgba(212,175,55,.07);
-  position:absolute;top:-10px;right:-20px;pointer-events:none;
+  font-size:130px;line-height:1;color:rgba(224,48,63,.06);
+  position:absolute;top:-14px;right:-24px;pointer-events:none;
 }
 .badge{
   display:inline-block;padding:4px 12px;
-  border:1px solid var(--line);border-radius:20px;
-  font-size:9.5px;letter-spacing:.5px;color:var(--green);
-  background:rgba(63,174,111,.08);margin-bottom:10px;
+  border:1px solid var(--line);
+  font-size:9.5px;letter-spacing:.6px;color:var(--red);
+  background:rgba(224,48,63,.08);margin-bottom:10px;
 }
 .hero h1{
-  font-family:'Cinzel',serif;font-size:26px;letter-spacing:2px;
-  color:var(--ivory);line-height:1.1;margin-bottom:8px;
+  font-size:34px;letter-spacing:2px;
+  color:var(--ivory);line-height:1;margin-bottom:8px;
 }
-.hero h1 span{color:var(--gold);}
+.hero h1 span{color:var(--red);}
 .hero p{
   font-size:11.5px;line-height:1.6;color:var(--dim);
   max-width:270px;margin:0 auto 14px;
 }
-.hero-board{
-  width:150px;height:150px;margin:0 auto 14px;
-  border-radius:16px;overflow:hidden;
-  border:3px solid var(--gold);
-  box-shadow:0 0 0 4px rgba(212,175,55,.08), var(--shadow);
-  display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr);
+.hero-media{display:flex;gap:10px;align-items:stretch;margin:0 0 14px;}
+.video-box{
+  width:140px;height:140px;flex-shrink:0;position:relative;overflow:hidden;
+  border:2px solid var(--red);
+  box-shadow:0 0 0 4px rgba(224,48,63,.08), var(--shadow);
+  background:
+    linear-gradient(135deg, rgba(224,48,63,.35), rgba(90,20,25,.3)),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.04) 0 6px, transparent 6px 12px),
+    #0f0e11;
 }
-.sq{display:flex;align-items:center;justify-content:center;font-size:18px;}
-.sq.l{background:#efe7d2;}
-.sq.d{background:#3a5c46;}
-.sq .pc{color:#1d1d1d;text-shadow:0 1px 0 rgba(255,255,255,.3);}
-.sq.d .pc{color:#efe7d2;}
+.video-box video{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1;}
+.video-box .vfallback{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:34px;color:rgba(239,238,240,.3);z-index:0;
+}
+.rating-card{
+  flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;background:var(--card);border:1px solid var(--line);
+  padding:10px 6px;
+}
+.rating-title{font-size:8.5px;color:var(--red);font-weight:700;letter-spacing:.4px;margin-bottom:4px;text-transform:uppercase;}
+.rating-value{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--ivory);line-height:1;margin-bottom:3px;}
+.rating-card p{font-size:8px;color:var(--dim);}
 .hero-btns{display:flex;gap:8px;justify-content:center;}
 .btn{
-  font-size:11px;font-weight:600;padding:9px 14px;border-radius:10px;
-  text-decoration:none;border:none;cursor:pointer;
+  font-size:11px;font-weight:700;padding:9px 16px;
+  text-decoration:none;border:none;cursor:pointer;letter-spacing:.3px;
 }
-.btn.primary{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;box-shadow:0 6px 14px rgba(63,174,111,.3);}
-.btn.secondary{background:transparent;border:1px solid var(--gold);color:var(--gold2);}
+.btn.primary{background:var(--red);color:#fff;box-shadow:0 6px 14px rgba(224,48,63,.35);}
+.btn.secondary{background:transparent;border:1px solid var(--steel2);color:var(--steel);}
 
 /* ===== STATS ===== */
 .stats{
   padding:14px 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;
   border-top:1px solid var(--line);border-bottom:1px solid var(--line);
 }
-.stat h2{font-family:'Cinzel',serif;font-size:16px;color:var(--gold2);}
-.stat p{font-size:8px;color:var(--dim);letter-spacing:.3px;margin-top:2px;text-transform:uppercase;}
+.stat h2{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--red);}
+.stat p{font-size:7.5px;color:var(--dim);letter-spacing:.3px;margin-top:2px;text-transform:uppercase;}
 .stat{text-align:center;}
 
 /* ===== SECTION SHELL ===== */
 .section{padding:16px;}
 .section + .section{border-top:1px solid var(--line);}
-.section-eyebrow{font-size:9.5px;color:var(--green);letter-spacing:.5px;margin-bottom:3px;}
-.section-title{font-family:'Cinzel',serif;font-size:16px;color:var(--ivory);margin-bottom:10px;}
+.section-eyebrow{font-size:9.5px;color:var(--red);letter-spacing:.5px;margin-bottom:3px;text-transform:uppercase;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:19px;color:var(--ivory);margin-bottom:10px;letter-spacing:1px;}
 
 /* ===== QUOTE ===== */
 .quote{padding:14px 20px;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
 .quote p{font-size:11.5px;font-style:italic;color:var(--dim);line-height:1.6;}
-.quote span{color:var(--gold);}
+.quote span{color:var(--red);}
 
 /* ===== FEATURES ===== */
-.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
 .feat{
-  background:var(--card);border:1px solid var(--line);border-radius:12px;
-  padding:11px 10px;text-align:center;
+  background:var(--card);border:1px solid var(--line);
+  padding:9px 4px;text-align:center;
 }
-.feat .ic{font-size:16px;color:var(--green);margin-bottom:5px;}
-.feat h3{font-family:'Cinzel',serif;font-size:11px;color:var(--ivory);margin-bottom:3px;}
-.feat p{font-size:8.5px;color:var(--dim);line-height:1.4;}
-/* ===== MUSIC PLAYER ===== */
+.feat .ic{font-size:15px;color:var(--red);margin-bottom:4px;}
+.feat h3{font-family:'Bebas Neue',sans-serif;font-size:9px;color:var(--ivory);line-height:1.2;letter-spacing:.3px;}
 
-.music-box{
-
-background:var(--card);
-
-border:1px solid var(--line);
-
-border-radius:16px;
-
-padding:12px;
-
-box-shadow:var(--shadow);
-
+/* ===== PREP AUDIO ===== */
+.music-player{
+  background:var(--card);border:1px solid var(--line);padding:12px;
 }
-
-
-.music-head{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-margin-bottom:10px;
-
+.music-screen{
+  width:100%;height:120px;overflow:hidden;position:relative;
+  border:1px solid var(--red);
+  background:
+    linear-gradient(135deg, rgba(224,48,63,.32), rgba(90,20,25,.28)),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.04) 0 6px, transparent 6px 12px),
+    #0f0e11;
+  margin-bottom:10px;
 }
-
-
-.music-head h3{
-
-font-family:'Cinzel',serif;
-
-font-size:13px;
-
-color:var(--ivory);
-
+.music-screen video{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1;}
+.music-screen .vfallback{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:3px;z-index:0;
 }
-
-
-.music-head span{
-
-font-size:8px;
-
-color:var(--green);
-
+.music-screen .vfallback span{
+  width:4px;background:rgba(239,238,240,.3);border-radius:1px;
+  animation:eq 1.1s ease-in-out infinite;
+}
+.music-screen .vfallback span:nth-child(1){height:14px;animation-delay:0s;}
+.music-screen .vfallback span:nth-child(2){height:28px;animation-delay:.15s;}
+.music-screen .vfallback span:nth-child(3){height:20px;animation-delay:.3s;}
+.music-screen .vfallback span:nth-child(4){height:34px;animation-delay:.45s;}
+.music-screen .vfallback span:nth-child(5){height:18px;animation-delay:.6s;}
+@keyframes eq{0%,100%{transform:scaleY(.4);}50%{transform:scaleY(1);}}
+.song-info{text-align:center;margin-bottom:9px;}
+.song-info h4{font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--ivory);letter-spacing:.5px;}
+.song-info p{font-size:8.5px;color:var(--dim);margin-top:2px;}
+.music-controls{display:flex;justify-content:center;gap:10px;}
+.music-controls button{
+  width:32px;height:32px;border:1px solid var(--line);
+  background:rgba(255,255,255,.03);color:var(--steel);font-size:12px;cursor:pointer;
+}
+.music-controls button.play{
+  width:38px;height:38px;background:var(--red);
+  color:#fff;border:none;font-size:13px;
 }
 
-
-.song{
-    overflow:hidden;
-    padding:10px;
-    border-radius:10px;
-    background:
-    linear-gradient(
-    90deg,
-    rgba(212,175,55,.12),
-    rgba(63,174,111,.12)
-    );
-
-    font-size:9px;
-    white-space:nowrap;
-}
-
-
-.marquee{
-    display:inline-block;
-    white-space:nowrap;
-    animation:scroll 10s linear infinite;
-}
-
-
-@keyframes scroll{
-
-0%{
-transform:translateX(100%);
-}
-
-100%{
-transform:translateX(-100%);
-}
-
-}
-
-.screen{
-
-margin-top:10px;
-
-aspect-ratio:16/9;
-
-background:#000;
-
-border-radius:12px;
-
-overflow:hidden;
-
-}
-
-
-.screen iframe{
-
-width:100%;
-
-height:100%;
-
-border:none;
-
-}
-
-
-.controls{
-
-display:flex;
-
-justify-content:center;
-
-gap:12px;
-
-padding-top:12px;
-
-}
-
-
-.controls button{
-
-width:38px;
-
-height:34px;
-
-border-radius:10px;
-
-border:1px solid var(--gold);
-
-background:linear-gradient(
-135deg,
-var(--green),
-var(--green2)
-);
-
-color:white;
-
-cursor:pointer;
-
-font-size:14px;
-
-}
-
-.controls button:hover{
-
-transform:translateY(-2px);
-
-}
-/* ===== CALENDAR ===== */
-.cal-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;}
+/* ===== STRIKE SCHEDULE (calendar) ===== */
+.cal-box{background:var(--card);border:1px solid var(--line);padding:12px;}
 .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
 .cal-head button{
-  width:24px;height:24px;border-radius:50%;border:1px solid var(--line);
-  background:transparent;color:var(--gold2);font-size:11px;cursor:pointer;
+  width:24px;height:24px;border:1px solid var(--line);
+  background:transparent;color:var(--red);font-size:11px;cursor:pointer;
 }
-.cal-head h4{font-family:'Cinzel',serif;font-size:12px;color:var(--ivory);}
+.cal-head h4{font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--ivory);letter-spacing:.5px;}
 .wk,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
-.wk div{text-align:center;font-size:7.5px;color:var(--green);font-weight:600;margin-bottom:5px;}
+.wk div{text-align:center;font-size:7.5px;color:var(--red);font-weight:700;margin-bottom:5px;}
 .day{
   aspect-ratio:1;display:flex;align-items:center;justify-content:center;
-  font-size:9px;border-radius:5px;color:var(--dim);background:rgba(255,255,255,.02);
+  font-size:9px;color:var(--dim);background:rgba(255,255,255,.02);
 }
-.day.today{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;font-weight:700;}
+.day.today{background:var(--red);color:#fff;font-weight:700;}
 .day.empty{background:transparent;}
 
-/* ===== LEADERBOARD ===== */
+/* ===== RANKINGS ===== */
 .lb-row{
   display:flex;align-items:center;gap:10px;padding:9px 10px;
-  background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:6px;
+  background:var(--card);border:1px solid var(--line);margin-bottom:6px;
 }
-.lb-row.first{border-color:rgba(212,175,55,.5);background:rgba(212,175,55,.05);}
+.lb-row.first{border-color:rgba(224,48,63,.55);background:rgba(224,48,63,.06);}
 .lb-rank{font-size:14px;width:18px;text-align:center;}
 .lb-info{flex:1;}
 .lb-info h4{font-size:10.5px;color:var(--ivory);}
 .lb-info p{font-size:8px;color:var(--dim);}
-.lb-rating{font-family:'Cinzel',serif;font-size:13px;color:var(--gold2);font-weight:700;}
+.lb-rating{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--red);}
 
-/* ===== EVENTS mini ===== */
+/* ===== SESSIONS mini ===== */
 .ev-row{
   display:flex;align-items:center;gap:8px;font-size:9.5px;color:var(--dim);
   padding:6px 0;border-bottom:1px dashed var(--line);
 }
 .ev-row:last-child{border-bottom:none;}
-.ev-row .dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0;}
+.ev-row .dot{width:5px;height:5px;background:var(--red);flex-shrink:0;}
 .ev-row b{color:var(--ivory);font-weight:600;}
-.ev-tag{margin-left:auto;font-size:7.5px;padding:2px 6px;border-radius:8px;background:rgba(63,174,111,.12);color:var(--green);}
-.ev-tag.gold{background:rgba(212,175,55,.15);color:var(--gold2);}
+.ev-tag{margin-left:auto;font-size:7.5px;padding:2px 6px;background:rgba(224,48,63,.14);color:var(--red);}
+.ev-tag.steel{background:rgba(154,165,173,.14);color:var(--steel);}
 
-/* ===== PARTNERS ===== */
-.partner-row{display:flex;align-items:center;gap:10px;padding:8px 0;}
+/* ===== ALLIES ===== */
+.partner-row{display:flex;align-items:center;gap:10px;padding:6px 0;}
 .partner-ic{
-  width:30px;height:30px;border-radius:9px;flex-shrink:0;
-  background:linear-gradient(135deg, rgba(63,174,111,.15), rgba(212,175,55,.15));
-  display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold2);
+  width:30px;height:30px;flex-shrink:0;
+  background:linear-gradient(135deg, rgba(224,48,63,.18), rgba(154,165,173,.1));
+  display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--red);
 }
 .partner-row h4{font-size:10.5px;color:var(--ivory);}
 .partner-row p{font-size:8px;color:var(--dim);}
 
 /* ===== FOOTER ===== */
 .foot{padding:16px;text-align:center;border-top:1px solid var(--line);}
-.foot-pieces{font-size:14px;letter-spacing:6px;color:var(--gold);opacity:.7;margin-bottom:8px;}
-.foot h5{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--ivory);margin-bottom:5px;}
+.foot-pieces{font-size:14px;letter-spacing:8px;color:var(--red);opacity:.75;margin-bottom:8px;}
+.foot h5{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1.5px;color:var(--ivory);margin-bottom:5px;}
 .foot p{font-size:8px;color:var(--dim);}
 
-/* subtle motion */
 .day, .feat, .lb-row, .partner-row{transition:.25s;}
 </style>
 </head>
@@ -356,94 +253,89 @@ transform:translateY(-2px);
 
   <!-- NAV -->
   <div class="nav">
-    <div class="logo">♔ PIXEL GLOW</div>
+    <div class="logo">🗡 THE OPENING <span>ASSASSIN</span></div>
     <div class="nav-dot"></div>
   </div>
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero-piece">♞</div>
-    <div class="badge">♟ Elite Chess Community</div>
-    <h1>PIXEL <span>GLOW</span></h1>
-    <p>A peaceful chess sanctuary where strategy, friendship and competition meet.</p>
+    <div class="badge">⚔ Aggressive Chess Training</div>
+    <h1>STRIKE <span>FIRST</span></h1>
+    <p>Master sharp openings that end games before your opponent finishes developing.</p>
 
-    <div class="hero-board" id="heroBoard"></div>
+    <div class="hero-media">
+      <div class="video-box">
+        <video autoplay muted loop playsinline poster="">
+          <source src="hero.mp4" type="video/mp4">
+        </video>
+        <div class="vfallback">🗡</div>
+      </div>
+      <div class="rating-card">
+        <div class="rating-title">Avg Elo Gain</div>
+        <div class="rating-value">+186</div>
+        <p>Per Student, 90 Days</p>
+      </div>
+    </div>
 
     <div class="hero-btns">
-      <a href="#" class="btn primary">Join Club</a>
-      <a href="#leaderboard" class="btn secondary">Leaderboard</a>
+      <a href="#" class="btn primary">Start Training</a>
+      <a href="#rankings" class="btn secondary">Rankings</a>
     </div>
   </section>
 
   <!-- STATS -->
   <div class="stats">
-    <div class="stat"><h2>100+</h2><p>Members</p></div>
-    <div class="stat"><h2>24/7</h2><p>Active</p></div>
-    <div class="stat"><h2>42</h2><p>Tourneys</p></div>
-    <div class="stat"><h2>1640</h2><p>Rating</p></div>
+    <div class="stat"><h2>3,200+</h2><p>Students</p></div>
+    <div class="stat"><h2>65</h2><p>Openings</p></div>
+    <div class="stat"><h2>91%</h2><p>Win Rate¹</p></div>
+    <div class="stat"><h2>Live</h2><p>Coaching</p></div>
   </div>
 
   <!-- QUOTE -->
   <div class="quote">
-    <p><span>"</span>The strongest move is the one played with patience.<span>"</span></p>
+    <p><span>"</span>By move ten, your opponent should already be losing.<span>"</span></p>
   </div>
 
-  <!-- FEATURES -->
-  <section class="section" id="features">
-    <div class="section-eyebrow">♟ CLUB EXPERIENCE</div>
-    <div class="section-title">Chess Features</div>
+  <!-- ARSENAL / FEATURES -->
+  <section class="section" id="arsenal">
+    <div class="section-eyebrow">🗡 The Arsenal</div>
+    <div class="section-title">Openings Toolkit</div>
     <div class="feat-grid">
-      <div class="feat"><div class="ic">♟</div><h3>Daily Matches</h3><p>Play regular games and sharpen your skills.</p></div>
-      <div class="feat"><div class="ic">🏆</div><h3>Tournaments</h3><p>Compete for the top position.</p></div>
-      <div class="feat"><div class="ic">♞</div><h3>Tactics Arena</h3><p>Train calculation and ideas.</p></div>
-      <div class="feat"><div class="ic">♜</div><h3>Strategy Room</h3><p>Discuss openings and plans.</p></div>
+      <div class="feat"><div class="ic">📖</div><h3>Trap Vault</h3></div>
+      <div class="feat"><div class="ic">🎯</div><h3>Repertoire Builder</h3></div>
+      <div class="feat"><div class="ic">⚡</div><h3>Blitz Drills</h3></div>
+      <div class="feat"><div class="ic">🔍</div><h3>Scout Reports</h3></div>
     </div>
   </section>
-<!-- MUSIC LOUNGE -->
-<section class="section" id="music">
 
-<div class="section-eyebrow">♬ CLUB AMBIENCE</div>
-<div class="section-title">Music Lounge</div>
+  <!-- PREP AUDIO -->
+  <section class="section" id="prep">
+    <div class="section-eyebrow">🎧 Focus Mode</div>
+    <div class="section-title">Pre-Game Prep</div>
+    <div class="music-player">
+      <div class="music-screen">
+        <video id="musicVideo" loop muted playsinline>
+          <source src="prep.mp4" type="video/mp4">
+        </video>
+        <div class="vfallback"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="song-info">
+        <h4>Kill Chain Calculation</h4>
+        <p>Sharp-line visualization audio</p>
+      </div>
+      <div class="music-controls">
+        <button id="musicPrev">⏮</button>
+        <button id="musicPlay" class="play">▶</button>
+        <button id="musicNext">⏭</button>
+      </div>
+    </div>
+  </section>
 
-<div class="music-box">
-
-<div class="music-head">
-<h3>Now Playing</h3>
-<span>Streaming</span>
-</div>
-
-<div class="song">
-<div class="marquee" id="songText">
-Now Playing
-</div>
-</div>
-
-<div class="screen">
-<iframe id="playerFrame"
-allow="autoplay; encrypted-media"
-allowfullscreen>
-</iframe>
-</div>
-
-<div class="controls">
-
-<button onclick="prevSong()">⏮</button>
-
-<button onclick="toggleVideo()" id="toggleBtn">
-▶
-</button>
-
-<button onclick="nextSong()">⏭</button>
-
-</div>
-
-</div>
-
-</section>
-  <!-- CALENDAR -->
-  <section class="section" id="calendar">
-    <div class="section-eyebrow">♜ TOURNAMENT PLANNER</div>
-    <div class="section-title">Club Calendar</div>
+  <!-- STRIKE SCHEDULE -->
+  <section class="section" id="schedule">
+    <div class="section-eyebrow">🗓 Strike Schedule</div>
+    <div class="section-title">Session Calendar</div>
     <div class="cal-box">
       <div class="cal-head">
         <button onclick="changeMonth(-1)">◀</button>
@@ -457,353 +349,92 @@ allowfullscreen>
     </div>
   </section>
 
-  <!-- LEADERBOARD + EVENTS -->
-  <section class="section" id="leaderboard">
-    <div class="section-eyebrow">♛ COMPETITIVE ARENA</div>
-    <div class="section-title">Top Players</div>
+  <!-- RANKINGS + SESSIONS -->
+  <section class="section" id="rankings">
+    <div class="section-eyebrow">🎯 Kill Count</div>
+    <div class="section-title">Top Assassins</div>
 
     <div class="lb-row first">
       <div class="lb-rank">🥇</div>
-      <div class="lb-info"><h4>Shairyaqoob</h4><p>Strategic Master</p></div>
-      <div class="lb-rating">1640</div>
+      <div class="lb-info"><h4>ShadowGambit</h4><p>Sicilian Specialist</p></div>
+      <div class="lb-rating">+312</div>
     </div>
     <div class="lb-row">
       <div class="lb-rank">🥈</div>
-      <div class="lb-info"><h4>LovehololiveEN</h4><p>Tactical Specialist</p></div>
-      <div class="lb-rating">1582</div>
+      <div class="lb-info"><h4>QuietBlade_92</h4><p>Caro-Kann Sniper</p></div>
+      <div class="lb-rating">+274</div>
     </div>
     <div class="lb-row">
       <div class="lb-rank">🥉</div>
-      <div class="lb-info"><h4>Rising Knight</h4><p>Future Champion</p></div>
-      <div class="lb-rating">1500</div>
+      <div class="lb-info"><h4>Rook_Reaper</h4><p>King's Indian Killer</p></div>
+      <div class="lb-rating">+229</div>
     </div>
 
     <div style="margin-top:10px;">
-      <div class="ev-row"><span class="dot"></span><b>Weekly Rapid</b>&nbsp;· Sat 10+5<span class="ev-tag">LIVE</span></div>
-      <div class="ev-row"><span class="dot"></span><b>Tactical Battle</b>&nbsp;· Puzzles<span class="ev-tag">OPEN</span></div>
-      <div class="ev-row"><span class="dot"></span><b>Grand Monthly</b>&nbsp;· Elite<span class="ev-tag gold">ELITE</span></div>
+      <div class="ev-row"><span class="dot"></span><b>Trap Lab</b>&nbsp;· Tue live<span class="ev-tag">LIVE</span></div>
+      <div class="ev-row"><span class="dot"></span><b>Speed Prep</b>&nbsp;· 5min drills<span class="ev-tag">OPEN</span></div>
+      <div class="ev-row"><span class="dot"></span><b>Assassin Cup</b>&nbsp;· Monthly<span class="ev-tag steel">ELITE</span></div>
     </div>
   </section>
 
-  <!-- PARTNERS -->
-  <section class="section" id="partners">
-    <div class="section-eyebrow">🤝 CHESS ALLIANCE</div>
-    <div class="section-title">Partner Clubs</div>
-    <div class="partner-row"><div class="partner-ic">♔</div><div><h4>Sapphire Chess Club</h4><p>Friendly strategic community</p></div></div>
-    <div class="partner-row"><div class="partner-ic">♞</div><div><h4>Penguin Chess Club</h4><p>Competitive environment</p></div></div>
-    <div class="partner-row"><div class="partner-ic">♜</div><div><h4>Strategic Council</h4><p>Advanced discussions</p></div></div>
+  <!-- ALLIES -->
+  <section class="section" id="allies">
+    <div class="section-eyebrow">🤝 Allied Coaches</div>
+    <div class="section-title">Trusted Partners</div>
+    <div class="partner-row"><div class="partner-ic">♞</div><div><h4>Blackout Chess Academy</h4><p>Tactical training partner</p></div></div>
+    <div class="partner-row"><div class="partner-ic">♟</div><div><h4>Endgame Syndicate</h4><p>Late-game conversion coaching</p></div></div>
+    <div class="partner-row"><div class="partner-ic">♜</div><div><h4>Rapid Fire Club</h4><p>Speed chess community</p></div></div>
   </section>
 
   <!-- FOOTER -->
   <footer class="foot">
-    <div class="foot-pieces">♔ ♕ ♖ ♗ ♘ ♙</div>
-    <h5>PIXEL GLOW CHESS CLUB</h5>
-    <p class="foot-line">© 2026 Pixel Glow · All Rights Reserved</p>
+    <div class="foot-pieces">🗡 ♞ ⚔ ♟ 🎯</div>
+    <h5>THE OPENING ASSASSIN</h5>
+    <p class="foot-line">© 2026 Opening Assassin · All Rights Reserved</p>
   </footer>
 
 </div>
 
 <script>
-/* ===== MINI CHESS BOARD (hero decoration, 5x5 sample) ===== */
-const boardLayout = [
-  ['♜','♞','♝','♛','♚'],
-  ['♟','♟','♟','♟','♟'],
-  ['','','','',''],
-  ['♙','♙','♙','♙','♙'],
-  ['♖','♘','♗','♕','♔']
-];
-const heroBoard = document.getElementById('heroBoard');
-boardLayout.forEach((row,r)=>{
-  row.forEach((piece,c)=>{
-    const sq = document.createElement('div');
-    sq.className = 'sq ' + (((r+c)%2===0) ? 'l' : 'd');
-    if(piece){
-      const pc = document.createElement('span');
-      pc.className='pc';
-      pc.textContent = piece;
-      sq.appendChild(pc);
-    }
-    heroBoard.appendChild(sq);
+/* ===== VIDEO FALLBACK HANDLING =====
+   If hero.mp4 / prep.mp4 aren't found next to this file, hide the <video>
+   so the CSS fallback (dagger glyph / equalizer bars) shows instead. */
+document.querySelectorAll('video').forEach(v=>{
+  v.addEventListener('error', ()=>{ v.style.display='none'; }, true);
+  v.querySelectorAll('source').forEach(s=>{
+    s.addEventListener('error', ()=>{ v.style.display='none'; });
   });
 });
-/* ===== MUSIC PLAYER ===== */
 
-let songs=[
+/* ===== PREP AUDIO CONTROLS ===== */
+const musicVideo = document.getElementById('musicVideo');
+const playBtn = document.getElementById('musicPlay');
+const prevBtn = document.getElementById('musicPrev');
+const nextBtn = document.getElementById('musicNext');
 
-{
-src:"https://youtu.be/kcsGhOmULxQ",
-name:"Golden Brown - The Stranglers"
-},
-
-{
-src:"https://youtu.be/qdpXxGPqW-Y",
-name:"Faded - Alan Walker"
-},
-
-{
-src:"https://youtu.be/R5aurUlfn3w",
-name:"Monody - TheFatRat"
-},
-
-{    
-src:"https://youtu.be/k50D8-EvNxk",    
-name:"Meu Abrigo - Melim"    
-},    
-
-{    
-src:"https://youtu.be/9I9c20LHmzY",    
-name:"Come As You Are - Nirvana"    
-},    
- {  
-src:"https://youtu.be/7WoVX2X3SQw",  
-name:"Motagem Renaido - Jmilton"  
-},   
-{    
-src:"https://youtu.be/SDNA934EEVk",    
-name:"A Walk - Tycho"    
-},    
-
-{    
-src:"https://youtu.be/A3xxG5zHuCA",    
-name:"Passo Bem Solto - ATLXS"    
-},    
-
-{    
-src:"https://youtu.be/Qk5lzJVfcLo",    
-name:"Downtown Baby 2 - Overtonight"    
-},    
-
-{    
-src:"https://youtu.be/vi72_ggUCHU",    
-name:"Keep Up - ODETARI"    
-},    
-
-{    
-src:"https://youtu.be/kGobHQ7z8X4",    
-name:"Why Do I? - Unknown Brain"    
-},    
-
-{    
-src:"https://youtu.be/0jSpCxmb2VQ",    
-name:"Mood - 24kGoldn"    
-},    
-{src:"https://youtu.be/4jh2H5qFb44", name:"Shape of You - Ed Sheeran"},  
-  {src:"https://youtu.be/rfTgO9rpqck", name:"Heat Waves - Glass Animals"},  
-  {src:"https://youtu.be/JrNMyzsYr4M", name:"Love Me Like You Do - Ellie Goulding"},  
-  {src:"https://youtu.be/DKbfBSrjVHA", name:"Can We Kiss Forever? - Kina"},  
-  {src:"https://youtu.be/TdbyjBf93zc", name:"All I Want - Lofi Remix"},  
-  {src:"https://youtu.be/z7zoabFKD60", name:"TheFatRat Mix / Songs"},   
-  {src:"https://youtu.be/i4bWViFpd0Q", name:"Army Dreamers - Kate Bush"},  
-  {src:"https://youtu.be/Jkj36B1YuDU", name:"Another Love - Tom Odell"},  
-  {src:"https://youtu.be/GXioir-fujY", name:"NO BATIDÃO - ZXKAI"},   
-
-{  
-src:"https://youtu.be/2vjPBrBU-TM",  
-name:"Sia - Chandelier"  
-},  
-
-{  
-src:"https://youtu.be/PT2_F-1esPk",  
-name:"Alan Walker - Spectre"  
-},  
-
-{  
-src:"https://youtu.be/n8X9_MgEdCg",  
-name:"TheFatRat - Unity"  
-},  
-{  
-src:"https://youtu.be/xy-NKN75Jhw",  
-name:"Petit Biscuit - Sunset Lover"  
-},  
-
-{  
-src:"https://youtu.be/HAIDqt2aUek",  
-name:"Imagine Dragons - Demons"  
-},  
-
-{  
-src:"https://youtu.be/RgKAFK5djSk",  
-name:"Wiz Khalifa - See You Again"  
-},  
-
-{  
-src:"https://youtu.be/mWRsgZuwf_8",  
-name:"M83 - Midnight City"  
-},  
-
-{  
-src:"https://youtu.be/50VNCymT-Cs",  
-name:"Coldplay - A Sky Full Of Stars"  
-},  
-
-{  
-src:"https://youtu.be/hLQl3WQQoQ0",  
-name:"Adele - Someone Like You"  
-},  
-
-{  
-src:"https://youtu.be/JGwWNGJdvx8",  
-name:"Ed Sheeran - Perfect"  
-},  
-
-{  
-src:"https://youtu.be/OpQFFLBMEPI",  
-name:"The Chainsmokers - Closer"  
-},  
-
-{  
-src:"https://youtu.be/pXRviuL6vMY",  
-name:"Twenty One Pilots - Stressed Out"  
-},  
-
-{  
-src:"https://youtu.be/60ItHLz5WEA",  
-name:"Alan Walker - Alone"  
-},  
-
-{  
-src:"https://youtu.be/kXYiU_JCYtU",  
-name:"Linkin Park - Numb"  
-},  
-
-{  
-src:"https://youtu.be/YQHsXMglC9A",  
-name:"Adele - Hello"  
-},  
-
-{  
-src:"https://youtu.be/uelHwf8o7_U",  
-name:"Eminem - Love The Way You Lie"  
-},  
-{  
-src:"https://youtu.be/3AtDnEC4zak",  
-name:"Charlie Puth - We Don't Talk Anymore"  
-},  
-
-{  
-src:"https://youtu.be/09R8_2nJtjg",  
-name:"Maroon 5 - Sugar"  
-},  
-
-{  
-src:"https://youtu.be/ktvTqknDobU",  
-name:"Imagine Dragons - Radioactive"  
-},   
-{src:"https://youtu.be/EoNWCYNTANA", name:"If I Killed Someone for You - Alec Benjamin"},  
-  {src:"https://youtu.be/y1uzBncUsQQ", name:"Origami - The Rare Occasions"},  
-  {src:"https://youtu.be/7U1LFCY70nA", name:"Ava - Underdog"}  
-
-];
-
-
-let songIndex=0;
-let playing=false;
-
-
-const frame=document.getElementById("playerFrame");
-const songText=document.getElementById("songText");
-const playBtn=document.getElementById("toggleBtn");
-
-
-function getId(url){
-
-if(url.includes("youtu.be/")){
-
-return url.split("youtu.be/")[1].split("?")[0];
-
+if(playBtn){
+  playBtn.addEventListener('click', ()=>{
+    if(musicVideo.paused){
+      musicVideo.play().catch(()=>{});
+      playBtn.innerHTML = '⏸';
+    } else {
+      musicVideo.pause();
+      playBtn.innerHTML = '▶';
+    }
+  });
+}
+if(prevBtn){
+  prevBtn.addEventListener('click', ()=>{ musicVideo.currentTime = 0; });
+}
+if(nextBtn){
+  nextBtn.addEventListener('click', ()=>{
+    musicVideo.currentTime = 0;
+    musicVideo.play().catch(()=>{});
+    playBtn.innerHTML = '⏸';
+  });
 }
 
-if(url.includes("youtube.com/watch?v=")){
-
-return url.split("v=")[1].split("&")[0];
-
-}
-
-return "";
-
-}
-
-
-function loadSong(){
-
-let videoID=getId(songs[songIndex].src);
-
-frame.src=
-"https://www.youtube.com/embed/"
-+videoID+
-"?enablejsapi=1&rel=0";
-
-
-songText.textContent =
-"Now Playing • " + songs[songIndex].name;
-
-playBtn.innerText="▶";
-
-playing=false;
-
-}
-
-
-function nextSong(){
-
-songIndex++;
-
-if(songIndex>=songs.length){
-
-songIndex=0;
-
-}
-
-loadSong();
-
-}
-
-
-function prevSong(){
-
-songIndex--;
-
-if(songIndex<0){
-
-songIndex=songs.length-1;
-
-}
-
-loadSong();
-
-}
-
-
-function toggleVideo(){
-
-frame.contentWindow.postMessage(
-
-JSON.stringify({
-
-event:"command",
-
-func:playing ? "pauseVideo" : "playVideo",
-
-args:[]
-
-}),
-
-"*"
-
-);
-
-
-playing=!playing;
-
-playBtn.innerText=
-
-playing ? "❚❚" : "▶";
-
-}
-
-
-loadSong();
-/* ===== CALENDAR ===== */
+/* ===== STRIKE SCHEDULE CALENDAR ===== */
 let currentCalendarDate = new Date();
 
 function renderCalendar(){
@@ -847,7 +478,7 @@ renderCalendar();
 /* ===== FOOTER YEAR ===== */
 const yearEl = document.querySelector(".foot-line");
 if(yearEl){
-  yearEl.innerHTML = "© " + new Date().getFullYear() + " Pixel Glow · All Rights Reserved";
+  yearEl.innerHTML = "© " + new Date().getFullYear() + " Opening Assassin · All Rights Reserved";
 }
 </script>
 
