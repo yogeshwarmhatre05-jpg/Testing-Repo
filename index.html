@@ -140,46 +140,6 @@ body{
 .feat h3{font-family:'Cinzel',serif;font-size:11px;color:var(--ivory);margin-bottom:3px;}
 .feat p{font-size:8.5px;color:var(--dim);line-height:1.4;}
 
-/* ===== MUSIC LOUNGE ===== */
-.music-player{
-  background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;
-}
-.music-screen{
-  width:100%;height:120px;border-radius:10px;overflow:hidden;position:relative;
-  border:2px solid var(--gold);
-  background:
-    linear-gradient(135deg, rgba(63,174,111,.35), rgba(212,175,55,.25)),
-    repeating-linear-gradient(45deg, rgba(255,255,255,.04) 0 6px, transparent 6px 12px),
-    #0c1310;
-  margin-bottom:10px;
-}
-.music-screen video{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1;}
-.music-screen .vfallback{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:3px;z-index:0;
-}
-.music-screen .vfallback span{
-  width:4px;background:rgba(239,231,210,.35);border-radius:2px;
-  animation:eq 1.1s ease-in-out infinite;
-}
-.music-screen .vfallback span:nth-child(1){height:14px;animation-delay:0s;}
-.music-screen .vfallback span:nth-child(2){height:28px;animation-delay:.15s;}
-.music-screen .vfallback span:nth-child(3){height:20px;animation-delay:.3s;}
-.music-screen .vfallback span:nth-child(4){height:34px;animation-delay:.45s;}
-.music-screen .vfallback span:nth-child(5){height:18px;animation-delay:.6s;}
-@keyframes eq{0%,100%{transform:scaleY(.4);}50%{transform:scaleY(1);}}
-.song-info{text-align:center;margin-bottom:9px;}
-.song-info h4{font-family:'Cinzel',serif;font-size:12px;color:var(--ivory);}
-.song-info p{font-size:8.5px;color:var(--dim);margin-top:2px;}
-.music-controls{display:flex;justify-content:center;gap:10px;}
-.music-controls button{
-  width:32px;height:32px;border-radius:50%;border:1px solid var(--line);
-  background:rgba(255,255,255,.03);color:var(--gold2);font-size:12px;cursor:pointer;
-}
-.music-controls button.play{
-  width:38px;height:38px;background:linear-gradient(135deg,var(--green),var(--green2));
-  color:#fff;border:none;font-size:13px;
-}
-
 /* ===== CALENDAR ===== */
 .cal-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;}
 .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
@@ -290,29 +250,6 @@ body{
     </div>
   </section>
 
-  <!-- MUSIC LOUNGE -->
-  <section class="section" id="music">
-    <div class="section-eyebrow">🎧 RELAX ZONE</div>
-    <div class="section-title">Music Lounge</div>
-    <div class="music-player">
-      <div class="music-screen">
-        <video id="musicVideo" loop muted playsinline>
-          <source src="music.mp4" type="video/mp4">
-        </video>
-        <div class="vfallback"><span></span><span></span><span></span><span></span><span></span></div>
-      </div>
-      <div class="song-info">
-        <h4>♫ Chess Focus</h4>
-        <p>Strategic thinking atmosphere</p>
-      </div>
-      <div class="music-controls">
-        <button id="musicPrev">⏮</button>
-        <button id="musicPlay" class="play">▶</button>
-        <button id="musicNext">⏭</button>
-      </div>
-    </div>
-  </section>
-
   <!-- CALENDAR -->
   <section class="section" id="calendar">
     <div class="section-eyebrow">♜ TOURNAMENT PLANNER</div>
@@ -399,34 +336,6 @@ boardLayout.forEach((row,r)=>{
     heroBoard.appendChild(sq);
   });
 });
-
-/* ===== MUSIC CONTROLS ===== */
-const musicVideo = document.getElementById('musicVideo');
-const playBtn = document.getElementById('musicPlay');
-const prevBtn = document.getElementById('musicPrev');
-const nextBtn = document.getElementById('musicNext');
-
-if(playBtn){
-  playBtn.addEventListener('click', ()=>{
-    if(musicVideo.paused){
-      musicVideo.play().catch(()=>{});
-      playBtn.innerHTML = '⏸';
-    } else {
-      musicVideo.pause();
-      playBtn.innerHTML = '▶';
-    }
-  });
-}
-if(prevBtn){
-  prevBtn.addEventListener('click', ()=>{ musicVideo.currentTime = 0; });
-}
-if(nextBtn){
-  nextBtn.addEventListener('click', ()=>{
-    musicVideo.currentTime = 0;
-    musicVideo.play().catch(()=>{});
-    playBtn.innerHTML = '⏸';
-  });
-}
 
 /* ===== CALENDAR ===== */
 let currentCalendarDate = new Date();
