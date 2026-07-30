@@ -1,357 +1,420 @@
-/* Part 3C Animation CSS */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
+body{
+font-family:'Poppins',sans-serif;
+background:#eef5ef;
+color:#20322e;
+padding:8px;
+overflow-x:hidden;
+}
 
-.hidden{
-
-opacity:0;
-
-transform:translateY(30px);
-
-transition:.8s;
-
+.bg-pattern,
+.bg-glow{
+display:none;
 }
 
 
-.show{
-
-opacity:1;
-
-transform:translateY(0);
-
+.navbar{
+display:none;
 }
 
 
-
-.floating-piece{
-
-position:fixed;
-
-bottom:-40px;
-
-font-size:35px;
-
-color:rgba(46,139,87,.15);
-
-z-index:-1;
-
-animation:risePiece linear forwards;
-
-pointer-events:none;
-
+.hero{
+width:325px;
+max-width:100%;
+margin:auto;
+padding:18px;
+border-radius:25px;
+background:white;
+box-shadow:0 8px 25px #0001;
+text-align:center;
 }
 
 
-
-@keyframes risePiece{
-
-
-to{
-
-transform:
-translateY(-110vh)
-rotate(360deg);
-
-opacity:0;
-
-}
-
+.hero-left h1{
+font-family:'Cinzel',serif;
+font-size:28px;
+margin:10px 0;
 }
 
 
-
-.ripple{
-
-position:absolute;
-
-width:20px;
-
-height:20px;
-
-background:
-rgba(255,255,255,.5);
-
-border-radius:50%;
-
-transform:scale(0);
-
-animation:ripple .6s;
-
+.hero-left p{
+font-size:11px;
+line-height:1.6;
+color:#666;
 }
 
 
-
-@keyframes ripple{
-
-to{
-
-transform:scale(8);
-
-opacity:0;
-
+.hero-badge{
+font-size:10px;
+background:#e8f5ed;
+padding:8px;
+border-radius:20px;
+display:inline-block;
 }
 
-}/* ==========================================
-   PART 3B
-   PARTNERS + FOOTER
-========================================== */
+
+.hero-buttons{
+margin-top:15px;
+}
 
 
-/* PARTNERS */
+.btn{
+padding:8px 14px;
+font-size:11px;
+border-radius:15px;
+text-decoration:none;
+}
 
 
-.partners-section{
+.primary{
+background:#2e8b57;
+color:white;
+}
 
-width:min(1150px,92%);
 
-margin:50px auto;
+.secondary{
+border:1px solid #2e8b57;
+color:#2e8b57;
+}
 
-padding:35px;
 
-background:rgba(255,255,255,.82);
+.video-box{
+width:120px;
+height:120px;
+margin:15px auto;
+border-radius:20px;
+overflow:hidden;
+border:3px solid #d4af37;
+}
 
-backdrop-filter:blur(18px);
 
-border-radius:30px;
+.video-box video{
+width:100%;
+height:100%;
+object-fit:cover;
+}
 
-box-shadow:var(--shadow);
 
+.rating-card{
+padding:10px;
+border-radius:15px;
+background:#f7faf7;
+}
+
+
+.rating-value{
+font-size:25px;
+font-weight:bold;
+color:#2e8b57;
 }
 
 
 
-.partner-grid{
+/* COMMON SECTIONS */
+
+
+.stats,
+.features-section,
+.calendar-section,
+.competition-section,
+.music-section,
+.partners-section,
+.quote{
+
+width:325px;
+max-width:100%;
+margin:10px auto;
+padding:14px;
+border-radius:20px;
+background:white;
+box-shadow:0 5px 18px #0001;
+
+}
+
+
+
+.stats{
 
 display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:5px;
 
-grid-template-columns:
-repeat(3,1fr);
+}
 
-gap:20px;
+
+.card{
+
+padding:8px 3px;
+text-align:center;
+background:#f7faf7;
+border-radius:12px;
+
+}
+
+
+.card h2{
+
+font-size:16px;
+color:#2e8b57;
+
+}
+
+
+.card p{
+
+font-size:8px;
 
 }
 
 
 
-.partner-card{
-
-display:flex;
-
-align-items:center;
-
-gap:18px;
-
-padding:22px;
-
-background:white;
-
-border-radius:22px;
-
-border:1px solid rgba(0,0,0,.05);
-
-transition:.35s;
-
-}
-
-
-
-.partner-card:hover{
-
-transform:translateY(-7px);
-
-box-shadow:
-0 18px 35px rgba(0,0,0,.12);
-
-}
-
-
-
-.partner-logo{
-
-width:65px;
-
-height:65px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-border-radius:20px;
-
-background:
-linear-gradient(
-135deg,
-#edf8f1,
-#fff5d6
-);
-
-font-size:32px;
-
-color:var(--gold);
-
-}
-
-
-
-.partner-card h3{
-
-font-family:'Cinzel',serif;
-
-font-size:17px;
-
-margin-bottom:6px;
-
-}
-
-
-
-.partner-card p{
-
-font-size:13px;
-
-color:#666;
-
-}
-
-
-
-/* FOOTER */
-
-
-.main-footer{
-
-margin-top:80px;
-
-padding:45px 20px;
+.section-title{
 
 text-align:center;
-
-background:
-linear-gradient(
-180deg,
-transparent,
-rgba(255,255,255,.7)
-);
+margin-bottom:12px;
 
 }
 
 
+.section-title h2{
 
-.footer-piece{
-
-font-size:28px;
-
-letter-spacing:10px;
-
-color:var(--gold);
-
-margin-bottom:20px;
-
-opacity:.8;
-
-}
-
-
-
-.main-footer h3{
-
+font-size:20px;
 font-family:'Cinzel',serif;
 
-font-size:24px;
-
-color:var(--dark);
-
 }
 
 
+.section-title p{
 
-.main-footer p{
-
-margin-top:10px;
-
-color:#666;
-
-font-size:14px;
-
-}
-
-
-
-.footer-line{
-
-margin-top:25px;
-
-padding-top:20px;
-
-border-top:1px solid rgba(0,0,0,.1);
-
-font-size:12px;
-
+font-size:10px;
 color:#777;
 
 }
 
 
 
-/* MOBILE */
+/* FEATURES */
 
 
-@media(max-width:900px){
+.feature-grid{
 
-.partner-grid{
-
-grid-template-columns:1fr;
-
-}
-
-}/* ==========================================
-   PART 3A
-   MUSIC LOUNGE
-========================================== */
-
-
-.music-section{
-
-width:min(1150px,92%);
-
-margin:50px auto;
-
-padding:35px;
-
-background:rgba(255,255,255,.82);
-
-backdrop-filter:blur(18px);
-
-border-radius:30px;
-
-box-shadow:var(--shadow);
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
 
 }
 
 
-.music-player{
+.feature-card{
 
-background:white;
-
-padding:25px;
-
-border-radius:25px;
+padding:10px;
+border-radius:15px;
+background:#f8faf8;
+text-align:center;
 
 }
+
+
+.feature-icon{
+
+font-size:22px;
+
+}
+
+
+.feature-card h3{
+
+font-size:12px;
+
+}
+
+
+.feature-card p{
+
+font-size:9px;
+
+}
+
+
+
+
+/* CALENDAR */
+
+
+.calendar-box{
+
+padding:8px;
+
+}
+
+
+.calendar-header{
+
+display:flex;
+justify-content:space-between;
+font-size:12px;
+
+}
+
+
+.calendar-header button{
+
+border:0;
+background:#2e8b57;
+color:white;
+border-radius:10px;
+padding:5px;
+
+}
+
+
+.weekdays,
+.calendar-grid{
+
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:4px;
+
+}
+
+
+.weekdays div,
+.calendar-grid div{
+
+font-size:9px;
+text-align:center;
+padding:5px;
+
+}
+
+
+
+
+
+/* EVENTS */
+
+
+.event-list{
+
+display:flex;
+flex-direction:column;
+gap:8px;
+
+}
+
+
+.event-card{
+
+padding:10px;
+display:flex;
+gap:8px;
+align-items:center;
+background:#f8faf8;
+border-radius:15px;
+
+}
+
+
+.event-icon{
+
+font-size:20px;
+
+}
+
+
+.event-card h3{
+
+font-size:11px;
+
+}
+
+
+.event-card p{
+
+font-size:9px;
+
+}
+
+
+.badge{
+
+font-size:8px;
+padding:4px 8px;
+border-radius:15px;
+background:#dff3e7;
+
+}
+
+
+
+
+/* LEADERBOARD */
+
+
+.leaderboard-box{
+
+margin-top:12px;
+
+}
+
+
+.player-row{
+
+display:flex;
+align-items:center;
+padding:10px;
+margin:6px 0;
+background:#f8faf8;
+border-radius:12px;
+
+}
+
+
+.rank{
+
+font-size:18px;
+
+}
+
+
+.player-info h3{
+
+font-size:11px;
+
+}
+
+
+.player-info p{
+
+font-size:9px;
+
+}
+
+
+.rating{
+
+margin-left:auto;
+font-weight:bold;
+color:#2e8b57;
+
+}
+
+
+
+/* MUSIC */
 
 
 .music-screen{
 
-height:260px;
-
-border-radius:22px;
-
+height:120px;
+border-radius:15px;
 overflow:hidden;
-
-background:#111;
-
-border:3px solid var(--gold);
+background:black;
 
 }
 
@@ -359,1929 +422,83 @@ border:3px solid var(--gold);
 .music-screen video{
 
 width:100%;
-
 height:100%;
-
 object-fit:cover;
-
-}
-
-
-
-.song-info{
-
-text-align:center;
-
-padding:20px;
-
-}
-
-
-.song-info h3{
-
-font-family:'Cinzel',serif;
-
-font-size:22px;
-
-}
-
-
-
-.song-info p{
-
-color:#666;
-
-font-size:14px;
-
-}
-
-
-
-.music-controls{
-
-display:flex;
-
-justify-content:center;
-
-gap:15px;
 
 }
 
 
 .music-controls button{
 
-width:50px;
-
-height:50px;
-
-border:none;
-
+width:35px;
+height:35px;
+border:0;
 border-radius:50%;
-
-background:var(--dark);
-
+background:#2e8b57;
 color:white;
 
-font-size:18px;
-
-cursor:pointer;
-
-transition:.3s;
-
 }
 
 
-.music-controls button:hover{
 
-background:var(--green);
-
-transform:translateY(-4px);
-
-}
+/* PARTNERS */
 
 
-@media(max-width:600px){
-
-.music-screen{
-
-height:180px;
-
-}
-
-}/* ==========================================
-   PART 2C
-   EVENTS + LEADERBOARD
-========================================== */
-
-
-.competition-section{
-
-width:min(1150px,92%);
-
-margin:50px auto;
-
-padding:35px;
-
-background:rgba(255,255,255,.82);
-
-backdrop-filter:blur(18px);
-
-border-radius:30px;
-
-box-shadow:var(--shadow);
-
-}
-
-
-/* Events */
-
-
-.event-list{
+.partner-grid{
 
 display:flex;
-
 flex-direction:column;
-
-gap:18px;
-
-margin-bottom:45px;
+gap:8px;
 
 }
 
 
-.event-card{
+.partner-card{
 
+padding:10px;
 display:flex;
-
-align-items:center;
-
-gap:20px;
-
-padding:22px;
-
-background:white;
-
-border-radius:22px;
-
-border:1px solid rgba(0,0,0,.05);
-
-transition:.35s;
-
-}
-
-
-.event-card:hover{
-
-transform:translateX(8px);
-
-box-shadow:
-0 15px 30px rgba(0,0,0,.1);
-
-}
-
-
-.event-icon{
-
-width:60px;
-
-height:60px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-border-radius:18px;
-
-background:#edf8f1;
-
-font-size:30px;
-
-color:var(--green);
-
-}
-
-
-.event-card h3{
-
-font-family:'Cinzel',serif;
-
-font-size:18px;
-
-margin-bottom:6px;
-
-}
-
-
-.event-card p{
-
-font-size:13px;
-
-color:#666;
-
-}
-
-
-
-.badge{
-
-margin-left:auto;
-
-padding:7px 15px;
-
-border-radius:30px;
-
-background:#e7f7ed;
-
-color:var(--green);
-
-font-size:12px;
-
-font-weight:700;
-
-}
-
-
-.badge.gold{
-
-background:#fff5d6;
-
-color:#a27b00;
-
-}
-
-
-
-/* Leaderboard */
-
-
-.leaderboard-box{
-
-background:white;
-
-border-radius:28px;
-
-padding:30px;
-
-}
-
-
-
-.leader-title{
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-gap:12px;
-
-margin-bottom:25px;
-
-}
-
-
-.leader-title span{
-
-font-size:35px;
-
-}
-
-
-.leader-title h2{
-
-font-family:'Cinzel',serif;
-
-}
-
-
-
-/* Player */
-
-
-.player-row{
-
-display:flex;
-
-align-items:center;
-
-gap:20px;
-
-padding:18px;
-
-margin-bottom:14px;
-
+gap:10px;
 background:#f8faf8;
-
-border-radius:18px;
-
-transition:.3s;
+border-radius:15px;
 
 }
 
 
+.partner-logo{
 
-.player-row:hover{
-
-transform:translateY(-4px);
-
-}
-
-
-.player-row.first{
-
-border:2px solid var(--gold);
-
-background:#fffdf5;
+font-size:25px;
 
 }
 
 
-
-.rank{
-
-font-size:30px;
-
-}
-
-
-
-.player-info{
-
-flex:1;
-
-}
-
-
-.player-info h3{
-
-font-size:16px;
-
-}
-
-
-.player-info p{
+.partner-card h3{
 
 font-size:12px;
 
-color:#777;
+}
+
+
+.partner-card p{
+
+font-size:9px;
 
 }
 
 
 
-.rating{
 
-font-family:'Cinzel',serif;
+.main-footer{
 
-font-size:22px;
-
-font-weight:700;
-
-color:var(--green);
-
-}
-
-
-
-/* Mobile */
-
-
-@media(max-width:600px){
-
-.competition-section{
-
-padding:25px 15px;
-
-}
-
-
-.event-card{
-
-flex-wrap:wrap;
-
-}
-
-
-.badge{
-
-margin-left:0;
-
-}
-
-
-.player-row{
-
-gap:12px;
-
-}
-
-
-.rating{
-
-font-size:18px;
-
-}
-
-}/* ==========================================
-   PART 2B
-   CHESS CALENDAR
-========================================== */
-
-
-.calendar-section{
-
-    width:min(1150px,92%);
-
-    margin:50px auto;
-
-    padding:35px;
-
-    background:rgba(255,255,255,.82);
-
-    backdrop-filter:blur(18px);
-
-    border-radius:30px;
-
-    box-shadow:var(--shadow);
-
-}
-
-
-
-.calendar-box{
-
-    background:white;
-
-    padding:25px;
-
-    border-radius:25px;
-
-}
-
-
-
-/* Header */
-
-
-.calendar-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:25px;
-
-}
-
-
-
-.calendar-header h3{
-
-    font-family:'Cinzel',serif;
-
-    font-size:22px;
-
-}
-
-
-
-.calendar-header button{
-
-    width:42px;
-
-    height:42px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:var(--dark);
-
-    color:white;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-
-.calendar-header button:hover{
-
-    background:var(--green);
-
-}
-
-
-
-/* Week */
-
-
-.weekdays,
-.calendar-grid{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(7,1fr);
-
-    gap:10px;
-
-}
-
-
-
-.weekdays div{
-
-    text-align:center;
-
-    font-size:12px;
-
-    font-weight:600;
-
-    color:var(--green);
-
-}
-
-
-
-/* Days */
-
-
-.calendar-day{
-
-    aspect-ratio:1;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    border-radius:14px;
-
-    background:#f5f7f5;
-
-    font-size:14px;
-
-    transition:.3s;
-
-    cursor:pointer;
-
-}
-
-
-.calendar-day:hover{
-
-    background:#edf8f1;
-
-    transform:translateY(-3px);
-
-}
-
-
-
-.empty-day{
-
-    background:transparent;
-
-}
-
-
-
-/* Today */
-
-
-.today{
-
-    background:
-    linear-gradient(
-    135deg,
-    var(--green),
-    var(--green2)
-    );
-
-    color:white;
-
-    font-weight:700;
-
-}
-
-
-
-/* Event Mark */
-
-
-.event-day{
-
-    border:2px solid var(--gold);
-
-}
-
-
-
-/* Mobile */
-
-
-@media(max-width:600px){
-
-.calendar-section{
-
-padding:25px 15px;
-
-}
-
-
-.calendar-box{
-
+text-align:center;
+font-size:10px;
 padding:15px;
 
 }
 
 
-.weekdays,
-.calendar-grid{
+.footer-piece{
 
-gap:5px;
-
-}
-
-
-.calendar-day{
-
-font-size:11px;
-
-}
-
-}/* ==========================================
-   PART 2A
-   FEATURES SECTION
-========================================== */
-
-
-.features-section{
-
-    width:min(1150px,92%);
-
-    margin:50px auto;
-
-    padding:35px;
-
-    background:rgba(255,255,255,.82);
-
-    backdrop-filter:blur(18px);
-
-    border-radius:30px;
-
-    box-shadow:var(--shadow);
-
-}
-
-
-/* Title */
-
-
-.section-title{
-
-    text-align:center;
-
-    margin-bottom:35px;
-
-}
-
-
-.section-title span{
-
-    color:var(--green);
-
-    font-weight:600;
-
-    font-size:14px;
-
-}
-
-
-.section-title h2{
-
-    margin-top:10px;
-
-    font-family:'Cinzel',serif;
-
-    font-size:36px;
-
-    color:var(--dark);
-
-}
-
-
-.section-title p{
-
-    margin-top:12px;
-
-    color:#666;
-
-    font-size:15px;
-
-}
-
-
-/* Grid */
-
-
-.feature-grid{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(4,1fr);
-
-    gap:20px;
-
-}
-
-
-
-/* Card */
-
-
-.feature-card{
-
-    background:white;
-
-    padding:28px 20px;
-
-    text-align:center;
-
-    border-radius:24px;
-
-    border:1px solid rgba(0,0,0,.06);
-
-    transition:.35s;
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-
-.feature-card::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:0;
-
-    width:100%;
-
-    height:3px;
-
-    background:
-    linear-gradient(
-    90deg,
-    var(--green),
-    var(--gold)
-    );
-
-}
-
-
-.feature-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:
-    0 18px 35px rgba(0,0,0,.12);
-
-}
-
-
-
-/* Icon */
-
-
-.feature-icon{
-
-    width:65px;
-
-    height:65px;
-
-    margin:auto;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:#eef8f1;
-
-    color:var(--green);
-
-    font-size:32px;
-
-    margin-bottom:18px;
-
-}
-
-
-
-/* Text */
-
-
-.feature-card h3{
-
-    font-family:'Cinzel',serif;
-
-    font-size:18px;
-
-    margin-bottom:10px;
-
-}
-
-
-.feature-card p{
-
-    color:#666;
-
-    font-size:13px;
-
-    line-height:1.7;
-
-}
-
-
-
-/* Mobile */
-
-
-@media(max-width:900px){
-
-.feature-grid{
-
-grid-template-columns:
-repeat(2,1fr);
-
-}
-
-}
-
-
-@media(max-width:600px){
-
-.features-section{
-
-padding:25px 18px;
-
-}
-
-
-.feature-grid{
-
-grid-template-columns:1fr;
-
-}
-
-
-.section-title h2{
-
-font-size:28px;
-
-}
-
-}/* ===========================================
-   PIXEL GLOW CHESS CLUB
-   PART 1B-1
-   =========================================== */
-
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
-
-/* Reset */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-
-    font-family:'Poppins',sans-serif;
-
-    background:#eef4f0;
-
-    color:#202020;
-
-    overflow-x:hidden;
-
-}
-
-/* ==========================
-        COLORS
-========================== */
-
-:root{
-
-    --bg:#eef4f0;
-
-    --card:#ffffff;
-
-    --card2:#f8faf8;
-
-    --dark:#1d1d1d;
-
-    --text:#555;
-
-    --green:#2E8B57;
-
-    --green2:#5ab87b;
-
-    --gold:#D4AF37;
-
-    --gold2:#f0cf6d;
-
-    --shadow:
-    0 15px 35px rgba(0,0,0,.08);
-
-}
-
-/* ==========================
-        BACKGROUND
-========================== */
-
-body::before{
-
-content:"";
-
-position:fixed;
-
-inset:0;
-
-background:
-
-linear-gradient(
-45deg,
-rgba(0,0,0,.025) 25%,
-transparent 25%),
-
-linear-gradient(
--45deg,
-rgba(0,0,0,.025) 25%,
-transparent 25%),
-
-linear-gradient(
-45deg,
-transparent 75%,
-rgba(0,0,0,.025) 75%),
-
-linear-gradient(
--45deg,
-transparent 75%,
-rgba(0,0,0,.025) 75%);
-
-background-size:70px 70px;
-
-opacity:.35;
-
-pointer-events:none;
-
-z-index:-3;
-
-}
-
-/* Emerald Glow */
-
-.bg-glow{
-
-position:fixed;
-
-width:280px;
-
-height:280px;
-
-border-radius:50%;
-
-filter:blur(120px);
-
-z-index:-2;
-
-animation:floatGlow 10s ease-in-out infinite alternate;
-
-}
-
-.glow1{
-
-left:-100px;
-
-top:-100px;
-
-background:#9ed9b3;
-
-}
-
-.glow2{
-
-right:-120px;
-
-bottom:-120px;
-
-background:#ffe6a7;
-
-}
-
-@keyframes floatGlow{
-
-100%{
-
-transform:
-translateY(25px)
-translateX(20px);
-
-}
-
-}
-
-/* ==========================
-        NAVBAR
-========================== */
-
-.navbar{
-
-width:min(1150px,92%);
-
-margin:25px auto;
-
-padding:16px 30px;
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-background:rgba(255,255,255,.75);
-
-backdrop-filter:blur(18px);
-
-border-radius:18px;
-
-box-shadow:var(--shadow);
-
-border:1px solid rgba(255,255,255,.6);
-
-}
-
-.logo{
-
-font-family:'Cinzel',serif;
-
-font-size:28px;
-
-font-weight:700;
-
-color:var(--green);
-
-letter-spacing:2px;
-
-}
-
-.nav-links{
-
-display:flex;
-
-gap:28px;
-
-}
-
-.nav-links a{
-
-text-decoration:none;
-
-font-size:15px;
-
-font-weight:500;
-
-color:#444;
-
-transition:.3s;
-
-position:relative;
-
-}
-
-.nav-links a:hover{
-
-color:var(--green);
-
-}
-
-.nav-links a::after{
-
-content:"";
-
-position:absolute;
-
-left:0;
-
-bottom:-6px;
-
-width:0;
-
-height:2px;
-
-background:var(--gold);
-
-transition:.35s;
-
-}
-
-.nav-links a:hover::after{
-
-width:100%;
-
-}
-
-/* ==========================
-        HERO
-========================== */
-
-.hero{
-
-width:min(1150px,92%);
-
-margin:35px auto;
-
-padding:60px;
-
-display:grid;
-
-grid-template-columns:1fr 380px;
-
-gap:40px;
-
-background:rgba(255,255,255,.78);
-
-backdrop-filter:blur(18px);
-
-border-radius:35px;
-
-box-shadow:var(--shadow);
-
-position:relative;
-
-overflow:hidden;
-
-}
-
-/* Giant King */
-
-.hero::after{
-
-content:"♔";
-
-position:absolute;
-
-right:30px;
-
-bottom:-20px;
-
-font-size:220px;
-
-opacity:.05;
-
-color:black;
-
-pointer-events:none;
-
-}
-
-.hero-left{
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:center;
-
-}
-
-.hero-badge{
-
-display:inline-block;
-
-padding:8px 18px;
-
-background:#edf8f1;
-
-border:1px solid #d9e9dd;
-
-border-radius:40px;
-
-font-size:13px;
-
-font-weight:600;
-
-color:var(--green);
-
-margin-bottom:22px;
-
-width:max-content;
-
-}
-
-.hero h1{
-
-font-family:'Cinzel',serif;
-
-font-size:64px;
-
-line-height:1.1;
-
-letter-spacing:3px;
-
-margin-bottom:20px;
-
-color:var(--dark);
-
-}
-
-.hero p{
-
-font-size:17px;
-
-line-height:1.9;
-
-color:#666;
-
-max-width:580px;
-
-margin-bottom:35px;
-
-}
-
-/* ==========================
-        VIDEO
-========================== */
-
-.hero-right{
-
-display:flex;
-
-flex-direction:column;
-
-gap:25px;
-
-align-items:center;
-
-justify-content:center;
-
-}
-
-.video-box{
-
-width:240px;
-
-height:240px;
-
-border-radius:26px;
-
-overflow:hidden;
-
-background:black;
-
-border:4px solid var(--gold);
-
-box-shadow:
-0 15px 35px rgba(0,0,0,.18);
-
-transition:.35s;
-
-}
-
-.video-box:hover{
-
-transform:translateY(-6px);
-
-}
-
-.video-box video{
-
-width:100%;
-
-height:100%;
-
-object-fit:cover;
-
-display:block;
-
-}
-/* ===========================================
-   PART 1B-2
-   Buttons • Rating Card • Stats • Quote
-   =========================================== */
-
-/* HERO BUTTONS */
-
-.hero-buttons{
-    display:flex;
-    gap:18px;
-    flex-wrap:wrap;
-}
-
-.btn{
-    text-decoration:none;
-    padding:14px 28px;
-    border-radius:16px;
-    font-weight:600;
-    transition:.35s;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.primary{
-    background:linear-gradient(135deg,var(--green),var(--green2));
-    color:#fff;
-    box-shadow:0 12px 25px rgba(46,139,87,.25);
-}
-
-.primary:hover{
-    transform:translateY(-4px);
-    box-shadow:0 18px 35px rgba(46,139,87,.35);
-}
-
-.secondary{
-    background:#fff;
-    color:var(--dark);
-    border:2px solid var(--gold);
-}
-
-.secondary:hover{
-    background:var(--gold);
-    color:#222;
-    transform:translateY(-4px);
-}
-
-/* RATING CARD */
-
-.rating-card{
-
-    width:240px;
-
-    background:rgba(255,255,255,.92);
-
-    border-radius:22px;
-
-    padding:22px;
-
-    text-align:center;
-
-    border:2px solid rgba(212,175,55,.35);
-
-    box-shadow:var(--shadow);
-
-}
-
-.rating-title{
-
-    font-size:14px;
-
-    color:var(--green);
-
-    font-weight:600;
-
-    margin-bottom:10px;
-
-}
-
-.rating-value{
-
-    font-size:42px;
-
-    font-weight:700;
-
-    font-family:'Cinzel',serif;
-
-    color:var(--gold);
-
-    margin-bottom:8px;
-
-}
-
-.rating-card p{
-
-    font-size:13px;
-
-    color:#666;
-
-}
-
-/* STATS */
-
-.stats{
-
-    width:min(1150px,92%);
-
-    margin:35px auto;
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:20px;
-
-}
-
-.card{
-
-    background:#fff;
-
-    border-radius:22px;
-
-    padding:28px 20px;
-
-    text-align:center;
-
-    box-shadow:var(--shadow);
-
-    transition:.35s;
-
-}
-
-.card:hover{
-
-    transform:translateY(-6px);
-
-}
-
-.card h2{
-
-    font-size:34px;
-
-    color:var(--green);
-
-    margin-bottom:8px;
-
-    font-family:'Cinzel',serif;
-
-}
-
-.card p{
-
-    color:#666;
-
-    font-size:14px;
-
-}
-
-/* QUOTE */
-
-.quote{
-
-    width:min(900px,92%);
-
-    margin:40px auto;
-
-    padding:28px;
-
-    text-align:center;
-
-    background:rgba(255,255,255,.85);
-
-    border-radius:24px;
-
-    box-shadow:var(--shadow);
-
-    border-left:6px solid var(--gold);
-
-}
-
-.quote p{
-
-    font-size:18px;
-
-    font-style:italic;
-
-    color:#555;
-
-    line-height:1.8;
-
-}
-
-/* FOOTER */
-
-footer{
-
-    margin-top:60px;
-
-    padding:30px;
-
-    text-align:center;
-
-    color:#666;
-
-    font-size:14px;
-
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-.hero{
-
-grid-template-columns:1fr;
-
-padding:40px 25px;
-
-text-align:center;
-
-}
-
-.hero-left{
-
-align-items:center;
-
-}
-
-.hero h1{
-
-font-size:46px;
-
-}
-
-.hero p{
-
-max-width:100%;
-
-}
-
-.stats{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-.navbar{
-
-flex-direction:column;
-
-gap:18px;
-
-}
-
-.nav-links{
-
-flex-wrap:wrap;
-
-justify-content:center;
-
-}
-
-}
-
-@media(max-width:600px){
-
-.hero{
-
-padding:30px 20px;
-
-}
-
-.hero h1{
-
-font-size:36px;
-
-}
-
-.video-box{
-
-width:180px;
-
-height:180px;
-
-}
-
-.rating-card{
-
-width:180px;
-
-}
-
-.stats{
-
-grid-template-columns:1fr;
-
-}
-
-.btn{
-
-width:100%;
-
-}
-
-.hero-buttons{
-
-width:100%;
-
-flex-direction:column;
-
-}
-
-}
-/* ===========================================
-   PART 1B-3
-   Animations • Chess Decorations • Finishing Touches
-=========================================== */
-
-/* Smooth fade */
-
-.hero,
-.card,
-.quote,
-.navbar{
-    animation:fadeUp .8s ease both;
-}
-
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* Floating hero */
-
-.hero{
-    animation:
-        heroFloat 6s ease-in-out infinite,
-        fadeUp .8s ease;
-}
-
-@keyframes heroFloat{
-    50%{
-        transform:translateY(-5px);
-    }
-}
-
-/* Button shine */
-
-.btn{
-    position:relative;
-    overflow:hidden;
-}
-
-.btn::before{
-
-content:"";
-
-position:absolute;
-
-top:0;
-left:-120%;
-
-width:60%;
-height:100%;
-
-background:
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.45),
-transparent);
-
-transform:skewX(-20deg);
-
-transition:.7s;
-
-}
-
-.btn:hover::before{
-    left:140%;
-}
-
-/* Card border */
-
-.card,
-.quote,
-.rating-card{
-
-position:relative;
-
-overflow:hidden;
-
-}
-
-.card::after,
-.quote::after,
-.rating-card::after{
-
-content:"";
-
-position:absolute;
-
-left:0;
-top:0;
-
-width:100%;
-height:2px;
-
-background:
-linear-gradient(
-90deg,
-transparent,
-var(--gold),
-transparent);
-
-opacity:.6;
-
-}
-
-/* Scrollbar */
-
-::-webkit-scrollbar{
-    width:10px;
-}
-
-::-webkit-scrollbar-track{
-    background:#edf3ef;
-}
-
-::-webkit-scrollbar-thumb{
-    background:linear-gradient(
-        var(--green),
-        var(--gold)
-    );
-    border-radius:20px;
-}
-
-/* Text Selection */
-
-::selection{
-    background:var(--green);
-    color:white;
-}
-
-/* Video Glow */
-
-.video-box{
-
-animation:videoGlow 3s ease-in-out infinite alternate;
-
-}
-
-@keyframes videoGlow{
-
-100%{
-
-box-shadow:
-0 0 18px rgba(212,175,55,.45),
-0 18px 35px rgba(0,0,0,.18);
-
-}
-
-}
-
-/* Chess Corner Pieces */
-
-.hero::before{
-
-content:"♞";
-
-position:absolute;
-
-left:25px;
-
-top:25px;
-
-font-size:34px;
-
-color:rgba(46,139,87,.18);
-
-}
-
-/* Navbar Blur */
-
-.navbar{
-
-backdrop-filter:blur(20px);
-
-}
-
-/* Image & Video Smooth */
-
-img,
-video{
-
-display:block;
-
-max-width:100%;
-
-}
-
-/* Links */
-
-a{
-
-transition:.3s;
-
-}
-
-/* Focus */
-
-button:focus,
-a:focus{
-
-outline:2px solid var(--gold);
-
-outline-offset:4px;
-
-}
-
-/* Premium Divider */
-
-.divider{
-
-width:120px;
-
-height:4px;
-
-margin:30px auto;
-
-border-radius:20px;
-
-background:
-linear-gradient(
-90deg,
-var(--green),
-var(--gold)
-);
-
-}
-
-/* Loading Animation */
-
-body{
-
-animation:pageLoad .6s ease;
-
-}
-
-@keyframes pageLoad{
-
-from{
-
-opacity:0;
-
-transform:scale(.99);
-
-}
-
-to{
-
-opacity:1;
-
-transform:scale(1);
-
-}
-}
-
-/* Hover Lift */
-
-.card,
-.rating-card,
-.quote,
-.video-box{
-
-transition:
-transform .35s,
-box-shadow .35s;
-
-}
-
-.card:hover,
-.rating-card:hover,
-.quote:hover,
-.video-box:hover{
-
-transform:translateY(-6px);
-
-box-shadow:
-0 20px 45px rgba(0,0,0,.12);
-
-}
-
-/* Footer */
-
-footer{
-
-border-top:1px solid rgba(0,0,0,.08);
-
-margin-top:80px;
-
-padding-top:35px;
-
-padding-bottom:40px;
-
-background:transparent;
+font-size:20px;
+color:#d4af37;
 
 }
