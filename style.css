@@ -1,4 +1,147 @@
 /* ==========================================
+   PART 3A
+   MUSIC LOUNGE
+========================================== */
+
+
+.music-section{
+
+width:min(1150px,92%);
+
+margin:50px auto;
+
+padding:35px;
+
+background:rgba(255,255,255,.82);
+
+backdrop-filter:blur(18px);
+
+border-radius:30px;
+
+box-shadow:var(--shadow);
+
+}
+
+
+.music-player{
+
+background:white;
+
+padding:25px;
+
+border-radius:25px;
+
+}
+
+
+.music-screen{
+
+height:260px;
+
+border-radius:22px;
+
+overflow:hidden;
+
+background:#111;
+
+border:3px solid var(--gold);
+
+}
+
+
+.music-screen video{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+}
+
+
+
+.song-info{
+
+text-align:center;
+
+padding:20px;
+
+}
+
+
+.song-info h3{
+
+font-family:'Cinzel',serif;
+
+font-size:22px;
+
+}
+
+
+
+.song-info p{
+
+color:#666;
+
+font-size:14px;
+
+}
+
+
+
+.music-controls{
+
+display:flex;
+
+justify-content:center;
+
+gap:15px;
+
+}
+
+
+.music-controls button{
+
+width:50px;
+
+height:50px;
+
+border:none;
+
+border-radius:50%;
+
+background:var(--dark);
+
+color:white;
+
+font-size:18px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+.music-controls button:hover{
+
+background:var(--green);
+
+transform:translateY(-4px);
+
+}
+
+
+@media(max-width:600px){
+
+.music-screen{
+
+height:180px;
+
+}
+
+}/* ==========================================
    PART 2C
    EVENTS + LEADERBOARD
 ========================================== */
