@@ -566,31 +566,53 @@ const playBtn=document.getElementById("toggleBtn");
 
 function getId(url){
 
-return url.split("youtu.be/")[1];
+if(url.includes("youtu.be/")){
+
+return url.split("youtu.be/")[1].split("?")[0];
+
+}
+
+if(url.includes("youtube.com/watch?v=")){
+
+return url.split("v=")[1].split("&")[0];
+
+}
+
+return "";
 
 }
 
 
 function loadSong(){
 
+let videoID=getId(songs[songIndex].src);
+
 frame.src=
 "https://www.youtube.com/embed/"
-+getId(songs[songIndex].src)
-+"?enablejsapi=1&rel=0";
++videoID+
+"?enablejsapi=1&rel=0";
+
 
 songText.innerText=
 "Now Playing • "+songs[songIndex].name;
 
-playing=false;
 
 playBtn.innerText="▶";
+
+playing=false;
 
 }
 
 
 function nextSong(){
 
-songIndex=(songIndex+1)%songs.length;
+songIndex++;
+
+if(songIndex>=songs.length){
+
+songIndex=0;
+
+}
 
 loadSong();
 
@@ -599,7 +621,13 @@ loadSong();
 
 function prevSong(){
 
-songIndex=(songIndex-1+songs.length)%songs.length;
+songIndex--;
+
+if(songIndex<0){
+
+songIndex=songs.length-1;
+
+}
 
 loadSong();
 
@@ -614,7 +642,7 @@ JSON.stringify({
 
 event:"command",
 
-func:playing?"pauseVideo":"playVideo",
+func:playing ? "pauseVideo" : "playVideo",
 
 args:[]
 
@@ -629,7 +657,7 @@ playing=!playing;
 
 playBtn.innerText=
 
-playing?"❚❚":"▶";
+playing ? "❚❚" : "▶";
 
 }
 
