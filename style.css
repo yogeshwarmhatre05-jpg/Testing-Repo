@@ -1,0 +1,1046 @@
+/* ===========================================
+   PIXEL GLOW CHESS CLUB
+   PART 1B-1
+   =========================================== */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Reset */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:#eef4f0;
+
+    color:#202020;
+
+    overflow-x:hidden;
+
+}
+
+/* ==========================
+        COLORS
+========================== */
+
+:root{
+
+    --bg:#eef4f0;
+
+    --card:#ffffff;
+
+    --card2:#f8faf8;
+
+    --dark:#1d1d1d;
+
+    --text:#555;
+
+    --green:#2E8B57;
+
+    --green2:#5ab87b;
+
+    --gold:#D4AF37;
+
+    --gold2:#f0cf6d;
+
+    --shadow:
+    0 15px 35px rgba(0,0,0,.08);
+
+}
+
+/* ==========================
+        BACKGROUND
+========================== */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+background:
+
+linear-gradient(
+45deg,
+rgba(0,0,0,.025) 25%,
+transparent 25%),
+
+linear-gradient(
+-45deg,
+rgba(0,0,0,.025) 25%,
+transparent 25%),
+
+linear-gradient(
+45deg,
+transparent 75%,
+rgba(0,0,0,.025) 75%),
+
+linear-gradient(
+-45deg,
+transparent 75%,
+rgba(0,0,0,.025) 75%);
+
+background-size:70px 70px;
+
+opacity:.35;
+
+pointer-events:none;
+
+z-index:-3;
+
+}
+
+/* Emerald Glow */
+
+.bg-glow{
+
+position:fixed;
+
+width:280px;
+
+height:280px;
+
+border-radius:50%;
+
+filter:blur(120px);
+
+z-index:-2;
+
+animation:floatGlow 10s ease-in-out infinite alternate;
+
+}
+
+.glow1{
+
+left:-100px;
+
+top:-100px;
+
+background:#9ed9b3;
+
+}
+
+.glow2{
+
+right:-120px;
+
+bottom:-120px;
+
+background:#ffe6a7;
+
+}
+
+@keyframes floatGlow{
+
+100%{
+
+transform:
+translateY(25px)
+translateX(20px);
+
+}
+
+}
+
+/* ==========================
+        NAVBAR
+========================== */
+
+.navbar{
+
+width:min(1150px,92%);
+
+margin:25px auto;
+
+padding:16px 30px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:rgba(255,255,255,.75);
+
+backdrop-filter:blur(18px);
+
+border-radius:18px;
+
+box-shadow:var(--shadow);
+
+border:1px solid rgba(255,255,255,.6);
+
+}
+
+.logo{
+
+font-family:'Cinzel',serif;
+
+font-size:28px;
+
+font-weight:700;
+
+color:var(--green);
+
+letter-spacing:2px;
+
+}
+
+.nav-links{
+
+display:flex;
+
+gap:28px;
+
+}
+
+.nav-links a{
+
+text-decoration:none;
+
+font-size:15px;
+
+font-weight:500;
+
+color:#444;
+
+transition:.3s;
+
+position:relative;
+
+}
+
+.nav-links a:hover{
+
+color:var(--green);
+
+}
+
+.nav-links a::after{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+bottom:-6px;
+
+width:0;
+
+height:2px;
+
+background:var(--gold);
+
+transition:.35s;
+
+}
+
+.nav-links a:hover::after{
+
+width:100%;
+
+}
+
+/* ==========================
+        HERO
+========================== */
+
+.hero{
+
+width:min(1150px,92%);
+
+margin:35px auto;
+
+padding:60px;
+
+display:grid;
+
+grid-template-columns:1fr 380px;
+
+gap:40px;
+
+background:rgba(255,255,255,.78);
+
+backdrop-filter:blur(18px);
+
+border-radius:35px;
+
+box-shadow:var(--shadow);
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+/* Giant King */
+
+.hero::after{
+
+content:"♔";
+
+position:absolute;
+
+right:30px;
+
+bottom:-20px;
+
+font-size:220px;
+
+opacity:.05;
+
+color:black;
+
+pointer-events:none;
+
+}
+
+.hero-left{
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+}
+
+.hero-badge{
+
+display:inline-block;
+
+padding:8px 18px;
+
+background:#edf8f1;
+
+border:1px solid #d9e9dd;
+
+border-radius:40px;
+
+font-size:13px;
+
+font-weight:600;
+
+color:var(--green);
+
+margin-bottom:22px;
+
+width:max-content;
+
+}
+
+.hero h1{
+
+font-family:'Cinzel',serif;
+
+font-size:64px;
+
+line-height:1.1;
+
+letter-spacing:3px;
+
+margin-bottom:20px;
+
+color:var(--dark);
+
+}
+
+.hero p{
+
+font-size:17px;
+
+line-height:1.9;
+
+color:#666;
+
+max-width:580px;
+
+margin-bottom:35px;
+
+}
+
+/* ==========================
+        VIDEO
+========================== */
+
+.hero-right{
+
+display:flex;
+
+flex-direction:column;
+
+gap:25px;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+.video-box{
+
+width:240px;
+
+height:240px;
+
+border-radius:26px;
+
+overflow:hidden;
+
+background:black;
+
+border:4px solid var(--gold);
+
+box-shadow:
+0 15px 35px rgba(0,0,0,.18);
+
+transition:.35s;
+
+}
+
+.video-box:hover{
+
+transform:translateY(-6px);
+
+}
+
+.video-box video{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+display:block;
+
+}
+/* ===========================================
+   PART 1B-2
+   Buttons • Rating Card • Stats • Quote
+   =========================================== */
+
+/* HERO BUTTONS */
+
+.hero-buttons{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    text-decoration:none;
+    padding:14px 28px;
+    border-radius:16px;
+    font-weight:600;
+    transition:.35s;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.primary{
+    background:linear-gradient(135deg,var(--green),var(--green2));
+    color:#fff;
+    box-shadow:0 12px 25px rgba(46,139,87,.25);
+}
+
+.primary:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 35px rgba(46,139,87,.35);
+}
+
+.secondary{
+    background:#fff;
+    color:var(--dark);
+    border:2px solid var(--gold);
+}
+
+.secondary:hover{
+    background:var(--gold);
+    color:#222;
+    transform:translateY(-4px);
+}
+
+/* RATING CARD */
+
+.rating-card{
+
+    width:240px;
+
+    background:rgba(255,255,255,.92);
+
+    border-radius:22px;
+
+    padding:22px;
+
+    text-align:center;
+
+    border:2px solid rgba(212,175,55,.35);
+
+    box-shadow:var(--shadow);
+
+}
+
+.rating-title{
+
+    font-size:14px;
+
+    color:var(--green);
+
+    font-weight:600;
+
+    margin-bottom:10px;
+
+}
+
+.rating-value{
+
+    font-size:42px;
+
+    font-weight:700;
+
+    font-family:'Cinzel',serif;
+
+    color:var(--gold);
+
+    margin-bottom:8px;
+
+}
+
+.rating-card p{
+
+    font-size:13px;
+
+    color:#666;
+
+}
+
+/* STATS */
+
+.stats{
+
+    width:min(1150px,92%);
+
+    margin:35px auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+}
+
+.card{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:28px 20px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    transition:.35s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.card h2{
+
+    font-size:34px;
+
+    color:var(--green);
+
+    margin-bottom:8px;
+
+    font-family:'Cinzel',serif;
+
+}
+
+.card p{
+
+    color:#666;
+
+    font-size:14px;
+
+}
+
+/* QUOTE */
+
+.quote{
+
+    width:min(900px,92%);
+
+    margin:40px auto;
+
+    padding:28px;
+
+    text-align:center;
+
+    background:rgba(255,255,255,.85);
+
+    border-radius:24px;
+
+    box-shadow:var(--shadow);
+
+    border-left:6px solid var(--gold);
+
+}
+
+.quote p{
+
+    font-size:18px;
+
+    font-style:italic;
+
+    color:#555;
+
+    line-height:1.8;
+
+}
+
+/* FOOTER */
+
+footer{
+
+    margin-top:60px;
+
+    padding:30px;
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:14px;
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.hero{
+
+grid-template-columns:1fr;
+
+padding:40px 25px;
+
+text-align:center;
+
+}
+
+.hero-left{
+
+align-items:center;
+
+}
+
+.hero h1{
+
+font-size:46px;
+
+}
+
+.hero p{
+
+max-width:100%;
+
+}
+
+.stats{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.navbar{
+
+flex-direction:column;
+
+gap:18px;
+
+}
+
+.nav-links{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.hero{
+
+padding:30px 20px;
+
+}
+
+.hero h1{
+
+font-size:36px;
+
+}
+
+.video-box{
+
+width:180px;
+
+height:180px;
+
+}
+
+.rating-card{
+
+width:180px;
+
+}
+
+.stats{
+
+grid-template-columns:1fr;
+
+}
+
+.btn{
+
+width:100%;
+
+}
+
+.hero-buttons{
+
+width:100%;
+
+flex-direction:column;
+
+}
+
+}
+/* ===========================================
+   PART 1B-3
+   Animations • Chess Decorations • Finishing Touches
+=========================================== */
+
+/* Smooth fade */
+
+.hero,
+.card,
+.quote,
+.navbar{
+    animation:fadeUp .8s ease both;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Floating hero */
+
+.hero{
+    animation:
+        heroFloat 6s ease-in-out infinite,
+        fadeUp .8s ease;
+}
+
+@keyframes heroFloat{
+    50%{
+        transform:translateY(-5px);
+    }
+}
+
+/* Button shine */
+
+.btn{
+    position:relative;
+    overflow:hidden;
+}
+
+.btn::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:-120%;
+
+width:60%;
+height:100%;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.45),
+transparent);
+
+transform:skewX(-20deg);
+
+transition:.7s;
+
+}
+
+.btn:hover::before{
+    left:140%;
+}
+
+/* Card border */
+
+.card,
+.quote,
+.rating-card{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.card::after,
+.quote::after,
+.rating-card::after{
+
+content:"";
+
+position:absolute;
+
+left:0;
+top:0;
+
+width:100%;
+height:2px;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+var(--gold),
+transparent);
+
+opacity:.6;
+
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#edf3ef;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(
+        var(--green),
+        var(--gold)
+    );
+    border-radius:20px;
+}
+
+/* Text Selection */
+
+::selection{
+    background:var(--green);
+    color:white;
+}
+
+/* Video Glow */
+
+.video-box{
+
+animation:videoGlow 3s ease-in-out infinite alternate;
+
+}
+
+@keyframes videoGlow{
+
+100%{
+
+box-shadow:
+0 0 18px rgba(212,175,55,.45),
+0 18px 35px rgba(0,0,0,.18);
+
+}
+
+}
+
+/* Chess Corner Pieces */
+
+.hero::before{
+
+content:"♞";
+
+position:absolute;
+
+left:25px;
+
+top:25px;
+
+font-size:34px;
+
+color:rgba(46,139,87,.18);
+
+}
+
+/* Navbar Blur */
+
+.navbar{
+
+backdrop-filter:blur(20px);
+
+}
+
+/* Image & Video Smooth */
+
+img,
+video{
+
+display:block;
+
+max-width:100%;
+
+}
+
+/* Links */
+
+a{
+
+transition:.3s;
+
+}
+
+/* Focus */
+
+button:focus,
+a:focus{
+
+outline:2px solid var(--gold);
+
+outline-offset:4px;
+
+}
+
+/* Premium Divider */
+
+.divider{
+
+width:120px;
+
+height:4px;
+
+margin:30px auto;
+
+border-radius:20px;
+
+background:
+linear-gradient(
+90deg,
+var(--green),
+var(--gold)
+);
+
+}
+
+/* Loading Animation */
+
+body{
+
+animation:pageLoad .6s ease;
+
+}
+
+@keyframes pageLoad{
+
+from{
+
+opacity:0;
+
+transform:scale(.99);
+
+}
+
+to{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+}
+
+/* Hover Lift */
+
+.card,
+.rating-card,
+.quote,
+.video-box{
+
+transition:
+transform .35s,
+box-shadow .35s;
+
+}
+
+.card:hover,
+.rating-card:hover,
+.quote:hover,
+.video-box:hover{
+
+transform:translateY(-6px);
+
+box-shadow:
+0 20px 45px rgba(0,0,0,.12);
+
+}
+
+/* Footer */
+
+footer{
+
+border-top:1px solid rgba(0,0,0,.08);
+
+margin-top:80px;
+
+padding-top:35px;
+
+padding-bottom:40px;
+
+background:transparent;
+
+}
