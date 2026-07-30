@@ -1,4 +1,237 @@
 /* ==========================================
+   PART 2B
+   CHESS CALENDAR
+========================================== */
+
+
+.calendar-section{
+
+    width:min(1150px,92%);
+
+    margin:50px auto;
+
+    padding:35px;
+
+    background:rgba(255,255,255,.82);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:30px;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+
+.calendar-box{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:25px;
+
+}
+
+
+
+/* Header */
+
+
+.calendar-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.calendar-header h3{
+
+    font-family:'Cinzel',serif;
+
+    font-size:22px;
+
+}
+
+
+
+.calendar-header button{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:var(--dark);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+.calendar-header button:hover{
+
+    background:var(--green);
+
+}
+
+
+
+/* Week */
+
+
+.weekdays,
+.calendar-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(7,1fr);
+
+    gap:10px;
+
+}
+
+
+
+.weekdays div{
+
+    text-align:center;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    color:var(--green);
+
+}
+
+
+
+/* Days */
+
+
+.calendar-day{
+
+    aspect-ratio:1;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:14px;
+
+    background:#f5f7f5;
+
+    font-size:14px;
+
+    transition:.3s;
+
+    cursor:pointer;
+
+}
+
+
+.calendar-day:hover{
+
+    background:#edf8f1;
+
+    transform:translateY(-3px);
+
+}
+
+
+
+.empty-day{
+
+    background:transparent;
+
+}
+
+
+
+/* Today */
+
+
+.today{
+
+    background:
+    linear-gradient(
+    135deg,
+    var(--green),
+    var(--green2)
+    );
+
+    color:white;
+
+    font-weight:700;
+
+}
+
+
+
+/* Event Mark */
+
+
+.event-day{
+
+    border:2px solid var(--gold);
+
+}
+
+
+
+/* Mobile */
+
+
+@media(max-width:600px){
+
+.calendar-section{
+
+padding:25px 15px;
+
+}
+
+
+.calendar-box{
+
+padding:15px;
+
+}
+
+
+.weekdays,
+.calendar-grid{
+
+gap:5px;
+
+}
+
+
+.calendar-day{
+
+font-size:11px;
+
+}
+
+}/* ==========================================
    PART 2A
    FEATURES SECTION
 ========================================== */
