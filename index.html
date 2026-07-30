@@ -41,6 +41,7 @@ h1,h2,h3,h4,h5{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;}
     radial-gradient(circle at 100% 15%, rgba(154,165,173,.08), transparent 40%),
     var(--bg);
   position:relative;
+  isolation:isolate;
   border-left:1px solid var(--line);
   border-right:1px solid var(--line);
 }
@@ -244,7 +245,61 @@ h1,h2,h3,h4,h5{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;}
 .foot h5{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1.5px;color:var(--ivory);margin-bottom:5px;}
 .foot p{font-size:8px;color:var(--dim);}
 
-.day, .feat, .lb-row, .partner-row{transition:.25s;}
+/* ===== OWNER / FOUNDER CARD ===== */
+.owner-card{
+  display:flex;align-items:center;gap:10px;
+  background:var(--card);border:1px solid var(--line);
+  padding:10px 12px;margin:0 16px 14px;
+}
+.owner-avatar{
+  width:40px;height:40px;flex-shrink:0;border-radius:50%;
+  background:linear-gradient(135deg,var(--red),var(--red2));
+  border:2px solid var(--red);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:15px;color:#fff;
+}
+.owner-info{flex:1;min-width:0;}
+.owner-name{
+  display:flex;align-items:center;gap:4px;
+  font-size:11.5px;font-weight:700;color:var(--ivory);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.owner-name .verified{color:var(--red);font-size:10px;flex-shrink:0;}
+.owner-title{font-size:8px;color:var(--dim);margin-top:2px;letter-spacing:.2px;}
+.owner-social{display:flex;gap:5px;flex-shrink:0;}
+.owner-social a{
+  width:21px;height:21px;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--line);color:var(--steel);font-size:9.5px;text-decoration:none;
+}
+.owner-social a:hover{border-color:var(--red);color:var(--red);}
+
+/* ===== SCROLL REVEAL ===== */
+.hidden{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+.show{opacity:1;transform:translateY(0);}
+
+/* ===== FLOATING PARTICLES ===== */
+.floating-piece{
+  position:absolute;bottom:-30px;font-size:14px;
+  color:rgba(224,48,63,.18);pointer-events:none;z-index:0;
+  animation:risePiece linear forwards;
+}
+@keyframes risePiece{
+  to{transform:translateY(-1600px) rotate(340deg);opacity:0;}
+}
+
+/* ===== BUTTON RIPPLE ===== */
+.btn{position:relative;overflow:hidden;}
+.ripple{
+  position:absolute;border-radius:50%;
+  background:rgba(255,255,255,.45);
+  transform:scale(0);animation:rippleAnim .6s linear;
+  pointer-events:none;
+}
+@keyframes rippleAnim{to{transform:scale(6);opacity:0;}}
+
+/* ===== FOOTER CREDIT ===== */
+.foot-credit{font-size:8px;color:var(--steel2);margin-top:6px;}
+.foot-credit b{color:var(--red);font-weight:600;}
 </style>
 </head>
 <body>
@@ -263,8 +318,7 @@ h1,h2,h3,h4,h5{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;}
     <div class="badge">⚔ Aggressive Chess Training</div>
     <h1>STRIKE <span>FIRST</span></h1>
     <p>Master sharp openings that end games before your opponent finishes developing.</p>
-
-    <div class="hero-media">
+<div class="hero-media">
       <div class="video-box">
         <video autoplay muted loop playsinline poster="">
           <source src="hero.mp4" type="video/mp4">
@@ -283,6 +337,20 @@ h1,h2,h3,h4,h5{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;}
       <a href="#rankings" class="btn secondary">Rankings</a>
     </div>
   </section>
+
+  <!-- OWNER -->
+  <div class="owner-card">
+    <div class="owner-avatar">HO</div>
+    <div class="owner-info">
+      <div class="owner-name">Handle-Owner <span class="verified">✔</span></div>
+      <div class="owner-title">Founder &amp; Head Coach · Opening Assassin</div>
+    </div>
+    <div class="owner-social">
+      <a href="#" title="X / Twitter">𝕏</a>
+      <a href="#" title="YouTube">▶</a>
+      <a href="#" title="Discord">◆</a>
+    </div>
+  </div>
 
   <!-- STATS -->
   <div class="stats">
@@ -387,15 +455,56 @@ h1,h2,h3,h4,h5{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;}
   </section>
 
   <!-- FOOTER -->
-  <footer class="foot">
+<footer class="foot">
     <div class="foot-pieces">🗡 ♞ ⚔ ♟ 🎯</div>
     <h5>THE OPENING ASSASSIN</h5>
     <p class="foot-line">© 2026 Opening Assassin · All Rights Reserved</p>
+    <p class="foot-credit">Founded &amp; run by <b>Handle-Owner</b></p>
   </footer>
 
 </div>
 
 <script>
+/* ===== SCROLL REVEAL ===== */
+const revealEls = document.querySelectorAll('.section, .feat, .lb-row, .partner-row, .owner-card');
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){ entry.target.classList.add('show'); }
+  });
+}, { root: document.querySelector('.widget'), threshold:.15 });
+revealEls.forEach(el=>{
+  el.classList.add('hidden');
+  revealObserver.observe(el);
+});
+
+/* ===== FLOATING DAGGER PARTICLES ===== */
+const widgetEl = document.querySelector('.widget');
+const particleGlyphs = ['🗡','♞','⚔'];
+function spawnParticle(){
+  const p = document.createElement('div');
+  p.className = 'floating-piece';
+  p.textContent = particleGlyphs[Math.floor(Math.random()*particleGlyphs.length)];
+  p.style.left = Math.random()*90 + '%';
+  p.style.animationDuration = (10 + Math.random()*10) + 's';
+  widgetEl.appendChild(p);
+  setTimeout(()=>p.remove(), 20000);
+}
+setInterval(spawnParticle, 3200);
+
+/* ===== BUTTON RIPPLE ===== */
+document.querySelectorAll('.btn').forEach(button=>{
+  button.addEventListener('click', function(e){
+    const rect = this.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
+    ripple.style.left = (e.clientX - rect.left - rect.width/2) + 'px';
+    ripple.style.top = (e.clientY - rect.top - rect.height/2) + 'px';
+    this.appendChild(ripple);
+    setTimeout(()=>ripple.remove(), 600);
+  });
+});
+
 /* ===== VIDEO FALLBACK HANDLING =====
    If hero.mp4 / prep.mp4 aren't found next to this file, hide the <video>
    so the CSS fallback (dagger glyph / equalizer bars) shows instead. */
