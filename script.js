@@ -129,3 +129,262 @@ renderCalendar();
 
 
 renderCalendar();
+/* ==========================================
+   PART 3C
+   FINAL JAVASCRIPT
+========================================== */
+
+
+/* ==========================
+   MUSIC CONTROL
+========================== */
+
+
+const musicVideo =
+document.getElementById("musicVideo");
+
+
+const musicButtons =
+document.querySelectorAll(
+".music-controls button"
+);
+
+
+
+if(musicButtons.length){
+
+musicButtons[1].addEventListener(
+"click",
+()=>{
+
+if(musicVideo.paused){
+
+musicVideo.play();
+
+musicButtons[1].innerHTML="⏸";
+
+}
+
+else{
+
+musicVideo.pause();
+
+musicButtons[1].innerHTML="▶";
+
+}
+
+});
+
+
+
+musicButtons[0].addEventListener(
+"click",
+()=>{
+
+musicVideo.currentTime=0;
+
+});
+
+
+
+musicButtons[2].addEventListener(
+"click",
+()=>{
+
+musicVideo.currentTime=0;
+
+musicVideo.play();
+
+});
+
+}
+
+
+
+/* ==========================
+   SCROLL REVEAL
+========================== */
+
+
+const revealElements =
+document.querySelectorAll(
+".section-title, .feature-card, .event-card, .player-row, .partner-card"
+);
+
+
+
+const revealObserver =
+new IntersectionObserver(
+(entries)=>{
+
+
+entries.forEach(
+entry=>{
+
+
+if(entry.isIntersecting){
+
+entry.target.classList.add(
+"show"
+);
+
+}
+
+
+});
+
+
+},
+{
+threshold:.15
+}
+);
+
+
+
+revealElements.forEach(
+element=>{
+
+element.classList.add(
+"hidden"
+);
+
+revealObserver.observe(
+element
+);
+
+});
+
+
+
+/* ==========================
+   FLOATING CHESS PIECES
+========================== */
+
+
+const pieces=[
+
+"♟",
+"♞",
+"♝",
+"♜",
+"♛"
+
+];
+
+
+function createPiece(){
+
+
+const piece =
+document.createElement("div");
+
+
+piece.innerHTML =
+pieces[
+Math.floor(
+Math.random()*pieces.length
+)
+];
+
+
+piece.className =
+"floating-piece";
+
+
+
+piece.style.left =
+Math.random()*100+"vw";
+
+
+piece.style.animationDuration =
+(8+Math.random()*8)+"s";
+
+
+
+document.body.appendChild(
+piece
+);
+
+
+
+setTimeout(()=>{
+
+piece.remove();
+
+},16000);
+
+
+}
+
+
+
+setInterval(
+createPiece,
+2500
+);
+
+
+
+/* ==========================
+   BUTTON RIPPLE
+========================== */
+
+
+document.querySelectorAll(
+".btn"
+)
+.forEach(
+button=>{
+
+
+button.addEventListener(
+"click",
+function(e){
+
+
+let ripple =
+document.createElement("span");
+
+
+ripple.className =
+"ripple";
+
+
+this.appendChild(
+ripple
+);
+
+
+
+setTimeout(
+()=>ripple.remove(),
+600
+);
+
+
+});
+
+});
+
+
+
+/* ==========================
+   CURRENT YEAR
+========================== */
+
+
+const yearElement =
+document.querySelector(
+".footer-line"
+);
+
+
+if(yearElement){
+
+yearElement.innerHTML =
+"© "
++new Date().getFullYear()
++" Pixel Glow • All Rights Reserved";
+
+}
