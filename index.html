@@ -188,44 +188,26 @@ color:var(--green);
 
 
 .song{
+    overflow:hidden;
+    padding:10px;
+    border-radius:10px;
+    background:
+    linear-gradient(
+    90deg,
+    rgba(212,175,55,.12),
+    rgba(63,174,111,.12)
+    );
 
-overflow:hidden;
-
-padding:10px;
-
-border-radius:10px;
-
-background:
-linear-gradient(
-90deg,
-rgba(212,175,55,.12),
-rgba(63,174,111,.12)
-);
-
-font-size:9px;
-
+    font-size:9px;
+    white-space:nowrap;
 }
 
 
 .marquee{
-
-display:inline-block;
-
-padding-left:100%;
-
-animation:scroll 12s linear infinite;
-
-}
-
-
-@keyframes scroll{
-
-100%{
-
-transform:translateX(-100%);
-
-}
-
+    display:inline-block;
+    white-space:nowrap;
+    padding-left:100%;
+    animation:scroll 12s linear infinite;
 }
 
 
