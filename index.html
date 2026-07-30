@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>PixelGlow Recent Players</title>
+<title>PixelGlow Players</title>
 
 <style>
 body{
@@ -15,101 +15,68 @@ body{
     width:300px;
     margin:30px auto;
     padding:20px;
-    border-radius:20px;
     background:#222;
+    border-radius:20px;
 }
 
 .player{
-    padding:10px;
-    margin:8px;
     background:#333;
+    margin:8px;
+    padding:10px;
     border-radius:10px;
 }
 </style>
-
 </head>
 
 <body>
 
 <div class="card">
-<h2>♟ Recent Players</h2>
-
-<div id="players">
-Loading...
-</div>
-
+<h2>♟ PixelGlow Players</h2>
+<div id="players">Loading...</div>
 </div>
 
 
 <script>
 
-let oldMembers = [];
-
-
 async function loadPlayers(){
 
 try{
 
-let response = await fetch(
-"https://api.chess.com/pub/club/pixelglow/members"
-);
+let url="https://api.chess.com/pub/club/pixelglow/members";
 
+let response = await fetch(url);
+
+console.log("Status:", response.status);
 
 if(!response.ok){
-throw new Error("API Error: " + response.status);
+throw new Error("HTTP Error: "+response.status);
 }
-
 
 let data = await response.json();
 
+console.log(data);
 
-// Get members
-let members = [
-    ...data.weekly,
-    ...data.monthly,
-    ...data.all_time
+
+let members=[
+...data.weekly,
+...data.monthly,
+...data.all_time
 ];
 
 
-// Remove duplicates
-members = [...new Set(members)];
-
-
-// Detect new players
-let newPlayers = members.filter(
-player => !oldMembers.includes(player)
-);
-
-
-if(oldMembers.length > 0 && newPlayers.length > 0){
-console.log("New players joined:", newPlayers);
-}
-
-
-oldMembers = members;
-
-
-// Display players
-
 document.getElementById("players").innerHTML =
-
-members.slice(0,5).map(player =>
-
-`
+members.slice(0,10).map(player=>`
 <div class="player">
-♟ ${player}
+♟ ${typeof player === "string" ? player : player.username}
 </div>
-`
-
-).join("");
-
+`).join("");
 
 }
 
 catch(error){
 
 document.getElementById("players").innerHTML =
-"Error loading players";
+"Error: "+error.message;
 
 console.log(error);
 
@@ -120,13 +87,7 @@ console.log(error);
 
 loadPlayers();
 
-
-// Refresh every 10 seconds
-setInterval(loadPlayers,10000);
-
-
 </script>
-
 
 </body>
 </html>
