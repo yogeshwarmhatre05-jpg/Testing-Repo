@@ -1,92 +1,485 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>PixelGlow Players</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Opening Assassin</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* ===== RESET & TOKENS ===== */
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0a0a0d;
+  --card:#151417;
+  --card2:#0f0e11;
+  --line:rgba(224,48,63,.22);
+  --ivory:#efeef0;
+  --dim:#8b8890;
+  --red:#e0303f;
+  --red2:#a3121f;
+  --steel:#9aa5ad;
+  --steel2:#5f6a72;
+  --shadow:0 10px 24px rgba(0,0,0,.55);
+}
+html,body{background:#000;}
 body{
-    font-family:Arial;
-    background:#111;
-    color:white;
-    text-align:center;
+  font-family:'Inter',sans-serif;
+  color:var(--ivory);
+  display:flex;
+  justify-content:center;
+}
+h1,h2,h3,h4,h5{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;}
+
+/* ===== WIDGET FRAME (325 x ~1990) ===== */
+.widget{
+  width:325px;
+  max-width:325px;
+  max-height:2000px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(224,48,63,.14), transparent 45%),
+    radial-gradient(circle at 100% 15%, rgba(154,165,173,.08), transparent 40%),
+    var(--bg);
+  position:relative;
+  border-left:1px solid var(--line);
+  border-right:1px solid var(--line);
+}
+.widget::before{ /* diagonal blade texture */
+  content:"";
+  position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(115deg, rgba(255,255,255,.015) 0 2px, transparent 2px 34px);
+  pointer-events:none;
 }
 
-.card{
-    width:300px;
-    margin:30px auto;
-    padding:20px;
-    background:#222;
-    border-radius:20px;
+/* ===== NAV ===== */
+.nav{
+  position:relative;
+  padding:14px 16px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+.logo{
+  font-family:'Bebas Neue',sans-serif;font-size:18px;
+  letter-spacing:1.5px;color:var(--ivory);
+  display:flex;align-items:center;gap:6px;
+}
+.logo span{color:var(--red);}
+.nav-dot{width:6px;height:6px;background:var(--red);box-shadow:0 0 8px var(--red);transform:rotate(45deg);}
+
+/* ===== HERO ===== */
+.hero{position:relative;padding:20px 16px 16px;text-align:center;}
+.hero-piece{
+  font-size:130px;line-height:1;color:rgba(224,48,63,.06);
+  position:absolute;top:-14px;right:-24px;pointer-events:none;
+}
+.badge{
+  display:inline-block;padding:4px 12px;
+  border:1px solid var(--line);
+  font-size:9.5px;letter-spacing:.6px;color:var(--red);
+  background:rgba(224,48,63,.08);margin-bottom:10px;
+}
+.hero h1{
+  font-size:34px;letter-spacing:2px;
+  color:var(--ivory);line-height:1;margin-bottom:8px;
+}
+.hero h1 span{color:var(--red);}
+.hero p{
+  font-size:11.5px;line-height:1.6;color:var(--dim);
+  max-width:270px;margin:0 auto 14px;
+}
+.hero-media{display:flex;gap:10px;align-items:stretch;margin:0 0 14px;}
+.video-box{
+  width:140px;height:140px;flex-shrink:0;position:relative;overflow:hidden;
+  border:2px solid var(--red);
+  box-shadow:0 0 0 4px rgba(224,48,63,.08), var(--shadow);
+  background:
+    linear-gradient(135deg, rgba(224,48,63,.35), rgba(90,20,25,.3)),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.04) 0 6px, transparent 6px 12px),
+    #0f0e11;
+}
+.video-box video{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1;}
+.video-box .vfallback{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:34px;color:rgba(239,238,240,.3);z-index:0;
+}
+.rating-card{
+  flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;background:var(--card);border:1px solid var(--line);
+  padding:10px 6px;
+}
+.rating-title{font-size:8.5px;color:var(--red);font-weight:700;letter-spacing:.4px;margin-bottom:4px;text-transform:uppercase;}
+.rating-value{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--ivory);line-height:1;margin-bottom:3px;}
+.rating-card p{font-size:8px;color:var(--dim);}
+.hero-btns{display:flex;gap:8px;justify-content:center;}
+.btn{
+  font-size:11px;font-weight:700;padding:9px 16px;
+  text-decoration:none;border:none;cursor:pointer;letter-spacing:.3px;
+}
+.btn.primary{background:var(--red);color:#fff;box-shadow:0 6px 14px rgba(224,48,63,.35);}
+.btn.secondary{background:transparent;border:1px solid var(--steel2);color:var(--steel);}
+
+/* ===== STATS ===== */
+.stats{
+  padding:14px 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.stat h2{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--red);}
+.stat p{font-size:7.5px;color:var(--dim);letter-spacing:.3px;margin-top:2px;text-transform:uppercase;}
+.stat{text-align:center;}
+
+/* ===== SECTION SHELL ===== */
+.section{padding:16px;}
+.section + .section{border-top:1px solid var(--line);}
+.section-eyebrow{font-size:9.5px;color:var(--red);letter-spacing:.5px;margin-bottom:3px;text-transform:uppercase;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:19px;color:var(--ivory);margin-bottom:10px;letter-spacing:1px;}
+
+/* ===== QUOTE ===== */
+.quote{padding:14px 20px;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.quote p{font-size:11.5px;font-style:italic;color:var(--dim);line-height:1.6;}
+.quote span{color:var(--red);}
+
+/* ===== FEATURES ===== */
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.feat{
+  background:var(--card);border:1px solid var(--line);
+  padding:9px 4px;text-align:center;
+}
+.feat .ic{font-size:15px;color:var(--red);margin-bottom:4px;}
+.feat h3{font-family:'Bebas Neue',sans-serif;font-size:9px;color:var(--ivory);line-height:1.2;letter-spacing:.3px;}
+
+/* ===== PREP AUDIO ===== */
+.music-player{
+  background:var(--card);border:1px solid var(--line);padding:12px;
+}
+.music-screen{
+  width:100%;height:120px;overflow:hidden;position:relative;
+  border:1px solid var(--red);
+  background:
+    linear-gradient(135deg, rgba(224,48,63,.32), rgba(90,20,25,.28)),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.04) 0 6px, transparent 6px 12px),
+    #0f0e11;
+  margin-bottom:10px;
+}
+.music-screen video{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1;}
+.music-screen .vfallback{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:3px;z-index:0;
+}
+.music-screen .vfallback span{
+  width:4px;background:rgba(239,238,240,.3);border-radius:1px;
+  animation:eq 1.1s ease-in-out infinite;
+}
+.music-screen .vfallback span:nth-child(1){height:14px;animation-delay:0s;}
+.music-screen .vfallback span:nth-child(2){height:28px;animation-delay:.15s;}
+.music-screen .vfallback span:nth-child(3){height:20px;animation-delay:.3s;}
+.music-screen .vfallback span:nth-child(4){height:34px;animation-delay:.45s;}
+.music-screen .vfallback span:nth-child(5){height:18px;animation-delay:.6s;}
+@keyframes eq{0%,100%{transform:scaleY(.4);}50%{transform:scaleY(1);}}
+.song-info{text-align:center;margin-bottom:9px;}
+.song-info h4{font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--ivory);letter-spacing:.5px;}
+.song-info p{font-size:8.5px;color:var(--dim);margin-top:2px;}
+.music-controls{display:flex;justify-content:center;gap:10px;}
+.music-controls button{
+  width:32px;height:32px;border:1px solid var(--line);
+  background:rgba(255,255,255,.03);color:var(--steel);font-size:12px;cursor:pointer;
+}
+.music-controls button.play{
+  width:38px;height:38px;background:var(--red);
+  color:#fff;border:none;font-size:13px;
 }
 
-.player{
-    background:#333;
-    margin:8px;
-    padding:10px;
-    border-radius:10px;
+/* ===== STRIKE SCHEDULE (calendar) ===== */
+.cal-box{background:var(--card);border:1px solid var(--line);padding:12px;}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.cal-head button{
+  width:24px;height:24px;border:1px solid var(--line);
+  background:transparent;color:var(--red);font-size:11px;cursor:pointer;
 }
+.cal-head h4{font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--ivory);letter-spacing:.5px;}
+.wk,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+.wk div{text-align:center;font-size:7.5px;color:var(--red);font-weight:700;margin-bottom:5px;}
+.day{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:var(--dim);background:rgba(255,255,255,.02);
+}
+.day.today{background:var(--red);color:#fff;font-weight:700;}
+.day.empty{background:transparent;}
+
+/* ===== RANKINGS ===== */
+.lb-row{
+  display:flex;align-items:center;gap:10px;padding:9px 10px;
+  background:var(--card);border:1px solid var(--line);margin-bottom:6px;
+}
+.lb-row.first{border-color:rgba(224,48,63,.55);background:rgba(224,48,63,.06);}
+.lb-rank{font-size:14px;width:18px;text-align:center;}
+.lb-info{flex:1;}
+.lb-info h4{font-size:10.5px;color:var(--ivory);}
+.lb-info p{font-size:8px;color:var(--dim);}
+.lb-rating{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--red);}
+
+/* ===== SESSIONS mini ===== */
+.ev-row{
+  display:flex;align-items:center;gap:8px;font-size:9.5px;color:var(--dim);
+  padding:6px 0;border-bottom:1px dashed var(--line);
+}
+.ev-row:last-child{border-bottom:none;}
+.ev-row .dot{width:5px;height:5px;background:var(--red);flex-shrink:0;}
+.ev-row b{color:var(--ivory);font-weight:600;}
+.ev-tag{margin-left:auto;font-size:7.5px;padding:2px 6px;background:rgba(224,48,63,.14);color:var(--red);}
+.ev-tag.steel{background:rgba(154,165,173,.14);color:var(--steel);}
+
+/* ===== ALLIES ===== */
+.partner-row{display:flex;align-items:center;gap:10px;padding:6px 0;}
+.partner-ic{
+  width:30px;height:30px;flex-shrink:0;
+  background:linear-gradient(135deg, rgba(224,48,63,.18), rgba(154,165,173,.1));
+  display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--red);
+}
+.partner-row h4{font-size:10.5px;color:var(--ivory);}
+.partner-row p{font-size:8px;color:var(--dim);}
+
+/* ===== FOOTER ===== */
+.foot{padding:16px;text-align:center;border-top:1px solid var(--line);}
+.foot-pieces{font-size:14px;letter-spacing:8px;color:var(--red);opacity:.75;margin-bottom:8px;}
+.foot h5{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1.5px;color:var(--ivory);margin-bottom:5px;}
+.foot p{font-size:8px;color:var(--dim);}
+
+.day, .feat, .lb-row, .partner-row{transition:.25s;}
 </style>
 </head>
-
 <body>
 
-<div class="card">
-<h2>♟ PixelGlow Players</h2>
-<div id="players">Loading...</div>
-</div>
+<div class="widget">
 
+  <!-- NAV -->
+  <div class="nav">
+    <div class="logo">🗡 THE OPENING <span>ASSASSIN</span></div>
+    <div class="nav-dot"></div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-piece">♞</div>
+    <div class="badge">⚔ Aggressive Chess Training</div>
+    <h1>STRIKE <span>FIRST</span></h1>
+    <p>Master sharp openings that end games before your opponent finishes developing.</p>
+
+    <div class="hero-media">
+      <div class="video-box">
+        <video autoplay muted loop playsinline poster="">
+          <source src="hero.mp4" type="video/mp4">
+        </video>
+        <div class="vfallback">🗡</div>
+      </div>
+      <div class="rating-card">
+        <div class="rating-title">Avg Elo Gain</div>
+        <div class="rating-value">+186</div>
+        <p>Per Student, 90 Days</p>
+      </div>
+    </div>
+
+    <div class="hero-btns">
+      <a href="#" class="btn primary">Start Training</a>
+      <a href="#rankings" class="btn secondary">Rankings</a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><h2>3,200+</h2><p>Students</p></div>
+    <div class="stat"><h2>65</h2><p>Openings</p></div>
+    <div class="stat"><h2>91%</h2><p>Win Rate¹</p></div>
+    <div class="stat"><h2>Live</h2><p>Coaching</p></div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote">
+    <p><span>"</span>By move ten, your opponent should already be losing.<span>"</span></p>
+  </div>
+
+  <!-- ARSENAL / FEATURES -->
+  <section class="section" id="arsenal">
+    <div class="section-eyebrow">🗡 The Arsenal</div>
+    <div class="section-title">Openings Toolkit</div>
+    <div class="feat-grid">
+      <div class="feat"><div class="ic">📖</div><h3>Trap Vault</h3></div>
+      <div class="feat"><div class="ic">🎯</div><h3>Repertoire Builder</h3></div>
+      <div class="feat"><div class="ic">⚡</div><h3>Blitz Drills</h3></div>
+      <div class="feat"><div class="ic">🔍</div><h3>Scout Reports</h3></div>
+    </div>
+  </section>
+
+  <!-- PREP AUDIO -->
+  <section class="section" id="prep">
+    <div class="section-eyebrow">🎧 Focus Mode</div>
+    <div class="section-title">Pre-Game Prep</div>
+    <div class="music-player">
+      <div class="music-screen">
+        <video id="musicVideo" loop muted playsinline>
+          <source src="prep.mp4" type="video/mp4">
+        </video>
+        <div class="vfallback"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="song-info">
+        <h4>Kill Chain Calculation</h4>
+        <p>Sharp-line visualization audio</p>
+      </div>
+      <div class="music-controls">
+        <button id="musicPrev">⏮</button>
+        <button id="musicPlay" class="play">▶</button>
+        <button id="musicNext">⏭</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIKE SCHEDULE -->
+  <section class="section" id="schedule">
+    <div class="section-eyebrow">🗓 Strike Schedule</div>
+    <div class="section-title">Session Calendar</div>
+    <div class="cal-box">
+      <div class="cal-head">
+        <button onclick="changeMonth(-1)">◀</button>
+        <h4 id="calendarMonth">Month Year</h4>
+        <button onclick="changeMonth(1)">▶</button>
+      </div>
+      <div class="wk">
+        <div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div><div>S</div>
+      </div>
+      <div class="days" id="calendarDays"></div>
+    </div>
+  </section>
+
+  <!-- RANKINGS + SESSIONS -->
+  <section class="section" id="rankings">
+    <div class="section-eyebrow">🎯 Kill Count</div>
+    <div class="section-title">Top Assassins</div>
+
+    <div class="lb-row first">
+      <div class="lb-rank">🥇</div>
+      <div class="lb-info"><h4>ShadowGambit</h4><p>Sicilian Specialist</p></div>
+      <div class="lb-rating">+312</div>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank">🥈</div>
+      <div class="lb-info"><h4>QuietBlade_92</h4><p>Caro-Kann Sniper</p></div>
+      <div class="lb-rating">+274</div>
+    </div>
+    <div class="lb-row">
+      <div class="lb-rank">🥉</div>
+      <div class="lb-info"><h4>Rook_Reaper</h4><p>King's Indian Killer</p></div>
+      <div class="lb-rating">+229</div>
+    </div>
+
+    <div style="margin-top:10px;">
+      <div class="ev-row"><span class="dot"></span><b>Trap Lab</b>&nbsp;· Tue live<span class="ev-tag">LIVE</span></div>
+      <div class="ev-row"><span class="dot"></span><b>Speed Prep</b>&nbsp;· 5min drills<span class="ev-tag">OPEN</span></div>
+      <div class="ev-row"><span class="dot"></span><b>Assassin Cup</b>&nbsp;· Monthly<span class="ev-tag steel">ELITE</span></div>
+    </div>
+  </section>
+
+  <!-- ALLIES -->
+  <section class="section" id="allies">
+    <div class="section-eyebrow">🤝 Allied Coaches</div>
+    <div class="section-title">Trusted Partners</div>
+    <div class="partner-row"><div class="partner-ic">♞</div><div><h4>Blackout Chess Academy</h4><p>Tactical training partner</p></div></div>
+    <div class="partner-row"><div class="partner-ic">♟</div><div><h4>Endgame Syndicate</h4><p>Late-game conversion coaching</p></div></div>
+    <div class="partner-row"><div class="partner-ic">♜</div><div><h4>Rapid Fire Club</h4><p>Speed chess community</p></div></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="foot-pieces">🗡 ♞ ⚔ ♟ 🎯</div>
+    <h5>THE OPENING ASSASSIN</h5>
+    <p class="foot-line">© 2026 Opening Assassin · All Rights Reserved</p>
+  </footer>
+
+</div>
 
 <script>
+/* ===== VIDEO FALLBACK HANDLING =====
+   If hero.mp4 / prep.mp4 aren't found next to this file, hide the <video>
+   so the CSS fallback (dagger glyph / equalizer bars) shows instead. */
+document.querySelectorAll('video').forEach(v=>{
+  v.addEventListener('error', ()=>{ v.style.display='none'; }, true);
+  v.querySelectorAll('source').forEach(s=>{
+    s.addEventListener('error', ()=>{ v.style.display='none'; });
+  });
+});
 
-async function loadPlayers(){
+/* ===== PREP AUDIO CONTROLS ===== */
+const musicVideo = document.getElementById('musicVideo');
+const playBtn = document.getElementById('musicPlay');
+const prevBtn = document.getElementById('musicPrev');
+const nextBtn = document.getElementById('musicNext');
 
-try{
-
-let url="https://api.chess.com/pub/club/pixelglow/members";
-
-let response = await fetch(url);
-
-console.log("Status:", response.status);
-
-if(!response.ok){
-throw new Error("HTTP Error: "+response.status);
+if(playBtn){
+  playBtn.addEventListener('click', ()=>{
+    if(musicVideo.paused){
+      musicVideo.play().catch(()=>{});
+      playBtn.innerHTML = '⏸';
+    } else {
+      musicVideo.pause();
+      playBtn.innerHTML = '▶';
+    }
+  });
+}
+if(prevBtn){
+  prevBtn.addEventListener('click', ()=>{ musicVideo.currentTime = 0; });
+}
+if(nextBtn){
+  nextBtn.addEventListener('click', ()=>{
+    musicVideo.currentTime = 0;
+    musicVideo.play().catch(()=>{});
+    playBtn.innerHTML = '⏸';
+  });
 }
 
-let data = await response.json();
+/* ===== STRIKE SCHEDULE CALENDAR ===== */
+let currentCalendarDate = new Date();
 
-console.log(data);
+function renderCalendar(){
+  const year = currentCalendarDate.getFullYear();
+  const month = currentCalendarDate.getMonth();
+  const title = document.getElementById("calendarMonth");
+  const days = document.getElementById("calendarDays");
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  title.innerText = months[month]+" "+year;
+  days.innerHTML="";
 
+  let first = new Date(year,month,1).getDay();
+  first = first===0 ? 6 : first-1;
+  let total = new Date(year,month+1,0).getDate();
 
-let members=[
-...data.weekly,
-...data.monthly,
-...data.all_time
-];
+  for(let i=0;i<first;i++){
+    const empty = document.createElement("div");
+    empty.className="day empty";
+    days.appendChild(empty);
+  }
 
-
-document.getElementById("players").innerHTML =
-members.slice(0,10).map(player=>`
-<div class="player">
-♟ ${typeof player === "string" ? player : player.username}
-</div>
-`).join("");
-
+  for(let d=1; d<=total; d++){
+    const day = document.createElement("div");
+    day.className="day";
+    day.innerText = d;
+    const today = new Date();
+    if(d===today.getDate() && month===today.getMonth() && year===today.getFullYear()){
+      day.classList.add("today");
+    }
+    days.appendChild(day);
+  }
 }
 
-catch(error){
-
-document.getElementById("players").innerHTML =
-"Error: "+error.message;
-
-console.log(error);
-
+function changeMonth(value){
+  currentCalendarDate.setMonth(currentCalendarDate.getMonth()+value);
+  renderCalendar();
 }
 
+renderCalendar();
+
+/* ===== FOOTER YEAR ===== */
+const yearEl = document.querySelector(".foot-line");
+if(yearEl){
+  yearEl.innerHTML = "© " + new Date().getFullYear() + " Opening Assassin · All Rights Reserved";
 }
-
-
-loadPlayers();
-
 </script>
 
 </body>
