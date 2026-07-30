@@ -139,7 +139,164 @@ body{
 .feat .ic{font-size:16px;color:var(--green);margin-bottom:5px;}
 .feat h3{font-family:'Cinzel',serif;font-size:11px;color:var(--ivory);margin-bottom:3px;}
 .feat p{font-size:8.5px;color:var(--dim);line-height:1.4;}
+/* ===== MUSIC PLAYER ===== */
 
+.music-box{
+
+background:var(--card);
+
+border:1px solid var(--line);
+
+border-radius:16px;
+
+padding:12px;
+
+box-shadow:var(--shadow);
+
+}
+
+
+.music-head{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+margin-bottom:10px;
+
+}
+
+
+.music-head h3{
+
+font-family:'Cinzel',serif;
+
+font-size:13px;
+
+color:var(--ivory);
+
+}
+
+
+.music-head span{
+
+font-size:8px;
+
+color:var(--green);
+
+}
+
+
+.song{
+
+overflow:hidden;
+
+padding:10px;
+
+border-radius:10px;
+
+background:
+linear-gradient(
+90deg,
+rgba(212,175,55,.12),
+rgba(63,174,111,.12)
+);
+
+font-size:9px;
+
+}
+
+
+.marquee{
+
+display:inline-block;
+
+padding-left:100%;
+
+animation:scroll 12s linear infinite;
+
+}
+
+
+@keyframes scroll{
+
+100%{
+
+transform:translateX(-100%);
+
+}
+
+}
+
+
+.screen{
+
+margin-top:10px;
+
+aspect-ratio:16/9;
+
+background:#000;
+
+border-radius:12px;
+
+overflow:hidden;
+
+}
+
+
+.screen iframe{
+
+width:100%;
+
+height:100%;
+
+border:none;
+
+}
+
+
+.controls{
+
+display:flex;
+
+justify-content:center;
+
+gap:12px;
+
+padding-top:12px;
+
+}
+
+
+.controls button{
+
+width:38px;
+
+height:34px;
+
+border-radius:10px;
+
+border:1px solid var(--gold);
+
+background:linear-gradient(
+135deg,
+var(--green),
+var(--green2)
+);
+
+color:white;
+
+cursor:pointer;
+
+font-size:14px;
+
+}
+
+.controls button:hover{
+
+transform:translateY(-2px);
+
+}
 /* ===== CALENDAR ===== */
 .cal-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;}
 .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
@@ -249,7 +406,47 @@ body{
       <div class="feat"><div class="ic">♜</div><h3>Strategy Room</h3><p>Discuss openings and plans.</p></div>
     </div>
   </section>
+<!-- MUSIC LOUNGE -->
+<section class="section" id="music">
 
+<div class="section-eyebrow">♬ CLUB AMBIENCE</div>
+<div class="section-title">Music Lounge</div>
+
+<div class="music-box">
+
+<div class="music-head">
+<h3>Now Playing</h3>
+<span>Streaming</span>
+</div>
+
+<div class="song">
+<div class="marquee" id="songText">
+Now Playing
+</div>
+</div>
+
+<div class="screen">
+<iframe id="playerFrame"
+allow="autoplay; encrypted-media"
+allowfullscreen>
+</iframe>
+</div>
+
+<div class="controls">
+
+<button onclick="prevSong()">⏮</button>
+
+<button onclick="toggleVideo()" id="toggleBtn">
+▶
+</button>
+
+<button onclick="nextSong()">⏭</button>
+
+</div>
+
+</div>
+
+</section>
   <!-- CALENDAR -->
   <section class="section" id="calendar">
     <div class="section-eyebrow">♜ TOURNAMENT PLANNER</div>
@@ -336,7 +533,108 @@ boardLayout.forEach((row,r)=>{
     heroBoard.appendChild(sq);
   });
 });
+/* ===== MUSIC PLAYER ===== */
 
+let songs=[
+
+{
+src:"https://youtu.be/kcsGhOmULxQ",
+name:"Golden Brown - The Stranglers"
+},
+
+{
+src:"https://youtu.be/qdpXxGPqW-Y",
+name:"Faded - Alan Walker"
+},
+
+{
+src:"https://youtu.be/R5aurUlfn3w",
+name:"Monody - TheFatRat"
+}
+
+];
+
+
+let songIndex=0;
+let playing=false;
+
+
+const frame=document.getElementById("playerFrame");
+const songText=document.getElementById("songText");
+const playBtn=document.getElementById("toggleBtn");
+
+
+function getId(url){
+
+return url.split("youtu.be/")[1];
+
+}
+
+
+function loadSong(){
+
+frame.src=
+"https://www.youtube.com/embed/"
++getId(songs[songIndex].src)
++"?enablejsapi=1&rel=0";
+
+songText.innerText=
+"Now Playing • "+songs[songIndex].name;
+
+playing=false;
+
+playBtn.innerText="▶";
+
+}
+
+
+function nextSong(){
+
+songIndex=(songIndex+1)%songs.length;
+
+loadSong();
+
+}
+
+
+function prevSong(){
+
+songIndex=(songIndex-1+songs.length)%songs.length;
+
+loadSong();
+
+}
+
+
+function toggleVideo(){
+
+frame.contentWindow.postMessage(
+
+JSON.stringify({
+
+event:"command",
+
+func:playing?"pauseVideo":"playVideo",
+
+args:[]
+
+}),
+
+"*"
+
+);
+
+
+playing=!playing;
+
+playBtn.innerText=
+
+playing?"❚❚":"▶";
+
+}
+
+
+loadSong();
 /* ===== CALENDAR ===== */
 let currentCalendarDate = new Date();
 
