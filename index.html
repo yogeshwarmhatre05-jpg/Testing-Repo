@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Chess Club Recent Players</title>
+<title>PixelGlow Recent Players</title>
 
 <style>
 body{
-    font-family: Arial;
+    font-family:Arial;
     background:#111;
     color:white;
     text-align:center;
@@ -33,9 +33,11 @@ body{
 
 <div class="card">
 <h2>♟ Recent Players</h2>
+
 <div id="players">
 Loading...
 </div>
+
 </div>
 
 
@@ -46,52 +48,72 @@ let oldMembers = [];
 
 async function loadPlayers(){
 
-    try{
+try{
 
-        let response = await fetch(
-        "https://api.chess.com/pub/club/pixelglow/members"
-        );
-
-        let data = await response.json();
-
-        let members = data.all_oneline;
+let response = await fetch(
+"https://api.chess.com/pub/club/pixelglow/members"
+);
 
 
-        // Detect new players
-        let newPlayers = members.filter(
-            player => !oldMembers.includes(player.username)
-        );
+if(!response.ok){
+throw new Error("API Error: " + response.status);
+}
 
 
-        if(oldMembers.length > 0 && newPlayers.length > 0){
-            console.log("New players:", newPlayers);
-        }
+let data = await response.json();
 
 
-        oldMembers = members;
+// Get members
+let members = [
+    ...data.weekly,
+    ...data.monthly,
+    ...data.all_time
+];
 
 
-        // Display latest 5 players
-        document.getElementById("players").innerHTML =
-        members.slice(0,5).map(player =>
-
-        `
-        <div class="player">
-        ♟ ${player.username}
-        </div>
-        `
-
-        ).join("");
+// Remove duplicates
+members = [...new Set(members)];
 
 
-    }
-    catch(error){
+// Detect new players
+let newPlayers = members.filter(
+player => !oldMembers.includes(player)
+);
 
-        document.getElementById("players").innerHTML =
-        "Error loading players";
 
-        console.log(error);
-    }
+if(oldMembers.length > 0 && newPlayers.length > 0){
+console.log("New players joined:", newPlayers);
+}
+
+
+oldMembers = members;
+
+
+// Display players
+
+document.getElementById("players").innerHTML =
+
+members.slice(0,5).map(player =>
+
+`
+<div class="player">
+♟ ${player}
+</div>
+`
+
+).join("");
+
+
+}
+
+catch(error){
+
+document.getElementById("players").innerHTML =
+"Error loading players";
+
+console.log(error);
+
+}
 
 }
 
