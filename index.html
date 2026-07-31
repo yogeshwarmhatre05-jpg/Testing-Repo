@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess Club UI Effects</title>
+  <style>
+    /* Base Page Styling */
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #312e2b;
+      color: #ffffff;
+      min-height: 200vh; /* Long page to demonstrate scrolling */
+      transition: background-color 0.3s, filter 0.3s;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* Floating Gear Button */
+    .gear-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #111;
+      border: 3px solid #81b64c;
+      color: white;
+      font-size: 26px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s ease;
+    }
+
+    .gear-btn:hover {
+      transform: scale(1.1) rotate(30deg);
+    }
+
+    /* Floating 12-Item Effect Tray */
+    .effect-tray {
+      position: fixed;
+      bottom: 95px;
+      right: 25px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 12px;
+      background: rgba(18, 18, 18, 0.95);
+      border: 2px solid #ffd700;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+      z-index: 999;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .effect-tray.hidden {
+      display: none;
+    }
+
+    .effect-btn {
+      width: 50px;
+      height: 50px;
+      background: #262421;
+      border: 1px solid #403d39;
+      border-radius: 8px;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .effect-btn:hover {
+      background: #363431;
+      transform: scale(1.05);
+    }
+
+    .effect-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* --- SPECIAL EFFECTS --- */
+
+    /* ⚡ Screen Shake */
+    .shake-effect {
+      animation: shake 0.4s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translate(0, 0); }
+      20% { transform: translate(-10px, 8px); }
+      40% { transform: translate(10px, -8px); }
+      60% { transform: translate(-6px, 5px); }
+      80% { transform: translate(6px, -5px); }
+    }
+
+    /* 🎬 Cinema Grayscale */
+    .cinema-effect {
+      filter: grayscale(100%) contrast(120%);
+    }
+
+    /* 🔴 Red Laser Flash */
+    .laser-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255, 0, 0, 0.4);
+      pointer-events: none;
+      z-index: 9999;
+      animation: fadeOut 0.4s forwards;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    /* 🌓 Light Theme Toggle */
+    .light-mode {
+      background-color: #f1f1f1 !important;
+      color: #222222 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Chess Club Effects Overlay</h1>
+    <p>Click the ⚙️ button in the bottom right corner to open the effects tray.</p>
+  </div>
+
+  <button id="gear-btn" class="gear-btn" onclick="toggleMenu()">⚙️</button>
+
+  <div id="effect-tray" class="effect-tray hidden">
+    <button class="effect-btn" title="Scroll Top" onclick="scrollToTop()">⬆️</button>
+    <button class="effect-btn" title="Scroll Bottom" onclick="scrollToBottom()">⬇️</button>
+    <button class="effect-btn" title="Laser Flash" onclick="triggerLaser()">🔴</button>
+    <button class="effect-btn" title="Screen Shake" onclick="triggerShake()">⚡</button>
+    <button class="effect-btn" title="Cinema Mode" onclick="toggleCinema()">🎬</button>
+    <button class="effect-btn" title="Toggle Theme" onclick="toggleTheme()">🌓</button>
+    <button class="effect-btn" title="Monitor">💻</button>
+    <button class="effect-btn" title="Cityscape">🏙️</button>
+    <button class="effect-btn" title="Snow">❄️</button>
+    <button class="effect-btn" title="Scroll">📜</button>
+    <button class="effect-btn" title="Disco">🪩</button>
+    <button class="effect-btn" title="Laugh">😂</button>
+  </div>
+
+  <script>
+    // Toggle Menu Tray
+    function toggleMenu() {
+      const tray = document.getElementById('effect-tray');
+      tray.classList.toggle('hidden');
+    }
+
+    // ⚡ Lightning: Screen Shake
+    function triggerShake() {
+      document.body.classList.add('shake-effect');
+      setTimeout(() => {
+        document.body.classList.remove('shake-effect');
+      }, 400);
+    }
+
+    // 🎬 Cinema Mode: Grayscale
+    function toggleCinema() {
+      document.body.classList.toggle('cinema-effect');
+    }
+
+    // 🔴 Red Button: Laser Flash
+    function triggerLaser() {
+      const flash = document.createElement('div');
+      flash.className = 'laser-overlay';
+      document.body.appendChild(flash);
+      setTimeout(() => flash.remove(), 400);
+    }
+
+    // 🌓 Moon Button: Light/Dark Theme
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    // ⬆️ Scroll to Top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ⬇️ Scroll to Bottom
+    function scrollToBottom() {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
