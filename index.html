@@ -103,9 +103,8 @@
       transform: scale(0.95);  
     }  
 
-    /* --- 12 SPECIAL EFFECTS --- */  
+    /* --- SPECIAL EFFECTS --- */  
 
-    /* 3: 🔴 Laser Flash */  
     .laser-overlay {  
       position: fixed;  
       top: 0; left: 0; width: 100vw; height: 100vh;  
@@ -116,7 +115,6 @@
     }  
     @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }  
 
-    /* 4: ⚡ Screen Shake */  
     .shake-effect { animation: shake 0.4s ease-in-out; }  
     @keyframes shake {  
       0%, 100% { transform: translate(0, 0); }  
@@ -126,13 +124,9 @@
       80% { transform: translate(5px, -4px); }  
     }  
 
-    /* 5: 🎬 Cinema Grayscale */  
     .cinema-effect { filter: grayscale(100%) contrast(120%); }  
-
-    /* 6: 🌓 Light Theme */  
     html.light-theme { background-color: #f1f1f1; color: #222222; }  
 
-    /* 7: 💻 Matrix Terminal Green */  
     html.matrix-mode {  
       background-color: #0d0d0d !important;  
       color: #00ff66 !important;  
@@ -140,14 +134,12 @@
       text-shadow: 0 0 5px #00ff66;  
     }  
 
-    /* 8: 🏙️ City Skyline Mode */  
     html.city-mode {  
       background: #0f172a url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;  
       background-size: cover;  
       color: #f8fafc;  
     }  
 
-    /* 9: ❄️ Falling Snow Overlay */  
     .snowflake {  
       position: fixed;  
       top: -20px;  
@@ -161,14 +153,12 @@
       to { transform: translateY(105vh) rotate(360deg); }  
     }  
 
-    /* 10: 📜 Parchment Mode */  
     html.parchment-mode {  
       background-color: #f4e4bc !important;  
       color: #3b2314 !important;  
       font-family: 'Georgia', serif;  
     }  
 
-    /* 11: 🪩 Disco Lights */  
     .disco-effect {  
       animation: discoParty 0.3s infinite alternate;  
     }  
@@ -180,7 +170,6 @@
       100% { background-color: #00ff66; }  
     }  
 
-    /* 12: 😂 Floating Laughing Emojis */  
     .laugh-emoji {  
       position: fixed;  
       font-size: 2rem;  
@@ -195,7 +184,7 @@
   </style>  
 </head>  
 
-<button id="gear-btn" class="gear-btn">⚙️</button>  
+<button id="gear-btn" class="gear-btn" title="Toggle Tray & Fullscreen">⚙️</button>  
 
 <div id="effect-tray" class="effect-tray">  
   <button class="effect-btn" id="btn-top" title="Scroll Top">⬆️</button>  
@@ -217,8 +206,17 @@
   const effectTray = document.getElementById('effect-tray');  
   const root = document.documentElement;  
 
-  // ⚙️ Toggle Tray  
-  gearBtn.addEventListener('click', () => effectTray.classList.toggle('open'));  
+  // ⚙️ Toggle Tray & Request Fullscreen
+  gearBtn.addEventListener('click', () => {
+    effectTray.classList.toggle('open');
+
+    // Trigger Fullscreen Mode on Click
+    if (!document.fullscreenElement) {
+      root.requestFullscreen().catch(() => {
+        /* Fullscreen block fallback */
+      });
+    }
+  });  
 
   // 1. ⬆️ Scroll Top  
   document.getElementById('btn-top').addEventListener('click', () => {  
@@ -266,7 +264,7 @@
     root.classList.toggle('city-mode');  
   });  
 
-  // 9. ❄️ Snowfall Effect (Spawns 30 Snowflakes)  
+  // 9. ❄️ Snowfall Effect  
   document.getElementById('btn-snow').addEventListener('click', () => {  
     for (let i = 0; i < 30; i++) {  
       const flake = document.createElement('div');  
@@ -285,7 +283,7 @@
     root.classList.toggle('parchment-mode');  
   });  
 
-  // 11. 🪩 Disco Party Mode (Flash lights for 3 seconds)  
+  // 11. 🪩 Disco Party Mode  
   document.getElementById('btn-disco').addEventListener('click', () => {  
     root.classList.add('disco-effect');  
     setTimeout(() => root.classList.remove('disco-effect'), 3000);  
