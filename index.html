@@ -168,7 +168,7 @@
       font-family: 'Georgia', serif;  
     }  
 
-    /* 11. Disco Effect (Fixed with !important) */
+    /* 11. Disco Effect */
     .disco-effect {  
       animation: discoParty 0.3s infinite alternate;  
     }  
@@ -195,7 +195,7 @@
   </style>  
 </head>  
 
-<button id="gear-btn" class="gear-btn" title="Toggle Tray & Fullscreen">⚙️</button>  
+<button id="gear-btn" class="gear-btn" title="Toggle Tray">⚙️</button>  
 
 <div id="effect-tray" class="effect-tray">  
   <button class="effect-btn" id="btn-top" title="Scroll Top">⬆️</button>  
@@ -217,12 +217,9 @@
   const effectTray = document.getElementById('effect-tray');  
   const root = document.documentElement;  
 
-  // ⚙️ Toggle Tray & Request Fullscreen  
+  // ⚙️ Toggle Tray  
   gearBtn.addEventListener('click', () => {  
     effectTray.classList.toggle('open');  
-    if (!document.fullscreenElement) {  
-      root.requestFullscreen().catch(() => {});  
-    }  
   });  
 
   // 1. ⬆️ Scroll Top  
