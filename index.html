@@ -3,7 +3,7 @@
 <head>  
   <meta charset="UTF-8" />  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-  <title>Chess Club Effects Widget - All 12 Effects</title>  
+  <title>Chess Club Effects Widget</title>  
   <style>  
     * { box-sizing: border-box; }  
     
@@ -105,6 +105,7 @@
 
     /* --- SPECIAL EFFECTS --- */  
 
+    /* 3. Laser Overlay */
     .laser-overlay {  
       position: fixed;  
       top: 0; left: 0; width: 100vw; height: 100vh;  
@@ -115,6 +116,7 @@
     }  
     @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }  
 
+    /* 4. Screen Shake */
     .shake-effect { animation: shake 0.4s ease-in-out; }  
     @keyframes shake {  
       0%, 100% { transform: translate(0, 0); }  
@@ -124,9 +126,13 @@
       80% { transform: translate(5px, -4px); }  
     }  
 
+    /* 5. Cinema Mode */
     .cinema-effect { filter: grayscale(100%) contrast(120%); }  
-    html.light-theme { background-color: #f1f1f1; color: #222222; }  
 
+    /* 6. Light Theme */
+    html.light-theme { background-color: #f1f1f1 !important; color: #222222 !important; }  
+
+    /* 7. Matrix Mode */
     html.matrix-mode {  
       background-color: #0d0d0d !important;  
       color: #00ff66 !important;  
@@ -134,12 +140,14 @@
       text-shadow: 0 0 5px #00ff66;  
     }  
 
+    /* 8. City Mode */
     html.city-mode {  
-      background: #0f172a url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;  
-      background-size: cover;  
+      background: #0f172a url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed !important;  
+      background-size: cover !important;  
       color: #f8fafc;  
     }  
 
+    /* 9. Snow Effect */
     .snowflake {  
       position: fixed;  
       top: -20px;  
@@ -153,23 +161,26 @@
       to { transform: translateY(105vh) rotate(360deg); }  
     }  
 
+    /* 10. Parchment Mode */
     html.parchment-mode {  
       background-color: #f4e4bc !important;  
       color: #3b2314 !important;  
       font-family: 'Georgia', serif;  
     }  
 
+    /* 11. Disco Effect (Fixed with !important) */
     .disco-effect {  
       animation: discoParty 0.3s infinite alternate;  
     }  
     @keyframes discoParty {  
-      0% { background-color: #ff0055; }  
-      25% { background-color: #00e5ff; }  
-      50% { background-color: #ffe600; }  
-      75% { background-color: #9d00ff; }  
-      100% { background-color: #00ff66; }  
+      0% { background-color: #ff0055 !important; }  
+      25% { background-color: #00e5ff !important; }  
+      50% { background-color: #ffe600 !important; }  
+      75% { background-color: #9d00ff !important; }  
+      100% { background-color: #00ff66 !important; }  
     }  
 
+    /* 12. Laugh Emoji Blast */
     .laugh-emoji {  
       position: fixed;  
       font-size: 2rem;  
@@ -206,16 +217,12 @@
   const effectTray = document.getElementById('effect-tray');  
   const root = document.documentElement;  
 
-  // ⚙️ Toggle Tray & Request Fullscreen
-  gearBtn.addEventListener('click', () => {
-    effectTray.classList.toggle('open');
-
-    // Trigger Fullscreen Mode on Click
-    if (!document.fullscreenElement) {
-      root.requestFullscreen().catch(() => {
-        /* Fullscreen block fallback */
-      });
-    }
+  // ⚙️ Toggle Tray & Request Fullscreen  
+  gearBtn.addEventListener('click', () => {  
+    effectTray.classList.toggle('open');  
+    if (!document.fullscreenElement) {  
+      root.requestFullscreen().catch(() => {});  
+    }  
   });  
 
   // 1. ⬆️ Scroll Top  
