@@ -289,4 +289,16 @@
     // Laugh Emoji Blast  
     document.getElementById('btn-laugh').addEventListener('click', () => {  
       for (let i = 0; i < 15; i++) {  
-        const emoji = document.
+        const emoji = document.createElement('div');  
+        emoji.className = 'laugh-emoji';  
+        emoji.innerText = '😂';  
+        emoji.style.left = Math.random() * 80 + 10 + 'vw';  
+        emoji.style.top = Math.random() * 50 + 40 + 'vh';  
+        root.appendChild(emoji);  
+        setTimeout(() => emoji.remove(), 1200);  
+      }  
+    });  
+  </script>  
+
+</body>
+</html>
