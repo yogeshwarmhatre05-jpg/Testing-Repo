@@ -1,22 +1,296 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0) !important;
-    background-color: transparent !important;
-}
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+  <title>Chess Club Effects Widget</title>  
+  <style>  
+    * { box-sizing: border-box; }  
+    
+    html, body {  
+      margin: 0;  
+      padding: 0;  
+      background-color: transparent !important;  
+      background: transparent !important;  
+      min-height: 100vh;  
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+      transition: background-color 0.4s ease, filter 0.4s ease;  
+      overflow-x: hidden;  
+      pointer-events: none; /* Allows clicks on empty space to pass to the parent page */
+    }  
 
-* {
-    background-color: transparent;
-}
-</style>
-</head>
+    /* Floating Gear Button */  
+    .gear-btn {  
+      position: fixed;  
+      bottom: 25px;  
+      right: 25px;  
+      width: 60px;  
+      height: 60px;  
+      border-radius: 50%;  
+      background: #111;  
+      border: 3px solid #81b64c;  
+      color: white;  
+      font-size: 26px;  
+      cursor: pointer;  
+      z-index: 1000;  
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  
+      transition: transform 0.2s ease;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      pointer-events: auto !important; /* Re-enables clicking on the button */
+    }  
 
+    .gear-btn:hover {  
+      transform: scale(1.1) rotate(30deg);  
+    }  
+
+    /* 12-Item Floating Grid Tray */  
+    .effect-tray {  
+      position: fixed;  
+      bottom: 95px;  
+      right: 25px;  
+      display: grid;  
+      grid-template-columns: repeat(2, 1fr);  
+      gap: 10px;  
+      padding: 12px;  
+      background: rgba(18, 18, 18, 0.95);  
+      border: 2px solid #ffd700;  
+      border-radius: 12px;  
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);  
+      z-index: 999;  
+      opacity: 0;  
+      pointer-events: none;  
+      transform: translateY(15px);  
+      transition: opacity 0.2s ease, transform 0.2s ease;  
+    }  
+
+    .effect-tray.open {  
+      opacity: 1;  
+      pointer-events: auto !important; /* Re-enables clicking on the tray options */
+      transform: translateY(0);  
+    }  
+
+    /* Buttons */  
+    .effect-btn {  
+      width: 50px;  
+      height: 50px;  
+      background: #262421;  
+      border: 1px solid #403d39;  
+      border-radius: 8px;  
+      font-size: 22px;  
+      cursor: pointer;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      color: white;  
+      transition: background 0.2s, transform 0.1s;  
+      pointer-events: auto !important;  
+    }  
+
+    .effect-btn:hover {  
+      background: #363431;  
+      transform: scale(1.05);  
+    }  
+
+    .effect-btn:active {  
+      transform: scale(0.95);  
+    }  
+
+    /* --- SPECIAL EFFECTS --- */  
+
+    .laser-overlay {  
+      position: fixed;  
+      top: 0; left: 0; width: 100vw; height: 100vh;  
+      background: rgba(255, 0, 0, 0.4);  
+      pointer-events: none;  
+      z-index: 9999;  
+      animation: fadeOut 0.4s forwards;  
+    }  
+    @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }  
+
+    .shake-effect { animation: shake 0.4s ease-in-out; }  
+    @keyframes shake {  
+      0%, 100% { transform: translate(0, 0); }  
+      20% { transform: translate(-8px, 6px); }  
+      40% { transform: translate(8px, -6px); }  
+      60% { transform: translate(-5px, 4px); }  
+      80% { transform: translate(5px, -4px); }  
+    }  
+
+    .cinema-effect { filter: grayscale(100%) contrast(120%); }  
+
+    html.light-theme, body.light-theme { background-color: #f1f1f1 !important; color: #222222 !important; }  
+
+    html.matrix-mode, body.matrix-mode {  
+      background-color: #0d0d0d !important;  
+      color: #00ff66 !important;  
+      font-family: 'Courier New', Courier, monospace;  
+      text-shadow: 0 0 5px #00ff66;  
+    }  
+
+    html.city-mode, body.city-mode {  
+      background: #0f172a url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed !important;  
+      background-size: cover !important;  
+      color: #f8fafc;  
+    }  
+
+    .snowflake {  
+      position: fixed;  
+      top: -20px;  
+      color: white;  
+      font-size: 1.5rem;  
+      pointer-events: none;  
+      z-index: 9998;  
+      animation: fall linear forwards;  
+    }  
+    @keyframes fall {  
+      to { transform: translateY(105vh) rotate(360deg); }  
+    }  
+
+    html.parchment-mode, body.parchment-mode {  
+      background-color: #f4e4bc !important;  
+      color: #3b2314 !important;  
+      font-family: 'Georgia', serif;  
+    }  
+
+    .disco-effect {  
+      animation: discoParty 0.3s infinite alternate;  
+    }  
+    @keyframes discoParty {  
+      0% { background-color: #ff0055 !important; }  
+      25% { background-color: #00e5ff !important; }  
+      50% { background-color: #ffe600 !important; }  
+      75% { background-color: #9d00ff !important; }  
+      100% { background-color: #00ff66 !important; }  
+    }  
+
+    .laugh-emoji {  
+      position: fixed;  
+      font-size: 2rem;  
+      pointer-events: none;  
+      z-index: 9998;  
+      animation: floatUp 1.2s ease-out forwards;  
+    }  
+    @keyframes floatUp {  
+      0% { opacity: 1; transform: translateY(0) scale(0.8); }  
+      100% { opacity: 0; transform: translateY(-150px) scale(1.5); }  
+    }  
+  </style>  
+</head>  
 <body>
+
+  <button id="gear-btn" class="gear-btn" title="Toggle Tray">⚙️</button>  
+
+  <div id="effect-tray" class="effect-tray">  
+    <button class="effect-btn" id="btn-top" title="Scroll Top">⬆️</button>  
+    <button class="effect-btn" id="btn-bottom" title="Scroll Bottom">⬇️</button>  
+    <button class="effect-btn" id="btn-laser" title="Laser Flash">🔴</button>  
+    <button class="effect-btn" id="btn-shake" title="Screen Shake">⚡</button>  
+    <button class="effect-btn" id="btn-cinema" title="Cinema Grayscale">🎬</button>  
+    <button class="effect-btn" id="btn-theme" title="Day/Night Theme">🌓</button>  
+    <button class="effect-btn" id="btn-matrix" title="Matrix Mode">💻</button>  
+    <button class="effect-btn" id="btn-city" title="City Skyline">🏙️</button>  
+    <button class="effect-btn" id="btn-snow" title="Let It Snow">❄️</button>  
+    <button class="effect-btn" id="btn-parchment" title="Vintage Parchment">📜</button>  
+    <button class="effect-btn" id="btn-disco" title="Disco Party">🪩</button>  
+    <button class="effect-btn" id="btn-laugh" title="Laugh Blast">😂</button>  
+  </div>    
+
+  <script>  
+    const gearBtn = document.getElementById('gear-btn');  
+    const effectTray = document.getElementById('effect-tray');  
+    const root = document.documentElement;  
+
+    // Toggle Tray  
+    gearBtn.addEventListener('click', () => {  
+      effectTray.classList.toggle('open');  
+    });  
+
+    // Scroll Top  
+    document.getElementById('btn-top').addEventListener('click', () => {  
+      window.scrollTo({ top: 0, behavior: 'smooth' });  
+    });  
+
+    // Scroll Bottom  
+    document.getElementById('btn-bottom').addEventListener('click', () => {  
+      window.scrollTo({ top: root.scrollHeight, behavior: 'smooth' });  
+    });  
+
+    // Laser Flash  
+    document.getElementById('btn-laser').addEventListener('click', () => {  
+      const flash = document.createElement('div');  
+      flash.className = 'laser-overlay';  
+      root.appendChild(flash);  
+      setTimeout(() => flash.remove(), 400);  
+    });  
+
+    // Screen Shake  
+    document.getElementById('btn-shake').addEventListener('click', () => {  
+      root.classList.remove('shake-effect');  
+      void root.offsetWidth;  
+      root.classList.add('shake-effect');  
+      setTimeout(() => root.classList.remove('shake-effect'), 400);  
+    });  
+
+    // Cinema Mode  
+    document.getElementById('btn-cinema').addEventListener('click', () => {  
+      root.classList.toggle('cinema-effect');  
+    });  
+
+    // Light Theme  
+    document.getElementById('btn-theme').addEventListener('click', () => {  
+      root.classList.toggle('light-theme');  
+    });  
+
+    // Matrix Mode  
+    document.getElementById('btn-matrix').addEventListener('click', () => {  
+      root.classList.toggle('matrix-mode');  
+    });  
+
+    // City Mode  
+    document.getElementById('btn-city').addEventListener('click', () => {  
+      root.classList.toggle('city-mode');  
+    });  
+
+    // Snow Effect  
+    document.getElementById('btn-snow').addEventListener('click', () => {  
+      for (let i = 0; i < 30; i++) {  
+        const flake = document.createElement('div');  
+        flake.className = 'snowflake';  
+        flake.innerText = '❄';  
+        flake.style.left = Math.random() * 100 + 'vw';  
+        flake.style.animationDuration = Math.random() * 3 + 2 + 's';  
+        flake.style.opacity = Math.random();  
+        root.appendChild(flake);  
+        setTimeout(() => flake.remove(), 5000);  
+      }  
+    });  
+
+    // Parchment Mode  
+    document.getElementById('btn-parchment').addEventListener('click', () => {  
+      root.classList.toggle('parchment-mode');  
+    });  
+
+    // Disco Mode  
+    document.getElementById('btn-disco').addEventListener('click', () => {  
+      root.classList.add('disco-effect');  
+      setTimeout(() => root.classList.remove('disco-effect'), 3000);  
+    });  
+
+    // Laugh Emoji Blast  
+    document.getElementById('btn-laugh').addEventListener('click', () => {  
+      for (let i = 0; i < 15; i++) {  
+        const emoji = document.createElement('div');  
+        emoji.className = 'laugh-emoji';  
+        emoji.innerText = '😂';  
+        emoji.style.left = Math.random() * 80 + 10 + 'vw';  
+        emoji.style.top = Math.random() * 50 + 40 + 'vh';  
+        root.appendChild(emoji);  
+        setTimeout(() => emoji.remove(), 1200);  
+      }  
+    });  
+  </script>  
+
 </body>
 </html>
