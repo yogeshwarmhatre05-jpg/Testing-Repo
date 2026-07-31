@@ -10,7 +10,8 @@
     html, body {  
       margin: 0;  
       padding: 0;  
-      background: transparent !important;  
+      /* Semi-transparent background so text stays visible on web browsers and overlays work properly */
+      background: rgba(18, 18, 18, 0.85);  
       color: #ffffff;  
       min-height: 100vh;  
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
@@ -195,6 +196,11 @@
   </style>  
 </head>  
 <body>
+
+  <div class="container">
+    <h1>Chess Club Widget</h1>
+    <p>Click the gear icon in the bottom right corner to launch effects!</p>
+  </div>
 
   <button id="gear-btn" class="gear-btn" title="Toggle Tray">⚙️</button>  
 
