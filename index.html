@@ -1,429 +1,1844 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rocking Superstar Team</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BlueBoardChess Club</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cinzel:wght@600&display=swap" rel="stylesheet">
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #0B0A10;
-    padding: 24px;
-    font-family: 'Inter', sans-serif;
-  }
-  .rst-scroll::-webkit-scrollbar { width: 4px; }
-  .rst-scroll::-webkit-scrollbar-thumb { background: rgba(232,181,77,0.4); border-radius: 4px; }
-  @keyframes rst-pulse {
-    0%, 100% { opacity: 0.55; transform: scaleY(0.4); }
-    50% { opacity: 1; transform: scaleY(1); }
-  }
-  .rst-bar { animation: rst-pulse 1.1s ease-in-out infinite; transform-origin: bottom; }
-  .rst-spin { animation: rst-spin 0.8s linear infinite; }
-  @keyframes rst-spin { to { transform: rotate(360deg); } }
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#111827;
+    color:#f8fafc;
+    font-family:'Inter',sans-serif;
+}
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+    padding:30px 0;
+}
+
+
+/* Header */
+
+header{
+    background:#0b1220;
+    padding:20px;
+    border-radius:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-family:'Cinzel',serif;
+    font-size:28px;
+    color:#d4af37;
+}
+
+.tagline{
+    color:#94a3b8;
+    margin-top:5px;
+    font-size:14px;
+}
+
+.join-btn{
+    background:#d4af37;
+    color:#111;
+    padding:12px 20px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:600;
+}
+
+
+/* Profile */
+
+.profile{
+    margin-top:25px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.avatar{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:#334155;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+}
+
+.profile h2{
+    margin-bottom:5px;
+}
+
+.role{
+    color:#d4af37;
+}
+
+
+/* Stats */
+
+.stats{
+    margin-top:25px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.stat-box{
+    background:#1e293b;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+}
+
+.stat-box h3{
+    font-size:28px;
+    color:#d4af37;
+}
+
+.stat-box p{
+    color:#94a3b8;
+}
+
+
+/* Sections */
+
+.section{
+    margin-top:30px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+}
+
+.section-title{
+    margin-bottom:15px;
+    font-size:22px;
+}
+
+
+/* Player list */
+
+.player{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #334155;
+}
+
+.rating{
+    color:#d4af37;
+    font-weight:600;
+}
+
+
+/* Responsive */
+
+@media(max-width:700px){
+
+header{
+    flex-direction:column;
+    gap:15px;
+}
+
+.stats{
+    grid-template-columns:1fr;
+}
+
+.profile{
+    flex-direction:column;
+    text-align:center;
+}
+
+}
+
 </style>
+
 </head>
-<body>
-<div id="root"></div>
+<!-- Add this before </body> -->
 
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/lucide@0.383.0/dist/umd/lucide.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script>
 
-<script type="text/babel" data-presets="react">
-const { useState, useEffect, useRef } = React;
-const {
-  Crown, Play, Pause, Volume2, Trophy, CalendarDays,
-  Send, CheckCircle2, Sparkles, Inbox, ChevronDown, Loader2, AlertCircle,
-} = lucideReact;
+/*
+  CLUB CONFIGURATION
+  Change these values later
+*/
 
-// ---- Swap this array with your API response later. ----
-// Expected shape per member: { id, name, rating, joinedDaysAgo }
-const MOCK_RECENT_MEMBERS = [
-  { id: 1, name: "Ishaan Verma", rating: 1842, joinedDaysAgo: 1 },
-  { id: 2, name: "Meera Kapoor", rating: 1765, joinedDaysAgo: 3 },
-  { id: 3, name: "Aarav Sinha", rating: 1601, joinedDaysAgo: 6 },
-];
+const CLUB = {
 
-const ANTHEM_LINES = [
-  "We push the pawns, we hold the line,",
-  "eight by eight, the board's our shrine.",
-  "Rock the clock, don't blink, don't bend —",
-  "Rocking Superstars, checkmate's our friend.",
-];
+    name:"BlueBoardChess",
 
-const CHESS_QUOTE = {
-  text: "Every chess master was once a beginner.",
-  author: "Irving Chernev",
+    chessApi:
+    "https://api.chess.com/pub/club/pixelglow/members",
+
+    joinLink:"#",
+
+    leaderboardLink:"#"
+
 };
 
-// ---- Storage: plain localStorage, works on any static host (GitHub Pages included) ----
-const STORAGE_PREFIX = "rst_reports:";
 
-function saveReport(entry) {
-  const key = STORAGE_PREFIX + entry.timestamp;
-  localStorage.setItem(key, JSON.stringify(entry));
+
+/*
+  Recently Joined Members
+*/
+
+const recentMembers = [
+
+{
+name:"Arjun",
+rating:1450
+},
+
+{
+name:"Rahul",
+rating:1320
+},
+
+{
+name:"Daniel",
+rating:1680
+},
+
+{
+name:"Ayaan",
+rating:1200
 }
 
-function loadAllReports() {
-  const items = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key && key.startsWith(STORAGE_PREFIX)) {
-      try {
-        const val = JSON.parse(localStorage.getItem(key));
-        if (val) items.push(val);
-      } catch (_) {}
-    }
-  }
-  items.sort((a, b) => b.timestamp - a.timestamp);
-  return items;
+];
+
+
+
+function showMembers(){
+
+let section=document.createElement("section");
+
+section.className="section";
+
+
+section.innerHTML=`
+
+<h2 class="section-title">
+Recently Joined
+</h2>
+
+${recentMembers.map(player=>`
+
+<div class="player">
+
+<span>
+${player.name}
+</span>
+
+<span class="rating">
+${player.rating}
+</span>
+
+</div>
+
+`).join("")}
+
+`;
+
+document.querySelector(".container")
+.appendChild(section);
+
+
 }
 
-function RankBadge({ rank }) {
-  const styles = {
-    1: { bg: "#E8B54D", fg: "#1A1420" },
-    2: { bg: "#CBD1DC", fg: "#1A1420" },
-    3: { bg: "#C98A52", fg: "#1A1420" },
-  };
-  const s = styles[rank];
-  return (
-    <span style={{
-      display: "flex", alignItems: "center", justifyContent: "center",
-      borderRadius: "9999px", fontWeight: 700, flexShrink: 0,
-      width: 24, height: 24, fontSize: 12, background: s.bg, color: s.fg,
-      fontFamily: "'JetBrains Mono', monospace",
-    }}>
-      {rank}
-    </span>
-  );
+
+showMembers();
+
+
+
+
+
+/*
+ Admin Team
+*/
+
+const admins=[
+
+"Yogi136 - Owner",
+
+"ChessMaster - Moderator",
+
+"KnightCoach - Coach"
+
+];
+
+
+
+function showAdmins(){
+
+let section=document.createElement("section");
+
+section.className="section";
+
+
+section.innerHTML=`
+
+<h2 class="section-title">
+Club Team
+</h2>
+
+
+${admins.map(admin=>`
+
+<div class="player">
+
+<span>
+${admin}
+</span>
+
+<span>
+♟
+</span>
+
+</div>
+
+`).join("")}
+
+
+`;
+
+
+document.querySelector(".container")
+.appendChild(section);
+
 }
 
-function RockingSuperstarSidebar() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(18);
-  const intervalRef = useRef(null);
 
-  const [report, setReport] = useState("");
-  const [sent, setSent] = useState(false);
-  const [sendError, setSendError] = useState(false);
+showAdmins();
 
-  const [showReports, setShowReports] = useState(false);
-  const [reports, setReports] = useState([]);
-  const [loadingReports, setLoadingReports] = useState(false);
-  const [loadError, setLoadError] = useState(false);
 
-  useEffect(() => {
-    if (isPlaying) {
-      intervalRef.current = setInterval(() => {
-        setProgress((p) => (p >= 100 ? 0 : p + 1));
-      }, 450);
-    } else {
-      clearInterval(intervalRef.current);
-    }
-    return () => clearInterval(intervalRef.current);
-  }, [isPlaying]);
 
-  const totalSeconds = 154;
-  const currentSeconds = Math.floor((progress / 100) * totalSeconds);
-  const fmt = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
-  const activeLineIndex = Math.min(
-    ANTHEM_LINES.length - 1,
-    Math.floor((progress / 100) * ANTHEM_LINES.length)
-  );
 
-  const handleReportSubmit = () => {
-    if (!report.trim()) return;
-    const entry = { text: report.trim(), timestamp: Date.now() };
-    try {
-      saveReport(entry);
-      setSent(true);
-      setSendError(false);
-      setReport("");
-      if (showReports) setReports((prev) => [entry, ...prev]);
-      setTimeout(() => setSent(false), 2600);
-    } catch (err) {
-      console.error("Failed to save report:", err);
-      setSendError(true);
-      setTimeout(() => setSendError(false), 3000);
-    }
-  };
 
-  const loadReports = () => {
-    setLoadingReports(true);
-    setLoadError(false);
-    try {
-      const items = loadAllReports();
-      setReports(items);
-    } catch (err) {
-      console.error("Failed to load reports:", err);
-      setLoadError(true);
-    } finally {
-      setLoadingReports(false);
-    }
-  };
 
-  const toggleReports = () => {
-    const next = !showReports;
-    setShowReports(next);
-    if (next) loadReports();
-  };
+/*
+ Chess.com API Example
 
-  const formatTimestamp = (ts) => {
-    const d = new Date(ts);
-    return d.toLocaleString(undefined, {
-      month: "short", day: "numeric", hour: "numeric", minute: "2-digit",
-    });
-  };
+ Fetches club members
 
-  return (
-    <div style={{
-      width: "100%", maxWidth: 320, margin: "0 auto", display: "flex", flexDirection: "column",
-      fontFamily: "'Inter', sans-serif", background: "#151320", color: "#F3EFE6",
-      borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)",
-      boxShadow: "0 30px 60px -20px rgba(0,0,0,0.6)",
-    }}>
-      {/* Header */}
-      <div style={{
-        position: "relative", padding: "24px 20px 20px",
-        background: "radial-gradient(120% 140% at 15% 0%, rgba(214,69,95,0.35) 0%, rgba(21,19,32,0) 55%), linear-gradient(180deg, #1E1B2C 0%, #151320 100%)",
-        borderBottom: "1px solid rgba(255,255,255,0.07)",
-      }}>
-        <div style={{
-          position: "absolute", inset: 0, opacity: 0.06, pointerEvents: "none",
-          backgroundImage: "repeating-conic-gradient(#F3EFE6 0% 25%, transparent 0% 50%)",
-          backgroundSize: "16px 16px",
-        }} />
-        <div style={{ position: "relative", display: "flex", alignItems: "center", gap: 12 }}>
-          <div style={{
-            display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 12,
-            flexShrink: 0, width: 46, height: 46,
-            background: "linear-gradient(145deg, #E8B54D, #C98A3A)",
-            boxShadow: "0 6px 18px -4px rgba(232,181,77,0.55)",
-          }}>
-            <Crown size={24} color="#1A1420" strokeWidth={2.4} />
-          </div>
-          <div>
-            <p style={{ lineHeight: 1, margin: 0, fontFamily: "'Bebas Neue', sans-serif", fontSize: 26, letterSpacing: "0.03em" }}>
-              ROCKING SUPERSTAR
-            </p>
-            <p style={{ lineHeight: 1, margin: "4px 0 0", fontFamily: "'Bebas Neue', sans-serif", fontSize: 15, letterSpacing: "0.3em", color: "#E8B54D" }}>
-              TEAM
-            </p>
-          </div>
-        </div>
-        <div style={{ position: "relative", display: "flex", alignItems: "center", gap: 6, marginTop: 12 }}>
-          <Sparkles size={12} color="#D6455F" />
-          <span style={{ fontSize: 11, color: "#948FA3", letterSpacing: "0.04em" }}>
-            Est. club &middot; Play loud, think louder
-          </span>
-        </div>
-      </div>
+*/
 
-      <div className="rst-scroll" style={{ maxHeight: 640, overflowY: "auto" }}>
-        {/* Owner profile */}
-        <div style={{ padding: "20px 20px 16px", display: "flex", alignItems: "center", gap: 12 }}>
-          <div style={{
-            display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "9999px",
-            flexShrink: 0, fontWeight: 600, width: 48, height: 48,
-            background: "linear-gradient(145deg, #D6455F, #8B3A5A)", fontSize: 17,
-            fontFamily: "'Bebas Neue', sans-serif", letterSpacing: "0.02em",
-          }}>
-            RK
-          </div>
-          <div style={{ minWidth: 0 }}>
-            <p style={{ fontWeight: 600, margin: 0, fontSize: 15, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-              Rehan Khurana
-            </p>
-            <p style={{ fontSize: 12, color: "#948FA3", margin: "2px 0 0" }}>Founder &amp; Club Captain</p>
-          </div>
-          <span style={{
-            marginLeft: "auto", fontSize: 10, padding: "4px 8px", borderRadius: "9999px", fontWeight: 600,
-            flexShrink: 0, background: "rgba(232,181,77,0.14)", color: "#E8B54D",
-            fontFamily: "'JetBrains Mono', monospace",
-          }}>
-            2104
-          </span>
-        </div>
+async function loadChessMembers(){
 
-        {/* Quote */}
-        <div style={{ padding: "0 20px 16px" }}>
-          <div style={{ borderRadius: 12, padding: "12px 16px", background: "rgba(255,255,255,0.03)", borderLeft: "3px solid #E8B54D" }}>
-            <p style={{ fontSize: 13, lineHeight: 1.5, fontStyle: "italic", color: "#EDE9DE", margin: 0 }}>
-              &ldquo;{CHESS_QUOTE.text}&rdquo;
-            </p>
-            <p style={{ fontSize: 11, color: "#948FA3", margin: "6px 0 0" }}>— {CHESS_QUOTE.author}</p>
-          </div>
-        </div>
+try{
 
-        {/* Anthem player */}
-        <div style={{ padding: "0 20px 16px" }}>
-          <p style={{ margin: "0 0 8px", fontSize: 11, letterSpacing: "0.12em", color: "#948FA3", fontWeight: 600 }}>
-            CLUB ANTHEM
-          </p>
-          <div style={{ borderRadius: 12, padding: 12, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <button
-                onClick={() => setIsPlaying((p) => !p)}
-                aria-label={isPlaying ? "Pause anthem" : "Play anthem"}
-                style={{
-                  display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "9999px",
-                  flexShrink: 0, width: 36, height: 36, background: "#E8B54D", color: "#1A1420",
-                  border: "none", cursor: "pointer",
-                }}
-              >
-                {isPlaying ? <Pause size={16} fill="#1A1420" /> : <Play size={16} fill="#1A1420" style={{ marginLeft: 2 }} />}
-              </button>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: "flex", alignItems: "flex-end", gap: 3, height: 20 }}>
-                  {Array.from({ length: 22 }).map((_, i) => {
-                    const h = 6 + ((i * 37) % 14);
-                    return (
-                      <div key={i} className="rst-bar" style={{
-                        width: 2.5, height: h, borderRadius: 2,
-                        background: i / 22 <= progress / 100 ? "#D6455F" : "rgba(255,255,255,0.14)",
-                        animationPlayState: isPlaying ? "running" : "paused",
-                        animationDelay: `${i * 0.05}s`,
-                      }} />
-                    );
-                  })}
-                </div>
-                <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4 }}>
-                  <span style={{ fontSize: 10, color: "#948FA3", fontFamily: "'JetBrains Mono', monospace" }}>{fmt(currentSeconds)}</span>
-                  <span style={{ fontSize: 10, color: "#948FA3", fontFamily: "'JetBrains Mono', monospace" }}>{fmt(totalSeconds)}</span>
-                </div>
-              </div>
-              <Volume2 size={15} color="#948FA3" style={{ flexShrink: 0 }} />
-            </div>
-            <p style={{ fontSize: 11.5, color: "#CFC9DE", marginTop: 10, fontStyle: "italic", lineHeight: 1.5, minHeight: 32 }}>
-              {ANTHEM_LINES[activeLineIndex]}
-            </p>
-          </div>
-        </div>
 
-        {/* Recently joined */}
-        <div style={{ padding: "0 20px 16px" }}>
-          <p style={{ margin: "0 0 8px", fontSize: 11, letterSpacing: "0.12em", color: "#948FA3", fontWeight: 600 }}>
-            NEW RECRUITS
-          </p>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {MOCK_RECENT_MEMBERS.map((m, i) => (
-              <div key={m.id} style={{ display: "flex", alignItems: "center", gap: 10, borderRadius: 8, padding: "8px 12px", background: "rgba(255,255,255,0.03)" }}>
-                <RankBadge rank={i + 1} />
-                <div style={{ minWidth: 0, flex: 1 }}>
-                  <p style={{ margin: 0, fontSize: 13, fontWeight: 500, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{m.name}</p>
-                  <p style={{ margin: 0, fontSize: 10.5, color: "#948FA3" }}>joined {m.joinedDaysAgo}d ago</p>
-                </div>
-                <span style={{ fontSize: 12.5, fontFamily: "'JetBrains Mono', monospace", color: "#E8B54D", fontWeight: 600 }}>
-                  {m.rating}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
+let response =
+await fetch(CLUB.chessApi);
 
-        {/* Action buttons */}
-        <div style={{ padding: "0 20px 16px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <button style={{
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 6, borderRadius: 8,
-            padding: "10px 0", fontWeight: 600, background: "linear-gradient(135deg, #D6455F, #A6395A)",
-            fontSize: 12.5, color: "#F3EFE6", border: "none", cursor: "pointer",
-          }}>
-            <CalendarDays size={14} /> Join Events
-          </button>
-          <button style={{
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 6, borderRadius: 8,
-            padding: "10px 0", fontWeight: 600, background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.12)", fontSize: 12.5, color: "#F3EFE6", cursor: "pointer",
-          }}>
-            <Trophy size={14} color="#E8B54D" /> Leaderboard
-          </button>
-        </div>
 
-        {/* Report box */}
-        <div style={{ padding: "0 20px 20px" }}>
-          <div style={{ borderRadius: 12, padding: 12, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-            <p style={{ fontSize: 11.5, color: "#948FA3", margin: "0 0 6px", fontWeight: 500 }}>
-              Report an issue to the club owner
-            </p>
-            <textarea
-              value={report}
-              onChange={(e) => setReport(e.target.value)}
-              placeholder="Something off with a match, a rating, or a member? Tell us..."
-              rows={2}
-              style={{
-                width: "100%", resize: "none", outline: "none",
-                background: "rgba(0,0,0,0.25)", border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: 8, padding: "8px 10px", fontSize: 12, color: "#F3EFE6",
-                fontFamily: "'Inter', sans-serif",
-              }}
-            />
-            <button
-              onClick={handleReportSubmit}
-              style={{
-                width: "100%", marginTop: 8, display: "flex", alignItems: "center", justifyContent: "center",
-                gap: 6, borderRadius: 8, padding: "8px 0", fontWeight: 600, fontSize: 12.5,
-                border: "none", cursor: "pointer", transition: "all 0.2s ease",
-                background: sendError ? "rgba(214,69,95,0.18)" : sent ? "rgba(232,181,77,0.18)" : "#E8B54D",
-                color: sendError ? "#D6455F" : sent ? "#E8B54D" : "#1A1420",
-              }}
-            >
-              {sendError ? (<><AlertCircle size={14} /> Couldn't send, try again</>)
-                : sent ? (<><CheckCircle2 size={14} /> Report sent</>)
-                : (<><Send size={13} /> Send report</>)}
-            </button>
+let data =
+await response.json();
 
-            <button
-              onClick={toggleReports}
-              style={{
-                width: "100%", marginTop: 8, display: "flex", alignItems: "center", justifyContent: "center",
-                gap: 6, padding: "6px 0", background: "transparent", color: "#948FA3", fontSize: 11,
-                fontWeight: 500, border: "none", cursor: "pointer",
-              }}
-            >
-              <Inbox size={12} />
-              {showReports ? "Hide past reports" : "View past reports"}
-              <ChevronDown size={12} style={{ transform: showReports ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s ease" }} />
-            </button>
 
-            {showReports && (
-              <div style={{ marginTop: 8, paddingTop: 8, display: "flex", flexDirection: "column", gap: 8, borderTop: "1px solid rgba(255,255,255,0.06)", maxHeight: 180, overflowY: "auto" }}>
-                {loadingReports ? (
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px 0", color: "#948FA3", fontSize: 11.5 }}>
-                    <Loader2 size={13} className="rst-spin" /> Loading reports…
-                  </div>
-                ) : loadError ? (
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px 0", color: "#D6455F", fontSize: 11.5 }}>
-                    <AlertCircle size={13} /> Couldn't load reports
-                  </div>
-                ) : reports.length === 0 ? (
-                  <p style={{ textAlign: "center", padding: "12px 0", color: "#948FA3", fontSize: 11.5, margin: 0 }}>
-                    No reports yet.
-                  </p>
-                ) : (
-                  reports.map((r) => (
-                    <div key={r.timestamp} style={{ borderRadius: 8, padding: "8px 12px", background: "rgba(0,0,0,0.25)" }}>
-                      <p style={{ fontSize: 12, color: "#EDE9DE", lineHeight: 1.45, margin: 0 }}>{r.text}</p>
-                      <p style={{ fontSize: 10, color: "#948FA3", marginTop: 4 }}>{formatTimestamp(r.timestamp)}</p>
-                    </div>
-                  ))
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+console.log(
+"Chess.com Members:",
+data
+);
+
+
+
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<RockingSuperstarSidebar />);
+catch(error){
+
+console.log(
+"API not available",
+error
+);
+
+
+}
+
+}
+
+
+loadChessMembers();
+
+
+
+
+
+/*
+ Button Functions
+*/
+
+
+document
+.querySelector(".join-btn")
+.addEventListener("click",()=>{
+
+
+window.open(
+CLUB.joinLink,
+"_blank"
+);
+
+
+});
+
+
+
 </script>
+<script>
+
+/*
+ Chess.com Club Leaderboard
+*/
+
+const API_URL =
+"https://api.chess.com/pub/club/pixelglow/members";
+
+
+
+async function loadClubPlayers(){
+
+try{
+
+
+const response =
+await fetch(API_URL);
+
+
+const members =
+await response.json();
+
+
+
+let players =
+members.members || [];
+
+
+
+let leaderboard =
+document.createElement("section");
+
+
+leaderboard.className="section";
+
+
+
+leaderboard.innerHTML=`
+
+<h2 class="section-title">
+Chess.com Members
+</h2>
+
+
+<div id="clubPlayers">
+
+Loading players...
+
+</div>
+
+`;
+
+
+
+document
+.querySelector(".container")
+.appendChild(leaderboard);
+
+
+
+let playerBox =
+document.getElementById("clubPlayers");
+
+
+
+playerBox.innerHTML = players
+.slice(0,10)
+.map((player,index)=>{
+
+
+return `
+
+<div class="player">
+
+<span>
+${index+1}. 
+${player.username}
+</span>
+
+
+<span class="rating">
+Member
+</span>
+
+
+</div>
+
+`;
+
+})
+.join("");
+
+
+
+}
+
+catch(error){
+
+
+console.log(
+"Unable to load Chess.com data",
+error
+);
+
+
+}
+
+}
+
+
+
+loadClubPlayers();
+
+
+
+
+
+/*
+ Tournament Cards
+*/
+
+
+const tournaments=[
+
+{
+title:"Weekly Rapid",
+time:"10+5",
+status:"Open"
+},
+
+{
+title:"Monthly Championship",
+time:"Rapid",
+status:"Upcoming"
+},
+
+{
+title:"Blitz Arena",
+time:"3+2",
+status:"Live"
+}
+
+];
+
+
+
+function showTournaments(){
+
+
+let section =
+document.createElement("section");
+
+
+section.className="section";
+
+
+
+section.innerHTML=`
+
+<h2 class="section-title">
+Tournaments
+</h2>
+
+
+${tournaments.map(event=>`
+
+<div class="player">
+
+<span>
+${event.title}
+</span>
+
+
+<span class="rating">
+${event.time}
+</span>
+
+
+</div>
+
+`).join("")}
+
+
+`;
+
+
+
+document
+.querySelector(".container")
+.appendChild(section);
+
+
+}
+
+
+
+showTournaments();
+
+
+
+</script>
+<script>
+
+/*
+ PLAYER PROFILE SYSTEM
+*/
+
+
+const players = [
+
+{
+name:"Yogi136",
+rating:1300,
+country:"India",
+title:"Founder"
+},
+
+{
+name:"Arjun",
+rating:1650,
+country:"India",
+title:"Player"
+},
+
+{
+name:"Daniel",
+rating:1850,
+country:"USA",
+title:"Player"
+},
+
+{
+name:"Rahul",
+rating:1450,
+country:"India",
+title:"Player"
+}
+
+];
+
+
+
+
+
+function createPlayerSection(){
+
+
+let section =
+document.createElement("section");
+
+
+section.className="section";
+
+
+section.innerHTML=`
+
+<h2 class="section-title">
+Player Directory
+</h2>
+
+
+<input 
+id="playerSearch"
+placeholder="Search player..."
+style="
+width:100%;
+padding:12px;
+border-radius:6px;
+border:none;
+margin-bottom:15px;
+font-size:15px;
+">
+
+
+<div id="playerList"></div>
+
+
+`;
+
+
+
+document
+.querySelector(".container")
+.appendChild(section);
+
+
+
+displayPlayers(players);
+
+
+
+document
+.getElementById("playerSearch")
+.addEventListener(
+"input",
+function(){
+
+
+let value =
+this.value.toLowerCase();
+
+
+
+let filtered =
+players.filter(
+p=>p.name.toLowerCase()
+.includes(value)
+);
+
+
+
+displayPlayers(filtered);
+
+
+
+});
+
+
+}
+
+
+
+
+
+function displayPlayers(data){
+
+
+let box =
+document.getElementById("playerList");
+
+
+
+box.innerHTML =
+data.map(player=>`
+
+
+<div class="player">
+
+
+<div>
+
+<strong>
+${player.name}
+</strong>
+
+<br>
+
+<small>
+${player.title} · ${player.country}
+</small>
+
+</div>
+
+
+<span class="rating">
+
+${player.rating}
+
+</span>
+
+
+</div>
+
+
+`).join("");
+
+}
+
+
+
+createPlayerSection();
+
+
+
+
+
+
+
+/*
+ Top Ranking Board
+*/
+
+
+function createRanking(){
+
+
+let section =
+document.createElement("section");
+
+
+section.className="section";
+
+
+let sorted =
+[...players]
+.sort(
+(a,b)=>b.rating-a.rating
+);
+
+
+
+section.innerHTML=`
+
+<h2 class="section-title">
+Club Ranking
+</h2>
+
+
+${sorted.map(
+(player,index)=>`
+
+
+<div class="player">
+
+<span>
+#${index+1}
+&nbsp;
+${player.name}
+</span>
+
+
+<span class="rating">
+${player.rating}
+</span>
+
+
+</div>
+
+
+`
+).join("")}
+
+
+`;
+
+
+
+document
+.querySelector(".container")
+.appendChild(section);
+
+
+}
+
+
+
+createRanking();
+
+
+
+</script>
+<script>
+
+/*
+ TOP NAVIGATION
+*/
+
+
+const nav =
+document.createElement("nav");
+
+
+nav.innerHTML = `
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#0b1220;
+padding:15px 20px;
+border-radius:12px;
+margin-bottom:20px;
+">
+
+
+<strong style="
+color:#d4af37;
+font-size:20px;
+">
+♟ BlueBoardChess
+</strong>
+
+
+<div>
+
+<a href="#" 
+style="
+color:white;
+margin-right:15px;
+text-decoration:none;
+">
+Home
+</a>
+
+
+<a href="#" 
+style="
+color:white;
+margin-right:15px;
+text-decoration:none;
+">
+Players
+</a>
+
+
+<a href="#" 
+style="
+color:white;
+text-decoration:none;
+">
+Events
+</a>
+
+
+</div>
+
+
+</div>
+
+`;
+
+
+
+document
+.querySelector(".container")
+.prepend(nav);
+
+
+
+
+
+
+/*
+ CLUB ANNOUNCEMENTS
+*/
+
+
+const announcements=[
+
+"Weekly rapid tournament registrations are open",
+
+"New players can join training sessions",
+
+"Monthly championship starts soon"
+
+];
+
+
+
+function showAnnouncements(){
+
+
+let section =
+document.createElement("section");
+
+
+section.className="section";
+
+
+section.innerHTML=`
+
+<h2 class="section-title">
+Club News
+</h2>
+
+
+${announcements.map(news=>`
+
+<div class="player">
+
+<span>
+${news}
+</span>
+
+<span>
+→
+</span>
+
+
+</div>
+
+
+`).join("")}
+
+
+`;
+
+
+
+document
+.querySelector(".container")
+.appendChild(section);
+
+
+}
+
+
+showAnnouncements();
+
+
+
+
+
+
+/*
+ FOOTER
+*/
+
+
+const footer =
+document.createElement("footer");
+
+
+footer.style.cssText=`
+
+text-align:center;
+padding:25px;
+margin-top:30px;
+color:#94a3b8;
+font-size:14px;
+
+`;
+
+
+
+footer.innerHTML=`
+
+<p>
+© 2026 BlueBoardChess Club
+</p>
+
+<p>
+Play • Learn • Compete
+</p>
+
+`;
+
+
+
+document
+.querySelector(".container")
+.appendChild(footer);
+
+
+
+</script>
+<script>
+
+/*
+ CHESS BOARD SECTION
+*/
+
+
+function createChessBoard(){
+
+
+let section =
+document.createElement("section");
+
+
+section.className="section";
+
+
+section.innerHTML=`
+
+<h2 class="section-title">
+Club Board
+</h2>
+
+
+<div style="
+display:grid;
+grid-template-columns:repeat(8,1fr);
+width:280px;
+margin:auto;
+border:2px solid #d4af37;
+">
+
+
+${Array.from({length:64},(_,i)=>`
+
+<div style="
+height:35px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:${(Math.floor(i/8)+i)%2===0?'#f0d9b5':'#b58863'};
+font-size:22px;
+">
+
+${i===4?'♚':''}
+
+${i===60?'♔':''}
+
+</div>
+
+`).join("")}
+
+
+</div>
+
+
+`;
+
+
+
+document
+.querySelector(".container")
+.appendChild(section);
+
+
+}
+
+
+createChessBoard();
+
+
+
+
+
+
+
+
+/*
+ MATCH HISTORY
+*/
+
+
+const matches=[
+
+{
+player:"Yogi136",
+result:"Win",
+opponent:"Arjun"
+},
+
+{
+player:"Daniel",
+result:"Win",
+opponent:"Rahul"
+},
+
+{
+player:"Arjun",
+result:"Loss",
+opponent:"Yogi136"
+}
+
+];
+
+
+
+function showMatches(){
+
+
+let section =
+document.createElement("section");
+
+
+section.className="section";
+
+
+section.innerHTML=`
+
+<h2 class="section-title">
+Recent Matches
+</h2>
+
+
+${matches.map(match=>`
+
+<div class="player">
+
+<span>
+${match.player}
+ vs 
+${match.opponent}
+</span>
+
+
+<span class="rating">
+${match.result}
+</span>
+
+
+</div>
+
+
+`).join("")}
+
+
+`;
+
+
+
+document
+.querySelector(".container")
+.appendChild(section);
+
+
+}
+
+
+showMatches();
+
+
+
+
+
+
+
+/*
+ PLAYER STATISTICS
+*/
+
+
+const statsData={
+
+games:5420,
+
+wins:3100,
+
+draws:900,
+
+losses:1420
+
+};
+
+
+
+function showStats(){
+
+
+let section =
+document.createElement("section");
+
+
+section.className="section";
+
+
+section.innerHTML=`
+
+<h2 class="section-title">
+Club Statistics
+</h2>
+
+
+<div class="player">
+
+<span>
+Total Games
+</span>
+
+<span class="rating">
+${statsData.games}
+</span>
+
+</div>
+
+
+
+<div class="player">
+
+<span>
+Wins
+</span>
+
+<span class="rating">
+${statsData.wins}
+</span>
+
+</div>
+
+
+
+<div class="player">
+
+<span>
+Draws
+</span>
+
+<span class="rating">
+${statsData.draws}
+</span>
+
+</div>
+
+
+
+<div class="player">
+
+<span>
+Losses
+</span>
+
+<span class="rating">
+${statsData.losses}
+</span>
+
+</div>
+
+
+`;
+
+
+document
+.querySelector(".container")
+.appendChild(section);
+
+
+}
+
+
+showStats();
+
+
+</script>
+<script>
+
+/*
+ REAL CHESS.COM CLUB DATA
+*/
+
+
+const CHESS_CLUB_API =
+"https://api.chess.com/pub/club/pixelglow/members";
+
+
+
+
+async function loadLiveMembers(){
+
+
+try{
+
+
+const response =
+await fetch(CHESS_CLUB_API);
+
+
+
+const data =
+await response.json();
+
+
+
+const members =
+data.members || [];
+
+
+
+let section =
+document.createElement("section");
+
+
+section.className="section";
+
+
+
+section.innerHTML=`
+
+<h2 class="section-title">
+Live Club Members
+</h2>
+
+
+<div id="liveMembers">
+Loading members...
+</div>
+
+
+`;
+
+
+
+document
+.querySelector(".container")
+.appendChild(section);
+
+
+
+let box =
+document.getElementById("liveMembers");
+
+
+
+if(members.length===0){
+
+box.innerHTML=
+"No members found";
+
+return;
+
+}
+
+
+
+box.innerHTML =
+members
+.slice(0,20)
+.map((member,index)=>`
+
+
+<div class="player">
+
+
+<span>
+
+${index+1}. 
+${member.username}
+
+</span>
+
+
+<span class="rating">
+
+Online
+
+</span>
+
+
+</div>
+
+
+`)
+.join("");
+
+
+
+}
+
+
+catch(error){
+
+
+console.log(
+"Chess.com API error:",
+error
+);
+
+
+let section =
+document.createElement("section");
+
+
+section.className="section";
+
+
+section.innerHTML=`
+
+<h2 class="section-title">
+Live Club Members
+</h2>
+
+
+<p>
+Unable to load members currently.
+</p>
+
+
+`;
+
+document
+.querySelector(".container")
+.appendChild(section);
+
+
+}
+
+
+}
+
+
+
+loadLiveMembers();
+
+
+
+
+
+
+/*
+ AUTO REFRESH MEMBERS
+*/
+
+
+setInterval(
+loadLiveMembers,
+60000
+);
+
+
+
+</script>
+<script>
+
+/*
+ FINAL CLUB SETTINGS
+*/
+
+
+const SETTINGS = {
+
+joinClub:
+"https://www.chess.com/clubs",
+
+leaderboard:
+"https://www.chess.com/leaderboard",
+
+events:
+"https://www.chess.com/events"
+
+};
+
+
+
+
+
+/*
+ MAKE BUTTONS WORK
+*/
+
+
+const joinButton =
+document.querySelector(".join-btn");
+
+
+if(joinButton){
+
+joinButton.href =
+SETTINGS.joinClub;
+
+joinButton.target =
+"_blank";
+
+}
+
+
+
+
+
+/*
+ ADD QUICK ACTIONS
+*/
+
+
+function createActions(){
+
+
+let section =
+document.createElement("section");
+
+
+section.className="section";
+
+
+section.innerHTML=`
+
+<h2 class="section-title">
+Quick Actions
+</h2>
+
+
+<div style="
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+">
+
+
+<a href="${SETTINGS.leaderboard}"
+target="_blank"
+style="
+background:#0b1220;
+padding:15px;
+border-radius:8px;
+color:white;
+text-decoration:none;
+text-align:center;
+">
+
+Leaderboard
+
+</a>
+
+
+
+<a href="${SETTINGS.events}"
+target="_blank"
+style="
+background:#0b1220;
+padding:15px;
+border-radius:8px;
+color:white;
+text-decoration:none;
+text-align:center;
+">
+
+Events
+
+</a>
+
+
+
+<a href="${SETTINGS.joinClub}"
+target="_blank"
+style="
+background:#0b1220;
+padding:15px;
+border-radius:8px;
+color:white;
+text-decoration:none;
+text-align:center;
+">
+
+Join
+
+</a>
+
+
+
+</div>
+
+`;
+
+
+
+document
+.querySelector(".container")
+.appendChild(section);
+
+
+}
+
+
+createActions();
+
+
+
+
+
+
+
+/*
+ MOBILE FIX
+*/
+
+
+const mobileStyle =
+document.createElement("style");
+
+
+mobileStyle.innerHTML=`
+
+@media(max-width:700px){
+
+.container{
+
+width:95%;
+
+}
+
+
+.section{
+
+padding:18px;
+
+}
+
+
+.logo{
+
+font-size:22px;
+
+}
+
+
+.quick-actions{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+`;
+
+
+
+document.head.appendChild(mobileStyle);
+
+
+
+
+
+
+/*
+ CURRENT YEAR FOOTER UPDATE
+*/
+
+
+const year =
+new Date().getFullYear();
+
+
+
+document
+.querySelector("footer")
+.innerHTML +=
+`<p>Updated ${year}</p>`;
+
+
+
+</script>
+
+
+<body>
+
+<div class="container">
+
+
+<header>
+
+<div>
+<h1 class="logo">BlueBoardChess</h1>
+<p class="tagline">
+A community for chess players
+</p>
+</div>
+
+<a class="join-btn" href="#">
+Join Club
+</a>
+
+</header>
+
+
+
+<section class="profile">
+
+<div class="avatar">
+♟
+</div>
+
+<div>
+<h2>Yogi136</h2>
+<p class="role">
+Club Founder
+</p>
+
+<p>
+Building a competitive chess community.
+</p>
+
+</div>
+
+</section>
+
+
+
+<section class="stats">
+
+<div class="stat-box">
+<h3>250</h3>
+<p>Members</p>
+</div>
+
+<div class="stat-box">
+<h3>5420</h3>
+<p>Games Played</p>
+</div>
+
+
+<div class="stat-box">
+<h3>35</h3>
+<p>Tournaments</p>
+</div>
+
+
+</section>
+
+
+
+<section class="section">
+
+<h2 class="section-title">
+Top Players
+</h2>
+
+
+<div class="player">
+<span>Player One</span>
+<span class="rating">2100</span>
+</div>
+
+
+<div class="player">
+<span>Player Two</span>
+<span class="rating">1950</span>
+</div>
+
+
+<div class="player">
+<span>Player Three</span>
+<span class="rating">1850</span>
+</div>
+
+
+</section>
+
+
+
+<section class="section">
+
+<h2 class="section-title">
+Upcoming Events
+</h2>
+
+<div class="player">
+<span>Weekly Rapid Tournament</span>
+<span>10+5</span>
+</div>
+
+
+<div class="player">
+<span>Monthly Championship</span>
+<span>Open</span>
+</div>
+
+
+</section>
+
+
+</div>
+
 </body>
 </html>
