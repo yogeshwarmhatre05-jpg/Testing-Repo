@@ -7,12 +7,12 @@
   <style>  
     * { box-sizing: border-box; }  
     
-    /* 100% Fully Transparent Background */
+    /* Fully transparent root layout */
     html, body {  
       margin: 0;  
       padding: 0;  
       background-color: transparent !important;  
-      background: none !important;  
+      background: transparent !important;  
       min-height: 100vh;  
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
       transition: background-color 0.4s ease, filter 0.4s ease;  
@@ -210,22 +210,22 @@
     const effectTray = document.getElementById('effect-tray');  
     const root = document.documentElement;  
 
-    // ⚙️ Toggle Tray  
+    // Toggle Tray  
     gearBtn.addEventListener('click', () => {  
       effectTray.classList.toggle('open');  
     });  
 
-    // 1. ⬆️ Scroll Top  
+    // Scroll Top  
     document.getElementById('btn-top').addEventListener('click', () => {  
       window.scrollTo({ top: 0, behavior: 'smooth' });  
     });  
 
-    // 2. ⬇️ Scroll Bottom  
+    // Scroll Bottom  
     document.getElementById('btn-bottom').addEventListener('click', () => {  
       window.scrollTo({ top: root.scrollHeight, behavior: 'smooth' });  
     });  
 
-    // 3. 🔴 Laser Flash  
+    // Laser Flash  
     document.getElementById('btn-laser').addEventListener('click', () => {  
       const flash = document.createElement('div');  
       flash.className = 'laser-overlay';  
@@ -233,7 +233,7 @@
       setTimeout(() => flash.remove(), 400);  
     });  
 
-    // 4. ⚡ Screen Shake  
+    // Screen Shake  
     document.getElementById('btn-shake').addEventListener('click', () => {  
       root.classList.remove('shake-effect');  
       void root.offsetWidth;  
@@ -241,27 +241,27 @@
       setTimeout(() => root.classList.remove('shake-effect'), 400);  
     });  
 
-    // 5. 🎬 Cinema Grayscale Mode  
+    // Cinema Mode  
     document.getElementById('btn-cinema').addEventListener('click', () => {  
       root.classList.toggle('cinema-effect');  
     });  
 
-    // 6. 🌓 Day/Night Theme  
+    // Light Theme  
     document.getElementById('btn-theme').addEventListener('click', () => {  
       root.classList.toggle('light-theme');  
     });  
 
-    // 7. 💻 Matrix Code Terminal  
+    // Matrix Mode  
     document.getElementById('btn-matrix').addEventListener('click', () => {  
       root.classList.toggle('matrix-mode');  
     });  
 
-    // 8. 🏙️ City Skyline Background  
+    // City Mode  
     document.getElementById('btn-city').addEventListener('click', () => {  
       root.classList.toggle('city-mode');  
     });  
 
-    // 9. ❄️ Snowfall Effect  
+    // Snow Effect  
     document.getElementById('btn-snow').addEventListener('click', () => {  
       for (let i = 0; i < 30; i++) {  
         const flake = document.createElement('div');  
@@ -275,30 +275,18 @@
       }  
     });  
 
-    // 10. 📜 Parchment Reader Mode  
+    // Parchment Mode  
     document.getElementById('btn-parchment').addEventListener('click', () => {  
       root.classList.toggle('parchment-mode');  
     });  
 
-    // 11. 🪩 Disco Party Mode  
+    // Disco Mode  
     document.getElementById('btn-disco').addEventListener('click', () => {  
       root.classList.add('disco-effect');  
       setTimeout(() => root.classList.remove('disco-effect'), 3000);  
     });  
 
-    // 12. 😂 Laugh Emoji Blast  
+    // Laugh Emoji Blast  
     document.getElementById('btn-laugh').addEventListener('click', () => {  
       for (let i = 0; i < 15; i++) {  
-        const emoji = document.createElement('div');  
-        emoji.className = 'laugh-emoji';  
-        emoji.innerText = '😂';  
-        emoji.style.left = Math.random() * 80 + 10 + 'vw';  
-        emoji.style.top = Math.random() * 50 + 40 + 'vh';  
-        root.appendChild(emoji);  
-        setTimeout(() => emoji.remove(), 1200);  
-      }  
-    });  
-  </script>  
-
-</body>
-</html>
+        const emoji = document.
