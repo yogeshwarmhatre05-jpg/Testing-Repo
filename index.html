@@ -7,10 +7,12 @@
   <style>  
     * { box-sizing: border-box; }  
     
+    /* 100% Fully Transparent Background */
     html, body {  
       margin: 0;  
       padding: 0;  
-      background: transparent !important;  
+      background-color: transparent !important;  
+      background: none !important;  
       min-height: 100vh;  
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
       transition: background-color 0.4s ease, filter 0.4s ease;  
@@ -95,7 +97,7 @@
 
     /* --- SPECIAL EFFECTS --- */  
 
-    /* 3. Laser Overlay */  
+    /* Laser Overlay */  
     .laser-overlay {  
       position: fixed;  
       top: 0; left: 0; width: 100vw; height: 100vh;  
@@ -106,7 +108,7 @@
     }  
     @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }  
 
-    /* 4. Screen Shake */  
+    /* Screen Shake */  
     .shake-effect { animation: shake 0.4s ease-in-out; }  
     @keyframes shake {  
       0%, 100% { transform: translate(0, 0); }  
@@ -116,13 +118,13 @@
       80% { transform: translate(5px, -4px); }  
     }  
 
-    /* 5. Cinema Mode */  
+    /* Cinema Mode */  
     .cinema-effect { filter: grayscale(100%) contrast(120%); }  
 
-    /* 6. Light Theme */  
+    /* Light Theme */  
     html.light-theme, body.light-theme { background-color: #f1f1f1 !important; color: #222222 !important; }  
 
-    /* 7. Matrix Mode */  
+    /* Matrix Mode */  
     html.matrix-mode, body.matrix-mode {  
       background-color: #0d0d0d !important;  
       color: #00ff66 !important;  
@@ -130,14 +132,14 @@
       text-shadow: 0 0 5px #00ff66;  
     }  
 
-    /* 8. City Mode */  
+    /* City Mode */  
     html.city-mode, body.city-mode {  
       background: #0f172a url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed !important;  
       background-size: cover !important;  
       color: #f8fafc;  
     }  
 
-    /* 9. Snow Effect */  
+    /* Snow Effect */  
     .snowflake {  
       position: fixed;  
       top: -20px;  
@@ -151,14 +153,14 @@
       to { transform: translateY(105vh) rotate(360deg); }  
     }  
 
-    /* 10. Parchment Mode */  
+    /* Parchment Mode */  
     html.parchment-mode, body.parchment-mode {  
       background-color: #f4e4bc !important;  
       color: #3b2314 !important;  
       font-family: 'Georgia', serif;  
     }  
 
-    /* 11. Disco Effect */  
+    /* Disco Effect */  
     .disco-effect {  
       animation: discoParty 0.3s infinite alternate;  
     }  
@@ -170,7 +172,7 @@
       100% { background-color: #00ff66 !important; }  
     }  
 
-    /* 12. Laugh Emoji Blast */  
+    /* Laugh Emoji Blast */  
     .laugh-emoji {  
       position: fixed;  
       font-size: 2rem;  
