@@ -10,22 +10,11 @@
     html, body {  
       margin: 0;  
       padding: 0;  
-      /* Semi-transparent background so text stays visible on web browsers and overlays work properly */
-      background: rgba(18, 18, 18, 0.85);  
-      color: #ffffff;  
+      background: transparent !important;  
       min-height: 100vh;  
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
       transition: background-color 0.4s ease, filter 0.4s ease;  
       overflow-x: hidden;  
-    }  
-
-    .container {  
-      max-width: 600px;  
-      margin: 0 auto;  
-      text-align: center;  
-      padding-top: 50px;  
-      position: relative;  
-      z-index: 2;  
     }  
 
     /* Floating Gear Button */  
@@ -196,11 +185,6 @@
   </style>  
 </head>  
 <body>
-
-  <div class="container">
-    <h1>Chess Club Widget</h1>
-    <p>Click the gear icon in the bottom right corner to launch effects!</p>
-  </div>
 
   <button id="gear-btn" class="gear-btn" title="Toggle Tray">⚙️</button>  
 
