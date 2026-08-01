@@ -18,21 +18,26 @@
    0. DESIGN TOKENS
 ============================================================ */
 :root{
-  --cream:#FAF7F0;          /* Swiss white / warm white */
-  --cream-soft:#F3EBDD;
-
   --cherry-deep:#6D0001;
-  --cherry:#9A0002;         /* main border */
-  --cherry-light:#C62828;
+  --cherry:#9A0002;
+  --cherry-mid:#9A0002;
+  --cherry-light:#B71C1C;
 
-  --gold:#D4AF37;           /* classic gold text */
+  --gold:#D4AF37;
   --gold-bright:#F5D76E;
   --gold-dim:#B8962E;
 
-  --ink:#2B211D;            /* dark readable text */
-  --ink-muted:#756A63;
+  --cream:#FAF7F0;
+  --cream-dim:#EDE4D3;
 
-  --card-bg:#FFFFFF;        /* clean cards */
+  --ink:#2B211D;
+  --ink-muted:#6D0001;
+
+  --text-primary:#6D0001;
+  --text-secondary:#9A0002;
+  --text-gold:#D4AF37;
+
+  --card-bg:#FFFFFF;
 
   --radius-sm:8px;
   --radius-md:12px;
@@ -50,6 +55,25 @@ body{
   padding:0;
   min-height:100vh;
   -webkit-font-smoothing:antialiased;
+}
+
+/* Visibility improvements */
+h1,h2,h3{
+  color:var(--cherry);
+}
+
+.stat-number,
+.rating,
+.score,
+.highlight-number{
+  color:var(--gold);
+  font-weight:700;
+}
+
+.label,
+.subtitle,
+.meta{
+  color:var(--text-primary);
 }
 /* ============================================================
    1. RESET & BASE
