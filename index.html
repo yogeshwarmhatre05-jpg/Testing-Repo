@@ -69,13 +69,17 @@ body{
 
 /* Text */
 h1,h2,h3,
-.stat-value,
+.club-name,
 .section-title{
-  color:#B85C1A;
+color:#5E1F22;
 }
 
-p,span,a{
-  color:#211B17;
+p,
+span,
+a,
+.stat-label,
+.member-sub{
+color:var(--text);
 }
 body{
   font-family:var(--font-body);
@@ -127,14 +131,20 @@ p,span,div,a,
 .anthem-player,
 .calendar-card,
 .partner-card,
-.feature-card,
-.action-btn,
 .section,
-.card{
-  background:#E8DDCA;
-  border-radius:18px;
-  border:1px solid #B8862C;
-  color:#211B17;
+.card,
+.action-btn{
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:16px;
+
+box-shadow:
+0 6px 15px rgba(50,30,15,.08);
+
+color:var(--text);
 }
 /* ============================================================
    1. RESET & BASE
