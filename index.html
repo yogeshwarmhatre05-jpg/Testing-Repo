@@ -808,12 +808,12 @@ const PARTNERED_CLUBS = [
   {
     name: "TheRateClimber's Friends",
     slug: "therateclimbersfriends",
-    logo: "♘"
+    logo: "♞"
   },
   {
     name: "The anime lover forever club",
     slug: "the-anime-lover-forever-club",
-    logo: "♖"
+    logo: "♜"
   }
 ];
 
@@ -1128,7 +1128,7 @@ function loadPartners(){
   const list = document.getElementById("partnerList");
   list.innerHTML = PARTNERED_CLUBS.map(p => `
     <div class="partner-card">
-      <img class="partner-logo" src="${p.logo || ''}" alt="${p.name} logo" loading="lazy">
+      <div class="partner-logo">${p.logo}</div>
       <div class="partner-name">${p.name}</div>
       <a class="partner-visit" href="https://www.chess.com/club/${p.slug}" target="_blank" rel="noopener">Visit</a>
     </div>
