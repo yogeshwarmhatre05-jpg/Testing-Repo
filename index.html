@@ -601,7 +601,7 @@ input[type="range"]::-moz-range-thumb{
       <div class="owner-info">
         <div class="owner-name" id="ownerName">Loading…</div>
         <div class="owner-role">Founder &amp; Administrator</div>
-        <a class="owner-link" id="ownerLink" href="https://www.chess.com/member/cutegirl1901" target="_blank" rel="noopener">
+        <a class="owner-link" id="ownerLink" target="_blank" rel="noopener">
           View profile
           <svg class="icon" style="width:11px;height:11px;stroke-width:2" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -891,7 +891,7 @@ async function loadClubInfo(){
   // Owner = first admin listed on the club
   if(club.admin && club.admin.length){
     const ownerUsername = club.admin[0].split("/").pop();
-    loadOwner(ownerUsername);
+    loadOwner(cutegirl1901);
   } else {
     document.getElementById("ownerName").textContent = "Unavailable";
   }
