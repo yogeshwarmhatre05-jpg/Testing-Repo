@@ -166,17 +166,20 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
    2. SIDEBAR SHELL
 ============================================================ */
 .sidebar{
-  width:100%;
-  max-width:325px;
-  position:relative;
-  background:
-    repeating-linear-gradient(...),
-    repeating-linear-gradient(...),
-    linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
-  border:1px solid rgba(201,162,74,0.35);
-  border-radius:var(--radius-lg);
-  overflow:hidden;
-  box-shadow:0 18px 40px rgba(0,0,0,0.45);
+ width:100%;
+ max-width:325px;
+
+ background:rgba(255,250,240,0.45);
+
+ border:1px solid rgba(139,46,46,.25);
+ border-radius:22px;
+
+ overflow:hidden;
+
+ box-shadow:
+ 0 15px 35px rgba(40,20,10,.18);
+
+ backdrop-filter:blur(12px);
 }
 
 /* faint corner ornaments */
