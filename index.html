@@ -18,18 +18,42 @@
    0. DESIGN TOKENS
 ============================================================ */
 :root{
-  --cream:#211B17;        /* all main text dark */
-  --cream-dim:#4A4038;    /* secondary text */
-  --ink-muted:#6E6258;    /* muted text */
+  --box-bg:rgba(232,221,202,0.75); /* slightly transparent cream */
+  --text-dark:#211B17;
+  --orange:#B85C1A; /* dark orange text */
+  --border:#B8862C;
+}
 
-  --card-bg:#E8DDCA;      /* boxes/cards */
-  --gold:#B8862C;         /* borders */
-  --gold-bright:#D4A84C;
+/* Text */
+body,
+h1,h2,h3,h4,h5,h6,
+p,span,div,a{
+  color:var(--text-dark);
+}
 
-  --navy:#E8DDCA;
-  --navy-mid:#D8CDB8;
-  --navy-light:#F2E8D8;
-  --navy-deep:#C8BDA8;
+/* Orange headings/numbers */
+.stat-value,
+.stat-label,
+.card-title,
+.section-title,
+.eyebrow{
+  color:var(--orange);
+}
+
+/* Transparent rounded boxes */
+.owner-card,
+.stat-card,
+.anthem-player,
+.calendar-card,
+.partner-card,
+.feature-card,
+.action-btn,
+.section,
+.card{
+  background:var(--box-bg);
+  border:1px solid var(--border);
+  border-radius:18px;
+  backdrop-filter:blur(8px);
 }
 body{
   font-family:var(--font-body);
