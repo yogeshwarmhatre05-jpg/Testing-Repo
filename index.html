@@ -18,11 +18,33 @@
    0. DESIGN TOKENS
 ============================================================ */
 :root{
-  --background:#C8BDA8;
-  --box:#E8DDCA;
-  --text:#211B17;
-  --accent:#B85C1A;
-  --border:#A87932;
+  --bg:#E7D8C5;
+  --card:rgba(250,242,230,0.82);
+  --text:#241A15;
+  --muted:#6D6258;
+  --accent:#8B2E2E;
+  --bronze:#A66A2C;
+  --border:rgba(139,46,46,0.25);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:
+  linear-gradient(rgba(231,216,197,.92),rgba(231,216,197,.92)),
+  url("https://i.ibb.co/fYWS7fsJ/22a0db2f2744453ae0e00a4146fd8a4d.jpg");
+
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+
+  color:var(--text);
+  display:flex;
+  justify-content:center;
+  padding:18px 10px;
 }
 
 /* Page */
