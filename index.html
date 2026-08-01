@@ -911,7 +911,9 @@ async function loadOwner(username){
     document.getElementById("ownerName").textContent = username;
     document.getElementById("ownerLink").href = `https://www.chess.com/member/${username}`;
     return;
-  }document.getElementById("ownerAvatar").src = profile.avatar || "";
+  }document.getElementById("ownerAvatar").src =
+profile.avatar ||
+`https://www.chess.com/bundles/web/images/noavatar_l.png`;
   document.getElementById("ownerName").textContent = profile.name || profile.username;
   document.getElementById("ownerLink").href = profile.url || `https://www.chess.com/member/${username}`;
 }
