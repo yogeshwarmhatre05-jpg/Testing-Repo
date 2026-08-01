@@ -18,141 +18,26 @@
    0. DESIGN TOKENS
 ============================================================ */
 :root{
-  --bg:#EFE6DE;
-  --card:rgba(255,248,240,0.78);
-  --card-dark:#F5E7DA;
-
-  --text:#241A15;
-  --muted:#6D6258;
-
-  --cherry:#9A0002;
-  --cherry-dark:#5E1F22;
-
-  --gold:#A66A2C;
-  --border:rgba(154,0,2,0.22);
-
-  --shadow:0 8px 20px rgba(60,25,15,.12);
+  --navy-deep:      #0a1630;
+  --navy:            #0f1f45;
+  --navy-mid:        #16295e;
+  --navy-light:      #1f3572;
+  --gold:            #c9a24a;
+  --gold-bright:     #e6c876;
+  --gold-dim:        #8a743a;
+  --cream:           #f2ede1;
+  --cream-dim:       #c7c2b6;
+  --ink-muted:       #9aa4c4;
+  --card-bg:         #122script;
+  --radius-sm:       8px;
+  --radius-md:       12px;
+  --radius-lg:       16px;
+  --shadow-soft:     0 4px 14px rgba(0,0,0,0.28);
+  --font-display:    'Cinzel', serif;
+  --font-accent:     'Cormorant Garamond', serif;
+  --font-body:       'Inter', sans-serif;
 }
 
-*{
-  box-sizing:border-box;
-}
-
-body{
-  font-family:'Inter',sans-serif;
-  background:
-  linear-gradient(rgba(231,216,197,.92),rgba(231,216,197,.92)),
-  url("https://i.ibb.co/fYWS7fsJ/22a0db2f2744453ae0e00a4146fd8a4d.jpg");
-
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
-
-  color:var(--text);
-  display:flex;
-  justify-content:center;
-  padding:18px 10px;
-}
-
-/* Page */
-body{
-  background:#C8BDA8;
-  color:#211B17;
-}
-
-/* Simple boxes */
-.owner-card,
-.stat-card,
-.anthem-player,
-.calendar-card,
-.partner-card,
-.section,
-.card{
-  background:rgba(232,221,202,0.85);
-  border:1px solid #A87932;
-  border-radius:14px;
-  box-shadow:0 4px 12px rgba(33,27,23,0.12);
-}
-
-/* Text */
-h1,h2,h3,
-.club-name,
-.section-title{
-color:#5E1F22;
-}
-
-p,
-span,
-a,
-.stat-label,
-.member-sub{
-color:var(--text);
-}
-body{
-  font-family:var(--font-body);
-  background-image:url("https://i.ibb.co/fYWS7fsJ/22a0db2f2744453ae0e00a4146fd8a4d.jpg") !important;
-  background-size:cover !important;
-  background-position:center !important;
-  background-repeat:no-repeat !important;
-  background-attachment:fixed !important;
-  color:#211B17;
-  display:flex;
-  justify-content:center;
-  padding:0;
-  min-height:100vh;
-}
-/* Visibility improvements */
-h1,h2,h3{
-  color:var(--cherry);
-}
-
-.stat-number,
-.rating,
-.score,
-.highlight-number{
-  color:var(--gold);
-  font-weight:700;
-}
-
-.label,
-.subtitle,
-.meta{
-  color:var(--text-primary);
-}body{
-  color:#211B17;
-}
-
-/* All text dark */
-h1,h2,h3,h4,h5,h6,
-p,span,div,a,
-.stat-value,
-.stat-label,
-.card-title,
-.card-text{
-  color:#211B17;
-}
-
-/* All boxes rounded with cream background */
-.owner-card,
-.stat-card,
-.anthem-player,
-.calendar-card,
-.partner-card,
-.section,
-.card,
-.action-btn{
-
-background:var(--card);
-
-border:1px solid var(--border);
-
-border-radius:16px;
-
-box-shadow:
-0 6px 15px rgba(50,30,15,.08);
-
-color:var(--text);
-}
 /* ============================================================
    1. RESET & BASE
 ============================================================ */
@@ -179,24 +64,20 @@ a{ color:inherit; text-decoration:none; }
 button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
 
 /* ============================================================
-
    2. SIDEBAR SHELL
 ============================================================ */
 .sidebar{
- width:100%;
- max-width:325px;
-
- background:rgba(255,250,240,0.45);
-
- border:1px solid rgba(139,46,46,.25);
- border-radius:22px;
-
- overflow:hidden;
-
- box-shadow:
- 0 15px 35px rgba(40,20,10,.18);
-
- backdrop-filter:blur(12px);
+  width:100%;
+  max-width:325px;
+  position:relative;
+  background:
+    repeating-linear-gradient(45deg, rgba(201,162,74,0.035) 0 2px, transparent 2px 34px),
+    repeating-linear-gradient(-45deg, rgba(201,162,74,0.035) 0 2px, transparent 2px 34px),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+  border:1px solid rgba(201,162,74,0.35);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:0 18px 40px rgba(0,0,0,0.45);
 }
 
 /* faint corner ornaments */
@@ -249,8 +130,7 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
 
 /* generic icon sizing */
 .icon{ width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.6; }
-
-/* ============================================================
+ ============================================================
    3. CLUB HEADER
 ============================================================ */
 .club-header{
