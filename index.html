@@ -902,12 +902,9 @@ async function loadClubInfo(){
   document.getElementById("statGoal").textContent = (members + 100).toLocaleString();
 
   // Owner = first admin listed on the club
-  if(club.admin && club.admin.length){
-    const ownerUsername = club.admin[0].split("/").pop();
-    loadOwner(cutegirl1901);
-  } else {
-    document.getElementById("ownerName").textContent = "Unavailable";
-  }
+  document.getElementById("ownerName").textContent = "cutegirl1901";
+document.getElementById("ownerLink").href = "https://www.chess.com/member/cutegirl1901";
+document.getElementById("ownerAvatar").src = "";
 
   return club;
 }
