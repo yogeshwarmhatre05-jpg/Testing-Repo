@@ -18,42 +18,42 @@
    0. DESIGN TOKENS
 ============================================================ */
 :root{
-  --box-bg:rgba(232,221,202,0.75); /* slightly transparent cream */
-  --text-dark:#211B17;
-  --orange:#B85C1A; /* dark orange text */
-  --border:#B8862C;
+  --background:#C8BDA8;
+  --box:#E8DDCA;
+  --text:#211B17;
+  --accent:#B85C1A;
+  --border:#A87932;
 }
 
-/* Text */
-body,
-h1,h2,h3,h4,h5,h6,
-p,span,div,a{
-  color:var(--text-dark);
+/* Page */
+body{
+  background:#C8BDA8;
+  color:#211B17;
 }
 
-/* Orange headings/numbers */
-.stat-value,
-.stat-label,
-.card-title,
-.section-title,
-.eyebrow{
-  color:var(--orange);
-}
-
-/* Transparent rounded boxes */
+/* Simple boxes */
 .owner-card,
 .stat-card,
 .anthem-player,
 .calendar-card,
 .partner-card,
-.feature-card,
-.action-btn,
 .section,
 .card{
-  background:var(--box-bg);
-  border:1px solid var(--border);
-  border-radius:18px;
-  backdrop-filter:blur(8px);
+  background:rgba(232,221,202,0.85);
+  border:1px solid #A87932;
+  border-radius:14px;
+  box-shadow:0 4px 12px rgba(33,27,23,0.12);
+}
+
+/* Text */
+h1,h2,h3,
+.stat-value,
+.section-title{
+  color:#B85C1A;
+}
+
+p,span,a{
+  color:#211B17;
 }
 body{
   font-family:var(--font-body);
