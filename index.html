@@ -28,7 +28,9 @@
   --cream:           #f2ede1;
   --cream-dim:       #c7c2b6;
   --ink-muted:       #9aa4c4;
-  --card-bg:         #122script;
+  --card-bg:         #12234a;
+  --good:            #6fbf7a;
+  --warn:            #d9a441;
   --radius-sm:       8px;
   --radius-md:       12px;
   --radius-lg:       16px;
@@ -74,7 +76,7 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
     repeating-linear-gradient(45deg, rgba(201,162,74,0.035) 0 2px, transparent 2px 34px),
     repeating-linear-gradient(-45deg, rgba(201,162,74,0.035) 0 2px, transparent 2px 34px),
     linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
-  border:1px solid rgba(201,162,74,0.35);
+  /* outer border removed per design update — soft shadow now carries the edge */
   border-radius:var(--radius-lg);
   overflow:hidden;
   box-shadow:0 18px 40px rgba(0,0,0,0.45);
@@ -171,6 +173,27 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
   margin-top:4px;
   letter-spacing:0.3px;
 }
+
+/* live sync indicator */
+.sync-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  margin-top:8px;
+  font-size:9.5px;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  color:var(--ink-muted);
+}
+.sync-dot{
+  width:6px; height:6px; border-radius:50%;
+  background:var(--good);
+  box-shadow:0 0 6px var(--good);
+  transition:background 0.3s ease, box-shadow 0.3s ease;
+}
+.sync-dot.retrying{ background:var(--warn); box-shadow:0 0 6px var(--warn); animation:pulse 1.2s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.4;} }
 
 /* ============================================================
    4. CLUB OWNER
@@ -273,10 +296,32 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
   overflow:hidden;
   border:1px solid rgba(201,162,74,0.3);
   box-shadow:var(--shadow-soft);
+  background:var(--navy-mid);
+  cursor:pointer;
 }
 .video-frame iframe{
   position:absolute; inset:0; width:100%; height:100%; border:0;
 }
+.video-frame .video-thumb{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover;
+}
+.video-frame .video-play{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(10,22,48,0.28);
+  transition:background 0.15s ease;
+}
+.video-frame:hover .video-play{ background:rgba(10,22,48,0.42); }
+.video-play .play-circle{
+  width:52px; height:52px;
+  border-radius:50%;
+  background:linear-gradient(160deg, var(--gold-bright), var(--gold));
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 6px 18px rgba(0,0,0,0.4);
+}
+.video-play .play-circle svg{ width:18px; height:18px; fill:var(--navy-deep); margin-left:2px; }
+
 .quote-card{
   margin-top:12px;
   background:linear-gradient(160deg, var(--navy-mid), var(--navy));
@@ -328,7 +373,6 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
   border-color:var(--gold);
   box-shadow:0 6px 16px rgba(0,0,0,0.35);
 }
-
 
 /* ============================================================
    8. CLUB ANTHEM AUDIO PLAYER
@@ -422,6 +466,7 @@ input[type="range"]::-moz-range-thumb{
   border:1px solid rgba(201,162,74,0.14);
   border-radius:var(--radius-sm);
   padding:8px 10px;
+  animation:fadeIn 0.35s ease both;
 }
 
 .member-rank{
@@ -438,6 +483,17 @@ input[type="range"]::-moz-range-thumb{
   border:1.5px solid rgba(201,162,74,0.5);
   flex-shrink:0;
   background:var(--navy-light);
+}
+.member-avatar-letter{
+  width:32px; height:32px;
+  border-radius:50%;
+  flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display);
+  font-size:12px; font-weight:700;
+  color:var(--navy-deep);
+  background:linear-gradient(160deg, var(--gold-bright), var(--gold-dim));
+  border:1.5px solid rgba(201,162,74,0.5);
 }
 .member-info{ flex:1; min-width:0; }
 .member-name{
@@ -556,6 +612,7 @@ input[type="range"]::-moz-range-thumb{
   letter-spacing:0.4px;
 }
 .sidebar-footer .gold{ color:var(--gold-bright); }
+.sidebar-footer .status-line{ margin-top:4px; }
 
 /* ============================================================
    13. RESPONSIVE
@@ -580,6 +637,12 @@ input[type="range"]::-moz-range-thumb{
   <div class="corner-ornament corner-tr">
     <svg viewBox="0 0 48 48"><path d="M4 44 Q4 14 34 6" stroke="#c9a24a" stroke-width="1.1" fill="none"/><path d="M4 44 Q10 30 4 18" stroke="#c9a24a" stroke-width="1" fill="none"/><circle cx="34" cy="6" r="2" fill="#c9a24a"/></svg>
   </div>
+  <div class="corner-ornament corner-bl">
+    <svg viewBox="0 0 48 48"><path d="M4 44 Q4 14 34 6" stroke="#c9a24a" stroke-width="1.1" fill="none"/><path d="M4 44 Q10 30 4 18" stroke="#c9a24a" stroke-width="1" fill="none"/><circle cx="34" cy="6" r="2" fill="#c9a24a"/></svg>
+  </div>
+  <div class="corner-ornament corner-br">
+    <svg viewBox="0 0 48 48"><path d="M4 44 Q4 14 34 6" stroke="#c9a24a" stroke-width="1.1" fill="none"/><path d="M4 44 Q10 30 4 18" stroke="#c9a24a" stroke-width="1" fill="none"/><circle cx="34" cy="6" r="2" fill="#c9a24a"/></svg>
+  </div>
 
   <!-- ============================== 1. CLUB HEADER ============================== -->
   <section class="section club-header" aria-label="Club header">
@@ -587,6 +650,10 @@ input[type="range"]::-moz-range-thumb{
     <img class="club-logo" id="clubLogo" src="" alt="Club logo" loading="lazy">
     <h1 class="club-name" id="clubName">Loading club…</h1>
     <p class="club-subtitle" id="clubSubtitle">A Sanctuary for Royal Play</p>
+    <div class="sync-row">
+      <span class="sync-dot" id="syncDot"></span>
+      <span id="syncLabel">Syncing…</span>
+    </div>
   </section>
 
   <hr class="divider">
@@ -599,14 +666,15 @@ input[type="range"]::-moz-range-thumb{
       <div class="owner-info">
         <div class="owner-name" id="ownerName">Loading…</div>
         <div class="owner-role">Founder &amp; Administrator</div>
-        <a class="owner-link" id="ownerLink" href="#https://www.chess.com/member/cutegirl1901" target="_blank" rel="noopener">
+        <a class="owner-link" id="ownerLink" href="https://www.chess.com/member/cutegirl1901" target="_blank" rel="noopener">
           View profile
           <svg class="icon" style="width:11px;height:11px;stroke-width:2" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
   </section>
-<hr class="divider">
+
+  <hr class="divider">
 
   <!-- ============================== 3. CLUB STATISTICS ============================== -->
   <section class="section" aria-label="Club statistics">
@@ -623,124 +691,100 @@ input[type="range"]::-moz-range-thumb{
         <div class="stat-label">Member Goal</div>
       </div>
       <div class="stat-card full">
-        <svg class="stat-icon" viewBox="0 0 24 24"><path d="M4 20 20 4M4 4l16 16" stroke-linecap="round" style="display:none"/><path d="M12 2 4 7v5c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V7l-8-5Z" stroke-linejoin="round"/></svg>
+        <svg class="stat-icon" viewBox="0 0 24 24"><path d="M12 2 4 7v5c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V7l-8-5Z" stroke-linejoin="round"/></svg>
         <div class="stat-text">
           <div class="stat-user" id="statTopUser">—</div>
-          <div class="stat-label" style="margin-top:2px;">Highest Rated Player</div>
+          <div class="stat-label">Highest Rated Member</div>
         </div>
-        <div class="stat-value" id="statTopRating">—</div>
       </div>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- ============================== 4. FEATURED VIDEO ============================== -->
+  <!-- ============================== 4. FEATURED VIDEO + QUOTE ============================== -->
   <section class="section" aria-label="Featured video">
-  <p class="eyebrow">
-    <svg class="icon" viewBox="0 0 24 24">
-      <path d="M23 7 16 12l7 5V7Z" stroke-linejoin="round"/>
-      <rect x="1" y="5" width="15" height="14" rx="2"/>
-    </svg>
-    Featured Video
-  </p>
+    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 9.5 22 6v12l-5-3.5" stroke-linejoin="round"/></svg>Featured Video</p>
+    <div class="video-frame" id="videoFrame">
+      <img class="video-thumb" id="videoThumb" src="" alt="Featured video thumbnail" loading="lazy">
+      <div class="video-play" id="videoPlayOverlay">
+        <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M6 4v16l14-8Z"/></svg></div>
+      </div>
+    </div>
+    <div class="quote-card">
+      <p class="quote-text">"Every chess master was once a beginner. Play boldly, and the board will teach you the rest."</p>
+      <p class="quote-author">— Club Motto</p>
+    </div>
+  </section>
 
-  <style>
-    .video-frame{
-      width:100%;
-      aspect-ratio:16/9;
-      border-radius:16px;
-      overflow:hidden;
-      background:#000;
-    }
-
-    .video-frame video{
-      width:100%;
-      height:100%;
-      display:block;
-      object-fit:contain; /* Change to 'cover' if you want it to fill the frame */
-    }
-  </style>
-
-  <div class="video-frame">
-    <video autoplay muted loop playsinline controls>
-      <source src="https://files.catbox.moe/a03ic1.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-
-  <div class="quote-card">
-    <p class="quote-text" id="quoteText">
-      "Every chess master was once a beginner."
-    </p>
-    <p class="quote-author" id="quoteAuthor">
-      — Irving Chernev
-    </p>
-  </div>
-</section>
   <hr class="divider">
 
-  <!-- ============================== 5. ACTION BUTTONS ============================== -->
-  <section class="section" aria-label="Club actions">
+  <!-- ============================== 5. ACTIONS ============================== -->
+  <section class="section" aria-label="Quick actions">
     <div class="action-grid">
-      <a class="action-btn" href="#https://www.chess.com/clubs/forum/view/club-rules-649" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
-        Club Rules
+      <a class="action-btn" id="actionJoin" href="https://www.chess.com/club/rocking-superstar-team/join" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Join Club
       </a>
-      <a class="action-btn" href="#https://www.chess.com/clubs/forum/view/advertising-forum-907" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z" stroke-linejoin="round"/><path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14" stroke-linecap="round"/></svg>
-        Advertisement
+      <a class="action-btn" id="actionForum" href="https://www.chess.com/club/rocking-superstar-team/forum" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z" stroke-linejoin="round"/></svg>
+        Forum
+      </a>
+      <a class="action-btn" id="actionMatches" href="https://www.chess.com/club/rocking-superstar-team/matches" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 21V10M20 21V3M12 21v-7" stroke-linecap="round"/></svg>
+        Team Matches
+      </a>
+      <a class="action-btn" id="actionMembers" href="https://www.chess.com/club/rocking-superstar-team/members" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M17 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Members
       </a>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- ============================== 6. CLUB ANTHEM ============================== -->
+  <!-- ============================== 6. ANTHEM PLAYER ============================== -->
   <section class="section" aria-label="Club anthem">
     <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>Club Anthem</p>
     <div class="anthem-player">
-      <audio id="anthemAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="metadata"></audio>
       <div class="anthem-top">
         <button class="anthem-toggle" id="anthemToggle" aria-label="Play anthem">
-          <svg class="icon" id="anthemIcon" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4Z"/></svg>
+          <svg class="icon" id="anthemIcon" viewBox="0 0 24 24"><path d="M6 4v16l14-8Z"/></svg>
         </button>
         <div class="anthem-meta">
-          <div class="anthem-title">Club Anthem</div>
-          <div class="anthem-sub">Royal Superstar Team</div>
+          <div class="anthem-title" id="anthemTitle">Club Anthem</div>
+          <div class="anthem-sub" id="anthemSub">Tap to play</div>
         </div>
       </div>
       <div class="anthem-progress-row">
         <span id="anthemCurrent">0:00</span>
-        <div class="progress-track" id="anthemTrack">
-          <div class="progress-fill" id="anthemFill"></div>
-        </div>
+        <div class="progress-track" id="anthemTrack"><div class="progress-fill" id="anthemFill"></div></div>
         <span id="anthemDuration">0:00</span>
       </div>
       <div class="anthem-volume-row">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5Z" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 0 1 0 7" stroke-linecap="round"/></svg>
-        <input type="range" id="anthemVolume" min="0" max="1" step="0.01" value="0.7" aria-label="Volume">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4Z" stroke-linejoin="round"/><path d="M16 8a5 5 0 0 1 0 8" stroke-linecap="round"/></svg>
+        <input type="range" id="anthemVolume" min="0" max="100" value="70">
       </div>
+      <audio id="anthemAudio" preload="none" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
     </div>
   </section>
 
   <hr class="divider">
-
-  <!-- ============================== 7. NEWEST MEMBERS ============================== -->
+<!-- ============================== 7. NEWEST MEMBERS ============================== -->
   <section class="section" aria-label="Newest members">
-    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6" stroke-linecap="round" stroke-linejoin="round"/></svg>Newest Members</p>
+    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>Newest Members</p>
     <div class="member-list" id="newestList">
-      <div class="list-skeleton">Fetching newest members…</div>
+      <div class="list-skeleton">Loading members…</div>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- ============================== 8. HIGHEST RATED PLAYERS ============================== -->
+  <!-- ============================== 8. HIGHEST RATED ============================== -->
   <section class="section" aria-label="Highest rated players">
-    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M17 5h3a2 2 0 0 1-2 4M7 5H4a2 2 0 0 0 2 4" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 3h10v5a5 5 0 0 1-10 0V3Z" stroke-linejoin="round"/></svg>Highest Rated Players</p>
-    <div class="member-list" id="ratedList">
-      <div class="list-skeleton">Calculating top ratings…</div>
+    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1Z" stroke-linejoin="round"/></svg>Highest Rated Players</p>
+    <div class="member-list" id="leaderboardList">
+      <div class="list-skeleton">Crunching ratings…</div>
     </div>
   </section>
 
@@ -748,16 +792,16 @@ input[type="range"]::-moz-range-thumb{
 
   <!-- ============================== 9. CALENDAR ============================== -->
   <section class="section" aria-label="Club calendar">
-    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18" stroke-linecap="round"/></svg>Calendar</p>
+    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18" stroke-linecap="round"/></svg>Club Calendar</p>
     <div class="calendar-card">
       <div class="calendar-head">
-        <div class="calendar-title" id="calTitle">—</div>
+        <span class="calendar-title" id="calendarTitle">—</span>
         <div class="calendar-nav">
-          <button id="calPrev" aria-label="Previous month"><svg class="icon" viewBox="0 0 24 24"><path d="M15 6 9 12l6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <button id="calNext" aria-label="Next month"><svg class="icon" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button id="calPrev" aria-label="Previous month"><svg class="icon" viewBox="0 0 24 24"><path d="M15 18 9 12l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button id="calNext" aria-label="Next month"><svg class="icon" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         </div>
       </div>
-      <div class="calendar-grid" id="calGrid"></div>
+      <div class="calendar-grid" id="calendarGrid"></div>
     </div>
   </section>
 
@@ -765,371 +809,622 @@ input[type="range"]::-moz-range-thumb{
 
   <!-- ============================== 10. PARTNERED CLUBS ============================== -->
   <section class="section" aria-label="Partnered clubs">
-    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9.5 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM17.5 3.5a4 4 0 0 1 0 7.5M23 21v-2a4 4 0 0 0-3-3.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Partnered Clubs</p>
+    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.35-9.5-9C.5 7.5 3 3 7 3c2 0 4 1.5 5 3 1-1.5 3-3 5-3 4 0 6.5 4.5 4.5 9-2.5 4.65-9.5 9-9.5 9Z" stroke-linejoin="round"/></svg>Partnered Clubs</p>
     <div class="partner-list" id="partnerList"></div>
   </section>
 
-  <!-- ============================== FOOTER ============================== -->
-  <div class="sidebar-footer">
-    Crafted for <span class="gold">Rocking Superstar Team</span> · Est. Royal Chess Society
-  </div>
+  <!-- ============================== 11. FOOTER ============================== -->
+  <footer class="sidebar-footer">
+    <div>Est. member of <span class="gold">Chess.com</span> • Est. 2021</div>
+    <div class="status-line" id="footerStatus">Loading live club data…</div>
+  </footer>
 
-  <div class="corner-ornament corner-bl">
-    <svg viewBox="0 0 48 48"><path d="M4 44 Q4 14 34 6" stroke="#c9a24a" stroke-width="1.1" fill="none"/><path d="M4 44 Q10 30 4 18" stroke="#c9a24a" stroke-width="1" fill="none"/><circle cx="34" cy="6" r="2" fill="#c9a24a"/></svg>
-  </div>
-  <div class="corner-ornament corner-br">
-    <svg viewBox="0 0 48 48"><path d="M4 44 Q4 14 34 6" stroke="#c9a24a" stroke-width="1.1" fill="none"/><path d="M4 44 Q10 30 4 18" stroke="#c9a24a" stroke-width="1" fill="none"/><circle cx="34" cy="6" r="2" fill="#c9a24a"/></svg>
-  </div>
 </aside>
 
 <script>
-/* ==================================================================
-   CONFIG — change only these to point the sidebar at a new club
-================================================================== */
-const CLUB_SLUG = "rocking-superstar-team-1";
-const API_BASE  = "https://api.chess.com/pub";
+(function(){
+  "use strict";
 
-// Edit this array to feature your own partner clubs.
-const PARTNERED_CLUBS = [
-  { name: "Knight's Gambit Society", slug: "chess",              logo: "" },
-  { name: "Silent Bishops Guild",    slug: "chess",              logo: "" },
-  { name: "Crownwood Chess Circle",  slug: "chess",              logo: "" }
-];
-
-const CHESS_QUOTES = [
-  { text: "Every chess master was once a beginner.", author: "Irving Chernev" },
-  { text: "Chess is life in miniature.", author: "Garry Kasparov" },
-  { text: "When you see a good move, look for a better one.", author: "Emanuel Lasker" },
-  { text: "Chess is the gymnasium of the mind.", author: "Blaise Pascal" },
-  { text: "Tactics flow from a superior position.", author: "Bobby Fischer" },
-  { text: "The pin is mightier than the sword.", author: "Fred Reinfeld" },
-  { text: "Chess is beautiful enough to waste your life for.", author: "Hans Re" },
-  { text: "Play the opening like a book, the middlegame like a magician.", author: "Rudolf Spielmann" }
-];
-
-/* ==================================================================
-   HELPERS
-================================================================== */
-async function fetchJSON(url){
-  try{
-    const res = await fetch(url);
-    if(!res.ok) throw new Error("HTTP " + res.status);
-    return await res.json();
-  }catch(err){
-    console.warn("Fetch failed:", url, err.message);
-    return null;
-  }
-}
-
-function stripHtml(html){
-  const div = document.createElement("div");
-  div.innerHTML = html || "";
-  return (div.textContent || div.innerText || "").trim();
-}
-
-function fmtDate(unix){
-  if(!unix) return "—";
-  const d = new Date(unix * 1000);
-  return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
-}
-
-function bestRating(stats){
-  if(!stats) return 0;
-  const cats = ["chess_rapid", "chess_blitz", "chess_bullet", "chess_daily"];
-  let max = 0;
-  cats.forEach(c => {
-    const r = stats[c] && stats[c].last && stats[c].last.rating;
-    if(r && r > max) max = r;
-  });
-  return max;
-}
-
-// small concurrency-limited map, so we never fire 50 requests at once
-async function mapLimit(items, limit, fn){
-  const results = new Array(items.length);
-  let i = 0;
-  async function worker(){
-    while(i < items.length){
-      const idx = i++;
-      results[idx] = await fn(items[idx], idx);
-    }
-  }
-  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
-  return results;
-}
-
-/* ==================================================================
-   1–3. CLUB INFO + STATS
-================================================================== */
-async function loadClubInfo(){
-  const club = await fetchJSON(`${API_BASE}/club/${CLUB_SLUG}`);
-  if(!club){
-    document.getElementById("clubName").textContent = "Club unavailable";
-    return null;
-  }
-
-  document.getElementById("clubLogo").src = club.icon || "";
-  document.getElementById("clubLogo").alt = club.name + " logo";
-  document.getElementById("clubName").textContent = club.name;
-
-  const desc = stripHtml(club.description);
-  document.getElementById("clubSubtitle").textContent =
-    desc ? (desc.length > 70 ? desc.slice(0, 67) + "…" : desc) : "A Sanctuary for Royal Play";
-
-  const members = club.members_count || 0;
-  document.getElementById("statMembers").textContent = members.toLocaleString();
-  document.getElementById("statGoal").textContent = (members + 100).toLocaleString();
-
-  // Owner = first admin listed on the club
-  if(club.admin && club.admin.length){
-    const ownerUsername = club.admin[0].split("/").pop();
-    loadOwner(ownerUsername);
-  } else {
-    document.getElementById("ownerName").textContent = "Unavailable";
-  }
-
-  return club;
-}
-
-async function loadOwner(username){
-  const profile = await fetchJSON(`${API_BASE}/player/${username}`);
-  if(!profile){
-    document.getElementById("ownerName").textContent = username;
-    document.getElementById("ownerLink").href = `https://www.chess.com/member/${username}`;
-    return;
-  }
-  document.getElementById("ownerAvatar").src = profile.avatar || "";
-  document.getElementById("ownerName").textContent = profile.name || profile.username;
-  document.getElementById("ownerLink").href = profile.url || `https://www.chess.com/member/${username}`;
-}
-
-/* ==================================================================
-   MEMBERS: newest joins + highest rated (sections 3c, 7, 8)
-================================================================== */
-async function loadMembersAndRatings(){
-  const data = await fetchJSON(`${API_BASE}/club/${CLUB_SLUG}/members`);
-  if(!data){
-    document.getElementById("newestList").innerHTML = '<div class="list-skeleton">Unable to load members.</div>';
-    document.getElementById("ratedList").innerHTML  = '<div class="list-skeleton">Unable to load ratings.</div>';
-    return;
-  }
-
-  // merge all groups, sort by join date descending
-  const all = [...(data.weekly||[]), ...(data.monthly||[]), ...(data.all_time||[])];
-  const seen = new Set();
-  const merged = [];
-  all.forEach(m => { if(!seen.has(m.username)){ seen.add(m.username); merged.push(m); } });
-  merged.sort((a,b) => (b.joined||0) - (a.joined||0));
-
-  // -------- Newest members (top 8, with avatar + live rating) --------
-  const newest = merged.slice(0, 8);
-  const newestRows = await mapLimit(newest, 4, async (m) => {
-    const [profile, stats] = await Promise.all([
-      fetchJSON(`${API_BASE}/player/${m.username}`),
-      fetchJSON(`${API_BASE}/player/${m.username}/stats`)
-    ]);
-    return {
-      username: m.username,
-      joined: m.joined,
-      avatar: profile && profile.avatar,
-      url: (profile && profile.url) || `https://www.chess.com/member/${m.username}`,
-      rating: bestRating(stats)
-    };
-  });
-
-  document.getElementById("newestList").innerHTML = newestRows.map(r => `
-    <div class="member-row">
-      <img class="member-avatar" src="${r.avatar || ''}" alt="${r.username}" loading="lazy">
-      <div class="member-info">
-        <div class="member-name">${r.username}</div>
-        <div class="member-sub">Joined ${fmtDate(r.joined)}</div>
-      </div>
-      <div class="member-rating">${r.rating ? r.rating : '—'}</div>
-    </div>
-  `).join("") || '<div class="list-skeleton">No recent members found.</div>';
-
-  // -------- Highest rated (sample up to 24 members to stay light) --------
-  const sample = merged.slice(0, 24);
-  const rated = await mapLimit(sample, 5, async (m) => {
-    const [profile, stats] = await Promise.all([
-      fetchJSON(`${API_BASE}/player/${m.username}`),
-      fetchJSON(`${API_BASE}/player/${m.username}/stats`)
-    ]);
-    return {
-      username: m.username,
-      avatar: profile && profile.avatar,
-      url: (profile && profile.url) || `https://www.chess.com/member/${m.username}`,
-      rating: bestRating(stats)
-    };
-  });
-
-  const top = rated.filter(r => r.rating > 0).sort((a,b) => b.rating - a.rating).slice(0, 5);
-
-  document.getElementById("ratedList").innerHTML = top.map((r, i) => `
-    <div class="member-row">
-      <div class="member-rank">${i+1}</div>
-      <img class="member-avatar" src="${r.avatar || ''}" alt="${r.username}" loading="lazy">
-      <div class="member-info">
-        <div class="member-name">${r.username}</div>
-      </div>
-      <span class="member-badge">${r.rating}</span>
-    </div>
-  `).join("") || '<div class="list-skeleton">No ratings found.</div>';
-
-  // feed the "Highest Rated Player" stat card (section 3c)
-  if(top.length){
-    document.getElementById("statTopUser").textContent = top[0].username;
-    document.getElementById("statTopRating").textContent = top[0].rating;
-  } else {
-    document.getElementById("statTopUser").textContent = "N/A";
-    document.getElementById("statTopRating").textContent = "—";
-  }
-}
-
-/* ==================================================================
-   4. RANDOM QUOTE
-================================================================== */
-function loadQuote(){
-  const q = CHESS_QUOTES[Math.floor(Math.random() * CHESS_QUOTES.length)];
-  document.getElementById("quoteText").textContent = `"${q.text}"`;
-  document.getElementById("quoteAuthor").textContent = `— ${q.author}`;
-}
-
-/* ==================================================================
-   6. CLUB ANTHEM AUDIO PLAYER
-================================================================== */
-function initAnthemPlayer(){
-  const audio    = document.getElementById("anthemAudio");
-  const toggle   = document.getElementById("anthemToggle");
-  const icon     = document.getElementById("anthemIcon");
-  const track    = document.getElementById("anthemTrack");
-  const fill     = document.getElementById("anthemFill");
-  const current  = document.getElementById("anthemCurrent");
-  const duration = document.getElementById("anthemDuration");
-  const volume   = document.getElementById("anthemVolume");
-
-  const fmtTime = (s) => {
-    if(!isFinite(s)) return "0:00";
-    const m = Math.floor(s / 60);
-    const sec = Math.floor(s % 60).toString().padStart(2, "0");
-    return `${m}:${sec}`;
+  /* ============================================================
+     CONFIG — the only values you should need to edit
+  ============================================================ */
+  var CONFIG = {
+    CLUB_URL_NAME: "rocking-superstar-team",     // Chess.com club URL slug — verify this matches your club's URL
+    OWNER_USERNAME: "cutegirl1901",               // Chess.com username of the club owner
+    VIDEO_ID: "yhqV49us4J8",                      // YouTube video ID for the featured video — replace with your own
+    MEMBER_GOAL: 500,                              // Displayed membership goal
+    REFRESH_INTERVAL_MS: 45000,                    // How often club profile + member list are re-checked
+    STATS_TTL_MS: 10 * 60 * 1000,                  // How long a cached player rating is considered fresh
+    STATS_BATCH_PER_CYCLE: 15,                     // How many stale ratings to refresh per refresh cycle
+    MAX_NEWEST: 8,                                 // Rows shown in "Newest Members"
+    MAX_LEADERBOARD: 10,                           // Rows shown in "Highest Rated Players"
+    FETCH_CONCURRENCY: 4,                          // Simultaneous player-stat requests
+    FETCH_GAP_MS: 120,                             // Delay between queued requests (rate-limit friendly)
+    MAX_BACKOFF_MS: 5 * 60 * 1000,                 // Cap for retry backoff after repeated failures
+    PARTNER_CLUBS: [
+      { name: "Knights of the Round Table", url: "https://www.chess.com/club/knights-of-the-round-table", logo: "" },
+      { name: "Endgame Society",            url: "https://www.chess.com/club/endgame-society",            logo: "" },
+      { name: "Gambit Guild",               url: "https://www.chess.com/club/gambit-guild",                logo: "" }
+    ]
   };
 
-  const PLAY_PATH  = "M6 4l14 8-14 8V4Z";
-  const PAUSE_PATH = "M7 4h3v16H7zM14 4h3v16h-3z";
+  var API_BASE = "https://api.chess.com/pub";
 
-  toggle.addEventListener("click", () => {
-    if(audio.paused){
-      audio.play();
-      icon.innerHTML = `<path d="${PAUSE_PATH}"/>`;
-      toggle.setAttribute("aria-label", "Pause anthem");
-    } else {
-      audio.pause();
-      icon.innerHTML = `<path d="${PLAY_PATH}"/>`;
-      toggle.setAttribute("aria-label", "Play anthem");
-    }
-  });
-audio.addEventListener("loadedmetadata", () => {
-    duration.textContent = fmtTime(audio.duration);
-  });
+  /* ============================================================
+     DOM refs
+  ============================================================ */
+  var el = {
+    clubLogo: document.getElementById("clubLogo"),
+    clubName: document.getElementById("clubName"),
+    clubSubtitle: document.getElementById("clubSubtitle"),
+    syncDot: document.getElementById("syncDot"),
+    syncLabel: document.getElementById("syncLabel"),
+    ownerAvatar: document.getElementById("ownerAvatar"),
+    ownerName: document.getElementById("ownerName"),
+    ownerLink: document.getElementById("ownerLink"),
+    statMembers: document.getElementById("statMembers"),
+    statGoal: document.getElementById("statGoal"),
+    statTopUser: document.getElementById("statTopUser"),
+    newestList: document.getElementById("newestList"),
+    leaderboardList: document.getElementById("leaderboardList"),
+    footerStatus: document.getElementById("footerStatus"),
+    partnerList: document.getElementById("partnerList"),
+    videoFrame: document.getElementById("videoFrame"),
+    videoThumb: document.getElementById("videoThumb"),
+    videoPlayOverlay: document.getElementById("videoPlayOverlay")
+  };
 
-  audio.addEventListener("timeupdate", () => {
-    current.textContent = fmtTime(audio.currentTime);
-    if(audio.duration){
-      fill.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
-    }
-  });
-
-  audio.addEventListener("ended", () => {
-    icon.innerHTML = `<path d="${PLAY_PATH}"/>`;
-  });
-
-  track.addEventListener("click", (e) => {
-    const rect = track.getBoundingClientRect();
-    const ratio = (e.clientX - rect.left) / rect.width;
-    if(audio.duration) audio.currentTime = ratio * audio.duration;
-  });
-
-  volume.addEventListener("input", () => {
-    audio.volume = parseFloat(volume.value);
-  });
-  audio.volume = parseFloat(volume.value);
-}
-
-/* ==================================================================
-   9. CALENDAR
-================================================================== */
-function initCalendar(){
-  const titleEl = document.getElementById("calTitle");
-  const gridEl  = document.getElementById("calGrid");
-  const today   = new Date();
-  let viewDate  = new Date(today.getFullYear(), today.getMonth(), 1);
-
-  const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const DOWS   = ["S","M","T","W","T","F","S"];
-
-  function render(){
-    titleEl.textContent = `${MONTHS[viewDate.getMonth()]} ${viewDate.getFullYear()}`;
-    const firstDay = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1).getDay();
-    const daysInMonth = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 0).getDate();
-    const daysInPrevMonth = new Date(viewDate.getFullYear(), viewDate.getMonth(), 0).getDate();
-
-    let html = DOWS.map(d => `<div class="dow">${d}</div>`).join("");
-
-    for(let i = firstDay - 1; i >= 0; i--){
-      html += `<div class="day muted">${daysInPrevMonth - i}</div>`;
-    }
-    for(let d = 1; d <= daysInMonth; d++){
-      const isToday = d === today.getDate() &&
-        viewDate.getMonth() === today.getMonth() &&
-        viewDate.getFullYear() === today.getFullYear();
-      html += `<div class="day${isToday ? ' today' : ''}">${d}</div>`;
-    }
-    const totalCells = firstDay + daysInMonth;
-    const trailing = (7 - (totalCells % 7)) % 7;
-    for(let d = 1; d <= trailing; d++){
-      html += `<div class="day muted">${d}</div>`;
-    }
-    gridEl.innerHTML = html;
+  /* ============================================================
+     Utilities
+  ============================================================ */
+  function escapeHTML(str){
+    return String(str).replace(/[&<>"']/g, function(c){
+      return ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" })[c];
+    });
   }
 
-  document.getElementById("calPrev").addEventListener("click", () => {
-    viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
-    render();
+  function timeAgo(unixSeconds){
+    if(!unixSeconds) return "";
+    var diff = Math.max(0, (Date.now()/1000) - unixSeconds);
+    var units = [["yr",31536000],["mo",2592000],["d",86400],["h",3600],["m",60]];
+    for(var i=0;i<units.length;i++){
+      var v = Math.floor(diff / units[i][1]);
+      if(v >= 1) return v + units[i][0] + " ago";
+    }
+    return "just now";
+  }
+
+  function initials(username){
+    return (username || "?").charAt(0).toUpperCase();
+  }
+
+  function sleep(ms){ return new Promise(function(res){ setTimeout(res, ms); }); }
+
+  // Simple fetch wrapper: never throws, returns null on any failure so callers
+  // can fall back to previously-known-good data instead of clearing the UI.
+  function safeFetchJSON(url){
+    return fetch(url, { headers: { "Accept": "application/json" } })
+      .then(function(res){
+        if(!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .catch(function(err){
+        console.warn("[club-sidebar] fetch failed:", url, err.message);
+        return null;
+      });
+  }
+
+  // Bounded-concurrency task queue so we never fire dozens of simultaneous
+  // requests at the Chess.com API at once (keeps us well under rate limits).
+  function runQueue(tasks, concurrency, gapMs){
+    return new Promise(function(resolve){
+      var idx = 0, active = 0, done = 0;
+      if(tasks.length === 0) return resolve();
+      function next(){
+        if(done >= tasks.length) return resolve();
+        while(active < concurrency && idx < tasks.length){
+          (function(task){
+            active++;
+            Promise.resolve()
+              .then(task)
+              .catch(function(){})
+              .then(function(){
+                active--; done++;
+                setTimeout(next, gapMs);
+              });
+          })(tasks[idx++]);
+        }
+      }
+      next();
+    });
+  }
+
+  /* ============================================================
+     State
+  ============================================================ */
+  var state = {
+    clubProfile: null,
+    members: new Map(),      // username -> { joined }
+    stats: new Map(),        // username -> { rating, category, fetchedAt }
+    consecutiveFailures: 0,
+    isRefreshing: false,
+    initialSweepDone: false
+  };
+
+  /* ============================================================
+     Rendering
+  ============================================================ */
+  function setSyncStatus(mode){
+    // mode: "live" | "retrying" | "loading"
+    if(mode === "live"){
+      el.syncDot.classList.remove("retrying");
+      el.syncLabel.textContent = "Live";
+      el.footerStatus.textContent = "Synced • updated " + new Date().toLocaleTimeString();
+    } else if(mode === "retrying"){
+      el.syncDot.classList.add("retrying");
+      el.syncLabel.textContent = "Retrying…";
+      el.footerStatus.textContent = "Connection hiccup — showing last known data, retrying…";
+    } else {
+      el.syncDot.classList.remove("retrying");
+      el.syncLabel.textContent = "Syncing…";
+    }
+  }
+
+  function renderClubHeader(){
+    var p = state.clubProfile;
+    if(!p) return;
+    el.clubName.textContent = p.name || "Rocking Superstar Team";
+    if(p.icon) el.clubLogo.src = p.icon;
+    el.statMembers.textContent = (typeof p.members_count === "number") ? p.members_count.toLocaleString() : "—";
+    el.statGoal.textContent = CONFIG.MEMBER_GOAL.toLocaleString();
+  }
+
+  function renderOwner(profile){
+    if(!profile) return;
+    el.ownerName.textContent = profile.name || profile.username || CONFIG.OWNER_USERNAME;
+    if(profile.avatar) el.ownerAvatar.src = profile.avatar;
+    el.ownerLink.href = "https://www.chess.com/member/" + encodeURIComponent(CONFIG.OWNER_USERNAME);
+  }
+
+  function renderNewest(){
+    var rows = Array.from(state.members.entries())
+      .map(function(entry){ return { username: entry[0], joined: entry[1].joined }; })
+      .sort(function(a,b){ return b.joined - a.joined; })
+      .slice(0, CONFIG.MAX_NEWEST);
+
+    if(rows.length === 0){
+      el.newestList.innerHTML = '<div class="list-skeleton">No members found yet.</div>';
+      return;
+    }
+
+    el.newestList.innerHTML = rows.map(function(r, i){
+      return (
+        '<div class="member-row">' +
+          '<span class="member-rank">' + (i+1) + '</span>' +
+          '<span class="member-avatar-letter">' + escapeHTML(initials(r.username)) + '</span>' +
+          '<div class="member-info">' +
+            '<div class="member-name">' + escapeHTML(r.username) + '</div>' +
+            '<div class="member-sub">Joined ' + escapeHTML(timeAgo(r.joined)) + '</div>' +
+          '</div>' +
+          '<a class="member-badge" href="https://www.chess.com/member/' + encodeURIComponent(r.username) + '" target="_blank" rel="noopener">View</a>' +
+        '</div>'
+      );
+    }).join("");
+  }
+
+  function renderLeaderboard(){
+    var rows = Array.from(state.stats.entries())
+      .filter(function(entry){ return state.members.has(entry[0]); })
+      .map(function(entry){ return { username: entry[0], rating: entry[1].rating, category: entry[1].category }; })
+      .filter(function(r){ return typeof r.rating === "number"; })
+      .sort(function(a,b){ return b.rating - a.rating; })
+      .slice(0, CONFIG.MAX_LEADERBOARD);
+
+    if(rows.length === 0){
+      el.leaderboardList.innerHTML = '<div class="list-skeleton">Crunching ratings…</div>';
+      return;
+    }
+
+    el.leaderboardList.innerHTML = rows.map(function(r, i){
+      return (
+        '<div class="member-row">' +
+          '<span class="member-rank">' + (i+1) + '</span>' +
+          '<span class="member-avatar-letter">' + escapeHTML(initials(r.username)) + '</span>' +
+          '<div class="member-info">' +
+            '<div class="member-name">' + escapeHTML(r.username) + '</div>' +
+            '<div class="member-sub">' + escapeHTML(r.category) + '</div>' +
+          '</div>' +
+          '<span class="member-rating">' + r.rating + '</span>' +
+        '</div>'
+      );
+    }).join("");
+
+    if(rows.length){
+      el.statTopUser.textContent = rows[0].username + " (" + rows[0].rating + ")";
+    }
+  }
+
+  function renderPartners(){
+    el.partnerList.innerHTML = CONFIG.PARTNER_CLUBS.map(function(c){
+      var logo = c.logo ? c.logo : "";
+      var avatarHTML = logo
+        ? '<img class="partner-logo" src="' + escapeHTML(logo) + '" alt="' + escapeHTML(c.name) + ' logo" loading="lazy">'
+        : '<span class="partner-logo" style="display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;color:var(--gold-bright);">' + escapeHTML(initials(c.name)) + '</span>';
+      return (
+        '<div class="partner-card">' +
+          avatarHTML +
+          '<span class="partner-name">' + escapeHTML(c.name) + '</span>' +
+          '<a class="partner-visit" href="' + escapeHTML(c.url) + '" target="_blank" rel="noopener">Visit</a>' +
+        '</div>'
+      );
+    }).join("");
+  }
+
+  /* ============================================================
+     Data fetching
+  ============================================================ */
+  function normalizeMembers(raw){
+    var map = new Map();
+    if(!raw) return map;
+    ["weekly","monthly","all_time"].forEach(function(bucket){
+      (raw[bucket] || []).forEach(function(m){
+        if(!m || !m.username) return;
+        var existing = map.get(m.username);
+        var joined = typeof m.joined === "number" ? m.joined : 0;
+        if(!existing || joined > existing.joined){
+          map.set(m.username, { joined: joined });
+        }
+      });
+    });
+    return map;
+  }
+
+  function fetchPlayerStats(username){
+    return safeFetchJSON(API_BASE + "/player/" + encodeURIComponent(username) + "/stats")
+      .then(function(data){
+        if(!data) return; // keep whatever we had cached, if anything
+        var candidates = [
+          ["Rapid", data.chess_rapid],
+          ["Blitz", data.chess_blitz],
+          ["Bullet", data.chess_bullet],
+          ["Daily", data.chess_daily]
+        ];
+        var best = null;
+        candidates.forEach(function(c){
+          var label = c[0], obj = c[1];
+          if(obj && obj.last && typeof obj.last.rating === "number"){
+            if(!best || obj.last.rating > best.rating){
+              best = { rating: obj.last.rating, category: label };
+            }
+          }
+        });
+        if(best){
+          state.stats.set(username, {
+            rating: best.rating,
+            category: best.category,
+            fetchedAt: Date.now()
+          });
+        }
+      });
+  }
+
+  function queueStatsFor(usernames){
+    var tasks = usernames.map(function(u){
+      return function(){ return fetchPlayerStats(u); };
+    });
+    return runQueue(tasks, CONFIG.FETCH_CONCURRENCY, CONFIG.FETCH_GAP_MS);
+  }
+
+  function refreshStaleStats(){
+    var now = Date.now();
+    var stale = [];
+    state.members.forEach(function(_, username){
+      var cached = state.stats.get(username);
+      if(!cached || (now - cached.fetchedAt) > CONFIG.STATS_TTL_MS){
+        stale.push(username);
+      }
+    });
+    if(stale.length === 0) return Promise.resolve();
+    var batch = stale.slice(0, CONFIG.STATS_BATCH_PER_CYCLE);
+    return queueStatsFor(batch).then(renderLeaderboard);
+  }
+
+  function refreshClubProfile(){
+    return safeFetchJSON(API_BASE + "/club/" + CONFIG.CLUB_URL_NAME).then(function(data){
+      if(data){
+        state.clubProfile = data;
+        renderClubHeader();
+        return true;
+      }
+      return false; // keep last-known-good club header untouched
+    });
+  }
+
+  function refreshMembers(){
+    return safeFetchJSON(API_BASE + "/club/" + CONFIG.CLUB_URL_NAME + "/members").then(function(data){
+      if(!data) return false; // keep previous member state, retry next cycle
+
+      var fresh = normalizeMembers(data);
+      var freshUsernames = new Set(fresh.keys());
+
+      // Determine newly joined + newly departed members relative to current state
+      var added = [];
+      fresh.forEach(function(_, username){
+        if(!state.members.has(username)) added.push(username);
+      });
+      var removed = [];
+      state.members.forEach(function(_, username){
+        if(!freshUsernames.has(username)) removed.push(username);
+      });
+
+      state.members = fresh;
+
+      // Immediately drop departed members from every cached section
+      removed.forEach(function(username){ state.stats.delete(username); });
+
+      renderNewest();
+      renderLeaderboard();
+
+      // Fetch ratings for brand-new members right away so the leaderboard
+      // can include them as soon as possible.
+      if(added.length){
+        queueStatsFor(added).then(renderLeaderboard);
+      }
+
+      return true;
+    });
+  }
+function refreshMembers(){
+    return safeFetchJSON(API_BASE + "/club/" + CONFIG.CLUB_URL_NAME + "/members").then(function(data){
+      if(!data) return false; // keep previous member state, retry next cycle
+
+      var fresh = normalizeMembers(data);
+      var freshUsernames = new Set(fresh.keys());
+
+      // Determine newly joined + newly departed members relative to current state
+      var added = [];
+      fresh.forEach(function(_, username){
+        if(!state.members.has(username)) added.push(username);
+      });
+      var removed = [];
+      state.members.forEach(function(_, username){
+        if(!freshUsernames.has(username)) removed.push(username);
+      });
+
+      state.members = fresh;
+
+      // Immediately drop departed members from every cached section
+      removed.forEach(function(username){ state.stats.delete(username); });
+
+      renderNewest();
+      renderLeaderboard();
+
+      // Fetch ratings for brand-new members right away so the leaderboard
+      // can include them as soon as possible.
+      if(added.length){
+        queueStatsFor(added).then(renderLeaderboard);
+      }
+
+      return true;
+    });
+  }
+
+  function ensureFullLeaderboardSweep(){
+    if(state.initialSweepDone) return;
+    state.initialSweepDone = true;
+    var all = Array.from(state.members.keys());
+    // Fetch in the background, re-rendering as batches complete so the
+    // leaderboard fills in progressively rather than blocking on everyone.
+    var tasks = all.map(function(u){
+      return function(){
+        return fetchPlayerStats(u).then(function(){
+          // Re-render occasionally rather than after every single request
+          if(Math.random() < 0.2) renderLeaderboard();
+        });
+      };
+    });
+    runQueue(tasks, CONFIG.FETCH_CONCURRENCY, CONFIG.FETCH_GAP_MS).then(renderLeaderboard);
+  }
+
+  /* ============================================================
+     Refresh loop (self-scheduling with backoff, avoids overlap)
+  ============================================================ */
+  function cycle(){
+    if(state.isRefreshing) return; // guard against overlapping cycles
+    if(document.visibilityState !== "visible"){
+      scheduleNext(CONFIG.REFRESH_INTERVAL_MS);
+      return;
+    }
+
+    state.isRefreshing = true;
+    setSyncStatus("loading");
+
+    Promise.all([refreshClubProfile(), refreshMembers()])
+      .then(function(results){
+        var anySucceeded = results.indexOf(true) !== -1;
+        if(anySucceeded){
+          state.consecutiveFailures = 0;
+          setSyncStatus("live");
+          ensureFullLeaderboardSweep();
+          return refreshStaleStats();
+        } else {
+          state.consecutiveFailures++;
+          setSyncStatus("retrying");
+        }
+      })
+      .catch(function(err){
+        console.warn("[club-sidebar] refresh cycle error:", err);
+        state.consecutiveFailures++;
+        setSyncStatus("retrying");
+      })
+      .then(function(){
+        state.isRefreshing = false;
+        var backoff = Math.min(
+          CONFIG.REFRESH_INTERVAL_MS * Math.pow(1.6, state.consecutiveFailures),
+          CONFIG.MAX_BACKOFF_MS
+        );
+        scheduleNext(state.consecutiveFailures > 0 ? backoff : CONFIG.REFRESH_INTERVAL_MS);
+      });
+  }
+
+  var refreshTimer = null;
+  function scheduleNext(delay){
+    if(refreshTimer) clearTimeout(refreshTimer);
+    refreshTimer = setTimeout(cycle, delay);
+  }
+
+  document.addEventListener("visibilitychange", function(){
+    if(document.visibilityState === "visible" && !state.isRefreshing){
+      cycle(); // catch up immediately when the tab regains focus
+    }
   });
-  document.getElementById("calNext").addEventListener("click", () => {
-    viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
+
+  /* ============================================================
+     Featured video (click-to-load facade — avoids autoplay/embed
+     blocking issues and speeds up initial page load)
+  ============================================================ */
+  function initVideo(){
+    el.videoThumb.src = "https://img.youtube.com/vi/" + CONFIG.VIDEO_ID + "/hqdefault.jpg";
+    el.videoFrame.addEventListener("click", function loadVideo(){
+      var iframe = document.createElement("iframe");
+      iframe.src = "https://www.youtube-nocookie.com/embed/" + CONFIG.VIDEO_ID + "?autoplay=1&rel=0";
+      iframe.title = "Featured club video";
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      iframe.allowFullscreen = true;
+      el.videoFrame.innerHTML = "";
+      el.videoFrame.appendChild(iframe);
+      el.videoFrame.removeEventListener("click", loadVideo);
+      el.videoFrame.style.cursor = "default";
+    }, { once: true });
+  }
+
+  /* ============================================================
+     Anthem audio player
+  ============================================================ */
+  function initAnthem(){
+    var audio = document.getElementById("anthemAudio");
+    var toggle = document.getElementById("anthemToggle");
+    var icon = document.getElementById("anthemIcon");
+    var sub = document.getElementById("anthemSub");
+    var track = document.getElementById("anthemTrack");
+    var fill = document.getElementById("anthemFill");
+    var curEl = document.getElementById("anthemCurrent");
+    var durEl = document.getElementById("anthemDuration");
+    var volume = document.getElementById("anthemVolume");
+
+    var PLAY_PATH = "M6 4v16l14-8Z";
+    var PAUSE_PATH = "M7 5h4v14H7ZM13 5h4v14h-4Z";
+
+    function fmt(t){
+      if(!isFinite(t)) return "0:00";
+      var m = Math.floor(t/60), s = Math.floor(t%60);
+      return m + ":" + (s < 10 ? "0" : "") + s;
+    }
+
+    toggle.addEventListener("click", function(){
+      if(audio.paused){ audio.play().catch(function(){}); } else { audio.pause(); }
+    });
+    audio.addEventListener("play", function(){
+      icon.querySelector("path").setAttribute("d", PAUSE_PATH);
+      sub.textContent = "Now playing";
+    });
+    audio.addEventListener("pause", function(){
+      icon.querySelector("path").setAttribute("d", PLAY_PATH);
+      sub.textContent = "Paused";
+    });
+    audio.addEventListener("loadedmetadata", function(){
+      durEl.textContent = fmt(audio.duration);
+    });
+    audio.addEventListener("timeupdate", function(){
+      curEl.textContent = fmt(audio.currentTime);
+      if(audio.duration){
+        fill.style.width = ((audio.currentTime / audio.duration) * 100) + "%";
+      }
+    });
+    audio.addEventListener("ended", function(){
+      sub.textContent = "Tap to play";
+    });
+    track.addEventListener("click", function(e){
+      if(!audio.duration) return;
+      var rect = track.getBoundingClientRect();
+      var pct = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+      audio.currentTime = pct * audio.duration;
+    });
+    volume.addEventListener("input", function(){
+      audio.volume = volume.value / 100;
+    });
+    audio.volume = volume.value / 100;
+  }
+
+  /* ============================================================
+     Calendar
+  ============================================================ */
+  function initCalendar(){
+    var grid = document.getElementById("calendarGrid");
+    var title = document.getElementById("calendarTitle");
+    var prevBtn = document.getElementById("calPrev");
+    var nextBtn = document.getElementById("calNext");
+    var view = new Date();
+    view.setDate(1);
+
+    var monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    var dows = ["S","M","T","W","T","F","S"];
+
+    function render(){
+      var year = view.getFullYear(), month = view.getMonth();
+      title.textContent = monthNames[month] + " " + year;
+
+      var today = new Date();
+      var isCurrentMonth = today.getFullYear() === year && today.getMonth() === month;
+
+      var firstDow = new Date(year, month, 1).getDay();
+      var daysInMonth = new Date(year, month + 1, 0).getDate();
+      var daysInPrevMonth = new Date(year, month, 0).getDate();
+
+      var html = dows.map(function(d){ return '<div class="dow">' + d + '</div>'; }).join("");
+
+      for(var i = firstDow - 1; i >= 0; i--){
+        html += '<div class="day muted">' + (daysInPrevMonth - i) + '</div>';
+      }
+      for(var d2 = 1; d2 <= daysInMonth; d2++){
+        var isToday = isCurrentMonth && d2 === today.getDate();
+        html += '<div class="day' + (isToday ? ' today' : '') + '">' + d2 + '</div>';
+      }
+      var totalCells = firstDow + daysInMonth;
+      var trailing = (7 - (totalCells % 7)) % 7;
+      for(var d3 = 1; d3 <= trailing; d3++){
+        html += '<div class="day muted">' + d3 + '</div>';
+      }
+
+      grid.innerHTML = html;
+    }
+
+    prevBtn.addEventListener("click", function(){ view.setMonth(view.getMonth() - 1); render(); });
+    nextBtn.addEventListener("click", function(){ view.setMonth(view.getMonth() + 1); render(); });
     render();
-  });
+  }
 
-  render();
-}
+  /* ============================================================
+     Boot
+  ============================================================ */
+  function boot(){
+    renderPartners();
+    initVideo();
+    initAnthem();
+    initCalendar();
 
-/* ==================================================================
-   10. PARTNERED CLUBS
-================================================================== */
-function loadPartners(){
-  const list = document.getElementById("partnerList");
-  list.innerHTML = PARTNERED_CLUBS.map(p => `
-    <div class="partner-card">
-      <img class="partner-logo" src="${p.logo || ''}" alt="${p.name} logo" loading="lazy">
-      <div class="partner-name">${p.name}</div>
-      <a class="partner-visit" href="https://www.chess.com/club/${p.slug}" target="_blank" rel="noopener">Visit</a>
-    </div>
-  `).join("");
-}
+    safeFetchJSON(API_BASE + "/player/" + CONFIG.OWNER_USERNAME).then(renderOwner);
 
-/* ==================================================================
-   INIT
-================================================================== */
-document.addEventListener("DOMContentLoaded", () => {
-  loadQuote();
-  initAnthemPlayer();
-  initCalendar();
-  loadPartners();
-  loadClubInfo();
-  loadMembersAndRatings();
-});
+    cycle(); // kicks off the self-scheduling refresh loop
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+})();
 </script>
+
 </body>
 </html>
