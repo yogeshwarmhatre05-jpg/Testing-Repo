@@ -497,35 +497,23 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
   </section>
 
   <hr class="divider">
-
-  <!-- ============================== 7. TARGET PRACTICE ============================== -->
-  <section class="section" aria-label="Daily puzzle">
-    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>Target Practice</p>
-    <div class="puzzle-card glass">
-      <div class="puzzle-top">
-        <div class="puzzle-board" aria-hidden="true">
-          <span></span><span></span><span></span><span></span>
-          <span></span><span></span><span></span><span></span>
-          <span></span><span></span><span></span><span></span>
-          <span></span><span></span><span></span><span></span>
-        </div>
-        <div class="puzzle-meta">
-          <div class="puzzle-label" id="puzzleLabel">White to move</div>
-          <div class="puzzle-sub" id="puzzleDifficulty">Mate in 2 · Intermediate</div>
-        </div>
-      </div>
-      <p class="puzzle-desc" id="puzzleDesc">The black king is pinned to the back rank. Find the quiet move that seals the contract.</p>
-      <div class="puzzle-reveal-row">
-        <button class="puzzle-btn" id="puzzleRevealBtn">
-          Reveal Solution
-          <svg class="sparkle" id="puzzleSparkle" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4L12 2Z"/></svg>
-        </button>
-      </div>
-      <p class="puzzle-solution" id="puzzleSolution">1. Qg7#</p>
+<!-- ============================== 11. ACTION BUTTONS (vertical stack) ============================== -->
+  <section class="section" aria-label="Club actions">
+    <div class="action-stack">
+      <a class="action-btn glass" id="rulesBtn" href="#" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+        Club Rules
+      </a>
+      <a class="action-btn glass" id="joinBtn" href="#" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Join the Club
+      </a>
+      <a class="action-btn glass" id="forumBtn" href="#" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z" stroke-linejoin="round"/><path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14" stroke-linecap="round"/></svg>
+        Visit Club Forum
+      </a>
     </div>
   </section>
-
-  <hr class="divider">
 
   <!-- ============================== 8. BLADE OF THE DAY ============================== -->
   <section class="section" aria-label="Opening tip of the day">
@@ -561,24 +549,7 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
 
   <hr class="divider">
 
-  <!-- ============================== 11. ACTION BUTTONS (vertical stack) ============================== -->
-  <section class="section" aria-label="Club actions">
-    <div class="action-stack">
-      <a class="action-btn glass" id="rulesBtn" href="#" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
-        Club Rules
-      </a>
-      <a class="action-btn glass" id="joinBtn" href="#" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Join the Club
-      </a>
-      <a class="action-btn glass" id="forumBtn" href="#" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z" stroke-linejoin="round"/><path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14" stroke-linecap="round"/></svg>
-        Visit Club Forum
-      </a>
-    </div>
-  </section>
-
+  
   <div class="sidebar-footer">
     Crafted for <span class="accent">The Opening Assassins</span> · Trust no one, verify the rating
   </div>
