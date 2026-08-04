@@ -82,7 +82,7 @@ hr{
   height:2px;
   background:var(--gold);
   box-shadow:0 0 8px rgba(244,180,0,.6);
-  margin:0 0 24px;
+  margin:24px 0;
 }
 
 .section-label{
@@ -143,9 +143,34 @@ hr{
   border-width:9px 0 9px 15px;
   border-color:transparent transparent transparent var(--gold);
 }
-</style>
 
+.links-list{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.links-list a{
+  display:block;
+  text-align:center;
+  padding:16px;
+  border:1.5px solid var(--gold);
+  color:var(--gold);
+  text-decoration:none;
+  letter-spacing:2px;
+  font-weight:600;
+  background:linear-gradient(180deg,rgba(244,180,0,.06),transparent);
+  transition:.2s;
+}
+
+.links-list a:hover{
+  background:rgba(244,180,0,.14);
+  box-shadow:0 0 10px rgba(244,180,0,.4);
+}
+</style>
 </head>
+
 <body>
 
 <div class="card">
@@ -170,6 +195,33 @@ hr{
       <span class="play-badge"></span>
     </a>
   </div>
+
+  <hr>
+
+  <div class="section-label">
+    <span class="bar"></span>
+    <span>LINKS</span>
+  </div>
+
+  <ul class="links-list">
+    <li>
+      <a href="https://www.chess.com/club/synapse-bar" target="_blank">
+        CLUB PAGE
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.chess.com/leaderboard" target="_blank">
+        CHESS.COM LEADERBOARD
+      </a>
+    </li>
+
+    <li>
+      <a href="https://lichess.org" target="_blank">
+        LICHESS
+      </a>
+    </li>
+  </ul>
 
 </div>
 
