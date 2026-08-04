@@ -3,169 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <title>Club Sidebar</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --bg-top:#3a1730;
-    --bg-bottom:#5c1f2e;
-    --panel:#0c0405;
-    --panel-edge:#1a0708;
-    --red:#c81e2c;
-    --gold:#f4b400;
-    --gold-glow:#ffd23f;
-    --text-dim:#c9a8a0;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    padding:32px 16px;
-    background:
-      radial-gradient(circle at 0% 0%, #7a3a4a 0%, transparent 40%),
-      radial-gradient(circle at 100% 100%, #7a3a4a 0%, transparent 40%),
-      linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
-    font-family:'Oswald', sans-serif;
-  }
-  .card{
-    width:100%;
-    max-width:420px;
-    background:linear-gradient(180deg,var(--panel) 0%,var(--panel-edge) 100%);
-    border-left:6px solid var(--red);
-    box-shadow:0 0 24px rgba(200,30,44,0.35), inset 0 0 60px rgba(0,0,0,0.6);
-    padding:36px 26px 30px;
-  }
-  .eyebrow{
-    text-align:center;
-    color:var(--gold);
-    letter-spacing:6px;
-    font-size:12px;
-    font-weight:600;
-    margin:0 0 10px;
-  }
-  .owner-name{
-    text-align:center;
-    font-family:'Great Vibes', cursive;
-    font-size:46px;
-    color:#fff;
-    text-shadow:0 0 12px rgba(200,30,44,0.8);
-    margin:0 0 26px;
-  }
-  .club-name-box{
-    border:1.5px solid var(--gold);
-    box-shadow:0 0 10px rgba(244,180,0,0.35);
-    padding:26px 10px;
-    text-align:center;
-    margin-bottom:26px;
-  }
-  .club-name{
-    font-family:'Great Vibes', cursive;
-    font-size:58px;
-    color:var(--gold);
-    text-shadow:0 0 14px var(--gold-glow), 0 0 28px rgba(244,180,0,0.5);
-    margin:0;
-  }
-  hr{
-    border:none;
-    height:2px;
-    background:var(--gold);
-    box-shadow:0 0 8px rgba(244,180,0,0.6);
-    margin:0 0 24px;
-  }
-  .section-label{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:14px;
-  }
-  .section-label .bar{
-    width:4px;
-    height:18px;
-    background:var(--red);
-    box-shadow:0 0 6px var(--red);
-  }
-  .section-label span{
-    color:var(--gold);
-    letter-spacing:3px;
-    font-size:14px;
-    font-weight:600;
-  }
-  .anthem-frame{
-    border:1px solid #4a3030;
-    padding:8px;
-    margin-bottom:30px;
-  }
-  .anthem-frame a{
-    display:block;
-    position:relative;
-    text-decoration:none;
-  }
-  .anthem-frame img{
-    width:100%;
-    display:block;
-  }
-  .play-badge{
-    position:absolute;
-    top:50%;left:50%;
-    transform:translate(-50%,-50%);
-    width:52px;height:52px;
-    border-radius:50%;
-    background:rgba(0,0,0,0.6);
-    border:1px solid var(--gold);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .play-badge::after{
-    content:"";
-    border-style:solid;
-    border-width:9px 0 9px 15px;
-    border-color:transparent transparent transparent var(--gold);
-    margin-left:3px;
-  }
-  .rankings-list{
-    list-style:none;
-    margin:0 0 20px;
-    padding:0;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-  }
-  .rankings-list li a{
-    display:block;
-    text-align:center;
-    padding:16px 12px;
-    border:1.5px solid var(--gold);
-    color:var(--gold);
-    letter-spacing:2px;
-    font-weight:600;
-    font-size:15px;
-    text-decoration:none;
-    background:linear-gradient(180deg, rgba(244,180,0,0.06), transparent);
-    transition:background 0.2s ease, box-shadow 0.2s ease;
-  }
-  .rankings-list li a:hover,
-  .rankings-list li a:focus-visible{
-    background:rgba(244,180,0,0.14);
-    box-shadow:0 0 10px rgba(244,180,0,0.4);
-    outline:none;
-  }
-  .placeholder{
-    border:1px dashed var(--gold);
-    opacity:0.5;
-    height:70px;
-  }
+:root{
+  --bg-top:#3a1730;
+  --bg-bottom:#5c1f2e;
+  --panel:#0c0405;
+  --panel-edge:#1a0708;
+  --red:#c81e2c;
+  --gold:#f4b400;
+  --gold-glow:#ffd23f;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  padding:32px 16px;
+  background:
+    radial-gradient(circle at 0% 0%, #7a3a4a 0%, transparent 40%),
+    radial-gradient(circle at 100% 100%, #7a3a4a 0%, transparent 40%),
+    linear-gradient(180deg,var(--bg-top),var(--bg-bottom));
+  font-family:'Oswald',sans-serif;
+}
+
+.card{
+  width:100%;
+  max-width:420px;
+  background:linear-gradient(180deg,var(--panel),var(--panel-edge));
+  border-left:6px solid var(--red);
+  box-shadow:0 0 24px rgba(200,30,44,.35), inset 0 0 60px rgba(0,0,0,.6);
+  padding:36px 26px 30px;
+}
+
+.eyebrow{
+  text-align:center;
+  color:var(--gold);
+  letter-spacing:6px;
+  font-size:12px;
+  font-weight:600;
+  margin-bottom:10px;
+}
+
+.owner-name{
+  text-align:center;
+  font-family:'Great Vibes',cursive;
+  font-size:46px;
+  color:#fff;
+  text-shadow:0 0 12px rgba(200,30,44,.8);
+  margin-bottom:26px;
+}
+
+.club-name-box{
+  border:1.5px solid var(--gold);
+  box-shadow:0 0 10px rgba(244,180,0,.35);
+  padding:26px 10px;
+  text-align:center;
+  margin-bottom:26px;
+}
+
+.club-name{
+  font-family:'Great Vibes',cursive;
+  font-size:58px;
+  color:var(--gold);
+  text-shadow:0 0 14px var(--gold-glow),0 0 28px rgba(244,180,0,.5);
+}
+
+hr{
+  border:none;
+  height:2px;
+  background:var(--gold);
+  box-shadow:0 0 8px rgba(244,180,0,.6);
+  margin:0 0 24px;
+}
+
+.section-label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.bar{
+  width:4px;
+  height:18px;
+  background:var(--red);
+  box-shadow:0 0 6px var(--red);
+}
+
+.section-label span:last-child{
+  color:var(--gold);
+  letter-spacing:3px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.anthem-frame{
+  border:1px solid #4a3030;
+  padding:8px;
+}
+
+.anthem-frame a{
+  display:block;
+  position:relative;
+}
+
+.anthem-frame img{
+  width:100%;
+  display:block;
+}
+
+.play-badge{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:rgba(0,0,0,.6);
+  border:1px solid var(--gold);
+}
+
+.play-badge::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-40%,-50%);
+  border-style:solid;
+  border-width:9px 0 9px 15px;
+  border-color:transparent transparent transparent var(--gold);
+}
 </style>
+
 </head>
 <body>
 
 <div class="card">
+
   <p class="eyebrow">OWNER</p>
-  <p class="owner-name" id="ownerName">Michael Kaiser</p>
+  <p class="owner-name">Michael Kaiser</p>
 
   <div class="club-name-box">
-    <p class="club-name" id="clubName">Synapse Bar</p>
+    <p class="club-name">Synapse Bar</p>
   </div>
 
   <hr>
@@ -174,41 +163,15 @@
     <span class="bar"></span>
     <span>CLUB ANTHEM</span>
   </div>
+
   <div class="anthem-frame">
-    <a href="https://youtu.be/kcsGhOmULxQ" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/PjHIz9Bi7Fc/hqdefault.jpg" alt="Club anthem thumbnail">
+    <a href="https://youtu.be/kcsGhOmULxQ" target="_blank">
+      <img src="https://img.youtube.com/vi/kcsGhOmULxQ/hqdefault.jpg" alt="Club Anthem">
       <span class="play-badge"></span>
     </a>
   </div>
 
-  <div class="section-label">
-    <span class="bar"></span>
-    <span>DATA &amp; RANKINGS</span>
-  </div>
-  <ul class="rankings-list">
-    <li><a href="#https://www.chess.com/leaderboard/daily?group=920695" id="leaderboardLink">LEADERBOARD</a></li>
-    <li><a href="#" id="dailyGamesLink">DAILY GAMES</a></li>
-    <li><a href="#" id="streakLink">LICHESS STREAK</a></li>
-  </ul>
-
-  <div class="placeholder"></div>
 </div>
-
-<script>
-  // Swap these to point this widget at any club.
-  const CONFIG = {
-    owner: "Sky-Tempest",
-    clubName: "Octagon",
-    leaderboardUrl: "#",
-    dailyGamesUrl: "#",
-    streakUrl: "#"
-  };
-  document.getElementById('ownerName').textContent = CONFIG.owner;
-  document.getElementById('clubName').textContent = CONFIG.clubName;
-  document.getElementById('leaderboardLink').href = CONFIG.leaderboardUrl;
-  document.getElementById('dailyGamesLink').href = CONFIG.dailyGamesUrl;
-  document.getElementById('streakLink').href = CONFIG.streakUrl;
-</script>
 
 </body>
 </html>
