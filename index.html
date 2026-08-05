@@ -62,101 +62,7 @@ body{
 img{ max-width:100%; display:block; }    
 a{ color:inherit; text-decoration:none; }    
 button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }    
-/* ==================================================================
-   GROWTH CHARM — member goal graph
-================================================================== */
 
-.goal-card{
-  padding:14px 16px;
-}
-
-.goal-top{
-  display:flex;
-  align-items:baseline;
-  gap:5px;
-}
-
-.goal-current{
-  font-family:var(--font-signature);
-  font-weight:700;
-  font-size:22px;
-  color:var(--gold-bright);
-}
-
-.goal-sep{
-  font-family:var(--font-signature);
-  font-size:16px;
-  color:var(--parchment-dim);
-}
-
-.goal-target{
-  font-family:var(--font-signature);
-  font-weight:700;
-  font-size:16px;
-  color:var(--parchment-dim);
-}
-
-.goal-label{
-  font-size:10.5px;
-  color:var(--parchment-dim);
-  margin-left:4px;
-  text-transform:uppercase;
-  letter-spacing:0.5px;
-}
-
-.goal-bar-track{
-  height:8px;
-  border-radius:4px;
-  background:rgba(255,255,255,0.08);
-  margin-top:11px;
-  overflow:hidden;
-}
-
-.goal-bar-fill{
-  height:100%;
-  border-radius:4px;
-  width:0%;
-
-  background:
-  linear-gradient(
-    90deg,
-    var(--gold-dim),
-    var(--gold-bright)
-  );
-
-  transition:
-  width 1.1s cubic-bezier(0.16,1,0.3,1);
-}
-
-.goal-sub{
-  font-size:10.5px;
-  color:var(--parchment-dim);
-  margin-top:8px;
-  font-family:var(--font-accent);
-  font-style:italic;
-}
-
-.goal-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-
-  margin-top:10px;
-
-  font-size:10.5px;
-  color:var(--gold-bright);
-
-  background:
-  rgba(200,162,77,0.10);
-
-  border:
-  1px solid rgba(200,162,77,0.25);
-
-  padding:4px 9px;
-  border-radius:20px;
-
-  font-weight:600;
-}  
 /* ============================================================    
    2. SIDEBAR SHELL    
 ============================================================ */    
@@ -770,24 +676,6 @@ View profile
 stroke-linejoin="round"/>
 </svg>
 
-<!-- ============================== 3. GROWTH CHARM ============================== -->  
-  <section class="section" aria-label="Membership goal">  
-    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20V10M12 10c0-3 2-5 6-5-1 3-2 5-6 5ZM12 10c0-3-2-5-6-5 1 3 2 5 6 5Z" stroke-linejoin="round"/></svg>Growth Charm</p>  
-    <div class="goal-card glass">  
-      <div class="goal-top">  
-        <span class="goal-current" id="goalCurrent">0</span>  
-        <span class="goal-sep">/</span>  
-        <span class="goal-target" id="goalTarget">500</span>  
-        <span class="goal-label">members</span>  
-      </div>  
-      <div class="goal-bar-track"><div class="goal-bar-fill" id="goalBarFill"></div></div>  
-      <div class="goal-sub" id="goalSub"></div>  
-      <div class="goal-sub" id="goalNextTier" style="margin-top:2px; opacity:0.75;"></div>  
-      <span class="goal-badge" id="weeklyBadge" style="display:none;"></span>  
-    </div>  
-  </section>  
-  
-  <hr class="divider">  
   <!-- ============================== 4. FEATURED VIDEO ============================== -->    
   <section class="section" aria-label="Featured video">    
   <p class="eyebrow">    
