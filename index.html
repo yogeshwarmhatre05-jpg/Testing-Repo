@@ -942,15 +942,20 @@ async function loadClubInfo(){
   document.getElementById("clubSubtitle").textContent =    
     desc ? (desc.length > 70 ? desc.slice(0, 67) + "…" : desc) : "A Sanctuary for Royal Play";    
   
-  const members = club.members_count || 0;    
-  document.getElementById("statMembers").textContent = members.toLocaleString();    
-  const goal = Math.ceil((members + 1) / 100) * 100;  
-document.getElementById("statGoal").textContent = goal.toLocaleString();   
-  
-  // Owner = first admin listed on the club    
-  loadOwner("cutegirl1901");    
-  return club;    
-}    
+  const members = club.members_count || 0;
+const goal = Math.ceil((members + 1) / 100) * 100;
+const pct = Math.min(100, Math.round((members / goal) * 100));
+
+document.getElementById("statMembers").textContent = members.toLocaleString();
+document.getElementById("statGoal").textContent = goal.toLocaleString();
+document.getElementById("progressPercent").textContent = `${pct}%`;
+document.getElementById("progressSub").textContent = `${(goal - members).toLocaleString()} to go`;
+
+const circumference = 2 * Math.PI * 35; // ~220
+const ringFill = document.getElementById("progressRingFill");
+ringFill.style.strokeDasharray = circumference;
+ringFill.style.strokeDashoffset = circumference - (pct / 100) * circumference;
+}
   
 async function loadOwner(username){    
   const profile = await fetchJSON(`${API_BASE}/player/${username}`);    
