@@ -1,381 +1,436 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Synapse Bar — Club Sidebar</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --paper: #FAFAF8;
-    --paper-dim: #F1F0EC;
-    --ink: #111111;
-    --steel: #7A7A74;
-    --hairline: #DEDDD6;
-    --crimson: #C41E2F;
-    --crimson-dark: #9A1522;
-  }
+import React, { useState, useRef, useEffect } from "react";
+import { Plus, PanelLeft, ArrowUp, Square } from "lucide-react";
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+// ---- Design tokens -------------------------------------------------
+// Paper   #F5F4F0   Ink   #202325   Line   #DEDBD2
+// Petrol  #2F4858 (assistant mark)   Moss  #5B6B4F (user mark)
+// Brass   #9C8355 (quiet accent, never glowing)
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
+const THREADS = [
+  { id: 1, title: "Rewriting a cover letter", active: true },
+  { id: 2, title: "Chess opening theory" },
+  { id: 3, title: "Weekend trip to Porto" },
+  { id: 4, title: "Debugging a fetch race condition" },
+];
 
-  body {
-    background: var(--paper);
-    font-family: 'IBM Plex Sans', sans-serif;
-    color: var(--ink);
-  }
+const SAMPLE_EXCHANGE = [
+  {
+    role: "user",
+    text: "Can you help me tighten this paragraph? It feels bloated but I can't tell what to cut.",
+  },
+  {
+    role: "assistant",
+    text:
+      "Send it over and I'll mark what's doing real work versus what's just padding. Usually the first cut is easiest: any sentence that restates something the reader already inferred from the sentence before it. After that, look for hedges stacked on hedges — \"it could perhaps be argued that\" is five words where one claim would do.",
+  },
+];
 
-  .sb-widget {
-    width: 100%;
-    max-width: 340px;
-    background: var(--paper);
-    border: 1px solid var(--hairline);
-    margin: 0 auto;
-  }
+function Mark({ role }) {
+  return (
+    <span
+      aria-hidden="true"
+      style={{
+        display: "inline-block",
+        width: 9,
+        height: 9,
+        marginTop: 6,
+        flexShrink: 0,
+        background: role === "assistant" ? "#2F4858" : "#5B6B4F",
+        borderRadius: role === "assistant" ? "1px" : "50%",
+      }}
+    />
+  );
+}
 
-  /* ---------- Header ---------- */
-  .sb-header {
-    position: relative;
-    background: var(--ink);
-    color: var(--paper);
-    padding: 22px 20px 18px;
-    overflow: hidden;
-  }
-  .sb-header::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--hairline) 1px, transparent 1px),
-      linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
-    background-size: 14px 14px;
-    opacity: 0.06;
-    pointer-events: none;
-  }
-
-  .sb-header-top {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .sb-crest {
-    width: 52px;
-    height: 52px;
-    border: 2px solid var(--paper);
-    flex-shrink: 0;
-    display: block;
-    object-fit: cover;
-  }
-
-  .sb-crest-fallback {
-    width: 52px;
-    height: 52px;
-    border: 2px solid var(--paper);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Oswald', sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-  }
-
-  .sb-name-block { min-width: 0; }
-
-  .sb-name {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 20px;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    line-height: 1.1;
-  }
-
-  .sb-status {
-    position: relative;
-    margin-top: 10px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--paper);
-    opacity: 0.85;
-  }
-
-  .sb-status-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--crimson);
-    display: inline-block;
-  }
-
-  /* ---------- Owner strip ---------- */
-  .sb-owner {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--hairline);
-    text-decoration: none;
-    color: var(--ink);
-    transition: background-color 0.15s ease;
-  }
-
-  .sb-owner:hover { background: var(--paper-dim); }
-
-  .sb-owner-avatar {
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--hairline);
-    flex-shrink: 0;
-    object-fit: cover;
-  }
-
-  .sb-owner-text { min-width: 0; }
-
-  .sb-owner-role {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--crimson);
-    display: block;
-  }
-
-  .sb-owner-name {
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--ink);
-    margin-top: 2px;
-  }
-
-  /* ---------- Anthem ---------- */
-  .sb-section {
-    padding: 16px 20px 18px;
-    border-bottom: 1px solid var(--hairline);
-  }
-
-  .sb-eyebrow {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--steel);
-    margin-bottom: 10px;
-  }
-
-  .sb-anthem {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    background: var(--ink);
-    overflow: hidden;
-    cursor: pointer;
-    border: 1px solid var(--hairline);
-  }
-
-  .sb-anthem img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    opacity: 0.75;
-    transition: opacity 0.2s ease;
-  }
-
-  .sb-anthem:hover img { opacity: 0.55; }
-
-  .sb-anthem iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-
-  .sb-play {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 46px;
-    height: 46px;
-    background: var(--crimson);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.15s ease, background-color 0.15s ease;
-  }
-
-  .sb-anthem:hover .sb-play {
-    background: var(--crimson-dark);
-    transform: translate(-50%, -50%) scale(1.05);
-  }
-
-  .sb-play svg { width: 16px; height: 16px; fill: var(--paper); margin-left: 2px; }
-
-  /* ---------- Links ---------- */
-  .sb-links { padding: 4px 0; }
-
-  .sb-link {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 13px 20px;
-    text-decoration: none;
-    color: var(--ink);
-    border-bottom: 1px solid var(--hairline);
-    transition: background-color 0.15s ease, padding-left 0.15s ease;
-  }
-
-  .sb-link:last-child { border-bottom: none; }
-
-  .sb-link:hover {
-    background: var(--ink);
-    color: var(--paper);
-    padding-left: 24px;
-  }
-
-  .sb-link:hover .sb-coord { color: var(--crimson); }
-  .sb-link:hover .sb-arrow { border-color: var(--paper); }
-  .sb-link:hover .sb-arrow::after { border-color: var(--paper); }
-
-  .sb-coord {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    color: var(--steel);
-    width: 22px;
-    flex-shrink: 0;
-    transition: color 0.15s ease;
-  }
-
-  .sb-link-label {
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    flex: 1;
-  }
-
-  .sb-arrow {
-    width: 7px;
-    height: 7px;
-    border-top: 1.5px solid var(--ink);
-    border-right: 1.5px solid var(--ink);
-    transform: rotate(45deg);
-    flex-shrink: 0;
-    transition: border-color 0.15s ease;
-  }
-
-  /* ---------- Footer ---------- */
-  .sb-footer {
-    padding: 12px 20px;
-    text-align: center;
-  }
-
-  .sb-footer-text {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--steel);
-  }
-</style>
-</head>
-<body>
-
-<div class="sb-widget">
-
-  <!-- Header -->
-  <div class="sb-header">
-    <div class="sb-header-top">
-      <img
-        class="sb-crest"
-        src="https://images.chesscomfiles.com/uploads/v1/group/920695.53fb7120.160x160o.514f0aa05831.jpg"
-        alt="Synapse Bar crest"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+function ThinkingRule() {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 10, paddingLeft: 21 }}>
+      <div
+        style={{
+          position: "relative",
+          height: 1.5,
+          width: 120,
+          background: "#DEDBD2",
+          overflow: "hidden",
+        }}
       >
-      <div class="sb-crest-fallback" style="display:none;">SB</div>
-      <div class="sb-name-block">
-        <div class="sb-name">Synapse Bar</div>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "40%",
+            background: "#2F4858",
+            animation: "inkfill 1.3s ease-in-out infinite",
+          }}
+        />
+      </div>
+      <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, letterSpacing: "0.04em", color: "#8A8578" }}>
+        composing
+      </span>
+    </div>
+  );
+}
+
+function Message({ role, text }) {
+  const label = role === "assistant" ? "Assistant" : "You";
+  return (
+    <div
+      style={{
+        display: "flex",
+        gap: 12,
+        padding: "22px 0",
+        borderBottom: "1px solid #EAE8E1",
+        animation: "rise 260ms ease-out",
+      }}
+    >
+      <Mark role={role} />
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div
+          style={{
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: 11,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            color: role === "assistant" ? "#2F4858" : "#5B6B4F",
+            marginBottom: 6,
+          }}
+        >
+          {label}
+        </div>
+        <div
+          style={{
+            fontFamily: "'IBM Plex Sans', sans-serif",
+            fontSize: 15.5,
+            lineHeight: 1.65,
+            color: "#202325",
+            whiteSpace: "pre-wrap",
+          }}
+        >
+          {text}
+        </div>
       </div>
     </div>
-    <div class="sb-status">
-      <span class="sb-status-dot"></span>
-      Status: Active
+  );
+}
+
+export default function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [messages, setMessages] = useState(SAMPLE_EXCHANGE);
+  const [input, setInput] = useState("");
+  const [thinking, setThinking] = useState(false);
+  const scrollRef = useRef(null);
+  const taRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages, thinking]);
+
+  const send = () => {
+    const text = input.trim();
+    if (!text || thinking) return;
+    setMessages((m) => [...m, { role: "user", text }]);
+    setInput("");
+    if (taRef.current) taRef.current.style.height = "auto";
+    setThinking(true);
+    setTimeout(() => {
+      setThinking(false);
+      setMessages((m) => [
+        ...m,
+        {
+          role: "assistant",
+          text:
+            "This is a static interface concept, so I can't reason about that yet — but this is exactly where a real reply would stream in, right below your line.",
+        },
+      ]);
+    }, 1500);
+  };
+
+  const onKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  };
+
+  const autosize = (e) => {
+    setInput(e.target.value);
+    e.target.style.height = "auto";
+    e.target.style.height = Math.min(e.target.scrollHeight, 160) + "px";
+  };
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        height: "100vh",
+        width: "100%",
+        background: "#F5F4F0",
+        fontFamily: "'IBM Plex Sans', sans-serif",
+        color: "#202325",
+        overflow: "hidden",
+      }}
+    >
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap');
+        * { box-sizing: border-box; }
+        ::selection { background: #2F4858; color: #F5F4F0; }
+        @keyframes inkfill {
+          0% { transform: translateX(-100%); }
+          50% { transform: translateX(150%); }
+          100% { transform: translateX(-100%); }
+        }
+        @keyframes rise {
+          from { opacity: 0; transform: translateY(4px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          * { animation: none !important; transition: none !important; }
+        }
+        textarea::placeholder { color: #A6A192; }
+        .thread-row:hover { background: #ECEAE3; }
+        .icon-btn:hover { background: #ECEAE3; }
+        .send-btn:hover:not(:disabled) { background: #24384333; }
+        .send-btn:disabled { opacity: 0.35; cursor: default; }
+      `}</style>
+
+      {/* Sidebar */}
+      <aside
+        style={{
+          width: sidebarOpen ? 248 : 0,
+          flexShrink: 0,
+          borderRight: sidebarOpen ? "1px solid #DEDBD2" : "none",
+          overflow: "hidden",
+          transition: "width 200ms ease",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div style={{ padding: "20px 18px 14px", width: 248 }}>
+          <div
+            style={{
+              fontFamily: "'Fraunces', serif",
+              fontSize: 20,
+              fontWeight: 600,
+              letterSpacing: "-0.01em",
+              marginBottom: 18,
+            }}
+          >
+            Marginal
+          </div>
+          <button
+            onClick={() => setMessages([])}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              width: "100%",
+              padding: "9px 12px",
+              background: "transparent",
+              border: "1px solid #DEDBD2",
+              borderRadius: 6,
+              cursor: "pointer",
+              fontFamily: "'IBM Plex Sans', sans-serif",
+              fontSize: 13.5,
+              color: "#202325",
+            }}
+          >
+            <Plus size={15} strokeWidth={1.75} />
+            New conversation
+          </button>
+        </div>
+
+        <div style={{ flex: 1, overflowY: "auto", padding: "4px 10px", width: 248 }}>
+          <div
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: 10.5,
+              letterSpacing: "0.08em",
+              color: "#A6A192",
+              padding: "8px 8px 6px",
+              textTransform: "uppercase",
+            }}
+          >
+            Recent
+          </div>
+          {THREADS.map((t) => (
+            <div
+              key={t.id}
+              className="thread-row"
+              style={{
+                padding: "9px 8px",
+                borderRadius: 5,
+                fontSize: 13.5,
+                cursor: "pointer",
+                color: t.active ? "#202325" : "#5B584E",
+                background: t.active ? "#ECEAE3" : "transparent",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                borderLeft: t.active ? "2px solid #2F4858" : "2px solid transparent",
+                marginBottom: 1,
+              }}
+            >
+              {t.title}
+            </div>
+          ))}
+        </div>
+
+        <div
+          style={{
+            padding: "14px 18px",
+            borderTop: "1px solid #DEDBD2",
+            display: "flex",
+            alignItems: "center",
+            gap: 9,
+            width: 248,
+          }}
+        >
+          <div
+            style={{
+              width: 24,
+              height: 24,
+              borderRadius: "50%",
+              background: "#9C8355",
+              flexShrink: 0,
+            }}
+          />
+          <span style={{ fontSize: 13, color: "#5B584E" }}>Yogeshwar</span>
+        </div>
+      </aside>
+
+      {/* Main */}
+      <main style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
+        <header
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            padding: "16px 28px",
+            borderBottom: "1px solid #DEDBD2",
+            flexShrink: 0,
+          }}
+        >
+          <button
+            className="icon-btn"
+            onClick={() => setSidebarOpen((v) => !v)}
+            style={{
+              background: "transparent",
+              border: "none",
+              padding: 6,
+              borderRadius: 5,
+              cursor: "pointer",
+              display: "flex",
+            }}
+            aria-label="Toggle sidebar"
+          >
+            <PanelLeft size={17} strokeWidth={1.75} color="#5B584E" />
+          </button>
+          <div>
+            <div style={{ fontSize: 13.5, fontWeight: 500 }}>Rewriting a cover letter</div>
+            <div
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: 10.5,
+                color: "#A6A192",
+                letterSpacing: "0.03em",
+              }}
+            >
+              started 11:04 today
+            </div>
+          </div>
+        </header>
+
+        <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", padding: "8px 28px 0" }}>
+          <div style={{ maxWidth: 680, margin: "0 auto" }}>
+            {messages.length === 0 && (
+              <div style={{ padding: "60px 0", color: "#A6A192", fontSize: 13.5 }}>
+                Nothing here yet. Say something below.
+              </div>
+            )}
+            {messages.map((m, i) => (
+              <Message key={i} role={m.role} text={m.text} />
+            ))}
+            {thinking && (
+              <div style={{ paddingTop: 20 }}>
+                <ThinkingRule />
+              </div>
+            )}
+            <div style={{ height: 24 }} />
+          </div>
+        </div>
+
+        <div style={{ padding: "16px 28px 22px", flexShrink: 0 }}>
+          <div style={{ maxWidth: 680, margin: "0 auto" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-end",
+                gap: 8,
+                border: "1px solid #DEDBD2",
+                borderRadius: 10,
+                background: "#FCFBF9",
+                padding: "10px 10px 10px 16px",
+              }}
+            >
+              <textarea
+                ref={taRef}
+                value={input}
+                onChange={autosize}
+                onKeyDown={onKeyDown}
+                rows={1}
+                placeholder="Write your next line…"
+                style={{
+                  flex: 1,
+                  resize: "none",
+                  border: "none",
+                  outline: "none",
+                  background: "transparent",
+                  fontFamily: "'IBM Plex Sans', sans-serif",
+                  fontSize: 14.5,
+                  lineHeight: 1.5,
+                  color: "#202325",
+                  maxHeight: 160,
+                  padding: "4px 0",
+                }}
+              />
+              <button
+                className="send-btn"
+                onClick={send}
+                disabled={!input.trim() || thinking}
+                style={{
+                  width: 32,
+                  height: 32,
+                  flexShrink: 0,
+                  borderRadius: "50%",
+                  border: "none",
+                  background: "#2F4858",
+                  color: "#F5F4F0",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                aria-label="Send message"
+              >
+                {thinking ? <Square size={12} fill="#F5F4F0" /> : <ArrowUp size={16} strokeWidth={2} />}
+              </button>
+            </div>
+            <div
+              style={{
+                textAlign: "center",
+                fontSize: 11,
+                color: "#A6A192",
+                marginTop: 9,
+                fontFamily: "'IBM Plex Mono', monospace",
+              }}
+            >
+              enter to send · shift+enter for a new line
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
-  </div>
-
-  <!-- Owner -->
-  <a class="sb-owner" href="https://www.chess.com/member/michael-kaiser10bm" target="_blank" rel="noopener">
-    <img class="sb-owner-avatar" src="https://images.chesscomfiles.com/uploads/v1/user/303824883.0513c743.48x48o.b1f8c089f3d3.jpg" alt="Michael Kaiser">
-    <div class="sb-owner-text">
-      <span class="sb-owner-role">Chief Tactician</span>
-      <div class="sb-owner-name">Michael Kaiser</div>
-    </div>
-  </a>
-
-  <!-- Anthem -->
-  <div class="sb-section">
-    <div class="sb-eyebrow">Club Anthem</div>
-    <div class="sb-anthem" id="sbAnthem" onclick="sbPlayAnthem()">
-      <img src="https://img.youtube.com/vi/kcsGhOmULxQ/hqdefault.jpg" alt="Club anthem thumbnail" loading="lazy">
-      <div class="sb-play">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-    </div>
-  </div>
-  <!-- Links -->
-  <div class="sb-links">
-    <a class="sb-link" href="https://www.chess.com/leaderboard/daily?group=920695" target="_blank" rel="noopener">
-      <span class="sb-coord">D4</span>
-      <span class="sb-link-label">Leaderboard</span>
-      <span class="sb-arrow"></span>
-    </a>
-    <a class="sb-link" href="https://www.chess.com/clubs/events/synapse-bar" target="_blank" rel="noopener">
-      <span class="sb-coord">E5</span>
-      <span class="sb-link-label">Club Events</span>
-      <span class="sb-arrow"></span>
-    </a>
-    <a class="sb-link" href="https://www.chess.com/clubs/about/synapse-bar" target="_blank" rel="noopener">
-      <span class="sb-coord">C3</span>
-      <span class="sb-link-label">About</span>
-      <span class="sb-arrow"></span>
-    </a>
-  </div>
-
-  <div class="sb-footer">
-    <span class="sb-footer-text">Synapse Bar · Est. 2026</span>
-  </div>
-
-</div>
-
-<script>
-  function sbPlayAnthem() {
-    var container = document.getElementById('sbAnthem');
-    var iframe = document.createElement('iframe');
-    iframe.src = 'https://www.youtube.com/embed/kcsGhOmULxQ?autoplay=1&rel=0';
-    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-    iframe.setAttribute('allowfullscreen', '');
-    container.innerHTML = '';
-    container.appendChild(iframe);
-    container.onclick = null;
-  }
-</script>
-</body>
-</html>
+  );
+}
