@@ -3,379 +3,908 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gengar — Club Sidebar</title>
+<title>Rocking Superstar Team — Club Sidebar</title>
+
+<!-- ============================================================
+     Fonts: Fraunces (display — a wood-carved, quiet serif),
+     Inter (body/data/UI)
+============================================================ -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,450;9..144,560;9..144,640&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --paper: #FAFAF8;
-    --paper-dim: #F1F0EC;
-    --ink: #111111;
-    --steel: #7A7A74;
-    --hairline: #DEDDD6;
-    --crimson: #C41E2F;
-    --crimson-dark: #9A1522;
-  }
+/* ============================================================
+   0. DESIGN TOKENS
+   Concept: a wooden chess box — ivory paper, walnut ink,
+   a single deep felt-green accent (the board), warm brass
+   for small metal details (hinges, engraving).
+============================================================ */
+:root{
+  --paper:        #f1efe8;
+  --paper-card:   #faf9f5;
+  --ink:          #23211c;
+  --ink-soft:     #6b6558;
+  --line:         #ddd8c8;
+  --felt:         #2e4a3c;
+  --felt-deep:    #1e332a;
+  --felt-tint:    #eaf0ec;
+  --brass:        #96763f;
+  --brass-soft:   #b7996a;
+  --radius:       10px;
+  --font-display: 'Fraunces', serif;
+  --font-body:    'Inter', sans-serif;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* ============================================================
+   1. RESET & BASE
+============================================================ */
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{
+  font-family:var(--font-body);
+  background:var(--paper);
+  color:var(--ink);
+  display:flex;
+  justify-content:center;
+  padding:14px 10px;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+:focus-visible{ outline:2px solid var(--felt); outline-offset:2px; }
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
+/* ============================================================
+   2. SIDEBAR SHELL
+============================================================ */
+.sidebar{
+  width:100%;
+  max-width:325px;
+  background:var(--paper-card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
 
-  body {
-    background: var(--paper);
-    font-family: 'IBM Plex Sans', sans-serif;
-    color: var(--ink);
-  }
+.section{ padding:16px 18px; }
+.divider{ border:none; height:1px; background:var(--line); margin:0 18px; }
 
-  .sb-widget {
-    width: 100%;
-    max-width: 340px;
-    background: var(--paper);
-    border: 1px solid var(--hairline);
-    margin: 0 auto;
-  }
+.eyebrow{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:1.6px;
+  text-transform:uppercase;
+  color:var(--brass);
+  margin-bottom:11px;
+}
 
-  /* ---------- Header ---------- */
-  .sb-header {
-    position: relative;
-    background: var(--ink);
-    color: var(--paper);
-    padding: 22px 20px 18px;
-    overflow: hidden;
-  }
-  .sb-header::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--hairline) 1px, transparent 1px),
-      linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
-    background-size: 14px 14px;
-    opacity: 0.06;
-    pointer-events: none;
-  }
+.icon{ width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.6; }
 
-  .sb-header-top {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
+/* ============================================================
+   3. CLUB HEADER — the "box lid": felt band, engraved title
+============================================================ */
+.club-header{
+  background:linear-gradient(180deg, var(--felt) 0%, var(--felt-deep) 100%);
+  padding:28px 18px 22px;
+  text-align:center;
+  position:relative;
+}
+/* thin engraved rule, the one signature flourish */
+.club-header::after{
+  content:'';
+  position:absolute;
+  left:50%; bottom:14px;
+  transform:translateX(-50%);
+  width:34px; height:1px;
+  background:var(--brass-soft);
+  opacity:0.7;
+}
+.club-logo{
+  width:60px; height:60px;
+  border-radius:50%;
+  margin:0 auto 13px;
+  border:2px solid var(--brass-soft);
+  object-fit:cover;
+  background:var(--felt-deep);
+}
+.club-name{
+  font-family:var(--font-display);
+  font-optical-sizing:auto;
+  font-size:21px;
+  font-weight:560;
+  color:var(--felt-tint);
+  line-height:1.25;
+}
+.club-subtitle{
+  font-size:12px;
+  color:var(--brass-soft);
+  margin-top:5px;
+  letter-spacing:0.2px;
+}
 
-  .sb-crest {
-    width: 52px;
-    height: 52px;
-    border: 2px solid var(--paper);
-    flex-shrink: 0;
-    display: block;
-    object-fit: cover;
-  }
+/* ============================================================
+   4. CLUB OWNER
+============================================================ */
+.owner-card{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.owner-avatar{
+  width:46px; height:46px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  object-fit:cover;
+  flex-shrink:0;
+  background:var(--paper);
+}
+.owner-info{ flex:1; min-width:0; }
+.owner-name{
+  font-family:var(--font-display);
+  font-size:14px;
+  font-weight:560;
+  color:var(--ink);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.owner-role{ font-size:11px; color:var(--ink-soft); margin-top:1px; }
+.owner-link{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  margin-top:6px;
+  font-size:11px;
+  font-weight:600;
+  color:var(--felt);
+  border-bottom:1px solid var(--felt);
+  padding-bottom:1px;
+}
+.owner-link:hover{ opacity:0.7; }
 
-  .sb-crest-fallback {
-    width: 52px;
-    height: 52px;
-    border: 2px solid var(--paper);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Oswald', sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-  }
+/* ============================================================
+   5. STAT CARD
+============================================================ */
+.stat-card{
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:12px 14px;
+}
+.stat-icon{ width:17px; height:17px; color:var(--felt); flex-shrink:0; }
+.stat-text{ flex:1; margin-left:10px; }
+.stat-user{ font-size:12.5px; font-weight:600; color:var(--ink); }
+.stat-label{ font-size:10px; color:var(--ink-soft); margin-top:2px; text-transform:uppercase; letter-spacing:0.4px; }
+.stat-value{
+  font-family:var(--font-display);
+  font-size:18px;
+  font-weight:640;
+  color:var(--felt);
+}
 
-  .sb-name-block { min-width: 0; }
+/* ============================================================
+   5b. MEMBERSHIP GROWTH
+============================================================ */
+.goal-card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:13px 14px;
+}
+.goal-top{ display:flex; align-items:baseline; gap:5px; }
+.goal-current{ font-family:var(--font-display); font-weight:640; font-size:19px; color:var(--felt); }
+.goal-sep{ font-size:14px; color:var(--ink-soft); }
+.goal-target{ font-family:var(--font-display); font-weight:600; font-size:14px; color:var(--ink-soft); }
+.goal-label{ font-size:10px; color:var(--ink-soft); margin-left:4px; text-transform:uppercase; letter-spacing:0.4px; }
+.goal-bar-track{ height:5px; border-radius:3px; background:var(--line); margin-top:11px; overflow:hidden; }
+.goal-bar-fill{ height:100%; width:0%; background:var(--felt); transition:width 0.9s ease; }
+.goal-sub{ font-size:10.5px; color:var(--ink-soft); margin-top:9px; }
 
-  .sb-name {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 20px;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    line-height: 1.1;
-  }
+/* ============================================================
+   6. FEATURED VIDEO + QUOTE
+============================================================ */
+.video-frame{
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:8px;
+  overflow:hidden;
+  background:var(--felt-deep);
+  border:1px solid var(--line);
+}
+.video-frame video{ width:100%; height:100%; object-fit:cover; display:block; }
+.quote-card{
+  margin-top:12px;
+  border-left:2px solid var(--brass);
+  padding:2px 0 2px 12px;
+}
+.quote-text{ font-size:13.5px; line-height:1.5; color:var(--ink); font-style:italic; }
+.quote-author{ margin-top:5px; font-size:10.5px; letter-spacing:0.4px; color:var(--ink-soft); text-transform:uppercase; }
 
-  .sb-status {
-    position: relative;
-    margin-top: 10px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--paper);
-    opacity: 0.85;
-  }
+/* ============================================================
+   7. ACTION BUTTONS
+============================================================ */
+.action-grid{ display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+.action-btn{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  padding:12px 8px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  color:var(--ink);
+  font-size:11.5px;
+  font-weight:600;
+  transition:border-color 0.15s ease, background 0.15s ease;
+}
+.action-btn .icon{ width:18px; height:18px; color:var(--felt); }
+.action-btn:hover{ border-color:var(--felt); background:var(--felt-tint); }
 
-  .sb-status-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--crimson);
-    display: inline-block;
-  }
+/* ============================================================
+   8. CLUB ANTHEM AUDIO PLAYER
+============================================================ */
+.anthem-player{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:13px 14px;
+}
+.anthem-top{ display:flex; align-items:center; gap:10px; }
+.anthem-toggle{
+  width:34px; height:34px;
+  border-radius:50%;
+  background:var(--felt);
+  color:var(--paper-card);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  transition:opacity 0.15s ease;
+}
+.anthem-toggle:hover{ opacity:0.85; }
+.anthem-toggle .icon{ width:14px; height:14px; stroke:none; fill:currentColor; }
+.anthem-meta{ flex:1; min-width:0; }
+.anthem-title{ font-size:12px; font-weight:600; color:var(--ink); }
+.anthem-sub{ font-size:10.5px; color:var(--ink-soft); margin-top:1px; }
+.anthem-progress-row{ display:flex; align-items:center; gap:8px; margin-top:11px; font-size:10px; color:var(--ink-soft); }
+.progress-track{ flex:1; height:4px; border-radius:2px; background:var(--line); position:relative; cursor:pointer; }
+.progress-fill{ position:absolute; left:0; top:0; height:100%; width:0%; border-radius:2px; background:var(--felt); }
+.anthem-volume-row{ display:flex; align-items:center; gap:8px; margin-top:9px; }
+.anthem-volume-row .icon{ width:13px; height:13px; color:var(--felt); }
+input[type="range"]{ -webkit-appearance:none; appearance:none; width:100%; height:4px; border-radius:2px; background:var(--line); outline:none; }
+input[type="range"]::-webkit-slider-thumb{ -webkit-appearance:none; width:11px; height:11px; border-radius:50%; background:var(--felt); cursor:pointer; border:2px solid var(--paper-card); }
+input[type="range"]::-moz-range-thumb{ width:11px; height:11px; border-radius:50%; background:var(--felt); border:2px solid var(--paper-card); cursor:pointer; }
 
-  /* ---------- Owner strip ---------- */
-  .sb-owner {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--hairline);
-    text-decoration: none;
-    color: var(--ink);
-    transition: background-color 0.15s ease;
-  }
+/* ============================================================
+   9. MEMBER LISTS — fixed height so both boxes always match,
+   regardless of how many rows come back from the API.
+============================================================ */
+.member-list{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  height:252px;
+  overflow-y:auto;
+  padding-right:2px;
+}
+.member-list::-webkit-scrollbar{ width:4px; }
+.member-list::-webkit-scrollbar-thumb{ background:var(--brass-soft); border-radius:2px; }
 
-  .sb-owner:hover { background: var(--paper-dim); }
+.member-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:7px 9px;
+  flex-shrink:0;
+}
+.member-rank{
+  width:16px; text-align:center;
+  font-family:var(--font-display);
+  font-size:11px; font-weight:640;
+  color:var(--brass);
+  flex-shrink:0;
+}
+.member-avatar{
+  width:30px; height:30px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid var(--line);
+  flex-shrink:0;
+  background:var(--paper-card);
+}
+.member-info{ flex:1; min-width:0; }
+.member-name{ font-size:12px; font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.member-sub{ font-size:10px; color:var(--ink-soft); margin-top:1px; }
+.member-badge{
+  font-size:10px; font-weight:700;
+  color:var(--paper-card);
+  background:var(--felt);
+  padding:2px 7px;
+  border-radius:20px;
+  flex-shrink:0;
+}
+.member-rating{ font-family:var(--font-display); font-size:12px; font-weight:640; color:var(--felt); flex-shrink:0; }
+.list-skeleton{ font-size:11px; color:var(--ink-soft); padding:8px 2px; }
 
-  .sb-owner-avatar {
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--hairline);
-    flex-shrink: 0;
-    object-fit: cover;
-  }
+/* ============================================================
+   10. CALENDAR
+============================================================ */
+.calendar-card{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:13px 14px; }
+.calendar-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+.calendar-title{ font-family:var(--font-display); font-size:13px; font-weight:600; color:var(--ink); }
+.calendar-nav{ display:flex; gap:6px; }
+.calendar-nav button{
+  width:22px; height:22px;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--line);
+  border-radius:6px;
+  color:var(--felt);
+  transition:background 0.15s ease;
+}
+.calendar-nav button:hover{ background:var(--felt-tint); }
+.calendar-nav .icon{ width:11px; height:11px; }
+.calendar-grid{ display:grid; grid-template-columns:repeat(7, 1fr); gap:3px; text-align:center; }
+.calendar-grid .dow{ font-size:9px; font-weight:600; color:var(--brass); padding-bottom:4px; }
+.calendar-grid .day{ font-size:11px; color:var(--ink); padding:5px 0; border-radius:6px; }
+.calendar-grid .day.muted{ color:#c9c4b4; }
+.calendar-grid .day.today{ background:var(--felt); color:var(--paper-card); font-weight:700; }
 
-  .sb-owner-text { min-width: 0; }
+/* ============================================================
+   11. PARTNERED CLUBS
+============================================================ */
+.partner-list{ display:flex; flex-direction:column; gap:7px; }
+.partner-card{
+  display:flex; align-items:center; gap:10px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:8px 10px;
+}
+.partner-logo{
+  width:32px; height:32px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:19px;
+  border-radius:7px;
+  border:1px solid var(--line);
+  background:var(--paper-card);
+  flex-shrink:0;
+}
+.partner-name{ flex:1; font-size:11.5px; font-weight:600; color:var(--ink); min-width:0; }
+.partner-visit{
+  font-size:10px; font-weight:700;
+  color:var(--paper-card);
+  background:var(--brass);
+  padding:5px 10px;
+  border-radius:20px;
+  flex-shrink:0;
+  transition:opacity 0.15s ease;
+}
+.partner-visit:hover{ opacity:0.85; }
 
-  .sb-owner-role {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--crimson);
-    display: block;
-  }
+/* ============================================================
+   12. FOOTER
+============================================================ */
+.sidebar-footer{ text-align:center; padding:14px 16px 20px; font-size:9.5px; color:var(--ink-soft); letter-spacing:0.3px; }
 
-  .sb-owner-name {
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    color: var(--ink);
-    margin-top: 2px;
-  }
-
-  /* ---------- Anthem ---------- */
-  .sb-section {
-    padding: 16px 20px 18px;
-    border-bottom: 1px solid var(--hairline);
-  }
-
-  .sb-eyebrow {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--steel);
-    margin-bottom: 10px;
-  }
-
-  .sb-anthem {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    background: var(--ink);
-    overflow: hidden;
-    cursor: pointer;
-    border: 1px solid var(--hairline);
-  }
-
-  .sb-anthem img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    opacity: 0.75;
-    transition: opacity 0.2s ease;
-  }
-
-  .sb-anthem:hover img { opacity: 0.55; }
-
-  .sb-anthem iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-
-  .sb-play {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 46px;
-    height: 46px;
-    background: var(--crimson);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.15s ease, background-color 0.15s ease;
-  }
-
-  .sb-anthem:hover .sb-play {
-    background: var(--crimson-dark);
-    transform: translate(-50%, -50%) scale(1.05);
-  }
-
-  .sb-play svg { width: 16px; height: 16px; fill: var(--paper); margin-left: 2px; }
-
-  /* ---------- Links ---------- */
-  .sb-links { padding: 4px 0; }
-
-  .sb-link {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 13px 20px;
-    text-decoration: none;
-    color: var(--ink);
-    border-bottom: 1px solid var(--hairline);
-    transition: background-color 0.15s ease, padding-left 0.15s ease;
-  }
-
-  .sb-link:last-child { border-bottom: none; }
-
-  .sb-link:hover {
-    background: var(--ink);
-    color: var(--paper);
-    padding-left: 24px;
-  }
-
-  .sb-link:hover .sb-coord { color: var(--crimson); }
-  .sb-link:hover .sb-arrow { border-color: var(--paper); }
-  .sb-link:hover .sb-arrow::after { border-color: var(--paper); }
-
-  .sb-coord {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    color: var(--steel);
-    width: 22px;
-    flex-shrink: 0;
-    transition: color 0.15s ease;
-  }
-
-  .sb-link-label {
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    flex: 1;
-  }
-
-  .sb-arrow {
-    width: 7px;
-    height: 7px;
-    border-top: 1.5px solid var(--ink);
-    border-right: 1.5px solid var(--ink);
-    transform: rotate(45deg);
-    flex-shrink: 0;
-    transition: border-color 0.15s ease;
-  }
-
-  /* ---------- Footer ---------- */
-  .sb-footer {
-    padding: 12px 20px;
-    text-align: center;
-  }
-
-  .sb-footer-text {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--steel);
-  }
+/* ============================================================
+   13. RESPONSIVE
+============================================================ */
+@media (max-width:360px){
+  .sidebar{ max-width:100%; }
+  body{ padding:10px 6px; }
+}
 </style>
 </head>
 <body>
 
-<div class="sb-widget">
+<aside class="sidebar" id="sidebar">
 
-  <!-- Header -->
-  <div class="sb-header">
-    <div class="sb-header-top">
-      <img
-        class="sb-crest"
-        src="https://images.chesscomfiles.com/uploads/v1/group/933269.ba855b5a.160x160o.bd278edd26f8@2x.jpg"
-        alt="Synapse Bar crest"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-      >
-      <div class="sb-crest-fallback" style="display:none;">SB</div>
-      <div class="sb-name-block">
-        <div class="sb-name">Synapse Bar</div>
+  <!-- ============================== 1. CLUB HEADER ============================== -->
+  <section class="section club-header" aria-label="Club header">
+    <img class="club-logo" id="clubLogo" src="" alt="Club logo" loading="lazy">
+    <h1 class="club-name" id="clubName">Loading club…</h1>
+    <p class="club-subtitle" id="clubSubtitle">A Sanctuary for Royal Play</p>
+  </section>
+
+  <!-- ============================== 2. CLUB OWNER ============================== -->
+  <section class="section" aria-label="Club owner">
+    <p class="eyebrow">Club Owner</p>
+    <div class="owner-card">
+      <img class="owner-avatar" id="ownerAvatar" src="" alt="Owner avatar" loading="lazy">
+      <div class="owner-info">
+        <div class="owner-name" id="ownerName">Loading…</div>
+        <div class="owner-role">Founder &amp; Administrator</div>
+        <a class="owner-link" id="ownerLink" href="https://www.chess.com/member/cutegirl1901" target="_blank" rel="noopener">
+          View profile
+          <svg class="icon" style="width:10px;height:10px;stroke-width:2" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
     </div>
-    <div class="sb-status">
-      <span class="sb-status-dot"></span>
-      Status: Active
-    </div>
-  </div>
+  </section>
 
-  <!-- Owner -->
-  <a class="sb-owner" href="https://www.chess.com/member/yogi136" target="_blank" rel="noopener">
-    <img class="sb-owner-avatar" src="https://images.chesscomfiles.com/uploads/v1/user/417107391.395500c0.48x48o.bfefb9c81bcb@2x.jpg" alt="yogi136">
-    <div class="sb-owner-text">
-      <span class="sb-owner-role">Owner</span>
-      <div class="sb-owner-name">yogi136</div>
-    </div>
-  </a>
+  <hr class="divider">
 
-  <!-- Anthem -->
-  <div class="sb-section">
-    <div class="sb-eyebrow">Club Anthem</div>
-    <div class="sb-anthem" id="sbAnthem" onclick="sbPlayAnthem()">
-      <img src="https://img.youtube.com/vi/kcsGhOmULxQ/hqdefault.jpg" alt="Club anthem thumbnail" loading="lazy">
-      <div class="sb-play">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  <!-- ============================== 3. CLUB STATISTICS ============================== -->
+  <section class="section" aria-label="Club statistics">
+    <p class="eyebrow">Club Statistics</p>
+    <div class="stat-card">
+      <svg class="stat-icon" viewBox="0 0 24 24"><path d="M12 2 4 7v5c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V7l-8-5Z" stroke-linejoin="round"/></svg>
+      <div class="stat-text">
+        <div class="stat-user" id="statTopUser">—</div>
+        <div class="stat-label">Highest Rated Player</div>
+      </div>
+      <div class="stat-value" id="statTopRating">—</div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================== 3b. MEMBERSHIP GROWTH ============================== -->
+  <section class="section" aria-label="Membership growth">
+    <p class="eyebrow">Membership Growth</p>
+    <div class="goal-card">
+      <div class="goal-top">
+        <span class="goal-current" id="goalCurrent">0</span>
+        <span class="goal-sep">/</span>
+        <span class="goal-target" id="goalTarget">100</span>
+        <span class="goal-label">members</span>
+      </div>
+      <div class="goal-bar-track"><div class="goal-bar-fill" id="goalBarFill"></div></div>
+      <div class="goal-sub" id="goalSub"></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================== 4. FEATURED VIDEO ============================== -->
+  <section class="section" aria-label="Featured video">
+    <p class="eyebrow">Featured Video</p>
+    <div class="video-frame">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="https://files.catbox.moe/a03ic1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="quote-card">
+      <p class="quote-text" id="quoteText">"Every chess master was once a beginner."</p>
+      <p class="quote-author" id="quoteAuthor">— Irving Chernev</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================== 5. ACTION BUTTONS ============================== -->
+  <section class="section" aria-label="Club actions">
+    <div class="action-grid">
+      <a class="action-btn" href="https://www.chess.com/clubs/forum/view/club-rules-649" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+        Club Rules
+      </a>
+      <a class="action-btn" href="https://www.chess.com/clubs/forum/view/advertising-forum-907" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z" stroke-linejoin="round"/><path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14" stroke-linecap="round"/></svg>
+        Advertisement
+      </a>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================== 6. CLUB ANTHEM ============================== -->
+  <section class="section" aria-label="Club anthem">
+    <p class="eyebrow">Club Anthem</p>
+    <div class="anthem-player">
+      <audio id="anthemAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="metadata"></audio>
+      <div class="anthem-top">
+        <button class="anthem-toggle" id="anthemToggle" aria-label="Play anthem">
+          <svg class="icon" id="anthemIcon" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4Z"/></svg>
+        </button>
+        <div class="anthem-meta">
+          <div class="anthem-title">Club Anthem</div>
+          <div class="anthem-sub">Rocking Superstar Team</div>
+        </div>
+      </div>
+      <div class="anthem-progress-row">
+        <span id="anthemCurrent">0:00</span>
+        <div class="progress-track" id="anthemTrack"><div class="progress-fill" id="anthemFill"></div></div>
+        <span id="anthemDuration">0:00</span>
+      </div>
+      <div class="anthem-volume-row">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5Z" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 0 1 0 7" stroke-linecap="round"/></svg>
+        <input type="range" id="anthemVolume" min="0" max="1" step="0.01" value="0.7" aria-label="Volume">
       </div>
     </div>
-  </div>
-  <!-- Links -->
-  <div class="sb-links">
-    <a class="sb-link" href="https://www.chess.com/leaderboard/daily?group=933269" target="_blank" rel="noopener">
-      <span class="sb-coord">D4</span>
-      <span class="sb-link-label">Leaderboard</span>
-      <span class="sb-arrow"></span>
-    </a>
-    <a class="sb-link" href="https://www.chess.com/clubs/events/gengar-1" target="_blank" rel="noopener">
-      <span class="sb-coord">E5</span>
-      <span class="sb-link-label">Club Events</span>
-      <span class="sb-arrow"></span>
-    </a>
-    <a class="sb-link" href="https://www.chess.com/clubs/about/gengar-1" target="_blank" rel="noopener">
-      <span class="sb-coord">C3</span>
-      <span class="sb-link-label">About</span>
-      <span class="sb-arrow"></span>
-    </a>
-  </div>
+  </section>
 
-  <div class="sb-footer">
-    <span class="sb-footer-text">Synapse Bar · Est. 2026 · Micheal-Kaiser and yogi136</span>
-  </div>
+  <hr class="divider">
 
-</div>
+  <!-- ============================== 7. NEWEST MEMBERS ============================== -->
+  <section class="section" aria-label="Newest members">
+    <p class="eyebrow">Newest Members</p>
+    <div class="member-list" id="newestList">
+      <div class="list-skeleton">Fetching newest members…</div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+ 
+  <!-- ============================== 8. HIGHEST RATED PLAYERS ============================== -->
+  <section class="section" aria-label="Highest rated players">
+    <p class="eyebrow">Highest Rated Players</p>
+    <div class="member-list" id="ratedList">
+      <div class="list-skeleton">Calculating top ratings…</div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================== 9. CALENDAR ============================== -->
+  <section class="section" aria-label="Club calendar">
+    <p class="eyebrow">Calendar</p>
+    <div class="calendar-card">
+      <div class="calendar-head">
+        <div class="calendar-title" id="calTitle">—</div>
+        <div class="calendar-nav">
+          <button id="calPrev" aria-label="Previous month"><svg class="icon" viewBox="0 0 24 24"><path d="M15 6 9 12l6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button id="calNext" aria-label="Next month"><svg class="icon" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+      <div class="calendar-grid" id="calGrid"></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================== 10. PARTNERED CLUBS ============================== -->
+  <section class="section" aria-label="Partnered clubs">
+    <p class="eyebrow">Partnered Clubs</p>
+    <div class="partner-list" id="partnerList"></div>
+  </section>
+
+  <div class="sidebar-footer">Rocking Superstar Team</div>
+</aside>
 
 <script>
-  function sbPlayAnthem() {
-    var container = document.getElementById('sbAnthem');
-    var iframe = document.createElement('iframe');
-    iframe.src = 'https://www.youtube.com/embed/kcsGhOmULxQ?autoplay=1&rel=0';
-    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-    iframe.setAttribute('allowfullscreen', '');
-    container.innerHTML = '';
-    container.appendChild(iframe);
-    container.onclick = null;
+/* ==================================================================
+   CONFIG — change only these to point the sidebar at a new club
+================================================================== */
+const CLUB_SLUG = "rocking-superstar-team-1";
+const API_BASE  = "https://api.chess.com/pub";
+
+// Membership Growth chart advances in fixed steps: 100, then 200,
+// then 300… Once the club passes a tier, the next tier becomes the goal.
+const GOAL_STEP = 100;
+
+// Edit this array to feature your own partner clubs.
+const PARTNERED_CLUBS = [
+  { name: "TheRateClimber's Friends", slug: "therateclimbersfriends", logo: "♞" },
+  { name: "The anime lover forever club", slug: "the-anime-lover-forever-club", logo: "♜" },
+  { name: "PixelGlow", slug: "pixelglow", logo: "♝" }
+];
+
+const CHESS_QUOTES = [
+  { text: "Every chess master was once a beginner.", author: "Irving Chernev" },
+  { text: "Chess is life in miniature.", author: "Garry Kasparov" },
+  { text: "When you see a good move, look for a better one.", author: "Emanuel Lasker" },
+  { text: "Chess is the gymnasium of the mind.", author: "Blaise Pascal" },
+  { text: "Tactics flow from a superior position.", author: "Bobby Fischer" },
+  { text: "The pin is mightier than the sword.", author: "Fred Reinfeld" },
+  { text: "Chess is beautiful enough to waste your life for.", author: "Hans Re" },
+  { text: "Play the opening like a book, the middlegame like a magician.", author: "Rudolf Spielmann" }
+];
+
+/* ==================================================================
+   HELPERS
+================================================================== */
+async function fetchJSON(url){
+  try{
+    const res = await fetch(url);
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    return await res.json();
+  }catch(err){
+    console.warn("Fetch failed:", url, err.message);
+    return null;
   }
+}
+
+function stripHtml(html){
+  const div = document.createElement("div");
+  div.innerHTML = html || "";
+  return (div.textContent || div.innerText || "").trim();
+}
+
+function fmtDate(unix){
+  if(!unix) return "—";
+  const d = new Date(unix * 1000);
+  return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+}
+
+function bestRating(stats){
+  if(!stats) return 0;
+  const cats = ["chess_rapid", "chess_blitz", "chess_bullet", "chess_daily"];
+  let max = 0;
+  cats.forEach(c => {
+    const r = stats[c] && stats[c].last && stats[c].last.rating;
+    if(r && r > max) max = r;
+  });
+  return max;
+}
+
+async function mapLimit(items, limit, fn){
+  const results = new Array(items.length);
+  let i = 0;
+  async function worker(){
+    while(i < items.length){
+      const idx = i++;
+      results[idx] = await fn(items[idx], idx);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+  return results;
+}
+
+/* ==================================================================
+   MEMBERSHIP GROWTH
+================================================================== */
+function computeMemberGoal(current){
+  const step = GOAL_STEP;
+  let goal = Math.ceil((current + 1) / step) * step;
+  if(goal <= current) goal += step;
+  return goal;
+}
+
+function loadMemberGoal(current){
+  const step = GOAL_STEP;
+  const prevTier = current > 0 ? Math.floor(current / step) * step : 0;
+  const goal = computeMemberGoal(current);
+  const span = goal - prevTier;
+  const pct = Math.max(0, Math.min(100, Math.round(((current - prevTier) / span) * 100)));
+
+  document.getElementById("goalCurrent").textContent = current.toLocaleString();
+  document.getElementById("goalTarget").textContent = goal.toLocaleString();
+  document.getElementById("goalSub").textContent = `${pct}% of the way to ${goal.toLocaleString()} members`;
+
+  const fill = document.getElementById("goalBarFill");
+  requestAnimationFrame(() => { fill.style.width = pct + "%"; });
+}
+
+/* ==================================================================
+   1–3. CLUB INFO + STATS
+================================================================== */
+async function loadClubInfo(){
+  const club = await fetchJSON(`${API_BASE}/club/${CLUB_SLUG}`);
+  if(!club){
+    document.getElementById("clubName").textContent = "Club unavailable";
+    return null;
+  }
+
+  document.getElementById("clubLogo").src = club.icon || "";
+  document.getElementById("clubLogo").alt = club.name + " logo";
+  document.getElementById("clubName").textContent = club.name;
+
+  const desc = stripHtml(club.description);
+  document.getElementById("clubSubtitle").textContent =
+    desc ? (desc.length > 70 ? desc.slice(0, 67) + "…" : desc) : "A Sanctuary for Royal Play";
+
+  const members = club.members_count || 0;
+  loadMemberGoal(members);
+
+  loadOwner("cutegirl1901");
+  return club;
+}
+
+async function loadOwner(username){
+  const profile = await fetchJSON(`${API_BASE}/player/${username}`);
+  if(!profile){
+    document.getElementById("ownerName").textContent = username;
+    document.getElementById("ownerLink").href = `https://www.chess.com/member/${username}`;
+    return;
+  }
+  document.getElementById("ownerAvatar").src = profile.avatar || `https://www.chess.com/bundles/web/images/noavatar_l.png`;
+  document.getElementById("ownerName").textContent = profile.name || profile.username;
+  document.getElementById("ownerLink").href = profile.url || `https://www.chess.com/member/${username}`;
+}
+
+/* ==================================================================
+   MEMBERS: newest joins + highest rated
+================================================================== */
+async function loadMembersAndRatings(){
+  const data = await fetchJSON(`${API_BASE}/club/${CLUB_SLUG}/members`);
+  if(!data){
+    document.getElementById("newestList").innerHTML = '<div class="list-skeleton">Unable to load members.</div>';
+    document.getElementById("ratedList").innerHTML  = '<div class="list-skeleton">Unable to load ratings.</div>';
+    return;
+  }
+
+  const all = [...(data.weekly||[]), ...(data.monthly||[]), ...(data.all_time||[])];
+  const seen = new Set();
+  const merged = [];
+  all.forEach(m => { if(!seen.has(m.username)){ seen.add(m.username); merged.push(m); } });
+  merged.sort((a,b) => (b.joined||0) - (a.joined||0));
+
+  const newest = merged.slice(0, 8);
+  const newestRows = await mapLimit(newest, 4, async (m) => {
+    const [profile, stats] = await Promise.all([
+      fetchJSON(`${API_BASE}/player/${m.username}`),
+      fetchJSON(`${API_BASE}/player/${m.username}/stats`)
+    ]);
+    return {
+      username: m.username,
+      joined: m.joined,
+      avatar: profile && profile.avatar,
+      url: (profile && profile.url) || `https://www.chess.com/member/${m.username}`,
+      rating: bestRating(stats)
+    };
+  });
+
+  document.getElementById("newestList").innerHTML = newestRows.map(r => `
+    <div class="member-row">
+      <img class="member-avatar" src="${r.avatar || ''}" alt="${r.username}" loading="lazy">
+      <div class="member-info">
+        <div class="member-name">${r.username}</div>
+        <div class="member-sub">Joined ${fmtDate(r.joined)}</div>
+      </div>
+      <div class="member-rating">${r.rating ? r.rating : '—'}</div>
+    </div>
+  `).join("") || '<div class="list-skeleton">No recent members found.</div>';
+
+  const sample = merged.slice(0, 24);
+  const rated = await mapLimit(sample, 5, async (m) => {
+    const [profile, stats] = await Promise.all([
+      fetchJSON(`${API_BASE}/player/${m.username}`),
+      fetchJSON(`${API_BASE}/player/${m.username}/stats`)
+    ]);
+    return {
+      username: m.username,
+      avatar: profile && profile.avatar,
+      url: (profile && profile.url) || `https://www.chess.com/member/${m.username}`,
+      rating: bestRating(stats)
+    };
+  });
+
+  const top = rated.filter(r => r.rating > 0).sort((a,b) => b.rating - a.rating).slice(0, 5);
+
+  document.getElementById("ratedList").innerHTML = top.map((r, i) => `
+    <div class="member-row">
+      <div class="member-rank">${i+1}</div>
+      <img class="member-avatar" src="${r.avatar || ''}" alt="${r.username}" loading="lazy">
+      <div class="member-info"><div class="member-name">${r.username}</div></div>
+      <span class="member-badge">${r.rating}</span>
+    </div>
+  `).join("") || '<div class="list-skeleton">No ratings found.</div>';
+
+  if(top.length){
+    document.getElementById("statTopUser").textContent = top[0].username;
+    document.getElementById("statTopRating").textContent = top[0].rating;
+  } else {
+    document.getElementById("statTopUser").textContent = "N/A";
+    document.getElementById("statTopRating").textContent = "—";
+  }
+}
+
+/* ==================================================================
+   4. RANDOM QUOTE
+================================================================== */
+function loadQuote(){
+  const q = CHESS_QUOTES[Math.floor(Math.random() * CHESS_QUOTES.length)];
+  document.getElementById("quoteText").textContent = `"${q.text}"`;
+  document.getElementById("quoteAuthor").textContent = `— ${q.author}`;
+}
+
+/* ==================================================================
+   6. CLUB ANTHEM AUDIO PLAYER
+================================================================== */
+function initAnthemPlayer(){
+  const audio    = document.getElementById("anthemAudio");
+  const toggle   = document.getElementById("anthemToggle");
+  const icon     = document.getElementById("anthemIcon");
+  const track    = document.getElementById("anthemTrack");
+  const fill     = document.getElementById("anthemFill");
+  const current  = document.getElementById("anthemCurrent");
+  const duration = document.getElementById("anthemDuration");
+  const volume   = document.getElementById("anthemVolume");
+
+  const fmtTime = (s) => {
+    if(!isFinite(s)) return "0:00";
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, "0");
+    return `${m}:${sec}`;
+  };
+
+  const PLAY_PATH  = "M6 4l14 8-14 8V4Z";
+  const PAUSE_PATH = "M7 4h3v16H7zM14 4h3v16h-3z";
+
+  toggle.addEventListener("click", () => {
+    if(audio.paused){
+      audio.play();
+      icon.innerHTML = `<path d="${PAUSE_PATH}"/>`;
+      toggle.setAttribute("aria-label", "Pause anthem");
+    } else {
+      audio.pause();
+      icon.innerHTML = `<path d="${PLAY_PATH}"/>`;
+      toggle.setAttribute("aria-label", "Play anthem");
+    }
+  });
+  audio.addEventListener("loadedmetadata", () => { duration.textContent = fmtTime(audio.duration); });
+  audio.addEventListener("timeupdate", () => {
+    current.textContent = fmtTime(audio.currentTime);
+    if(audio.duration) fill.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
+  });
+  audio.addEventListener("ended", () => { icon.innerHTML = `<path d="${PLAY_PATH}"/>`; });
+  track.addEventListener("click", (e) => {
+    const rect = track.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    if(audio.duration) audio.currentTime = ratio * audio.duration;
+  });
+  volume.addEventListener("input", () => { audio.volume = parseFloat(volume.value); });
+  audio.volume = parseFloat(volume.value);
+}
+
+/* ==================================================================
+   9. CALENDAR
+================================================================== */
+function initCalendar(){
+  const titleEl = document.getElementById("calTitle");
+  const gridEl  = document.getElementById("calGrid");
+  const today   = new Date();
+  let viewDate  = new Date(today.getFullYear(), today.getMonth(), 1);
+
+  const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const DOWS   = ["S","M","T","W","T","F","S"];
+
+  function render(){
+    titleEl.textContent = `${MONTHS[viewDate.getMonth()]} ${viewDate.getFullYear()}`;
+    const firstDay = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1).getDay();
+    const daysInMonth = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 0).getDate();
+    const daysInPrevMonth = new Date(viewDate.getFullYear(), viewDate.getMonth(), 0).getDate();
+
+    let html = DOWS.map(d => `<div class="dow">${d}</div>`).join("");
+    for(let i = firstDay - 1; i >= 0; i--){ html += `<div class="day muted">${daysInPrevMonth - i}</div>`; }
+    for(let d = 1; d <= daysInMonth; d++){
+      const isToday = d === today.getDate() && viewDate.getMonth() === today.getMonth() && viewDate.getFullYear() === today.getFullYear();
+      html += `<div class="day${isToday ? ' today' : ''}">${d}</div>`;
+    }
+    const totalCells = firstDay + daysInMonth;
+    const trailing = (7 - (totalCells % 7)) % 7;
+    for(let d = 1; d <= trailing; d++){ html += `<div class="day muted">${d}</div>`; }
+    gridEl.innerHTML = html;
+  }
+
+  document.getElementById("calPrev").addEventListener("click", () => { viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1); render(); });
+  document.getElementById("calNext").addEventListener("click", () => { viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1); render(); });
+  render();
+}
+
+/* ==================================================================
+   10. PARTNERED CLUBS
+================================================================== */
+function loadPartners(){
+  const list = document.getElementById("partnerList");
+  list.innerHTML = PARTNERED_CLUBS.map(p => `
+    <div class="partner-card">
+      <div class="partner-logo">${p.logo}</div>
+      <div class="partner-name">${p.name}</div>
+      <a class="partner-visit" href="https://www.chess.com/club/${p.slug}" target="_blank" rel="noopener">Visit</a>
+    </div>
+  `).join("");
+}
+
+/* ==================================================================
+   INIT
+================================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  loadQuote();
+  initAnthemPlayer();
+  initCalendar();
+  loadPartners();
+  loadClubInfo();
+  loadMembersAndRatings();
+});
 </script>
 </body>
 </html>
