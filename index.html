@@ -3,51 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rocking Superstar Team — Club Sidebar</title>
+<title>Hogwarts Team — Club Sidebar</title>
 
-<!-- ============================================================
-     Fonts: Fraunces (display — a wood-carved, quiet serif),
-     Inter (body/data/UI)
-============================================================ -->
+<!-- ==================================================================
+     FONTS
+     Display (signature, used once): Cinzel Decorative — for the
+       club name only, so it stays a genuine signature rather than
+       a default headline face.
+     Accent: Cormorant Garamond italic — old-book marginalia, for
+       quotes and section eyebrows.
+     Body/data: Inter — everything that needs to stay legible small.
+================================================================== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,450;9..144,560;9..144,640&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ============================================================
+/* ==================================================================
    0. DESIGN TOKENS
-   Concept: a wooden chess box — ivory paper, walnut ink,
-   a single deep felt-green accent (the board), warm brass
-   for small metal details (hinges, engraving).
-============================================================ */
+   Concept: a quiet library study — worn leather-brown walls,
+   parchment ink, a single brass accent. No glow, no blur, one
+   signature move (the sorting ribbon) and nothing else competing
+   for attention.
+================================================================== */
 :root{
-  --paper:        #f1efe8;
-  --paper-card:   #faf9f5;
-  --ink:          #23211c;
-  --ink-soft:     #6b6558;
-  --line:         #ddd8c8;
-  --felt:         #2e4a3c;
-  --felt-deep:    #1e332a;
-  --felt-tint:    #eaf0ec;
-  --brass:        #96763f;
-  --brass-soft:   #b7996a;
-  --radius:       10px;
-  --font-display: 'Fraunces', serif;
-  --font-body:    'Inter', sans-serif;
+  --ink-black:     #17140f;
+  --ink-deep:      #1d1912;
+  --card:          #241f17;
+  --card-soft:     #2a2419;
+  --parchment:     #ece3cf;
+  --parchment-dim: #a89c82;
+  --gold:          #b3903f;
+  --gold-soft:     #d2ac67;
+  --line:          rgba(179,144,63,0.22);
+  --radius-sm:     8px;
+  --radius-md:     12px;
+  --radius-lg:     16px;
+  --font-signature:'Cinzel Decorative', serif;
+  --font-accent:   'Cormorant Garamond', serif;
+  --font-body:     'Inter', sans-serif;
+
+  --h-gryffindor:  #8a3a3a;
+  --h-slytherin:   #2c5c47;
+  --h-ravenclaw:   #3a5788;
+  --h-hufflepuff:  #a3841f;
 }
 
-/* ============================================================
+/* ==================================================================
    1. RESET & BASE
-============================================================ */
+================================================================== */
 *{ box-sizing:border-box; margin:0; padding:0; }
 html{ scroll-behavior:smooth; }
 body{
   font-family:var(--font-body);
-  background:var(--paper);
-  color:var(--ink);
+  background:var(--ink-black);
+  color:var(--parchment);
   display:flex;
   justify-content:center;
-  padding:14px 10px;
+  padding:16px 10px;
   min-height:100vh;
   -webkit-font-smoothing:antialiased;
 }
@@ -57,496 +70,327 @@ body{
 img{ max-width:100%; display:block; }
 a{ color:inherit; text-decoration:none; }
 button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
-:focus-visible{ outline:2px solid var(--felt); outline-offset:2px; }
+:focus-visible{ outline:2px solid var(--gold-soft); outline-offset:2px; border-radius:4px; }
 
-/* ============================================================
+/* ==================================================================
    2. SIDEBAR SHELL
-============================================================ */
+================================================================== */
 .sidebar{
   width:100%;
-  max-width:325px;
-  background:var(--paper-card);
+  max-width:330px;
+  background:var(--ink-deep);
   border:1px solid var(--line);
-  border-radius:var(--radius);
+  border-radius:var(--radius-lg);
   overflow:hidden;
 }
 
-.section{ padding:16px 18px; }
-.divider{ border:none; height:1px; background:var(--line); margin:0 18px; }
+.section{ padding:18px 16px; }
+.divider{ border:none; height:1px; margin:0 16px; background:var(--line); }
 
 .eyebrow{
-  font-size:10px;
+  font-family:var(--font-accent);
+  font-style:italic;
   font-weight:600;
-  letter-spacing:1.6px;
-  text-transform:uppercase;
-  color:var(--brass);
+  font-size:13px;
+  color:var(--gold-soft);
   margin-bottom:11px;
 }
-
+.eyebrow-sub{ font-size:10px; color:var(--parchment-dim); margin:-8px 0 12px; }
 .icon{ width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.6; }
 
-/* ============================================================
-   3. CLUB HEADER — the "box lid": felt band, engraved title
-============================================================ */
-.club-header{
-  background:linear-gradient(180deg, var(--felt) 0%, var(--felt-deep) 100%);
-  padding:28px 18px 22px;
-  text-align:center;
-  position:relative;
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
 }
-/* thin engraved rule, the one signature flourish */
-.club-header::after{
-  content:'';
-  position:absolute;
-  left:50%; bottom:14px;
-  transform:translateX(-50%);
-  width:34px; height:1px;
-  background:var(--brass-soft);
-  opacity:0.7;
-}
+
+/* ==================================================================
+   3. CLUB HEADER + SORTING HAT RIBBON
+================================================================== */
+.club-header{ padding:28px 18px 20px; text-align:center; }
+.crest-wrap{ display:block; width:72px; height:72px; margin:0 auto 14px; border-radius:50%; }
 .club-logo{
-  width:60px; height:60px;
-  border-radius:50%;
-  margin:0 auto 13px;
-  border:2px solid var(--brass-soft);
-  object-fit:cover;
-  background:var(--felt-deep);
+  width:72px; height:72px; border-radius:50%;
+  border:2px solid var(--gold);
+  object-fit:cover; background:var(--card);
 }
 .club-name{
-  font-family:var(--font-display);
-  font-optical-sizing:auto;
-  font-size:21px;
-  font-weight:560;
-  color:var(--felt-tint);
-  line-height:1.25;
+  font-family:var(--font-signature); font-weight:700; font-size:19px;
+  letter-spacing:0.4px; color:var(--parchment); line-height:1.35;
 }
-.club-subtitle{
-  font-size:12px;
-  color:var(--brass-soft);
-  margin-top:5px;
-  letter-spacing:0.2px;
+.club-motto{
+  font-family:var(--font-accent); font-style:italic; font-weight:500;
+  font-size:13.5px; color:var(--gold-soft); margin-top:6px;
 }
 
-/* ============================================================
-   4. CLUB OWNER
-============================================================ */
-.owner-card{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.owner-avatar{
-  width:46px; height:46px;
-  border-radius:50%;
-  border:1px solid var(--line);
-  object-fit:cover;
-  flex-shrink:0;
-  background:var(--paper);
-}
-.owner-info{ flex:1; min-width:0; }
-.owner-name{
-  font-family:var(--font-display);
-  font-size:14px;
-  font-weight:560;
-  color:var(--ink);
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-}
-.owner-role{ font-size:11px; color:var(--ink-soft); margin-top:1px; }
-.owner-link{
+.sorting-ribbon{
+  margin-top:14px;
   display:inline-flex;
   align-items:center;
-  gap:4px;
-  margin-top:6px;
+  gap:7px;
+  padding:6px 14px;
+  border-radius:20px;
   font-size:11px;
+  font-family:var(--font-accent);
+  font-style:italic;
   font-weight:600;
-  color:var(--felt);
-  border-bottom:1px solid var(--felt);
-  padding-bottom:1px;
-}
-.owner-link:hover{ opacity:0.7; }
-
-/* ============================================================
-   5. STAT CARD
-============================================================ */
-.stat-card{
-  display:flex; align-items:center; justify-content:space-between;
-  background:var(--paper);
+  color:var(--parchment);
+  background:var(--card);
   border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:12px 14px;
 }
-.stat-icon{ width:17px; height:17px; color:var(--felt); flex-shrink:0; }
-.stat-text{ flex:1; margin-left:10px; }
-.stat-user{ font-size:12.5px; font-weight:600; color:var(--ink); }
-.stat-label{ font-size:10px; color:var(--ink-soft); margin-top:2px; text-transform:uppercase; letter-spacing:0.4px; }
-.stat-value{
-  font-family:var(--font-display);
-  font-size:18px;
-  font-weight:640;
-  color:var(--felt);
-}
+.sorting-dot{ width:7px; height:7px; border-radius:50%; flex-shrink:0; background:var(--gold); }
 
-/* ============================================================
-   5b. MEMBERSHIP GROWTH
-============================================================ */
-.goal-card{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:13px 14px;
-}
+/* ==================================================================
+   4. CLUB LEDGER
+================================================================== */
+.stats-grid{ display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+.stat-card{ padding:13px 10px; text-align:center; }
+.stat-card.full{ grid-column:1 / -1; display:flex; align-items:center; gap:10px; text-align:left; padding:12px 14px; }
+.stat-icon{ width:17px; height:17px; color:var(--gold-soft); margin:0 auto 6px; }
+.stat-card.full .stat-icon{ margin:0; }
+.stat-value{ font-family:var(--font-signature); font-weight:700; font-size:17px; color:var(--parchment); line-height:1; }
+.stat-label{ font-size:9.5px; letter-spacing:0.5px; text-transform:uppercase; color:var(--parchment-dim); margin-top:5px; }
+.stat-card.full .stat-text{ flex:1; min-width:0; }
+.stat-card.full .stat-value, .stat-card.full .stat-label{ margin-top:0; }
+.stat-card.full .stat-user{ font-size:12.5px; color:var(--gold-soft); font-weight:600; font-family:var(--font-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.stat-avatar{ width:28px; height:28px; border-radius:50%; object-fit:cover; border:1px solid var(--line); background:var(--card-soft); flex-shrink:0; }
+
+/* ==================================================================
+   4b. GROWTH CHARM
+================================================================== */
+.goal-card{ padding:14px 16px; }
 .goal-top{ display:flex; align-items:baseline; gap:5px; }
-.goal-current{ font-family:var(--font-display); font-weight:640; font-size:19px; color:var(--felt); }
-.goal-sep{ font-size:14px; color:var(--ink-soft); }
-.goal-target{ font-family:var(--font-display); font-weight:600; font-size:14px; color:var(--ink-soft); }
-.goal-label{ font-size:10px; color:var(--ink-soft); margin-left:4px; text-transform:uppercase; letter-spacing:0.4px; }
-.goal-bar-track{ height:5px; border-radius:3px; background:var(--line); margin-top:11px; overflow:hidden; }
-.goal-bar-fill{ height:100%; width:0%; background:var(--felt); transition:width 0.9s ease; }
-.goal-sub{ font-size:10.5px; color:var(--ink-soft); margin-top:9px; }
-
-/* ============================================================
-   6. FEATURED VIDEO + QUOTE
-============================================================ */
-.video-frame{
-  width:100%;
-  aspect-ratio:16/9;
-  border-radius:8px;
-  overflow:hidden;
-  background:var(--felt-deep);
-  border:1px solid var(--line);
+.goal-current{ font-family:var(--font-signature); font-weight:700; font-size:19px; color:var(--gold-soft); }
+.goal-sep{ font-size:14px; color:var(--parchment-dim); }
+.goal-target{ font-family:var(--font-signature); font-weight:700; font-size:14px; color:var(--parchment-dim); }
+.goal-label{ font-size:10px; color:var(--parchment-dim); margin-left:4px; text-transform:uppercase; letter-spacing:0.4px; }
+.goal-bar-track{ height:6px; border-radius:3px; background:var(--card-soft); margin-top:11px; overflow:hidden; }
+.goal-bar-fill{ height:100%; width:0%; background:var(--gold); transition:width 0.9s ease; }
+.goal-sub{ font-size:10.5px; color:var(--parchment-dim); margin-top:9px; font-family:var(--font-accent); font-style:italic; }
+.goal-badge{
+  display:inline-flex; align-items:center; gap:5px; margin-top:10px;
+  font-size:10.5px; color:var(--gold-soft); background:var(--card-soft);
+  border:1px solid var(--line); padding:4px 9px; border-radius:20px; font-weight:600;
 }
-.video-frame video{ width:100%; height:100%; object-fit:cover; display:block; }
-.quote-card{
-  margin-top:12px;
-  border-left:2px solid var(--brass);
-  padding:2px 0 2px 12px;
-}
-.quote-text{ font-size:13.5px; line-height:1.5; color:var(--ink); font-style:italic; }
-.quote-author{ margin-top:5px; font-size:10.5px; letter-spacing:0.4px; color:var(--ink-soft); text-transform:uppercase; }
 
-/* ============================================================
-   7. ACTION BUTTONS
-============================================================ */
+/* ==================================================================
+   5. ACTION BUTTONS
+================================================================== */
 .action-grid{ display:grid; grid-template-columns:1fr 1fr; gap:9px; }
 .action-btn{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:6px;
-  padding:12px 8px;
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  color:var(--ink);
-  font-size:11.5px;
-  font-weight:600;
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  padding:13px 8px; color:var(--parchment); font-size:11.5px; font-weight:600;
   transition:border-color 0.15s ease, background 0.15s ease;
 }
-.action-btn .icon{ width:18px; height:18px; color:var(--felt); }
-.action-btn:hover{ border-color:var(--felt); background:var(--felt-tint); }
+.action-btn .icon{ width:18px; height:18px; color:var(--gold-soft); }
+.action-btn:hover{ border-color:var(--gold); background:var(--card-soft); }
+.action-btn.wide{ grid-column:1 / -1; flex-direction:row; justify-content:center; padding:11px; }
 
-/* ============================================================
-   8. CLUB ANTHEM AUDIO PLAYER
-============================================================ */
-.anthem-player{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:13px 14px;
+/* ==================================================================
+   6. PLAYER LISTS — fixed height so Top Wizards and Recently Sorted
+   always occupy the same footprint, regardless of row count.
+================================================================== */
+.player-list{
+  display:flex; flex-direction:column; gap:7px;
+  height:252px; overflow-y:auto; padding-right:2px;
 }
-.anthem-top{ display:flex; align-items:center; gap:10px; }
-.anthem-toggle{
-  width:34px; height:34px;
-  border-radius:50%;
-  background:var(--felt);
-  color:var(--paper-card);
-  display:flex; align-items:center; justify-content:center;
-  flex-shrink:0;
-  transition:opacity 0.15s ease;
-}
-.anthem-toggle:hover{ opacity:0.85; }
-.anthem-toggle .icon{ width:14px; height:14px; stroke:none; fill:currentColor; }
-.anthem-meta{ flex:1; min-width:0; }
-.anthem-title{ font-size:12px; font-weight:600; color:var(--ink); }
-.anthem-sub{ font-size:10.5px; color:var(--ink-soft); margin-top:1px; }
-.anthem-progress-row{ display:flex; align-items:center; gap:8px; margin-top:11px; font-size:10px; color:var(--ink-soft); }
-.progress-track{ flex:1; height:4px; border-radius:2px; background:var(--line); position:relative; cursor:pointer; }
-.progress-fill{ position:absolute; left:0; top:0; height:100%; width:0%; border-radius:2px; background:var(--felt); }
-.anthem-volume-row{ display:flex; align-items:center; gap:8px; margin-top:9px; }
-.anthem-volume-row .icon{ width:13px; height:13px; color:var(--felt); }
-input[type="range"]{ -webkit-appearance:none; appearance:none; width:100%; height:4px; border-radius:2px; background:var(--line); outline:none; }
-input[type="range"]::-webkit-slider-thumb{ -webkit-appearance:none; width:11px; height:11px; border-radius:50%; background:var(--felt); cursor:pointer; border:2px solid var(--paper-card); }
-input[type="range"]::-moz-range-thumb{ width:11px; height:11px; border-radius:50%; background:var(--felt); border:2px solid var(--paper-card); cursor:pointer; }
+.player-list::-webkit-scrollbar{ width:4px; }
+.player-list::-webkit-scrollbar-thumb{ background:var(--gold); border-radius:2px; }
 
-/* ============================================================
-   9. MEMBER LISTS — fixed height so both boxes always match,
-   regardless of how many rows come back from the API.
-============================================================ */
-.member-list{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  height:252px;
-  overflow-y:auto;
-  padding-right:2px;
-}
-.member-list::-webkit-scrollbar{ width:4px; }
-.member-list::-webkit-scrollbar-thumb{ background:var(--brass-soft); border-radius:2px; }
-
-.member-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:8px;
-  padding:7px 9px;
-  flex-shrink:0;
-}
-.member-rank{
-  width:16px; text-align:center;
-  font-family:var(--font-display);
-  font-size:11px; font-weight:640;
-  color:var(--brass);
-  flex-shrink:0;
-}
-.member-avatar{
-  width:30px; height:30px;
-  border-radius:50%;
-  object-fit:cover;
+.player-row{
+  display:flex; align-items:center; gap:10px; padding:8px 10px;
+  border-radius:var(--radius-sm);
+  background:var(--card);
   border:1px solid var(--line);
   flex-shrink:0;
-  background:var(--paper-card);
 }
-.member-info{ flex:1; min-width:0; }
-.member-name{ font-size:12px; font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.member-sub{ font-size:10px; color:var(--ink-soft); margin-top:1px; }
-.member-badge{
-  font-size:10px; font-weight:700;
-  color:var(--paper-card);
-  background:var(--felt);
-  padding:2px 7px;
-  border-radius:20px;
-  flex-shrink:0;
+.player-rank{ width:16px; text-align:center; flex-shrink:0; font-family:var(--font-signature); font-size:11px; font-weight:700; color:var(--gold-soft); }
+.player-avatar{ width:30px; height:30px; border-radius:50%; object-fit:cover; border:1px solid var(--line); background:var(--card-soft); flex-shrink:0; }
+.player-info{ flex:1; min-width:0; }
+.player-name{ font-size:12.5px; font-weight:600; color:var(--parchment); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.player-sub{ font-size:10px; color:var(--parchment-dim); margin-top:1px; display:flex; align-items:center; gap:4px; }
+.player-sub .icon{ width:10px; height:10px; }
+.player-rating{ font-family:var(--font-signature); font-weight:700; font-size:12.5px; color:var(--gold-soft); flex-shrink:0; }
+.player-rating.pending{ font-size:9.5px; font-family:var(--font-body); font-weight:600; color:var(--parchment-dim); font-style:italic; }
+.player-badge-new{
+  font-size:9.5px; font-weight:700; color:var(--ink-black);
+  background:var(--gold-soft);
+  padding:2px 7px; border-radius:20px; flex-shrink:0;
 }
-.member-rating{ font-family:var(--font-display); font-size:12px; font-weight:640; color:var(--felt); flex-shrink:0; }
-.list-skeleton{ font-size:11px; color:var(--ink-soft); padding:8px 2px; }
+.list-skeleton{ font-size:11.5px; color:var(--parchment-dim); padding:8px 2px; }
 
-/* ============================================================
-   10. CALENDAR
-============================================================ */
-.calendar-card{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:13px 14px; }
+/* ==================================================================
+   7. CALENDAR — always renders 6 full rows so the card is the same
+   height every month, whether it has 4 trailing days or 10.
+================================================================== */
+.calendar-card{ padding:13px 14px; }
 .calendar-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
-.calendar-title{ font-family:var(--font-display); font-size:13px; font-weight:600; color:var(--ink); }
+.calendar-title{ font-family:var(--font-signature); font-size:12.5px; font-weight:700; color:var(--parchment); }
 .calendar-nav{ display:flex; gap:6px; }
 .calendar-nav button{
   width:22px; height:22px;
   display:flex; align-items:center; justify-content:center;
   border:1px solid var(--line);
   border-radius:6px;
-  color:var(--felt);
+  color:var(--gold-soft);
   transition:background 0.15s ease;
 }
-.calendar-nav button:hover{ background:var(--felt-tint); }
+.calendar-nav button:hover{ background:var(--card-soft); }
 .calendar-nav .icon{ width:11px; height:11px; }
 .calendar-grid{ display:grid; grid-template-columns:repeat(7, 1fr); gap:3px; text-align:center; }
-.calendar-grid .dow{ font-size:9px; font-weight:600; color:var(--brass); padding-bottom:4px; }
-.calendar-grid .day{ font-size:11px; color:var(--ink); padding:5px 0; border-radius:6px; }
-.calendar-grid .day.muted{ color:#c9c4b4; }
-.calendar-grid .day.today{ background:var(--felt); color:var(--paper-card); font-weight:700; }
+.calendar-grid .dow{ font-size:9px; font-weight:600; color:var(--gold); padding-bottom:4px; }
+.calendar-grid .day{ font-size:11px; color:var(--parchment); padding:5px 0; border-radius:6px; }
+.calendar-grid .day.muted{ color:rgba(168,156,130,0.35); }
+.calendar-grid .day.today{ background:var(--gold); color:var(--ink-black); font-weight:700; }
 
-/* ============================================================
-   11. PARTNERED CLUBS
-============================================================ */
-.partner-list{ display:flex; flex-direction:column; gap:7px; }
-.partner-card{
-  display:flex; align-items:center; gap:10px;
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:8px;
-  padding:8px 10px;
-}
-.partner-logo{
-  width:32px; height:32px;
-  display:flex; align-items:center; justify-content:center;
-  font-size:19px;
-  border-radius:7px;
-  border:1px solid var(--line);
-  background:var(--paper-card);
-  flex-shrink:0;
-}
-.partner-name{ flex:1; font-size:11.5px; font-weight:600; color:var(--ink); min-width:0; }
-.partner-visit{
-  font-size:10px; font-weight:700;
-  color:var(--paper-card);
-  background:var(--brass);
-  padding:5px 10px;
-  border-radius:20px;
-  flex-shrink:0;
-  transition:opacity 0.15s ease;
-}
-.partner-visit:hover{ opacity:0.85; }
+/* ==================================================================
+   8. SPELL BOOK & ENCHANTED DIARY — same quote-card treatment,
+   distinguished only by an eyebrow label.
+================================================================== */
+.quote-card{ padding:14px 16px; border-left:2px solid var(--gold); border-radius:0 var(--radius-md) var(--radius-md) 0; }
+.spell-name{ font-family:var(--font-accent); font-style:italic; font-weight:600; font-size:15px; color:var(--gold-soft); }
+.spell-effect{ font-size:12.5px; line-height:1.5; color:var(--parchment); margin-top:6px; }
 
-/* ============================================================
-   12. FOOTER
-============================================================ */
-.sidebar-footer{ text-align:center; padding:14px 16px 20px; font-size:9.5px; color:var(--ink-soft); letter-spacing:0.3px; }
+.diary-entry{ font-family:var(--font-accent); font-style:italic; font-weight:600; font-size:14px; line-height:1.55; color:var(--parchment); }
+.diary-date{ font-size:10px; letter-spacing:0.4px; text-transform:uppercase; color:var(--parchment-dim); margin-top:10px; }
 
-/* ============================================================
-   13. RESPONSIVE
-============================================================ */
+/* ==================================================================
+   9. DAILY PROPHET
+================================================================== */
+.prophet-list{ display:flex; flex-direction:column; padding:2px 12px; }
+.prophet-item{ padding:10px 0; border-bottom:1px solid var(--line); }
+.prophet-item:last-child{ border-bottom:none; }
+.prophet-kicker{ font-size:9.5px; letter-spacing:0.5px; text-transform:uppercase; color:var(--gold); }
+.prophet-headline{ font-family:var(--font-accent); font-weight:600; font-size:13px; color:var(--parchment); margin-top:3px; line-height:1.4; }
+.prophet-date{ font-size:10px; color:var(--parchment-dim); margin-top:3px; }
+
+/* ==================================================================
+   10. FOOTER
+================================================================== */
+.sidebar-footer{ text-align:center; font-size:9.5px; color:var(--parchment-dim); padding:6px 16px 20px; }
+
 @media (max-width:360px){
-  .sidebar{ max-width:100%; }
-  body{ padding:10px 6px; }
+  .stats-grid{ gap:7px; }
+  .club-header{ padding:22px 14px 16px; }
 }
 </style>
 </head>
 <body>
-
-<aside class="sidebar" id="sidebar">
+<aside class="sidebar">
 
   <!-- ============================== 1. CLUB HEADER ============================== -->
-  <section class="section club-header" aria-label="Club header">
-    <img class="club-logo" id="clubLogo" src="" alt="Club logo" loading="lazy">
-    <h1 class="club-name" id="clubName">Loading club…</h1>
-    <p class="club-subtitle" id="clubSubtitle">A Sanctuary for Royal Play</p>
-  </section>
+  <div class="club-header">
+    <a class="crest-wrap" id="crestLink" href="https://www.chess.com/club/hogwarts-team" target="_blank" rel="noopener" aria-label="View Hogwarts Team on Chess.com">
+      <img class="club-logo" id="clubLogo" src="" alt="">
+    </a>
+    <div class="club-name" id="clubName">Hogwarts Team</div>
+    <div class="club-motto">Draco Dormiens Numquam Titillandus</div>
 
-  <!-- ============================== 2. CLUB OWNER ============================== -->
-  <section class="section" aria-label="Club owner">
-    <p class="eyebrow">Club Owner</p>
-    <div class="owner-card">
-      <img class="owner-avatar" id="ownerAvatar" src="" alt="Owner avatar" loading="lazy">
-      <div class="owner-info">
-        <div class="owner-name" id="ownerName">Loading…</div>
-        <div class="owner-role">Founder &amp; Administrator</div>
-        <a class="owner-link" id="ownerLink" href="https://www.chess.com/member/cutegirl1901" target="_blank" rel="noopener">
-          View profile
-          <svg class="icon" style="width:10px;height:10px;stroke-width:2" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
+    <div class="sorting-ribbon" id="sortingRibbon">
+      <span class="sorting-dot" id="sortingDot"></span>
+      <span id="sortingText">The Sorting Hat is deciding…</span>
     </div>
-  </section>
+  </div>
 
   <hr class="divider">
 
-  <!-- ============================== 3. CLUB STATISTICS ============================== -->
+  <!-- ============================== 2. CLUB LEDGER ============================== -->
   <section class="section" aria-label="Club statistics">
-    <p class="eyebrow">Club Statistics</p>
-    <div class="stat-card">
-      <svg class="stat-icon" viewBox="0 0 24 24"><path d="M12 2 4 7v5c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V7l-8-5Z" stroke-linejoin="round"/></svg>
-      <div class="stat-text">
-        <div class="stat-user" id="statTopUser">—</div>
-        <div class="stat-label">Highest Rated Player</div>
+    <div class="stats-grid">
+      <div class="stat-card card">
+        <svg class="stat-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="stat-value" id="statMembers">—</div>
+        <div class="stat-label">Members</div>
       </div>
-      <div class="stat-value" id="statTopRating">—</div>
+      <div class="stat-card card">
+        <svg class="stat-icon" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M6 4h12v4a6 6 0 0 1-12 0V4Z" stroke-linejoin="round"/><path d="M6 6H3v1a4 4 0 0 0 4 4M18 6h3v1a4 4 0 0 1-4 4" stroke-linecap="round"/></svg>
+        <div class="stat-value" id="statHouses">4</div>
+        <div class="stat-label">Houses</div>
+      </div>
+      <div class="stat-card full card">
+        <img class="stat-avatar" id="championAvatar" src="" alt="" style="display:none;">
+        <svg class="stat-icon" id="championIcon" viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2Z" stroke-linejoin="round"/></svg>
+        <div class="stat-text">
+          <div class="stat-user" id="championName">—</div>
+          <div class="stat-label" style="margin-top:1px;">reigning top wizard</div>
+        </div>
+      </div>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- ============================== 3b. MEMBERSHIP GROWTH ============================== -->
-  <section class="section" aria-label="Membership growth">
-    <p class="eyebrow">Membership Growth</p>
-    <div class="goal-card">
+  <!-- ============================== 3. GROWTH CHARM ============================== -->
+  <section class="section" aria-label="Membership goal">
+    <p class="eyebrow">Growth Charm</p>
+    <div class="goal-card card">
       <div class="goal-top">
         <span class="goal-current" id="goalCurrent">0</span>
         <span class="goal-sep">/</span>
-        <span class="goal-target" id="goalTarget">100</span>
+        <span class="goal-target" id="goalTarget">500</span>
         <span class="goal-label">members</span>
       </div>
       <div class="goal-bar-track"><div class="goal-bar-fill" id="goalBarFill"></div></div>
       <div class="goal-sub" id="goalSub"></div>
+      <div class="goal-sub" id="goalNextTier" style="margin-top:2px; opacity:0.75;"></div>
+      <span class="goal-badge" id="weeklyBadge" style="display:none;"></span>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- ============================== 4. FEATURED VIDEO ============================== -->
-  <section class="section" aria-label="Featured video">
-    <p class="eyebrow">Featured Video</p>
-    <div class="video-frame">
-      <video autoplay muted loop playsinline preload="auto">
-        <source src="https://files.catbox.moe/164r52.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="quote-card">
-      <p class="quote-text" id="quoteText">"Every chess master was once a beginner."</p>
-      <p class="quote-author" id="quoteAuthor">— Irving Chernev</p>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ============================== 5. ACTION BUTTONS ============================== -->
+  <!-- ============================== 4. ACTION BUTTONS ============================== -->
   <section class="section" aria-label="Club actions">
     <div class="action-grid">
-      <a class="action-btn" href="https://www.chess.com/clubs/forum/view/club-rules-649" target="_blank" rel="noopener">
+      <a class="action-btn card" id="rulesBtn" href="https://www.chess.com/clubs/forum/view/club-rules-640" target="_blank" rel="noopener">
         <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
         Club Rules
       </a>
-      <a class="action-btn" href="https://www.chess.com/clubs/forum/view/advertising-forum-907" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z" stroke-linejoin="round"/><path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14" stroke-linecap="round"/></svg>
-        Advertisement
+      <a class="action-btn card" id="joinBtn" href="https://www.chess.com/club/hogwarts-team" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Join the Club
+      </a>
+      <a class="action-btn card wide" id="forumBtn" href="https://www.chess.com/clubs/forum/hogwarts-team" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" style="margin-right:8px;"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z" stroke-linejoin="round"/><path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14" stroke-linecap="round"/></svg>
+        Visit Club Forum
+      </a>
+      <a class="action-btn card wide" id="announcementsBtn" href="https://www.chess.com/club/hogwarts-team/announcements" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" style="margin-right:8px;"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z" stroke-linejoin="round"/><path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14" stroke-linecap="round"/></svg>
+        Announcements
+      </a>
+      <a class="action-btn card wide" id="tournamentsBtn" href="https://www.chess.com/clubs/events/hogwarts-team" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" style="margin-right:8px;"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z" stroke-linejoin="round"/><path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14" stroke-linecap="round"/></svg>
+        Join Tournaments
       </a>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- ============================== 6. CLUB ANTHEM ============================== -->
-  <section class="section" aria-label="Club anthem">
-    <p class="eyebrow">Club Anthem</p>
-    <div class="anthem-player">
-      <audio id="anthemAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="metadata"></audio>
-      <div class="anthem-top">
-        <button class="anthem-toggle" id="anthemToggle" aria-label="Play anthem">
-          <svg class="icon" id="anthemIcon" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4Z"/></svg>
-        </button>
-        <div class="anthem-meta">
-          <div class="anthem-title">Club Anthem</div>
-          <div class="anthem-sub">Rocking Superstar Team</div>
-        </div>
-      </div>
-      <div class="anthem-progress-row">
-        <span id="anthemCurrent">0:00</span>
-        <div class="progress-track" id="anthemTrack"><div class="progress-fill" id="anthemFill"></div></div>
-        <span id="anthemDuration">0:00</span>
-      </div>
-      <div class="anthem-volume-row">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5Z" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 0 1 0 7" stroke-linecap="round"/></svg>
-        <input type="range" id="anthemVolume" min="0" max="1" step="0.01" value="0.7" aria-label="Volume">
-      </div>
+  <!-- ============================== 5. TOP WIZARDS ============================== -->
+  <section class="section" aria-label="Top wizards by rating">
+    <p class="eyebrow">Top Wizards</p>
+    <div class="player-list" id="topPlayersList">
+      <div class="list-skeleton">Loading…</div>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- ============================== 7. NEWEST MEMBERS ============================== -->
-  <section class="section" aria-label="Newest members">
-    <p class="eyebrow">Newest Members</p>
-    <div class="member-list" id="newestList">
-      <div class="list-skeleton">Fetching newest members…</div>
+  <!-- ============================== 6. RECENTLY SORTED ============================== -->
+  <section class="section" aria-label="Recently joined members">
+    <p class="eyebrow">Recently Sorted</p>
+    <div class="player-list" id="recentJoinsList">
+      <div class="list-skeleton">Loading…</div>
     </div>
   </section>
 
   <hr class="divider">
 
- 
-  <!-- ============================== 8. HIGHEST RATED PLAYERS ============================== -->
-  <section class="section" aria-label="Highest rated players">
-    <p class="eyebrow">Highest Rated Players</p>
-    <div class="member-list" id="ratedList">
-      <div class="list-skeleton">Calculating top ratings…</div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ============================== 9. CALENDAR ============================== -->
+  <!-- ============================== 7. CALENDAR ============================== -->
   <section class="section" aria-label="Club calendar">
     <p class="eyebrow">Calendar</p>
-    <div class="calendar-card">
+    <div class="calendar-card card">
       <div class="calendar-head">
         <div class="calendar-title" id="calTitle">—</div>
         <div class="calendar-nav">
@@ -560,50 +404,176 @@ input[type="range"]::-moz-range-thumb{ width:11px; height:11px; border-radius:50
 
   <hr class="divider">
 
-  <!-- ============================== 10. PARTNERED CLUBS ============================== -->
-  <section class="section" aria-label="Partnered clubs">
-    <p class="eyebrow">Partnered Clubs</p>
-    <div class="partner-list" id="partnerList"></div>
+  <!-- ============================== 8. SPELL BOOK ============================== -->
+  <section class="section" aria-label="Spell book of chess tips">
+    <p class="eyebrow">Spell Book</p>
+    <div class="quote-card card">
+      <div class="spell-name" id="spellName">Protego Prophylaxis</div>
+      <div class="spell-effect" id="spellEffect">Castle early. A king left in the centre is a king left undefended.</div>
+    </div>
   </section>
 
-  <div class="sidebar-footer">Rocking Superstar Team</div>
+  <hr class="divider">
+
+  <!-- ============================== 9. THE ENCHANTED DIARY ============================== -->
+  <section class="section" aria-label="Enchanted diary">
+    <p class="eyebrow">The Enchanted Diary</p>
+    <p class="eyebrow-sub">It never forgets to write something amazing back.</p>
+    <div class="quote-card card">
+      <div class="diary-entry" id="diaryEntry">The diary is gathering its thoughts…</div>
+      <div class="diary-date" id="diaryDate"></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================== 10. DAILY PROPHET ============================== -->
+  <section class="section" aria-label="Club announcements">
+    <p class="eyebrow">The Daily Prophet</p>
+    <div class="prophet-list card" id="prophetList">
+      <div class="list-skeleton">Fresh copies arriving by owl…</div>
+    </div>
+  </section>
+
+  <div class="sidebar-footer">Hogwarts Team</div>
 </aside>
 
 <script>
 /* ==================================================================
-   CONFIG — change only these to point the sidebar at a new club
+   CONFIG
+   To connect the real Chess.com API later:
+     1. Set CLUB_SLUG to the club's actual slug.
+     2. Set USE_LIVE_API to true.
+   Fetch functions already call the correct api.chess.com/pub
+   endpoints and fall back to PLACEHOLDER_DATA automatically if a
+   call fails, so this is safe to flip on before every field is
+   verified. Sections with no Chess.com API equivalent (House Cup
+   points, Puzzle, Spell Book, Diary, Daily Prophet, Member Goal
+   target) are clearly marked below — they'll need either a manual
+   data source or a small backend of your own.
 ================================================================== */
-const CLUB_SLUG = "rocking-superstar-team-1";
-const API_BASE  = "https://api.chess.com/pub";
+const CONFIG = {
+  CLUB_SLUG: "hogwarts-team",        // confirmed: chess.com/club/hogwarts-team
+  CLUB_URL: "https://www.chess.com/club/hogwarts-team",
+  API_BASE: "https://api.chess.com/pub",
+  USE_LIVE_API: true,
+  RULES_URL: "https://www.chess.com/clubs/forum/view/club-rules-640",
+  JOIN_URL: "https://www.chess.com/club/hogwarts-team",
+  FORUM_URL: "https://www.chess.com/clubs/forum/hogwarts-team",
+  TOP_PLAYERS_COUNT: 5,
+  RECENT_JOINS_COUNT: 6,
+  MEMBER_SAMPLE_SIZE: 24,
+  // Membership goal auto-advances in fixed steps: 100, then 200, then
+  // 300… Once the club passes a tier, the next tier becomes the goal.
+  GOAL_STEP: 100
+};
 
-// Membership Growth chart advances in fixed steps: 100, then 200,
-// then 300… Once the club passes a tier, the next tier becomes the goal.
-const GOAL_STEP = 100;
+// Returns the next un-reached multiple of GOAL_STEP above `current`.
+// 0-99 -> 100, 100 -> 200, 150 -> 200, 200 -> 300, etc.
+function computeMemberGoal(current){
+  const step = CONFIG.GOAL_STEP;
+  let goal = Math.ceil((current + 1) / step) * step;
+  if(goal <= current) goal += step;
+  return goal;
+}
 
-// Edit this array to feature your own partner clubs.
-const PARTNERED_CLUBS = [
-  { name: "TheRateClimber's Friends", slug: "therateclimbersfriends", logo: "♞" },
-  { name: "The anime lover forever club", slug: "the-anime-lover-forever-club", logo: "♜" },
-  { name: "PixelGlow", slug: "pixelglow", logo: "♝" }
+const HOUSES = [
+  { name: "Gryffindor", color: "var(--h-gryffindor)" },
+  { name: "Slytherin",  color: "var(--h-slytherin)"  },
+  { name: "Ravenclaw",  color: "var(--h-ravenclaw)"  },
+  { name: "Hufflepuff", color: "var(--h-hufflepuff)" }
 ];
 
-const CHESS_QUOTES = [
-  { text: "Every chess master was once a beginner.", author: "Irving Chernev" },
-  { text: "Chess is life in miniature.", author: "Garry Kasparov" },
-  { text: "When you see a good move, look for a better one.", author: "Emanuel Lasker" },
-  { text: "Chess is the gymnasium of the mind.", author: "Blaise Pascal" },
-  { text: "Tactics flow from a superior position.", author: "Bobby Fischer" },
-  { text: "The pin is mightier than the sword.", author: "Fred Reinfeld" },
-  { text: "Chess is beautiful enough to waste your life for.", author: "Hans Re" },
-  { text: "Play the opening like a book, the middlegame like a magician.", author: "Rudolf Spielmann" }
-];
+/* ==================================================================
+   PLACEHOLDER DATA — shaped to match the live API mapping so
+   flipping USE_LIVE_API requires no template changes.
+
+   topPlayers / recentJoins below use REAL identities pulled from
+   this club's own API responses (club/{slug}/members and
+   player/{username}). Ratings aren't part of either endpoint, so
+   they're marked "pending" here — loadPlayerLists() progressively
+   fetches player/{username}/stats for real numbers once
+   USE_LIVE_API is on. Avatars for BOTH lists are enriched live via
+   player/{username} regardless of USE_LIVE_API (see loadPlayerLists),
+   since that's a lightweight public endpoint — these placeholder
+   avatars are just the last-known fallback if that fetch is blocked.
+================================================================== */
+const PLACEHOLDER_DATA = {
+  club: {
+    name: "Hogwarts Team",
+    icon: "https://images.chesscomfiles.com/uploads/v1/group/447204.4d2b4dcd.50x50o.7b6a7d6a7d6a.png",
+    description: "A club for witches, wizards, and squibs who love the sixty-four squares.",
+    // From club/hogwarts-team/members: weekly(8) + monthly(22) + all_time(7)
+    // = 37. Note this endpoint only lists *recently joined* members in
+    // three buckets, not the club's full roster — if the club summary
+    // endpoint (club/{slug} -> members_count) ever returns a bigger
+    // number, prefer that field instead.
+    members_count: 37,
+    houses_represented: 4
+  },
+  // Ratings confirmed directly by the club owner (Aug 2026 snapshot).
+  // Refresh via player/{username}/stats when USE_LIVE_API is on.
+  topPlayers: [
+    { username: "hollygirl1225",     avatar: "https://images.chesscomfiles.com/uploads/v1/user/244999519.b00187c9.200x200o.638e5ba97579.jpg", rating: 2078 },
+    { username: "snowflakesundown",  avatar: "https://images.chesscomfiles.com/uploads/v1/user/481026122.1ea2ed35.200x200o.970c738e8740.png", rating: 2058 },
+    { username: "meangel13",         avatar: "https://images.chesscomfiles.com/uploads/v1/user/178048309.5a1fd24a.200x200o.87dc1427beae.jpg", rating: 1380 }
+  ],
+  // Sorted by join date, most recent first (weekly bucket from
+  // club/{slug}/members). Avatars aren't in that endpoint, so these
+  // start blank and loadPlayerLists() fills them in from
+  // player/{username} the same way it does for Top Wizards.
+  recentJoins: [
+    { username: "hates_draw",           joined: 1785669444, avatar: "" },
+    { username: "mivaan-shoora",        joined: 1785382698, avatar: "" },
+    { username: "goodatflags",          joined: 1784435215, avatar: "" },
+    { username: "cutegirl1901",         joined: 1782974340, avatar: "" },
+    { username: "the_a_greninja",       joined: 1782926030, avatar: "" },
+    { username: "your_local_goober_e",  joined: 1782238959, avatar: "" }
+  ],
+  // From club/{slug}/members — used for the "sorted this week" badge.
+  weeklyJoinCount: 8,
+  spells: [
+    { name: "Protego Prophylaxis", effect: "Castle early. A king left in the centre is a king left undefended." },
+    { name: "Accio Tempo", effect: "Develop with threats. Every move should do two jobs at once." },
+    { name: "Revelio Weakness", effect: "Before you calculate a combination, ask what your opponent's last move weakened." },
+    { name: "Finite Incantatem", effect: "In equal endgames, trade pieces, not pawns. Pawns are the ones that promote." },
+    { name: "Expecto Endgame", effect: "Count material before you sacrifice. Hope is not compensation." }
+  ],
+  announcements: [
+    { kicker: "House Cup", headline: "Ravenclaw takes the lead after this week's blitz arena.", date: "Aug 1" },
+    { kicker: "New Feature", headline: "Daily Puzzle is now live — solve it for bonus House points.", date: "Jul 29" },
+    { kicker: "Recruitment", headline: "First-years welcome: club is accepting new members through August.", date: "Jul 24" }
+  ],
+  // The Enchanted Diary — one "amazing" entry per calendar day, picked
+  // deterministically from the day of year so every visitor sees the
+  // same page all day, and it changes itself overnight like magic.
+  // Swap this array for a real feed later; the picker logic won't change.
+  diary: [
+    "Today a first-year beat a club veteran with nothing but a well-timed pawn storm. Dumbledore would be proud.",
+    "A member just crossed 1500 rating for the first time. Somewhere, a wand chose its wizard.",
+    "The Room of Requirement, it turns out, is an empty board and forty spare minutes.",
+    "Someone in the club solved the daily puzzle in nine seconds flat. Time-Turner not required.",
+    "Every checkmate is a small Patronus: proof that, under pressure, you knew exactly what to do.",
+    "A Hufflepuff drew a grandmaster-adjacent opponent to a stalemate today. Loyalty holds the line.",
+    "The best move on the board is rarely the loudest one. Ravenclaws already knew that.",
+    "Two members played their first-ever rated game against each other this week. Both are still talking about it.",
+    "An old rivalry match ended in a handshake instead of a duel. That's growth, not just chess.",
+    "Somebody finally figured out the Sicilian line that's been haunting the forum for a month.",
+    "A member taught their little sibling en passant today. The club just got one wizard bigger.",
+    "The House Cup shifted by twelve points overnight. Nothing is ever really settled here.",
+    "A quiet member won five games in a row and told no one. We're telling you now.",
+    "Someone queened a pawn that started the game looking completely hopeless. Keep playing yours.",
+    "The forum lit up over one brilliant sacrifice. It was worth every bit of the noise."
+  ]
+};
 
 /* ==================================================================
    HELPERS
 ================================================================== */
 async function fetchJSON(url){
   try{
-    const res = await fetch(url);
+    const bust = url.includes("?") ? "&" : "?";
+    const res = await fetch(url + bust + "_=" + Date.now(), { cache: "no-store" });
     if(!res.ok) throw new Error("HTTP " + res.status);
     return await res.json();
   }catch(err){
@@ -612,16 +582,21 @@ async function fetchJSON(url){
   }
 }
 
-function stripHtml(html){
+function escapeHTML(str){
   const div = document.createElement("div");
-  div.innerHTML = html || "";
-  return (div.textContent || div.innerText || "").trim();
+  div.textContent = str == null ? "" : String(str);
+  return div.innerHTML;
 }
 
 function fmtDate(unix){
   if(!unix) return "—";
-  const d = new Date(unix * 1000);
-  return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+  return new Date(unix * 1000).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+}
+
+function dayOfYear(d){
+  const start = new Date(d.getFullYear(), 0, 0);
+  const diff = d - start;
+  return Math.floor(diff / 86400000);
 }
 
 function bestRating(stats){
@@ -633,6 +608,10 @@ function bestRating(stats){
     if(r && r > max) max = r;
   });
   return max;
+}
+
+function profileURL(username){
+  return `https://www.chess.com/member/${encodeURIComponent(username)}`;
 }
 
 async function mapLimit(items, limit, fn){
@@ -648,19 +627,47 @@ async function mapLimit(items, limit, fn){
   return results;
 }
 
+const avatarFallback = "https://www.chess.com/bundles/web/images/noavatar_l.png";
+
 /* ==================================================================
-   MEMBERSHIP GROWTH
+   1. CLUB HEADER + LEDGER
 ================================================================== */
-function computeMemberGoal(current){
-  const step = GOAL_STEP;
-  let goal = Math.ceil((current + 1) / step) * step;
-  if(goal <= current) goal += step;
-  return goal;
+let currentClub = PLACEHOLDER_DATA.club;
+
+async function loadClubInfo(){
+  let club = PLACEHOLDER_DATA.club;
+
+  if(CONFIG.USE_LIVE_API){
+    const live = await fetchJSON(`${CONFIG.API_BASE}/club/${CONFIG.CLUB_SLUG}`);
+    if(live){
+      club = {
+        name: live.name,
+        icon: live.icon,
+        description: (live.description || "").replace(/<[^>]*>/g, "").trim() || PLACEHOLDER_DATA.club.description,
+        members_count: live.members_count || 0,
+        houses_represented: PLACEHOLDER_DATA.club.houses_represented // no API field — manual for now
+      };
+    }
+  }
+currentClub = club;
+  document.getElementById("clubLogo").src = club.icon || avatarFallback;
+  document.getElementById("clubLogo").alt = club.name + " crest";
+  document.getElementById("crestLink").href = CONFIG.CLUB_URL;
+  document.getElementById("clubName").textContent = club.name;
+  document.getElementById("statMembers").textContent = club.members_count.toLocaleString();
+  document.getElementById("statHouses").textContent = club.houses_represented;
+
+  loadMemberGoal(club.members_count);
 }
 
+/* ==================================================================
+   2. GROWTH CHARM — member goal graph. No public API field for a
+   club's own target headcount, so the goal itself stays manual
+   (auto-stepped by GOAL_STEP); current count reuses the live/
+   placeholder member total above.
+================================================================== */
 function loadMemberGoal(current){
-  const step = GOAL_STEP;
-  const prevTier = current > 0 ? Math.floor(current / step) * step : 0;
+  const prevTier = current > 0 ? Math.floor(current / CONFIG.GOAL_STEP) * CONFIG.GOAL_STEP : 0;
   const goal = computeMemberGoal(current);
   const span = goal - prevTier;
   const pct = Math.max(0, Math.min(100, Math.round(((current - prevTier) / span) * 100)));
@@ -668,185 +675,146 @@ function loadMemberGoal(current){
   document.getElementById("goalCurrent").textContent = current.toLocaleString();
   document.getElementById("goalTarget").textContent = goal.toLocaleString();
   document.getElementById("goalSub").textContent = `${pct}% of the way to ${goal.toLocaleString()} members`;
+  document.getElementById("goalNextTier").textContent = "";
+
+  const weeklyEl = document.getElementById("weeklyBadge");
+  if(PLACEHOLDER_DATA.weeklyJoinCount){
+    weeklyEl.textContent = `${PLACEHOLDER_DATA.weeklyJoinCount} sorted this week`;
+    weeklyEl.style.display = "inline-flex";
+  }
 
   const fill = document.getElementById("goalBarFill");
   requestAnimationFrame(() => { fill.style.width = pct + "%"; });
 }
 
 /* ==================================================================
-   1–3. CLUB INFO + STATS
+   3. SORTING HAT RIBBON
 ================================================================== */
-async function loadClubInfo(){
-  const club = await fetchJSON(`${API_BASE}/club/${CLUB_SLUG}`);
-  if(!club){
-    document.getElementById("clubName").textContent = "Club unavailable";
-    return null;
-  }
-
-  document.getElementById("clubLogo").src = club.icon || "";
-  document.getElementById("clubLogo").alt = club.name + " logo";
-  document.getElementById("clubName").textContent = club.name;
-
-  const desc = stripHtml(club.description);
-  document.getElementById("clubSubtitle").textContent =
-    desc ? (desc.length > 70 ? desc.slice(0, 67) + "…" : desc) : "A Sanctuary for Royal Play";
-
-  const members = club.members_count || 0;
-  loadMemberGoal(members);
-
-  loadOwner("cutegirl1901");
-  return club;
-}
-
-async function loadOwner(username){
-  const profile = await fetchJSON(`${API_BASE}/player/${username}`);
-  if(!profile){
-    document.getElementById("ownerName").textContent = username;
-    document.getElementById("ownerLink").href = `https://www.chess.com/member/${username}`;
-    return;
-  }
-  document.getElementById("ownerAvatar").src = profile.avatar || `https://www.chess.com/bundles/web/images/noavatar_l.png`;
-  document.getElementById("ownerName").textContent = profile.name || profile.username;
-  document.getElementById("ownerLink").href = profile.url || `https://www.chess.com/member/${username}`;
+function runSortingHat(){
+  const house = HOUSES[Math.floor(Math.random() * HOUSES.length)];
+  const dot = document.getElementById("sortingDot");
+  const text = document.getElementById("sortingText");
+  dot.style.background = house.color;
+  text.textContent = `The Sorting Hat calls you ${house.name}.`;
 }
 
 /* ==================================================================
-   MEMBERS: newest joins + highest rated
+   4. TOP WIZARDS + RECENTLY SORTED
+   Chess.com has no single "top rated club members" endpoint, so the
+   real workflow is: pull club/{slug}/members (weekly/monthly/all_time
+   buckets of {username, joined}), then progressively fetch
+   player/{username}/stats for a sample to find best ratings. Recently
+   Sorted just needs the weekly bucket sorted by join date.
+
+   Avatars for both lists are enriched from player/{username} — a
+   lightweight public endpoint — independently of CONFIG.USE_LIVE_API,
+   so Recently Sorted shows real profile pictures the same way Top
+   Wizards does. fetchJSON already fails soft to null, so if the
+   sandbox blocks the request the placeholder avatar/icon is used.
 ================================================================== */
-async function loadMembersAndRatings(){
-  const data = await fetchJSON(`${API_BASE}/club/${CLUB_SLUG}/members`);
-  if(!data){
-    document.getElementById("newestList").innerHTML = '<div class="list-skeleton">Unable to load members.</div>';
-    document.getElementById("ratedList").innerHTML  = '<div class="list-skeleton">Unable to load ratings.</div>';
-    return;
-  }
-
-  const all = [...(data.weekly||[]), ...(data.monthly||[]), ...(data.all_time||[])];
-  const seen = new Set();
-  const merged = [];
-  all.forEach(m => { if(!seen.has(m.username)){ seen.add(m.username); merged.push(m); } });
-  merged.sort((a,b) => (b.joined||0) - (a.joined||0));
-
-  const newest = merged.slice(0, 8);
-  const newestRows = await mapLimit(newest, 4, async (m) => {
-    const [profile, stats] = await Promise.all([
-      fetchJSON(`${API_BASE}/player/${m.username}`),
-      fetchJSON(`${API_BASE}/player/${m.username}/stats`)
-    ]);
-    return {
-      username: m.username,
-      joined: m.joined,
-      avatar: profile && profile.avatar,
-      url: (profile && profile.url) || `https://www.chess.com/member/${m.username}`,
-      rating: bestRating(stats)
-    };
+async function enrichAvatars(list){
+  return mapLimit(list, 6, async (p) => {
+    if(p.avatar) return p; // already have one (placeholder or live)
+    const profile = await fetchJSON(`${CONFIG.API_BASE}/player/${p.username}`);
+    return { ...p, avatar: profile && profile.avatar ? profile.avatar : "" };
   });
+}
 
-  document.getElementById("newestList").innerHTML = newestRows.map(r => `
-    <div class="member-row">
-      <img class="member-avatar" src="${r.avatar || ''}" alt="${r.username}" loading="lazy">
-      <div class="member-info">
-        <div class="member-name">${r.username}</div>
-        <div class="member-sub">Joined ${fmtDate(r.joined)}</div>
+function renderTopPlayers(list){
+  const el = document.getElementById("topPlayersList");
+  if(!list.length){ el.innerHTML = '<div class="list-skeleton">No rated members yet.</div>'; return; }
+
+  el.innerHTML = list.map((p, i) => `
+    <a class="player-row" href="${profileURL(p.username)}" target="_blank" rel="noopener">
+      <div class="player-rank">${i + 1}</div>
+      <img class="player-avatar" src="${p.avatar || avatarFallback}" alt="" loading="lazy">
+      <div class="player-info">
+        <div class="player-name">${escapeHTML(p.username)}</div>
+        <div class="player-sub">Top wizard</div>
       </div>
-      <div class="member-rating">${r.rating ? r.rating : '—'}</div>
-    </div>
-  `).join("") || '<div class="list-skeleton">No recent members found.</div>';
+      ${p.rating ? `<div class="player-rating">${p.rating}</div>` : `<div class="player-rating pending">pending</div>`}
+    </a>
+  `).join("");
 
-  const sample = merged.slice(0, 24);
-  const rated = await mapLimit(sample, 5, async (m) => {
-    const [profile, stats] = await Promise.all([
-      fetchJSON(`${API_BASE}/player/${m.username}`),
-      fetchJSON(`${API_BASE}/player/${m.username}/stats`)
-    ]);
-    return {
-      username: m.username,
-      avatar: profile && profile.avatar,
-      url: (profile && profile.url) || `https://www.chess.com/member/${m.username}`,
-      rating: bestRating(stats)
-    };
-  });
-
-  const top = rated.filter(r => r.rating > 0).sort((a,b) => b.rating - a.rating).slice(0, 5);
-
-  document.getElementById("ratedList").innerHTML = top.map((r, i) => `
-    <div class="member-row">
-      <div class="member-rank">${i+1}</div>
-      <img class="member-avatar" src="${r.avatar || ''}" alt="${r.username}" loading="lazy">
-      <div class="member-info"><div class="member-name">${r.username}</div></div>
-      <span class="member-badge">${r.rating}</span>
-    </div>
-  `).join("") || '<div class="list-skeleton">No ratings found.</div>';
-
-  if(top.length){
-    document.getElementById("statTopUser").textContent = top[0].username;
-    document.getElementById("statTopRating").textContent = top[0].rating;
-  } else {
-    document.getElementById("statTopUser").textContent = "N/A";
-    document.getElementById("statTopRating").textContent = "—";
+  const top = list[0];
+  const championEl = document.getElementById("championName");
+  const championAvatar = document.getElementById("championAvatar");
+  const championIcon = document.getElementById("championIcon");
+  if(top){
+    championEl.textContent = top.username + (top.rating ? ` · ${top.rating}` : "");
+    if(top.avatar){
+      championAvatar.src = top.avatar;
+      championAvatar.style.display = "block";
+      championIcon.style.display = "none";
+    }
   }
 }
 
-/* ==================================================================
-   4. RANDOM QUOTE
-================================================================== */
-function loadQuote(){
-  const q = CHESS_QUOTES[Math.floor(Math.random() * CHESS_QUOTES.length)];
-  document.getElementById("quoteText").textContent = `"${q.text}"`;
-  document.getElementById("quoteAuthor").textContent = `— ${q.author}`;
+function renderRecentJoins(list){
+  const el = document.getElementById("recentJoinsList");
+  if(!list.length){ el.innerHTML = '<div class="list-skeleton">No new members yet.</div>'; return; }
+
+  const cutoff = Date.now()/1000 - (3 * 24 * 3600); // "New" badge for last 3 days
+  el.innerHTML = list.map((p, i) => `
+    <a class="player-row" href="${profileURL(p.username)}" target="_blank" rel="noopener">
+      <div class="player-rank">${i + 1}</div>
+      <img class="player-avatar" src="${p.avatar || avatarFallback}" alt="" loading="lazy">
+      <div class="player-info">
+        <div class="player-name">${escapeHTML(p.username)}</div>
+        <div class="player-sub">Sorted ${fmtDate(p.joined)}</div>
+      </div>
+      ${p.joined > cutoff ? '<span class="player-badge-new">NEW</span>' : ''}
+    </a>
+  `).join("");
 }
 
-/* ==================================================================
-   6. CLUB ANTHEM AUDIO PLAYER
-================================================================== */
-function initAnthemPlayer(){
-  const audio    = document.getElementById("anthemAudio");
-  const toggle   = document.getElementById("anthemToggle");
-  const icon     = document.getElementById("anthemIcon");
-  const track    = document.getElementById("anthemTrack");
-  const fill     = document.getElementById("anthemFill");
-  const current  = document.getElementById("anthemCurrent");
-  const duration = document.getElementById("anthemDuration");
-  const volume   = document.getElementById("anthemVolume");
+async function loadPlayerLists(){
+  let topPlayers = PLACEHOLDER_DATA.topPlayers;
+  let recentJoins = PLACEHOLDER_DATA.recentJoins;
 
-  const fmtTime = (s) => {
-    if(!isFinite(s)) return "0:00";
-    const m = Math.floor(s / 60);
-    const sec = Math.floor(s % 60).toString().padStart(2, "0");
-    return `${m}:${sec}`;
-  };
+  if(CONFIG.USE_LIVE_API){
+    const members = await fetchJSON(`${CONFIG.API_BASE}/club/${CONFIG.CLUB_SLUG}/members`);
+    if(members){
+      const weekly = members.weekly || [];
+      const monthly = members.monthly || [];
+      const allTime = members.all_time || [];
 
-  const PLAY_PATH  = "M6 4l14 8-14 8V4Z";
-  const PAUSE_PATH = "M7 4h3v16H7zM14 4h3v16h-3z";
+      const recentRaw = [...weekly, ...monthly, ...allTime]
+        .sort((a, b) => b.joined - a.joined)
+        .slice(0, CONFIG.RECENT_JOINS_COUNT);
 
-  toggle.addEventListener("click", () => {
-    if(audio.paused){
-      audio.play();
-      icon.innerHTML = `<path d="${PAUSE_PATH}"/>`;
-      toggle.setAttribute("aria-label", "Pause anthem");
-    } else {
-      audio.pause();
-      icon.innerHTML = `<path d="${PLAY_PATH}"/>`;
-      toggle.setAttribute("aria-label", "Play anthem");
+      recentJoins = recentRaw.map(m => ({ username: m.username, joined: m.joined, avatar: "" }));
+
+      const sample = [...weekly, ...monthly, ...allTime].slice(0, CONFIG.MEMBER_SAMPLE_SIZE);
+      const withRatings = await mapLimit(sample, 6, async (m) => {
+        const profile = await fetchJSON(`${CONFIG.API_BASE}/player/${m.username}`);
+        const stats = await fetchJSON(`${CONFIG.API_BASE}/player/${m.username}/stats`);
+        return {
+          username: m.username,
+          avatar: profile && profile.avatar ? profile.avatar : "",
+          rating: bestRating(stats) || null
+        };
+      });
+
+      const rated = withRatings.filter(p => p.rating).sort((a, b) => b.rating - a.rating);
+      if(rated.length) topPlayers = rated.slice(0, CONFIG.TOP_PLAYERS_COUNT);
+      if(!recentJoins.length) recentJoins = PLACEHOLDER_DATA.recentJoins;
     }
-  });
-  audio.addEventListener("loadedmetadata", () => { duration.textContent = fmtTime(audio.duration); });
-  audio.addEventListener("timeupdate", () => {
-    current.textContent = fmtTime(audio.currentTime);
-    if(audio.duration) fill.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
-  });
-  audio.addEventListener("ended", () => { icon.innerHTML = `<path d="${PLAY_PATH}"/>`; });
-  track.addEventListener("click", (e) => {
-    const rect = track.getBoundingClientRect();
-    const ratio = (e.clientX - rect.left) / rect.width;
-    if(audio.duration) audio.currentTime = ratio * audio.duration;
-  });
-  volume.addEventListener("input", () => { audio.volume = parseFloat(volume.value); });
-  audio.volume = parseFloat(volume.value);
+  }
+
+  // Enrich avatars regardless of USE_LIVE_API — same treatment for
+  // Top Wizards and Recently Sorted, gracefully falling back if the
+  // sandbox blocks the request.
+  topPlayers = await enrichAvatars(topPlayers);
+  recentJoins = await enrichAvatars(recentJoins);
+
+  renderTopPlayers(topPlayers);
+  renderRecentJoins(recentJoins.slice(0, CONFIG.RECENT_JOINS_COUNT));
 }
 
 /* ==================================================================
-   9. CALENDAR
+   5. CALENDAR — always renders 42 cells (6 rows) so the card height
+   never shifts between a 4-week and a 6-week month.
 ================================================================== */
 function initCalendar(){
   const titleEl = document.getElementById("calTitle");
@@ -864,46 +832,95 @@ function initCalendar(){
     const daysInPrevMonth = new Date(viewDate.getFullYear(), viewDate.getMonth(), 0).getDate();
 
     let html = DOWS.map(d => `<div class="dow">${d}</div>`).join("");
-    for(let i = firstDay - 1; i >= 0; i--){ html += `<div class="day muted">${daysInPrevMonth - i}</div>`; }
+    for(let i = firstDay - 1; i >= 0; i--){
+      html += `<div class="day muted">${daysInPrevMonth - i}</div>`;
+    }
     for(let d = 1; d <= daysInMonth; d++){
       const isToday = d === today.getDate() && viewDate.getMonth() === today.getMonth() && viewDate.getFullYear() === today.getFullYear();
       html += `<div class="day${isToday ? ' today' : ''}">${d}</div>`;
     }
-    const totalCells = firstDay + daysInMonth;
-    const trailing = (7 - (totalCells % 7)) % 7;
-    for(let d = 1; d <= trailing; d++){ html += `<div class="day muted">${d}</div>`; }
+    // Always fill out to 42 cells (6 full rows) so the card's height
+    // is identical for every month, not just ones with more trailing days.
+    const filledSoFar = firstDay + daysInMonth;
+    const totalCells = 42;
+    const trailing = totalCells - filledSoFar;
+    for(let d = 1; d <= trailing; d++){
+      html += `<div class="day muted">${d}</div>`;
+    }
     gridEl.innerHTML = html;
   }
 
-  document.getElementById("calPrev").addEventListener("click", () => { viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1); render(); });
-  document.getElementById("calNext").addEventListener("click", () => { viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1); render(); });
+  document.getElementById("calPrev").addEventListener("click", () => {
+    viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
+    render();
+  });
+  document.getElementById("calNext").addEventListener("click", () => {
+    viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
+    render();
+  });
+
   render();
 }
 
 /* ==================================================================
-   10. PARTNERED CLUBS
+   6. SPELL BOOK
 ================================================================== */
-function loadPartners(){
-  const list = document.getElementById("partnerList");
-  list.innerHTML = PARTNERED_CLUBS.map(p => `
-    <div class="partner-card">
-      <div class="partner-logo">${p.logo}</div>
-      <div class="partner-name">${p.name}</div>
-      <a class="partner-visit" href="https://www.chess.com/club/${p.slug}" target="_blank" rel="noopener">Visit</a>
+function loadSpell(){
+  const s = PLACEHOLDER_DATA.spells[Math.floor(Math.random() * PLACEHOLDER_DATA.spells.length)];
+  document.getElementById("spellName").textContent = s.name;
+  document.getElementById("spellEffect").textContent = s.effect;
+}
+
+/* ==================================================================
+   7. THE ENCHANTED DIARY — same entry all day for everyone, changes
+   at midnight. Picked by day-of-year so it's stable without storage.
+================================================================== */
+function loadDiary(){
+  const entries = PLACEHOLDER_DATA.diary;
+  const now = new Date();
+  const idx = dayOfYear(now) % entries.length;
+
+  document.getElementById("diaryEntry").textContent = entries[idx];
+  document.getElementById("diaryDate").textContent =
+    now.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+}
+
+/* ==================================================================
+   8. DAILY PROPHET
+================================================================== */
+function loadProphet(){
+  const items = PLACEHOLDER_DATA.announcements;
+  const el = document.getElementById("prophetList");
+  el.innerHTML = items.map(a => `
+    <div class="prophet-item">
+      <div class="prophet-kicker">${escapeHTML(a.kicker)}</div>
+      <div class="prophet-headline">${escapeHTML(a.headline)}</div>
+      <div class="prophet-date">${escapeHTML(a.date)}</div>
     </div>
-  `).join("");
+  `).join("") || '<div class="list-skeleton">No announcements yet.</div>';
+}
+
+/* ==================================================================
+   9. ACTION LINKS
+================================================================== */
+function wireActionLinks(){
+  document.getElementById("rulesBtn").href = CONFIG.RULES_URL;
+  document.getElementById("joinBtn").href = CONFIG.JOIN_URL;
+  document.getElementById("forumBtn").href = CONFIG.FORUM_URL;
 }
 
 /* ==================================================================
    INIT
 ================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-  loadQuote();
-  initAnthemPlayer();
+  runSortingHat();
+  wireActionLinks();
+  loadClubInfo();       // also triggers loadMemberGoal()
+  loadPlayerLists();    // also updates the champion ledger card
   initCalendar();
-  loadPartners();
-  loadClubInfo();
-  loadMembersAndRatings();
+  loadSpell();
+  loadDiary();
+  loadProphet();
 });
 </script>
 </body>
