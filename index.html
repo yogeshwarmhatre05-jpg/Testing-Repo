@@ -47,16 +47,18 @@
 ================================================================== */
 *{ box-sizing:border-box; margin:0; padding:0; }
 html{ scroll-behavior:smooth; }
-body{
-  font-family:var(--font-body);
-  background:transparent;
-  color:var(--ink);
-  display:flex;
-  justify-content:center;
-  padding:14px 10px;
-  min-height:100vh;
-  -webkit-font-smoothing:antialiased;
+html {
+  background: transparent !important;
+  background-color: transparent !important;
 }
+
+body {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Keep the cream sketchbook background ONLY inside the border */
+
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
 }
@@ -73,11 +75,7 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
   max-width:325px;
   background:
     linear-gradient(var(--paper-line) 1px, transparent 1px) 0 0/100% 22px,
-    var(--paper);
-  border:2px solid var(--ink);
-  border-radius:var(--radius-lg);
-  overflow:hidden;
-  box-shadow:5px 5px 0 var(--ink);
+    var(--paper) !important;
 }
 
 .section{ padding:16px 16px; }
