@@ -3,50 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hogwarts Team — Club Sidebar</title>
+<title>Stick Figure Lover Club — Club Sidebar</title>
 
 <!-- ==================================================================
      FONTS
-     Display (signature, used once): Cinzel Decorative — for the
-       club name only, so it stays a genuine signature rather than
-       a default headline face.
-     Accent: Cormorant Garamond italic — old-book marginalia, for
-       quotes and section eyebrows.
-     Body/data: Inter — everything that needs to stay legible small.
+     Display: Fredoka — round, friendly, cartoon-marker energy.
+     Accent: Caveat — genuine handwriting, for the motto & doodles.
+     Body: Inter — legible at small sizes.
 ================================================================== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ==================================================================
    0. DESIGN TOKENS
-   Concept: a quiet library study — worn leather-brown walls,
-   parchment ink, a single brass accent. No glow, no blur, one
-   signature move (the sorting ribbon) and nothing else competing
-   for attention.
+   Concept: a kid's sketchbook page — cream paper, faint grid,
+   black marker linework, one loud accent (stick-figure orange).
+   This is deliberately looser and more playful than the other club
+   sidebars: hand-tilted badges, a doodle figure, dashed borders.
 ================================================================== */
 :root{
-  --ink-black:     #17140f;
-  --ink-deep:      #1d1912;
-  --card:          #241f17;
-  --card-soft:     #2a2419;
-  --parchment:     #ece3cf;
-  --parchment-dim: #a89c82;
-  --gold:          #b3903f;
-  --gold-soft:     #d2ac67;
-  --line:          rgba(179,144,63,0.22);
-  --radius-sm:     8px;
-  --radius-md:     12px;
-  --radius-lg:     16px;
-  --font-signature:'Cinzel Decorative', serif;
-  --font-accent:   'Cormorant Garamond', serif;
-  --font-body:     'Inter', sans-serif;
-
-  --h-gryffindor:  #8a3a3a;
-  --h-slytherin:   #2c5c47;
-  --h-ravenclaw:   #3a5788;
-  --h-hufflepuff:  #a3841f;
+  --paper:      #fdfaf1;
+  --paper-line: #eae3cd;
+  --card:       #ffffff;
+  --ink:        #201d18;
+  --ink-soft:   #7a7566;
+  --orange:     #ff5a36;
+  --orange-deep:#e1441f;
+  --yellow:     #ffc93d;
+  --sky:        #3fa9dd;
+  --line:       #e7e0c9;
+  --radius-sm:  10px;
+  --radius-md:  16px;
+  --radius-lg:  22px;
+  --font-display:'Fredoka', sans-serif;
+  --font-hand:   'Caveat', cursive;
+  --font-body:   'Inter', sans-serif;
 }
 
 /* ==================================================================
@@ -56,11 +49,11 @@
 html{ scroll-behavior:smooth; }
 body{
   font-family:var(--font-body);
-  background:var(--ink-black);
-  color:var(--parchment);
+  background:var(--paper);
+  color:var(--ink);
   display:flex;
   justify-content:center;
-  padding:16px 10px;
+  padding:14px 10px;
   min-height:100vh;
   -webkit-font-smoothing:antialiased;
 }
@@ -70,501 +63,415 @@ body{
 img{ max-width:100%; display:block; }
 a{ color:inherit; text-decoration:none; }
 button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
-:focus-visible{ outline:2px solid var(--gold-soft); outline-offset:2px; border-radius:4px; }
+:focus-visible{ outline:2px solid var(--orange); outline-offset:2px; }
 
 /* ==================================================================
-   2. SIDEBAR SHELL
+   2. SIDEBAR SHELL — faint sketchbook grid, ink border
 ================================================================== */
 .sidebar{
   width:100%;
-  max-width:330px;
-  background:var(--ink-deep);
-  border:1px solid var(--line);
+  max-width:325px;
+  background:
+    linear-gradient(var(--paper-line) 1px, transparent 1px) 0 0/100% 22px,
+    var(--paper);
+  border:2px solid var(--ink);
   border-radius:var(--radius-lg);
   overflow:hidden;
+  box-shadow:5px 5px 0 var(--ink);
 }
 
-.section{ padding:18px 16px; }
-.divider{ border:none; height:1px; margin:0 16px; background:var(--line); }
+.section{ padding:16px 16px; }
+.divider{ border:none; border-top:2px dashed var(--line); margin:0 16px; }
 
 .eyebrow{
-  font-family:var(--font-accent);
-  font-style:italic;
+  font-family:var(--font-display);
   font-weight:600;
-  font-size:13px;
-  color:var(--gold-soft);
+  font-size:12px;
+  letter-spacing:0.3px;
+  color:var(--orange-deep);
+  display:flex;
+  align-items:center;
+  gap:6px;
   margin-bottom:11px;
 }
-.eyebrow-sub{ font-size:10px; color:var(--parchment-dim); margin:-8px 0 12px; }
-.icon{ width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.6; }
+.icon{ width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; }
 
 .card{
   background:var(--card);
-  border:1px solid var(--line);
+  border:2px solid var(--ink);
   border-radius:var(--radius-md);
 }
 
 /* ==================================================================
-   3. CLUB HEADER + SORTING HAT RIBBON
+   3. FEATURED VIDEO — the very first thing in the sidebar
 ================================================================== */
-.club-header{ padding:28px 18px 20px; text-align:center; }
-.crest-wrap{ display:block; width:72px; height:72px; margin:0 auto 14px; border-radius:50%; }
+.video-wrap{ padding:14px 14px 0; }
+.video-frame{
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  border:2px solid var(--ink);
+  background:var(--ink);
+  position:relative;
+}
+.video-frame video{ width:100%; height:100%; object-fit:cover; display:block; }
+.video-tag{
+  position:absolute; top:8px; left:8px;
+  background:var(--orange);
+  color:#fff;
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:10px;
+  letter-spacing:0.3px;
+  padding:4px 10px;
+  border-radius:20px;
+  border:2px solid var(--ink);
+  transform:rotate(-3deg);
+}
+
+/* ==================================================================
+   4. CLUB HEADER — doodle stick figure, hand-drawn underline
+================================================================== */
+.club-header{ padding:20px 18px 18px; text-align:center; position:relative; }
+.club-logo-row{ display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
 .club-logo{
-  width:72px; height:72px; border-radius:50%;
-  border:2px solid var(--gold);
+  width:52px; height:52px; border-radius:50%;
+  border:2px solid var(--ink);
   object-fit:cover; background:var(--card);
 }
+.doodle-figure{ width:34px; height:52px; flex-shrink:0; }
 .club-name{
-  font-family:var(--font-signature); font-weight:700; font-size:19px;
-  letter-spacing:0.4px; color:var(--parchment); line-height:1.35;
+  font-family:var(--font-display); font-weight:700; font-size:20px;
+  color:var(--ink); line-height:1.25;
 }
-.club-motto{
-  font-family:var(--font-accent); font-style:italic; font-weight:500;
-  font-size:13.5px; color:var(--gold-soft); margin-top:6px;
+.club-tagline{
+  font-family:var(--font-hand); font-weight:700; font-size:17px;
+  color:var(--orange-deep); margin-top:2px;
 }
-
-.sorting-ribbon{
-  margin-top:14px;
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  padding:6px 14px;
+.member-pill{
+  display:inline-flex; align-items:center; gap:5px;
+  margin-top:11px;
+  font-family:var(--font-display); font-weight:600; font-size:10.5px;
+  color:var(--ink);
+  background:var(--yellow);
+  border:2px solid var(--ink);
+  padding:4px 12px;
   border-radius:20px;
-  font-size:11px;
-  font-family:var(--font-accent);
-  font-style:italic;
-  font-weight:600;
-  color:var(--parchment);
+  transform:rotate(-2deg);
+}
+
+/* ==================================================================
+   5. OWNER
+================================================================== */
+.owner-card{ display:flex; align-items:center; gap:12px; padding:12px 14px; }
+.owner-avatar{ width:46px; height:46px; border-radius:50%; border:2px solid var(--ink); object-fit:cover; flex-shrink:0; background:var(--paper); }
+.owner-info{ flex:1; min-width:0; }
+.owner-name{ font-family:var(--font-display); font-weight:600; font-size:14px; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.owner-role{ font-size:11px; color:var(--ink-soft); margin-top:1px; }
+.owner-link{
+  display:inline-flex; align-items:center; gap:4px; margin-top:6px;
+  font-size:11px; font-weight:700; color:var(--sky);
+  border-bottom:2px solid var(--sky); padding-bottom:1px;
+}
+.owner-link:hover{ opacity:0.75; }
+
+/* ==================================================================
+   6. MISSION
+================================================================== */
+.mission-card{ padding:14px 16px; }
+.mission-text{ font-size:13px; line-height:1.55; color:var(--ink); }
+
+/* ==================================================================
+   7. EVENTS GRID
+================================================================== */
+.events-grid{ display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+.event-card{
+  padding:12px 10px; text-align:center;
+}
+.event-emoji{ font-size:20px; margin-bottom:5px; }
+.event-name{ font-family:var(--font-display); font-weight:600; font-size:11.5px; color:var(--ink); }
+.event-card.wide{ grid-column:1 / -1; display:flex; align-items:center; gap:10px; text-align:left; padding:11px 14px; }
+.event-card.wide .event-emoji{ margin-bottom:0; font-size:22px; }
+
+/* ==================================================================
+   8. MEMBER GOALS + SPECIAL ROLES
+================================================================== */
+.chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
+.chip{
+  font-family:var(--font-display); font-weight:600; font-size:11px;
+  color:var(--ink);
   background:var(--card);
-  border:1px solid var(--line);
+  border:2px solid var(--ink);
+  padding:6px 12px;
+  border-radius:20px;
 }
-.sorting-dot{ width:7px; height:7px; border-radius:50%; flex-shrink:0; background:var(--gold); }
+.chip:nth-child(2){ transform:rotate(1.5deg); }
+.chip:nth-child(3){ transform:rotate(-1.5deg); }
+
+.roles-card{ padding:13px 15px; }
+.roles-text{ font-size:12.5px; line-height:1.55; color:var(--ink); }
+.role-badges{ display:flex; gap:7px; margin-top:10px; flex-wrap:wrap; }
+.role-badge{
+  font-family:var(--font-display); font-weight:600; font-size:10px;
+  color:#fff;
+  padding:4px 10px;
+  border-radius:20px;
+  border:2px solid var(--ink);
+}
+.role-badge.coordinator{ background:var(--sky); }
+.role-badge.admin{ background:var(--orange); }
+.role-badge.superadmin{ background:var(--ink); }
 
 /* ==================================================================
-   4. CLUB LEDGER
+   9. MOTTO
 ================================================================== */
-.stats-grid{ display:grid; grid-template-columns:1fr 1fr; gap:9px; }
-.stat-card{ padding:13px 10px; text-align:center; }
-.stat-card.full{ grid-column:1 / -1; display:flex; align-items:center; gap:10px; text-align:left; padding:12px 14px; }
-.stat-icon{ width:17px; height:17px; color:var(--gold-soft); margin:0 auto 6px; }
-.stat-card.full .stat-icon{ margin:0; }
-.stat-value{ font-family:var(--font-signature); font-weight:700; font-size:17px; color:var(--parchment); line-height:1; }
-.stat-label{ font-size:9.5px; letter-spacing:0.5px; text-transform:uppercase; color:var(--parchment-dim); margin-top:5px; }
-.stat-card.full .stat-text{ flex:1; min-width:0; }
-.stat-card.full .stat-value, .stat-card.full .stat-label{ margin-top:0; }
-.stat-card.full .stat-user{ font-size:12.5px; color:var(--gold-soft); font-weight:600; font-family:var(--font-body); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.stat-avatar{ width:28px; height:28px; border-radius:50%; object-fit:cover; border:1px solid var(--line); background:var(--card-soft); flex-shrink:0; }
-
-/* ==================================================================
-   4b. GROWTH CHARM
-================================================================== */
-.goal-card{ padding:14px 16px; }
-.goal-top{ display:flex; align-items:baseline; gap:5px; }
-.goal-current{ font-family:var(--font-signature); font-weight:700; font-size:19px; color:var(--gold-soft); }
-.goal-sep{ font-size:14px; color:var(--parchment-dim); }
-.goal-target{ font-family:var(--font-signature); font-weight:700; font-size:14px; color:var(--parchment-dim); }
-.goal-label{ font-size:10px; color:var(--parchment-dim); margin-left:4px; text-transform:uppercase; letter-spacing:0.4px; }
-.goal-bar-track{ height:6px; border-radius:3px; background:var(--card-soft); margin-top:11px; overflow:hidden; }
-.goal-bar-fill{ height:100%; width:0%; background:var(--gold); transition:width 0.9s ease; }
-.goal-sub{ font-size:10.5px; color:var(--parchment-dim); margin-top:9px; font-family:var(--font-accent); font-style:italic; }
-.goal-badge{
-  display:inline-flex; align-items:center; gap:5px; margin-top:10px;
-  font-size:10.5px; color:var(--gold-soft); background:var(--card-soft);
-  border:1px solid var(--line); padding:4px 9px; border-radius:20px; font-weight:600;
+.motto-card{
+  padding:16px 18px;
+  text-align:center;
+  background:var(--yellow);
+}
+.motto-text{
+  font-family:var(--font-hand); font-weight:700; font-size:19px;
+  color:var(--ink); line-height:1.3;
 }
 
 /* ==================================================================
-   5. ACTION BUTTONS
+   10. RECENTLY JOINED — fixed height, scrollable
+================================================================== */
+.member-list{
+  display:flex; flex-direction:column; gap:7px;
+  height:252px; overflow-y:auto; padding-right:2px;
+}
+.member-list::-webkit-scrollbar{ width:4px; }
+.member-list::-webkit-scrollbar-thumb{ background:var(--orange); border-radius:2px; }
+
+.member-row{
+  display:flex; align-items:center; gap:10px; padding:8px 10px;
+  border-radius:var(--radius-sm);
+  background:var(--card);
+  border:2px solid var(--ink);
+  flex-shrink:0;
+}
+.member-avatar{ width:30px; height:30px; border-radius:50%; object-fit:cover; border:1.5px solid var(--ink); background:var(--paper); flex-shrink:0; }
+.member-info{ flex:1; min-width:0; }
+.member-name{ font-size:12.5px; font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.member-sub{ font-size:10px; color:var(--ink-soft); margin-top:1px; }
+.member-badge{
+  font-family:var(--font-display); font-weight:600; font-size:9.5px;
+  color:#fff;
+  background:var(--orange);
+  border:1.5px solid var(--ink);
+  padding:2px 8px;
+  border-radius:20px;
+  flex-shrink:0;
+}
+.list-skeleton{ font-size:11px; color:var(--ink-soft); padding:8px 2px; }
+
+/* ==================================================================
+   11. ACTION BUTTONS
 ================================================================== */
 .action-grid{ display:grid; grid-template-columns:1fr 1fr; gap:9px; }
 .action-btn{
   display:flex; flex-direction:column; align-items:center; gap:6px;
-  padding:13px 8px; color:var(--parchment); font-size:11.5px; font-weight:600;
-  transition:border-color 0.15s ease, background 0.15s ease;
+  padding:12px 8px;
+  color:var(--ink); font-size:11.5px; font-weight:700;
+  font-family:var(--font-display);
+  transition:transform 0.15s ease;
 }
-.action-btn .icon{ width:18px; height:18px; color:var(--gold-soft); }
-.action-btn:hover{ border-color:var(--gold); background:var(--card-soft); }
-.action-btn.wide{ grid-column:1 / -1; flex-direction:row; justify-content:center; padding:11px; }
+.action-btn .icon{ width:18px; height:18px; color:var(--orange-deep); }
+.action-btn:hover{ transform:translateY(-2px); }
+.action-btn.wide{ grid-column:1 / -1; flex-direction:row; justify-content:center; padding:11px; background:var(--orange); color:#fff; }
+.action-btn.wide .icon{ color:#fff; }
 
 /* ==================================================================
-   6. PLAYER LISTS — fixed height so Top Wizards and Recently Sorted
-   always occupy the same footprint, regardless of row count.
+   12. FOOTER
 ================================================================== */
-.player-list{
-  display:flex; flex-direction:column; gap:7px;
-  height:252px; overflow-y:auto; padding-right:2px;
-}
-.player-list::-webkit-scrollbar{ width:4px; }
-.player-list::-webkit-scrollbar-thumb{ background:var(--gold); border-radius:2px; }
-
-.player-row{
-  display:flex; align-items:center; gap:10px; padding:8px 10px;
-  border-radius:var(--radius-sm);
-  background:var(--card);
-  border:1px solid var(--line);
-  flex-shrink:0;
-}
-.player-rank{ width:16px; text-align:center; flex-shrink:0; font-family:var(--font-signature); font-size:11px; font-weight:700; color:var(--gold-soft); }
-.player-avatar{ width:30px; height:30px; border-radius:50%; object-fit:cover; border:1px solid var(--line); background:var(--card-soft); flex-shrink:0; }
-.player-info{ flex:1; min-width:0; }
-.player-name{ font-size:12.5px; font-weight:600; color:var(--parchment); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.player-sub{ font-size:10px; color:var(--parchment-dim); margin-top:1px; display:flex; align-items:center; gap:4px; }
-.player-sub .icon{ width:10px; height:10px; }
-.player-rating{ font-family:var(--font-signature); font-weight:700; font-size:12.5px; color:var(--gold-soft); flex-shrink:0; }
-.player-rating.pending{ font-size:9.5px; font-family:var(--font-body); font-weight:600; color:var(--parchment-dim); font-style:italic; }
-.player-badge-new{
-  font-size:9.5px; font-weight:700; color:var(--ink-black);
-  background:var(--gold-soft);
-  padding:2px 7px; border-radius:20px; flex-shrink:0;
-}
-.list-skeleton{ font-size:11.5px; color:var(--parchment-dim); padding:8px 2px; }
-
-/* ==================================================================
-   7. CALENDAR — always renders 6 full rows so the card is the same
-   height every month, whether it has 4 trailing days or 10.
-================================================================== */
-.calendar-card{ padding:13px 14px; }
-.calendar-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
-.calendar-title{ font-family:var(--font-signature); font-size:12.5px; font-weight:700; color:var(--parchment); }
-.calendar-nav{ display:flex; gap:6px; }
-.calendar-nav button{
-  width:22px; height:22px;
-  display:flex; align-items:center; justify-content:center;
-  border:1px solid var(--line);
-  border-radius:6px;
-  color:var(--gold-soft);
-  transition:background 0.15s ease;
-}
-.calendar-nav button:hover{ background:var(--card-soft); }
-.calendar-nav .icon{ width:11px; height:11px; }
-.calendar-grid{ display:grid; grid-template-columns:repeat(7, 1fr); gap:3px; text-align:center; }
-.calendar-grid .dow{ font-size:9px; font-weight:600; color:var(--gold); padding-bottom:4px; }
-.calendar-grid .day{ font-size:11px; color:var(--parchment); padding:5px 0; border-radius:6px; }
-.calendar-grid .day.muted{ color:rgba(168,156,130,0.35); }
-.calendar-grid .day.today{ background:var(--gold); color:var(--ink-black); font-weight:700; }
-
-/* ==================================================================
-   8. SPELL BOOK & ENCHANTED DIARY — same quote-card treatment,
-   distinguished only by an eyebrow label.
-================================================================== */
-.quote-card{ padding:14px 16px; border-left:2px solid var(--gold); border-radius:0 var(--radius-md) var(--radius-md) 0; }
-.spell-name{ font-family:var(--font-accent); font-style:italic; font-weight:600; font-size:15px; color:var(--gold-soft); }
-.spell-effect{ font-size:12.5px; line-height:1.5; color:var(--parchment); margin-top:6px; }
-
-.diary-entry{ font-family:var(--font-accent); font-style:italic; font-weight:600; font-size:14px; line-height:1.55; color:var(--parchment); }
-.diary-date{ font-size:10px; letter-spacing:0.4px; text-transform:uppercase; color:var(--parchment-dim); margin-top:10px; }
-
-/* ==================================================================
-   9. DAILY PROPHET
-================================================================== */
-.prophet-list{ display:flex; flex-direction:column; padding:2px 12px; }
-.prophet-item{ padding:10px 0; border-bottom:1px solid var(--line); }
-.prophet-item:last-child{ border-bottom:none; }
-.prophet-kicker{ font-size:9.5px; letter-spacing:0.5px; text-transform:uppercase; color:var(--gold); }
-.prophet-headline{ font-family:var(--font-accent); font-weight:600; font-size:13px; color:var(--parchment); margin-top:3px; line-height:1.4; }
-.prophet-date{ font-size:10px; color:var(--parchment-dim); margin-top:3px; }
-
-/* ==================================================================
-   10. FOOTER
-================================================================== */
-.sidebar-footer{ text-align:center; font-size:9.5px; color:var(--parchment-dim); padding:6px 16px 20px; }
+.sidebar-footer{ text-align:center; padding:14px 16px 20px; font-size:10px; color:var(--ink-soft); }
+.sidebar-footer .accent{ color:var(--orange-deep); font-weight:700; }
 
 @media (max-width:360px){
-  .stats-grid{ gap:7px; }
-  .club-header{ padding:22px 14px 16px; }
+  .sidebar{ max-width:100%; }
+  body{ padding:10px 6px; }
 }
 </style>
 </head>
 <body>
-<aside class="sidebar">
 
-  <!-- ============================== 1. CLUB HEADER ============================== -->
-  <div class="club-header">
-    <a class="crest-wrap" id="crestLink" href="https://www.chess.com/club/hogwarts-team" target="_blank" rel="noopener" aria-label="View Hogwarts Team on Chess.com">
-      <img class="club-logo" id="clubLogo" src="" alt="">
-    </a>
-    <div class="club-name" id="clubName">Hogwarts Team</div>
-    <div class="club-motto">Draco Dormiens Numquam Titillandus</div>
+<aside class="sidebar" id="sidebar">
 
-    <div class="sorting-ribbon" id="sortingRibbon">
-      <span class="sorting-dot" id="sortingDot"></span>
-      <span id="sortingText">The Sorting Hat is deciding…</span>
+  <!-- ============================== 1. FEATURED VIDEO (on top) ============================== -->
+  <div class="video-wrap">
+    <div class="video-frame">
+      <span class="video-tag">Featured</span>
+      <!-- TODO: swap this src for your own club highlight reel -->
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="https://files.catbox.moe/a03ic1.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
+  <!-- ============================== 2. CLUB HEADER ============================== -->
+  <section class="section club-header" aria-label="Club header">
+    <div class="club-logo-row">
+      <!-- hand-drawn stick figure, a small nod to Alan Becker's animations -->
+      <svg class="doodle-figure" viewBox="0 0 34 52" fill="none" stroke="#201d18" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="17" cy="8" r="6.5"/>
+        <line x1="17" y1="14.5" x2="17" y2="34"/>
+        <line x1="17" y1="20" x2="6" y2="14"/>
+        <line x1="17" y1="20" x2="28" y2="26"/>
+        <line x1="17" y1="34" x2="7" y2="48"/>
+        <line x1="17" y1="34" x2="27" y2="48"/>
+        <line x1="24" y1="22" x2="30" y2="14"/>
+      </svg>
+      <img class="club-logo" id="clubLogo" src="" alt="Club logo">
+    </div>
+    <h1 class="club-name" id="clubName">Stick Figure Lover Club</h1>
+    <p class="club-tagline">Make chess fun, friendly &amp; creative!</p>
+    <span class="member-pill" id="memberPill">⭐ — members</span>
+  </section>
+
   <hr class="divider">
 
-  <!-- ============================== 2. CLUB LEDGER ============================== -->
-  <section class="section" aria-label="Club statistics">
-    <div class="stats-grid">
-      <div class="stat-card card">
-        <svg class="stat-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div class="stat-value" id="statMembers">—</div>
-        <div class="stat-label">Members</div>
-      </div>
-      <div class="stat-card card">
-        <svg class="stat-icon" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M6 4h12v4a6 6 0 0 1-12 0V4Z" stroke-linejoin="round"/><path d="M6 6H3v1a4 4 0 0 0 4 4M18 6h3v1a4 4 0 0 1-4 4" stroke-linecap="round"/></svg>
-        <div class="stat-value" id="statHouses">4</div>
-        <div class="stat-label">Houses</div>
-      </div>
-      <div class="stat-card full card">
-        <img class="stat-avatar" id="championAvatar" src="" alt="" style="display:none;">
-        <svg class="stat-icon" id="championIcon" viewBox="0 0 24 24"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2Z" stroke-linejoin="round"/></svg>
-        <div class="stat-text">
-          <div class="stat-user" id="championName">—</div>
-          <div class="stat-label" style="margin-top:1px;">reigning top wizard</div>
-        </div>
+  <!-- ============================== 3. CLUB OWNER ============================== -->
+  <section class="section" aria-label="Club owner">
+    <p class="eyebrow">Club Owner</p>
+    <div class="owner-card card">
+      <img class="owner-avatar" id="ownerAvatar" src="" alt="Owner avatar">
+      <div class="owner-info">
+        <div class="owner-name" id="ownerName">Loading…</div>
+        <div class="owner-role">Founder &amp; Administrator</div>
+        <a class="owner-link" id="ownerLink" href="https://www.chess.com/member/hates_draw" target="_blank" rel="noopener">
+          View profile
+          <svg class="icon" style="width:10px;height:10px;stroke-width:2.5" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- ============================== 3. GROWTH CHARM ============================== -->
-  <section class="section" aria-label="Membership goal">
-    <p class="eyebrow">Growth Charm</p>
-    <div class="goal-card card">
-      <div class="goal-top">
-        <span class="goal-current" id="goalCurrent">0</span>
-        <span class="goal-sep">/</span>
-        <span class="goal-target" id="goalTarget">500</span>
-        <span class="goal-label">members</span>
-      </div>
-      <div class="goal-bar-track"><div class="goal-bar-fill" id="goalBarFill"></div></div>
-      <div class="goal-sub" id="goalSub"></div>
-      <div class="goal-sub" id="goalNextTier" style="margin-top:2px; opacity:0.75;"></div>
-      <span class="goal-badge" id="weeklyBadge" style="display:none;"></span>
+  <!-- ============================== 4. MISSION ============================== -->
+  <section class="section" aria-label="Club mission">
+    <p class="eyebrow">🎯 Mission</p>
+    <div class="mission-card card">
+      <p class="mission-text">Make chess fun, friendly &amp; creative — no stick figure left behind.</p>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- ============================== 4. ACTION BUTTONS ============================== -->
+  <!-- ============================== 5. EVENTS ============================== -->
+  <section class="section" aria-label="Club events">
+    <p class="eyebrow">🎉 Events</p>
+    <div class="events-grid">
+      <div class="event-card card"><div class="event-emoji">♟️</div><div class="event-name">Club Tournaments</div></div>
+      <div class="event-card card"><div class="event-emoji">⚔️</div><div class="event-name">Vote Chess</div></div>
+      <div class="event-card card"><div class="event-emoji">🧩</div><div class="event-name">Chess Puzzles</div></div>
+      <div class="event-card card"><div class="event-emoji">😂</div><div class="event-name">Meme Contests</div></div>
+      <div class="event-card wide card"><div class="event-emoji">🎨</div><div class="event-name">Stick Figure Art</div></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================== 6. MEMBER GOALS ============================== -->
+  <section class="section" aria-label="Member goals">
+    <p class="eyebrow">🙌 Member Goals</p>
+    <div class="chip-row">
+      <span class="chip">Be Active</span>
+      <span class="chip">Be Respectful</span>
+      <span class="chip">Have Fun</span>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================== 7. SPECIAL ROLES ============================== -->
+  <section class="section" aria-label="Special roles">
+    <p class="eyebrow">🏅 Special Roles</p>
+    <div class="roles-card card">
+      <p class="roles-text">Active members can earn a promotion — stick around and climb the ranks!</p>
+      <div class="role-badges">
+        <span class="role-badge coordinator">Coordinator</span>
+        <span class="role-badge admin">Admin</span>
+        <span class="role-badge superadmin">Super Admin</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================== 8. CLUB MOTTO ============================== -->
+  <section class="section" aria-label="Club motto">
+    <div class="motto-card card">
+      <p class="motto-text">"No arms. No legs. Still checkmating." 😂</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================== 9. RECENTLY JOINED ============================== -->
+  <section class="section" aria-label="Recently joined members">
+    <p class="eyebrow">🆕 Recently Joined</p>
+    <div class="member-list" id="recentJoinsList">
+      <div class="list-skeleton">Fetching newest members…</div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ============================== 10. ACTION BUTTONS ============================== -->
   <section class="section" aria-label="Club actions">
     <div class="action-grid">
-      <a class="action-btn card" id="rulesBtn" href="https://www.chess.com/clubs/forum/view/club-rules-640" target="_blank" rel="noopener">
+      <a class="action-btn card" href="https://www.chess.com/clubs/forum/view/club-rules-689-2" target="_blank" rel="noopener">
         <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
         Club Rules
       </a>
-      <a class="action-btn card" id="joinBtn" href="https://www.chess.com/club/hogwarts-team" target="_blank" rel="noopener">
+      <a class="action-btn card" href="https://www.chess.com/clubs/forum/view/advertisement-452" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z" stroke-linejoin="round"/><path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14" stroke-linecap="round"/></svg>
+        Advertisement
+      </a>
+      <a class="action-btn wide" href="https://www.chess.com/club/stick-figure-lover-club" target="_blank" rel="noopener">
         <svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Join the Club
       </a>
-      <a class="action-btn card wide" id="forumBtn" href="https://www.chess.com/clubs/forum/hogwarts-team" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24" style="margin-right:8px;"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z" stroke-linejoin="round"/><path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14" stroke-linecap="round"/></svg>
-        Visit Club Forum
-      </a>
-      <a class="action-btn card wide" id="announcementsBtn" href="https://www.chess.com/club/hogwarts-team/announcements" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24" style="margin-right:8px;"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z" stroke-linejoin="round"/><path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14" stroke-linecap="round"/></svg>
-        Announcements
-      </a>
-      <a class="action-btn card wide" id="tournamentsBtn" href="https://www.chess.com/clubs/events/hogwarts-team" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24" style="margin-right:8px;"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z" stroke-linejoin="round"/><path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14" stroke-linecap="round"/></svg>
-        Join Tournaments
-      </a>
     </div>
   </section>
 
-  <hr class="divider">
-
-  <!-- ============================== 5. TOP WIZARDS ============================== -->
-  <section class="section" aria-label="Top wizards by rating">
-    <p class="eyebrow">Top Wizards</p>
-    <div class="player-list" id="topPlayersList">
-      <div class="list-skeleton">Loading…</div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ============================== 6. RECENTLY SORTED ============================== -->
-  <section class="section" aria-label="Recently joined members">
-    <p class="eyebrow">Recently Sorted</p>
-    <div class="player-list" id="recentJoinsList">
-      <div class="list-skeleton">Loading…</div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ============================== 7. CALENDAR ============================== -->
-  <section class="section" aria-label="Club calendar">
-    <p class="eyebrow">Calendar</p>
-    <div class="calendar-card card">
-      <div class="calendar-head">
-        <div class="calendar-title" id="calTitle">—</div>
-        <div class="calendar-nav">
-          <button id="calPrev" aria-label="Previous month"><svg class="icon" viewBox="0 0 24 24"><path d="M15 6 9 12l6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <button id="calNext" aria-label="Next month"><svg class="icon" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        </div>
-      </div>
-      <div class="calendar-grid" id="calGrid"></div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ============================== 8. SPELL BOOK ============================== -->
-  <section class="section" aria-label="Spell book of chess tips">
-    <p class="eyebrow">Spell Book</p>
-    <div class="quote-card card">
-      <div class="spell-name" id="spellName">Protego Prophylaxis</div>
-      <div class="spell-effect" id="spellEffect">Castle early. A king left in the centre is a king left undefended.</div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ============================== 9. THE ENCHANTED DIARY ============================== -->
-  <section class="section" aria-label="Enchanted diary">
-    <p class="eyebrow">The Enchanted Diary</p>
-    <p class="eyebrow-sub">It never forgets to write something amazing back.</p>
-    <div class="quote-card card">
-      <div class="diary-entry" id="diaryEntry">The diary is gathering its thoughts…</div>
-      <div class="diary-date" id="diaryDate"></div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ============================== 10. DAILY PROPHET ============================== -->
-  <section class="section" aria-label="Club announcements">
-    <p class="eyebrow">The Daily Prophet</p>
-    <div class="prophet-list card" id="prophetList">
-      <div class="list-skeleton">Fresh copies arriving by owl…</div>
-    </div>
-  </section>
-
-  <div class="sidebar-footer">Hogwarts Team</div>
+  <div class="sidebar-footer">Drawn with love by the <span class="accent">Stick Figure Lover Club</span></div>
 </aside>
 
 <script>
 /* ==================================================================
    CONFIG
-   To connect the real Chess.com API later:
-     1. Set CLUB_SLUG to the club's actual slug.
-     2. Set USE_LIVE_API to true.
-   Fetch functions already call the correct api.chess.com/pub
-   endpoints and fall back to PLACEHOLDER_DATA automatically if a
-   call fails, so this is safe to flip on before every field is
-   verified. Sections with no Chess.com API equivalent (House Cup
-   points, Puzzle, Spell Book, Diary, Daily Prophet, Member Goal
-   target) are clearly marked below — they'll need either a manual
-   data source or a small backend of your own.
 ================================================================== */
 const CONFIG = {
-  CLUB_SLUG: "hogwarts-team",        // confirmed: chess.com/club/hogwarts-team
-  CLUB_URL: "https://www.chess.com/club/hogwarts-team",
+  CLUB_SLUG: "stick-figure-lover-club",
+  CLUB_URL: "https://www.chess.com/club/stick-figure-lover-club",
   API_BASE: "https://api.chess.com/pub",
-  USE_LIVE_API: true,
-  RULES_URL: "https://www.chess.com/clubs/forum/view/club-rules-640",
-  JOIN_URL: "https://www.chess.com/club/hogwarts-team",
-  FORUM_URL: "https://www.chess.com/clubs/forum/hogwarts-team",
-  TOP_PLAYERS_COUNT: 5,
-  RECENT_JOINS_COUNT: 6,
-  MEMBER_SAMPLE_SIZE: 24,
-  // Membership goal auto-advances in fixed steps: 100, then 200, then
-  // 300… Once the club passes a tier, the next tier becomes the goal.
-  GOAL_STEP: 100
+  OWNER_USERNAME: "hates_draw",
+  RECENT_JOINS_COUNT: 11
 };
 
-// Returns the next un-reached multiple of GOAL_STEP above `current`.
-// 0-99 -> 100, 100 -> 200, 150 -> 200, 200 -> 300, etc.
-function computeMemberGoal(current){
-  const step = CONFIG.GOAL_STEP;
-  let goal = Math.ceil((current + 1) / step) * step;
-  if(goal <= current) goal += step;
-  return goal;
-}
-
-const HOUSES = [
-  { name: "Gryffindor", color: "var(--h-gryffindor)" },
-  { name: "Slytherin",  color: "var(--h-slytherin)"  },
-  { name: "Ravenclaw",  color: "var(--h-ravenclaw)"  },
-  { name: "Hufflepuff", color: "var(--h-hufflepuff)" }
-];
-
-/* ==================================================================
-   PLACEHOLDER DATA — shaped to match the live API mapping so
-   flipping USE_LIVE_API requires no template changes.
-
-   topPlayers / recentJoins below use REAL identities pulled from
-   this club's own API responses (club/{slug}/members and
-   player/{username}). Ratings aren't part of either endpoint, so
-   they're marked "pending" here — loadPlayerLists() progressively
-   fetches player/{username}/stats for real numbers once
-   USE_LIVE_API is on. Avatars for BOTH lists are enriched live via
-   player/{username} regardless of USE_LIVE_API (see loadPlayerLists),
-   since that's a lightweight public endpoint — these placeholder
-   avatars are just the last-known fallback if that fetch is blocked.
-================================================================== */
-const PLACEHOLDER_DATA = {
-  club: {
-    name: "Hogwarts Team",
-    icon: "https://images.chesscomfiles.com/uploads/v1/group/447204.4d2b4dcd.50x50o.7b6a7d6a7d6a.png",
-    description: "A club for witches, wizards, and squibs who love the sixty-four squares.",
-    // From club/hogwarts-team/members: weekly(8) + monthly(22) + all_time(7)
-    // = 37. Note this endpoint only lists *recently joined* members in
-    // three buckets, not the club's full roster — if the club summary
-    // endpoint (club/{slug} -> members_count) ever returns a bigger
-    // number, prefer that field instead.
-    members_count: 37,
-    houses_represented: 4
-  },
-  // Ratings confirmed directly by the club owner (Aug 2026 snapshot).
-  // Refresh via player/{username}/stats when USE_LIVE_API is on.
-  topPlayers: [
-    { username: "hollygirl1225",     avatar: "https://images.chesscomfiles.com/uploads/v1/user/244999519.b00187c9.200x200o.638e5ba97579.jpg", rating: 2078 },
-    { username: "snowflakesundown",  avatar: "https://images.chesscomfiles.com/uploads/v1/user/481026122.1ea2ed35.200x200o.970c738e8740.png", rating: 2058 },
-    { username: "meangel13",         avatar: "https://images.chesscomfiles.com/uploads/v1/user/178048309.5a1fd24a.200x200o.87dc1427beae.jpg", rating: 1380 }
+// Fallback, shaped exactly like the live club/{slug}/members response,
+// used only if the live fetch fails.
+const PLACEHOLDER_MEMBERS = {
+  weekly: [
+    { username: "anikarv0103", joined: 1786362901 },
+    { username: "bc005641", joined: 1786377805 },
+    { username: "cutegirl1901", joined: 1786362120 },
+    { username: "hates_draw", joined: 1786272445 },
+    { username: "ivy_88", joined: 1786362828 },
+    { username: "jake-66w", joined: 1786360414 },
+    { username: "liel2012", joined: 1786280909 },
+    { username: "mavik24", joined: 1786360862 },
+    { username: "meangel13", joined: 1786365198 },
+    { username: "shivaji_the_boss_247", joined: 1786362867 },
+    { username: "yogi136", joined: 1786367359 }
   ],
-  // Sorted by join date, most recent first (weekly bucket from
-  // club/{slug}/members). Avatars aren't in that endpoint, so these
-  // start blank and loadPlayerLists() fills them in from
-  // player/{username} the same way it does for Top Wizards.
-  recentJoins: [
-    { username: "hates_draw",           joined: 1785669444, avatar: "" },
-    { username: "mivaan-shoora",        joined: 1785382698, avatar: "" },
-    { username: "goodatflags",          joined: 1784435215, avatar: "" },
-    { username: "cutegirl1901",         joined: 1782974340, avatar: "" },
-    { username: "the_a_greninja",       joined: 1782926030, avatar: "" },
-    { username: "your_local_goober_e",  joined: 1782238959, avatar: "" }
-  ],
-  // From club/{slug}/members — used for the "sorted this week" badge.
-  weeklyJoinCount: 8,
-  spells: [
-    { name: "Protego Prophylaxis", effect: "Castle early. A king left in the centre is a king left undefended." },
-    { name: "Accio Tempo", effect: "Develop with threats. Every move should do two jobs at once." },
-    { name: "Revelio Weakness", effect: "Before you calculate a combination, ask what your opponent's last move weakened." },
-    { name: "Finite Incantatem", effect: "In equal endgames, trade pieces, not pawns. Pawns are the ones that promote." },
-    { name: "Expecto Endgame", effect: "Count material before you sacrifice. Hope is not compensation." }
-  ],
-  announcements: [
-    { kicker: "House Cup", headline: "Ravenclaw takes the lead after this week's blitz arena.", date: "Aug 1" },
-    { kicker: "New Feature", headline: "Daily Puzzle is now live — solve it for bonus House points.", date: "Jul 29" },
-    { kicker: "Recruitment", headline: "First-years welcome: club is accepting new members through August.", date: "Jul 24" }
-  ],
-  // The Enchanted Diary — one "amazing" entry per calendar day, picked
-  // deterministically from the day of year so every visitor sees the
-  // same page all day, and it changes itself overnight like magic.
-  // Swap this array for a real feed later; the picker logic won't change.
-  diary: [
-    "Today a first-year beat a club veteran with nothing but a well-timed pawn storm. Dumbledore would be proud.",
-    "A member just crossed 1500 rating for the first time. Somewhere, a wand chose its wizard.",
-    "The Room of Requirement, it turns out, is an empty board and forty spare minutes.",
-    "Someone in the club solved the daily puzzle in nine seconds flat. Time-Turner not required.",
-    "Every checkmate is a small Patronus: proof that, under pressure, you knew exactly what to do.",
-    "A Hufflepuff drew a grandmaster-adjacent opponent to a stalemate today. Loyalty holds the line.",
-    "The best move on the board is rarely the loudest one. Ravenclaws already knew that.",
-    "Two members played their first-ever rated game against each other this week. Both are still talking about it.",
-    "An old rivalry match ended in a handshake instead of a duel. That's growth, not just chess.",
-    "Somebody finally figured out the Sicilian line that's been haunting the forum for a month.",
-    "A member taught their little sibling en passant today. The club just got one wizard bigger.",
-    "The House Cup shifted by twelve points overnight. Nothing is ever really settled here.",
-    "A quiet member won five games in a row and told no one. We're telling you now.",
-    "Someone queened a pawn that started the game looking completely hopeless. Keep playing yours.",
-    "The forum lit up over one brilliant sacrifice. It was worth every bit of the noise."
-  ]
+  monthly: [],
+  all_time: []
 };
 
 /* ==================================================================
@@ -593,27 +500,6 @@ function fmtDate(unix){
   return new Date(unix * 1000).toLocaleDateString(undefined, { month: "short", day: "numeric" });
 }
 
-function dayOfYear(d){
-  const start = new Date(d.getFullYear(), 0, 0);
-  const diff = d - start;
-  return Math.floor(diff / 86400000);
-}
-
-function bestRating(stats){
-  if(!stats) return 0;
-  const cats = ["chess_rapid", "chess_blitz", "chess_bullet", "chess_daily"];
-  let max = 0;
-  cats.forEach(c => {
-    const r = stats[c] && stats[c].last && stats[c].last.rating;
-    if(r && r > max) max = r;
-  });
-  return max;
-}
-
-function profileURL(username){
-  return `https://www.chess.com/member/${encodeURIComponent(username)}`;
-}
-
 async function mapLimit(items, limit, fn){
   const results = new Array(items.length);
   let i = 0;
@@ -628,299 +514,88 @@ async function mapLimit(items, limit, fn){
 }
 
 const avatarFallback = "https://www.chess.com/bundles/web/images/noavatar_l.png";
+const profileURL = (u) => `https://www.chess.com/member/${encodeURIComponent(u)}`;
 
 /* ==================================================================
-   1. CLUB HEADER + LEDGER
+   1. CLUB HEADER (logo + member count)
 ================================================================== */
-let currentClub = PLACEHOLDER_DATA.club;
-
 async function loadClubInfo(){
-  let club = PLACEHOLDER_DATA.club;
-
-  if(CONFIG.USE_LIVE_API){
-    const live = await fetchJSON(`${CONFIG.API_BASE}/club/${CONFIG.CLUB_SLUG}`);
-    if(live){
-      club = {
-        name: live.name,
-        icon: live.icon,
-        description: (live.description || "").replace(/<[^>]*>/g, "").trim() || PLACEHOLDER_DATA.club.description,
-        members_count: live.members_count || 0,
-        houses_represented: PLACEHOLDER_DATA.club.houses_represented // no API field — manual for now
-      };
-    }
+  const club = await fetchJSON(`${CONFIG.API_BASE}/club/${CONFIG.CLUB_SLUG}`);
+  if(!club){
+    document.getElementById("clubLogo").src = avatarFallback;
+    return;
   }
-currentClub = club;
   document.getElementById("clubLogo").src = club.icon || avatarFallback;
-  document.getElementById("clubLogo").alt = club.name + " crest";
-  document.getElementById("crestLink").href = CONFIG.CLUB_URL;
-  document.getElementById("clubName").textContent = club.name;
-  document.getElementById("statMembers").textContent = club.members_count.toLocaleString();
-  document.getElementById("statHouses").textContent = club.houses_represented;
-
-  loadMemberGoal(club.members_count);
-}
-
-/* ==================================================================
-   2. GROWTH CHARM — member goal graph. No public API field for a
-   club's own target headcount, so the goal itself stays manual
-   (auto-stepped by GOAL_STEP); current count reuses the live/
-   placeholder member total above.
-================================================================== */
-function loadMemberGoal(current){
-  const prevTier = current > 0 ? Math.floor(current / CONFIG.GOAL_STEP) * CONFIG.GOAL_STEP : 0;
-  const goal = computeMemberGoal(current);
-  const span = goal - prevTier;
-  const pct = Math.max(0, Math.min(100, Math.round(((current - prevTier) / span) * 100)));
-
-  document.getElementById("goalCurrent").textContent = current.toLocaleString();
-  document.getElementById("goalTarget").textContent = goal.toLocaleString();
-  document.getElementById("goalSub").textContent = `${pct}% of the way to ${goal.toLocaleString()} members`;
-  document.getElementById("goalNextTier").textContent = "";
-
-  const weeklyEl = document.getElementById("weeklyBadge");
-  if(PLACEHOLDER_DATA.weeklyJoinCount){
-    weeklyEl.textContent = `${PLACEHOLDER_DATA.weeklyJoinCount} sorted this week`;
-    weeklyEl.style.display = "inline-flex";
-  }
-
-  const fill = document.getElementById("goalBarFill");
-  requestAnimationFrame(() => { fill.style.width = pct + "%"; });
-}
-
-/* ==================================================================
-   3. SORTING HAT RIBBON
-================================================================== */
-function runSortingHat(){
-  const house = HOUSES[Math.floor(Math.random() * HOUSES.length)];
-  const dot = document.getElementById("sortingDot");
-  const text = document.getElementById("sortingText");
-  dot.style.background = house.color;
-  text.textContent = `The Sorting Hat calls you ${house.name}.`;
-}
-
-/* ==================================================================
-   4. TOP WIZARDS + RECENTLY SORTED
-   Chess.com has no single "top rated club members" endpoint, so the
-   real workflow is: pull club/{slug}/members (weekly/monthly/all_time
-   buckets of {username, joined}), then progressively fetch
-   player/{username}/stats for a sample to find best ratings. Recently
-   Sorted just needs the weekly bucket sorted by join date.
-
-   Avatars for both lists are enriched from player/{username} — a
-   lightweight public endpoint — independently of CONFIG.USE_LIVE_API,
-   so Recently Sorted shows real profile pictures the same way Top
-   Wizards does. fetchJSON already fails soft to null, so if the
-   sandbox blocks the request the placeholder avatar/icon is used.
-================================================================== */
-async function enrichAvatars(list){
-  return mapLimit(list, 6, async (p) => {
-    if(p.avatar) return p; // already have one (placeholder or live)
-    const profile = await fetchJSON(`${CONFIG.API_BASE}/player/${p.username}`);
-    return { ...p, avatar: profile && profile.avatar ? profile.avatar : "" };
-  });
-}
-
-function renderTopPlayers(list){
-  const el = document.getElementById("topPlayersList");
-  if(!list.length){ el.innerHTML = '<div class="list-skeleton">No rated members yet.</div>'; return; }
-
-  el.innerHTML = list.map((p, i) => `
-    <a class="player-row" href="${profileURL(p.username)}" target="_blank" rel="noopener">
-      <div class="player-rank">${i + 1}</div>
-      <img class="player-avatar" src="${p.avatar || avatarFallback}" alt="" loading="lazy">
-      <div class="player-info">
-        <div class="player-name">${escapeHTML(p.username)}</div>
-        <div class="player-sub">Top wizard</div>
-      </div>
-      ${p.rating ? `<div class="player-rating">${p.rating}</div>` : `<div class="player-rating pending">pending</div>`}
-    </a>
-  `).join("");
-
-  const top = list[0];
-  const championEl = document.getElementById("championName");
-  const championAvatar = document.getElementById("championAvatar");
-  const championIcon = document.getElementById("championIcon");
-  if(top){
-    championEl.textContent = top.username + (top.rating ? ` · ${top.rating}` : "");
-    if(top.avatar){
-      championAvatar.src = top.avatar;
-      championAvatar.style.display = "block";
-      championIcon.style.display = "none";
-    }
+  document.getElementById("clubLogo").alt = club.name + " logo";
+  if(club.name) document.getElementById("clubName").textContent = club.name;
+  if(typeof club.members_count === "number"){
+    document.getElementById("memberPill").textContent = `⭐ ${club.members_count.toLocaleString()} members`;
   }
 }
 
+/* ==================================================================
+   2. CLUB OWNER
+================================================================== */
+async function loadOwner(){
+  const profile = await fetchJSON(`${CONFIG.API_BASE}/player/${CONFIG.OWNER_USERNAME}`);
+  const link = document.getElementById("ownerLink");
+  link.href = profileURL(CONFIG.OWNER_USERNAME);
+  if(!profile){
+    document.getElementById("ownerName").textContent = CONFIG.OWNER_USERNAME;
+    document.getElementById("ownerAvatar").src = avatarFallback;
+    return;
+  }
+  document.getElementById("ownerAvatar").src = profile.avatar || avatarFallback;
+  document.getElementById("ownerName").textContent = profile.name || profile.username;
+}
+
+/* ==================================================================
+   3. RECENTLY JOINED — no ratings here on purpose, just fresh faces.
+================================================================== */
 function renderRecentJoins(list){
   const el = document.getElementById("recentJoinsList");
   if(!list.length){ el.innerHTML = '<div class="list-skeleton">No new members yet.</div>'; return; }
 
-  const cutoff = Date.now()/1000 - (3 * 24 * 3600); // "New" badge for last 3 days
-  el.innerHTML = list.map((p, i) => `
-    <a class="player-row" href="${profileURL(p.username)}" target="_blank" rel="noopener">
-      <div class="player-rank">${i + 1}</div>
-      <img class="player-avatar" src="${p.avatar || avatarFallback}" alt="" loading="lazy">
-      <div class="player-info">
-        <div class="player-name">${escapeHTML(p.username)}</div>
-        <div class="player-sub">Sorted ${fmtDate(p.joined)}</div>
+  const cutoff = Date.now()/1000 - (3 * 24 * 3600); // "NEW" badge for last 3 days
+  el.innerHTML = list.map(p => `
+    <a class="member-row" href="${profileURL(p.username)}" target="_blank" rel="noopener">
+      <img class="member-avatar" src="${p.avatar || avatarFallback}" alt="" loading="lazy">
+      <div class="member-info">
+        <div class="member-name">${escapeHTML(p.username)}</div>
+        <div class="member-sub">Joined ${fmtDate(p.joined)}</div>
       </div>
-      ${p.joined > cutoff ? '<span class="player-badge-new">NEW</span>' : ''}
+      ${p.joined > cutoff ? '<span class="member-badge">NEW</span>' : ''}
     </a>
   `).join("");
 }
 
-async function loadPlayerLists(){
-  let topPlayers = PLACEHOLDER_DATA.topPlayers;
-  let recentJoins = PLACEHOLDER_DATA.recentJoins;
+async function loadRecentJoins(){
+  let members = PLACEHOLDER_MEMBERS;
+  const live = await fetchJSON(`${CONFIG.API_BASE}/club/${CONFIG.CLUB_SLUG}/members`);
+  if(live) members = live;
 
-  if(CONFIG.USE_LIVE_API){
-    const members = await fetchJSON(`${CONFIG.API_BASE}/club/${CONFIG.CLUB_SLUG}/members`);
-    if(members){
-      const weekly = members.weekly || [];
-      const monthly = members.monthly || [];
-      const allTime = members.all_time || [];
+  const all = [...(members.weekly||[]), ...(members.monthly||[]), ...(members.all_time||[])];
+  const seen = new Set();
+  const merged = [];
+  all.forEach(m => { if(!seen.has(m.username)){ seen.add(m.username); merged.push(m); } });
+  merged.sort((a,b) => (b.joined||0) - (a.joined||0));
 
-      const recentRaw = [...weekly, ...monthly, ...allTime]
-        .sort((a, b) => b.joined - a.joined)
-        .slice(0, CONFIG.RECENT_JOINS_COUNT);
-
-      recentJoins = recentRaw.map(m => ({ username: m.username, joined: m.joined, avatar: "" }));
-
-      const sample = [...weekly, ...monthly, ...allTime].slice(0, CONFIG.MEMBER_SAMPLE_SIZE);
-      const withRatings = await mapLimit(sample, 6, async (m) => {
-        const profile = await fetchJSON(`${CONFIG.API_BASE}/player/${m.username}`);
-        const stats = await fetchJSON(`${CONFIG.API_BASE}/player/${m.username}/stats`);
-        return {
-          username: m.username,
-          avatar: profile && profile.avatar ? profile.avatar : "",
-          rating: bestRating(stats) || null
-        };
-      });
-
-      const rated = withRatings.filter(p => p.rating).sort((a, b) => b.rating - a.rating);
-      if(rated.length) topPlayers = rated.slice(0, CONFIG.TOP_PLAYERS_COUNT);
-      if(!recentJoins.length) recentJoins = PLACEHOLDER_DATA.recentJoins;
-    }
-  }
-
-  // Enrich avatars regardless of USE_LIVE_API — same treatment for
-  // Top Wizards and Recently Sorted, gracefully falling back if the
-  // sandbox blocks the request.
-  topPlayers = await enrichAvatars(topPlayers);
-  recentJoins = await enrichAvatars(recentJoins);
-
-  renderTopPlayers(topPlayers);
-  renderRecentJoins(recentJoins.slice(0, CONFIG.RECENT_JOINS_COUNT));
-}
-
-/* ==================================================================
-   5. CALENDAR — always renders 42 cells (6 rows) so the card height
-   never shifts between a 4-week and a 6-week month.
-================================================================== */
-function initCalendar(){
-  const titleEl = document.getElementById("calTitle");
-  const gridEl  = document.getElementById("calGrid");
-  const today   = new Date();
-  let viewDate  = new Date(today.getFullYear(), today.getMonth(), 1);
-
-  const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const DOWS   = ["S","M","T","W","T","F","S"];
-
-  function render(){
-    titleEl.textContent = `${MONTHS[viewDate.getMonth()]} ${viewDate.getFullYear()}`;
-    const firstDay = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1).getDay();
-    const daysInMonth = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 0).getDate();
-    const daysInPrevMonth = new Date(viewDate.getFullYear(), viewDate.getMonth(), 0).getDate();
-
-    let html = DOWS.map(d => `<div class="dow">${d}</div>`).join("");
-    for(let i = firstDay - 1; i >= 0; i--){
-      html += `<div class="day muted">${daysInPrevMonth - i}</div>`;
-    }
-    for(let d = 1; d <= daysInMonth; d++){
-      const isToday = d === today.getDate() && viewDate.getMonth() === today.getMonth() && viewDate.getFullYear() === today.getFullYear();
-      html += `<div class="day${isToday ? ' today' : ''}">${d}</div>`;
-    }
-    // Always fill out to 42 cells (6 full rows) so the card's height
-    // is identical for every month, not just ones with more trailing days.
-    const filledSoFar = firstDay + daysInMonth;
-    const totalCells = 42;
-    const trailing = totalCells - filledSoFar;
-    for(let d = 1; d <= trailing; d++){
-      html += `<div class="day muted">${d}</div>`;
-    }
-    gridEl.innerHTML = html;
-  }
-
-  document.getElementById("calPrev").addEventListener("click", () => {
-    viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
-    render();
-  });
-  document.getElementById("calNext").addEventListener("click", () => {
-    viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
-    render();
+  const recent = merged.slice(0, CONFIG.RECENT_JOINS_COUNT);
+  const rows = await mapLimit(recent, 5, async (m) => {
+    const profile = await fetchJSON(`${CONFIG.API_BASE}/player/${m.username}`);
+    return { username: m.username, joined: m.joined, avatar: profile && profile.avatar };
   });
 
-  render();
-}
-
-/* ==================================================================
-   6. SPELL BOOK
-================================================================== */
-function loadSpell(){
-  const s = PLACEHOLDER_DATA.spells[Math.floor(Math.random() * PLACEHOLDER_DATA.spells.length)];
-  document.getElementById("spellName").textContent = s.name;
-  document.getElementById("spellEffect").textContent = s.effect;
-}
-
-/* ==================================================================
-   7. THE ENCHANTED DIARY — same entry all day for everyone, changes
-   at midnight. Picked by day-of-year so it's stable without storage.
-================================================================== */
-function loadDiary(){
-  const entries = PLACEHOLDER_DATA.diary;
-  const now = new Date();
-  const idx = dayOfYear(now) % entries.length;
-
-  document.getElementById("diaryEntry").textContent = entries[idx];
-  document.getElementById("diaryDate").textContent =
-    now.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
-}
-
-/* ==================================================================
-   8. DAILY PROPHET
-================================================================== */
-function loadProphet(){
-  const items = PLACEHOLDER_DATA.announcements;
-  const el = document.getElementById("prophetList");
-  el.innerHTML = items.map(a => `
-    <div class="prophet-item">
-      <div class="prophet-kicker">${escapeHTML(a.kicker)}</div>
-      <div class="prophet-headline">${escapeHTML(a.headline)}</div>
-      <div class="prophet-date">${escapeHTML(a.date)}</div>
-    </div>
-  `).join("") || '<div class="list-skeleton">No announcements yet.</div>';
-}
-
-/* ==================================================================
-   9. ACTION LINKS
-================================================================== */
-function wireActionLinks(){
-  document.getElementById("rulesBtn").href = CONFIG.RULES_URL;
-  document.getElementById("joinBtn").href = CONFIG.JOIN_URL;
-  document.getElementById("forumBtn").href = CONFIG.FORUM_URL;
+  renderRecentJoins(rows);
 }
 
 /* ==================================================================
    INIT
 ================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-  runSortingHat();
-  wireActionLinks();
-  loadClubInfo();       // also triggers loadMemberGoal()
-  loadPlayerLists();    // also updates the champion ledger card
-  initCalendar();
-  loadSpell();
-  loadDiary();
-  loadProphet();
+  loadClubInfo();
+  loadOwner();
+  loadRecentJoins();
 });
 </script>
 </body>
