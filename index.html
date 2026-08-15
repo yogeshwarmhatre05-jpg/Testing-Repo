@@ -33,6 +33,7 @@
   --steel-dim:   #6b7690;
   --steel-bright:#e7ecf5;
   --hairline:    rgba(170,182,201,0.16);
+  --warn:        #c98a5f;
   --font-display:'Shippori Mincho', serif;
   --font-body:   'Inter', sans-serif;
 }
@@ -74,6 +75,7 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
 .hairline{ border:none; border-top:1px solid var(--hairline); margin:0 22px; }
 
 .eyebrow{
+  display:flex; align-items:center; justify-content:space-between;
   font-size:9.5px;
   font-weight:600;
   letter-spacing:2.6px;
@@ -81,6 +83,13 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
   color:var(--steel-dim);
   margin-bottom:14px;
 }
+.eyebrow .retry-btn{
+  font-size:9px; letter-spacing:1px; color:var(--warn);
+  border-bottom:1px solid var(--warn); padding-bottom:1px;
+  text-transform:none; font-weight:600;
+}
+.eyebrow .retry-btn:hover{ color:var(--steel-bright); border-color:var(--steel-bright); }
+.eyebrow .retry-btn:focus-visible{ outline:1px solid var(--warn); outline-offset:2px; }
 
 /* ==================================================================
    3. CLUB HEADER — faint ensō behind the crest, quiet type
@@ -125,8 +134,10 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
 .leader-link{
   font-size:10.5px; color:var(--steel); flex-shrink:0;
   border-bottom:1px solid var(--steel-dim); padding-bottom:1px;
+  transition:color 0.15s ease, border-color 0.15s ease;
 }
 .leader-link:hover{ color:var(--steel-bright); border-color:var(--steel-bright); }
+.leader-link:focus-visible{ outline:1px solid var(--steel); outline-offset:3px; }
 
 /* ==================================================================
    5. STATS — a single hairline-divided row, no boxes
@@ -135,6 +146,7 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
 .stat-cell{ flex:1; text-align:center; padding:4px 0; }
 .stat-cell + .stat-cell{ border-left:1px solid var(--hairline); }
 .stat-value{ font-family:var(--font-display); font-weight:700; font-size:22px; color:var(--steel-bright); line-height:1; }
+.stat-value.is-empty{ color:var(--steel-dim); font-size:13px; font-family:var(--font-body); font-weight:500; }
 .stat-label{ font-size:9px; letter-spacing:1px; text-transform:uppercase; color:var(--steel-dim); margin-top:7px; }
 
 /* ==================================================================
@@ -151,15 +163,23 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
   display:flex; align-items:center; gap:11px;
   padding:9px 0;
   border-top:1px solid var(--hairline);
+  transition:padding-left 0.15s ease, background 0.15s ease;
 }
 .roster-row:first-child{ border-top:none; }
+.roster-row:hover{ padding-left:4px; background:rgba(170,182,201,0.04); }
+.roster-row:focus-visible{ outline:1px solid var(--steel); outline-offset:-1px; }
 .roster-avatar{
   width:28px; height:28px; border-radius:50%;
   object-fit:cover; border:1px solid var(--steel-dim);
   background:var(--night-deep); flex-shrink:0;
 }
 .roster-info{ flex:1; min-width:0; }
-.roster-name{ font-size:12px; font-weight:600; color:var(--steel-bright); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.roster-name{
+  font-size:12px; font-weight:600; color:var(--steel-bright);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  transition:color 0.15s ease;
+}
+.roster-row:hover .roster-name{ color:var(--steel); }
 .roster-sub{ font-size:9.5px; color:var(--steel-dim); margin-top:1px; }
 .roster-tag{
   font-size:8.5px; letter-spacing:0.6px; text-transform:uppercase;
@@ -168,6 +188,15 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
   padding:2px 7px; border-radius:2px; flex-shrink:0;
 }
 .list-skeleton{ font-size:11px; color:var(--steel-dim); padding:8px 0; }
+.list-error{
+  font-size:11px; color:var(--steel-dim); padding:8px 0;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+}
+.list-error .retry-btn{
+  font-size:10px; letter-spacing:0.6px; color:var(--warn); flex-shrink:0;
+  border-bottom:1px solid var(--warn); padding-bottom:1px; font-weight:600;
+}
+.list-error .retry-btn:hover{ color:var(--steel-bright); border-color:var(--steel-bright); }
 
 /* ==================================================================
    7. LINKS — bracketed text menu instead of a button grid
@@ -182,6 +211,7 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
 }
 .link-row:first-child{ border-top:none; }
 .link-row:hover{ color:var(--steel); padding-left:4px; }
+.link-row:focus-visible{ outline:1px solid var(--steel); outline-offset:-2px; }
 .link-arrow{ font-size:12px; color:var(--steel-dim); }
 
 /* ==================================================================
@@ -242,7 +272,7 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
 
   <!-- ============================== 3. STATS ============================== -->
   <section class="section" aria-label="Club statistics">
-    <p class="eyebrow">Dojo Record</p>
+    <p class="eyebrow" id="statsEyebrow">Dojo Record</p>
     <div class="stat-row">
       <div class="stat-cell">
         <div class="stat-value" id="statMembers">—</div>
@@ -297,7 +327,8 @@ const CONFIG = {
   OWNER_USERNAME: "theeternity1505t",
   CO_OWNER_USERNAME: "mrstomioka",
   ROSTER_COUNT: 10,
-  MEMBER_SAMPLE_SIZE: 14
+  MEMBER_SAMPLE_SIZE: 14,
+  FETCH_CONCURRENCY: 5
 };
 
 // Fallback, shaped exactly like the live club/{slug}/members response.
@@ -323,6 +354,28 @@ const PLACEHOLDER_MEMBERS = {
     { username: "xx_fadeddreams_xx", joined: 1781069736 }
   ]
 };
+
+/* ==================================================================
+   PROFILE CACHE
+   Both the roster (avatars) and the rating sample hit /player/{u} or
+   /player/{u}/stats for overlapping usernames. Cache per-load so a
+   given username is never fetched twice from the same endpoint.
+================================================================== */
+const profileCache = new Map();
+const statsCache = new Map();
+
+function fetchPlayerCached(username){
+  if(!profileCache.has(username)){
+    profileCache.set(username, fetchJSON(`${CONFIG.API_BASE}/player/${username}`));
+  }
+  return profileCache.get(username);
+}
+function fetchStatsCached(username){
+  if(!statsCache.has(username)){
+    statsCache.set(username, fetchJSON(`${CONFIG.API_BASE}/player/${username}/stats`));
+  }
+  return statsCache.get(username);
+}
 
 /* ==================================================================
    HELPERS
@@ -384,13 +437,22 @@ async function loadClubInfo(){
   const club = await fetchJSON(`${CONFIG.API_BASE}/club/${CONFIG.CLUB_SLUG}`);
   if(!club){
     document.getElementById("clubLogo").src = avatarFallback;
+    const membersEl = document.getElementById("statMembers");
+    membersEl.textContent = "n/a";
+    membersEl.classList.add("is-empty");
     return;
   }
   document.getElementById("clubLogo").src = club.icon || avatarFallback;
   document.getElementById("clubLogo").alt = club.name + " logo";
   if(club.name) document.getElementById("clubName").textContent = club.name;
+
+  const membersEl = document.getElementById("statMembers");
   if(typeof club.members_count === "number"){
-    document.getElementById("statMembers").textContent = club.members_count.toLocaleString();
+    membersEl.textContent = club.members_count.toLocaleString();
+    membersEl.classList.remove("is-empty");
+  }else{
+    membersEl.textContent = "n/a";
+    membersEl.classList.add("is-empty");
   }
 }
 
@@ -400,7 +462,7 @@ async function loadClubInfo(){
 async function loadLeader(username, avatarId, nameId, linkId){
   const link = document.getElementById(linkId);
   link.href = profileURL(username);
-  const profile = await fetchJSON(`${CONFIG.API_BASE}/player/${username}`);
+  const profile = await fetchPlayerCached(username);
   if(!profile){
     document.getElementById(nameId).textContent = username;
     document.getElementById(avatarId).src = avatarFallback;
@@ -412,7 +474,8 @@ async function loadLeader(username, avatarId, nameId, linkId){
 
 /* ==================================================================
    3. ROSTER — recently joined + a sampled top rating for the
-   "Dojo Record" strip.
+   "Dojo Record" strip. Distinct empty vs. error vs. loading states,
+   each with a retry affordance since these hit the network live.
 ================================================================== */
 function renderRoster(list){
   const el = document.getElementById("rosterList");
@@ -431,44 +494,20 @@ function renderRoster(list){
   `).join("");
 }
 
-async function loadRosterAndStats(){
-  let members = PLACEHOLDER_MEMBERS;
-  const live = await fetchJSON(`${CONFIG.API_BASE}/club/${CONFIG.CLUB_SLUG}/members`);
-  if(live) members = live;
-
-  const all = [...(members.weekly||[]), ...(members.monthly||[]), ...(members.all_time||[])];
-  const seen = new Set();
-  const merged = [];
-  all.forEach(m => { if(!seen.has(m.username)){ seen.add(m.username); merged.push(m); } });
-  merged.sort((a,b) => (b.joined||0) - (a.joined||0));
-
-  // -------- Recently joined --------
-  const recent = merged.slice(0, CONFIG.ROSTER_COUNT);
-  const rosterRows = await mapLimit(recent, 5, async (m) => {
-    const profile = await fetchJSON(`${CONFIG.API_BASE}/player/${m.username}`);
-    return { username: m.username, joined: m.joined, avatar: profile && profile.avatar };
-  });
-  renderRoster(rosterRows);
-
-  // -------- Top rating, sampled from the same pool --------
-  const sample = merged.slice(0, CONFIG.MEMBER_SAMPLE_SIZE);
-  const ratings = await mapLimit(sample, 5, async (m) => {
-    const stats = await fetchJSON(`${CONFIG.API_BASE}/player/${m.username}/stats`);
-    return bestRating(stats);
-  });
-  const top = Math.max(0, ...ratings);
-  document.getElementById("statTopRating").textContent = top > 0 ? top : "—";
+function renderRosterError(){
+  const el = document.getElementById("rosterList");
+  el.innerHTML = `
+    <div class="list-error">
+      <span>Couldn't reach the club roster.</span>
+      <button class="retry-btn" id="rosterRetry" type="button">Retry</button>
+    </div>`;
+  document.getElementById("rosterRetry").addEventListener("click", loadRosterAndStats);
 }
 
-/* ==================================================================
-   INIT
-================================================================== */
-document.addEventListener("DOMContentLoaded", () => {
-  loadClubInfo();
-  loadLeader(CONFIG.OWNER_USERNAME, "ownerAvatar", "ownerName", "ownerLink");
-  loadLeader(CONFIG.CO_OWNER_USERNAME, "coOwnerAvatar", "coOwnerName", "coOwnerLink");
-  loadRosterAndStats();
-});
-</script>
-</body>
-</html>
+function setStatError(){
+  const el = document.getElementById("statTopRating");
+  el.textContent = "n/a";
+  el.classList.add("is-empty");
+}
+
+async functi
