@@ -5,77 +5,116 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Silent Katana — Club Sidebar</title>
 
-<!-- ==================================================================
-     FONTS
-     Display: Shippori Mincho — a real Japanese-style mincho serif,
-       used for the club name and every numeral, so the whole thing
-       reads like a printed dossier rather than a themed template.
-     Body: Inter — quiet, legible, gets out of the way.
-     No second "accent" script font here on purpose — restraint is
-     the point of this one.
-================================================================== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ==================================================================
-   0. DESIGN TOKENS
-   Concept: a printed dossier page at midnight — near-flat deep
-   night-blue, one pale steel accent, no card grids, no glow, no
-   gradients. Rows and hairlines instead of boxes. A single faint
-   ensō (ink circle) is the only decorative mark in the whole file.
-================================================================== */
 :root{
-  --night:       #0a1120;
-  --night-deep:  #060a14;
-  --steel:       #aab6c9;
-  --steel-dim:   #6b7690;
+  --night:#0a1120;
+  --night-deep:#060a14;
+  --steel:#aab6c9;
+  --steel-dim:#6b7690;
   --steel-bright:#e7ecf5;
-  --hairline:    rgba(170,182,201,0.16);
-  --warn:        #c98a5f;
-  --font-display:'Shippori Mincho', serif;
-  --font-body:   'Inter', sans-serif;
+  --hairline:rgba(170,182,201,0.16);
+  --warn:#c98a5f;
+  --font-display:'Shippori Mincho',serif;
+  --font-body:'Inter',sans-serif;
 }
 
-/* ==================================================================
-   1. RESET & BASE
-================================================================== */
-*{ box-sizing:border-box; margin:0; padding:0; }
-html{ scroll-behavior:smooth; }
+/* ================================================================
+   FULL PAGE — NO OUTER SPACE
+================================================================ */
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,
+body{
+  width:100%;
+  min-width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  background:var(--night);
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   font-family:var(--font-body);
-  background:var(--night-deep);
   color:var(--steel-bright);
-  display:flex;
-  justify-content:center;
-  padding:14px 10px;
-  min-height:100vh;
   -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
-@media (prefers-reduced-motion: reduce){
-  *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
-}
-img{ max-width:100%; display:block; }
-a{ color:inherit; text-decoration:none; }
-button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
-:focus-visible{ outline:1px solid var(--steel); outline-offset:2px; }
 
-/* ==================================================================
-   2. SIDEBAR SHELL — a page, not a card
-================================================================== */
+@media (prefers-reduced-motion:reduce){
+  *{
+    animation-duration:0.001ms!important;
+    transition-duration:0.001ms!important;
+  }
+}
+
+img{
+  max-width:100%;
+  display:block;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font-family:inherit;
+  cursor:pointer;
+  border:none;
+  background:none;
+  color:inherit;
+}
+
+:focus-visible{
+  outline:1px solid var(--steel);
+  outline-offset:2px;
+}
+
+/* ================================================================
+   SIDEBAR — EXACT WIDTH OF WEBPAGE
+================================================================ */
 .sidebar{
   width:100%;
-  max-width:325px;
+  max-width:none;
+  min-width:100%;
+  min-height:100vh;
+  height:auto;
+  margin:0;
+  padding:0;
   background:var(--night);
-  border:1px solid var(--hairline);
+  border:0;
+  overflow:hidden;
 }
 
-.section{ padding:20px 22px; }
-.hairline{ border:none; border-top:1px solid var(--hairline); margin:0 22px; }
+/* ================================================================
+   SECTIONS
+================================================================ */
+.section{
+  padding:20px 22px;
+}
+
+.hairline{
+  border:none;
+  border-top:1px solid var(--hairline);
+  margin:0 22px;
+}
 
 .eyebrow{
-  display:flex; align-items:center; justify-content:space-between;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   font-size:9.5px;
   font-weight:600;
   letter-spacing:2.6px;
@@ -83,395 +122,902 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
   color:var(--steel-dim);
   margin-bottom:14px;
 }
+
 .eyebrow .retry-btn{
-  font-size:9px; letter-spacing:1px; color:var(--warn);
-  border-bottom:1px solid var(--warn); padding-bottom:1px;
-  text-transform:none; font-weight:600;
+  font-size:9px;
+  letter-spacing:1px;
+  color:var(--warn);
+  border-bottom:1px solid var(--warn);
+  padding-bottom:1px;
+  text-transform:none;
+  font-weight:600;
 }
-.eyebrow .retry-btn:hover{ color:var(--steel-bright); border-color:var(--steel-bright); }
-.eyebrow .retry-btn:focus-visible{ outline:1px solid var(--warn); outline-offset:2px; }
 
-/* ==================================================================
-   3. CLUB HEADER — faint ensō behind the crest, quiet type
-================================================================== */
-.club-header{ padding:32px 22px 24px; text-align:center; position:relative; }
+.eyebrow .retry-btn:hover{
+  color:var(--steel-bright);
+  border-color:var(--steel-bright);
+}
+
+.eyebrow .retry-btn:focus-visible{
+  outline:1px solid var(--warn);
+  outline-offset:2px;
+}
+
+/* ================================================================
+   CLUB HEADER
+================================================================ */
+.club-header{
+  padding:32px 22px 24px;
+  text-align:center;
+  position:relative;
+}
+
 .enso{
-  position:absolute; top:14px; left:50%; transform:translateX(-50%);
-  width:118px; height:118px; opacity:0.5; pointer-events:none;
-}
-.club-logo-wrap{ position:relative; width:56px; height:56px; margin:0 auto 16px; }
-.club-logo{
-  width:56px; height:56px; border-radius:50%;
-  border:1px solid var(--steel-dim);
-  object-fit:cover; background:var(--night-deep);
-  position:relative; z-index:1;
-}
-.club-name{
-  font-family:var(--font-display); font-weight:700; font-size:20px;
-  letter-spacing:1px; color:var(--steel-bright); line-height:1.35;
-}
-.club-tagline{
-  font-size:10.5px; letter-spacing:3px; text-transform:uppercase;
-  color:var(--steel-dim); margin-top:9px;
+  position:absolute;
+  top:14px;
+  left:50%;
+  transform:translateX(-50%);
+  width:118px;
+  height:118px;
+  opacity:.5;
+  pointer-events:none;
 }
 
-/* ==================================================================
-   4. LEADERSHIP — a dossier row, not a card
-================================================================== */
+.club-logo-wrap{
+  position:relative;
+  width:56px;
+  height:56px;
+  margin:0 auto 16px;
+}
+
+.club-logo{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  border:1px solid var(--steel-dim);
+  object-fit:cover;
+  background:var(--night-deep);
+  position:relative;
+  z-index:1;
+}
+
+.club-name{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:20px;
+  letter-spacing:1px;
+  color:var(--steel-bright);
+  line-height:1.35;
+}
+
+.club-tagline{
+  font-size:10.5px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--steel-dim);
+  margin-top:9px;
+}
+
+/* ================================================================
+   LEADERSHIP
+================================================================ */
 .leader-row{
-  display:flex; align-items:center; gap:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
   padding:12px 0;
 }
-.leader-row + .leader-row{ border-top:1px solid var(--hairline); }
+
+.leader-row + .leader-row{
+  border-top:1px solid var(--hairline);
+}
+
 .leader-avatar{
-  width:40px; height:40px; border-radius:50%;
+  width:40px;
+  height:40px;
+  border-radius:50%;
   border:1px solid var(--steel-dim);
-  object-fit:cover; background:var(--night-deep); flex-shrink:0;
+  object-fit:cover;
+  background:var(--night-deep);
+  flex-shrink:0;
 }
-.leader-info{ flex:1; min-width:0; }
-.leader-name{ font-size:13px; font-weight:600; color:var(--steel-bright); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.leader-role{ font-size:10px; letter-spacing:0.6px; text-transform:uppercase; color:var(--steel-dim); margin-top:2px; }
+
+.leader-info{
+  flex:1;
+  min-width:0;
+}
+
+.leader-name{
+  font-size:13px;
+  font-weight:600;
+  color:var(--steel-bright);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.leader-role{
+  font-size:10px;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  color:var(--steel-dim);
+  margin-top:2px;
+}
+
 .leader-link{
-  font-size:10.5px; color:var(--steel); flex-shrink:0;
-  border-bottom:1px solid var(--steel-dim); padding-bottom:1px;
-  transition:color 0.15s ease, border-color 0.15s ease;
+  font-size:10.5px;
+  color:var(--steel);
+  flex-shrink:0;
+  border-bottom:1px solid var(--steel-dim);
+  padding-bottom:1px;
+  transition:color .15s ease,border-color .15s ease;
 }
-.leader-link:hover{ color:var(--steel-bright); border-color:var(--steel-bright); }
-.leader-link:focus-visible{ outline:1px solid var(--steel); outline-offset:3px; }
 
-/* ==================================================================
-   5. STATS — a single hairline-divided row, no boxes
-================================================================== */
-.stat-row{ display:flex; }
-.stat-cell{ flex:1; text-align:center; padding:4px 0; }
-.stat-cell + .stat-cell{ border-left:1px solid var(--hairline); }
-.stat-value{ font-family:var(--font-display); font-weight:700; font-size:22px; color:var(--steel-bright); line-height:1; }
-.stat-value.is-empty{ color:var(--steel-dim); font-size:13px; font-family:var(--font-body); font-weight:500; }
-.stat-label{ font-size:9px; letter-spacing:1px; text-transform:uppercase; color:var(--steel-dim); margin-top:7px; }
+.leader-link:hover{
+  color:var(--steel-bright);
+  border-color:var(--steel-bright);
+}
 
-/* ==================================================================
-   6. RECENTLY JOINED — fixed-height scroll, flat rows with hairlines
-   instead of bordered cards, to read like a roster page.
-================================================================== */
+/* ================================================================
+   STATS
+================================================================ */
+.stat-row{
+  display:flex;
+}
+
+.stat-cell{
+  flex:1;
+  text-align:center;
+  padding:4px 0;
+}
+
+.stat-cell + .stat-cell{
+  border-left:1px solid var(--hairline);
+}
+
+.stat-value{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:22px;
+  color:var(--steel-bright);
+  line-height:1;
+}
+
+.stat-value.is-empty{
+  color:var(--steel-dim);
+  font-size:13px;
+  font-family:var(--font-body);
+  font-weight:500;
+}
+
+.stat-label{
+  font-size:9px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--steel-dim);
+  margin-top:7px;
+}
+
+/* ================================================================
+   ROSTER
+================================================================ */
 .roster{
-  height:246px; overflow-y:auto; padding-right:2px;
+  height:246px;
+  overflow-y:auto;
+  padding-right:2px;
 }
-.roster::-webkit-scrollbar{ width:3px; }
-.roster::-webkit-scrollbar-thumb{ background:var(--steel-dim); border-radius:2px; }
+
+.roster::-webkit-scrollbar{
+  width:3px;
+}
+
+.roster::-webkit-scrollbar-thumb{
+  background:var(--steel-dim);
+  border-radius:2px;
+}
 
 .roster-row{
-  display:flex; align-items:center; gap:11px;
+  display:flex;
+  align-items:center;
+  gap:11px;
   padding:9px 0;
   border-top:1px solid var(--hairline);
-  transition:padding-left 0.15s ease, background 0.15s ease;
+  transition:padding-left .15s ease,background .15s ease;
 }
-.roster-row:first-child{ border-top:none; }
-.roster-row:hover{ padding-left:4px; background:rgba(170,182,201,0.04); }
-.roster-row:focus-visible{ outline:1px solid var(--steel); outline-offset:-1px; }
+
+.roster-row:first-child{
+  border-top:none;
+}
+
+.roster-row:hover{
+  padding-left:4px;
+  background:rgba(170,182,201,.04);
+}
+
 .roster-avatar{
-  width:28px; height:28px; border-radius:50%;
-  object-fit:cover; border:1px solid var(--steel-dim);
-  background:var(--night-deep); flex-shrink:0;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid var(--steel-dim);
+  background:var(--night-deep);
+  flex-shrink:0;
 }
-.roster-info{ flex:1; min-width:0; }
+
+.roster-info{
+  flex:1;
+  min-width:0;
+}
+
 .roster-name{
-  font-size:12px; font-weight:600; color:var(--steel-bright);
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  transition:color 0.15s ease;
+  font-size:12px;
+  font-weight:600;
+  color:var(--steel-bright);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  transition:color .15s ease;
 }
-.roster-row:hover .roster-name{ color:var(--steel); }
-.roster-sub{ font-size:9.5px; color:var(--steel-dim); margin-top:1px; }
+
+.roster-row:hover .roster-name{
+  color:var(--steel);
+}
+
+.roster-sub{
+  font-size:9.5px;
+  color:var(--steel-dim);
+  margin-top:1px;
+}
+
 .roster-tag{
-  font-size:8.5px; letter-spacing:0.6px; text-transform:uppercase;
+  font-size:8.5px;
+  letter-spacing:.6px;
+  text-transform:uppercase;
   color:var(--steel-bright);
   border:1px solid var(--steel-dim);
-  padding:2px 7px; border-radius:2px; flex-shrink:0;
+  padding:2px 7px;
+  border-radius:2px;
+  flex-shrink:0;
 }
-.list-skeleton{ font-size:11px; color:var(--steel-dim); padding:8px 0; }
-.list-error{
-  font-size:11px; color:var(--steel-dim); padding:8px 0;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-}
-.list-error .retry-btn{
-  font-size:10px; letter-spacing:0.6px; color:var(--warn); flex-shrink:0;
-  border-bottom:1px solid var(--warn); padding-bottom:1px; font-weight:600;
-}
-.list-error .retry-btn:hover{ color:var(--steel-bright); border-color:var(--steel-bright); }
 
-/* ==================================================================
-   7. LINKS — bracketed text menu instead of a button grid
-================================================================== */
-.link-list{ display:flex; flex-direction:column; }
+.list-skeleton{
+  font-size:11px;
+  color:var(--steel-dim);
+  padding:8px 0;
+}
+
+.list-error{
+  font-size:11px;
+  color:var(--steel-dim);
+  padding:8px 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.list-error .retry-btn{
+  font-size:10px;
+  letter-spacing:.6px;
+  color:var(--warn);
+  flex-shrink:0;
+  border-bottom:1px solid var(--warn);
+  padding-bottom:1px;
+  font-weight:600;
+}
+
+/* ================================================================
+   LINKS
+================================================================ */
+.link-list{
+  display:flex;
+  flex-direction:column;
+}
+
 .link-row{
-  display:flex; align-items:center; justify-content:space-between;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   padding:12px 0;
   border-top:1px solid var(--hairline);
-  font-size:12.5px; color:var(--steel-bright); font-weight:500;
-  transition:color 0.15s ease, padding-left 0.15s ease;
+  font-size:12.5px;
+  color:var(--steel-bright);
+  font-weight:500;
+  transition:color .15s ease,padding-left .15s ease;
 }
-.link-row:first-child{ border-top:none; }
-.link-row:hover{ color:var(--steel); padding-left:4px; }
-.link-row:focus-visible{ outline:1px solid var(--steel); outline-offset:-2px; }
-.link-arrow{ font-size:12px; color:var(--steel-dim); }
 
-/* ==================================================================
-   8. FOOTER
-================================================================== */
-.sidebar-footer{
-  text-align:center; padding:20px 22px 26px;
-  font-size:9.5px; letter-spacing:1.5px; text-transform:uppercase;
+.link-row:first-child{
+  border-top:none;
+}
+
+.link-row:hover{
+  color:var(--steel);
+  padding-left:4px;
+}
+
+.link-arrow{
+  font-size:12px;
   color:var(--steel-dim);
 }
 
+/* ================================================================
+   FOOTER
+================================================================ */
+.sidebar-footer{
+  text-align:center;
+  padding:20px 22px 26px;
+  font-size:9.5px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--steel-dim);
+}
+
+/* ================================================================
+   SMALL SCREENS
+================================================================ */
 @media (max-width:360px){
-  .sidebar{ max-width:100%; }
-  body{ padding:10px 6px; }
+  .sidebar{
+    width:100%;
+    min-width:100%;
+    max-width:none;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <aside class="sidebar" id="sidebar">
 
-  <!-- ============================== 1. CLUB HEADER ============================== -->
+  <!-- CLUB HEADER -->
   <section class="club-header" aria-label="Club header">
+
     <svg class="enso" viewBox="0 0 120 120" fill="none">
-      <path d="M60 12c26 0 47 20 47 46s-20 48-47 48c-24 0-44-18-47-41" stroke="#aab6c9" stroke-width="2" stroke-linecap="round"/>
+      <path
+        d="M60 12c26 0 47 20 47 46s-20 48-47 48c-24 0-44-18-47-41"
+        stroke="#aab6c9"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
     </svg>
+
     <div class="club-logo-wrap">
-      <img class="club-logo" id="clubLogo" src="" alt="Club logo">
+      <img
+        class="club-logo"
+        id="clubLogo"
+        src=""
+        alt="Club logo"
+      >
     </div>
-    <h1 class="club-name" id="clubName">The Silent Katana</h1>
-    <p class="club-tagline">Strike in Silence</p>
+
+    <h1 class="club-name" id="clubName">
+      The Silent Katana
+    </h1>
+
+    <p class="club-tagline">
+      Strike in Silence
+    </p>
+
   </section>
 
   <hr class="hairline">
 
-  <!-- ============================== 2. LEADERSHIP ============================== -->
+  <!-- LEADERSHIP -->
   <section class="section" aria-label="Club leadership">
-    <p class="eyebrow">Leadership</p>
+
+    <p class="eyebrow">
+      Leadership
+    </p>
+
     <div class="leader-row">
-      <img class="leader-avatar" id="ownerAvatar" src="" alt="Owner avatar">
+
+      <img
+        class="leader-avatar"
+        id="ownerAvatar"
+        src=""
+        alt="Owner avatar"
+      >
+
       <div class="leader-info">
-        <div class="leader-name" id="ownerName">Loading…</div>
-        <div class="leader-role">Owner</div>
+        <div class="leader-name" id="ownerName">
+          Loading…
+        </div>
+
+        <div class="leader-role">
+          Owner
+        </div>
       </div>
-      <a class="leader-link" id="ownerLink" href="https://www.chess.com/member/theeternity1505t" target="_blank" rel="noopener">Profile</a>
+
+      <a
+        class="leader-link"
+        id="ownerLink"
+        href="https://www.chess.com/member/theeternity1505t"
+        target="_blank"
+        rel="noopener"
+      >
+        Profile
+      </a>
+
     </div>
+
     <div class="leader-row">
-      <img class="leader-avatar" id="coOwnerAvatar" src="" alt="Co-owner avatar">
+
+      <img
+        class="leader-avatar"
+        id="coOwnerAvatar"
+        src=""
+        alt="Co-owner avatar"
+      >
+
       <div class="leader-info">
-        <div class="leader-name" id="coOwnerName">Loading…</div>
-        <div class="leader-role">Co-Owner</div>
+        <div class="leader-name" id="coOwnerName">
+          Loading…
+        </div>
+
+        <div class="leader-role">
+          Co-Owner
+        </div>
       </div>
-      <a class="leader-link" id="coOwnerLink" href="https://www.chess.com/member/mrstomioka" target="_blank" rel="noopener">Profile</a>
+
+      <a
+        class="leader-link"
+        id="coOwnerLink"
+        href="https://www.chess.com/member/mrstomioka"
+        target="_blank"
+        rel="noopener"
+      >
+        Profile
+      </a>
+
     </div>
+
   </section>
 
   <hr class="hairline">
 
-  <!-- ============================== 3. STATS ============================== -->
+  <!-- STATS -->
   <section class="section" aria-label="Club statistics">
-    <p class="eyebrow" id="statsEyebrow">Dojo Record</p>
+
+    <p class="eyebrow" id="statsEyebrow">
+      Dojo Record
+    </p>
+
     <div class="stat-row">
+
       <div class="stat-cell">
-        <div class="stat-value" id="statMembers">—</div>
-        <div class="stat-label">Members</div>
+        <div class="stat-value" id="statMembers">
+          —
+        </div>
+
+        <div class="stat-label">
+          Members
+        </div>
       </div>
+
       <div class="stat-cell">
-        <div class="stat-value" id="statTopRating">—</div>
-        <div class="stat-label">Top Rating</div>
+        <div class="stat-value" id="statTopRating">
+          —
+        </div>
+
+        <div class="stat-label">
+          Top Rating
+        </div>
       </div>
+
     </div>
+
   </section>
 
   <hr class="hairline">
 
-  <!-- ============================== 4. RECENTLY JOINED ============================== -->
+  <!-- RECENT MEMBERS -->
   <section class="section" aria-label="Recently joined members">
-    <p class="eyebrow">New to the Dojo</p>
+
+    <p class="eyebrow">
+      New to the Dojo
+    </p>
+
     <div class="roster" id="rosterList">
-      <div class="list-skeleton">Fetching newest members…</div>
+      <div class="list-skeleton">
+        Fetching newest members…
+      </div>
     </div>
+
   </section>
 
   <hr class="hairline">
 
-  <!-- ============================== 5. LINKS ============================== -->
+  <!-- LINKS -->
   <section class="section" aria-label="Club links">
-    <p class="eyebrow">Passages</p>
+
+    <p class="eyebrow">
+      Passages
+    </p>
+
     <div class="link-list">
-      <a class="link-row" href="https://www.chess.com/clubs/forum/the-silent-katana" target="_blank" rel="noopener">
-        Club Forum <span class="link-arrow">→</span>
+
+      <a
+        class="link-row"
+        href="https://www.chess.com/clubs/forum/the-silent-katana"
+        target="_blank"
+        rel="noopener"
+      >
+        Club Forum
+        <span class="link-arrow">→</span>
       </a>
-      <a class="link-row" href="https://www.chess.com/clubs/events/the-silent-katana" target="_blank" rel="noopener">
-        Club Events <span class="link-arrow">→</span>
+
+      <a
+        class="link-row"
+        href="https://www.chess.com/clubs/events/the-silent-katana"
+        target="_blank"
+        rel="noopener"
+      >
+        Club Events
+        <span class="link-arrow">→</span>
       </a>
-      <a class="link-row" href="https://www.chess.com/club/the-silent-katana" target="_blank" rel="noopener">
-        Join the Club <span class="link-arrow">→</span>
+
+      <a
+        class="link-row"
+        href="https://www.chess.com/club/the-silent-katana"
+        target="_blank"
+        rel="noopener"
+      >
+        Join the Club
+        <span class="link-arrow">→</span>
       </a>
+
     </div>
+
   </section>
 
-  <div class="sidebar-footer">The Silent Katana</div>
+  <div class="sidebar-footer">
+    The Silent Katana
+  </div>
+
 </aside>
 
 <script>
-/* ==================================================================
+/* ================================================================
    CONFIG
-================================================================== */
+================================================================ */
 const CONFIG = {
-  CLUB_SLUG: "the-silent-katana",
-  CLUB_URL: "https://www.chess.com/club/the-silent-katana",
-  API_BASE: "https://api.chess.com/pub",
-  OWNER_USERNAME: "theeternity1505t",
-  CO_OWNER_USERNAME: "mrstomioka",
-  ROSTER_COUNT: 10,
-  MEMBER_SAMPLE_SIZE: 14,
-  FETCH_CONCURRENCY: 5
+  CLUB_SLUG:"the-silent-katana",
+  CLUB_URL:"https://www.chess.com/club/the-silent-katana",
+  API_BASE:"https://api.chess.com/pub",
+  OWNER_USERNAME:"theeternity1505t",
+  CO_OWNER_USERNAME:"mrstomioka",
+  ROSTER_COUNT:10,
+  MEMBER_SAMPLE_SIZE:14,
+  FETCH_CONCURRENCY:5
 };
 
-// Fallback, shaped exactly like the live club/{slug}/members response.
+/* ================================================================
+   FALLBACK MEMBERS
+================================================================ */
 const PLACEHOLDER_MEMBERS = {
-  weekly: [
-    { username: "cutegirl1901", joined: 1786708974 },
-    { username: "yogi136", joined: 1786711851 }
+
+  weekly:[
+    {
+      username:"cutegirl1901",
+      joined:1786708974
+    },
+    {
+      username:"yogi136",
+      joined:1786711851
+    }
   ],
-  monthly: [
-    { username: "asakuralove", joined: 1780336598 },
-    { username: "dore-mon", joined: 1785064797 },
-    { username: "mrstomioka", joined: 1778053615 },
-    { username: "silent-sniper", joined: 1784767640 },
-    { username: "theeternity1505t", joined: 1784773312 }
+
+  monthly:[
+    {
+      username:"asakuralove",
+      joined:1780336598
+    },
+    {
+      username:"dore-mon",
+      joined:1785064797
+    },
+    {
+      username:"mrstomioka",
+      joined:1778053615
+    },
+    {
+      username:"silent-sniper",
+      joined:1784767640
+    },
+    {
+      username:"theeternity1505t",
+      joined:1784773312
+    }
   ],
-  all_time: [
-    { username: "kanao-la-vraie", joined: 1778271689 },
-    { username: "kat32323", joined: 1779079606 },
-    { username: "muichiros_darling", joined: 1778221306 },
-    { username: "patypu", joined: 1779830137 },
-    { username: "pink_r0s3s285", joined: 1778498154 },
-    { username: "shinobu-la-vrai", joined: 1778246382 },
-    { username: "xx_fadeddreams_xx", joined: 1781069736 }
+
+  all_time:[
+    {
+      username:"kanao-la-vraie",
+      joined:1778271689
+    },
+    {
+      username:"kat32323",
+      joined:1779079606
+    },
+    {
+      username:"muichiros_darling",
+      joined:1778221306
+    },
+    {
+      username:"patypu",
+      joined:1779830137
+    },
+    {
+      username:"pink_r0s3s285",
+      joined:1778498154
+    },
+    {
+      username:"shinobu-la-vrai",
+      joined:1778246382
+    },
+    {
+      username:"xx_fadeddreams_xx",
+      joined:1781069736
+    }
   ]
+
 };
 
-/* ==================================================================
-   PROFILE CACHE
-   Both the roster (avatars) and the rating sample hit /player/{u} or
-   /player/{u}/stats for overlapping usernames. Cache per-load so a
-   given username is never fetched twice from the same endpoint.
-================================================================== */
+/* ================================================================
+   CACHE
+================================================================ */
 const profileCache = new Map();
 const statsCache = new Map();
 
 function fetchPlayerCached(username){
+
   if(!profileCache.has(username)){
-    profileCache.set(username, fetchJSON(`${CONFIG.API_BASE}/player/${username}`));
+    profileCache.set(
+      username,
+      fetchJSON(`${CONFIG.API_BASE}/player/${username}`)
+    );
   }
+
   return profileCache.get(username);
 }
+
 function fetchStatsCached(username){
+
   if(!statsCache.has(username)){
-    statsCache.set(username, fetchJSON(`${CONFIG.API_BASE}/player/${username}/stats`));
+    statsCache.set(
+      username,
+      fetchJSON(`${CONFIG.API_BASE}/player/${username}/stats`)
+    );
   }
+
   return statsCache.get(username);
 }
 
-/* ==================================================================
-   HELPERS
-================================================================== */
+/* ================================================================
+   FETCH
+================================================================ */
 async function fetchJSON(url){
+
   try{
+
     const bust = url.includes("?") ? "&" : "?";
-    const res = await fetch(url + bust + "_=" + Date.now(), { cache: "no-store" });
-    if(!res.ok) throw new Error("HTTP " + res.status);
+
+    const res = await fetch(
+      url + bust + "_=" + Date.now(),
+      {
+        cache:"no-store"
+      }
+    );
+
+    if(!res.ok){
+      throw new Error("HTTP " + res.status);
+    }
+
     return await res.json();
+
   }catch(err){
-    console.warn("Fetch failed:", url, err.message);
+
+    console.warn(
+      "Fetch failed:",
+      url,
+      err.message
+    );
+
     return null;
   }
 }
 
+/* ================================================================
+   HELPERS
+================================================================ */
 function escapeHTML(str){
+
   const div = document.createElement("div");
-  div.textContent = str == null ? "" : String(str);
+
+  div.textContent =
+    str == null ? "" : String(str);
+
   return div.innerHTML;
 }
 
 function fmtDate(unix){
-  if(!unix) return "—";
-  return new Date(unix * 1000).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+
+  if(!unix){
+    return "—";
+  }
+
+  return new Date(unix * 1000)
+    .toLocaleDateString(
+      undefined,
+      {
+        month:"short",
+        day:"numeric"
+      }
+    );
 }
 
 function bestRating(stats){
-  if(!stats) return 0;
-  const cats = ["chess_rapid", "chess_blitz", "chess_bullet", "chess_daily"];
+
+  if(!stats){
+    return 0;
+  }
+
+  const cats = [
+    "chess_rapid",
+    "chess_blitz",
+    "chess_bullet",
+    "chess_daily"
+  ];
+
   let max = 0;
+
   cats.forEach(c => {
-    const r = stats[c] && stats[c].last && stats[c].last.rating;
-    if(r && r > max) max = r;
+
+    const r =
+      stats[c] &&
+      stats[c].last &&
+      stats[c].last.rating;
+
+    if(r && r > max){
+      max = r;
+    }
+
   });
+
   return max;
 }
 
-async function mapLimit(items, limit, fn){
+async function mapLimit(items,limit,fn){
+
   const results = new Array(items.length);
+
   let i = 0;
+
   async function worker(){
+
     while(i < items.length){
+
       const idx = i++;
-      results[idx] = await fn(items[idx], idx);
+
+      results[idx] =
+        await fn(items[idx],idx);
     }
   }
-  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+
+  await Promise.all(
+    Array.from(
+      {
+        length:Math.min(limit,items.length)
+      },
+      worker
+    )
+  );
+
   return results;
 }
 
-const avatarFallback = "https://www.chess.com/bundles/web/images/noavatar_l.png";
-const profileURL = (u) => `https://www.chess.com/member/${encodeURIComponent(u)}`;
+const avatarFallback =
+  "https://www.chess.com/bundles/web/images/noavatar_l.png";
 
-/* ==================================================================
-   1. CLUB HEADER + MEMBER COUNT
-================================================================== */
+const profileURL =
+  u =>
+    `https://www.chess.com/member/${encodeURIComponent(u)}`;
+
+/* ================================================================
+   CLUB INFO
+================================================================ */
 async function loadClubInfo(){
-  const club = await fetchJSON(`${CONFIG.API_BASE}/club/${CONFIG.CLUB_SLUG}`);
+
+  const club =
+    await fetchJSON(
+      `${CONFIG.API_BASE}/club/${CONFIG.CLUB_SLUG}`
+    );
+
   if(!club){
-    document.getElementById("clubLogo").src = avatarFallback;
-    const membersEl = document.getElementById("statMembers");
+
+    document.getElementById("clubLogo").src =
+      avatarFallback;
+
+    const membersEl =
+      document.getElementById("statMembers");
+
     membersEl.textContent = "n/a";
+
     membersEl.classList.add("is-empty");
+
     return;
   }
-  document.getElementById("clubLogo").src = club.icon || avatarFallback;
-  document.getElementById("clubLogo").alt = club.name + " logo";
-  if(club.name) document.getElementById("clubName").textContent = club.name;
 
-  const membersEl = document.getElementById("statMembers");
+  document.getElementById("clubLogo").src =
+    club.icon || avatarFallback;
+
+  document.getElementById("clubLogo").alt =
+    club.name + " logo";
+
+  if(club.name){
+
+    document.getElementById("clubName").textContent =
+      club.name;
+  }
+
+  const membersEl =
+    document.getElementById("statMembers");
+
   if(typeof club.members_count === "number"){
-    membersEl.textContent = club.members_count.toLocaleString();
+
+    membersEl.textContent =
+      club.members_count.toLocaleString();
+
     membersEl.classList.remove("is-empty");
+
   }else{
+
     membersEl.textContent = "n/a";
+
     membersEl.classList.add("is-empty");
   }
 }
 
-/* ==================================================================
-   2. LEADERSHIP
-================================================================== */
-async function loadLeader(username, avatarId, nameId, linkId){
-  const link = document.getElementById(linkId);
-  link.href = profileURL(username);
-  const profile = await fetchPlayerCached(username);
+/* ================================================================
+   LEADERSHIP
+================================================================ */
+async function loadLeader(
+  username,
+  avatarId,
+  nameId,
+  linkId
+){
+
+  const link =
+    document.getElementById(linkId);
+
+  link.href =
+    profileURL(username);
+
+  const profile =
+    await fetchPlayerCached(username);
+
   if(!profile){
-    document.getElementById(nameId).textContent = username;
-    document.getElementById(avatarId).src = avatarFallback;
+
+    document.getElementById(nameId).textContent =
+      username;
+
+    document.getElementById(avatarId).src =
+      avatarFallback;
+
     return;
   }
-  document.getElementById(avatarId).src = profile.avatar || avatarFallback;
-  document.getElementById(nameId).textContent = profile.name || profile.username;
+
+  document.getElementById(avatarId).src =
+    profile.avatar || avatarFallback;
+
+  document.getElementById(nameId).textContent =
+    profile.name || profile.username;
 }
 
+/* ================================================================
+   ROSTER
+================================================================ */
 /* ==================================================================
    3. ROSTER — recently joined + a sampled top rating for the
    "Dojo Record" strip. Distinct empty vs. error vs. loading states,
@@ -568,3 +1114,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+  
