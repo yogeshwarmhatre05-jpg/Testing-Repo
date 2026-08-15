@@ -3,1115 +3,433 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Silent Katana — Club Sidebar</title>
-
+<title>Anime Haven — Club Sidebar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --night:#0a1120;
-  --night-deep:#060a14;
-  --steel:#aab6c9;
-  --steel-dim:#6b7690;
-  --steel-bright:#e7ecf5;
-  --hairline:rgba(170,182,201,0.16);
-  --warn:#c98a5f;
-  --font-display:'Shippori Mincho',serif;
-  --font-body:'Inter',sans-serif;
-}
-
-/* ================================================================
-   FULL PAGE — NO OUTER SPACE
-================================================================ */
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html,
-body{
-  width:100%;
-  min-width:100%;
-  height:100%;
-  margin:0;
-  padding:0;
-  background:var(--night);
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:var(--font-body);
-  color:var(--steel-bright);
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-
-@media (prefers-reduced-motion:reduce){
-  *{
-    animation-duration:0.001ms!important;
-    transition-duration:0.001ms!important;
+  :root{
+    --washi:#F4EEE0;
+    --washi-dim:#ECE4D2;
+    --sumi:#1C1814;
+    --sumi-soft:#2B241D;
+    --hanko:#B8232C;
+    --hanko-dark:#8C1B22;
+    --stone:#8B8172;
+    --hairline:#DCD2B8;
   }
-}
-
-img{
-  max-width:100%;
-  display:block;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button{
-  font-family:inherit;
-  cursor:pointer;
-  border:none;
-  background:none;
-  color:inherit;
-}
-
-:focus-visible{
-  outline:1px solid var(--steel);
-  outline-offset:2px;
-}
-
-/* ================================================================
-   SIDEBAR — EXACT WIDTH OF WEBPAGE
-================================================================ */
-.sidebar{
-  width:100%;
-  max-width:none;
-  min-width:100%;
-  min-height:100vh;
-  height:auto;
-  margin:0;
-  padding:0;
-  background:var(--night);
-  border:0;
-  overflow:hidden;
-}
-
-/* ================================================================
-   SECTIONS
-================================================================ */
-.section{
-  padding:20px 22px;
-}
-
-.hairline{
-  border:none;
-  border-top:1px solid var(--hairline);
-  margin:0 22px;
-}
-
-.eyebrow{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  font-size:9.5px;
-  font-weight:600;
-  letter-spacing:2.6px;
-  text-transform:uppercase;
-  color:var(--steel-dim);
-  margin-bottom:14px;
-}
-
-.eyebrow .retry-btn{
-  font-size:9px;
-  letter-spacing:1px;
-  color:var(--warn);
-  border-bottom:1px solid var(--warn);
-  padding-bottom:1px;
-  text-transform:none;
-  font-weight:600;
-}
-
-.eyebrow .retry-btn:hover{
-  color:var(--steel-bright);
-  border-color:var(--steel-bright);
-}
-
-.eyebrow .retry-btn:focus-visible{
-  outline:1px solid var(--warn);
-  outline-offset:2px;
-}
-
-/* ================================================================
-   CLUB HEADER
-================================================================ */
-.club-header{
-  padding:32px 22px 24px;
-  text-align:center;
-  position:relative;
-}
-
-.enso{
-  position:absolute;
-  top:14px;
-  left:50%;
-  transform:translateX(-50%);
-  width:118px;
-  height:118px;
-  opacity:.5;
-  pointer-events:none;
-}
-
-.club-logo-wrap{
-  position:relative;
-  width:56px;
-  height:56px;
-  margin:0 auto 16px;
-}
-
-.club-logo{
-  width:56px;
-  height:56px;
-  border-radius:50%;
-  border:1px solid var(--steel-dim);
-  object-fit:cover;
-  background:var(--night-deep);
-  position:relative;
-  z-index:1;
-}
-
-.club-name{
-  font-family:var(--font-display);
-  font-weight:700;
-  font-size:20px;
-  letter-spacing:1px;
-  color:var(--steel-bright);
-  line-height:1.35;
-}
-
-.club-tagline{
-  font-size:10.5px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:var(--steel-dim);
-  margin-top:9px;
-}
-
-/* ================================================================
-   LEADERSHIP
-================================================================ */
-.leader-row{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:12px 0;
-}
-
-.leader-row + .leader-row{
-  border-top:1px solid var(--hairline);
-}
-
-.leader-avatar{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  border:1px solid var(--steel-dim);
-  object-fit:cover;
-  background:var(--night-deep);
-  flex-shrink:0;
-}
-
-.leader-info{
-  flex:1;
-  min-width:0;
-}
-
-.leader-name{
-  font-size:13px;
-  font-weight:600;
-  color:var(--steel-bright);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.leader-role{
-  font-size:10px;
-  letter-spacing:.6px;
-  text-transform:uppercase;
-  color:var(--steel-dim);
-  margin-top:2px;
-}
-
-.leader-link{
-  font-size:10.5px;
-  color:var(--steel);
-  flex-shrink:0;
-  border-bottom:1px solid var(--steel-dim);
-  padding-bottom:1px;
-  transition:color .15s ease,border-color .15s ease;
-}
-
-.leader-link:hover{
-  color:var(--steel-bright);
-  border-color:var(--steel-bright);
-}
-
-/* ================================================================
-   STATS
-================================================================ */
-.stat-row{
-  display:flex;
-}
-
-.stat-cell{
-  flex:1;
-  text-align:center;
-  padding:4px 0;
-}
-
-.stat-cell + .stat-cell{
-  border-left:1px solid var(--hairline);
-}
-
-.stat-value{
-  font-family:var(--font-display);
-  font-weight:700;
-  font-size:22px;
-  color:var(--steel-bright);
-  line-height:1;
-}
-
-.stat-value.is-empty{
-  color:var(--steel-dim);
-  font-size:13px;
-  font-family:var(--font-body);
-  font-weight:500;
-}
-
-.stat-label{
-  font-size:9px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  color:var(--steel-dim);
-  margin-top:7px;
-}
-
-/* ================================================================
-   ROSTER
-================================================================ */
-.roster{
-  height:246px;
-  overflow-y:auto;
-  padding-right:2px;
-}
-
-.roster::-webkit-scrollbar{
-  width:3px;
-}
-
-.roster::-webkit-scrollbar-thumb{
-  background:var(--steel-dim);
-  border-radius:2px;
-}
-
-.roster-row{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  padding:9px 0;
-  border-top:1px solid var(--hairline);
-  transition:padding-left .15s ease,background .15s ease;
-}
-
-.roster-row:first-child{
-  border-top:none;
-}
-
-.roster-row:hover{
-  padding-left:4px;
-  background:rgba(170,182,201,.04);
-}
-
-.roster-avatar{
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  object-fit:cover;
-  border:1px solid var(--steel-dim);
-  background:var(--night-deep);
-  flex-shrink:0;
-}
-
-.roster-info{
-  flex:1;
-  min-width:0;
-}
-
-.roster-name{
-  font-size:12px;
-  font-weight:600;
-  color:var(--steel-bright);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  transition:color .15s ease;
-}
-
-.roster-row:hover .roster-name{
-  color:var(--steel);
-}
-
-.roster-sub{
-  font-size:9.5px;
-  color:var(--steel-dim);
-  margin-top:1px;
-}
-
-.roster-tag{
-  font-size:8.5px;
-  letter-spacing:.6px;
-  text-transform:uppercase;
-  color:var(--steel-bright);
-  border:1px solid var(--steel-dim);
-  padding:2px 7px;
-  border-radius:2px;
-  flex-shrink:0;
-}
-
-.list-skeleton{
-  font-size:11px;
-  color:var(--steel-dim);
-  padding:8px 0;
-}
-
-.list-error{
-  font-size:11px;
-  color:var(--steel-dim);
-  padding:8px 0;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.list-error .retry-btn{
-  font-size:10px;
-  letter-spacing:.6px;
-  color:var(--warn);
-  flex-shrink:0;
-  border-bottom:1px solid var(--warn);
-  padding-bottom:1px;
-  font-weight:600;
-}
-
-/* ================================================================
-   LINKS
-================================================================ */
-.link-list{
-  display:flex;
-  flex-direction:column;
-}
-
-.link-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:12px 0;
-  border-top:1px solid var(--hairline);
-  font-size:12.5px;
-  color:var(--steel-bright);
-  font-weight:500;
-  transition:color .15s ease,padding-left .15s ease;
-}
-
-.link-row:first-child{
-  border-top:none;
-}
-
-.link-row:hover{
-  color:var(--steel);
-  padding-left:4px;
-}
-
-.link-arrow{
-  font-size:12px;
-  color:var(--steel-dim);
-}
-
-/* ================================================================
-   FOOTER
-================================================================ */
-.sidebar-footer{
-  text-align:center;
-  padding:20px 22px 26px;
-  font-size:9.5px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  color:var(--steel-dim);
-}
-
-/* ================================================================
-   SMALL SCREENS
-================================================================ */
-@media (max-width:360px){
-  .sidebar{
-    width:100%;
-    min-width:100%;
-    max-width:none;
+  *{box-sizing:border-box;margin:0;padding:0;}
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
   }
-}
+  body{background:var(--washi);font-family:'Zen Kaku Gothic New',sans-serif;color:var(--sumi);}
+
+  .ah-widget{width:100%;max-width:340px;background:var(--washi);border:1px solid var(--hairline);margin:0 auto;}
+
+  /* ---------- header (cover panel) ---------- */
+  .ah-header{
+    position:relative;background:var(--sumi);color:var(--washi);
+    padding:24px 20px 20px;overflow:hidden;
+  }
+  .ah-header::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:radial-gradient(rgba(244,238,224,.5) 1px, transparent 1.4px);
+    background-size:9px 9px;opacity:.08;
+  }
+  .ah-header-row{position:relative;display:flex;align-items:center;gap:14px;}
+  .ah-crest{width:54px;height:54px;border:2px solid var(--washi);object-fit:cover;flex-shrink:0;display:block;}
+  .ah-crest-fallback{
+    width:54px;height:54px;border:2px solid var(--washi);flex-shrink:0;display:none;
+    align-items:center;justify-content:center;font-family:'Shippori Mincho',serif;
+    font-weight:800;font-size:18px;letter-spacing:.02em;
+  }
+  .ah-title-block{min-width:0;}
+  .ah-title{font-family:'Shippori Mincho',serif;font-weight:800;font-size:22px;line-height:1.15;letter-spacing:.01em;}
+  .ah-subtitle{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--washi);opacity:.6;margin-top:4px;}
+  .ah-status{position:relative;margin-top:14px;display:inline-flex;align-items:center;gap:7px;
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.85;}
+  .ah-status-dot{width:6px;height:6px;border-radius:50%;background:var(--hanko);display:inline-block;
+    box-shadow:0 0 0 3px rgba(184,35,44,.18);}
+
+  /* ---------- owner strip w/ hanko seal ---------- */
+  .ah-owner{display:flex;align-items:center;gap:13px;padding:15px 20px;border-bottom:1px solid var(--hairline);
+    text-decoration:none;color:var(--sumi);transition:background-color .15s ease;}
+  .ah-owner:hover{background:var(--washi-dim);}
+  .ah-owner:hover .ah-seal{transform:rotate(-9deg) scale(1.05);}
+  .ah-seal{
+    position:relative;width:40px;height:40px;flex-shrink:0;background:var(--hanko);
+    color:var(--washi);display:flex;align-items:center;justify-content:center;
+    font-family:'Shippori Mincho',serif;font-weight:800;font-size:16px;
+    clip-path:polygon(8% 2%,92% 0%,100% 12%,97% 90%,90% 100%,10% 98%,0% 88%,3% 10%);
+    transform:rotate(-4deg);transition:transform .18s ease;
+  }
+  .ah-owner-text{min-width:0;}
+  .ah-owner-role{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--hanko);display:block;}
+  .ah-owner-name{font-weight:700;font-size:14px;margin-top:2px;}
+
+  /* ---------- sections ---------- */
+  .ah-section{padding:16px 20px 6px;}
+  .ah-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:11px;display:flex;align-items:center;justify-content:space-between;}
+
+  /* search / jump */
+  .ah-jump{position:relative;margin:0 20px 14px;}
+  .ah-jump input{
+    width:100%;padding:10px 12px;background:var(--washi-dim);border:1px solid var(--hairline);
+    font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;color:var(--sumi);outline:none;
+    transition:border-color .15s ease;
+  }
+  .ah-jump input::placeholder{color:var(--stone);}
+  .ah-jump input:focus{border-color:var(--hanko);}
+
+  /* tabs */
+  .ah-tabs{display:flex;gap:2px;margin:0 20px 4px;border-bottom:1px solid var(--hairline);}
+  .ah-tab{
+    flex:1;background:none;border:none;cursor:pointer;padding:9px 4px 11px;
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--stone);position:relative;transition:color .15s ease;
+  }
+  .ah-tab::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--hanko);
+    transform:scaleX(0);transition:transform .18s ease;}
+  .ah-tab[aria-selected="true"]{color:var(--sumi);font-weight:700;}
+  .ah-tab[aria-selected="true"]::after{transform:scaleX(1);}
+  .ah-tab:focus-visible{outline:2px solid var(--hanko);outline-offset:2px;}
+
+  /* member rows */
+  .ah-members{padding:6px 0 4px;}
+  .ah-member{
+    display:flex;align-items:center;gap:12px;padding:11px 20px;border-left:3px solid transparent;
+    text-decoration:none;color:var(--sumi);transition:background-color .15s ease,border-color .15s ease,padding-left .15s ease;
+  }
+  .ah-member:hover{background:var(--washi-dim);border-left-color:var(--hanko);padding-left:23px;}
+  .ah-member:focus-visible{outline:2px solid var(--hanko);outline-offset:-2px;}
+  .ah-mnum{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--stone);width:22px;flex-shrink:0;}
+  .ah-mavatar{width:32px;height:32px;object-fit:cover;background:var(--washi-dim);border:1px solid var(--hairline);flex-shrink:0;}
+  .ah-mavatar-skel{width:32px;height:32px;flex-shrink:0;background:linear-gradient(90deg,var(--washi-dim) 25%,var(--hairline) 50%,var(--washi-dim) 75%);
+    background-size:200% 100%;animation:ah-shimmer 1.3s ease-in-out infinite;}
+  @keyframes ah-shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+  .ah-mtext{min-width:0;flex:1;}
+  .ah-mname{font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .ah-mtime{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--stone);margin-top:2px;}
+  .ah-empty{padding:22px 20px;text-align:center;font-size:12.5px;color:var(--stone);font-style:italic;}
+
+  /* stats footer strip */
+  .ah-stats{display:flex;border-top:1px solid var(--hairline);margin-top:8px;}
+  .ah-stat{flex:1;padding:14px 20px;}
+  .ah-stat + .ah-stat{border-left:1px solid var(--hairline);}
+  .ah-stat-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);}
+  .ah-stat-value{font-family:'Shippori Mincho',serif;font-weight:700;font-size:19px;margin-top:5px;color:var(--sumi);}
+
+  /* links */
+  .ah-links{padding:4px 0;border-top:1px solid var(--hairline);}
+  .ah-link{display:flex;align-items:center;gap:14px;padding:13px 20px;text-decoration:none;color:var(--sumi);
+    border-bottom:1px solid var(--hairline);transition:background-color .15s ease,color .15s ease,padding-left .15s ease;}
+  .ah-link:last-child{border-bottom:none;}
+  .ah-link:hover{background:var(--sumi);color:var(--washi);padding-left:24px;}
+  .ah-link:hover .ah-coord{color:var(--hanko);}
+  .ah-link:hover .ah-arrow{border-color:var(--washi);}
+  .ah-link:focus-visible{outline:2px solid var(--hanko);outline-offset:-2px;}
+  .ah-coord{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--stone);width:22px;flex-shrink:0;transition:color .15s ease;}
+  .ah-link-label{font-weight:500;font-size:14px;flex:1;}
+  .ah-arrow{width:7px;height:7px;border-top:1.5px solid var(--sumi);border-right:1.5px solid var(--sumi);transform:rotate(45deg);flex-shrink:0;transition:border-color .15s ease;}
+
+  .ah-footer{padding:12px 20px;text-align:center;}
+  .ah-footer-text{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);}
 </style>
 </head>
-
 <body>
 
-<aside class="sidebar" id="sidebar">
+<div class="ah-widget">
 
-  <!-- CLUB HEADER -->
-  <section class="club-header" aria-label="Club header">
-
-    <svg class="enso" viewBox="0 0 120 120" fill="none">
-      <path
-        d="M60 12c26 0 47 20 47 46s-20 48-47 48c-24 0-44-18-47-41"
-        stroke="#aab6c9"
-        stroke-width="2"
-        stroke-linecap="round"
-      />
-    </svg>
-
-    <div class="club-logo-wrap">
-      <img
-        class="club-logo"
-        id="clubLogo"
-        src=""
-        alt="Club logo"
-      >
-    </div>
-
-    <h1 class="club-name" id="clubName">
-      The Silent Katana
-    </h1>
-
-    <p class="club-tagline">
-      Strike in Silence
-    </p>
-
-  </section>
-
-  <hr class="hairline">
-
-  <!-- LEADERSHIP -->
-  <section class="section" aria-label="Club leadership">
-
-    <p class="eyebrow">
-      Leadership
-    </p>
-
-    <div class="leader-row">
-
-      <img
-        class="leader-avatar"
-        id="ownerAvatar"
-        src=""
-        alt="Owner avatar"
-      >
-
-      <div class="leader-info">
-        <div class="leader-name" id="ownerName">
-          Loading…
-        </div>
-
-        <div class="leader-role">
-          Owner
-        </div>
-      </div>
-
-      <a
-        class="leader-link"
-        id="ownerLink"
-        href="https://www.chess.com/member/theeternity1505t"
-        target="_blank"
-        rel="noopener"
-      >
-        Profile
-      </a>
-
-    </div>
-
-    <div class="leader-row">
-
-      <img
-        class="leader-avatar"
-        id="coOwnerAvatar"
-        src=""
-        alt="Co-owner avatar"
-      >
-
-      <div class="leader-info">
-        <div class="leader-name" id="coOwnerName">
-          Loading…
-        </div>
-
-        <div class="leader-role">
-          Co-Owner
-        </div>
-      </div>
-
-      <a
-        class="leader-link"
-        id="coOwnerLink"
-        href="https://www.chess.com/member/mrstomioka"
-        target="_blank"
-        rel="noopener"
-      >
-        Profile
-      </a>
-
-    </div>
-
-  </section>
-
-  <hr class="hairline">
-
-  <!-- STATS -->
-  <section class="section" aria-label="Club statistics">
-
-    <p class="eyebrow" id="statsEyebrow">
-      Dojo Record
-    </p>
-
-    <div class="stat-row">
-
-      <div class="stat-cell">
-        <div class="stat-value" id="statMembers">
-          —
-        </div>
-
-        <div class="stat-label">
-          Members
-        </div>
-      </div>
-
-      <div class="stat-cell">
-        <div class="stat-value" id="statTopRating">
-          —
-        </div>
-
-        <div class="stat-label">
-          Top Rating
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-
-  <hr class="hairline">
-
-  <!-- RECENT MEMBERS -->
-  <section class="section" aria-label="Recently joined members">
-
-    <p class="eyebrow">
-      New to the Dojo
-    </p>
-
-    <div class="roster" id="rosterList">
-      <div class="list-skeleton">
-        Fetching newest members…
+  <div class="ah-header">
+    <div class="ah-header-row">
+      <img class="ah-crest" id="ahCrest" alt="Anime Haven crest"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="ah-crest-fallback" id="ahCrestFallback">AH</div>
+      <div class="ah-title-block">
+        <div class="ah-title">Anime Haven</div>
+        <div class="ah-subtitle">Chess.com Club</div>
       </div>
     </div>
-
-  </section>
-
-  <hr class="hairline">
-
-  <!-- LINKS -->
-  <section class="section" aria-label="Club links">
-
-    <p class="eyebrow">
-      Passages
-    </p>
-
-    <div class="link-list">
-
-      <a
-        class="link-row"
-        href="https://www.chess.com/clubs/forum/the-silent-katana"
-        target="_blank"
-        rel="noopener"
-      >
-        Club Forum
-        <span class="link-arrow">→</span>
-      </a>
-
-      <a
-        class="link-row"
-        href="https://www.chess.com/clubs/events/the-silent-katana"
-        target="_blank"
-        rel="noopener"
-      >
-        Club Events
-        <span class="link-arrow">→</span>
-      </a>
-
-      <a
-        class="link-row"
-        href="https://www.chess.com/club/the-silent-katana"
-        target="_blank"
-        rel="noopener"
-      >
-        Join the Club
-        <span class="link-arrow">→</span>
-      </a>
-
+    <div class="ah-status">
+      <span class="ah-status-dot"></span>
+      <span id="ahStatusText">Loading dojo…</span>
     </div>
-
-  </section>
-
-  <div class="sidebar-footer">
-    The Silent Katana
   </div>
 
-</aside>
+  <a class="ah-owner" id="ahOwnerLink" href="https://www.chess.com/member/yogi136" target="_blank" rel="noopener">
+    <div class="ah-seal" id="ahSeal">A</div>
+    <div class="ah-owner-text">
+      <span class="ah-owner-role">Founder's Seal</span>
+      <div class="ah-owner-name" id="ahOwnerName">yogi136</div>
+    </div>
+  </a>
+
+  <div class="ah-jump">
+    <input type="text" id="ahFilter" placeholder="Find a member…" autocomplete="off">
+  </div>
+
+  <div class="ah-eyebrow"><span>New Recruits</span></div>
+  <div class="ah-tabs" role="tablist">
+    <button class="ah-tab" role="tab" data-tab="weekly" aria-selected="true">This Week</button>
+    <button class="ah-tab" role="tab" data-tab="monthly" aria-selected="false">This Month</button>
+    <button class="ah-tab" role="tab" data-tab="all_time" aria-selected="false">All-Time</button>
+  </div>
+  <div class="ah-members" id="ahMemberList"></div>
+
+  <div class="ah-stats">
+    <div class="ah-stat">
+      <div class="ah-stat-label">Members</div>
+      <div class="ah-stat-value" id="ahStatMembers">—</div>
+    </div>
+    <div class="ah-stat">
+      <div class="ah-stat-label">Club Age</div>
+      <div class="ah-stat-value" id="ahStatAge">—</div>
+    </div>
+  </div>
+
+  <div class="ah-links">
+    <a class="ah-link" id="ahLinkMatches" href="https://www.chess.com/clubs/matches/anime-haven" target="_blank" rel="noopener">
+      <span class="ah-coord">A1</span><span class="ah-link-label">Matches</span><span class="ah-arrow"></span>
+    </a>
+    <a class="ah-link" id="ahLinkLeaderboard" href="https://www.chess.com/clubs/anime-haven" target="_blank" rel="noopener">
+      <span class="ah-coord">B2</span><span class="ah-link-label">Leaderboard</span><span class="ah-arrow"></span>
+    </a>
+    <a class="ah-link" href="https://www.chess.com/clubs/events/anime-haven" target="_blank" rel="noopener">
+      <span class="ah-coord">C3</span><span class="ah-link-label">Club Events</span><span class="ah-arrow"></span>
+    </a>
+    <a class="ah-link" href="https://www.chess.com/clubs/about/anime-haven" target="_blank" rel="noopener">
+      <span class="ah-coord">D4</span><span class="ah-link-label">About</span><span class="ah-arrow"></span>
+    </a>
+  </div>
+
+  <div class="ah-footer">
+    <span class="ah-footer-text">Anime Haven · Founded &amp; sealed by yogi136</span>
+  </div>
+
+</div>
 
 <script>
-/* ================================================================
-   CONFIG
-================================================================ */
-const CONFIG = {
-  CLUB_SLUG:"the-silent-katana",
-  CLUB_URL:"https://www.chess.com/club/the-silent-katana",
-  API_BASE:"https://api.chess.com/pub",
-  OWNER_USERNAME:"theeternity1505t",
-  CO_OWNER_USERNAME:"mrstomioka",
-  ROSTER_COUNT:10,
-  MEMBER_SAMPLE_SIZE:14,
-  FETCH_CONCURRENCY:5
-};
+(function(){
+  "use strict";
 
-/* ================================================================
-   FALLBACK MEMBERS
-================================================================ */
-const PLACEHOLDER_MEMBERS = {
+  var CONFIG = {
+    clubSlug: "anime-haven",
+    ownerUsername: "yogi136",
+    useLiveApi: true,
+    refreshMs: 5 * 60 * 1000,
+    avatarConcurrency: 4
+  };
 
-  weekly:[
-    {
-      username:"cutegirl1901",
-      joined:1786708974
-    },
-    {
-      username:"yogi136",
-      joined:1786711851
+  // fallback data — mirrors the club's members endpoint shape, used if live fetch fails
+  var FALLBACK = {
+    weekly: [
+      { username: "yogi136", joined: 1777466298 }
+    ],
+    monthly: [
+      { username: "cuberx2", joined: 1777230348 },
+      { username: "delparco", joined: 1777809917 }
+    ],
+    all_time: [
+      { username: "aryanakbar", joined: 1775484258 },
+      { username: "charan_smaran", joined: 1777651198 },
+      { username: "chess_sky_chrome", joined: 1779278570 },
+      { username: "chientnhp", joined: 1780217252 },
+      { username: "chiruuuuu_6", joined: 1777221111 },
+      { username: "cleft_sovereign_chess", joined: 1777116059 },
+      { username: "da_dumpster", joined: 1775409544 }
+    ]
+  };
+
+  var state = {
+    activeTab: "weekly",
+    members: FALLBACK,
+    avatars: {}, // username -> url | null (null = fetched, no avatar)
+    filter: ""
+  };
+
+  var el = {
+    crest: document.getElementById("ahCrest"),
+    crestFallback: document.getElementById("ahCrestFallback"),
+    statusText: document.getElementById("ahStatusText"),
+    ownerLink: document.getElementById("ahOwnerLink"),
+    ownerName: document.getElementById("ahOwnerName"),
+    seal: document.getElementById("ahSeal"),
+    filter: document.getElementById("ahFilter"),
+    tabs: document.querySelectorAll(".ah-tab"),
+    memberList: document.getElementById("ahMemberList"),
+    statMembers: document.getElementById("ahStatMembers"),
+    statAge: document.getElementById("ahStatAge"),
+    linkLeaderboard: document.getElementById("ahLinkLeaderboard")
+  };
+
+  function timeAgo(unixSeconds){
+    var diff = Math.max(0, Math.floor(Date.now() / 1000) - unixSeconds);
+    var units = [
+      [31536000, "y"], [2592000, "mo"], [604800, "w"], [86400, "d"], [3600, "h"], [60, "m"]
+    ];
+    for (var i = 0; i < units.length; i++){
+      var v = Math.floor(diff / units[i][0]);
+      if (v >= 1) return v + units[i][1] + " ago";
     }
-  ],
-
-  monthly:[
-    {
-      username:"asakuralove",
-      joined:1780336598
-    },
-    {
-      username:"dore-mon",
-      joined:1785064797
-    },
-    {
-      username:"mrstomioka",
-      joined:1778053615
-    },
-    {
-      username:"silent-sniper",
-      joined:1784767640
-    },
-    {
-      username:"theeternity1505t",
-      joined:1784773312
-    }
-  ],
-
-  all_time:[
-    {
-      username:"kanao-la-vraie",
-      joined:1778271689
-    },
-    {
-      username:"kat32323",
-      joined:1779079606
-    },
-    {
-      username:"muichiros_darling",
-      joined:1778221306
-    },
-    {
-      username:"patypu",
-      joined:1779830137
-    },
-    {
-      username:"pink_r0s3s285",
-      joined:1778498154
-    },
-    {
-      username:"shinobu-la-vrai",
-      joined:1778246382
-    },
-    {
-      username:"xx_fadeddreams_xx",
-      joined:1781069736
-    }
-  ]
-
-};
-
-/* ================================================================
-   CACHE
-================================================================ */
-const profileCache = new Map();
-const statsCache = new Map();
-
-function fetchPlayerCached(username){
-
-  if(!profileCache.has(username)){
-    profileCache.set(
-      username,
-      fetchJSON(`${CONFIG.API_BASE}/player/${username}`)
-    );
+    return "just now";
   }
 
-  return profileCache.get(username);
-}
-
-function fetchStatsCached(username){
-
-  if(!statsCache.has(username)){
-    statsCache.set(
-      username,
-      fetchJSON(`${CONFIG.API_BASE}/player/${username}/stats`)
-    );
+  function clubAgeString(foundedUnix){
+    var diff = Math.max(0, Math.floor(Date.now() / 1000) - foundedUnix);
+    var years = Math.floor(diff / 31536000);
+    var days = Math.floor((diff % 31536000) / 86400);
+    if (years > 0) return years + "y " + days + "d";
+    return days + "d";
   }
 
-  return statsCache.get(username);
-}
+  function cacheBust(url){
+    return url + (url.indexOf("?") === -1 ? "?" : "&") + "_ts=" + Date.now();
+  }
 
-/* ================================================================
-   FETCH
-================================================================ */
-async function fetchJSON(url){
+  function renderMembers(){
+    var list = state.members[state.activeTab] || [];
+    var q = state.filter.trim().toLowerCase();
+    if (q) list = list.filter(function(m){ return m.username.toLowerCase().indexOf(q) !== -1; });
 
-  try{
+    if (!list.length){
+      el.memberList.innerHTML = '<div class="ah-empty">No members here yet.</div>';
+      return;
+    }
 
-    const bust = url.includes("?") ? "&" : "?";
+    var html = "";
+    list.forEach(function(m, i){
+      var num = String(i + 1).padStart(2, "0");
+      var avatarUrl = state.avatars[m.username];
+      var avatarHtml = avatarUrl
+        ? '<img class="ah-mavatar" src="' + avatarUrl + '" alt="' + m.username + '" loading="lazy">'
+        : (avatarUrl === null
+            ? '<div class="ah-mavatar" style="display:flex;align-items:center;justify-content:center;font-family:\'Shippori Mincho\',serif;font-weight:700;font-size:13px;">' + m.username.charAt(0).toUpperCase() + '</div>'
+            : '<div class="ah-mavatar-skel"></div>');
+      html += '<a class="ah-member" href="https://www.chess.com/member/' + encodeURIComponent(m.username) + '" target="_blank" rel="noopener">' +
+        '<span class="ah-mnum">№' + num + '</span>' +
+        avatarHtml +
+        '<div class="ah-mtext">' +
+          '<div class="ah-mname">' + m.username + '</div>' +
+          '<div class="ah-mtime">' + timeAgo(m.joined) + '</div>' +
+        '</div>' +
+      '</a>';
+    });
+    el.memberList.innerHTML = html;
+    loadAvatarsFor(list);
+  }
 
-    const res = await fetch(
-      url + bust + "_=" + Date.now(),
-      {
-        cache:"no-store"
+  var avatarQueue = [];
+  var avatarInFlight = 0;
+
+  function loadAvatarsFor(list){
+    list.forEach(function(m){
+      if (state.avatars.hasOwnProperty(m.username)) return;
+      if (avatarQueue.indexOf(m.username) === -1) avatarQueue.push(m.username);
+    });
+    pumpAvatarQueue();
+  }
+
+  function pumpAvatarQueue(){
+    while (avatarInFlight < CONFIG.avatarConcurrency && avatarQueue.length){
+      var username = avatarQueue.shift();
+      avatarInFlight++;
+      fetch(cacheBust("https://api.chess.com/pub/player/" + encodeURIComponent(username)))
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(data){
+          state.avatars[username] = (data && data.avatar) ? data.avatar : null;
+        })
+        .catch(function(){
+          state.avatars[username] = null;
+        })
+        .finally(function(){
+          avatarInFlight--;
+          renderMembers();
+          pumpAvatarQueue();
+        });
+    }
+  }
+
+  function setTab(tab){
+    state.activeTab = tab;
+    el.tabs.forEach(function(btn){
+      btn.setAttribute("aria-selected", btn.dataset.tab === tab ? "true" : "false");
+    });
+    renderMembers();
+  }
+
+  el.tabs.forEach(function(btn){
+    btn.addEventListener("click", function(){ setTab(btn.dataset.tab); });
+  });
+
+  el.filter.addEventListener("input", function(){
+    state.filter = el.filter.value;
+    renderMembers();
+  });
+
+  el.seal.textContent = CONFIG.ownerUsername.charAt(0).toUpperCase();
+
+  function applyProfile(profile){
+    if (!profile) return;
+    if (profile.icon) el.crest.src = profile.icon;
+    else { el.crest.style.display = "none"; el.crestFallback.style.display = "flex"; }
+    if (typeof profile.members_count === "number") el.statMembers.textContent = profile.members_count.toLocaleString();
+    if (profile.created) el.statAge.textContent = clubAgeString(profile.created);
+    el.statusText.textContent = "Active dojo";
+    if (profile.club_id) {
+      el.linkLeaderboard.href = "https://www.chess.com/leaderboard/live?group=" + profile.club_id;
+    }
+  }
+
+  function applyOwnerAvatar(){
+    fetch(cacheBust("https://api.chess.com/pub/player/" + encodeURIComponent(CONFIG.ownerUsername)))
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(data){
+        if (data && data.name) el.ownerName.textContent = data.name + " (" + CONFIG.ownerUsername + ")";
+      })
+      .catch(function(){});
+  }
+
+  function fetchAll(){
+    if (!CONFIG.useLiveApi){
+      renderMembers();
+      el.statusText.textContent = "Active dojo";
+      return;
+    }
+    Promise.all([
+      fetch(cacheBust("https://api.chess.com/pub/club/" + CONFIG.clubSlug), { cache: "no-store" })
+        .then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }),
+      fetch(cacheBust("https://api.chess.com/pub/club/" + CONFIG.clubSlug + "/members"), { cache: "no-store" })
+        .then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; })
+    ]).then(function(results){
+      var profile = results[0];
+      var members = results[1];
+      applyProfile(profile);
+      if (members && (members.weekly || members.monthly || members.all_time)){
+        state.members = {
+          weekly: members.weekly || [],
+          monthly: members.monthly || [],
+          all_time: members.all_time || []
+        };
       }
-    );
-
-    if(!res.ok){
-      throw new Error("HTTP " + res.status);
-    }
-
-    return await res.json();
-
-  }catch(err){
-
-    console.warn(
-      "Fetch failed:",
-      url,
-      err.message
-    );
-
-    return null;
-  }
-}
-
-/* ================================================================
-   HELPERS
-================================================================ */
-function escapeHTML(str){
-
-  const div = document.createElement("div");
-
-  div.textContent =
-    str == null ? "" : String(str);
-
-  return div.innerHTML;
-}
-
-function fmtDate(unix){
-
-  if(!unix){
-    return "—";
+      renderMembers();
+    }).catch(function(){
+      el.statusText.textContent = "Active dojo";
+      renderMembers();
+    });
   }
 
-  return new Date(unix * 1000)
-    .toLocaleDateString(
-      undefined,
-      {
-        month:"short",
-        day:"numeric"
-      }
-    );
-}
-
-function bestRating(stats){
-
-  if(!stats){
-    return 0;
+  function scheduleRefresh(){
+    setTimeout(function(){
+      fetchAll();
+      scheduleRefresh();
+    }, CONFIG.refreshMs);
   }
 
-  const cats = [
-    "chess_rapid",
-    "chess_blitz",
-    "chess_bullet",
-    "chess_daily"
-  ];
-
-  let max = 0;
-
-  cats.forEach(c => {
-
-    const r =
-      stats[c] &&
-      stats[c].last &&
-      stats[c].last.rating;
-
-    if(r && r > max){
-      max = r;
-    }
-
-  });
-
-  return max;
-}
-
-async function mapLimit(items,limit,fn){
-
-  const results = new Array(items.length);
-
-  let i = 0;
-
-  async function worker(){
-
-    while(i < items.length){
-
-      const idx = i++;
-
-      results[idx] =
-        await fn(items[idx],idx);
-    }
-  }
-
-  await Promise.all(
-    Array.from(
-      {
-        length:Math.min(limit,items.length)
-      },
-      worker
-    )
-  );
-
-  return results;
-}
-
-const avatarFallback =
-  "https://www.chess.com/bundles/web/images/noavatar_l.png";
-
-const profileURL =
-  u =>
-    `https://www.chess.com/member/${encodeURIComponent(u)}`;
-
-/* ================================================================
-   CLUB INFO
-================================================================ */
-async function loadClubInfo(){
-
-  const club =
-    await fetchJSON(
-      `${CONFIG.API_BASE}/club/${CONFIG.CLUB_SLUG}`
-    );
-
-  if(!club){
-
-    document.getElementById("clubLogo").src =
-      avatarFallback;
-
-    const membersEl =
-      document.getElementById("statMembers");
-
-    membersEl.textContent = "n/a";
-
-    membersEl.classList.add("is-empty");
-
-    return;
-  }
-
-  document.getElementById("clubLogo").src =
-    club.icon || avatarFallback;
-
-  document.getElementById("clubLogo").alt =
-    club.name + " logo";
-
-  if(club.name){
-
-    document.getElementById("clubName").textContent =
-      club.name;
-  }
-
-  const membersEl =
-    document.getElementById("statMembers");
-
-  if(typeof club.members_count === "number"){
-
-    membersEl.textContent =
-      club.members_count.toLocaleString();
-
-    membersEl.classList.remove("is-empty");
-
-  }else{
-
-    membersEl.textContent = "n/a";
-
-    membersEl.classList.add("is-empty");
-  }
-}
-
-/* ================================================================
-   LEADERSHIP
-================================================================ */
-async function loadLeader(
-  username,
-  avatarId,
-  nameId,
-  linkId
-){
-
-  const link =
-    document.getElementById(linkId);
-
-  link.href =
-    profileURL(username);
-
-  const profile =
-    await fetchPlayerCached(username);
-
-  if(!profile){
-
-    document.getElementById(nameId).textContent =
-      username;
-
-    document.getElementById(avatarId).src =
-      avatarFallback;
-
-    return;
-  }
-
-  document.getElementById(avatarId).src =
-    profile.avatar || avatarFallback;
-
-  document.getElementById(nameId).textContent =
-    profile.name || profile.username;
-}
-
-/* ================================================================
-   ROSTER
-================================================================ */
-/* ==================================================================
-   3. ROSTER — recently joined + a sampled top rating for the
-   "Dojo Record" strip. Distinct empty vs. error vs. loading states,
-   each with a retry affordance since these hit the network live.
-================================================================== */
-function renderRoster(list){
-  const el = document.getElementById("rosterList");
-  if(!list.length){ el.innerHTML = '<div class="list-skeleton">No new members yet.</div>'; return; }
-
-  const cutoff = Date.now()/1000 - (3 * 24 * 3600);
-  el.innerHTML = list.map(p => `
-    <a class="roster-row" href="${profileURL(p.username)}" target="_blank" rel="noopener">
-      <img class="roster-avatar" src="${p.avatar || avatarFallback}" alt="" loading="lazy">
-      <div class="roster-info">
-        <div class="roster-name">${escapeHTML(p.username)}</div>
-        <div class="roster-sub">Joined ${fmtDate(p.joined)}</div>
-      </div>
-      ${p.joined > cutoff ? '<span class="roster-tag">New</span>' : ''}
-    </a>
-  `).join("");
-}
-
-function renderRosterError(){
-  const el = document.getElementById("rosterList");
-  el.innerHTML = `
-    <div class="list-error">
-      <span>Couldn't reach the club roster.</span>
-      <button class="retry-btn" id="rosterRetry" type="button">Retry</button>
-    </div>`;
-  document.getElementById("rosterRetry").addEventListener("click", loadRosterAndStats);
-}
-
-function setStatError(){
-  const el = document.getElementById("statTopRating");
-  el.textContent = "n/a";
-  el.classList.add("is-empty");
-}
-
-async function loadRosterAndStats(){
-  const rosterEl = document.getElementById("rosterList");
-  rosterEl.innerHTML = '<div class="list-skeleton">Fetching newest members…</div>';
-  profileCache.clear();
-  statsCache.clear();
-
-  const live = await fetchJSON(`${CONFIG.API_BASE}/club/${CONFIG.CLUB_SLUG}/members`);
-  const usedFallback = !live;
-  const members = live || PLACEHOLDER_MEMBERS;
-
-  const all = [...(members.weekly||[]), ...(members.monthly||[]), ...(members.all_time||[])];
-  const seen = new Set();
-  const merged = [];
-  all.forEach(m => { if(!seen.has(m.username)){ seen.add(m.username); merged.push(m); } });
-  merged.sort((a,b) => (b.joined||0) - (a.joined||0));
-
-  if(!merged.length){
-    if(usedFallback){ renderRosterError(); } else { renderRoster([]); }
-    setStatError();
-    return;
-  }
-
-  // -------- Recently joined (cached profile fetch shared with ratings) --------
-  const recent = merged.slice(0, CONFIG.ROSTER_COUNT);
-  const rosterRows = await mapLimit(recent, CONFIG.FETCH_CONCURRENCY, async (m) => {
-    const profile = await fetchPlayerCached(m.username);
-    return { username: m.username, joined: m.joined, avatar: profile && profile.avatar };
-  });
-  renderRoster(rosterRows);
-
-  // -------- Top rating, sampled from the same pool --------
-  const sample = merged.slice(0, CONFIG.MEMBER_SAMPLE_SIZE);
-  const ratings = await mapLimit(sample, CONFIG.FETCH_CONCURRENCY, async (m) => {
-    const stats = await fetchStatsCached(m.username);
-    return bestRating(stats);
-  });
-  const top = Math.max(0, ...ratings);
-  const ratingEl = document.getElementById("statTopRating");
-  if(top > 0){
-    ratingEl.textContent = top;
-    ratingEl.classList.remove("is-empty");
-  }else{
-    setStatError();
-  }
-}
-
-/* ==================================================================
-   INIT
-================================================================== */
-document.addEventListener("DOMContentLoaded", () => {
-  loadClubInfo();
-  loadLeader(CONFIG.OWNER_USERNAME, "ownerAvatar", "ownerName", "ownerLink");
-  loadLeader(CONFIG.CO_OWNER_USERNAME, "coOwnerAvatar", "coOwnerName", "coOwnerLink");
-  loadRosterAndStats();
-});
+  renderMembers();
+  fetchAll();
+  applyOwnerAvatar();
+  scheduleRefresh();
+})();
 </script>
 </body>
 </html>
-  
