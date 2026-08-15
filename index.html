@@ -13,11 +13,12 @@
     --washi-dim:#ECE4D2;
     --sumi:#1C1814;
     --sumi-soft:#2B241D;
+    --indigo:#2F3E52;
     --hanko:#B8232C;
     --hanko-dark:#8C1B22;
+    --sakura:#E8A6AE;
     --stone:#8B8172;
     --hairline:#DCD2B8;
-    --indigo:#2F3E52;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   @media (prefers-reduced-motion: reduce){
@@ -29,8 +30,8 @@
 
   /* ---------- header (manga cover panel) ---------- */
   .ah-header{
-    position:relative;background:var(--sumi);color:var(--washi);
-    padding:26px 20px 22px;overflow:hidden;
+    position:relative;color:var(--washi);padding:26px 20px 22px;overflow:hidden;
+    background:linear-gradient(150deg, var(--sumi) 0%, var(--sumi) 55%, var(--indigo) 130%);
   }
   .ah-header::before{
     /* screentone dot texture */
@@ -41,8 +42,19 @@
   .ah-header::after{
     /* speed-line burst, manga action-panel motif */
     content:"";position:absolute;top:-40%;right:-30%;width:220px;height:220px;pointer-events:none;
-    background:repeating-conic-gradient(from 0deg, rgba(184,35,44,.16) 0deg 2deg, transparent 2deg 9deg);
+    background:repeating-conic-gradient(from 0deg, rgba(184,35,44,.18) 0deg 2deg, transparent 2deg 9deg);
     border-radius:50%;opacity:.7;
+  }
+  .ah-petal{position:absolute;width:7px;height:7px;background:var(--sakura);opacity:.55;pointer-events:none;
+    border-radius:70% 0 70% 0;animation:ah-drift 9s ease-in-out infinite;}
+  .ah-petal.p1{top:14%;left:60%;animation-delay:0s;}
+  .ah-petal.p2{top:34%;left:78%;animation-delay:2.4s;width:5px;height:5px;}
+  .ah-petal.p3{top:58%;left:68%;animation-delay:4.8s;width:6px;height:6px;}
+  @keyframes ah-drift{
+    0%{transform:translateY(0) rotate(0deg);opacity:0;}
+    15%{opacity:.55;}
+    85%{opacity:.35;}
+    100%{transform:translateY(38px) rotate(60deg);opacity:0;}
   }
   .ah-vol-tag{
     position:absolute;top:0;right:0;background:var(--hanko);color:var(--washi);
@@ -65,31 +77,37 @@
   .ah-status-dot{width:6px;height:6px;border-radius:50%;background:var(--hanko);display:inline-block;
     box-shadow:0 0 0 3px rgba(184,35,44,.18);}
 
-  /* ---------- owner strip w/ hanko seal ---------- */
-  .ah-owner{display:flex;align-items:center;gap:13px;padding:15px 20px;border-bottom:1px solid var(--hairline);
+  /* ---------- owner strip w/ real photo + hanko badge ---------- */
+  .ah-owner{display:flex;align-items:center;gap:14px;padding:15px 20px;border-bottom:1px solid var(--hairline);
     text-decoration:none;color:var(--sumi);transition:background-color .15s ease;}
   .ah-owner:hover{background:var(--washi-dim);}
-  .ah-owner:hover .ah-seal{transform:rotate(-9deg) scale(1.05);}
+  .ah-owner-photo-wrap{position:relative;flex-shrink:0;width:46px;height:46px;}
+  .ah-owner-photo{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--hairline);display:block;background:var(--washi-dim);}
+  .ah-owner-photo-fallback{
+    width:46px;height:46px;border-radius:50%;border:2px solid var(--hairline);background:var(--washi-dim);
+    display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho',serif;font-weight:800;font-size:16px;color:var(--sumi);
+  }
   .ah-seal{
-    position:relative;width:40px;height:40px;flex-shrink:0;background:var(--hanko);
+    position:absolute;bottom:-4px;right:-6px;width:22px;height:22px;background:var(--hanko);
     color:var(--washi);display:flex;align-items:center;justify-content:center;
-    font-family:'Shippori Mincho',serif;font-weight:800;font-size:16px;
+    font-family:'Shippori Mincho',serif;font-weight:800;font-size:10px;
     clip-path:polygon(8% 2%,92% 0%,100% 12%,97% 90%,90% 100%,10% 98%,0% 88%,3% 10%);
-    transform:rotate(-4deg);transition:transform .18s ease;
+    transform:rotate(-8deg);border:2px solid var(--washi);
   }
   .ah-owner-text{min-width:0;}
   .ah-owner-role{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--hanko);display:block;}
   .ah-owner-name{font-weight:700;font-size:14px;margin-top:2px;}
 
-  /* ---------- sections ---------- */
-  .ah-section{padding:16px 20px 6px;}
-  .ah-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:11px;display:flex;align-items:center;justify-content:space-between;}
+  /* ---------- section headers (chapter marks) ---------- */
+  .ah-chapter{padding:16px 20px 0;display:flex;align-items:baseline;justify-content:space-between;}
+  .ah-chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);}
+  .ah-chapter-num{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--sakura);background:var(--sumi);padding:2px 6px;}
 
   /* ---------- video panel (cold open) ---------- */
   .ah-video-wrap{padding:16px 20px 4px;border-bottom:1px solid var(--hairline);}
   .ah-video{
     position:relative;aspect-ratio:16/9;background:var(--sumi);overflow:hidden;cursor:pointer;
-    border:1px solid var(--hairline);
+    border:1px solid var(--hairline);margin-top:11px;
   }
   .ah-video::before{
     content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
@@ -115,11 +133,11 @@
   .ah-video-caption{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--stone);margin-top:8px;letter-spacing:.04em;}
   .ah-video-empty{
     aspect-ratio:16/9;border:1px dashed var(--hairline);display:flex;align-items:center;justify-content:center;
-    text-align:center;padding:16px;font-size:12px;color:var(--stone);font-style:italic;
+    text-align:center;padding:16px;font-size:12px;color:var(--stone);font-style:italic;margin-top:11px;
   }
 
   /* search / jump */
-  .ah-jump{position:relative;margin:0 20px 14px;}
+  .ah-jump{position:relative;margin:12px 20px 14px;}
   .ah-jump input{
     width:100%;padding:10px 12px;background:var(--washi-dim);border:1px solid var(--hairline);
     font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;color:var(--sumi);outline:none;
@@ -128,57 +146,59 @@
   .ah-jump input::placeholder{color:var(--stone);}
   .ah-jump input:focus{border-color:var(--hanko);}
 
-  /* tabs */
-  .ah-tabs{display:flex;gap:2px;margin:0 20px 4px;border-bottom:1px solid var(--hairline);}
-  .ah-tab{
-    flex:1;background:none;border:none;cursor:pointer;padding:9px 4px 11px;
-    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;
-    color:var(--stone);position:relative;transition:color .15s ease;
-  }
-  .ah-tab::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--hanko);
-    transform:scaleX(0);transition:transform .18s ease;}
-  .ah-tab[aria-selected="true"]{color:var(--sumi);font-weight:700;}
-  .ah-tab[aria-selected="true"]::after{transform:scaleX(1);}
-  .ah-tab:focus-visible{outline:2px solid var(--hanko);outline-offset:2px;}
-
-  /* member rows — fixed-height scrollable box */
+  /* member rows — fixed-height scrollable box, no layout-shift hover */
   .ah-members{
-    padding:6px 0 4px;height:236px;overflow-y:auto;
+    padding:2px 0 4px;height:248px;overflow-y:auto;
     scrollbar-width:thin;scrollbar-color:var(--hanko) var(--washi-dim);
   }
   .ah-members::-webkit-scrollbar{width:6px;}
   .ah-members::-webkit-scrollbar-track{background:var(--washi-dim);}
   .ah-members::-webkit-scrollbar-thumb{background:var(--hanko);}
   .ah-member{
-    display:flex;align-items:center;gap:12px;padding:11px 20px;border-left:3px solid transparent;
-    text-decoration:none;color:var(--sumi);transition:background-color .15s ease,border-color .15s ease,padding-left .15s ease;
+    position:relative;display:flex;align-items:center;gap:12px;padding:11px 20px 11px 23px;
+    text-decoration:none;color:var(--sumi);background-color:transparent;
+    transition:background-color .15s ease;
   }
-  .ah-member:hover{background:var(--washi-dim);border-left-color:var(--hanko);padding-left:23px;}
+  .ah-member::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--hanko);
+    opacity:0;transition:opacity .15s ease;
+  }
+  .ah-member:hover{background-color:var(--washi-dim);}
+  .ah-member:hover::before{opacity:1;}
   .ah-member:focus-visible{outline:2px solid var(--hanko);outline-offset:-2px;}
   .ah-mnum{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--stone);width:22px;flex-shrink:0;}
-  .ah-mavatar{width:32px;height:32px;object-fit:cover;background:var(--washi-dim);border:1px solid var(--hairline);flex-shrink:0;}
+  .ah-mavatar-wrap{position:relative;flex-shrink:0;}
+  .ah-mavatar{width:32px;height:32px;object-fit:cover;background:var(--washi-dim);border:1px solid var(--hairline);}
+  .ah-mavatar-init{width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho',serif;font-weight:700;font-size:13px;background:var(--washi-dim);border:1px solid var(--hairline);}
   .ah-mavatar-skel{width:32px;height:32px;flex-shrink:0;background:linear-gradient(90deg,var(--washi-dim) 25%,var(--hairline) 50%,var(--washi-dim) 75%);
     background-size:200% 100%;animation:ah-shimmer 1.3s ease-in-out infinite;}
   @keyframes ah-shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+  .ah-new-tag{
+    position:absolute;top:-6px;left:-6px;background:var(--hanko);color:var(--washi);
+    font-family:'JetBrains Mono',monospace;font-size:7px;font-weight:700;letter-spacing:.04em;
+    padding:1px 3px;transform:rotate(-10deg);
+  }
   .ah-mtext{min-width:0;flex:1;}
   .ah-mname{font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .ah-mtime{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--stone);margin-top:2px;}
   .ah-empty{padding:22px 20px;text-align:center;font-size:12.5px;color:var(--stone);font-style:italic;}
 
   /* stats footer strip */
-  .ah-stats{display:flex;border-top:1px solid var(--hairline);margin-top:8px;}
+  .ah-stats{display:flex;border-top:1px solid var(--hairline);}
   .ah-stat{flex:1;padding:14px 20px;}
   .ah-stat + .ah-stat{border-left:1px solid var(--hairline);}
   .ah-stat-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);}
   .ah-stat-value{font-family:'Shippori Mincho',serif;font-weight:700;font-size:19px;margin-top:5px;color:var(--sumi);}
 
-  /* links */
+  /* links — no layout-shift hover */
   .ah-links{padding:4px 0;border-top:1px solid var(--hairline);}
-  .ah-link{display:flex;align-items:center;gap:14px;padding:13px 20px;text-decoration:none;color:var(--sumi);
-    border-bottom:1px solid var(--hairline);transition:background-color .15s ease,color .15s ease,padding-left .15s ease;}
+  .ah-link{
+    position:relative;display:flex;align-items:center;gap:14px;padding:13px 20px;text-decoration:none;color:var(--sumi);
+    border-bottom:1px solid var(--hairline);background-color:transparent;transition:background-color .15s ease,color .15s ease;
+  }
   .ah-link:last-child{border-bottom:none;}
-  .ah-link:hover{background:var(--sumi);color:var(--washi);padding-left:24px;}
-  .ah-link:hover .ah-coord{color:var(--hanko);}
+  .ah-link:hover{background-color:var(--sumi);color:var(--washi);}
+  .ah-link:hover .ah-coord{color:var(--sakura);}
   .ah-link:hover .ah-arrow{border-color:var(--washi);}
   .ah-link:focus-visible{outline:2px solid var(--hanko);outline-offset:-2px;}
   .ah-coord{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--stone);width:22px;flex-shrink:0;transition:color .15s ease;}
@@ -195,6 +215,9 @@
 
   <div class="ah-header">
     <div class="ah-vol-tag">VOL. 01</div>
+    <span class="ah-petal p1"></span>
+    <span class="ah-petal p2"></span>
+    <span class="ah-petal p3"></span>
     <div class="ah-header-row">
       <img class="ah-crest" id="ahCrest" alt="Anime Haven crest"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -211,7 +234,12 @@
   </div>
 
   <a class="ah-owner" id="ahOwnerLink" href="https://www.chess.com/member/yogi136" target="_blank" rel="noopener">
-    <div class="ah-seal" id="ahSeal">A</div>
+    <div class="ah-owner-photo-wrap">
+      <img class="ah-owner-photo" id="ahOwnerPhoto" alt="yogi136" style="display:none;"
+        onerror="this.style.display='none'; document.getElementById('ahOwnerPhotoFallback').style.display='flex';">
+      <div class="ah-owner-photo-fallback" id="ahOwnerPhotoFallback">A</div>
+      <div class="ah-seal">誠</div>
+    </div>
     <div class="ah-owner-text">
       <span class="ah-owner-role">Founder's Seal</span>
       <div class="ah-owner-name" id="ahOwnerName">yogi136</div>
@@ -219,7 +247,10 @@
   </a>
 
   <div class="ah-video-wrap">
-    <div class="ah-eyebrow"><span>Cold Open</span></div>
+    <div class="ah-chapter" style="padding:0;">
+      <span class="ah-chapter-label">Cold Open</span>
+      <span class="ah-chapter-num">CH. 01</span>
+    </div>
     <div class="ah-video" id="ahVideo" style="display:none;" onclick="ahPlayVideo()">
       <span class="ah-video-tag">PV</span>
       <img id="ahVideoThumb" src="" alt="Club video thumbnail" loading="lazy">
@@ -229,14 +260,12 @@
     <div class="ah-video-caption">Anime Haven — Opening</div>
   </div>
 
-  <div class="ah-eyebrow" style="padding:16px 20px 0;"><span>New Recruits</span></div>
-  <div class="ah-tabs" role="tablist">
-    <button class="ah-tab" role="tab" data-tab="weekly" aria-selected="true">This Week</button>
-    <button class="ah-tab" role="tab" data-tab="monthly" aria-selected="false">This Month</button>
-    <button class="ah-tab" role="tab" data-tab="all_time" aria-selected="false">All-Time</button>
+  <div class="ah-chapter">
+    <span class="ah-chapter-label">Recently Joined</span>
+    <span class="ah-chapter-num">CH. 02</span>
   </div>
 
-  <div class="ah-jump" style="margin-top:12px;">
+  <div class="ah-jump">
     <input type="text" id="ahFilter" placeholder="Find a member…" autocomplete="off">
   </div>
 
@@ -288,28 +317,21 @@
   };
 
   // fallback data — mirrors the club's members endpoint shape, used if live fetch fails
-  var FALLBACK = {
-    weekly: [
-      { username: "yogi136", joined: 1777466298 }
-    ],
-    monthly: [
-      { username: "cuberx2", joined: 1777230348 },
-      { username: "delparco", joined: 1777809917 }
-    ],
-    all_time: [
-      { username: "aryanakbar", joined: 1775484258 },
-      { username: "charan_smaran", joined: 1777651198 },
-      { username: "chess_sky_chrome", joined: 1779278570 },
-      { username: "chientnhp", joined: 1780217252 },
-      { username: "chiruuuuu_6", joined: 1777221111 },
-      { username: "cleft_sovereign_chess", joined: 1777116059 },
-      { username: "da_dumpster", joined: 1775409544 }
-    ]
-  };
+  var FALLBACK_ALL_TIME = [
+    { username: "aryanakbar", joined: 1775484258 },
+    { username: "charan_smaran", joined: 1777651198 },
+    { username: "chess_sky_chrome", joined: 1779278570 },
+    { username: "chientnhp", joined: 1780217252 },
+    { username: "chiruuuuu_6", joined: 1777221111 },
+    { username: "cleft_sovereign_chess", joined: 1777116059 },
+    { username: "da_dumpster", joined: 1775409544 },
+    { username: "cuberx2", joined: 1777230348 },
+    { username: "delparco", joined: 1777809917 },
+    { username: "yogi136", joined: 1777466298 }
+  ];
 
   var state = {
-    activeTab: "weekly",
-    members: FALLBACK,
+    members: FALLBACK_ALL_TIME.slice(),
     avatars: {}, // username -> url | null (null = fetched, no avatar)
     filter: ""
   };
@@ -320,9 +342,9 @@
     statusText: document.getElementById("ahStatusText"),
     ownerLink: document.getElementById("ahOwnerLink"),
     ownerName: document.getElementById("ahOwnerName"),
-    seal: document.getElementById("ahSeal"),
+    ownerPhoto: document.getElementById("ahOwnerPhoto"),
+    ownerPhotoFallback: document.getElementById("ahOwnerPhotoFallback"),
     filter: document.getElementById("ahFilter"),
-    tabs: document.querySelectorAll(".ah-tab"),
     memberList: document.getElementById("ahMemberList"),
     statMembers: document.getElementById("ahStatMembers"),
     statAge: document.getElementById("ahStatAge"),
@@ -374,7 +396,8 @@
   }
 
   function renderMembers(){
-    var list = state.members[state.activeTab] || [];
+    // sort newest-joined first, so "recently joined" is always accurate regardless of API order
+    var list = state.members.slice().sort(function(a, b){ return b.joined - a.joined; });
     var q = state.filter.trim().toLowerCase();
     if (q) list = list.filter(function(m){ return m.username.toLowerCase().indexOf(q) !== -1; });
 
@@ -390,11 +413,12 @@
       var avatarHtml = avatarUrl
         ? '<img class="ah-mavatar" src="' + avatarUrl + '" alt="' + m.username + '" loading="lazy">'
         : (avatarUrl === null
-            ? '<div class="ah-mavatar" style="display:flex;align-items:center;justify-content:center;font-family:\'Shippori Mincho\',serif;font-weight:700;font-size:13px;">' + m.username.charAt(0).toUpperCase() + '</div>'
+            ? '<div class="ah-mavatar-init">' + m.username.charAt(0).toUpperCase() + '</div>'
             : '<div class="ah-mavatar-skel"></div>');
+      var newTag = (!q && i === 0) ? '<span class="ah-new-tag">NEW</span>' : '';
       html += '<a class="ah-member" href="https://www.chess.com/member/' + encodeURIComponent(m.username) + '" target="_blank" rel="noopener">' +
         '<span class="ah-mnum">№' + num + '</span>' +
-        avatarHtml +
+        '<div class="ah-mavatar-wrap">' + newTag + avatarHtml + '</div>' +
         '<div class="ah-mtext">' +
           '<div class="ah-mname">' + m.username + '</div>' +
           '<div class="ah-mtime">' + timeAgo(m.joined) + '</div>' +
@@ -436,24 +460,12 @@
     }
   }
 
-  function setTab(tab){
-    state.activeTab = tab;
-    el.tabs.forEach(function(btn){
-      btn.setAttribute("aria-selected", btn.dataset.tab === tab ? "true" : "false");
-    });
-    renderMembers();
-  }
-
-  el.tabs.forEach(function(btn){
-    btn.addEventListener("click", function(){ setTab(btn.dataset.tab); });
-  });
-
   el.filter.addEventListener("input", function(){
     state.filter = el.filter.value;
     renderMembers();
   });
 
-  el.seal.textContent = CONFIG.ownerUsername.charAt(0).toUpperCase();
+  el.ownerPhotoFallback.textContent = CONFIG.ownerUsername.charAt(0).toUpperCase();
 
   function applyProfile(profile){
     if (!profile) return;
@@ -467,11 +479,16 @@
     }
   }
 
-  function applyOwnerAvatar(){
+  function applyOwnerProfile(){
     fetch(cacheBust("https://api.chess.com/pub/player/" + encodeURIComponent(CONFIG.ownerUsername)))
       .then(function(r){ return r.ok ? r.json() : null; })
       .then(function(data){
         if (data && data.name) el.ownerName.textContent = data.name + " (" + CONFIG.ownerUsername + ")";
+        if (data && data.avatar) {
+          el.ownerPhoto.src = data.avatar;
+          el.ownerPhoto.style.display = "block";
+          el.ownerPhotoFallback.style.display = "none";
+        }
       })
       .catch(function(){});
   }
@@ -491,12 +508,8 @@
       var profile = results[0];
       var members = results[1];
       applyProfile(profile);
-      if (members && (members.weekly || members.monthly || members.all_time)){
-        state.members = {
-          weekly: members.weekly || [],
-          monthly: members.monthly || [],
-          all_time: members.all_time || []
-        };
+      if (members && members.all_time && members.all_time.length){
+        state.members = members.all_time;
       }
       renderMembers();
     }).catch(function(){
@@ -514,7 +527,7 @@
 
   renderMembers();
   fetchAll();
-  applyOwnerAvatar();
+  applyOwnerProfile();
   scheduleRefresh();
 })();
 </script>
