@@ -17,6 +17,7 @@
     --hanko:#B8232C;
     --hanko-dark:#8C1B22;
     --sakura:#E8A6AE;
+    --denki:#3FB6E0;
     --stone:#8B8172;
     --hairline:#DCD2B8;
   }
@@ -45,6 +46,9 @@
     background:repeating-conic-gradient(from 0deg, rgba(184,35,44,.18) 0deg 2deg, transparent 2deg 9deg);
     border-radius:50%;opacity:.7;
   }
+  .ah-burst{position:absolute;top:-18%;right:6%;width:110px;height:110px;pointer-events:none;
+    background:conic-gradient(from 0deg, var(--denki) 0deg 6deg, transparent 6deg 30deg);
+    opacity:.22;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);}
   .ah-petal{position:absolute;width:7px;height:7px;background:var(--sakura);opacity:.55;pointer-events:none;
     border-radius:70% 0 70% 0;animation:ah-drift 9s ease-in-out infinite;}
   .ah-petal.p1{top:14%;left:60%;animation-delay:0s;}
@@ -70,7 +74,7 @@
   }
   .ah-title-block{min-width:0;}
   .ah-title{font-family:'Shippori Mincho',serif;font-weight:800;font-size:23px;line-height:1.12;letter-spacing:.01em;
-    text-shadow:2px 2px 0 var(--hanko-dark);}
+    text-shadow:2px 2px 0 var(--hanko-dark), -1.5px -1.5px 0 rgba(63,182,224,.55);}
   .ah-subtitle{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--washi);opacity:.6;margin-top:5px;}
   .ah-status{position:relative;margin-top:15px;display:inline-flex;align-items:center;gap:7px;
     font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.85;}
@@ -215,6 +219,7 @@
 
   <div class="ah-header">
     <div class="ah-vol-tag">VOL. 01</div>
+    <span class="ah-burst"></span>
     <span class="ah-petal p1"></span>
     <span class="ah-petal p2"></span>
     <span class="ah-petal p3"></span>
@@ -262,7 +267,7 @@
 
   <div class="ah-chapter">
     <span class="ah-chapter-label">Recently Joined</span>
-    <span class="ah-chapter-num">CH. 02</span>
+    <span class="ah-chapter-num">TOP 30</span>
   </div>
 
   <div class="ah-jump">
@@ -397,7 +402,7 @@
 
   function renderMembers(){
     // sort newest-joined first, so "recently joined" is always accurate regardless of API order
-    var list = state.members.slice().sort(function(a, b){ return b.joined - a.joined; });
+    var list = state.members.slice().sort(function(a, b){ return b.joined - a.joined; }).slice(0, 30);
     var q = state.filter.trim().toLowerCase();
     if (q) list = list.filter(function(m){ return m.username.toLowerCase().indexOf(q) !== -1; });
 
