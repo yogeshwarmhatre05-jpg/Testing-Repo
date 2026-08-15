@@ -17,6 +17,7 @@
     --hanko-dark:#8C1B22;
     --stone:#8B8172;
     --hairline:#DCD2B8;
+    --indigo:#2F3E52;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   @media (prefers-reduced-motion: reduce){
@@ -24,29 +25,42 @@
   }
   body{background:var(--washi);font-family:'Zen Kaku Gothic New',sans-serif;color:var(--sumi);}
 
-  .ah-widget{width:100%;max-width:340px;background:var(--washi);border:1px solid var(--hairline);margin:0 auto;}
+  .ah-widget{width:100%;max-width:340px;background:var(--washi);border:1px solid var(--hairline);margin:0 auto;position:relative;}
 
-  /* ---------- header (cover panel) ---------- */
+  /* ---------- header (manga cover panel) ---------- */
   .ah-header{
     position:relative;background:var(--sumi);color:var(--washi);
-    padding:24px 20px 20px;overflow:hidden;
+    padding:26px 20px 22px;overflow:hidden;
   }
   .ah-header::before{
+    /* screentone dot texture */
     content:"";position:absolute;inset:0;pointer-events:none;
     background-image:radial-gradient(rgba(244,238,224,.5) 1px, transparent 1.4px);
     background-size:9px 9px;opacity:.08;
   }
-  .ah-header-row{position:relative;display:flex;align-items:center;gap:14px;}
-  .ah-crest{width:54px;height:54px;border:2px solid var(--washi);object-fit:cover;flex-shrink:0;display:block;}
+  .ah-header::after{
+    /* speed-line burst, manga action-panel motif */
+    content:"";position:absolute;top:-40%;right:-30%;width:220px;height:220px;pointer-events:none;
+    background:repeating-conic-gradient(from 0deg, rgba(184,35,44,.16) 0deg 2deg, transparent 2deg 9deg);
+    border-radius:50%;opacity:.7;
+  }
+  .ah-vol-tag{
+    position:absolute;top:0;right:0;background:var(--hanko);color:var(--washi);
+    font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;font-weight:600;
+    padding:5px 10px 5px 14px;clip-path:polygon(14px 0,100% 0,100% 100%,0 100%);
+  }
+  .ah-header-row{position:relative;display:flex;align-items:center;gap:14px;margin-top:6px;}
+  .ah-crest{width:56px;height:56px;border:2px solid var(--washi);object-fit:cover;flex-shrink:0;display:block;}
   .ah-crest-fallback{
-    width:54px;height:54px;border:2px solid var(--washi);flex-shrink:0;display:none;
+    width:56px;height:56px;border:2px solid var(--washi);flex-shrink:0;display:none;
     align-items:center;justify-content:center;font-family:'Shippori Mincho',serif;
-    font-weight:800;font-size:18px;letter-spacing:.02em;
+    font-weight:800;font-size:19px;letter-spacing:.02em;background:var(--sumi-soft);
   }
   .ah-title-block{min-width:0;}
-  .ah-title{font-family:'Shippori Mincho',serif;font-weight:800;font-size:22px;line-height:1.15;letter-spacing:.01em;}
-  .ah-subtitle{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--washi);opacity:.6;margin-top:4px;}
-  .ah-status{position:relative;margin-top:14px;display:inline-flex;align-items:center;gap:7px;
+  .ah-title{font-family:'Shippori Mincho',serif;font-weight:800;font-size:23px;line-height:1.12;letter-spacing:.01em;
+    text-shadow:2px 2px 0 var(--hanko-dark);}
+  .ah-subtitle{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--washi);opacity:.6;margin-top:5px;}
+  .ah-status{position:relative;margin-top:15px;display:inline-flex;align-items:center;gap:7px;
     font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.85;}
   .ah-status-dot{width:6px;height:6px;border-radius:50%;background:var(--hanko);display:inline-block;
     box-shadow:0 0 0 3px rgba(184,35,44,.18);}
@@ -71,6 +85,39 @@
   .ah-section{padding:16px 20px 6px;}
   .ah-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:11px;display:flex;align-items:center;justify-content:space-between;}
 
+  /* ---------- video panel (cold open) ---------- */
+  .ah-video-wrap{padding:16px 20px 4px;border-bottom:1px solid var(--hairline);}
+  .ah-video{
+    position:relative;aspect-ratio:16/9;background:var(--sumi);overflow:hidden;cursor:pointer;
+    border:1px solid var(--hairline);
+  }
+  .ah-video::before{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+    background-image:radial-gradient(rgba(244,238,224,.4) 1px, transparent 1.4px);
+    background-size:8px 8px;opacity:.07;
+  }
+  .ah-video-tag{
+    position:absolute;top:8px;left:0;z-index:3;background:var(--hanko);color:var(--washi);
+    font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;font-weight:600;
+    padding:4px 10px 4px 12px;clip-path:polygon(10px 0,100% 0,100% 100%,0 100%);
+  }
+  .ah-video img{width:100%;height:100%;object-fit:cover;display:block;opacity:.7;transition:opacity .2s ease,transform .3s ease;}
+  .ah-video:hover img{opacity:.5;transform:scale(1.03);}
+  .ah-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:1;}
+  .ah-play{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;
+    background:var(--hanko);display:flex;align-items:center;justify-content:center;z-index:3;
+    clip-path:polygon(8% 2%,92% 0%,100% 12%,97% 90%,90% 100%,10% 98%,0% 88%,3% 10%);
+    transition:transform .15s ease,background-color .15s ease;
+  }
+  .ah-video:hover .ah-play{background:var(--hanko-dark);transform:translate(-50%,-50%) scale(1.06);}
+  .ah-play svg{width:16px;height:16px;fill:var(--washi);margin-left:2px;}
+  .ah-video-caption{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--stone);margin-top:8px;letter-spacing:.04em;}
+  .ah-video-empty{
+    aspect-ratio:16/9;border:1px dashed var(--hairline);display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:16px;font-size:12px;color:var(--stone);font-style:italic;
+  }
+
   /* search / jump */
   .ah-jump{position:relative;margin:0 20px 14px;}
   .ah-jump input{
@@ -94,8 +141,14 @@
   .ah-tab[aria-selected="true"]::after{transform:scaleX(1);}
   .ah-tab:focus-visible{outline:2px solid var(--hanko);outline-offset:2px;}
 
-  /* member rows */
-  .ah-members{padding:6px 0 4px;}
+  /* member rows — fixed-height scrollable box */
+  .ah-members{
+    padding:6px 0 4px;height:236px;overflow-y:auto;
+    scrollbar-width:thin;scrollbar-color:var(--hanko) var(--washi-dim);
+  }
+  .ah-members::-webkit-scrollbar{width:6px;}
+  .ah-members::-webkit-scrollbar-track{background:var(--washi-dim);}
+  .ah-members::-webkit-scrollbar-thumb{background:var(--hanko);}
   .ah-member{
     display:flex;align-items:center;gap:12px;padding:11px 20px;border-left:3px solid transparent;
     text-decoration:none;color:var(--sumi);transition:background-color .15s ease,border-color .15s ease,padding-left .15s ease;
@@ -141,6 +194,7 @@
 <div class="ah-widget">
 
   <div class="ah-header">
+    <div class="ah-vol-tag">VOL. 01</div>
     <div class="ah-header-row">
       <img class="ah-crest" id="ahCrest" alt="Anime Haven crest"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -164,16 +218,28 @@
     </div>
   </a>
 
-  <div class="ah-jump">
-    <input type="text" id="ahFilter" placeholder="Find a member…" autocomplete="off">
+  <div class="ah-video-wrap">
+    <div class="ah-eyebrow"><span>Cold Open</span></div>
+    <div class="ah-video" id="ahVideo" style="display:none;" onclick="ahPlayVideo()">
+      <span class="ah-video-tag">PV</span>
+      <img id="ahVideoThumb" src="" alt="Club video thumbnail" loading="lazy">
+      <div class="ah-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    </div>
+    <div class="ah-video-empty" id="ahVideoEmpty">Add a video ID in CONFIG.videoId to show the club's opening here.</div>
+    <div class="ah-video-caption">Anime Haven — Opening</div>
   </div>
 
-  <div class="ah-eyebrow"><span>New Recruits</span></div>
+  <div class="ah-eyebrow" style="padding:16px 20px 0;"><span>New Recruits</span></div>
   <div class="ah-tabs" role="tablist">
     <button class="ah-tab" role="tab" data-tab="weekly" aria-selected="true">This Week</button>
     <button class="ah-tab" role="tab" data-tab="monthly" aria-selected="false">This Month</button>
     <button class="ah-tab" role="tab" data-tab="all_time" aria-selected="false">All-Time</button>
   </div>
+
+  <div class="ah-jump" style="margin-top:12px;">
+    <input type="text" id="ahFilter" placeholder="Find a member…" autocomplete="off">
+  </div>
+
   <div class="ah-members" id="ahMemberList"></div>
 
   <div class="ah-stats">
@@ -217,7 +283,8 @@
     ownerUsername: "yogi136",
     useLiveApi: true,
     refreshMs: 5 * 60 * 1000,
-    avatarConcurrency: 4
+    avatarConcurrency: 4,
+    videoId: ""   // <-- put a YouTube video ID here, e.g. "dQw4w9WgXcQ", to show the club's opening video
   };
 
   // fallback data — mirrors the club's members endpoint shape, used if live fetch fails
@@ -259,7 +326,27 @@
     memberList: document.getElementById("ahMemberList"),
     statMembers: document.getElementById("ahStatMembers"),
     statAge: document.getElementById("ahStatAge"),
-    linkLeaderboard: document.getElementById("ahLinkLeaderboard")
+    linkLeaderboard: document.getElementById("ahLinkLeaderboard"),
+    video: document.getElementById("ahVideo"),
+    videoThumb: document.getElementById("ahVideoThumb"),
+    videoEmpty: document.getElementById("ahVideoEmpty")
+  };
+
+  // ---- video (cold open) ----
+  if (CONFIG.videoId) {
+    el.video.style.display = "";
+    el.videoEmpty.style.display = "none";
+    el.videoThumb.src = "https://img.youtube.com/vi/" + CONFIG.videoId + "/hqdefault.jpg";
+  }
+  window.ahPlayVideo = function(){
+    if (!CONFIG.videoId) return;
+    var iframe = document.createElement("iframe");
+    iframe.src = "https://www.youtube.com/embed/" + CONFIG.videoId + "?autoplay=1&rel=0";
+    iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+    iframe.setAttribute("allowfullscreen", "");
+    el.video.innerHTML = "";
+    el.video.appendChild(iframe);
+    el.video.onclick = null;
   };
 
   function timeAgo(unixSeconds){
