@@ -510,4 +510,61 @@ function setStatError(){
   el.classList.add("is-empty");
 }
 
-async functi
+async function loadRosterAndStats(){
+  const rosterEl = document.getElementById("rosterList");
+  rosterEl.innerHTML = '<div class="list-skeleton">Fetching newest members…</div>';
+  profileCache.clear();
+  statsCache.clear();
+
+  const live = await fetchJSON(`${CONFIG.API_BASE}/club/${CONFIG.CLUB_SLUG}/members`);
+  const usedFallback = !live;
+  const members = live || PLACEHOLDER_MEMBERS;
+
+  const all = [...(members.weekly||[]), ...(members.monthly||[]), ...(members.all_time||[])];
+  const seen = new Set();
+  const merged = [];
+  all.forEach(m => { if(!seen.has(m.username)){ seen.add(m.username); merged.push(m); } });
+  merged.sort((a,b) => (b.joined||0) - (a.joined||0));
+
+  if(!merged.length){
+    if(usedFallback){ renderRosterError(); } else { renderRoster([]); }
+    setStatError();
+    return;
+  }
+
+  // -------- Recently joined (cached profile fetch shared with ratings) --------
+  const recent = merged.slice(0, CONFIG.ROSTER_COUNT);
+  const rosterRows = await mapLimit(recent, CONFIG.FETCH_CONCURRENCY, async (m) => {
+    const profile = await fetchPlayerCached(m.username);
+    return { username: m.username, joined: m.joined, avatar: profile && profile.avatar };
+  });
+  renderRoster(rosterRows);
+
+  // -------- Top rating, sampled from the same pool --------
+  const sample = merged.slice(0, CONFIG.MEMBER_SAMPLE_SIZE);
+  const ratings = await mapLimit(sample, CONFIG.FETCH_CONCURRENCY, async (m) => {
+    const stats = await fetchStatsCached(m.username);
+    return bestRating(stats);
+  });
+  const top = Math.max(0, ...ratings);
+  const ratingEl = document.getElementById("statTopRating");
+  if(top > 0){
+    ratingEl.textContent = top;
+    ratingEl.classList.remove("is-empty");
+  }else{
+    setStatError();
+  }
+}
+
+/* ==================================================================
+   INIT
+================================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  loadClubInfo();
+  loadLeader(CONFIG.OWNER_USERNAME, "ownerAvatar", "ownerName", "ownerLink");
+  loadLeader(CONFIG.CO_OWNER_USERNAME, "coOwnerAvatar", "coOwnerName", "coOwnerLink");
+  loadRosterAndStats();
+});
+</script>
+</body>
+</html>
