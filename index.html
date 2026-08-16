@@ -3,307 +3,290 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anime Haven — Club Sidebar</title>
+<title>GENGAR — Club Sidebar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --washi:#F4EEE0;
-    --washi-dim:#ECE4D2;
-    --sumi:#1C1814;
-    --sumi-soft:#2B241D;
-    --indigo:#2F3E52;
-    --hanko:#B8232C;
-    --hanko-dark:#8C1B22;
-    --sakura:#E8A6AE;
-    --denki:#3FB6E0;
-    --stone:#8B8172;
-    --hairline:#DCD2B8;
+    --gb0:#0F380F;   /* darkest — panel/bg */
+    --gb1:#1C4E1C;   /* dark — hairlines, secondary panel */
+    --gb2:#5A8F3B;   /* mid — muted text, icons */
+    --gb3:#9BBC0F;   /* lightest — screen glow, headline text */
+    --gb-screen:#C4D89A; /* body panel "LCD" tint */
+    --ink:#0F380F;
+    --paper:#DDE8C4;
+    --danger:#8B2E2E;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   @media (prefers-reduced-motion: reduce){
     *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
   }
-  body{background:var(--washi);font-family:'Zen Kaku Gothic New',sans-serif;color:var(--sumi);}
+  body{background:var(--gb-screen);font-family:'Inter',sans-serif;color:var(--ink);}
 
-  .ah-widget{width:100%;max-width:340px;background:var(--washi);border:1px solid var(--hairline);margin:0 auto;position:relative;}
+  .gg-widget{width:100%;max-width:340px;background:var(--gb-screen);margin:0 auto;position:relative;
+    box-shadow:0 0 0 3px var(--gb0), 0 0 0 6px var(--gb2);}
 
-  /* ---------- header (manga cover panel) ---------- */
-  .ah-header{
-    position:relative;color:var(--washi);padding:26px 20px 22px;overflow:hidden;
-    background:linear-gradient(150deg, var(--sumi) 0%, var(--sumi) 55%, var(--indigo) 130%);
+  /* ---------- header: DMG screen ---------- */
+  .gg-header{
+    position:relative;color:var(--gb3);padding:24px 20px 20px;overflow:hidden;background:var(--gb0);
   }
-  .ah-header::before{
-    /* screentone dot texture */
+  .gg-header::before{
+    /* dither / halftone noise */
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:
+      radial-gradient(var(--gb1) 1px, transparent 1.2px);
+    background-size:4px 4px;background-position:0 0;
+    mix-blend-mode:overlay;
+  }
+  .gg-header::after{
+    /* scanlines */
     content:"";position:absolute;inset:0;pointer-events:none;
-    background-image:radial-gradient(rgba(244,238,224,.5) 1px, transparent 1.4px);
-    background-size:9px 9px;opacity:.08;
+    background:repeating-linear-gradient(0deg, rgba(0,0,0,.22) 0px, rgba(0,0,0,.22) 1px, transparent 1px, transparent 3px);
   }
-  .ah-header::after{
-    /* speed-line burst, manga action-panel motif */
-    content:"";position:absolute;top:-40%;right:-30%;width:220px;height:220px;pointer-events:none;
-    background:repeating-conic-gradient(from 0deg, rgba(184,35,44,.18) 0deg 2deg, transparent 2deg 9deg);
-    border-radius:50%;opacity:.7;
+  .gg-phase{
+    position:absolute;width:150px;height:150px;top:-30px;right:-40px;pointer-events:none;
+    background:
+      radial-gradient(circle at 35% 30%, var(--gb2) 0 18%, transparent 19%),
+      radial-gradient(circle at 62% 55%, var(--gb2) 0 26%, transparent 27%),
+      radial-gradient(circle at 40% 70%, var(--gb2) 0 14%, transparent 15%);
+    filter: blur(.4px) contrast(1.6);
+    opacity:.16;border-radius:44% 56% 60% 40% / 50% 45% 55% 50%;
+    animation:gg-drift 11s ease-in-out infinite;
   }
-  .ah-burst{position:absolute;top:-18%;right:6%;width:110px;height:110px;pointer-events:none;
-    background:conic-gradient(from 0deg, var(--denki) 0deg 6deg, transparent 6deg 30deg);
-    opacity:.22;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);}
-  .ah-petal{position:absolute;width:7px;height:7px;background:var(--sakura);opacity:.55;pointer-events:none;
-    border-radius:70% 0 70% 0;animation:ah-drift 9s ease-in-out infinite;}
-  .ah-petal.p1{top:14%;left:60%;animation-delay:0s;}
-  .ah-petal.p2{top:34%;left:78%;animation-delay:2.4s;width:5px;height:5px;}
-  .ah-petal.p3{top:58%;left:68%;animation-delay:4.8s;width:6px;height:6px;}
-  @keyframes ah-drift{
-    0%{transform:translateY(0) rotate(0deg);opacity:0;}
-    15%{opacity:.55;}
-    85%{opacity:.35;}
-    100%{transform:translateY(38px) rotate(60deg);opacity:0;}
+  @keyframes gg-drift{
+    0%,100%{transform:translate(0,0) scale(1);opacity:.10;}
+    50%{transform:translate(-14px,10px) scale(1.08);opacity:.22;}
   }
-  .ah-vol-tag{
-    position:absolute;top:0;right:0;background:var(--hanko);color:var(--washi);
-    font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;font-weight:600;
-    padding:5px 10px 5px 14px;clip-path:polygon(14px 0,100% 0,100% 100%,0 100%);
+  .gg-led{position:absolute;top:14px;left:16px;width:7px;height:7px;background:var(--danger);
+    box-shadow:0 0 0 2px var(--gb1), 0 0 4px 1px rgba(139,46,46,.7);animation:gg-blink 2.6s ease-in-out infinite;}
+  @keyframes gg-blink{0%,100%{opacity:1;}50%{opacity:.35;}}
+  .gg-cart-tag{
+    position:absolute;top:0;right:0;background:var(--gb2);color:var(--gb0);
+    font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:0;
+    padding:6px 10px;
   }
-  .ah-header-row{position:relative;display:flex;align-items:center;gap:14px;margin-top:6px;}
-  .ah-crest{width:56px;height:56px;border:2px solid var(--washi);object-fit:cover;flex-shrink:0;display:block;}
-  .ah-crest-fallback{
-    width:56px;height:56px;border:2px solid var(--washi);flex-shrink:0;display:none;
-    align-items:center;justify-content:center;font-family:'Shippori Mincho',serif;
-    font-weight:800;font-size:19px;letter-spacing:.02em;background:var(--sumi-soft);
+  .gg-header-row{position:relative;display:flex;align-items:center;gap:14px;margin-top:16px;}
+  .gg-crest{width:52px;height:52px;object-fit:cover;flex-shrink:0;display:block;
+    image-rendering:pixelated;box-shadow:0 0 0 2px var(--gb0), 0 0 0 4px var(--gb3);}
+  .gg-crest-fallback{
+    width:52px;height:52px;flex-shrink:0;display:none;align-items:center;justify-content:center;
+    font-family:'VT323',monospace;font-weight:400;font-size:26px;background:var(--gb1);color:var(--gb3);
+    box-shadow:0 0 0 2px var(--gb0), 0 0 0 4px var(--gb3);
   }
-  .ah-title-block{min-width:0;}
-  .ah-title{font-family:'Shippori Mincho',serif;font-weight:800;font-size:23px;line-height:1.12;letter-spacing:.01em;
-    text-shadow:2px 2px 0 var(--hanko-dark), -1.5px -1.5px 0 rgba(63,182,224,.55);}
-  .ah-subtitle{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--washi);opacity:.6;margin-top:5px;}
-  .ah-status{position:relative;margin-top:15px;display:inline-flex;align-items:center;gap:7px;
-    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.85;}
-  .ah-status-dot{width:6px;height:6px;border-radius:50%;background:var(--hanko);display:inline-block;
-    box-shadow:0 0 0 3px rgba(184,35,44,.18);}
+  .gg-title-block{min-width:0;}
+  .gg-title{font-family:'VT323',monospace;font-size:34px;line-height:1;letter-spacing:.03em;
+    text-shadow:0 0 6px rgba(155,188,15,.55);}
+  .gg-subtitle{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gb2);margin-top:5px;}
+  .gg-status{position:relative;margin-top:15px;display:flex;align-items:center;gap:7px;
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gb2);}
+  .gg-status-dot{width:6px;height:6px;background:var(--gb3);display:inline-block;
+    box-shadow:0 0 0 2px rgba(155,188,15,.18);flex-shrink:0;}
 
-  /* ---------- owner strip w/ real photo + hanko badge ---------- */
-  .ah-owner{display:flex;align-items:center;gap:14px;padding:15px 20px;border-bottom:1px solid var(--hairline);
-    text-decoration:none;color:var(--sumi);transition:background-color .15s ease;}
-  .ah-owner:hover{background:var(--washi-dim);}
-  .ah-owner-photo-wrap{position:relative;flex-shrink:0;width:46px;height:46px;}
-  .ah-owner-photo{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--hairline);display:block;background:var(--washi-dim);}
-  .ah-owner-photo-fallback{
-    width:46px;height:46px;border-radius:50%;border:2px solid var(--hairline);background:var(--washi-dim);
-    display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho',serif;font-weight:800;font-size:16px;color:var(--sumi);
+  /* ---------- owner strip ---------- */
+  .gg-owner{display:flex;align-items:center;gap:14px;padding:15px 20px;border-bottom:2px solid var(--gb0);
+    text-decoration:none;color:var(--ink);background:var(--paper);transition:background-color .12s ease;}
+  .gg-owner:hover{background:#cfdcae;}
+  .gg-owner-photo-wrap{position:relative;flex-shrink:0;width:44px;height:44px;}
+  .gg-owner-photo{width:44px;height:44px;object-fit:cover;display:block;background:var(--gb-screen);
+    image-rendering:pixelated;box-shadow:0 0 0 2px var(--gb0);}
+  .gg-owner-photo-fallback{
+    width:44px;height:44px;background:var(--gb-screen);box-shadow:0 0 0 2px var(--gb0);
+    display:flex;align-items:center;justify-content:center;font-family:'VT323',monospace;font-size:22px;color:var(--gb0);
   }
-  .ah-seal{
-    position:absolute;bottom:-4px;right:-6px;width:22px;height:22px;background:var(--hanko);
-    color:var(--washi);display:flex;align-items:center;justify-content:center;
-    font-family:'Shippori Mincho',serif;font-weight:800;font-size:10px;
-    clip-path:polygon(8% 2%,92% 0%,100% 12%,97% 90%,90% 100%,10% 98%,0% 88%,3% 10%);
-    transform:rotate(-8deg);border:2px solid var(--washi);
+  .gg-owner-badge{
+    position:absolute;bottom:-5px;right:-7px;background:var(--gb0);color:var(--gb3);
+    font-family:'Press Start 2P',monospace;font-size:6px;padding:2px 3px;box-shadow:0 0 0 2px var(--paper);
   }
-  .ah-owner-text{min-width:0;}
-  .ah-owner-role{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--hanko);display:block;}
-  .ah-owner-name{font-weight:700;font-size:14px;margin-top:2px;}
+  .gg-owner-text{min-width:0;}
+  .gg-owner-role{font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:.02em;color:var(--danger);display:block;}
+  .gg-owner-name{font-weight:700;font-size:14px;margin-top:5px;font-family:'Inter',sans-serif;}
 
-  /* ---------- section headers (chapter marks) ---------- */
-  .ah-chapter{padding:16px 20px 0;display:flex;align-items:baseline;justify-content:space-between;}
-  .ah-chapter-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);}
-  .ah-chapter-num{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--sakura);background:var(--sumi);padding:2px 6px;}
+  /* ---------- section headers (menu cursor) ---------- */
+  .gg-menu-head{padding:16px 20px 0;display:flex;align-items:baseline;justify-content:space-between;}
+  .gg-menu-label{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.05em;color:var(--gb0);}
+  .gg-menu-label::before{content:"▶ ";color:var(--danger);}
+  .gg-menu-tag{font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:0;color:var(--gb2);}
 
-  /* ---------- video panel (cold open) ---------- */
-  .ah-video-wrap{padding:16px 20px 4px;border-bottom:1px solid var(--hairline);}
-  .ah-video{
-    position:relative;aspect-ratio:16/9;background:var(--sumi);overflow:hidden;cursor:pointer;
-    border:1px solid var(--hairline);margin-top:11px;
+  /* ---------- video panel ---------- */
+  .gg-video-wrap{padding:16px 20px 4px;border-bottom:2px solid var(--gb0);background:var(--paper);}
+  .gg-video{
+    position:relative;aspect-ratio:16/9;background:var(--gb0);overflow:hidden;cursor:pointer;
+    margin-top:11px;box-shadow:0 0 0 2px var(--gb0), 0 0 0 4px var(--gb2);
   }
-  .ah-video::before{
-    content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
-    background-image:radial-gradient(rgba(244,238,224,.4) 1px, transparent 1.4px);
-    background-size:8px 8px;opacity:.07;
+  .gg-video img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.15) brightness(.85);
+    opacity:.85;transition:opacity .2s ease,transform .3s ease;image-rendering:pixelated;}
+  .gg-video:hover img{opacity:.65;transform:scale(1.03);}
+  .gg-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:1;}
+  .gg-play{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:0;height:0;z-index:3;
+    border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:20px solid var(--gb3);
+    filter:drop-shadow(0 0 4px rgba(155,188,15,.6));transition:transform .15s ease;
   }
-  .ah-video-tag{
-    position:absolute;top:8px;left:0;z-index:3;background:var(--hanko);color:var(--washi);
-    font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;font-weight:600;
-    padding:4px 10px 4px 12px;clip-path:polygon(10px 0,100% 0,100% 100%,0 100%);
-  }
-  .ah-video img{width:100%;height:100%;object-fit:cover;display:block;opacity:.7;transition:opacity .2s ease,transform .3s ease;}
-  .ah-video:hover img{opacity:.5;transform:scale(1.03);}
-  .ah-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:1;}
-  .ah-play{
-    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;
-    background:var(--hanko);display:flex;align-items:center;justify-content:center;z-index:3;
-    clip-path:polygon(8% 2%,92% 0%,100% 12%,97% 90%,90% 100%,10% 98%,0% 88%,3% 10%);
-    transition:transform .15s ease,background-color .15s ease;
-  }
-  .ah-video:hover .ah-play{background:var(--hanko-dark);transform:translate(-50%,-50%) scale(1.06);}
-  .ah-play svg{width:16px;height:16px;fill:var(--washi);margin-left:2px;}
-  .ah-video-caption{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--stone);margin-top:8px;letter-spacing:.04em;}
-  .ah-video-empty{
-    aspect-ratio:16/9;border:1px dashed var(--hairline);display:flex;align-items:center;justify-content:center;
-    text-align:center;padding:16px;font-size:12px;color:var(--stone);font-style:italic;margin-top:11px;
+  .gg-video:hover .gg-play{transform:translate(-50%,-50%) scale(1.1);}
+  .gg-video-caption{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--gb2);margin-top:8px;letter-spacing:.03em;}
+  .gg-video-empty{
+    aspect-ratio:16/9;border:2px dashed var(--gb1);display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gb2);margin-top:11px;
   }
 
   /* search / jump */
-  .ah-jump{position:relative;margin:12px 20px 14px;}
-  .ah-jump input{
-    width:100%;padding:10px 12px;background:var(--washi-dim);border:1px solid var(--hairline);
-    font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;color:var(--sumi);outline:none;
-    transition:border-color .15s ease;
+  .gg-jump{position:relative;margin:12px 20px 14px;background:var(--paper);padding-bottom:2px;}
+  .gg-jump input{
+    width:100%;padding:10px 12px;background:var(--gb-screen);border:none;
+    box-shadow:0 0 0 2px var(--gb0);font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--ink);outline:none;
   }
-  .ah-jump input::placeholder{color:var(--stone);}
-  .ah-jump input:focus{border-color:var(--hanko);}
+  .gg-jump input::placeholder{color:var(--gb2);}
+  .gg-jump input:focus{box-shadow:0 0 0 2px var(--danger);}
+  .gg-jump-hint{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gb2);margin-top:6px;letter-spacing:.03em;}
 
-  /* member rows — fixed-height scrollable box, no layout-shift hover */
-  .ah-members{
-    padding:2px 0 4px;height:248px;overflow-y:auto;
-    scrollbar-width:thin;scrollbar-color:var(--hanko) var(--washi-dim);
+  /* member rows */
+  .gg-members{
+    padding:2px 0 4px;height:248px;overflow-y:auto;background:var(--paper);
+    scrollbar-width:thin;scrollbar-color:var(--gb0) var(--paper);
   }
-  .ah-members::-webkit-scrollbar{width:6px;}
-  .ah-members::-webkit-scrollbar-track{background:var(--washi-dim);}
-  .ah-members::-webkit-scrollbar-thumb{background:var(--hanko);}
-  .ah-member{
-    position:relative;display:flex;align-items:center;gap:12px;padding:11px 20px 11px 23px;
-    text-decoration:none;color:var(--sumi);background-color:transparent;
-    transition:background-color .15s ease;
+  .gg-members::-webkit-scrollbar{width:6px;}
+  .gg-members::-webkit-scrollbar-track{background:var(--paper);}
+  .gg-members::-webkit-scrollbar-thumb{background:var(--gb0);}
+  .gg-member{
+    position:relative;display:flex;align-items:center;gap:12px;padding:10px 20px 10px 16px;
+    text-decoration:none;color:var(--ink);background-color:transparent;
   }
-  .ah-member::before{
-    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--hanko);
-    opacity:0;transition:opacity .15s ease;
+  .gg-member::before{content:"▶";position:absolute;left:4px;top:50%;transform:translateY(-50%);
+    color:var(--danger);font-size:11px;opacity:0;}
+  .gg-member:hover{background-color:#cfdcae;}
+  .gg-member:hover::before{opacity:1;}
+  .gg-member:focus-visible{outline:2px solid var(--danger);outline-offset:-2px;}
+  .gg-mnum{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gb2);width:20px;flex-shrink:0;}
+  .gg-mavatar-wrap{position:relative;flex-shrink:0;}
+  .gg-mavatar{width:30px;height:30px;object-fit:cover;background:var(--gb-screen);box-shadow:0 0 0 2px var(--gb0);image-rendering:pixelated;}
+  .gg-mavatar-init{width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-family:'VT323',monospace;font-size:16px;background:var(--gb-screen);box-shadow:0 0 0 2px var(--gb0);color:var(--gb0);}
+  .gg-mavatar-skel{width:30px;height:30px;flex-shrink:0;background:linear-gradient(90deg,var(--gb-screen) 25%,#c3d1a1 50%,var(--gb-screen) 75%);
+    background-size:200% 100%;animation:gg-shimmer 1.3s ease-in-out infinite;box-shadow:0 0 0 2px var(--gb0);}
+  @keyframes gg-shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+  .gg-new-tag{
+    position:absolute;top:-6px;left:-6px;background:var(--danger);color:var(--paper);
+    font-family:'Press Start 2P',monospace;font-size:6px;padding:2px 3px;
   }
-  .ah-member:hover{background-color:var(--washi-dim);}
-  .ah-member:hover::before{opacity:1;}
-  .ah-member:focus-visible{outline:2px solid var(--hanko);outline-offset:-2px;}
-  .ah-mnum{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--stone);width:22px;flex-shrink:0;}
-  .ah-mavatar-wrap{position:relative;flex-shrink:0;}
-  .ah-mavatar{width:32px;height:32px;object-fit:cover;background:var(--washi-dim);border:1px solid var(--hairline);}
-  .ah-mavatar-init{width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-family:'Shippori Mincho',serif;font-weight:700;font-size:13px;background:var(--washi-dim);border:1px solid var(--hairline);}
-  .ah-mavatar-skel{width:32px;height:32px;flex-shrink:0;background:linear-gradient(90deg,var(--washi-dim) 25%,var(--hairline) 50%,var(--washi-dim) 75%);
-    background-size:200% 100%;animation:ah-shimmer 1.3s ease-in-out infinite;}
-  @keyframes ah-shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
-  .ah-new-tag{
-    position:absolute;top:-6px;left:-6px;background:var(--hanko);color:var(--washi);
-    font-family:'JetBrains Mono',monospace;font-size:7px;font-weight:700;letter-spacing:.04em;
-    padding:1px 3px;transform:rotate(-10deg);
-  }
-  .ah-mtext{min-width:0;flex:1;}
-  .ah-mname{font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .ah-mtime{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--stone);margin-top:2px;}
-  .ah-empty{padding:22px 20px;text-align:center;font-size:12.5px;color:var(--stone);font-style:italic;}
+  .gg-mtext{min-width:0;flex:1;}
+  .gg-mname{font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .gg-mtime{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gb2);margin-top:2px;}
+  .gg-empty{padding:22px 20px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gb2);}
 
   /* stats footer strip */
-  .ah-stats{display:flex;border-top:1px solid var(--hairline);}
-  .ah-stat{flex:1;padding:14px 20px;}
-  .ah-stat + .ah-stat{border-left:1px solid var(--hairline);}
-  .ah-stat-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);}
-  .ah-stat-value{font-family:'Shippori Mincho',serif;font-weight:700;font-size:19px;margin-top:5px;color:var(--sumi);}
+  .gg-stats{display:flex;border-top:2px solid var(--gb0);background:var(--gb0);}
+  .gg-stat{flex:1;padding:14px 20px;}
+  .gg-stat + .gg-stat{border-left:2px solid var(--gb1);}
+  .gg-stat-label{font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:0;color:var(--gb2);}
+  .gg-stat-value{font-family:'VT323',monospace;font-size:26px;margin-top:6px;color:var(--gb3);text-shadow:0 0 6px rgba(155,188,15,.4);}
 
-  /* links — no layout-shift hover */
-  .ah-links{padding:4px 0;border-top:1px solid var(--hairline);}
-  .ah-link{
-    position:relative;display:flex;align-items:center;gap:14px;padding:13px 20px;text-decoration:none;color:var(--sumi);
-    border-bottom:1px solid var(--hairline);background-color:transparent;transition:background-color .15s ease,color .15s ease;
+  /* links — menu list */
+  .gg-links{padding:0;border-top:2px solid var(--gb0);}
+  .gg-link{
+    position:relative;display:flex;align-items:center;gap:14px;padding:13px 20px 13px 24px;text-decoration:none;color:var(--paper);
+    border-bottom:1px solid var(--gb1);background-color:var(--gb0);transition:background-color .12s ease;
   }
-  .ah-link:last-child{border-bottom:none;}
-  .ah-link:hover{background-color:var(--sumi);color:var(--washi);}
-  .ah-link:hover .ah-coord{color:var(--sakura);}
-  .ah-link:hover .ah-arrow{border-color:var(--washi);}
-  .ah-link:focus-visible{outline:2px solid var(--hanko);outline-offset:-2px;}
-  .ah-coord{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--stone);width:22px;flex-shrink:0;transition:color .15s ease;}
-  .ah-link-label{font-weight:500;font-size:14px;flex:1;}
-  .ah-arrow{width:7px;height:7px;border-top:1.5px solid var(--sumi);border-right:1.5px solid var(--sumi);transform:rotate(45deg);flex-shrink:0;transition:border-color .15s ease;}
+  .gg-link:last-child{border-bottom:none;}
+  .gg-link:hover{background-color:var(--gb1);}
+  .gg-link:hover .gg-cursor{opacity:1;}
+  .gg-link:focus-visible{outline:2px solid var(--gb3);outline-offset:-2px;}
+  .gg-cursor{position:absolute;left:8px;color:var(--gb3);font-size:11px;opacity:0;transition:opacity .12s ease;}
+  .gg-link-label{font-weight:500;font-size:14px;flex:1;font-family:'Inter',sans-serif;}
+  .gg-link-key{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gb2);}
 
-  .ah-footer{padding:12px 20px;text-align:center;}
-  .ah-footer-text{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);}
+  .gg-footer{padding:12px 20px;text-align:center;background:var(--gb-screen);}
+  .gg-footer-text{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;color:var(--gb1);}
 </style>
 </head>
 <body>
 
-<div class="ah-widget">
+<div class="gg-widget">
 
-  <div class="ah-header">
-    <div class="ah-vol-tag">VOL. 01</div>
-    <span class="ah-burst"></span>
-    <span class="ah-petal p1"></span>
-    <span class="ah-petal p2"></span>
-    <span class="ah-petal p3"></span>
-    <div class="ah-header-row">
-      <img class="ah-crest" id="ahCrest" alt="Anime Haven crest"
+  <div class="gg-header">
+    <span class="gg-led"></span>
+    <div class="gg-cart-tag">HQ</div>
+    <span class="gg-phase"></span>
+    <div class="gg-header-row">
+      <img class="gg-crest" id="ggCrest" alt="GENGAR club crest"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-      <div class="ah-crest-fallback" id="ahCrestFallback">AH</div>
-      <div class="ah-title-block">
-        <div class="ah-title">Anime Haven</div>
-        <div class="ah-subtitle">Chess.com Club</div>
+      <div class="gg-crest-fallback" id="ggCrestFallback">G</div>
+      <div class="gg-title-block">
+        <div class="gg-title">GENGAR</div>
+        <div class="gg-subtitle">Chess.com Club · Nexus Void HQ</div>
       </div>
     </div>
-    <div class="ah-status">
-      <span class="ah-status-dot"></span>
-      <span id="ahStatusText">Loading dojo…</span>
+    <div class="gg-status">
+      <span class="gg-status-dot"></span>
+      <span id="ggStatusText">Connecting…</span>
     </div>
   </div>
 
-  <a class="ah-owner" id="ahOwnerLink" href="https://www.chess.com/member/yogi136" target="_blank" rel="noopener">
-    <div class="ah-owner-photo-wrap">
-      <img class="ah-owner-photo" id="ahOwnerPhoto" alt="yogi136" style="display:none;"
-        onerror="this.style.display='none'; document.getElementById('ahOwnerPhotoFallback').style.display='flex';">
-      <div class="ah-owner-photo-fallback" id="ahOwnerPhotoFallback">A</div>
-      <div class="ah-seal">誠</div>
+  <a class="gg-owner" id="ggOwnerLink" href="https://www.chess.com/member/yogi136" target="_blank" rel="noopener">
+    <div class="gg-owner-photo-wrap">
+      <img class="gg-owner-photo" id="ggOwnerPhoto" alt="yogi136" style="display:none;"
+        onerror="this.style.display='none'; document.getElementById('ggOwnerPhotoFallback').style.display='flex';">
+      <div class="gg-owner-photo-fallback" id="ggOwnerPhotoFallback">Y</div>
+      <div class="gg-owner-badge">SA</div>
     </div>
-    <div class="ah-owner-text">
-      <span class="ah-owner-role">Founder's Seal</span>
-      <div class="ah-owner-name" id="ahOwnerName">yogi136</div>
+    <div class="gg-owner-text">
+      <span class="gg-owner-role">Super Admin</span>
+      <div class="gg-owner-name" id="ggOwnerName">yogi136</div>
     </div>
   </a>
 
-  <div class="ah-video-wrap">
-    <div class="ah-chapter" style="padding:0;">
-      <span class="ah-chapter-label">Cold Open</span>
-      <span class="ah-chapter-num">CH. 01</span>
+  <div class="gg-video-wrap">
+    <div class="gg-menu-head" style="padding:0;">
+      <span class="gg-menu-label">INTRO.MOV</span>
+      <span class="gg-menu-tag">01</span>
     </div>
-    <div class="ah-video" id="ahVideo" style="display:none;" onclick="ahPlayVideo()">
-      <span class="ah-video-tag">PV</span>
-      <img id="ahVideoThumb" src="" alt="Club video thumbnail" loading="lazy">
-      <div class="ah-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="gg-video" id="ggVideo" style="display:none;" onclick="ggPlayVideo()">
+      <img id="ggVideoThumb" src="" alt="Club video thumbnail" loading="lazy">
+      <div class="gg-play"></div>
     </div>
-    <div class="ah-video-empty" id="ahVideoEmpty">Add a video ID in CONFIG.videoId to show the club's opening here.</div>
-    <div class="ah-video-caption">Anime Haven — Opening</div>
+    <div class="gg-video-empty" id="ggVideoEmpty">NO CARTRIDGE INSERTED — add a YouTube ID to CONFIG.videoId</div>
+    <div class="gg-video-caption">GENGAR — Club Trailer</div>
   </div>
 
-  <div class="ah-chapter">
-    <span class="ah-chapter-label">Recently Joined</span>
-    <span class="ah-chapter-num">TOP 30</span>
+  <div class="gg-menu-head">
+    <span class="gg-menu-label" id="ggRosterLabel">Recently Joined</span>
+    <span class="gg-menu-tag">TOP 30</span>
   </div>
 
-  <div class="ah-jump">
-    <input type="text" id="ahFilter" placeholder="Find a member…" autocomplete="off">
+  <div class="gg-jump">
+    <input type="text" id="ggFilter" placeholder="SEARCH ALL MEMBERS…" autocomplete="off">
+    <div class="gg-jump-hint">Empty = top 30 newest. Typing searches the whole roster.</div>
   </div>
 
-  <div class="ah-members" id="ahMemberList"></div>
+  <div class="gg-members" id="ggMemberList"></div>
 
-  <div class="ah-stats">
-    <div class="ah-stat">
-      <div class="ah-stat-label">Members</div>
-      <div class="ah-stat-value" id="ahStatMembers">—</div>
+  <div class="gg-stats">
+    <div class="gg-stat">
+      <div class="gg-stat-label">MEMBERS</div>
+      <div class="gg-stat-value" id="ggStatMembers">—</div>
     </div>
-    <div class="ah-stat">
-      <div class="ah-stat-label">Club Age</div>
-      <div class="ah-stat-value" id="ahStatAge">—</div>
+    <div class="gg-stat">
+      <div class="gg-stat-label">CLUB AGE</div>
+      <div class="gg-stat-value" id="ggStatAge">—</div>
     </div>
   </div>
 
-  <div class="ah-links">
-    <a class="ah-link" id="ahLinkMatches" href="https://www.chess.com/clubs/matches/anime-haven" target="_blank" rel="noopener">
-      <span class="ah-coord">A1</span><span class="ah-link-label">Matches</span><span class="ah-arrow"></span>
+  <div class="gg-links">
+    <a class="gg-link" id="ggLinkMatches" href="https://www.chess.com/clubs/matches/gengar-1" target="_blank" rel="noopener">
+      <span class="gg-cursor">▶</span><span class="gg-link-label">Matches</span><span class="gg-link-key">A</span>
     </a>
-    <a class="ah-link" id="ahLinkLeaderboard" href="https://www.chess.com/clubs/anime-haven" target="_blank" rel="noopener">
-      <span class="ah-coord">B2</span><span class="ah-link-label">Leaderboard</span><span class="ah-arrow"></span>
+    <a class="gg-link" id="ggLinkLeaderboard" href="https://www.chess.com/clubs/gengar-1" target="_blank" rel="noopener">
+      <span class="gg-cursor">▶</span><span class="gg-link-label">Leaderboard</span><span class="gg-link-key">B</span>
     </a>
-    <a class="ah-link" href="https://www.chess.com/clubs/events/anime-haven" target="_blank" rel="noopener">
-      <span class="ah-coord">C3</span><span class="ah-link-label">Club Events</span><span class="ah-arrow"></span>
+    <a class="gg-link" href="https://www.chess.com/clubs/events/gengar-1" target="_blank" rel="noopener">
+      <span class="gg-cursor">▶</span><span class="gg-link-label">Club Events</span><span class="gg-link-key">C</span>
     </a>
-    <a class="ah-link" href="https://www.chess.com/clubs/about/anime-haven" target="_blank" rel="noopener">
-      <span class="ah-coord">D4</span><span class="ah-link-label">About</span><span class="ah-arrow"></span>
+    <a class="gg-link" href="https://www.chess.com/clubs/about/gengar-1" target="_blank" rel="noopener">
+      <span class="gg-cursor">▶</span><span class="gg-link-label">About</span><span class="gg-link-key">D</span>
     </a>
   </div>
 
-  <div class="ah-footer">
-    <span class="ah-footer-text">Anime Haven · Founded &amp; sealed by yogi136</span>
+  <div class="gg-footer">
+    <span class="gg-footer-text">GENGAR · Nexus Void HQ · run by yogi136</span>
   </div>
 
 </div>
@@ -313,26 +296,32 @@
   "use strict";
 
   var CONFIG = {
-    clubSlug: "anime-haven",
+    clubSlug: "gengar-1",
     ownerUsername: "yogi136",
     useLiveApi: true,
     refreshMs: 5 * 60 * 1000,
     avatarConcurrency: 4,
-    videoId: ""   // <-- put a YouTube video ID here, e.g. "dQw4w9WgXcQ", to show the club's opening video
+    videoId: ""   // <-- put a YouTube video ID here, e.g. "dQw4w9WgXcQ", to show the club's trailer
   };
 
-  // fallback data — mirrors the club's members endpoint shape, used if live fetch fails
+  // fallback data — used only if the live members fetch fails (CSP-restricted iframes, offline, etc.)
   var FALLBACK_ALL_TIME = [
-    { username: "aryanakbar", joined: 1775484258 },
-    { username: "charan_smaran", joined: 1777651198 },
-    { username: "chess_sky_chrome", joined: 1779278570 },
-    { username: "chientnhp", joined: 1780217252 },
-    { username: "chiruuuuu_6", joined: 1777221111 },
-    { username: "cleft_sovereign_chess", joined: 1777116059 },
-    { username: "da_dumpster", joined: 1775409544 },
-    { username: "cuberx2", joined: 1777230348 },
-    { username: "delparco", joined: 1777809917 },
-    { username: "yogi136", joined: 1777466298 }
+    { username: "yogi136", joined: 1766966400 },
+    { username: "Zohanbabu", joined: 1767398400 },
+    { username: "SabikAG", joined: 1768723200 },
+    { username: "da_phoenix14159", joined: 1770048000 },
+    { username: "Da_Dumpster", joined: 1771372800 },
+    { username: "AryanAkbar", joined: 1772697600 },
+    { username: "Prime_Real_Madrid", joined: 1774022400 },
+    { username: "Minhnhat510", joined: 1775347200 },
+    { username: "Raghavpv", joined: 1776672000 },
+    { username: "MorcoIo", joined: 1777996800 },
+    { username: "Cleft_Sovereign_Chess", joined: 1779321600 },
+    { username: "S0apTheGreat", joined: 1780646400 },
+    { username: "chiruuuuu_6", joined: 1781971200 },
+    { username: "CuberX2", joined: 1783296000 },
+    { username: "themancod", joined: 1784620800 },
+    { username: "GTJ14", joined: 1785945600 }
   ];
 
   var state = {
@@ -342,30 +331,31 @@
   };
 
   var el = {
-    crest: document.getElementById("ahCrest"),
-    crestFallback: document.getElementById("ahCrestFallback"),
-    statusText: document.getElementById("ahStatusText"),
-    ownerLink: document.getElementById("ahOwnerLink"),
-    ownerName: document.getElementById("ahOwnerName"),
-    ownerPhoto: document.getElementById("ahOwnerPhoto"),
-    ownerPhotoFallback: document.getElementById("ahOwnerPhotoFallback"),
-    filter: document.getElementById("ahFilter"),
-    memberList: document.getElementById("ahMemberList"),
-    statMembers: document.getElementById("ahStatMembers"),
-    statAge: document.getElementById("ahStatAge"),
-    linkLeaderboard: document.getElementById("ahLinkLeaderboard"),
-    video: document.getElementById("ahVideo"),
-    videoThumb: document.getElementById("ahVideoThumb"),
-    videoEmpty: document.getElementById("ahVideoEmpty")
+    crest: document.getElementById("ggCrest"),
+    crestFallback: document.getElementById("ggCrestFallback"),
+    statusText: document.getElementById("ggStatusText"),
+    ownerLink: document.getElementById("ggOwnerLink"),
+    ownerName: document.getElementById("ggOwnerName"),
+    ownerPhoto: document.getElementById("ggOwnerPhoto"),
+    ownerPhotoFallback: document.getElementById("ggOwnerPhotoFallback"),
+    filter: document.getElementById("ggFilter"),
+    rosterLabel: document.getElementById("ggRosterLabel"),
+    memberList: document.getElementById("ggMemberList"),
+    statMembers: document.getElementById("ggStatMembers"),
+    statAge: document.getElementById("ggStatAge"),
+    linkLeaderboard: document.getElementById("ggLinkLeaderboard"),
+    video: document.getElementById("ggVideo"),
+    videoThumb: document.getElementById("ggVideoThumb"),
+    videoEmpty: document.getElementById("ggVideoEmpty")
   };
 
-  // ---- video (cold open) ----
+  // ---- video (intro) ----
   if (CONFIG.videoId) {
     el.video.style.display = "";
     el.videoEmpty.style.display = "none";
     el.videoThumb.src = "https://img.youtube.com/vi/" + CONFIG.videoId + "/hqdefault.jpg";
   }
-  window.ahPlayVideo = function(){
+  window.ggPlayVideo = function(){
     if (!CONFIG.videoId) return;
     var iframe = document.createElement("iframe");
     iframe.src = "https://www.youtube.com/embed/" + CONFIG.videoId + "?autoplay=1&rel=0";
@@ -375,6 +365,10 @@
     el.video.appendChild(iframe);
     el.video.onclick = null;
   };
+
+  function cacheBust(url){
+    return url + (url.indexOf("?") === -1 ? "?" : "&") + "_=" + Date.now();
+  }
 
   function timeAgo(unixSeconds){
     var diff = Math.max(0, Math.floor(Date.now() / 1000) - unixSeconds);
@@ -392,22 +386,28 @@
     var diff = Math.max(0, Math.floor(Date.now() / 1000) - foundedUnix);
     var years = Math.floor(diff / 31536000);
     var days = Math.floor((diff % 31536000) / 86400);
-    if (years > 0) return years + "y " + days + "d";
-    return days + "d";
+    if (years >= 1) return years + "y " + Math.floor(days / 30) + "mo";
+    var months = Math.floor(diff / 2592000);
+    if (months >= 1) return months + "mo";
+    return Math.floor(diff / 86400) + "d";
   }
 
-  function cacheBust(url){
-    return url + (url.indexOf("?") === -1 ? "?" : "&") + "_ts=" + Date.now();
-  }
-
+  // ---- roster: filter searches the WHOLE member list, not just the visible top 30 ----
   function renderMembers(){
-    // sort newest-joined first, so "recently joined" is always accurate regardless of API order
-    var list = state.members.slice().sort(function(a, b){ return b.joined - a.joined; }).slice(0, 30);
+    var full = state.members.slice().sort(function(a, b){ return b.joined - a.joined; });
     var q = state.filter.trim().toLowerCase();
-    if (q) list = list.filter(function(m){ return m.username.toLowerCase().indexOf(q) !== -1; });
+    var list;
+
+    if (q) {
+      list = full.filter(function(m){ return m.username.toLowerCase().indexOf(q) !== -1; });
+      el.rosterLabel.textContent = "Search Results";
+    } else {
+      list = full.slice(0, 30);
+      el.rosterLabel.textContent = "Recently Joined";
+    }
 
     if (!list.length){
-      el.memberList.innerHTML = '<div class="ah-empty">No members here yet.</div>';
+      el.memberList.innerHTML = '<div class="gg-empty">NO MATCH FOUND.</div>';
       return;
     }
 
@@ -416,17 +416,17 @@
       var num = String(i + 1).padStart(2, "0");
       var avatarUrl = state.avatars[m.username];
       var avatarHtml = avatarUrl
-        ? '<img class="ah-mavatar" src="' + avatarUrl + '" alt="' + m.username + '" loading="lazy">'
+        ? '<img class="gg-mavatar" src="' + avatarUrl + '" alt="' + m.username + '" loading="lazy">'
         : (avatarUrl === null
-            ? '<div class="ah-mavatar-init">' + m.username.charAt(0).toUpperCase() + '</div>'
-            : '<div class="ah-mavatar-skel"></div>');
-      var newTag = (!q && i === 0) ? '<span class="ah-new-tag">NEW</span>' : '';
-      html += '<a class="ah-member" href="https://www.chess.com/member/' + encodeURIComponent(m.username) + '" target="_blank" rel="noopener">' +
-        '<span class="ah-mnum">№' + num + '</span>' +
-        '<div class="ah-mavatar-wrap">' + newTag + avatarHtml + '</div>' +
-        '<div class="ah-mtext">' +
-          '<div class="ah-mname">' + m.username + '</div>' +
-          '<div class="ah-mtime">' + timeAgo(m.joined) + '</div>' +
+            ? '<div class="gg-mavatar-init">' + m.username.charAt(0).toUpperCase() + '</div>'
+            : '<div class="gg-mavatar-skel"></div>');
+      var newTag = (!q && i === 0) ? '<span class="gg-new-tag">NEW!</span>' : '';
+      html += '<a class="gg-member" href="https://www.chess.com/member/' + encodeURIComponent(m.username) + '" target="_blank" rel="noopener">' +
+        '<span class="gg-mnum">' + num + '</span>' +
+        '<div class="gg-mavatar-wrap">' + newTag + avatarHtml + '</div>' +
+        '<div class="gg-mtext">' +
+          '<div class="gg-mname">' + m.username + '</div>' +
+          '<div class="gg-mtime">' + timeAgo(m.joined) + '</div>' +
         '</div>' +
       '</a>';
     });
@@ -478,7 +478,7 @@
     else { el.crest.style.display = "none"; el.crestFallback.style.display = "flex"; }
     if (typeof profile.members_count === "number") el.statMembers.textContent = profile.members_count.toLocaleString();
     if (profile.created) el.statAge.textContent = clubAgeString(profile.created);
-    el.statusText.textContent = "Active dojo";
+    el.statusText.textContent = "Signal strong";
     if (profile.club_id) {
       el.linkLeaderboard.href = "https://www.chess.com/leaderboard/live?group=" + profile.club_id;
     }
@@ -501,7 +501,7 @@
   function fetchAll(){
     if (!CONFIG.useLiveApi){
       renderMembers();
-      el.statusText.textContent = "Active dojo";
+      el.statusText.textContent = "Signal strong";
       return;
     }
     Promise.all([
@@ -513,12 +513,23 @@
       var profile = results[0];
       var members = results[1];
       applyProfile(profile);
-      if (members && members.all_time && members.all_time.length){
-        state.members = members.all_time;
+      if (members) {
+        var merged = [];
+        ["weekly", "monthly", "all_time"].forEach(function(bucket){
+          if (members[bucket] && members[bucket].length) merged = merged.concat(members[bucket]);
+        });
+        if (merged.length) {
+          var seen = {};
+          state.members = merged.filter(function(m){
+            if (seen[m.username]) return false;
+            seen[m.username] = true;
+            return true;
+          });
+        }
       }
       renderMembers();
     }).catch(function(){
-      el.statusText.textContent = "Active dojo";
+      el.statusText.textContent = "Signal strong";
       renderMembers();
     });
   }
