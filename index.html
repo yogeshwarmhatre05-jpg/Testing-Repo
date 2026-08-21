@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+
+content="width=device-width,
+
+initial-scale=1.0">
+
+<title>Pixel Bat Animation</title>
+
+<style>
+
+*{
+
+box-sizing: border-box;
+
+}
+
+body {
+
+}
+
+margin: 0;
+
+height: 100vh;
+
+background: #111118;
+
+overflow: hidden;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+.scene {
+
+position: relative;
+
+width: 100%;
+
+height: 100%;
+
+}
+
+.bat {
+
+position: absolute;
+
+left: 50%;
+
+top: 50%;
+
+width: 8px;
+height: 8px;
+
+background: #000;
+
+/* Pixelated bat shape */
+
+box-shadow:
+
+-8px 8px #000,
+
+-16px 16px #000,
+
+-24px 16px #000,
+
+-32px 8px #000,
+
+-40px 0 #000,
+
+-32px 8px #000,
+
+-24px 16px #000,
+
+-16px 24px #000,
+
+8px 8px #000,
+
+16px 16px #000,
+
+24px 16px #000,
+
+32px 8px #000,
+
+40px 0 #000,
+
+32px 8px #000,
+
+24px 16px #000,
+
+16px 24px #000,
+
+-8px 8px #000,
+
+8px 8px #000,
+
+-8px 16px #000,
+
+8px 16px #000;
+
+animation: flap 0.5s steps (2)
+
+86
+
+infinite,
+
+}
+
+fly 4s linear infinite:
+
+@keyframes flap {
+
+0% {
+
+transform: scaley(1);}
+
+50% {
+
+transform: scaleY(0.65);
+
+}
+
+100% {
+
+transform: scaley(1);
+
+}
+
+}
+
+@keyframes fly {
+
+0% {
+
+left: 100px;
+
+top: 45%;
+
+}
+
+50% {
+
+left: 50%;
+
+top: 35%;
+
+}
+
+100% {
+
+left: 110%;
+
+top: 45%;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="scene">
+
+<div class="bat"></div>
+
+</div>
+
+</body>
+
+</html>
